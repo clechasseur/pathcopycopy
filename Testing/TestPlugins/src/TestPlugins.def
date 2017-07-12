@@ -1,0 +1,10 @@
+; TestPlugins.def : Declares the module parameters.
+
+LIBRARY      "TestPlugins.DLL"
+
+EXPORTS
+	DllCanUnloadNow		PRIVATE
+	DllGetClassObject	PRIVATE
+	DllRegisterServer	PRIVATE
+	DllUnregisterServer	PRIVATE
+	DllInstall		PRIVATE

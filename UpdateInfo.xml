@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SoftwareUpdateInfo xmlns="http://pathcopycopy.codeplex.com/xsd/SoftwareUpdate/V1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://pathcopycopy.codeplex.com/xsd/SoftwareUpdate/V1 Schemas/SoftwareUpdateInfo.xsd">
+    <Version>13.0.1.0</Version>
+    <Name>13.0.1</Name>
+    <Url>https://pathcopycopy.codeplex.com/releases/view/629048</Url>
+    <ReleaseNotes>
+        <string><![CDATA[
+        <p>13.0 is a major release that adds an oft-requested feature: the ability to fully reorder commands and add/remove separators.</p>
+        <p>There are other new features and bug fixes, follow the link above for the entire list.</p>
+        <p>13.0.1 is a bugfix release to get rid of a few bugs and of a false positive virus identification.</p>
+        <p>A recommended upgrade for all users.</p>
+        ]]></string>
+    </ReleaseNotes>
+</SoftwareUpdateInfo>

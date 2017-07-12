@@ -1,0 +1,34 @@
+// SampleCOMPlugin.idl : IDL source for SampleCOMPlugin
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (SampleCOMPlugin.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	object,
+	uuid(AE980919-AA58-4387-8450-D2E17115B4C7),
+	helpstring("ISamplePathCopyCopyPlugin Interface"),
+	pointer_default(unique)
+]
+interface ISamplePathCopyCopyPlugin : IUnknown{
+};
+[
+	uuid(5EA2F6A2-8B00-4B14-81AF-39401CA26BA4),
+	version(1.0),
+	helpstring("SampleCOMPlugin 1.0 Type Library")
+]
+library SampleCOMPluginLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(50377643-61E1-4544-80D7-BF17140D8BFF),
+		helpstring("SamplePathCopyCopyPlugin Class")
+	]
+	coclass SamplePathCopyCopyPlugin
+	{
+		[default] interface ISamplePathCopyCopyPlugin;
+	};
+};

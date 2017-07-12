@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{5e68d71c-003b-4c17-a2fb-f7c7993743fb}</UniqueIdentifier>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="SDK Header Files">
+      <UniqueIdentifier>{0289b9fd-19f2-4f1f-a4ed-2b6d84f32205}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\dlldatax.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dllmain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PathCopyCopyPlugin1a.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PathCopyCopyPlugin1b.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PathCopyCopyPlugin2a.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PathCopyCopyPlugin2b.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TestPlugins.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="generated\TestPlugins_i.c">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\TestPlugins.def">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="rsrc\PathCopyCopyPlugin1a.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="rsrc\PathCopyCopyPlugin1b.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="rsrc\PathCopyCopyPlugin2a.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="rsrc\PathCopyCopyPlugin2b.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="rsrc\TestPlugins.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="src\TestPlugins.idl">
+      <Filter>Source Files</Filter>
+    </Midl>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="prihdr\dlldatax.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\dllmain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\PathCopyCopyPlugin1a.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\PathCopyCopyPlugin1b.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\PathCopyCopyPlugin2a.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\PathCopyCopyPlugin2b.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rsrc\Resource.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="generated\TestPlugins_i.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\PathCopyCopy\generated\PathCopyCopy_i.h">
+      <Filter>SDK Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\PathCopyCopy\prihdr\StAtlPerUserOverride.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="rsrc\TestPlugins.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

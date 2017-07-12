@@ -1,0 +1,444 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{AA106D7B-966E-4A98-8EAD-0AE2AE0038D2}</ProjectGuid>
+    <RootNamespace>PathCopyCopy</RootNamespace>
+    <Keyword>AtlProj</Keyword>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <UseOfAtl>Static</UseOfAtl>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v141_xp</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <UseOfAtl>Static</UseOfAtl>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v141_xp</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <UseOfAtl>Static</UseOfAtl>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v141_xp</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <UseOfAtl>Static</UseOfAtl>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v141_xp</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\obj\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</IgnoreImportLibrary>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..\bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..\obj\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</IgnoreImportLibrary>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\obj\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</IgnoreImportLibrary>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\obj\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</IgnoreImportLibrary>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <GenerateStublessProxies>true</GenerateStublessProxies>
+      <TypeLibraryName>../$(IntDir)PathCopyCopy.tlb</TypeLibraryName>
+      <OutputDirectory>generated\</OutputDirectory>
+      <HeaderFileName>PathCopyCopy_i.h</HeaderFileName>
+      <DllDataFileName>
+      </DllDataFileName>
+      <InterfaceIdentifierFileName>PathCopyCopy_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>PathCopyCopy_p.c</ProxyFileName>
+      <ValidateAllParameters>true</ValidateAllParameters>
+    </Midl>
+    <ClCompile>
+      <AdditionalIncludeDirectories>.\prihdr;.\plugins\prihdr;.\generated;.\rsrc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;_USRDLL;_MERGE_PROXYSTUB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <MinimalRebuild>true</MinimalRebuild>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);.\prihdr;..\prihdr;.\pubhdr;..\pubhdr;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <RegisterOutput>true</RegisterOutput>
+      <AdditionalDependencies>mpr.lib;netapi32.lib;gdiplus.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ModuleDefinitionFile>.\src\PathCopyCopy.def</ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <TargetEnvironment>X64</TargetEnvironment>
+      <GenerateStublessProxies>true</GenerateStublessProxies>
+      <TypeLibraryName>../$(IntDir)PathCopyCopy.tlb</TypeLibraryName>
+      <OutputDirectory>generated\</OutputDirectory>
+      <HeaderFileName>PathCopyCopy_i.h</HeaderFileName>
+      <DllDataFileName>
+      </DllDataFileName>
+      <InterfaceIdentifierFileName>PathCopyCopy_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>PathCopyCopy_p.c</ProxyFileName>
+    </Midl>
+    <ClCompile>
+      <AdditionalIncludeDirectories>.\prihdr;.\plugins\prihdr;.\generated;.\rsrc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;_USRDLL;PCC_WIN64;_MERGE_PROXYSTUB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <MinimalRebuild>true</MinimalRebuild>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);.\prihdr;..\prihdr;.\pubhdr;..\pubhdr;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <RegisterOutput>false</RegisterOutput>
+      <AdditionalDependencies>mpr.lib;netapi32.lib;gdiplus.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ModuleDefinitionFile>.\src\PathCopyCopy.def</ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Message>Registering output (x64)...</Message>
+      <Command>$(SolutionDir)3rdParty\Regsvr64.exe /s $(TargetPath)</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <GenerateStublessProxies>true</GenerateStublessProxies>
+      <TypeLibraryName>../$(IntDir)PathCopyCopy.tlb</TypeLibraryName>
+      <OutputDirectory>generated\</OutputDirectory>
+      <HeaderFileName>PathCopyCopy_i.h</HeaderFileName>
+      <DllDataFileName>
+      </DllDataFileName>
+      <InterfaceIdentifierFileName>PathCopyCopy_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>PathCopyCopy_p.c</ProxyFileName>
+      <ValidateAllParameters>true</ValidateAllParameters>
+    </Midl>
+    <ClCompile>
+      <AdditionalIncludeDirectories>.\prihdr;.\plugins\prihdr;.\generated;.\rsrc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_USRDLL;_MERGE_PROXYSTUB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);.\prihdr;..\prihdr;.\pubhdr;..\pubhdr;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <RegisterOutput>true</RegisterOutput>
+      <AdditionalDependencies>mpr.lib;netapi32.lib;gdiplus.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ModuleDefinitionFile>.\src\PathCopyCopy.def</ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <TargetEnvironment>X64</TargetEnvironment>
+      <GenerateStublessProxies>true</GenerateStublessProxies>
+      <TypeLibraryName>../$(IntDir)PathCopyCopy.tlb</TypeLibraryName>
+      <OutputDirectory>generated\</OutputDirectory>
+      <HeaderFileName>PathCopyCopy_i.h</HeaderFileName>
+      <DllDataFileName>
+      </DllDataFileName>
+      <InterfaceIdentifierFileName>PathCopyCopy_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>PathCopyCopy_p.c</ProxyFileName>
+    </Midl>
+    <ClCompile>
+      <AdditionalIncludeDirectories>.\prihdr;.\plugins\prihdr;.\generated;.\rsrc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_USRDLL;PCC_WIN64;_MERGE_PROXYSTUB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);.\prihdr;..\prihdr;.\pubhdr;..\pubhdr;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <RegisterOutput>false</RegisterOutput>
+      <AdditionalDependencies>mpr.lib;netapi32.lib;gdiplus.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ModuleDefinitionFile>.\src\PathCopyCopy.def</ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Message>Registering output (x64)...</Message>
+      <Command>$(SolutionDir)3rdParty\Regsvr64.exe /s $(TargetPath)</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="plugins\src\AndrogynousInternalPlugin.cpp" />
+    <ClCompile Include="src\AllPluginsProvider.cpp" />
+    <ClCompile Include="src\AtlRegKey.cpp" />
+    <ClCompile Include="src\dlldatax.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="src\dllmain.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="src\COMPluginProvider.cpp" />
+    <ClCompile Include="src\PipelinePluginProvider.cpp" />
+    <ClCompile Include="src\PluginProvider.cpp" />
+    <ClCompile Include="src\RegKey.cpp" />
+    <ClCompile Include="src\PathCopyCopy.cpp" />
+    <ClCompile Include="src\PathCopyCopyConfigHelper.cpp" />
+    <ClCompile Include="src\PathCopyCopyContextMenuExt.cpp" />
+    <ClCompile Include="src\PathCopyCopyDataHandler.cpp" />
+    <ClCompile Include="src\PathCopyCopyPluginsRegistry.cpp" />
+    <ClCompile Include="src\PathCopyCopyRunDll32EntryPoints.cpp" />
+    <ClCompile Include="src\PathCopyCopySettings.cpp" />
+    <ClCompile Include="src\PathCopyCopySettingsApp.cpp" />
+    <ClCompile Include="src\Plugin.cpp" />
+    <ClCompile Include="src\PluginPipeline.cpp" />
+    <ClCompile Include="src\PluginPipelineDecoder.cpp" />
+    <ClCompile Include="src\PluginPipelineElements.cpp" />
+    <ClCompile Include="src\PluginSeparator.cpp" />
+    <ClCompile Include="src\PluginUtils.cpp" />
+    <ClCompile Include="src\stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\StringUtils.cpp" />
+    <ClCompile Include="src\UserOverrideableRegKey.cpp" />
+    <ClCompile Include="generated\PathCopyCopy_i.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="plugins\src\COMPlugin.cpp" />
+    <ClCompile Include="plugins\src\CygwinPathPlugin.cpp" />
+    <ClCompile Include="plugins\src\DefaultPlugin.cpp" />
+    <ClCompile Include="plugins\src\InternalPlugin.cpp" />
+    <ClCompile Include="plugins\src\InternetPathPlugin.cpp" />
+    <ClCompile Include="plugins\src\LongFolderPlugin.cpp" />
+    <ClCompile Include="plugins\src\LongNamePlugin.cpp" />
+    <ClCompile Include="plugins\src\LongPathPlugin.cpp" />
+    <ClCompile Include="plugins\src\LongUNCFolderPlugin.cpp" />
+    <ClCompile Include="plugins\src\LongUNCPathPlugin.cpp" />
+    <ClCompile Include="plugins\src\PipelinePlugin.cpp" />
+    <ClCompile Include="plugins\src\SamplePlugin.cpp" />
+    <ClCompile Include="plugins\src\ShortFolderPlugin.cpp" />
+    <ClCompile Include="plugins\src\ShortNamePlugin.cpp" />
+    <ClCompile Include="plugins\src\ShortPathPlugin.cpp" />
+    <ClCompile Include="plugins\src\ShortUNCFolderPlugin.cpp" />
+    <ClCompile Include="plugins\src\ShortUNCPathPlugin.cpp" />
+    <ClCompile Include="plugins\src\UnixPathPlugin.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\icons\PathCopyCopy2.png" />
+    <None Include="src\PathCopyCopy.def" />
+    <None Include="rsrc\PathCopyCopy.rgs" />
+    <None Include="rsrc\PathCopyCopyConfigHelper.rgs" />
+    <None Include="rsrc\PathCopyCopyContextMenuExt.rgs" />
+    <None Include="rsrc\PathCopyCopyDataHandler.rgs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="src\PathCopyCopy.idl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="plugins\prihdr\AndrogynousInternalPlugin.h" />
+    <ClInclude Include="prihdr\AllPluginsProvider.h" />
+    <ClInclude Include="prihdr\AtlRegKey.h" />
+    <ClInclude Include="prihdr\dlldatax.h" />
+    <ClInclude Include="prihdr\dllmain.h" />
+    <ClInclude Include="prihdr\COMPluginProvider.h" />
+    <ClInclude Include="prihdr\PipelinePluginProvider.h" />
+    <ClInclude Include="prihdr\PluginProvider.h" />
+    <ClInclude Include="prihdr\RegKey.h" />
+    <ClInclude Include="prihdr\PathCopyCopyConfigHelper.h" />
+    <ClInclude Include="prihdr\PathCopyCopyContextMenuExt.h" />
+    <ClInclude Include="prihdr\PathCopyCopyDataHandler.h" />
+    <ClInclude Include="prihdr\PathCopyCopyPluginsRegistry.h" />
+    <ClInclude Include="prihdr\PathCopyCopyPrivateTypes.h" />
+    <ClInclude Include="prihdr\PathCopyCopyRunDll32EntryPoints.h" />
+    <ClInclude Include="prihdr\PathCopyCopySettings.h" />
+    <ClInclude Include="prihdr\PathCopyCopySettingsApp.h" />
+    <ClInclude Include="prihdr\Plugin.h" />
+    <ClInclude Include="prihdr\PluginPipeline.h" />
+    <ClInclude Include="prihdr\PluginPipelineDecoder.h" />
+    <ClInclude Include="prihdr\PluginPipelineElements.h" />
+    <ClInclude Include="prihdr\PluginSeparator.h" />
+    <ClInclude Include="prihdr\PluginUtils.h" />
+    <ClInclude Include="prihdr\StAtlPerUserOverride.h" />
+    <ClInclude Include="prihdr\StClipboard.h" />
+    <ClInclude Include="prihdr\StCoInitialize.h" />
+    <ClInclude Include="prihdr\stdafx.h" />
+    <ClInclude Include="prihdr\StGdiplusStartup.h" />
+    <ClInclude Include="prihdr\StGlobalBlock.h" />
+    <ClInclude Include="prihdr\StGlobalLock.h" />
+    <ClInclude Include="prihdr\StImage.h" />
+    <ClInclude Include="prihdr\StOleStr.h" />
+    <ClInclude Include="prihdr\StringUtils.h" />
+    <ClInclude Include="prihdr\StStgMedium.h" />
+    <ClInclude Include="prihdr\targetver.h" />
+    <ClInclude Include="prihdr\UserOverrideableRegKey.h" />
+    <ClInclude Include="rsrc\resource.h" />
+    <ClInclude Include="generated\PathCopyCopy_i.h" />
+    <ClInclude Include="plugins\prihdr\COMPlugin.h" />
+    <ClInclude Include="plugins\prihdr\CygwinPathPlugin.h" />
+    <ClInclude Include="plugins\prihdr\DefaultPlugin.h" />
+    <ClInclude Include="plugins\prihdr\InternalPlugin.h" />
+    <ClInclude Include="plugins\prihdr\InternetPathPlugin.h" />
+    <ClInclude Include="plugins\prihdr\LongFolderPlugin.h" />
+    <ClInclude Include="plugins\prihdr\LongNamePlugin.h" />
+    <ClInclude Include="plugins\prihdr\LongPathPlugin.h" />
+    <ClInclude Include="plugins\prihdr\LongUNCFolderPlugin.h" />
+    <ClInclude Include="plugins\prihdr\LongUNCPathPlugin.h" />
+    <ClInclude Include="plugins\prihdr\PipelinePlugin.h" />
+    <ClInclude Include="plugins\prihdr\SamplePlugin.h" />
+    <ClInclude Include="plugins\prihdr\ShortFolderPlugin.h" />
+    <ClInclude Include="plugins\prihdr\ShortNamePlugin.h" />
+    <ClInclude Include="plugins\prihdr\ShortPathPlugin.h" />
+    <ClInclude Include="plugins\prihdr\ShortUNCFolderPlugin.h" />
+    <ClInclude Include="plugins\prihdr\ShortUNCPathPlugin.h" />
+    <ClInclude Include="plugins\prihdr\UnixPathPlugin.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="rsrc\PathCopyCopy.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <Target Name="AfterBuild" AfterTargets="Build" Inputs="$(ProjectDir)generated\PathCopyCopy_i.h" Outputs="$(SolutionDir)Samples\SampleCOMPluginCpp\SampleCOMPlugin\PathCopyCopy_i.h">
+    <Message Importance="High" Text="Copying interface definition header to sample C++ COM plugin project..." />
+    <Copy SourceFiles="$(ProjectDir)generated\PathCopyCopy_i.h" DestinationFolder="$(SolutionDir)Samples\SampleCOMPluginCpp\SampleCOMPlugin" />
+  </Target>
+</Project>

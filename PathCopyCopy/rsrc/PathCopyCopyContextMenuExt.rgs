@@ -1,0 +1,58 @@
+HKCR
+{
+	PathCopyCopy.PathCopyCopyContextMenuExt.1 = s 'PathCopyCopyContextMenuExt Class'
+	{
+		CLSID = s '{82CB99A2-2F18-4D5D-9476-54347E3B6720}'
+	}
+	PathCopyCopy.PathCopyCopyContextMenuExt = s 'PathCopyCopyContextMenuExt Class'
+	{
+		CLSID = s '{82CB99A2-2F18-4D5D-9476-54347E3B6720}'
+		CurVer = s 'PathCopyCopy.PathCopyCopyContextMenuExt.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {82CB99A2-2F18-4D5D-9476-54347E3B6720} = s 'PathCopyCopyContextMenuExt Class'
+		{
+			ProgID = s 'PathCopyCopy.PathCopyCopyContextMenuExt.1'
+			VersionIndependentProgID = s 'PathCopyCopy.PathCopyCopyContextMenuExt'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{2E3829C9-CB67-4C81-B304-B6FE22816E4C}'
+		}
+	}
+	NoRemove *
+	{
+		NoRemove shellex
+		{
+			ContextMenuHandlers
+			{
+				ForceRemove PathCopyCopy = s '{82CB99A2-2F18-4D5D-9476-54347E3B6720}'
+			}
+		}
+	}
+	NoRemove Directory
+	{
+		NoRemove Background
+		{
+			NoRemove shellex
+			{
+				ContextMenuHandlers
+				{
+					ForceRemove PathCopyCopy = s '{82CB99A2-2F18-4D5D-9476-54347E3B6720}'
+				}
+			}
+		}
+	}
+	NoRemove Folder
+	{
+		NoRemove shellex
+		{
+			ContextMenuHandlers
+			{
+				ForceRemove PathCopyCopy = s '{82CB99A2-2F18-4D5D-9476-54347E3B6720}'
+			}
+		}
+	}
+}

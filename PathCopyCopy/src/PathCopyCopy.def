@@ -1,0 +1,14 @@
+; PathCopyCopy.def : Declares the module parameters.
+
+LIBRARY      "PathCopyCopy.DLL"
+
+EXPORTS
+	DllCanUnloadNow		PRIVATE
+	DllGetClassObject	PRIVATE
+	DllRegisterServer	PRIVATE
+	DllUnregisterServer	PRIVATE
+	DllInstall			PRIVATE
+	GetPathWithPluginW
+	RegGetPathWithPluginW
+	ApplyGlobalRevisionsW
+	ApplyUserRevisionsW

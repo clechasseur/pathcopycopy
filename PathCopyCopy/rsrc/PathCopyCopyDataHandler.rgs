@@ -1,0 +1,32 @@
+HKCR
+{
+	PathCopyCopy.PathCopyCopyDataHandler.1 = s 'PathCopyCopyDataHandler Class'
+	{
+		CLSID = s '{16170CA5-25CA-4e6d-928C-7A3A974F4B56}'
+	}
+	PathCopyCopy.PathCopyCopyDataHandler = s 'PathCopyCopyDataHandler Class'
+	{
+		CLSID = s '{16170CA5-25CA-4e6d-928C-7A3A974F4B56}'
+		CurVer = s 'PathCopyCopy.PathCopyCopyDataHandler.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {16170CA5-25CA-4e6d-928C-7A3A974F4B56} = s 'PathCopyCopyDataHandler Class'
+		{
+			ProgID = s 'PathCopyCopy.PathCopyCopyDataHandler.1'
+			VersionIndependentProgID = s 'PathCopyCopy.PathCopyCopyDataHandler'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{2E3829C9-CB67-4C81-B304-B6FE22816E4C}'
+			DataFormats
+			{
+				GetSet
+				{
+					0 = s '13,1,1,3'
+				}
+			}
+		}
+	}
+}

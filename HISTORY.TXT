@@ -1,0 +1,209 @@
+Version 14.0 (2017-??-??)
+-------------------------
+- New UI to select which command are included in main menu/submenu, a little like it was in 12.0.
+- Settings window now remembers its size and position. It can also be resized. [https://pathcopycopy.codeplex.com/workitem/11423]
+
+
+Version 13.0.1 (2016-10-12)
+---------------------------
+- Copying short/long name now works properly on drives and copies the drive label (e.g., C:). [https://pathcopycopy.codeplex.com/workitem/11413]
+- Clicking on the Icon column header in the Settings application will no longer cause a crash. [https://pathcopycopy.codeplex.com/workitem/11412]
+- New version to get rid of a false positive virus identification. [https://pathcopycopy.codeplex.com/workitem/11415]
+
+
+Version 13.0 (2016-10-05)
+-------------------------
+- Commands can now be freely added/removed/reordered, both in the main contextual menu and in Path Copy Copy's submenu (including separators).
+  [https://pathcopycopy.codeplex.com/workitem/11392] [https://pathcopycopy.codeplex.com/workitem/11376]
+- New setting to copy multiple paths on the same line. Also available for custom commands. [https://pathcopycopy.codeplex.com/workitem/11404]
+- New setting to encode only whitespace instead of all invalid URI characters. Also available for custom commands. [https://pathcopycopy.codeplex.com/workitem/11406]
+- New button in Settings app to export user settings in a .reg file. [https://pathcopycopy.codeplex.com/workitem/11396]
+- "Drop redundant words" no longer applies to commands in the main contextual menu. [https://pathcopycopy.codeplex.com/workitem/11398]
+- "Drop redundant words" no longer applies to custom commands. [https://pathcopycopy.codeplex.com/workitem/11399]
+- "Drop redundact words" no longer applies to COM-based commands.
+- Many fixes to the Portable version.
+
+
+Version 12.0 (2015-02-22)
+-------------------------
+- Now available as a portable Installer that will install Path Copy Copy for the current user only. [https://pathcopycopy.codeplex.com/workitem/11378]
+- Now available as a Windows Installer (.msi) package. The MSI package installs silently in the default location, with commands fit for network environments and disabled update checks. [https://pathcopycopy.codeplex.com/workitem/11370]
+- Added an option to surround copied paths with < and > to create e-mail links. This is also available for custom commands. [http://pathcopycopy.codeplex.com/workitem/11367]
+- Custom commands must now have a non-empty name. [http://pathcopycopy.codeplex.com/workitem/11371]
+- Custom commands now have a "required version" when exported. This will prevent custom commands using features of new versions from being imported by old versions of Path Copy Copy.
+- Importing custom commands and then deselecting all custom commands in the import dialog could cause crashes in the Settings application.
+- New custom command option to encode characters in paths that are invalid in URIs. [https://pathcopycopy.codeplex.com/workitem/11374]
+- New Path Copy Copy icon [https://pathcopycopy.codeplex.com/workitem/11379]
+- New option to display previews instead of descriptions in the submenu. [https://pathcopycopy.codeplex.com/workitem/11373]
+- Settings application now displays previews of selected commands. [https://pathcopycopy.codeplex.com/workitem/11384]
+- New option to drop redundant words from command descriptions in the submenu. [https://pathcopycopy.codeplex.com/workitem/11377]
+- Each command can now display its own icon in the contextual submenu. Icons can be edited in the Settings application. [https://pathcopycopy.codeplex.com/workitem/11383]
+- Installer will now offer to install .NET Framework 2.0 on Windows XP if it's not already available. [https://pathcopycopy.codeplex.com/workitem/11386]
+- Installer will now offer to turn on the ".NET Framework 3.5" feature on Windows 8 or later (and Windows Server 2012 or later) if it's not already on. [https://pathcopycopy.codeplex.com/workitem/11387]
+- Software updates now have a minimum Windows version, in case we need to drop support for older versions of Windows one day.
+- COM-based commands were not accessible when called through the command-line via rundll32. This has been fixed.
+- Custom commands that used a non-standard base command did not work properly when called through the command-line via rundll32. This has been fixed.
+- Copying Internet paths that ended in a whitespace followed by exactly one character would drop the last character. This has been fixed. [https://pathcopycopy.codeplex.com/workitem/11395]
+- Copying paths should now work for network shares when part of the path is inaccessible due to permissions. [https://pathcopycopy.codeplex.com/workitem/11393]
+- Sample projects have been converted to Visual Studio 2013 format. They are compatible with the Visual Studio 2013 Community edition.
+
+
+Version 11.1 (2013-07-29)
+-------------------------
+- An icon is now included next to the submenu's contextual menu entry. It can be disabled through the Settings application. [https://pathcopycopy.codeplex.com/workitem/11375]
+- Added a reference to the JavaScript regular expression syntax in the Settings application [https://pathcopycopy.codeplex.com/workitem/11369]
+
+
+Version 11.0.2 (2013-03-17)
+---------------------------
+- Fixed bug that could result in frozen Windows Explorer when using Find/Replace in custom commands [http://pathcopycopy.codeplex.com/workitem/11360]
+- Setup will now notify user of running applications that are using files being installed (like Windows Explorer) and offer to close those applications during installation.
+
+
+Version 11.0.1 (2012-08-18)
+---------------------------
+- Selecting "Use hidden shares" will correctly use hidden drive shares for all local files, even those not listed in the registry [http://pathcopycopy.codeplex.com/workitem/11365]
+
+
+Version 11.0 (2012-08-02)
+-------------------------
+- Added a "Check for update" mechanism. By default, will poll for updates once a week. Can be disabled in the Settings application. [http://pathcopycopy.codeplex.com/workitem/11363]
+- Added an "About" tab in the Settings application [http://pathcopycopy.codeplex.com/workitem/11362]
+- Fixed bug that prevented paths from being copied when selecting more than 16 files [http://pathcopycopy.codeplex.com/workitem/11364]
+
+
+Version 10.1 (2012-04-08)
+--------------------------
+- Can now properly select no custom commands for the main contextual menu [http://pathcopycopy.codeplex.com/workitem/11357]
+- Right-clicking on a folder in the left folder pane won't show two sets of menu item options [http://pathcopycopy.codeplex.com/workitem/11358]
+- Added icon in the Start menu to launch the Settings application [http://pathcopycopy.codeplex.com/workitem/11359]
+
+
+Version 10.0.1 (2012-03-05)
+---------------------------
+- Fixed UNC-based commands not being enabled for UNC shares [http://pathcopycopy.codeplex.com/workitem/11355]
+
+
+Version 10.0 (2012-03-04)
+-------------------------
+- Added way of invoking a specific command directly [http://pathcopycopy.codeplex.com/workitem/11348]
+- Corrected casing of cygwin drive letters for the Cygwin Path command [http://pathcopycopy.codeplex.com/workitem/11353 - thanks to JohnPeterson)
+- Right-clicking in a directory's background in Windows Explorer will now show the Path Copy Copy commands for the directory [http://pathcopycopy.codeplex.com/workitem/11353 - thanks to JohnPeterson)
+- Custom commands can now use regular expressions to perform Find/Replace operations [http://pathcopycopy.codeplex.com/workitem/11354]
+- It is now possible to export and import custom commands through the Settings app, allowing easy sharing of custom commands [http://pathcopycopy.codeplex.com/workitem/11351]
+
+
+Version 9.2.2 (2012-02-17)
+--------------------------
+- Fixed display issue on Windows versions using Medium or Large fonts [http://pathcopycopy.codeplex.com/workitem/11350]
+
+
+Version 9.2.1 (2012-02-14)
+--------------------------
+- Fixed bug that could prevent users from being able to save settings [http://pathcopycopy.codeplex.com/workitem/11349]
+
+
+Version 9.2 (2012-02-05)
+------------------------
+- Custom commands will now correctly show up grayed in appropriate circumstances [http://pathcopycopy.codeplex.com/workitem/11347]
+- Refactored the disabled/default commands paradigm to allow greater flexibility in what goes in which menu [http://pathcopycopy.codeplex.com/workitem/11346]
+- Modifying custom commands in the Settings application should no longer cause changes in other lists to be lost
+
+
+Version 9.1.1 (2012-01-14)
+--------------------------
+- Custom commands will now execute their Find/Replace work before changing slashes, if applicable [http://pathcopycopy.codeplex.com/workitem/11345]
+
+
+Version 9.1 (2011-12-24)
+------------------------
+- Installer now allows user to preconfigure enabled commands [http://pathcopycopy.codeplex.com/workitem/11344]
+- The "Disabled Commands" page in the Settings has been renamed to "Enabled Commands" [http://pathcopycopy.codeplex.com/workitem/11343]
+
+
+Version 9.0 (2011-12-11)
+------------------------
+- Added support for custom plugins configured by the user [http://pathcopycopy.codeplex.com/workitem/7070)
+
+
+Version 8.0.1 (2011-12-03)
+--------------------------
+- Fixed registration of user-created plugins that was broken in 7.0.
+
+
+Version 8.0 (2011-10-26)
+------------------------
+- Refactored the UI to better explain its purpose and add new options
+- Added an option to quote paths [http://pathcopycopy.codeplex.com/workitem/11340]
+- Added an option to use hidden shares for UNC plugins; this allows the use of administrative shares as well [http://pathcopycopy.codeplex.com/workitem/11339]
+- Added an option to choose what the default plugin is (the plugin shown in the main contextual menu) [http://pathcopycopy.codeplex.com/workitem/11337]
+- Re-added the option not to show the submenu
+- Settings can now be defined globally or just for the user; this allows admins to pre-configure some options [http://pathcopycopy.codeplex.com/wikipage?title=Network%20Administrator&referringTitle=Documentation)
+- Administrator can now disable the editing of settings for each user [http://pathcopycopy.codeplex.com/wikipage?title=Network%20Administrator&referringTitle=Documentation)
+
+
+Version 7.0.1 (2011-10-09)
+--------------------------
+- Fixed a bug that prevented the "Settings" dialog from working on some systems [http://pathcopycopy.codeplex.com/workitem/11342]
+
+
+Version 7.0 (2011-10-03)
+------------------------
+- Changed the window that is used to choose which plugins to display. The new version
+  should be more compatible with recent Windows versions and offers the same functionality.
+
+
+Version 6.0 (2011-06-10)
+------------------------
+- Added an item in the contextual sub-menu that opens a window to choose which plugins to display.
+  This choice is per-user. [http://pathcopycopy.codeplex.com/workitem/7071)
+
+
+Version 5.0 (2011-06-03)
+------------------------
+- Plugins will now be properly reloaded when new ones are added or when some are removed.
+- PathCopyCopy should now correctly show up in the contextual menu even on systems with thighter shell security.
+- Added a plugin to copy the path in UNIX-like format (with slashes instead of backslashes) [http://pathcopycopy.codeplex.com/workitem/9845)
+- Added a plugin to copy the path in Cygwin format [http://pathcopycopy.codeplex.com/workitem/9845)
+- Removed the "Always show entire menu" item. Now, a default entry will always show up in the main contextual
+  menu (to copy the long path). The other plugins will always be there in a submenu.
+- Fixed an issue that prevented the plugins' help text to show up in the status bar.
+- Added a plugin to copy the short UNC path of a file [http://pathcopycopy.codeplex.com/workitem/10980]
+- Added plugins to copy a file's parent folder path in short or long format [http://pathcopycopy.codeplex.com/workitem/10979]
+- Added plugins to copy a file's parent folder UNC path in short or long format [http://pathcopycopy.codeplex.com/workitem/10999]
+- Plugins that return a UNC path will be grayed-out in the contextual menu if no share is detected [http://pathcopycopy.codeplex.com/workitem/10263]
+
+
+Version 4.0 (2011-05-21)
+------------------------
+- Updated the COM-based plugin API a bit.
+  See http://pathcopycopy.codeplex.com/documentation for more details.
+- Fixed Internet path plugin to produce a more "internet-like" path [http://pathcopycopy.codeplex.com/workitem/8998)
+- Ignore hidden shares when looking for shares in the UNC path plugin [http://pathcopycopy.codeplex.com/workitem/10950]
+
+
+Version 3.0 (2011-03-02)
+------------------------
+- Added support for user-created COM-based plugins.
+  See the Samples directory in the installation folder for a sample Visual Studio project.
+  Also see http://pathcopycopy.codeplex.com/documentation for more details.
+- Fixed copying paths of multiple files/folders to always output them on different lines [http://pathcopycopy.codeplex.com/workitem/4604).
+- Fixed use of Path Copy Copy for users other than the user that installed the program [http://pathcopycopy.codeplex.com/workitem/10273].
+
+
+Version 2.1 (2010-01-09)
+------------------------
+- Added a plugin to copy the Internet path of a file/folder (file://path\to\file).
+
+
+Version 2.0 (2009-06-26)
+------------------------
+- Added a plugin to copy the UNC (network share) path of a file/folder.
+- Added an option to only show a single plugin (Copy Long Path) in the contextual menu.
+  The entire submenu is then shown only in the extended menu (hold down SHIFT while right-clicking to see it).
+
+
+Version 1.0 (2008-11-11)
+------------------------
+
+Initial release.

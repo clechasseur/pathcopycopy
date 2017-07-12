@@ -1,0 +1,367 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{585cc659-af02-4d3a-b619-5277a1461abc}</UniqueIdentifier>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="Plugins">
+      <UniqueIdentifier>{528256b9-fccb-49cd-9823-af88ef3a28b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\Header Files">
+      <UniqueIdentifier>{936c4f74-f7ed-493e-8a15-2257929be853}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\Source Files">
+      <UniqueIdentifier>{14c2348a-afce-4df3-b584-90740722709a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\dlldatax.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dllmain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PathCopyCopy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PathCopyCopyConfigHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PathCopyCopyContextMenuExt.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PathCopyCopyDataHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PathCopyCopyRunDll32EntryPoints.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PathCopyCopySettings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Plugin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PluginPipeline.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PluginPipelineDecoder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PluginPipelineElements.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PluginSeparator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PluginUtils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StringUtils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UserOverrideableRegKey.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="generated\PathCopyCopy_i.c">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="plugins\src\COMPlugin.cpp">
+      <Filter>Plugins\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="plugins\src\CygwinPathPlugin.cpp">
+      <Filter>Plugins\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="plugins\src\DefaultPlugin.cpp">
+      <Filter>Plugins\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="plugins\src\InternalPlugin.cpp">
+      <Filter>Plugins\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="plugins\src\InternetPathPlugin.cpp">
+      <Filter>Plugins\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="plugins\src\LongFolderPlugin.cpp">
+      <Filter>Plugins\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="plugins\src\LongNamePlugin.cpp">
+      <Filter>Plugins\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="plugins\src\LongPathPlugin.cpp">
+      <Filter>Plugins\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="plugins\src\LongUNCFolderPlugin.cpp">
+      <Filter>Plugins\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="plugins\src\LongUNCPathPlugin.cpp">
+      <Filter>Plugins\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="plugins\src\PipelinePlugin.cpp">
+      <Filter>Plugins\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="plugins\src\SamplePlugin.cpp">
+      <Filter>Plugins\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="plugins\src\ShortFolderPlugin.cpp">
+      <Filter>Plugins\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="plugins\src\ShortNamePlugin.cpp">
+      <Filter>Plugins\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="plugins\src\ShortPathPlugin.cpp">
+      <Filter>Plugins\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="plugins\src\ShortUNCFolderPlugin.cpp">
+      <Filter>Plugins\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="plugins\src\ShortUNCPathPlugin.cpp">
+      <Filter>Plugins\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="plugins\src\UnixPathPlugin.cpp">
+      <Filter>Plugins\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PathCopyCopySettingsApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="plugins\src\AndrogynousInternalPlugin.cpp">
+      <Filter>Plugins\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PathCopyCopyPluginsRegistry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AtlRegKey.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AllPluginsProvider.cpp">
+      <Filter>Plugins\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\COMPluginProvider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PipelinePluginProvider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PluginProvider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RegKey.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\PathCopyCopy.def">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="rsrc\PathCopyCopy.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="rsrc\PathCopyCopyConfigHelper.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="rsrc\PathCopyCopyContextMenuExt.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="rsrc\PathCopyCopyDataHandler.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\icons\PathCopyCopy2.png">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="src\PathCopyCopy.idl">
+      <Filter>Source Files</Filter>
+    </Midl>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="prihdr\dlldatax.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\dllmain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\PathCopyCopyConfigHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\PathCopyCopyContextMenuExt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\PathCopyCopyDataHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\PathCopyCopyRunDll32EntryPoints.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\PathCopyCopySettings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\PluginPipeline.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\PluginPipelineDecoder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\PluginPipelineElements.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\PluginUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\StClipboard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\StCoInitialize.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\StGlobalBlock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\StGlobalLock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\StOleStr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\StringUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\StStgMedium.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\UserOverrideableRegKey.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rsrc\resource.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="generated\PathCopyCopy_i.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="plugins\prihdr\COMPlugin.h">
+      <Filter>Plugins\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="plugins\prihdr\CygwinPathPlugin.h">
+      <Filter>Plugins\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="plugins\prihdr\DefaultPlugin.h">
+      <Filter>Plugins\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="plugins\prihdr\InternalPlugin.h">
+      <Filter>Plugins\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="plugins\prihdr\InternetPathPlugin.h">
+      <Filter>Plugins\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="plugins\prihdr\LongFolderPlugin.h">
+      <Filter>Plugins\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="plugins\prihdr\LongNamePlugin.h">
+      <Filter>Plugins\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="plugins\prihdr\LongPathPlugin.h">
+      <Filter>Plugins\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="plugins\prihdr\LongUNCFolderPlugin.h">
+      <Filter>Plugins\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="plugins\prihdr\LongUNCPathPlugin.h">
+      <Filter>Plugins\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="plugins\prihdr\PipelinePlugin.h">
+      <Filter>Plugins\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="plugins\prihdr\ShortFolderPlugin.h">
+      <Filter>Plugins\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="plugins\prihdr\ShortNamePlugin.h">
+      <Filter>Plugins\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="plugins\prihdr\ShortPathPlugin.h">
+      <Filter>Plugins\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="plugins\prihdr\ShortUNCFolderPlugin.h">
+      <Filter>Plugins\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="plugins\prihdr\ShortUNCPathPlugin.h">
+      <Filter>Plugins\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="plugins\prihdr\UnixPathPlugin.h">
+      <Filter>Plugins\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\PathCopyCopySettingsApp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\StImage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\StGdiplusStartup.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\StAtlPerUserOverride.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\PathCopyCopyPrivateTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="plugins\prihdr\AndrogynousInternalPlugin.h">
+      <Filter>Plugins\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="plugins\prihdr\SamplePlugin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\PathCopyCopyPluginsRegistry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\AtlRegKey.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\Plugin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\PluginSeparator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\AllPluginsProvider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\COMPluginProvider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\PipelinePluginProvider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\PluginProvider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\RegKey.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="rsrc\PathCopyCopy.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

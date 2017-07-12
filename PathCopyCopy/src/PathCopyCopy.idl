@@ -1,0 +1,216 @@
+// PathCopyCopy.idl
+// (c) 2008-2017, Charles Lechasseur
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+
+// This file will be processed by the MIDL tool to
+// produce the type library (PathCopyCopy.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+    object,
+    uuid(1C535AD2-59D7-4825-879C-DF428A23D02C),
+    helpstring("IPathCopyCopyContextMenuExt Interface"),
+    pointer_default(unique)
+]
+interface IPathCopyCopyContextMenuExt : IUnknown
+{
+    [
+        helpstring("Registers a plugin component so that Path Copy Copy will display it in its contextual menu.")
+    ]
+    HRESULT RegisterPlugin([in] REFCLSID p_pCLSID);
+
+    [
+        helpstring("Unregisters a plugin component from the Path Copy Copy registry.")
+    ]
+    HRESULT UnregisterPlugin([in] REFCLSID p_pCLSID);
+};
+
+[
+    object,
+    uuid(D024E39A-791F-45A2-9FE9-F23C4D79876E),
+    helpstring("IPathCopyCopyContextMenuExt2 Interface"),
+    pointer_default(unique)
+]
+interface IPathCopyCopyContextMenuExt2 : IPathCopyCopyContextMenuExt
+{
+    [
+        helpstring("Registers a plugin component so that Path Copy Copy will display it in its contextual menu. Can register per-user and per-machine components.")
+    ]
+    HRESULT RegisterPlugin2([in] REFCLSID p_pCLSID, [in] VARIANT_BOOL p_User);
+
+    [
+        helpstring("Unregisters a plugin component from the Path Copy Copy registry. Can unregister per-user and per-machine components.")
+    ]
+    HRESULT UnregisterPlugin2([in] REFCLSID p_pCLSID, [in] VARIANT_BOOL p_User);
+}
+
+[
+    object,
+    uuid(6D8335E8-E2B8-49e7-9BF7-C5FA12394DE3),
+    helpstring("IPathCopyCopyDataHandler Interface"),
+    pointer_default(unique)
+]
+interface IPathCopyCopyDataHandler : IUnknown
+{
+};
+
+[
+    object,
+    uuid(3D0656ED-ABD1-4802-BB26-4A718E590894),
+    helpstring("IPathCopyCopyConfigHelper Interface"),
+    pointer_default(unique)
+]
+interface IPathCopyCopyConfigHelper : IUnknown
+{
+    [
+        propget,
+        helpstring("Returns the number of plugins in the config.")
+    ]
+    HRESULT PluginCount([out, retval] ULONG* p_pCount);
+    
+    [
+        helpstring("Returns information about a plugin in the config. p_Index must be between 0 and (PluginCount-1).")
+    ]
+    HRESULT GetPluginInfo([in] ULONG p_Index, [out] BSTR* p_ppId, [out] BSTR* p_ppDescription, [out] VARIANT_BOOL* p_pIsSeparator);
+};
+
+[
+	uuid(2E3829C9-CB67-4C81-B304-B6FE22816E4C),
+	version(7.0),
+	helpstring("PathCopyCopy 7.0 Type Library")
+]
+library PathCopyCopyLib
+{
+	importlib("stdole2.tlb");
+	
+    [
+		uuid(82CB99A2-2F18-4D5D-9476-54347E3B6720),
+		helpstring("PathCopyCopyContextMenuExt Class")
+	]
+	coclass PathCopyCopyContextMenuExt
+	{
+		[default] interface IPathCopyCopyContextMenuExt2;
+	};
+    
+    [
+        uuid(16170CA5-25CA-4e6d-928C-7A3A974F4B56),
+        helpstring("PathCopyCopyDataHandler Class")
+    ]
+    coclass PathCopyCopyDataHandler
+    {
+        [default] interface IPathCopyCopyDataHandler;
+    };
+    
+    [
+        uuid(1B4B1405-84CF-48CC-B373-42FAD7744258),
+        helpstring("PathCopyCopyConfigHelper Class")
+    ]
+    coclass PathCopyCopyConfigHelper
+    {
+        [default] interface IPathCopyCopyConfigHelper;
+    };
+
+    [
+        object,
+        uuid(C6B4863D-5212-4f86-A397-C8142A5372D6),
+        helpstring("Interface for plugins that allow custom path transformation in Path Copy Copy"),
+        pointer_default(unique)
+    ]
+    interface IPathCopyCopyPlugin : IUnknown
+    {
+        [
+            propget,
+            helpstring("Property that returns the plugin description. Will be used to show the plugin in the contextual menu. It is illegal to return NULL or an empty string. String should be allocated with SysAllocString.")
+        ]
+        HRESULT Description([out, retval] BSTR* p_ppDescription);
+
+        [
+            propget,
+            helpstring("Property that returns the plugin help text. Will be shown in the Explorer's status bar when the cursor is over the plugin's menu item. Can return NULL or an empty string to avoid showing help text. String should be allocated with SysAllocString.")
+        ]
+        HRESULT HelpText([out, retval] BSTR* p_ppHelpText);
+
+        [
+            helpstring("Method invoked when the user selects the plugin's menu item. The method is passed a file/folder's full path in p_pPath and should return a modified path in p_ppNewPath. Passing NULL or an empty string will cause Path Copy Copy to reuse the full path. String should be allocated with SysAllocString.")
+        ]
+        HRESULT GetPath([in] BSTR p_pPath,
+                        [out, retval] BSTR* p_ppNewPath);
+    };
+
+    [
+        object,
+        uuid(91C54806-12B6-4921-A8EC-791FC1209BD2),
+        helpstring("Interface for Path Copy Copy plugins that support grouping."),
+        pointer_default(unique)
+    ]
+    interface IPathCopyCopyPluginGroupInfo : IUnknown
+    {
+        [
+            propget,
+            helpstring("ID of the group to which this plugin belongs. If a non-zero value is returned, all plugins in that group will be placed together in the contextual menu. See http://pathcopycopy.codeplex.com/documentation for more info on what to pass here.")
+        ]
+        HRESULT GroupId([out, retval] ULONG* p_pGroupId);
+
+        [
+            propget,
+            helpstring("If GroupId returns a non-zero value, this can return a position for the plugin in the group. Plugins will be shown in ascending order of position in the contextual menu.")
+        ]
+        HRESULT GroupPosition([out, retval] ULONG* p_pPosition);
+    };
+
+    [
+        object,
+        uuid(76D0A4AF-717B-4f9c-8A84-4B471814D751),
+        helpstring("Interface for Path Copy Copy plugins that support different states."),
+        pointer_default(unique)
+    ]
+    interface IPathCopyCopyPluginStateInfo : IUnknown
+    {
+        [
+            helpstring("Property that returns whether the plugin should be enabled or not in the contextual menu. If the method returns VARIANT_FALSE, S_FALSE or an error code, the plugin will not be enabled (e.g. grayed out).")
+        ]
+        HRESULT Enabled([in] BSTR p_pParentPath,
+                        [in] BSTR p_pFile,
+                        [out, retval] VARIANT_BOOL* p_pEnabled);
+    };
+
+    [
+        object,
+        uuid(F876C1DF-8AE8-4C2D-B9DC-1717850E225B),
+        helpstring("Interface for Path Copy Copy plugins that want to display an icon in the contextual menu."),
+        pointer_default(unique)
+    ]
+    interface IPathCopyCopyPluginIconInfo : IUnknown
+    {
+        [
+            propget,
+            helpstring("Returns the path of the file containing the icon to use for the plugin.")
+        ]
+        HRESULT IconFile([out, retval] BSTR* p_ppIconFile);
+
+        [
+            propget,
+            helpstring("Checks if the plugin wants to use the default icon.")
+        ]
+        HRESULT UseDefaultIcon([out, retval] VARIANT_BOOL* p_pUseDefaultIcon);
+    };
+};

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://pathcopycopy.codeplex.com/xsd/PipelinePlugins/V1" elementFormDefault="qualified" targetNamespace="http://pathcopycopy.codeplex.com/xsd/PipelinePlugins/V1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="PipelinePluginCollection" nillable="true" type="tns:PipelinePluginCollection" />
+  <xs:complexType name="PipelinePluginCollection">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Plugins" type="tns:ArrayOfPipelinePluginInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfPipelinePluginInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PipelinePluginInfo" nillable="true" type="tns:PipelinePluginInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PipelinePluginInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Id" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Pipeline" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Global" type="xs:boolean" />
+      <xs:element minOccurs="0" maxOccurs="1" default="9.0.0.0" name="RequiredVersion" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

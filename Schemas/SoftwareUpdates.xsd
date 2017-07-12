@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://pathcopycopy.codeplex.com/xsd/SoftwareUpdate/V2" elementFormDefault="qualified" targetNamespace="http://pathcopycopy.codeplex.com/xsd/SoftwareUpdate/V2" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="SoftwareUpdateCollection" nillable="true" type="tns:SoftwareUpdateCollection" />
+  <xs:complexType name="SoftwareUpdateCollection">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="UpdateInfos" type="tns:ArrayOfSoftwareUpdateInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfSoftwareUpdateInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SoftwareUpdateInfo" nillable="true" type="tns:SoftwareUpdateInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SoftwareUpdateInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Version" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="RequiredWindowsVersion" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="InstallSources" type="tns:ArrayOfString" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Url" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ReleaseNotes" type="tns:ArrayOfString" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfString">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

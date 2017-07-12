@@ -1,0 +1,25 @@
+HKCR
+{
+	SampleCOMPlugin.SamplePathCopyCopyPlu.1 = s 'SamplePathCopyCopyPlugin Class'
+	{
+		CLSID = s '{50377643-61E1-4544-80D7-BF17140D8BFF}'
+	}
+	SampleCOMPlugin.SamplePathCopyCopyPlugi = s 'SamplePathCopyCopyPlugin Class'
+	{
+		CLSID = s '{50377643-61E1-4544-80D7-BF17140D8BFF}'
+		CurVer = s 'SampleCOMPlugin.SamplePathCopyCopyPlu.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {50377643-61E1-4544-80D7-BF17140D8BFF} = s 'SamplePathCopyCopyPlugin Class'
+		{
+			ProgID = s 'SampleCOMPlugin.SamplePathCopyCopyPlu.1'
+			VersionIndependentProgID = s 'SampleCOMPlugin.SamplePathCopyCopyPlugi'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{5EA2F6A2-8B00-4B14-81AF-39401CA26BA4}'
+		}
+	}
+}

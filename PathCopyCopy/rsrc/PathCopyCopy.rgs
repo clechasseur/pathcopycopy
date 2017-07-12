@@ -1,0 +1,11 @@
+HKCR
+{
+	NoRemove AppID
+	{
+		'%APPID%' = s 'PathCopyCopy'
+		'PathCopyCopy.DLL'
+		{
+			val AppID = s '%APPID%'
+		}
+	}
+}

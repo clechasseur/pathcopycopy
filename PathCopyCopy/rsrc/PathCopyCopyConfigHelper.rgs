@@ -1,0 +1,26 @@
+HKCR
+{
+	PathCopyCopy.PathCopyCopyConfigHelper.1 = s 'PathCopyCopyConfigHelper Class'
+	{
+		CLSID = s '{1B4B1405-84CF-48CC-B373-42FAD7744258}'
+	}
+	PathCopyCopy.PathCopyCopyConfigHelper = s 'PathCopyCopyConfigHelper Class'
+	{
+		CLSID = s '{1B4B1405-84CF-48CC-B373-42FAD7744258}'
+		CurVer = s 'PathCopyCopy.PathCopyCopyConfigHelper.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {1B4B1405-84CF-48CC-B373-42FAD7744258} = s 'PathCopyCopyConfigHelper Class'
+		{
+			ProgID = s 'PathCopyCopy.PathCopyCopyConfigHelper.1'
+			VersionIndependentProgID = s 'PathCopyCopy.PathCopyCopyConfigHelper'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{2E3829C9-CB67-4C81-B304-B6FE22816E4C}'
+		}
+	}
+}
+

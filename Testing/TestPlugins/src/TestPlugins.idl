@@ -1,0 +1,100 @@
+// TestPlugins.idl
+// (c) 2011-2017, Charles Lechasseur
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+
+// This file will be processed by the MIDL tool to
+// produce the type library (TestPlugins.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	object,
+	uuid(66560F42-A2E6-40FF-A7FC-3EA18C6CD7BA),
+	helpstring("IPathCopyCopyPlugin1a Interface"),
+	pointer_default(unique)
+]
+interface IPathCopyCopyPlugin1a : IUnknown{
+};
+[
+	object,
+	uuid(B30F9F02-9AC4-43CA-8C41-D05B6B3F965C),
+	helpstring("IPathCopyCopyPlugin1b Interface"),
+	pointer_default(unique)
+]
+interface IPathCopyCopyPlugin1b : IUnknown{
+};
+[
+	object,
+	uuid(61E74D7C-A4BE-460A-A793-5789BB399F1F),
+	helpstring("IPathCopyCopyPlugin2a Interface"),
+	pointer_default(unique)
+]
+interface IPathCopyCopyPlugin2a : IUnknown{
+};
+[
+	object,
+	uuid(7DAC830D-F778-4380-A12F-2F24E63D1A62),
+	helpstring("IPathCopyCopyPlugin2b Interface"),
+	pointer_default(unique)
+]
+interface IPathCopyCopyPlugin2b : IUnknown{
+};
+[
+	uuid(AB157490-4C48-4E45-84F9-D1F3126161CB),
+	version(1.0),
+	helpstring("TestPlugins 1.0 Type Library")
+]
+library TestPluginsLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(A21A5507-0858-44E1-A7AA-04E348A484FF),
+		helpstring("PathCopyCopyPlugin1a Class")
+	]
+	coclass PathCopyCopyPlugin1a
+	{
+		[default] interface IPathCopyCopyPlugin1a;
+	};
+	[
+		uuid(7CCED11E-0E40-4FC1-9B7A-040C02CD2DE2),
+		helpstring("PathCopyCopyPlugin1b Class")
+	]
+	coclass PathCopyCopyPlugin1b
+	{
+		[default] interface IPathCopyCopyPlugin1b;
+	};
+	[
+		uuid(6019CAF4-AEFD-471F-A2D1-D5B6AAB51B65),
+		helpstring("PathCopyCopyPlugin2a Class")
+	]
+	coclass PathCopyCopyPlugin2a
+	{
+		[default] interface IPathCopyCopyPlugin2a;
+	};
+	[
+		uuid(0277EF6E-74E0-4387-AB19-C48666469C6B),
+		helpstring("PathCopyCopyPlugin2b Class")
+	]
+	coclass PathCopyCopyPlugin2b
+	{
+		[default] interface IPathCopyCopyPlugin2b;
+	};
+};

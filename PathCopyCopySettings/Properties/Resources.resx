@@ -1,0 +1,300 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CYGWIN_PATH_PLUGIN_DESCRIPTION" xml:space="preserve">
+    <value>Copy Cygwin Path</value>
+  </data>
+  <data name="CYGWIN_PATH_PLUGIN_ID" xml:space="preserve">
+    <value>{CD50DCE3-9A5C-4adf-B552-1741361567D6}</value>
+  </data>
+  <data name="EDITING_DISABLED_MESSAGE" xml:space="preserve">
+    <value>This function has been disabled by the administrator.</value>
+  </data>
+  <data name="EDITING_DISABLED_TITLE" xml:space="preserve">
+    <value>Editing disabled</value>
+  </data>
+  <data name="ImportPipelinePluginsForm_CantOverwriteGlobalMsg" xml:space="preserve">
+    <value>Grayed out custom commands cannot be selected because they would overwrite those configured by your system administrator.</value>
+  </data>
+  <data name="ImportPipelinePluginsForm_MsgTitle" xml:space="preserve">
+    <value>Custom Commands</value>
+  </data>
+  <data name="INTERNET_PATH_PLUGIN_DESCRIPTION" xml:space="preserve">
+    <value>Copy Internet Path</value>
+  </data>
+  <data name="INTERNET_PATH_PLUGIN_ID" xml:space="preserve">
+    <value>{8F2ADCCC-9693-407d-9300-FCCB9A12B982}</value>
+  </data>
+  <data name="LONG_FOLDER_PLUGIN_DESCRIPTION" xml:space="preserve">
+    <value>Copy Long Parent Folder Path</value>
+  </data>
+  <data name="LONG_FOLDER_PLUGIN_ID" xml:space="preserve">
+    <value>{349939D7-780F-43fd-A98E-83D9ADD44E22}</value>
+  </data>
+  <data name="LONG_NAME_PLUGIN_DESCRIPTION" xml:space="preserve">
+    <value>Copy Long Name</value>
+  </data>
+  <data name="LONG_NAME_PLUGIN_ID" xml:space="preserve">
+    <value>{3A42B5C6-72D6-4a8a-BA44-014FA64AA11A}</value>
+  </data>
+  <data name="LONG_PATH_PLUGIN_DESCRIPTION" xml:space="preserve">
+    <value>Copy Long Path</value>
+  </data>
+  <data name="LONG_PATH_PLUGIN_ID" xml:space="preserve">
+    <value>{331A3B60-AF49-44f4-B30D-56ADFF6D25E8}</value>
+  </data>
+  <data name="LONG_UNC_FOLDER_PATH_PLUGIN_DESCRIPTION" xml:space="preserve">
+    <value>Copy Long UNC Parent Folder Path</value>
+  </data>
+  <data name="LONG_UNC_FOLDER_PATH_PLUGIN_ID" xml:space="preserve">
+    <value>{E2C942AC-917C-4aee-A867-8F6AB960BA76}</value>
+  </data>
+  <data name="LONG_UNC_PATH_PLUGIN_DESCRIPTION" xml:space="preserve">
+    <value>Copy Long UNC Path</value>
+  </data>
+  <data name="LONG_UNC_PATH_PLUGIN_ID" xml:space="preserve">
+    <value>{EA24BCC3-35F5-46b9-A2A5-A12A0AED2D28}</value>
+  </data>
+  <data name="MainForm_Confirm_ImportMsgTitle" xml:space="preserve">
+    <value>Import</value>
+  </data>
+  <data name="MainForm_Confirm_ImportPipelinePluginOverwrite" xml:space="preserve">
+    <value>Some custom commands to be imported will overwrite existing ones. Do you want to import them anyway?</value>
+  </data>
+  <data name="REGEX_TESTER_EXE_NAME" xml:space="preserve">
+    <value>PathCopyCopyRegexTester.exe</value>
+  </data>
+  <data name="REGEX_TESTER_MODIFIED_STRING_PREFIX" xml:space="preserve">
+    <value>Modified string: </value>
+  </data>
+  <data name="REMOVE_PIPELINE_PLUGIN_MESSAGE" xml:space="preserve">
+    <value>Are you sure you want to remove the "{0}" command?</value>
+  </data>
+  <data name="REMOVE_PIPELINE_PLUGIN_TITLE" xml:space="preserve">
+    <value>Remove Custom Command</value>
+  </data>
+  <data name="SHORT_FOLDER_PLUGIN_DESCRIPTION" xml:space="preserve">
+    <value>Copy Short Parent Folder Path</value>
+  </data>
+  <data name="SHORT_FOLDER_PLUGIN_ID" xml:space="preserve">
+    <value>{0929538B-5F52-4480-9902-2BBEC9C84905}</value>
+  </data>
+  <data name="SHORT_NAME_PLUGIN_DESCRIPTION" xml:space="preserve">
+    <value>Copy Short Name</value>
+  </data>
+  <data name="SHORT_NAME_PLUGIN_ID" xml:space="preserve">
+    <value>{C8757DCA-1BA8-48d0-8145-B93BBB9237AF}</value>
+  </data>
+  <data name="SHORT_PATH_PLUGIN_DESCRIPTION" xml:space="preserve">
+    <value>Copy Short Path</value>
+  </data>
+  <data name="SHORT_PATH_PLUGIN_ID" xml:space="preserve">
+    <value>{93B362D1-2B13-467a-B618-6784F24F3BA1}</value>
+  </data>
+  <data name="SHORT_UNC_FOLDER_PATH_PLUGIN_DESCRIPTION" xml:space="preserve">
+    <value>Copy Short UNC Parent Folder Path</value>
+  </data>
+  <data name="SHORT_UNC_FOLDER_PATH_PLUGIN_ID" xml:space="preserve">
+    <value>{73188FB3-8E14-409c-95EF-BA608FDC1274}</value>
+  </data>
+  <data name="SHORT_UNC_PATH_PLUGIN_DESCRIPTION" xml:space="preserve">
+    <value>Copy Short UNC Path</value>
+  </data>
+  <data name="SHORT_UNC_PATH_PLUGIN_ID" xml:space="preserve">
+    <value>{891F9E3E-0B70-49fd-A86C-53B21C6193C7}</value>
+  </data>
+  <data name="UNIX_PATH_PLUGIN_DESCRIPTION" xml:space="preserve">
+    <value>Copy Unix Path</value>
+  </data>
+  <data name="UNIX_PATH_PLUGIN_ID" xml:space="preserve">
+    <value>{5B5DA5CB-3284-45a9-A1E5-4D6B03107924}</value>
+  </data>
+  <data name="MainForm_Error_ImportPipelinePluginBadXMLFormat" xml:space="preserve">
+    <value>An error occured while trying to import the custom commands. The file appears to be corrupted.</value>
+  </data>
+  <data name="UserSettings_DefaultUpdateChannel" xml:space="preserve">
+    <value>https://raw.githubusercontent.com/clechasseur/pcc-updates/master/UpdateInfo2.xml</value>
+  </data>
+  <data name="MainForm_Confirm_EditMsgTitle" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="MainForm_Error_InvalidPipelinePluginEncodedElements" xml:space="preserve">
+    <value>An error occured while trying to interpret the data of this custom command. Perhaps it has been created by a newer version of Path Copy Copy? It will be impossible to edit it.</value>
+  </data>
+  <data name="PipelinePluginForm_EmptyName" xml:space="preserve">
+    <value>Please enter a name for the custom command.</value>
+  </data>
+  <data name="PipelinePluginForm_MsgTitle" xml:space="preserve">
+    <value>Custom Command</value>
+  </data>
+  <data name="PipelinePluginInfo_DescriptionWithRequiredVersion" xml:space="preserve">
+    <value>{0} (Required version: {1})</value>
+  </data>
+  <data name="MainForm_Error_ImportPipelinePluginEmptyXML" xml:space="preserve">
+    <value>An error occured while trying to import the custom commands. The file appears to be empty.</value>
+  </data>
+  <data name="ImportPipelinePluginsForm_IncompatiblePluginsMsg" xml:space="preserve">
+    <value>Custom commands with a listed version requirement are incompatible with this version of Path Copy Copy. They can still be imported, but they will be disabled.</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="DefaultIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\icons\PathCopyCopy2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BlankIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BlankIcon.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MainForm_PluginsDataGrid_IconToolTipText" xml:space="preserve">
+    <value>Click to choose an icon file for this command.
+Shift-click to have this command use the default icon.
+Control-click to avoid displaying an icon for this command.</value>
+  </data>
+  <data name="COM_PLUGIN_EXECUTOR_EXE_NAME_32" xml:space="preserve">
+    <value>PathCopyCopyCOMPluginExecutor32.exe</value>
+  </data>
+  <data name="COM_PLUGIN_EXECUTOR_EXE_NAME_64" xml:space="preserve">
+    <value>PathCopyCopyCOMPluginExecutor64.exe</value>
+  </data>
+  <data name="COM_PLUGIN_EXECUTOR_OUTPUT_PREFIX" xml:space="preserve">
+    <value>Output: </value>
+  </data>
+  <data name="PCC_EXECUTOR_DLL_NAME_32" xml:space="preserve">
+    <value>PCC32.dll</value>
+  </data>
+  <data name="PCC_EXECUTOR_DLL_NAME_64" xml:space="preserve">
+    <value>PCC64.dll</value>
+  </data>
+  <data name="PCC_EXECUTOR_DLL_NAME_DEV" xml:space="preserve">
+    <value>PathCopyCopy.dll</value>
+  </data>
+  <data name="Plugin_PreviewError" xml:space="preserve">
+    <value>#ERROR#</value>
+  </data>
+  <data name="MainForm_Msg_UserSettingsExported" xml:space="preserve">
+    <value>Settings have been exported to "{0}". To import them back (possibly on another machine), simply double-click the .reg file in Windows Explorer.</value>
+  </data>
+  <data name="MainForm_Msg_UserSettingsExportedMsgTitle" xml:space="preserve">
+    <value>Settings Exported</value>
+  </data>
+  <data name="MainForm_Confirm_ExportUserSettingsMsgTitle" xml:space="preserve">
+    <value>Export Settings</value>
+  </data>
+  <data name="MainForm_Confirm_ExportUserSettingsSaving" xml:space="preserve">
+    <value>In order to export settings, changes have to be applied first. Do you want to apply changes now?</value>
+  </data>
+</root>
