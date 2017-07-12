@@ -166,7 +166,7 @@ library PathCopyCopyLib
     {
         [
             propget,
-            helpstring("ID of the group to which this plugin belongs. If a non-zero value is returned, all plugins in that group will be placed together in the contextual menu. See http://pathcopycopy.codeplex.com/documentation for more info on what to pass here.")
+            helpstring("ID of the group to which this plugin belongs. If a non-zero value is returned, all plugins in that group will be placed together in the contextual menu.")
         ]
         HRESULT GroupId([out, retval] ULONG* p_pGroupId);
 

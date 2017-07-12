@@ -43,10 +43,10 @@
   #define MyAppVerName "Path Copy Copy DEBUG 14.0"
 #endif
 #define MyAppPublisher "Charles Lechasseur"
-#define MyAppURL "https://pathcopycopy.codeplex.com/"
+#define MyAppURL "https://pathcopycopy.github.io/"
 #define MyAppDescription "Path Copy Copy Shell Contextual Menu Extension"
-#define MyAppCopyright "(c) 2008-2017, Charles Lechasseur. See LICENSE.TXT for details."
-#define MyLicenseFile "..\LICENSE.TXT"
+#define MyAppCopyright "(c) 2008-2017, Charles Lechasseur. See LICENSE for details."
+#define MyLicenseFile "..\LICENSE"
 
 ; Include Inno Download Plugin script to be able to download dependencies.
 ; To use this, make sure Inno Download Plugin is installed: http://mitrich.net23.net/?/inno-download-plugin.html
@@ -124,9 +124,8 @@ Source: ..\bin\Win32\{#MyConfiguration}\PathCopyCopySettings.exe; DestDir: {app}
 Source: ..\bin\Win32\{#MyConfiguration}\PathCopyCopyRegexTester.exe; DestDir: {app}; Flags: ignoreversion restartreplace overwritereadonly uninsrestartdelete uninsremovereadonly
 Source: ..\bin\Win32\{#MyConfiguration}\PathCopyCopyCOMPluginExecutor32.exe; DestDir: {app}; Flags: ignoreversion restartreplace overwritereadonly uninsrestartdelete uninsremovereadonly
 Source: ..\bin\x64\{#MyConfiguration}\PathCopyCopyCOMPluginExecutor64.exe; DestDir: {app}; Flags: ignoreversion restartreplace overwritereadonly uninsrestartdelete uninsremovereadonly; Check: Is64BitInstallMode
-Source: ..\LICENSE.TXT; DestDir: {app}; Flags: overwritereadonly uninsremovereadonly
-Source: ..\HISTORY.TXT; DestDir: {app}; Flags: overwritereadonly uninsremovereadonly
-Source: .\Input\Path Copy Copy on CodePlex.url; DestDir: {app}; Flags: overwritereadonly uninsremovereadonly
+Source: ..\LICENSE; DestDir: {app}; Flags: overwritereadonly uninsremovereadonly
+Source: ..\HISTORY; DestDir: {app}; Flags: overwritereadonly uninsremovereadonly
 Source: ..\Schemas\PipelinePluginCollection.xsd; DestDir: {app}\Schemas; Flags: overwritereadonly uninsremovereadonly
 Source: ..\obj\Win32\{#MyConfiguration}\PathCopyCopy\PathCopyCopy.tlb; DestDir: {app}\Type Libraries\Win32; Flags: overwritereadonly uninsremovereadonly
 Source: ..\obj\x64\{#MyConfiguration}\PathCopyCopy\PathCopyCopy.tlb; DestDir: {app}\Type Libraries\x64; Flags: overwritereadonly uninsremovereadonly
@@ -139,7 +138,6 @@ Source: ..\Samples\SampleCOMPluginCSharp\SampleCOMPlugin\Properties\*; DestDir: 
 
 [Icons]
 Name: {group}\Path Copy Copy Settings; Filename: {app}\PathCopyCopySettings.exe; Flags: excludefromshowinnewinstall
-Name: {group}\Path Copy Copy License; Filename: {app}\LICENSE.TXT; Flags: excludefromshowinnewinstall
 
 [Registry]
 #ifdef PER_USER
@@ -156,9 +154,10 @@ Root: HKLM64; Subkey: Software\clechasseur\PathCopyCopy; Flags: uninsdeletekeyif
 #endif
 
 [InstallDelete]
-; Legacy shortcuts without the "Path Copy Copy" prefix
 Type: files; Name: {group}\Settings.lnk
 Type: files; Name: {group}\License.lnk
+Type: files; Name: {group}\Path Copy Copy License.lnk
+Type: files; Name: {app}\Path Copy Copy on CodePlex.url
 
 [Run]
 Filename: {sys}\regsvr32.exe; Parameters: "{code:Regsvr32InstallParameters} ""{app}\PCC32.dll"""; WorkingDir: {app}; StatusMsg: {code:GetStatusRegisterFiles}; Flags: runhidden 32bit

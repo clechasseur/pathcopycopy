@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26020.0
+VisualStudioVersion = 15.0.26430.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PathCopyCopy", "PathCopyCopy\PathCopyCopy.vcxproj", "{AA106D7B-966E-4A98-8EAD-0AE2AE0038D2}"
 EndProject
@@ -18,9 +18,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PathCopyCopyRegexTester", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0B4523A6-521E-43F6-BC87-44919C8CA492}"
 	ProjectSection(SolutionItems) = preProject
-		HISTORY.TXT = HISTORY.TXT
-		LICENSE.TXT = LICENSE.TXT
-		README-DEV.TXT = README-DEV.TXT
+		HISTORY = HISTORY
+		LICENSE = LICENSE
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PathCopyCopyCOMPluginExecutor", "PathCopyCopyCOMPluginExecutor\PathCopyCopyCOMPluginExecutor.vcxproj", "{F682E1A6-ADFA-403F-8C8A-5D61F8E023A9}"

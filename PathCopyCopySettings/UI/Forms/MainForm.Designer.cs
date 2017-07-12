@@ -69,7 +69,7 @@
             this.ProductAndVersionLbl = new System.Windows.Forms.Label();
             this.CopyrightLbl = new System.Windows.Forms.Label();
             this.VisitWebsiteLbl = new System.Windows.Forms.Label();
-            this.CodePlexSiteLinkLbl = new System.Windows.Forms.LinkLabel();
+            this.SiteLinkLbl = new System.Windows.Forms.LinkLabel();
             this.LicenseExplanationLbl = new System.Windows.Forms.Label();
             this.LicenseTxtLinkLbl = new System.Windows.Forms.LinkLabel();
             this.DonationLinkLbl = new System.Windows.Forms.LinkLabel();
@@ -559,7 +559,7 @@
             this.AboutTableLayoutPanel.Controls.Add(this.ProductAndVersionLbl, 0, 0);
             this.AboutTableLayoutPanel.Controls.Add(this.CopyrightLbl, 0, 1);
             this.AboutTableLayoutPanel.Controls.Add(this.VisitWebsiteLbl, 0, 2);
-            this.AboutTableLayoutPanel.Controls.Add(this.CodePlexSiteLinkLbl, 0, 3);
+            this.AboutTableLayoutPanel.Controls.Add(this.SiteLinkLbl, 0, 3);
             this.AboutTableLayoutPanel.Controls.Add(this.LicenseExplanationLbl, 0, 4);
             this.AboutTableLayoutPanel.Controls.Add(this.LicenseTxtLinkLbl, 0, 5);
             this.AboutTableLayoutPanel.Controls.Add(this.DonationLinkLbl, 0, 6);
@@ -619,21 +619,21 @@
             this.VisitWebsiteLbl.Text = "Visit our website:";
             this.VisitWebsiteLbl.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
-            // CodePlexSiteLinkLbl
+            // SiteLinkLbl
             // 
-            this.CodePlexSiteLinkLbl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.SiteLinkLbl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.CodePlexSiteLinkLbl.AutoSize = true;
-            this.CodePlexSiteLinkLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CodePlexSiteLinkLbl.Location = new System.Drawing.Point(3, 200);
-            this.CodePlexSiteLinkLbl.Name = "CodePlexSiteLinkLbl";
-            this.CodePlexSiteLinkLbl.Size = new System.Drawing.Size(453, 60);
-            this.CodePlexSiteLinkLbl.TabIndex = 3;
-            this.CodePlexSiteLinkLbl.TabStop = true;
-            this.CodePlexSiteLinkLbl.Text = "https://pathcopycopy.codeplex.com/";
-            this.CodePlexSiteLinkLbl.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.CodePlexSiteLinkLbl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.CodePlexSiteLinkLbl_LinkClicked);
+            this.SiteLinkLbl.AutoSize = true;
+            this.SiteLinkLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SiteLinkLbl.Location = new System.Drawing.Point(3, 200);
+            this.SiteLinkLbl.Name = "SiteLinkLbl";
+            this.SiteLinkLbl.Size = new System.Drawing.Size(453, 60);
+            this.SiteLinkLbl.TabIndex = 3;
+            this.SiteLinkLbl.TabStop = true;
+            this.SiteLinkLbl.Text = "https://pathcopycopy.github.io/";
+            this.SiteLinkLbl.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.SiteLinkLbl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.SiteLinkLbl_LinkClicked);
             // 
             // LicenseExplanationLbl
             // 
@@ -660,7 +660,7 @@
             this.LicenseTxtLinkLbl.Size = new System.Drawing.Size(453, 60);
             this.LicenseTxtLinkLbl.TabIndex = 5;
             this.LicenseTxtLinkLbl.TabStop = true;
-            this.LicenseTxtLinkLbl.Text = "LICENSE.TXT";
+            this.LicenseTxtLinkLbl.Text = "LICENSE";
             this.LicenseTxtLinkLbl.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.LicenseTxtLinkLbl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LicenseTxtLinkLbl_LinkClicked);
             // 
@@ -774,7 +774,7 @@
         private System.Windows.Forms.Label ProductAndVersionLbl;
         private System.Windows.Forms.Label CopyrightLbl;
         private System.Windows.Forms.Label VisitWebsiteLbl;
-        private System.Windows.Forms.LinkLabel CodePlexSiteLinkLbl;
+        private System.Windows.Forms.LinkLabel SiteLinkLbl;
         private System.Windows.Forms.Label LicenseExplanationLbl;
         private System.Windows.Forms.LinkLabel LicenseTxtLinkLbl;
         private System.Windows.Forms.LinkLabel DonationLinkLbl;

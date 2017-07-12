@@ -1,0 +1,8 @@
+.vs/
+bin/
+obj/
+*.aps
+dlldata.c
+*_i.c
+*_i.h
+*_p.c

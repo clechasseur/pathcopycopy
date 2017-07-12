@@ -44,13 +44,13 @@ namespace PathCopyCopy.Settings.UI.Forms
         private const string PATHS_SEPARATOR_ON_SAME_LINE = " ";
 
         /// Name of our LICENSE file.
-        private const string LICENSE_TXT_FILE = "LICENSE.TXT";
+        private const string LICENSE_TXT_FILE = "LICENSE";
 
         /// URI of the Donations page.
         private const string DONATIONS_PAGE_URI = @"https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=LM5B9WNTH4KN4&lc=CA&item_name=Charles%20Lechasseur&item_number=PathCopyCopy&currency_code=CAD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted";
 
-        /// URI of the page specifying the Path Copy Copy license on CodePlex.
-        private const string LICENSE_PAGE_URI = @"https://pathcopycopy.codeplex.com/license";
+        /// URI of the page specifying the Path Copy Copy license on GitHub.
+        private const string LICENSE_PAGE_URI = @"https://github.com/clechasseur/pathcopycopy/blob/master/LICENSE";
 
         /// Extension of legacy pipeline plugins export files.
         private const string LEGACY_PIPELINE_PLUGINS_EXT = ".pccpp";
@@ -121,7 +121,7 @@ namespace PathCopyCopy.Settings.UI.Forms
             }
             ProductAndVersionLbl.Text = String.Format(ProductAndVersionLbl.Text, version.ToString(numComponents));
             CopyrightLbl.Text = GetAssemblyCopyrightString(thisAssembly);
-            MainToolTip.SetToolTip(CodePlexSiteLinkLbl, CodePlexSiteLinkLbl.Text);
+            MainToolTip.SetToolTip(SiteLinkLbl, SiteLinkLbl.Text);
             MainToolTip.SetToolTip(LicenseTxtLinkLbl, licensePath);
             DonationLinkLbl.Links[0].LinkData = DONATIONS_PAGE_URI;
             MainToolTip.SetToolTip(DonationLinkLbl, DONATIONS_PAGE_URI);
@@ -670,10 +670,10 @@ namespace PathCopyCopy.Settings.UI.Forms
         /// </summary>
         /// <param name="sender">Event sender.</param>
         /// <param name="e">Event arguments.</param>
-        private void CodePlexSiteLinkLbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void SiteLinkLbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             // Link is the control's text.
-            Process.Start(CodePlexSiteLinkLbl.Text);
+            Process.Start(SiteLinkLbl.Text);
         }
         
         /// <summary>
