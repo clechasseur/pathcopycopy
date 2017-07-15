@@ -705,14 +705,12 @@ begin
     // (We do this here and not in the [Run] section to be able to do it
     // after processing the command-line, since [Run] entries are processed
     // before this event is called.)
-    Exec(ExpandConstant('{sys}\rundll32.exe'), ExpandConstant(
-      '"{app}\PCC32.dll,ApplyGlobalRevisions"'), ExpandConstant('"{app}"'),
-      SW_HIDE, ewWaitUntilTerminated, ResultCode);
+    Exec('rundll32.exe', ExpandConstant('"{app}\PCC32.dll",ApplyGlobalRevisions'),
+      '', SW_HIDE, ewWaitUntilTerminated, ResultCode);
     if Is64BitInstallMode then
     begin
-      Exec(ExpandConstant('{sys}\rundll32.exe'), ExpandConstant(
-        '"{app}\PCC64.dll,ApplyGlobalRevisions"'), ExpandConstant('"{app}"'),
-        SW_HIDE, ewWaitUntilTerminated, ResultCode);
+      Exec('rundll32.exe', ExpandConstant('"{app}\PCC64.dll",ApplyGlobalRevisions'),
+        '', SW_HIDE, ewWaitUntilTerminated, ResultCode);
     end;
 #else
     // No need to perform revise in portable mode, it will be performed
