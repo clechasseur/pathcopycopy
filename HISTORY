@@ -1,4 +1,4 @@
-Version 14.0 (2017-??-??)
+Version 14.0 (2017-07-14)
 -------------------------
 - New UI to select which command are included in main menu/submenu, a little like it was in 12.0.
 - Settings window now remembers its size and position. It can also be resized. [https://pathcopycopy.codeplex.com/workitem/11423]
