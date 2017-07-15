@@ -42,10 +42,7 @@ namespace PathCopyCopy.Settings.UI.Forms
     {
         /// Paths separator that copies multiple paths on the same line.
         private const string PATHS_SEPARATOR_ON_SAME_LINE = " ";
-
-        /// Name of our LICENSE file.
-        private const string LICENSE_TXT_FILE = "LICENSE";
-
+        
         /// URI of the Donations page.
         private const string DONATIONS_PAGE_URI = @"https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=LM5B9WNTH4KN4&lc=CA&item_name=Charles%20Lechasseur&item_number=PathCopyCopy&currency_code=CAD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted";
 
@@ -57,9 +54,6 @@ namespace PathCopyCopy.Settings.UI.Forms
 
         /// The standard DPI values in Windows.
         private const int STANDARD_DPI = 96;
-
-        /// Path to license file, either locally or online.
-        private string licensePath;
 
         /// Object used to access user settings.
         private UserSettings settings;
@@ -105,11 +99,8 @@ namespace PathCopyCopy.Settings.UI.Forms
                 }
             }
 
-            // Locate license file.
-            Assembly thisAssembly = this.GetType().Assembly;
-            licensePath = LocateLicenseFile(thisAssembly);
-
             // Init about "box" controls.
+            Assembly thisAssembly = this.GetType().Assembly;
             Version version = thisAssembly.GetName().Version;
             int numComponents;
             if (version.Revision > 0) {
@@ -122,7 +113,7 @@ namespace PathCopyCopy.Settings.UI.Forms
             ProductAndVersionLbl.Text = String.Format(ProductAndVersionLbl.Text, version.ToString(numComponents));
             CopyrightLbl.Text = GetAssemblyCopyrightString(thisAssembly);
             MainToolTip.SetToolTip(SiteLinkLbl, SiteLinkLbl.Text);
-            MainToolTip.SetToolTip(LicenseTxtLinkLbl, licensePath);
+            MainToolTip.SetToolTip(LicenseTxtLinkLbl, LICENSE_PAGE_URI);
             DonationLinkLbl.Links[0].LinkData = DONATIONS_PAGE_URI;
             MainToolTip.SetToolTip(DonationLinkLbl, DONATIONS_PAGE_URI);
         }
@@ -141,7 +132,7 @@ namespace PathCopyCopy.Settings.UI.Forms
                 // Extract the entire string from the attribute.
                 string entireCopyrightString = ((AssemblyCopyrightAttribute) copyrightAttributes[0]).Copyright;
 
-                // If there is a period, stop there. We don't want the part about LICENSE.TXT.
+                // If there is a period, stop there. We don't want the part about LICENSE.
                 int periodPos = entireCopyrightString.IndexOf('.');
                 if (periodPos >= 0) {
                     copyrightString = entireCopyrightString.Substring(0, periodPos);
@@ -160,41 +151,6 @@ namespace PathCopyCopy.Settings.UI.Forms
             copyrightString = copyrightString.Replace("(c)", "\u00A9");
 
             return copyrightString;
-        }
-
-        /// <summary>
-        /// Looks for the LICENSE.TXT file on disk and returns its full path.
-        /// If not found, returns the URL of the license file online.
-        /// </summary>
-        /// <param name="assembly">Assembly used to locate license file on disk.</param>
-        /// <returns>Path to license file, on disk or online.</returns>
-        private string LocateLicenseFile(Assembly assembly)
-        {
-            Debug.Assert(assembly != null);
-
-            // In a normal installation, the license file will be located right next to the executable.
-            string licensePath = Path.Combine(Path.GetDirectoryName(Path.GetFullPath(assembly.Location)), LICENSE_TXT_FILE);
-            FileInfo licenseFileInfo = new FileInfo(licensePath);
-            if (!licenseFileInfo.Exists) {
-                // In a dev environment, license file is three directories up.
-                FileInfo[] fileInfos = null;
-                DirectoryInfo dirInfo = licenseFileInfo.Directory;
-                for (int i = 0; dirInfo != null && i < 3; ++i) {
-                    dirInfo = dirInfo.Parent;
-                }
-                if (dirInfo != null) {
-                    fileInfos = dirInfo.GetFiles(LICENSE_TXT_FILE);
-                }
-                if (fileInfos != null && fileInfos.Length != 0) {
-                    Debug.Assert(fileInfos.Length == 1);
-                    licenseFileInfo = fileInfos[0];
-                } else {
-                    licenseFileInfo = null;
-                }
-            }
-            
-            // If license file was found, return its full path, otherwise return online URL.
-            return licenseFileInfo != null ? licenseFileInfo.FullName : LICENSE_PAGE_URI;
         }
         
         /// <summary>
@@ -677,16 +633,13 @@ namespace PathCopyCopy.Settings.UI.Forms
         }
         
         /// <summary>
-        /// Called when the user clicks on the link to see the license file.
-        /// We need to locate the license file on disk and open it.
+        /// Called when the user clicks on the link to see the license.
         /// </summary>
         /// <param name="sender">Event sender.</param>
         /// <param name="e">Event arguments.</param>
         private void LicenseTxtLinkLbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Debug.Assert(licensePath != null);
-
-            Process.Start(licensePath);
+            Process.Start(LICENSE_PAGE_URI);
         }
         
         /// <summary>
