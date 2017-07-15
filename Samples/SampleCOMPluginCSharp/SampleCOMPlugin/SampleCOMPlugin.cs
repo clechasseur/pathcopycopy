@@ -129,7 +129,7 @@ namespace SampleCOMPlugin.CSharp
         /// ID of the group this plugin belongs to.
         /// </summary>
         /// <remarks>
-        /// See http://pathcopycopy.codeplex.com/documentation for more info.
+        /// See https://github.com/clechasseur/pathcopycopy/wiki for more info.
         /// </remarks>
         public uint GroupId
         {

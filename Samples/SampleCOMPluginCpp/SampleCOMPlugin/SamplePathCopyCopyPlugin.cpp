@@ -31,7 +31,7 @@ STDMETHODIMP CSamplePathCopyCopyPlugin::GetPath(BSTR p_pPath, BSTR *p_ppNewPath)
 // Method that must return the ID of the plugin group to which this plugin belongs.
 // All plugins in the same group will appear together in the contextual menu.
 // Different groups will be split by menu separators.
-// See http://pathcopycopy.codeplex.com/documentation for more info.
+// See https://github.com/clechasseur/pathcopycopy/wiki for more info.
 STDMETHODIMP CSamplePathCopyCopyPlugin::get_GroupId(ULONG *p_pGroupId)
 {
     *p_pGroupId = 0x5A4781E0;
