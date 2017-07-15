@@ -671,8 +671,10 @@ end;
 // Called during several installation steps. We'll use the
 // opportunity to write admin registry keys at the end.
 procedure CurStepChanged(CurStep: TSetupStep);
+#ifndef PER_USER
 var
   ResultCode: Integer;
+#endif
 begin
   if CurStep = ssPostInstall then
   begin
