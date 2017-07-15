@@ -7,3 +7,4 @@ dlldata.c
 *_i.h
 *_p.c
 Installer/Output/
+*.user

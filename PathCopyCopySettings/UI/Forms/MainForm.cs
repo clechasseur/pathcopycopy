@@ -185,7 +185,10 @@ namespace PathCopyCopy.Settings.UI.Forms
             SortedPluginsSet setOfAllPlugins = new SortedPluginsSet(pluginsInDefaultOrder);
 
             // Create binding list to store plugins to display. Populate it by ordering
-            // plugins using UI display order and known plugins from settings.
+            // plugins using UI display order from settings. (We use UI display order as
+            // "known plugins" also because we want to display any plugin not in UI display
+            // order at the end, otherwise we might skip displaying known plugins that are
+            // not in UI display order setting.)
             List<Guid> uiDisplayOrder = settings.UIDisplayOrder;
             if (uiDisplayOrder == null) {
                 // No display order, just use all plugins in default order
@@ -194,13 +197,9 @@ namespace PathCopyCopy.Settings.UI.Forms
                     uiDisplayOrder.Add(plugin.Id);
                 }
             }
-            List<Guid> knownPlugins = settings.KnownPlugins;
-            SortedSet<Guid> knownPluginsAsSet = null;
-            if (knownPlugins != null) {
-                knownPluginsAsSet = new SortedSet<Guid>(knownPlugins);
-            }
+            SortedSet<Guid> uiDisplayOrderAsSet = new SortedSet<Guid>(uiDisplayOrder);
             List<Plugin> plugins = PluginsRegistry.OrderPluginsToDisplay(setOfAllPlugins,
-                uiDisplayOrder, knownPluginsAsSet, pluginsInDefaultOrder);
+                uiDisplayOrder, uiDisplayOrderAsSet, pluginsInDefaultOrder);
             pluginDisplayInfos = new BindingList<PluginDisplayInfo>();
             foreach (Plugin plugin in plugins) {
                 pluginDisplayInfos.Add(new PluginDisplayInfo(plugin));
