@@ -4,20 +4,19 @@
     xsi:schemaLocation="http://pathcopycopy.codeplex.com/xsd/SoftwareUpdate/V2 Schemas/SoftwareUpdates.xsd">
     <UpdateInfos>
         <SoftwareUpdateInfo>
-            <Version>13.0.1.0</Version>
+            <Version>14.0</Version>
             <RequiredWindowsVersion>5.1.0.0</RequiredWindowsVersion>
             <InstallSources>
                 <string>Inno</string>
                 <string>Portable</string>
             </InstallSources>
-            <Name>13.0.1</Name>
-            <Url>http://pathcopycopy.codeplex.com/releases/view/629048</Url>
+            <Name>14.0</Name>
+            <Url>https://github.com/clechasseur/pathcopycopy/releases/tag/14.0</Url>
             <ReleaseNotes>
                 <string><![CDATA[
-                <p>13.0 is a major release that adds an oft-requested feature: the ability to fully reorder commands and add/remove separators.</p>
-                <p>There are other new features and bug fixes, follow the link above for the entire list.</p>
-                <p>13.0.1 is a bugfix release to get rid of a few bugs and of a false positive virus identification.</p>
-                <p>A recommended upgrade for all users.</p>
+                <p>The Path Copy Copy project is moving to GitHub! 14.0 is the first release to be hosted there.</p>
+                <p>This version features a revamped Settings UI that looks more like the old one from 12.0. It is more user-friendly.</p>
+                <p>This is a must-have upgrade for all users!</p>
                 ]]></string>
             </ReleaseNotes>
         </SoftwareUpdateInfo>
