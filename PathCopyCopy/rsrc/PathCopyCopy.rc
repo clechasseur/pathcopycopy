@@ -202,7 +202,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_CAN
 // PNG
 //
 
-IDB_PCCICON2            PNG                     "E:\\Projects\\plex\\PathCopyCopy\\icons\\PathCopyCopy2.png"
+IDB_PCCICON2            PNG                     "..\\..\\icons\\PathCopyCopy2.png"
 
 #endif    // English (Canada) resources
 /////////////////////////////////////////////////////////////////////////////
