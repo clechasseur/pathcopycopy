@@ -125,6 +125,7 @@ Source: ..\bin\Win32\{#MyConfiguration}\PathCopyCopyRegexTester.exe; DestDir: {a
 Source: ..\bin\Win32\{#MyConfiguration}\PathCopyCopyCOMPluginExecutor32.exe; DestDir: {app}; Flags: ignoreversion restartreplace overwritereadonly uninsrestartdelete uninsremovereadonly
 Source: ..\bin\x64\{#MyConfiguration}\PathCopyCopyCOMPluginExecutor64.exe; DestDir: {app}; Flags: ignoreversion restartreplace overwritereadonly uninsrestartdelete uninsremovereadonly; Check: Is64BitInstallMode
 Source: ..\LICENSE; DestDir: {app}; Flags: overwritereadonly uninsremovereadonly; DestName: LICENSE.TXT
+Source: ..\LICENSE.CommandLineArguments; DestDir: {app}; Flags: overwritereadonly uninsremovereadonly; DestName: LICENSE.CommandLineArguments.TXT
 Source: ..\HISTORY; DestDir: {app}; Flags: overwritereadonly uninsremovereadonly; DestName: HISTORY.TXT
 Source: ..\Schemas\PipelinePluginCollection.xsd; DestDir: {app}\Schemas; Flags: overwritereadonly uninsremovereadonly
 Source: ..\obj\Win32\{#MyConfiguration}\PathCopyCopy\PathCopyCopy.tlb; DestDir: {app}\Type Libraries\Win32; Flags: overwritereadonly uninsremovereadonly
