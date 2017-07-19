@@ -1,10 +1,10 @@
 image: Visual Studio 2017
+install:
+  - "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Tools\VsDevCmd.bat"
 platform:
   - x64
 configuration:
   - Debug
-before_build:
-  - call "C:\Program Files (x86)\Microsoft Visual Studio 15.0\Common7\Tools\vsdevcmd.bat"
 build:
   project: PathCopyCopy.sln
 test: off
