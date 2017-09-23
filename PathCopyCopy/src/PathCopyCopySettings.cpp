@@ -540,13 +540,13 @@ namespace PCC
     // default icon is to be used, will return an empty string. If no icon is specified
     // for this plugin, will return a value whose has_value() method returns false.
     //
-    std::optional<std::wstring> Settings::GetIconFileForPlugin(const CLSID& p_PluginId) const
+    cl::optional<std::wstring> Settings::GetIconFileForPlugin(const CLSID& p_PluginId) const
     {
         // Perform late-revising.
         Revise();
 
         // Assume there's no info for the icon.
-        std::optional<std::wstring> resultingIconFile;
+        cl::optional<std::wstring> resultingIconFile;
 
         // Convert plugin ID to string.
         StOleStr pluginIdAsString;

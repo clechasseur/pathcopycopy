@@ -26,21 +26,21 @@
   #define MyConfiguration "Release"
   #ifdef PER_USER
     #define MyAppName "Path Copy Copy (Portable)"
-    #define MyAppVersion "14.0"
-    #define MyAppFullVersion "14.0"
-    #define MyAppVerName "Path Copy Copy (Portable) 14.0"
+    #define MyAppVersion "14.0.1"
+    #define MyAppFullVersion "14.0.1"
+    #define MyAppVerName "Path Copy Copy (Portable) 14.0.1"
   #else
     #define MyAppName "Path Copy Copy"
-    #define MyAppVersion "14.0"
-    #define MyAppFullVersion "14.0"
-    #define MyAppVerName "Path Copy Copy 14.0"
+    #define MyAppVersion "14.0.1"
+    #define MyAppFullVersion "14.0.1"
+    #define MyAppVerName "Path Copy Copy 14.0.1"
   #endif
 #else
   #define MyConfiguration "Debug"
   #define MyAppName "Path Copy Copy DEBUG"
-  #define MyAppVersion "14.0"
-  #define MyAppFullVersion "14.0"
-  #define MyAppVerName "Path Copy Copy DEBUG 14.0"
+  #define MyAppVersion "14.0.1"
+  #define MyAppFullVersion "14.0.1"
+  #define MyAppVerName "Path Copy Copy DEBUG 14.0.1"
 #endif
 #define MyAppPublisher "Charles Lechasseur"
 #define MyAppURL "https://pathcopycopy.github.io/"
@@ -125,6 +125,7 @@ Source: ..\bin\Win32\{#MyConfiguration}\PathCopyCopyRegexTester.exe; DestDir: {a
 Source: ..\bin\Win32\{#MyConfiguration}\PathCopyCopyCOMPluginExecutor32.exe; DestDir: {app}; Flags: ignoreversion restartreplace overwritereadonly uninsrestartdelete uninsremovereadonly
 Source: ..\bin\x64\{#MyConfiguration}\PathCopyCopyCOMPluginExecutor64.exe; DestDir: {app}; Flags: ignoreversion restartreplace overwritereadonly uninsrestartdelete uninsremovereadonly; Check: Is64BitInstallMode
 Source: ..\LICENSE; DestDir: {app}; Flags: overwritereadonly uninsremovereadonly; DestName: LICENSE.TXT
+Source: ..\LICENSE.cl_optional; DestDir: {app}; Flags: overwritereadonly uninsremovereadonly; DestName: LICENSE.cl_optional.TXT
 Source: ..\LICENSE.CommandLineArguments; DestDir: {app}; Flags: overwritereadonly uninsremovereadonly; DestName: LICENSE.CommandLineArguments.TXT
 Source: ..\HISTORY; DestDir: {app}; Flags: overwritereadonly uninsremovereadonly; DestName: HISTORY.TXT
 Source: ..\Schemas\PipelinePluginCollection.xsd; DestDir: {app}\Schemas; Flags: overwritereadonly uninsremovereadonly

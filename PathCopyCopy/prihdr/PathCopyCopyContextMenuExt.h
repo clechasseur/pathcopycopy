@@ -27,10 +27,11 @@
 #include "resource.h"
 #include "StImage.h"
 
+#include <cl/optional.h>
+
 #include <map>
 #include <memory>
 #include <mutex>
-#include <optional>
 #include <string>
 #include <utility>
 
@@ -123,11 +124,11 @@ private:
     PCC::FilesV         m_vFiles;                   // Files selected in Shell.
     std::wstring        m_ParentPath;               // Path of the parent directory of all files selected.
 
-    std::optional<UINT_PTR>
+    cl::optional<UINT_PTR>
                         m_FirstCmdId;               // ID of first command menu item.
-    std::optional<UINT_PTR>
+    cl::optional<UINT_PTR>
                         m_SubMenuCmdId;             // ID of the menu item that opens our submenu.
-    std::optional<UINT_PTR>
+    cl::optional<UINT_PTR>
                         m_SettingsCmdId;            // ID of the menu item that triggers the options.
     CmdIdPluginM        m_mPluginsByCmdId;          // Map storing plugins by their command IDs.
 
