@@ -1,3 +1,13 @@
+Version 1x.x (20??-??-??)
+-------------------------
+- Ignored software updates really won't show up again after one week [https://github.com/clechasseur/pathcopycopy/issues/20]
+
+
+Version 14.0.1 (2017-09-23)
+---------------------------
+- Restore compatibility with Windows XP [https://github.com/clechasseur/pathcopycopy/issues/17]
+
+
 Version 14.0 (2017-07-14)
 -------------------------
 - New UI to select which command are included in main menu/submenu, a little like it was in 12.0.
