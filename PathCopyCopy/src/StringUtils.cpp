@@ -114,7 +114,7 @@ void StringUtils::EncodeURICharacters(std::wstring& p_rString,
                     return val <= 0x1F || val == 0x20 || val == 0x7F || p_Char == L'<' || p_Char == L'>' ||
                         p_Char == L'#' || p_Char == L'%' || p_Char == L'"' || p_Char == L'{' ||
                         p_Char == L'}' || p_Char == L'|' || p_Char == L'\\' || p_Char == L'^' ||
-                        p_Char == L'[' || p_Char == L']' || p_Char == L'`';
+                        p_Char == L'[' || p_Char == L']' || p_Char == L'`' || p_Char == L'+';
                 };
                 break;
             }
