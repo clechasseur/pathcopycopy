@@ -479,7 +479,7 @@ namespace PathCopyCopy.Settings.Core
             }
             set {
                 if (value != null) {
-                    userKey.SetValue(IGNORED_UPDATE_VALUE_NAME, value.ToString(4));
+                    userKey.SetValue(IGNORED_UPDATE_VALUE_NAME, value.ToString());
                 } else {
                     userKey.DeleteValue(IGNORED_UPDATE_VALUE_NAME, false);
                 }
