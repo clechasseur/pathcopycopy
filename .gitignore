@@ -8,3 +8,6 @@ dlldata.c
 *_p.c
 Installer/Output/
 *.user
+ipch/
+*.VC.db
+*.VC.opendb
