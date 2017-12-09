@@ -43,8 +43,13 @@ namespace PCC
                         GetPathsSeparator() const;
         void            SetPathsSeparator(const std::wstring& p_PathsSeparator);
 
+        const std::wstring&
+                        GetExecutable() const;
+        void            SetExecutable(const std::wstring& p_Executable);
+
     private:
         std::wstring    m_PathsSeparator;   // Separator to use between multiple paths.
+        std::wstring    m_Executable;       // Path to executable to start.
     };
 
     //

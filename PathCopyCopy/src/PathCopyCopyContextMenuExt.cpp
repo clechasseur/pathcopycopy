@@ -28,7 +28,7 @@
 #include <PathCopyCopySettings.h>
 #include <PathCopyCopySettingsApp.h>
 #include <PluginUtils.h>
-#include <StClipboard.h>
+#include <PathAction.h>
 #include <StGdiplusStartup.h>
 #include <StGlobalBlock.h>
 #include <StGlobalLock.h>
@@ -568,49 +568,14 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::InvokeCommand(
                         }
                     }
 
-                    // Now store the copied paths in the clipboard.
-                    StClipboard acquireClipboard(p_pCommandInfo->hwnd);
-                    if (acquireClipboard.InitResult()) {
-                        // Allocate global block to store text.
-                        const size_t blockNumElements = newFiles.size() + 1;
-                        const size_t blockSize = blockNumElements * sizeof(wchar_t);
-                        StGlobalBlock memBlock(GMEM_MOVEABLE, blockSize);
-                        if (memBlock.Get() != NULL) {
-                            // Lock block and copy text in it.
-                            {
-                                StGlobalLock lockBlock(memBlock.Get());
-                                void* pBlock = lockBlock.GetPtr();
-                                if (pBlock != nullptr) {
-                                    errno_t copyErr = ::wcscpy_s(static_cast<wchar_t*>(pBlock),
-                                                                 blockNumElements,
-                                                                 newFiles.c_str());
-                                    if (copyErr != 0) {
-                                        // Could not copy data in block.
-                                        hRes = E_FAIL;
-                                    }
-                                } else {
-                                    // Could not copy data in block.
-                                    hRes = E_FAIL;
-                                }
-                            }
+                    // Get action to perform on the filenames.
+                    PCC::PathActionSP spAction = spPlugin->Action();
+                    assert(spAction != nullptr);
 
-                            if (SUCCEEDED(hRes)) {
-                                // Save data in clipboard.
-                                HANDLE hSavedData = ::SetClipboardData(CF_UNICODETEXT, memBlock.Get());
-                                if (hSavedData != NULL) {
-                                    // Clipboard now owns the data, avoid freeing it.
-                                    memBlock.Release();
-                                } else {
-                                    // Could not save clipboard data.
-                                    hRes = E_FAIL;
-                                }
-                            }
-                        } else {
-                            // Could not allocate memory for clipboard data.
-                            hRes = E_FAIL;
-                        }
-                    } else {
-                        // Failed to acquire clipboard, can't set data.
+                    // Use the action to perform whatever is needed.
+                    try {
+                        spAction->Act(newFiles, p_pCommandInfo->hwnd);
+                    } catch (...) {
                         hRes = E_FAIL;
                     }
                 }

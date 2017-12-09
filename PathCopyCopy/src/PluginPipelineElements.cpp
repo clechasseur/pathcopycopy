@@ -352,4 +352,37 @@ namespace PCC
         p_rOptions.SetPathsSeparator(m_PathsSeparator);
     }
 
+    //
+    // Constructor.
+    //
+    // @param p_Executable Path to executable to launch.
+    //
+    ExecutablePipelineElement::ExecutablePipelineElement(const std::wstring& p_Executable)
+        : PipelineElement(),
+          m_Executable(p_Executable)
+    {
+    }
+
+    //
+    // Does not modify the path since this element only modifies pipeline options.
+    //
+    // @param p_rPath Path to modify (in-place).
+    // @param p_pPluginProvider Optional object to access plugins.
+    //
+    void ExecutablePipelineElement::ModifyPath(std::wstring& /*p_rPath*/,
+                                               const PluginProvider* const /*p_pPluginProvider*/) const
+    {
+    }
+
+    //
+    // Modifies global pipeline options by specifying the path of the
+    // executable to launch with paths as argument.
+    //
+    // @param p_rOptions Global options to modify (in-place).
+    //
+    void ExecutablePipelineElement::ModifyOptions(PipelineOptions& p_rOptions) const
+    {
+        p_rOptions.SetExecutable(m_Executable);
+    }
+
 } // namespace PCC

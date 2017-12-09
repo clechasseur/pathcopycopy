@@ -39,6 +39,7 @@ namespace PCC
 {
     // Forward declarations
     class Plugin;
+    class PathAction;
     class PipelineElement;
     class Pipeline;
     class Settings;
@@ -69,6 +70,7 @@ namespace PCC
     typedef GUIDEqualTo                         CLSIDEqualTo;
 
     typedef std::shared_ptr<Plugin>             PluginSP;               // Shared pointer to a plugin.
+    typedef std::shared_ptr<PathAction>         PathActionSP;           // Shared pointer to a path action.
     typedef std::shared_ptr<PipelineElement>    PipelineElementSP;      // Shared pointer to a plugin pipeline element.
     typedef std::vector<PipelineElementSP>      PipelineElementSPV;     // Vector of pipeline elements (via shared pointers).
     typedef std::shared_ptr<Pipeline>           PipelineSP;             // Shared pointer to a plugin pipeline.

@@ -116,7 +116,7 @@
       <ValidateAllParameters>true</ValidateAllParameters>
     </Midl>
     <ClCompile>
-      <AdditionalIncludeDirectories>.\prihdr;.\plugins\prihdr;.\generated;.\rsrc;..\3rdParty\cl_optional\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\prihdr;.\plugins\prihdr;.\actions\prihdr;.\generated;.\rsrc;..\3rdParty\cl_optional\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;_USRDLL;_MERGE_PROXYSTUB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -157,7 +157,7 @@
       <ProxyFileName>PathCopyCopy_p.c</ProxyFileName>
     </Midl>
     <ClCompile>
-      <AdditionalIncludeDirectories>.\prihdr;.\plugins\prihdr;.\generated;.\rsrc;..\3rdParty\cl_optional\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\prihdr;.\plugins\prihdr;.\actions\prihdr;.\generated;.\rsrc;..\3rdParty\cl_optional\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;_USRDLL;PCC_WIN64;_MERGE_PROXYSTUB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -202,7 +202,7 @@
       <ValidateAllParameters>true</ValidateAllParameters>
     </Midl>
     <ClCompile>
-      <AdditionalIncludeDirectories>.\prihdr;.\plugins\prihdr;.\generated;.\rsrc;..\3rdParty\cl_optional\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\prihdr;.\plugins\prihdr;.\actions\prihdr;.\generated;.\rsrc;..\3rdParty\cl_optional\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_USRDLL;_MERGE_PROXYSTUB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -240,7 +240,7 @@
       <ProxyFileName>PathCopyCopy_p.c</ProxyFileName>
     </Midl>
     <ClCompile>
-      <AdditionalIncludeDirectories>.\prihdr;.\plugins\prihdr;.\generated;.\rsrc;..\3rdParty\cl_optional\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\prihdr;.\plugins\prihdr;.\actions\prihdr;.\generated;.\rsrc;..\3rdParty\cl_optional\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_USRDLL;PCC_WIN64;_MERGE_PROXYSTUB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -268,6 +268,8 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="actions\src\CopyToClipboardPathAction.cpp" />
+    <ClCompile Include="actions\src\LaunchExecutablePathAction.cpp" />
     <ClCompile Include="plugins\src\AndrogynousInternalPlugin.cpp" />
     <ClCompile Include="src\AllPluginsProvider.cpp" />
     <ClCompile Include="src\AtlRegKey.cpp" />
@@ -300,6 +302,7 @@
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</CompileAsManaged>
     </ClCompile>
     <ClCompile Include="src\COMPluginProvider.cpp" />
+    <ClCompile Include="src\PathAction.cpp" />
     <ClCompile Include="src\PipelinePluginProvider.cpp" />
     <ClCompile Include="src\PluginProvider.cpp" />
     <ClCompile Include="src\RegKey.cpp" />
@@ -370,12 +373,15 @@
     <Midl Include="src\PathCopyCopy.idl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="actions\prihdr\CopyToClipboardPathAction.h" />
+    <ClInclude Include="actions\prihdr\LaunchExecutablePathAction.h" />
     <ClInclude Include="plugins\prihdr\AndrogynousInternalPlugin.h" />
     <ClInclude Include="prihdr\AllPluginsProvider.h" />
     <ClInclude Include="prihdr\AtlRegKey.h" />
     <ClInclude Include="prihdr\dlldatax.h" />
     <ClInclude Include="prihdr\dllmain.h" />
     <ClInclude Include="prihdr\COMPluginProvider.h" />
+    <ClInclude Include="prihdr\PathAction.h" />
     <ClInclude Include="prihdr\PipelinePluginProvider.h" />
     <ClInclude Include="prihdr\PluginProvider.h" />
     <ClInclude Include="prihdr\RegKey.h" />

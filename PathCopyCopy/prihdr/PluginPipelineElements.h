@@ -241,4 +241,27 @@ namespace PCC
         std::wstring    m_PathsSeparator;   // Separator to use between multiple paths.
     };
 
+    //
+    // ExecutablePipelineElement
+    //
+    // Pipeline element that does not modify the path but instructs
+    // Path Copy Copy to launch an executable with the path or paths
+    // as argument, instead of copying them to the clipboard.
+    //
+    class ExecutablePipelineElement : public PipelineElement
+    {
+    public:
+        explicit        ExecutablePipelineElement(const std::wstring& p_Executable);
+                        ExecutablePipelineElement(const ExecutablePipelineElement&) = delete;
+        ExecutablePipelineElement&
+                        operator=(const ExecutablePipelineElement&) = delete;
+
+        virtual void    ModifyPath(std::wstring& p_rPath,
+                                   const PluginProvider* const p_pPluginProvider) const override;
+        virtual void    ModifyOptions(PipelineOptions& p_rOptions) const override;
+
+    private:
+        std::wstring    m_Executable;       // Executable to launch.
+    };
+
 } // namespace PCC

@@ -61,6 +61,9 @@ namespace PCC
         static void     DecodePathsSeparatorElement(std::wstring::const_iterator& p_rElementIt,
                                                     const std::wstring::const_iterator& p_ElementEnd,
                                                     PipelineElementSP& p_rspElement);
+        static void     DecodeExecutableElement(std::wstring::const_iterator& p_rElementIt,
+                                                const std::wstring::const_iterator& p_ElementEnd,
+                                                PipelineElementSP& p_rspElement);
 
         static long     DecodePipelineInt(std::wstring::const_iterator& p_rElementIt,
                                           const std::wstring::const_iterator& p_ElementEnd);

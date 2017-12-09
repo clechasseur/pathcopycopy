@@ -41,6 +41,7 @@ namespace
     const wchar_t   ELEMENT_CODE_REGEX                      = L'^';
     const wchar_t   ELEMENT_CODE_APPLY_PLUGIN               = L'{';
     const wchar_t   ELEMENT_CODE_PATHS_SEPARATOR            = L',';
+    const wchar_t   ELEMENT_CODE_EXECUTABLE                 = L'x';
 
     // Version numbers used for regex elements.
     const long      REGEX_ELEMENT_INITIAL_VERSION           = 1;
@@ -150,6 +151,10 @@ namespace PCC
             }
             case ELEMENT_CODE_PATHS_SEPARATOR: {
                 DecodePathsSeparatorElement(p_rElementIt, p_ElementEnd, spElement);
+                break;
+            }
+            case ELEMENT_CODE_EXECUTABLE: {
+                DecodeExecutableElement(p_rElementIt, p_ElementEnd, spElement);
                 break;
             }
             default:
@@ -268,6 +273,25 @@ namespace PCC
         std::wstring pathsSeparator;
         DecodePipelineString(p_rElementIt, p_ElementEnd, pathsSeparator);
         p_rspElement = std::make_shared<PathsSeparatorPipelineElement>(pathsSeparator);
+    }
+
+    //
+    // Decodes an ExecutablePipelineElement found in an encoded string.
+    //
+    // @param p_rElementIt Iterator pointing at the beginning of the element data in the
+    //                     encoded string. After the method returns, the iterator points
+    //                     just past the pipeline element's data.
+    // @param p_ElementEnd Iterator pointing at the end of the encoded string.
+    // @param p_rspElement Where to store the newly-created element.
+    //
+    void PipelineDecoder::DecodeExecutableElement(std::wstring::const_iterator& p_rElementIt,
+                                                  const std::wstring::const_iterator& p_ElementEnd,
+                                                  PipelineElementSP& p_rspElement)
+    {
+        // This type of element contains only a string containing the path to the executable.
+        std::wstring executable;
+        DecodePipelineString(p_rElementIt, p_ElementEnd, executable);
+        p_rspElement = std::make_shared<ExecutablePipelineElement>(executable);
     }
 
     //

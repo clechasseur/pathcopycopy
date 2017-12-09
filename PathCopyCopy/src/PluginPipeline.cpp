@@ -43,9 +43,33 @@ namespace PCC
     //
     // @param p_PathsSeparator Separator between multiple paths
     //                         or empty string for default value.
+    //
     void PipelineOptions::SetPathsSeparator(const std::wstring& p_PathsSeparator)
     {
         m_PathsSeparator = p_PathsSeparator;
+    }
+
+    //
+    // Returns the executable to start with the path or paths as argument.
+    //
+    // @return Path of executable to start. An empty string means
+    //         to copy to clipboard instead.
+    //
+    const std::wstring& PipelineOptions::GetExecutable() const
+    {
+        return m_Executable;
+    }
+
+    //
+    // Sets the executable to start with the path or paths as argument.
+    // An empty string means to copy paths to the clipboard instead.
+    //
+    // @param p_Executable Executable to start or empty string to
+    //                     use default behavior of copying to clipboard.
+    //
+    void PipelineOptions::SetExecutable(const std::wstring& p_Executable)
+    {
+        m_Executable = p_Executable;
     }
 
     //

@@ -22,6 +22,8 @@
 #include <stdafx.h>
 #include <Plugin.h>
 
+#include <CopyToClipboardPathAction.h>
+
 #include <assert.h>
 #include <string.h>
 
@@ -95,6 +97,17 @@ namespace PCC
     std::wstring Plugin::PathsSeparator() const
     {
         return L"";
+    }
+
+    //
+    // Returns the action to perform on the path or paths when using this plugin.
+    // By default, this returns an action copying the path or paths to the clipboard.
+    //
+    // @return Path action instance to use.
+    //
+    PathActionSP Plugin::Action() const
+    {
+        return std::make_shared<PCC::Actions::CopyToClipboardPathAction>();
     }
 
     //

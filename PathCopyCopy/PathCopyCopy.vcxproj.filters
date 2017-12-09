@@ -26,6 +26,15 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
+    <Filter Include="Actions">
+      <UniqueIdentifier>{7d8106b1-e1b6-470f-89ff-4d7a1d9a7e78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actions\Header Files">
+      <UniqueIdentifier>{61ec5751-7a69-44a2-a743-b46f8637fb61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actions\Source Files">
+      <UniqueIdentifier>{37a848d8-c79d-4c3c-a4dd-400677792808}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\dlldatax.c">
@@ -162,6 +171,15 @@
     </ClCompile>
     <ClCompile Include="src\RegKey.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PathAction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="actions\src\CopyToClipboardPathAction.cpp">
+      <Filter>Actions\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="actions\src\LaunchExecutablePathAction.cpp">
+      <Filter>Actions\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -357,6 +375,15 @@
     </ClInclude>
     <ClInclude Include="prihdr\RegKey.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\PathAction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="actions\prihdr\CopyToClipboardPathAction.h">
+      <Filter>Actions\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="actions\prihdr\LaunchExecutablePathAction.h">
+      <Filter>Actions\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

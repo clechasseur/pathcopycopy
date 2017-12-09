@@ -57,6 +57,8 @@ namespace PCC
             virtual std::wstring        GetPath(const std::wstring& p_File) const override;
             virtual std::wstring        PathsSeparator() const override;
 
+            virtual PCC::PathActionSP   Action() const override;
+
             virtual bool                CanDropRedundantWords() const override;
 
         private:

@@ -23,6 +23,7 @@
 #include <PipelinePlugin.h>
 #include <PluginPipeline.h>
 #include <PluginPipelineDecoder.h>
+#include <LaunchExecutablePathAction.h>
 
 #include <assert.h>
 
@@ -149,6 +150,33 @@ namespace PCC
                 separator = options.GetPathsSeparator();
             }
             return separator;
+        }
+
+        //
+        // Returns the action to perform on the path or paths when using this plugin.
+        //
+        // @return Path action instance to use.
+        //
+        PCC::PathActionSP PipelinePlugin::Action() const
+        {
+            // Pipeline options can modify the behavior.
+            std::wstring executable;
+            if (m_spPipeline != nullptr) {
+                PipelineOptions options;
+                m_spPipeline->ModifyOptions(options);
+                executable = options.GetExecutable();
+            }
+            
+            PCC::PathActionSP spAction;
+            if (!executable.empty()) {
+                // Launch executable with paths as argument
+                spAction = std::make_shared<PCC::Actions::LaunchExecutablePathAction>(executable);
+            } else {
+                // Use default behavior.
+                spAction = Plugin::Action();
+            }
+
+            return spAction;
         }
 
         //
