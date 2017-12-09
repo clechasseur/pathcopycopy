@@ -130,6 +130,7 @@
             this.Controls.Add(this.SoftwareUpdateAvailLbl);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(498, 419);
             this.Name = "SoftwareUpdateForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

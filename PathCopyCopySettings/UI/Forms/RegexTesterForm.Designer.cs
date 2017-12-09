@@ -115,8 +115,7 @@
             // 
             // ExecutionGroupBox
             // 
-            this.ExecutionGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.ExecutionGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ExecutionGroupBox.Controls.Add(this.InvalidNoticeLbl);
             this.ExecutionGroupBox.Controls.Add(this.TestBtn);
@@ -285,7 +284,7 @@
             this.Controls.Add(this.ParamsGroupBox);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(454, 352);
+            this.MinimumSize = new System.Drawing.Size(462, 364);
             this.Name = "RegexTesterForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

@@ -402,7 +402,7 @@
             this.Controls.Add(this.NameLbl);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(414, 529);
+            this.MinimumSize = new System.Drawing.Size(422, 541);
             this.Name = "PipelinePluginForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

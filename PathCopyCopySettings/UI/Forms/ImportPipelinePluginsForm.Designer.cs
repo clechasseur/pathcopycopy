@@ -92,7 +92,7 @@
             this.Controls.Add(this.ChoosePipelinePluginsLbl);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(399, 357);
+            this.MinimumSize = new System.Drawing.Size(407, 369);
             this.Name = "ImportPipelinePluginsForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

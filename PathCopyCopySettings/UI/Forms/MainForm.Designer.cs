@@ -92,7 +92,7 @@
             // 
             this.ApplyBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ApplyBtn.Enabled = false;
-            this.ApplyBtn.Location = new System.Drawing.Point(410, 533);
+            this.ApplyBtn.Location = new System.Drawing.Point(410, 563);
             this.ApplyBtn.Name = "ApplyBtn";
             this.ApplyBtn.Size = new System.Drawing.Size(75, 23);
             this.ApplyBtn.TabIndex = 4;
@@ -104,7 +104,7 @@
             // OKBtn
             // 
             this.OKBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.OKBtn.Location = new System.Drawing.Point(248, 533);
+            this.OKBtn.Location = new System.Drawing.Point(248, 563);
             this.OKBtn.Name = "OKBtn";
             this.OKBtn.Size = new System.Drawing.Size(75, 23);
             this.OKBtn.TabIndex = 2;
@@ -117,7 +117,7 @@
             // 
             this.CancelBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.CancelBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.CancelBtn.Location = new System.Drawing.Point(329, 533);
+            this.CancelBtn.Location = new System.Drawing.Point(329, 563);
             this.CancelBtn.Name = "CancelBtn";
             this.CancelBtn.Size = new System.Drawing.Size(75, 23);
             this.CancelBtn.TabIndex = 3;
@@ -137,7 +137,7 @@
             this.MainTabCtrl.Location = new System.Drawing.Point(12, 12);
             this.MainTabCtrl.Name = "MainTabCtrl";
             this.MainTabCtrl.SelectedIndex = 0;
-            this.MainTabCtrl.Size = new System.Drawing.Size(473, 515);
+            this.MainTabCtrl.Size = new System.Drawing.Size(473, 545);
             this.MainTabCtrl.TabIndex = 0;
             // 
             // PluginsPage
@@ -159,7 +159,7 @@
             this.PluginsPage.Location = new System.Drawing.Point(4, 22);
             this.PluginsPage.Name = "PluginsPage";
             this.PluginsPage.Padding = new System.Windows.Forms.Padding(3);
-            this.PluginsPage.Size = new System.Drawing.Size(465, 489);
+            this.PluginsPage.Size = new System.Drawing.Size(465, 519);
             this.PluginsPage.TabIndex = 1;
             this.PluginsPage.Text = "Commands";
             this.PluginsPage.UseVisualStyleBackColor = true;
@@ -283,7 +283,7 @@
             this.PreviewGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.PreviewGroupBox.Controls.Add(this.PreviewTxt);
-            this.PreviewGroupBox.Location = new System.Drawing.Point(9, 430);
+            this.PreviewGroupBox.Location = new System.Drawing.Point(9, 460);
             this.PreviewGroupBox.Name = "PreviewGroupBox";
             this.PreviewGroupBox.Size = new System.Drawing.Size(369, 53);
             this.PreviewGroupBox.TabIndex = 3;
@@ -333,7 +333,7 @@
             this.PluginsDataGrid.RowHeadersVisible = false;
             this.PluginsDataGrid.RowTemplate.Height = 18;
             this.PluginsDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.PluginsDataGrid.Size = new System.Drawing.Size(369, 380);
+            this.PluginsDataGrid.Size = new System.Drawing.Size(369, 410);
             this.PluginsDataGrid.TabIndex = 2;
             this.PluginsDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.PluginsDataGrid_CellContentClick);
             this.PluginsDataGrid.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.PluginsDataGrid_CellMouseEnter);
@@ -706,7 +706,7 @@
             // ExportUserSettingsBtn
             // 
             this.ExportUserSettingsBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.ExportUserSettingsBtn.Location = new System.Drawing.Point(12, 533);
+            this.ExportUserSettingsBtn.Location = new System.Drawing.Point(12, 563);
             this.ExportUserSettingsBtn.Name = "ExportUserSettingsBtn";
             this.ExportUserSettingsBtn.Size = new System.Drawing.Size(107, 23);
             this.ExportUserSettingsBtn.TabIndex = 1;
@@ -721,7 +721,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.CancelBtn;
-            this.ClientSize = new System.Drawing.Size(497, 568);
+            this.ClientSize = new System.Drawing.Size(497, 598);
             this.Controls.Add(this.ExportUserSettingsBtn);
             this.Controls.Add(this.MainTabCtrl);
             this.Controls.Add(this.CancelBtn);
@@ -729,7 +729,7 @@
             this.Controls.Add(this.ApplyBtn);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(505, 595);
+            this.MinimumSize = new System.Drawing.Size(513, 637);
             this.Name = "MainForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
