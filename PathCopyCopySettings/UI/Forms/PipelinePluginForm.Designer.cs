@@ -36,6 +36,10 @@
             this.BaseCommandLbl = new System.Windows.Forms.Label();
             this.OptionsPage = new System.Windows.Forms.TabPage();
             this.OptionsGroupBox = new System.Windows.Forms.GroupBox();
+            this.BrowserForExecutableBtn = new System.Windows.Forms.Button();
+            this.ExecutableTxt = new System.Windows.Forms.TextBox();
+            this.ExecutableLbl = new System.Windows.Forms.Label();
+            this.LaunchExecutableChk = new System.Windows.Forms.CheckBox();
             this.CopyOnSameLineChk = new System.Windows.Forms.CheckBox();
             this.FindReplaceGroupBox = new System.Windows.Forms.GroupBox();
             this.TestRegexBtn = new System.Windows.Forms.Button();
@@ -56,6 +60,7 @@
             this.QuotesChk = new System.Windows.Forms.CheckBox();
             this.OKBtn = new System.Windows.Forms.Button();
             this.CancelBtn = new System.Windows.Forms.Button();
+            this.ChooseExecutableOpenDlg = new System.Windows.Forms.OpenFileDialog();
             this.MainTabControl.SuspendLayout();
             this.BasePluginPage.SuspendLayout();
             this.OptionsPage.SuspendLayout();
@@ -93,7 +98,7 @@
             this.MainTabControl.Location = new System.Drawing.Point(12, 38);
             this.MainTabControl.Name = "MainTabControl";
             this.MainTabControl.SelectedIndex = 0;
-            this.MainTabControl.Size = new System.Drawing.Size(382, 416);
+            this.MainTabControl.Size = new System.Drawing.Size(382, 465);
             this.MainTabControl.TabIndex = 2;
             // 
             // BasePluginPage
@@ -104,7 +109,7 @@
             this.BasePluginPage.Location = new System.Drawing.Point(4, 22);
             this.BasePluginPage.Name = "BasePluginPage";
             this.BasePluginPage.Padding = new System.Windows.Forms.Padding(3);
-            this.BasePluginPage.Size = new System.Drawing.Size(374, 390);
+            this.BasePluginPage.Size = new System.Drawing.Size(374, 439);
             this.BasePluginPage.TabIndex = 0;
             this.BasePluginPage.Text = "Base Command";
             this.BasePluginPage.UseVisualStyleBackColor = true;
@@ -117,7 +122,7 @@
             this.BasePluginLst.FormattingEnabled = true;
             this.BasePluginLst.Location = new System.Drawing.Point(9, 32);
             this.BasePluginLst.Name = "BasePluginLst";
-            this.BasePluginLst.Size = new System.Drawing.Size(355, 316);
+            this.BasePluginLst.Size = new System.Drawing.Size(355, 355);
             this.BasePluginLst.TabIndex = 2;
             this.BasePluginLst.SelectedIndexChanged += new System.EventHandler(this.BasePluginLst_SelectedIndexChanged);
             // 
@@ -148,7 +153,7 @@
             this.OptionsPage.Location = new System.Drawing.Point(4, 22);
             this.OptionsPage.Name = "OptionsPage";
             this.OptionsPage.Padding = new System.Windows.Forms.Padding(3);
-            this.OptionsPage.Size = new System.Drawing.Size(374, 390);
+            this.OptionsPage.Size = new System.Drawing.Size(374, 439);
             this.OptionsPage.TabIndex = 1;
             this.OptionsPage.Text = "Options";
             this.OptionsPage.UseVisualStyleBackColor = true;
@@ -157,13 +162,60 @@
             // 
             this.OptionsGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.OptionsGroupBox.Controls.Add(this.BrowserForExecutableBtn);
+            this.OptionsGroupBox.Controls.Add(this.ExecutableTxt);
+            this.OptionsGroupBox.Controls.Add(this.ExecutableLbl);
+            this.OptionsGroupBox.Controls.Add(this.LaunchExecutableChk);
             this.OptionsGroupBox.Controls.Add(this.CopyOnSameLineChk);
             this.OptionsGroupBox.Location = new System.Drawing.Point(6, 334);
             this.OptionsGroupBox.Name = "OptionsGroupBox";
-            this.OptionsGroupBox.Size = new System.Drawing.Size(362, 46);
+            this.OptionsGroupBox.Size = new System.Drawing.Size(362, 99);
             this.OptionsGroupBox.TabIndex = 3;
             this.OptionsGroupBox.TabStop = false;
             this.OptionsGroupBox.Text = "Options";
+            // 
+            // BrowserForExecutableBtn
+            // 
+            this.BrowserForExecutableBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BrowserForExecutableBtn.Enabled = false;
+            this.BrowserForExecutableBtn.Location = new System.Drawing.Point(281, 65);
+            this.BrowserForExecutableBtn.Name = "BrowserForExecutableBtn";
+            this.BrowserForExecutableBtn.Size = new System.Drawing.Size(75, 23);
+            this.BrowserForExecutableBtn.TabIndex = 4;
+            this.BrowserForExecutableBtn.Text = "Br&owse";
+            this.BrowserForExecutableBtn.UseVisualStyleBackColor = true;
+            this.BrowserForExecutableBtn.Click += new System.EventHandler(this.BrowserForExecutableBtn_Click);
+            // 
+            // ExecutableTxt
+            // 
+            this.ExecutableTxt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ExecutableTxt.Enabled = false;
+            this.ExecutableTxt.Location = new System.Drawing.Point(91, 67);
+            this.ExecutableTxt.Name = "ExecutableTxt";
+            this.ExecutableTxt.Size = new System.Drawing.Size(184, 20);
+            this.ExecutableTxt.TabIndex = 3;
+            // 
+            // ExecutableLbl
+            // 
+            this.ExecutableLbl.AutoSize = true;
+            this.ExecutableLbl.Enabled = false;
+            this.ExecutableLbl.Location = new System.Drawing.Point(22, 70);
+            this.ExecutableLbl.Name = "ExecutableLbl";
+            this.ExecutableLbl.Size = new System.Drawing.Size(63, 13);
+            this.ExecutableLbl.TabIndex = 2;
+            this.ExecutableLbl.Text = "E&xecutable:";
+            // 
+            // LaunchExecutableChk
+            // 
+            this.LaunchExecutableChk.AutoSize = true;
+            this.LaunchExecutableChk.Location = new System.Drawing.Point(6, 42);
+            this.LaunchExecutableChk.Name = "LaunchExecutableChk";
+            this.LaunchExecutableChk.Size = new System.Drawing.Size(339, 17);
+            this.LaunchExecutableChk.TabIndex = 1;
+            this.LaunchExecutableChk.Text = "&Launch executable with path(s) instead of copying to the clipboard";
+            this.LaunchExecutableChk.UseVisualStyleBackColor = true;
+            this.LaunchExecutableChk.CheckedChanged += new System.EventHandler(this.LaunchExecutableChk_CheckedChanged);
             // 
             // CopyOnSameLineChk
             // 
@@ -370,7 +422,7 @@
             // 
             this.OKBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.OKBtn.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.OKBtn.Location = new System.Drawing.Point(238, 467);
+            this.OKBtn.Location = new System.Drawing.Point(238, 516);
             this.OKBtn.Name = "OKBtn";
             this.OKBtn.Size = new System.Drawing.Size(75, 23);
             this.OKBtn.TabIndex = 3;
@@ -381,12 +433,17 @@
             // 
             this.CancelBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.CancelBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.CancelBtn.Location = new System.Drawing.Point(319, 467);
+            this.CancelBtn.Location = new System.Drawing.Point(319, 516);
             this.CancelBtn.Name = "CancelBtn";
             this.CancelBtn.Size = new System.Drawing.Size(75, 23);
             this.CancelBtn.TabIndex = 4;
             this.CancelBtn.Text = "Cancel";
             this.CancelBtn.UseVisualStyleBackColor = true;
+            // 
+            // ChooseExecutableOpenDlg
+            // 
+            this.ChooseExecutableOpenDlg.Filter = "Executable files (*.exe;*.com;*.bat;*.cmd)|*.exe;*.com;*.bat;*.cmd|All files (*.*" +
+    ")|*.*";
             // 
             // PipelinePluginForm
             // 
@@ -394,7 +451,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.CancelBtn;
-            this.ClientSize = new System.Drawing.Size(406, 502);
+            this.ClientSize = new System.Drawing.Size(406, 551);
             this.Controls.Add(this.CancelBtn);
             this.Controls.Add(this.OKBtn);
             this.Controls.Add(this.MainTabControl);
@@ -402,7 +459,7 @@
             this.Controls.Add(this.NameLbl);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(422, 541);
+            this.MinimumSize = new System.Drawing.Size(422, 590);
             this.Name = "PipelinePluginForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
@@ -458,5 +515,10 @@
         private System.Windows.Forms.GroupBox OptionsGroupBox;
         private System.Windows.Forms.CheckBox CopyOnSameLineChk;
         private System.Windows.Forms.CheckBox EncodeURICharsChk;
+        private System.Windows.Forms.Button BrowserForExecutableBtn;
+        private System.Windows.Forms.TextBox ExecutableTxt;
+        private System.Windows.Forms.Label ExecutableLbl;
+        private System.Windows.Forms.CheckBox LaunchExecutableChk;
+        private System.Windows.Forms.OpenFileDialog ChooseExecutableOpenDlg;
     }
 }

@@ -1263,7 +1263,75 @@ namespace PathCopyCopy.Settings.Core.Plugins
             return EncodeString(PathsSeparator);
         }
     }
-    
+
+    /// <summary>
+    /// Pipeline element that does not modify the path but instructs
+    /// Path Copy Copy to launch an executable with path(s) as argument
+    /// instead of copying them to the clipboard.
+    /// </summary>
+    public class ExecutablePipelineElement : PipelineElement
+    {
+        /// <summary>
+        /// Code representing this pipeline element type.
+        /// </summary>
+        public const char CODE = 'x';
+
+        /// <summary>
+        /// Code representing this pipeline element type.
+        /// </summary>
+        public override char Code
+        {
+            get {
+                return CODE;
+            }
+        }
+
+        /// <summary>
+        /// Minumum version of Path Copy Copy required to use this pipeline element.
+        /// </summary>
+        public override Version RequiredVersion
+        {
+            get {
+                return new Version(15, 0, 0, 0);
+            }
+        }
+
+        /// <summary>
+        /// Path to executable to launch with path(s) as argument.
+        /// </summary>
+        public string Executable
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        public ExecutablePipelineElement()
+        {
+        }
+
+        /// <summary>
+        /// Constructor with arguments.
+        /// </summary>
+        /// <param name="executable">Path to executable.</param>
+        public ExecutablePipelineElement(string executable)
+        {
+            Executable = executable;
+        }
+
+        /// <summary>
+        /// Encodes this pipeline element in a string.
+        /// </summary>
+        /// <returns>Encoded element data.</returns>
+        public override string Encode()
+        {
+            // Encode the executable path.
+            return EncodeString(Executable);
+        }
+    }
+
     /// <summary>
     /// Static class that can decode a pipeline of multiple elements from an
     /// encoded string. This is the C# equivalent of the C++'s PipelineDecoder.
@@ -1362,6 +1430,10 @@ namespace PathCopyCopy.Settings.Core.Plugins
                     element = DecodePathsSeparatorElement(encodedElements, ref curChar);
                     break;
                 }
+                case ExecutablePipelineElement.CODE: {
+                    element = DecodeExecutableElement(encodedElements, ref curChar);
+                    break;
+                }
                 default:
                     // Invalid pipeline. PCC downgrade, maybe?
                     throw new InvalidPipelineException();
@@ -1451,6 +1523,23 @@ namespace PathCopyCopy.Settings.Core.Plugins
             // The element data contains the paths separator.
             string pathsSeparator = DecodeString(encodedElements, ref curChar);
             return new PathsSeparatorPipelineElement(pathsSeparator);
+        }
+
+        /// <summary>
+        /// Decodes an <see cref="ExecutablePipelineElement"/> from an encoded
+        /// element string.
+        /// </summary>
+        /// <param name="encodedElements">String of encoded elements data.</param>
+        /// <param name="curChar">Position where the element data is to be found
+        /// in the string (not counting the element code). Upon return, this will
+        /// point just after the element data.</param>
+        /// <returns></returns>
+        private static ExecutablePipelineElement DecodeExecutableElement(
+            string encodedElements, ref int curChar)
+        {
+            // The element data contains the executable path.
+            string executable = DecodeString(encodedElements, ref curChar);
+            return new ExecutablePipelineElement(executable);
         }
         
         /// <summary>

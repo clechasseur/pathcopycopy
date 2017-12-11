@@ -22,6 +22,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Windows.Forms;
 using PathCopyCopy.Settings.Core;
 using PathCopyCopy.Settings.Core.Plugins;
@@ -164,6 +165,16 @@ namespace PathCopyCopy.Settings.UI.Forms
                 } else if (!String.IsNullOrEmpty(pathsSeparator)) {
                     CopyOnSameLineChk.Enabled = false;
                 }
+
+                element = pipeline.Elements.Find(el => el is ExecutablePipelineElement);
+                if (element != null) {
+                    LaunchExecutableChk.Checked = true;
+                    ExecutableTxt.Text = ((ExecutablePipelineElement) element).Executable;
+                } else {
+                    Debug.Assert(!ExecutableLbl.Enabled);
+                    Debug.Assert(!ExecutableTxt.Enabled);
+                    Debug.Assert(!BrowserForExecutableBtn.Enabled);
+                }
             }
 
             // Validate base plugin ID if found.
@@ -210,6 +221,9 @@ namespace PathCopyCopy.Settings.UI.Forms
                         pipeline = new Pipeline();
                     } else {
                         pipeline.Clear();
+                    }
+                    if (LaunchExecutableChk.Checked) {
+                        pipeline.Elements.Add(new ExecutablePipelineElement(ExecutableTxt.Text));
                     }
                     if (CopyOnSameLineChk.Enabled) {
                         if (CopyOnSameLineChk.Checked) {
@@ -295,6 +309,20 @@ namespace PathCopyCopy.Settings.UI.Forms
             IgnoreCaseChk.Enabled = UseRegexChk.Checked;
             TestRegexBtn.Enabled = UseRegexChk.Checked;
         }
+
+        /// <summary>
+        /// Called when the user checks or unchecks the "Launch executable..."
+        /// checkbox. We need to enable or disable the executable path textbox
+        /// and the browse button when this occurs.
+        /// </summary>
+        /// <param name="sender">Event sender.</param>
+        /// <param name="e">Event arguments.</param>
+        private void LaunchExecutableChk_CheckedChanged(object sender, EventArgs e)
+        {
+            ExecutableLbl.Enabled = LaunchExecutableChk.Checked;
+            ExecutableTxt.Enabled = LaunchExecutableChk.Checked;
+            BrowserForExecutableBtn.Enabled = LaunchExecutableChk.Checked;
+        }
         
         /// <summary>
         /// Called when the user presses the button to test a regular expression.
@@ -320,6 +348,27 @@ namespace PathCopyCopy.Settings.UI.Forms
                     ReplaceTxt.Text = format;
                     IgnoreCaseChk.Checked = ignoreCase;
                 }
+            }
+        }
+
+        /// <summary>
+        /// Called when the user presses the button to browse for an executable.
+        /// We will show an open dialog allowing user to pick one.
+        /// </summary>
+        /// <param name="sender">Event sender.</param>
+        /// <param name="e">Event arguments.</param>
+        private void BrowserForExecutableBtn_Click(object sender, EventArgs e)
+        {
+            // Show browse box, using the current filename as hint.
+            try {
+                ChooseExecutableOpenDlg.InitialDirectory = Path.GetDirectoryName(ExecutableTxt.Text);
+                ChooseExecutableOpenDlg.FileName = Path.GetFileName(ExecutableTxt.Text);
+            } catch {
+                // Bad format or something, simply don't use.
+            }
+            if (ChooseExecutableOpenDlg.ShowDialog(this) == DialogResult.OK) {
+                // User chose a new executable, copy its path back in our control.
+                ExecutableTxt.Text = ChooseExecutableOpenDlg.FileName;
             }
         }
 
