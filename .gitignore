@@ -11,3 +11,4 @@ Installer/Output/
 ipch/
 *.VC.db
 *.VC.opendb
+Testing/mtexplorer.ini
