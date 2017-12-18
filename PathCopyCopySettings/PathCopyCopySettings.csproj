@@ -86,7 +86,6 @@
     <Compile Include="UI\Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\MainFormEvents.cs" />
     <Compile Include="Core\PCCEnvironment.cs" />
     <Compile Include="Core\PCCExecutor.cs" />
     <Compile Include="UI\Forms\PipelinePluginForm.cs">
