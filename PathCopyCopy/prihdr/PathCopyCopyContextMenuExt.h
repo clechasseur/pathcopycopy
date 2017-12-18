@@ -159,6 +159,9 @@ private:
     HBITMAP             GetPCCIcon();
     HBITMAP             GetIconForIconFile(const std::wstring& p_IconFile);
 
+    HRESULT             ActOnFiles(const PCC::PluginSP& p_spPlugin,
+                                   HWND p_hWnd);
+
     void                RemoveFromExtToMenu();
     void                CheckForUpdates();
 };

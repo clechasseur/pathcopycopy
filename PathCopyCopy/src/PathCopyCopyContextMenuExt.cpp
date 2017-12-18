@@ -342,6 +342,17 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::QueryContextMenu(
                 const bool alwaysShowSubmenu = rSettings.GetAlwaysShowSubmenu();
                 PCC::GUIDV vKnownPlugins;
                 const PCC::GUIDV* const pvKnownPlugins = rSettings.GetKnownPlugins(vKnownPlugins) ? &vKnownPlugins : nullptr;
+                GUID ctrlKeyPluginId;
+                const GUID* const pCtrlKeyPluginId = rSettings.GetCtrlKeyPlugin(ctrlKeyPluginId) ? &ctrlKeyPluginId : nullptr;
+
+                // Check if user held down Ctrl key and we have a plugin to use when this happens.
+                if ((::GetKeyState(VK_CONTROL) && 0x8000) != 0 && pCtrlKeyPluginId != nullptr) {
+                    // Find plugin to use.
+                    auto pluginIt = m_sspAllPlugins.find(*pCtrlKeyPluginId);
+                    if (pluginIt != m_sspAllPlugins.end()) {
+                        ActOnFiles(*pluginIt, NULL);
+                    }
+                }
 
                 // Add all plugins requested to the main menu.
                 PCC::GUIDV vPluginIds;
@@ -532,52 +543,8 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::InvokeCommand(
                     // Fetch plugin reference for this command ID.
                     PCC::PluginSP spPlugin = itId->second;
 
-                    // Loop through files and compute filenames using plugin.
-                    bool addQuotes = GetSettings().GetAddQuotesAroundPaths();
-                    bool makeEmailLinks = GetSettings().GetMakePathsIntoEmailLinks();
-                    StringUtils::EncodeParam encodeParam = GetSettings().GetEncodeParam();
-                    std::wstring pathsSeparator = spPlugin->PathsSeparator();
-                    if (pathsSeparator.empty()) {
-                        pathsSeparator = GetSettings().GetPathsSeparator();
-                        if (pathsSeparator.empty()) {
-                            pathsSeparator = DEFAULT_PATHS_SEPARATOR;
-                        }
-                    }
-                    std::wstring newFiles;
-                    PCC::FilesV::const_iterator it, end = m_vFiles.end();
-                    for (it = m_vFiles.begin(); it != end; ++it) {
-                        // Ask plugin to compute filename using its scheme and save it.
-                        const std::wstring& oldName = *it;
-                        if (!newFiles.empty()) {
-                            newFiles += pathsSeparator;
-                        }
-                        if (makeEmailLinks) {
-                            newFiles += L"<";
-                        }
-                        if (addQuotes) {
-                            newFiles += L"\"";
-                        }
-                        std::wstring newName = spPlugin->GetPath(oldName);
-                        StringUtils::EncodeURICharacters(newName, encodeParam);
-                        newFiles += newName;
-                        if (addQuotes) {
-                            newFiles += L"\"";
-                        }
-                        if (makeEmailLinks) {
-                            newFiles += L">";
-                        }
-                    }
-
-                    // Get action to perform on the filenames.
-                    PCC::PathActionSP spAction = spPlugin->Action();
-                    assert(spAction != nullptr);
-
-                    // Use the action to perform whatever is needed.
-                    try {
-                        spAction->Act(newFiles, p_pCommandInfo->hwnd);
-                    } catch (...) {
-                        hRes = E_FAIL;
-                    }
+                    // Act on the files using the plugin.
+                    hRes = ActOnFiles(spPlugin, p_pCommandInfo->hwnd);
                 }
             }
         }
@@ -956,6 +923,73 @@ HBITMAP CPathCopyCopyContextMenuExt::GetIconForIconFile(const std::wstring& p_Ic
     }
 
     return hIconBitmap;
+}
+
+//
+// Performs the plugin's default action on our saved files.
+// Call this when user picks a plugin from the menu, for instance.
+//
+// @param p_spPlugin Plugin to apply.
+// @param p_hWnd Handle to parent window, that can be used for
+//               message boxes, etc.
+// @return Result code.
+//
+HRESULT CPathCopyCopyContextMenuExt::ActOnFiles(const PCC::PluginSP& p_spPlugin,
+                                                HWND p_hWnd)
+{
+    HRESULT hRes = E_FAIL;
+
+    if (p_spPlugin != nullptr) {
+        // Loop through files and compute filenames using plugin.
+        bool addQuotes = GetSettings().GetAddQuotesAroundPaths();
+        bool makeEmailLinks = GetSettings().GetMakePathsIntoEmailLinks();
+        StringUtils::EncodeParam encodeParam = GetSettings().GetEncodeParam();
+        std::wstring pathsSeparator = p_spPlugin->PathsSeparator();
+        if (pathsSeparator.empty()) {
+            pathsSeparator = GetSettings().GetPathsSeparator();
+            if (pathsSeparator.empty()) {
+                pathsSeparator = DEFAULT_PATHS_SEPARATOR;
+            }
+        }
+        std::wstring newFiles;
+        PCC::FilesV::const_iterator it, end = m_vFiles.end();
+        for (it = m_vFiles.begin(); it != end; ++it) {
+            // Ask plugin to compute filename using its scheme and save it.
+            const std::wstring& oldName = *it;
+            if (!newFiles.empty()) {
+                newFiles += pathsSeparator;
+            }
+            if (makeEmailLinks) {
+                newFiles += L"<";
+            }
+            if (addQuotes) {
+                newFiles += L"\"";
+            }
+            std::wstring newName = p_spPlugin->GetPath(oldName);
+            StringUtils::EncodeURICharacters(newName, encodeParam);
+            newFiles += newName;
+            if (addQuotes) {
+                newFiles += L"\"";
+            }
+            if (makeEmailLinks) {
+                newFiles += L">";
+            }
+        }
+
+        // Get action to perform on the filenames.
+        PCC::PathActionSP spAction = p_spPlugin->Action();
+        assert(spAction != nullptr);
+
+        // Use the action to perform whatever is needed.
+        try {
+            spAction->Act(newFiles, p_hWnd);
+            hRes = S_OK;
+        } catch (...) {
+            assert(hRes == E_FAIL);
+        }
+    }
+
+    return hRes;
 }
 
 //

@@ -62,6 +62,7 @@ namespace
     const wchar_t* const    SETTING_DROP_REDUNDANT_WORDS                    = L"DropRedundantWords";
     const wchar_t* const    SETTING_ALWAYS_SHOW_SUBMENU                     = L"AlwaysShowSubmenu";
     const wchar_t* const    SETTING_PATHS_SEPARATOR                         = L"PathsSeparator";
+    const wchar_t* const    SETTING_CTRL_KEY_PLUGIN                         = L"CtrlKeyPlugin";
     const wchar_t* const    SETTING_MAIN_MENU_PLUGIN_DISPLAY_ORDER          = L"MainMenuDisplayOrder";
     const wchar_t* const    SETTING_SUBMENU_PLUGIN_DISPLAY_ORDER            = L"SubmenuDisplayOrder";
     const wchar_t* const    SETTING_UI_PLUGIN_DISPLAY_ORDER                 = L"UIDisplayOrder";
@@ -397,6 +398,32 @@ namespace PCC
             pathsSeparator.clear();
         }
         return pathsSeparator;
+    }
+
+    //
+    // Returns the plugin to use when user opens the contextual menu
+    // while holding down the Ctrl key.
+    //
+    // @param p_rPluginId Upon return, will contain the ID of the plugin
+    //                    to use. If the method returns false, this is untouched.
+    // @return true if we have a Ctrl key plugin and its ID was copied
+    //         in p_rPluginId.
+    //
+    bool Settings::GetCtrlKeyPlugin(GUID& p_rPluginId) const
+    {
+        // Perform late-revising.
+        Revise();
+
+        bool hasPluginId = false;
+        std::wstring pluginAsString;
+        if (PluginUtils::ReadRegistryStringValue(m_UserKey, SETTING_CTRL_KEY_PLUGIN, pluginAsString) == ERROR_SUCCESS) {
+            GUIDV vPluginIds = PluginUtils::StringToPluginIds(pluginAsString, PLUGINS_SEPARATOR);
+            if (vPluginIds.size() == 1) {
+                p_rPluginId = vPluginIds.front();
+                hasPluginId = true;
+            }
+        }
+        return hasPluginId;
     }
 
     //
