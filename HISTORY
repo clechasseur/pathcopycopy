@@ -2,6 +2,8 @@ Version 15.0 (20??-??-??)
 -------------------------
 - Ignored software updates really won't show up again after one week [https://github.com/clechasseur/pathcopycopy/issues/20]
 - Escape '+' character when using the Internet path command [https://github.com/clechasseur/pathcopycopy/issues/11]
+- Custom commands can now launch an executable with the path(s) as argument [https://github.com/clechasseur/pathcopycopy/issues/4]
+- It is now possible to use a command automatically when Ctrl is held down when contextual menu is shown [https://github.com/clechasseur/pathcopycopy/issues/6]
 
 
 Version 14.0.1 (2017-09-23)
