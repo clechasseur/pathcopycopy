@@ -61,6 +61,13 @@ namespace PathCopyCopy.Settings.UI.Forms
         /// BindingList used to store all existing plugins and their display infos.
         private BindingList<PluginDisplayInfo> pluginDisplayInfos;
 
+        /// Will contain the last value of SelectedIndex in Ctrl key plugin combo box.
+        /// Used to be able to switch back to the previous value quickly if selection is invalid.
+        private int lastCtrlKeyPluginSelectedIndex = -1;
+
+        /// Will track SelectedIndexChanged calls to avoid recursion issues.
+        private bool inCtrlKeyPluginComboBoxSelectedIndexChanged = false;
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -247,6 +254,9 @@ namespace PathCopyCopy.Settings.UI.Forms
             DropRedundantWordsChk.Checked = settings.DropRedundantWords;
             EnableSoftwareUpdateChk.Checked = !settings.DisableSoftwareUpdate;
 
+            // Set binding list as data source for the combo box used to pick ctrl key plugin.
+            CtrlKeyPluginCombo.DataSource = pluginDisplayInfos;
+
             // Encode param is a little special since it has two checkboxes.
             switch (settings.EncodeParam) {
                 case UserSettings.StringEncodeParam.None: {
@@ -275,6 +285,19 @@ namespace PathCopyCopy.Settings.UI.Forms
                 CopyOnSameLineChk.Checked = true;
             } else if (!String.IsNullOrEmpty(pathsSeparator)) {
                 CopyOnSameLineChk.Enabled = false;
+            }
+
+            // Ctrl key plugin is a little special since there's a combo box to update.
+            Guid? ctrlKeyPluginId = settings.CtrlKeyPlugin;
+            if (ctrlKeyPluginId.HasValue && !ctrlKeyPluginId.Value.Equals(new SeparatorPlugin().Id)) {
+                for (int i = 0; i < pluginDisplayInfos.Count; ++i) {
+                    if (pluginDisplayInfos[i].Plugin.Id == ctrlKeyPluginId.Value) {
+                        CtrlKeyPluginChk.Checked = true;
+                        CtrlKeyPluginCombo.SelectedIndex = i;
+                        lastCtrlKeyPluginSelectedIndex = i;
+                        break;
+                    }
+                }
             }
 
             // All those changes probably enabled the "Apply" button so disable it again here.
@@ -413,6 +436,15 @@ namespace PathCopyCopy.Settings.UI.Forms
                 if (pathsSeparator != settings.PathsSeparator) {
                     settings.PathsSeparator = pathsSeparator;
                 }
+            }
+
+            // Ctrl key plugin is a little special (see above)
+            Guid? ctrlKeyPluginId = null;
+            if (CtrlKeyPluginChk.Checked && CtrlKeyPluginCombo.SelectedIndex != -1) {
+                ctrlKeyPluginId = (CtrlKeyPluginCombo.SelectedValue as Plugin).Id;
+            }
+            if (!ctrlKeyPluginId.Equals(settings.CtrlKeyPlugin)) {
+                settings.CtrlKeyPlugin = ctrlKeyPluginId;
             }
 
             // Now that everything is saved, disable the "Apply button".
@@ -618,6 +650,43 @@ namespace PathCopyCopy.Settings.UI.Forms
         private void EncodeURIWhitespaceChk_CheckedChanged(object sender, EventArgs e)
         {
             EncodeURICharsChk.Enabled = EncodeURIWhitespaceChk.Checked;
+        }
+
+        /// <summary>
+        /// Called when the user checks or unchecks the "Use this command on Ctrl key" checkbox.
+        /// We need to enable or disable the combo box when this occurs.
+        /// </summary>
+        /// <param name="sender">Event sender.</param>
+        /// <param name="e">Event arguments.</param>
+        private void CtrlKeyPluginChk_CheckedChanged(object sender, EventArgs e)
+        {
+            CtrlKeyPluginCombo.Enabled = CtrlKeyPluginChk.Checked;
+        }
+
+        /// <summary>
+        /// Called when the user picks a new Ctrl key plugin the combo box.
+        /// We need to validate the entry and possibly enable the "Apply" button.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CtrlKeyPluginCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Prevent recursion issues.
+            if (!inCtrlKeyPluginComboBoxSelectedIndexChanged) {
+                inCtrlKeyPluginComboBoxSelectedIndexChanged = true;
+                try {
+                    // Validate that user hasn't selected a separator. If he did, re-select previous value.
+                    if (CtrlKeyPluginCombo.SelectedIndex != -1 && CtrlKeyPluginCombo.SelectedValue is SeparatorPlugin) {
+                        CtrlKeyPluginCombo.SelectedIndex = lastCtrlKeyPluginSelectedIndex;
+                    } else {
+                        // This selection is OK, update our saved value and enable Apply button.
+                        lastCtrlKeyPluginSelectedIndex = CtrlKeyPluginCombo.SelectedIndex;
+                        ApplyBtn.Enabled = true;
+                    }
+                } finally {
+                    inCtrlKeyPluginComboBoxSelectedIndexChanged = false;
+                }
+            }
         }
         
         /// <summary>

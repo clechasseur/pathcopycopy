@@ -53,6 +53,8 @@
             this.InSubmenuCol = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.PluginsExplanationLbl = new System.Windows.Forms.Label();
             this.MiscOptionsPage = new System.Windows.Forms.TabPage();
+            this.CtrlKeyPluginCombo = new System.Windows.Forms.ComboBox();
+            this.CtrlKeyPluginChk = new System.Windows.Forms.CheckBox();
             this.EncodeURICharsChk = new System.Windows.Forms.CheckBox();
             this.EncodeURIWhitespaceChk = new System.Windows.Forms.CheckBox();
             this.CopyOnSameLineChk = new System.Windows.Forms.CheckBox();
@@ -392,6 +394,8 @@
             // 
             // MiscOptionsPage
             // 
+            this.MiscOptionsPage.Controls.Add(this.CtrlKeyPluginCombo);
+            this.MiscOptionsPage.Controls.Add(this.CtrlKeyPluginChk);
             this.MiscOptionsPage.Controls.Add(this.EncodeURICharsChk);
             this.MiscOptionsPage.Controls.Add(this.EncodeURIWhitespaceChk);
             this.MiscOptionsPage.Controls.Add(this.CopyOnSameLineChk);
@@ -406,10 +410,38 @@
             this.MiscOptionsPage.Location = new System.Drawing.Point(4, 22);
             this.MiscOptionsPage.Name = "MiscOptionsPage";
             this.MiscOptionsPage.Padding = new System.Windows.Forms.Padding(3);
-            this.MiscOptionsPage.Size = new System.Drawing.Size(465, 489);
+            this.MiscOptionsPage.Size = new System.Drawing.Size(465, 519);
             this.MiscOptionsPage.TabIndex = 0;
             this.MiscOptionsPage.Text = "Options";
             this.MiscOptionsPage.UseVisualStyleBackColor = true;
+            // 
+            // CtrlKeyPluginCombo
+            // 
+            this.CtrlKeyPluginCombo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.CtrlKeyPluginCombo.DisplayMember = "Name";
+            this.CtrlKeyPluginCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CtrlKeyPluginCombo.Enabled = false;
+            this.CtrlKeyPluginCombo.FormattingEnabled = true;
+            this.CtrlKeyPluginCombo.Location = new System.Drawing.Point(25, 259);
+            this.CtrlKeyPluginCombo.Name = "CtrlKeyPluginCombo";
+            this.CtrlKeyPluginCombo.Size = new System.Drawing.Size(399, 21);
+            this.CtrlKeyPluginCombo.TabIndex = 11;
+            this.CtrlKeyPluginCombo.ValueMember = "Plugin";
+            this.CtrlKeyPluginCombo.SelectedIndexChanged += new System.EventHandler(this.CtrlKeyPluginCombo_SelectedIndexChanged);
+            // 
+            // CtrlKeyPluginChk
+            // 
+            this.CtrlKeyPluginChk.AutoSize = true;
+            this.CtrlKeyPluginChk.Location = new System.Drawing.Point(6, 236);
+            this.CtrlKeyPluginChk.Name = "CtrlKeyPluginChk";
+            this.CtrlKeyPluginChk.Size = new System.Drawing.Size(418, 17);
+            this.CtrlKeyPluginChk.TabIndex = 10;
+            this.CtrlKeyPluginChk.Text = "When user holds down Ctrl &key when opening contextual menu, use this command:";
+            this.MainToolTip.SetToolTip(this.CtrlKeyPluginChk, "Choose a command to use automatically when user holds down the Ctrl key when Expl" +
+        "orer\'s contextual menu is shown");
+            this.CtrlKeyPluginChk.UseVisualStyleBackColor = true;
+            this.CtrlKeyPluginChk.CheckedChanged += new System.EventHandler(this.CtrlKeyPluginChk_CheckedChanged);
             // 
             // EncodeURICharsChk
             // 
@@ -497,10 +529,10 @@
             // EnableSoftwareUpdateChk
             // 
             this.EnableSoftwareUpdateChk.AutoSize = true;
-            this.EnableSoftwareUpdateChk.Location = new System.Drawing.Point(6, 236);
+            this.EnableSoftwareUpdateChk.Location = new System.Drawing.Point(6, 286);
             this.EnableSoftwareUpdateChk.Name = "EnableSoftwareUpdateChk";
             this.EnableSoftwareUpdateChk.Size = new System.Drawing.Size(177, 17);
-            this.EnableSoftwareUpdateChk.TabIndex = 10;
+            this.EnableSoftwareUpdateChk.TabIndex = 12;
             this.EnableSoftwareUpdateChk.Text = "Check for &updates automatically";
             this.MainToolTip.SetToolTip(this.EnableSoftwareUpdateChk, "Automatically check for new versions of Path Copy Copy and offer them when they a" +
         "re released");
@@ -547,7 +579,7 @@
             this.AboutPage.Location = new System.Drawing.Point(4, 22);
             this.AboutPage.Name = "AboutPage";
             this.AboutPage.Padding = new System.Windows.Forms.Padding(3);
-            this.AboutPage.Size = new System.Drawing.Size(465, 489);
+            this.AboutPage.Size = new System.Drawing.Size(465, 519);
             this.AboutPage.TabIndex = 4;
             this.AboutPage.Text = "About";
             this.AboutPage.UseVisualStyleBackColor = true;
@@ -574,7 +606,7 @@
             this.AboutTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.AboutTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.AboutTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.AboutTableLayoutPanel.Size = new System.Drawing.Size(459, 483);
+            this.AboutTableLayoutPanel.Size = new System.Drawing.Size(459, 513);
             this.AboutTableLayoutPanel.TabIndex = 0;
             // 
             // ProductAndVersionLbl
@@ -808,6 +840,8 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn InMainMenuCol;
         private System.Windows.Forms.DataGridViewCheckBoxColumn InSubmenuCol;
         private System.Windows.Forms.Button AddSeparatorBtn;
+        private System.Windows.Forms.ComboBox CtrlKeyPluginCombo;
+        private System.Windows.Forms.CheckBox CtrlKeyPluginChk;
     }
 }
 

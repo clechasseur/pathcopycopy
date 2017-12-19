@@ -98,6 +98,9 @@ namespace PathCopyCopy.Settings.Core
         /// Name of registry value specifying the separator to use between multiple copied paths.
         private const string PATHS_SEPARATOR_VALUE_NAME = "PathsSeparator";
 
+        /// Name of registry value containing the ID of the plugin to activate when Ctrl key is held down.
+        private const string CTRL_KEY_PLUGIN_VALUE_NAME = "CtrlKeyPlugin";
+
         /// Name of registry value containing the plugins to display in the main menu, in order.
         private const string MAIN_MENU_DISPLAY_ORDER_VALUE_NAME = "MainMenuDisplayOrder";
 
@@ -375,6 +378,32 @@ namespace PathCopyCopy.Settings.Core
         {
             get {
                 return (string) GetUserOrGlobalValue(INSTALL_SOURCE_VALUE_NAME, INSTALL_SOURCE_DEFAULT_VALUE);
+            }
+        }
+
+        /// <summary>
+        /// ID of plugin to activate when user holds down the Ctrl key when the
+        /// contextual menu is shown. Will return <c>null</c> if not set.
+        /// </summary>
+        public Guid? CtrlKeyPlugin
+        {
+            get {
+                var pluginIds = LoadPluginsFromValue(CTRL_KEY_PLUGIN_VALUE_NAME, false);
+                Guid? pluginId = null;
+                if (pluginIds.Count == 1) {
+                    pluginId = pluginIds[0];
+                }
+                return pluginId;
+            }
+            set {
+                if (value.HasValue) {
+                    List<Guid> pluginIds = new List<Guid>();
+                    pluginIds.Add(value.Value);
+                    SavePluginsInValue(CTRL_KEY_PLUGIN_VALUE_NAME, pluginIds);
+                } else {
+                    // Delete the value in the registry instead.
+                    userKey.DeleteValue(CTRL_KEY_PLUGIN_VALUE_NAME, false);
+                }
             }
         }
 
