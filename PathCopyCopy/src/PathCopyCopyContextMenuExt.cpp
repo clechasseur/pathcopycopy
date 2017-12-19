@@ -349,7 +349,7 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::QueryContextMenu(
                 if ((::GetKeyState(VK_CONTROL) && 0x8000) != 0 && pCtrlKeyPluginId != nullptr) {
                     // Find plugin to use.
                     auto pluginIt = m_sspAllPlugins.find(*pCtrlKeyPluginId);
-                    if (pluginIt != m_sspAllPlugins.end()) {
+                    if (pluginIt != m_sspAllPlugins.end() && !(*pluginIt)->IsSeparator()) {
                         ActOnFiles(*pluginIt, NULL);
                     }
                 }
