@@ -1,4 +1,4 @@
-Version 15.0 (20??-??-??)
+Version 15.0 (2017-12-21)
 -------------------------
 - Ignored software updates really won't show up again after one week [https://github.com/clechasseur/pathcopycopy/issues/20]
 - Escape '+' character when using the Internet path command [https://github.com/clechasseur/pathcopycopy/issues/11]
