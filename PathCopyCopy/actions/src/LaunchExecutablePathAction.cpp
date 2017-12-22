@@ -48,7 +48,7 @@ namespace PCC
         void LaunchExecutablePathAction::Act(const std::wstring& p_Paths,
                                              const HWND          p_hWnd) const
         {
-            int res = reinterpret_cast<int>(::ShellExecuteW(p_hWnd, nullptr, m_Executable.c_str(), p_Paths.c_str(), nullptr, SW_SHOWDEFAULT));
+            auto res = reinterpret_cast<size_t>(::ShellExecuteW(p_hWnd, nullptr, m_Executable.c_str(), p_Paths.c_str(), nullptr, SW_SHOWDEFAULT));
             if (res <= 32) {
                 throw LaunchExecutableException();
             }
