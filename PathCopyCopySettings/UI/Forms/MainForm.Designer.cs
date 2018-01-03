@@ -37,7 +37,7 @@
             this.ImportPipelinePluginsBtn = new System.Windows.Forms.Button();
             this.ExportPipelinePluginsBtn = new System.Windows.Forms.Button();
             this.BevelLineLbl2 = new System.Windows.Forms.Label();
-            this.RemovePipelinePluginBtn = new System.Windows.Forms.Button();
+            this.RemovePluginBtn = new System.Windows.Forms.Button();
             this.EditPipelinePluginBtn = new System.Windows.Forms.Button();
             this.AddPipelinePluginBtn = new System.Windows.Forms.Button();
             this.BevelLineLbl = new System.Windows.Forms.Label();
@@ -148,7 +148,7 @@
             this.PluginsPage.Controls.Add(this.ImportPipelinePluginsBtn);
             this.PluginsPage.Controls.Add(this.ExportPipelinePluginsBtn);
             this.PluginsPage.Controls.Add(this.BevelLineLbl2);
-            this.PluginsPage.Controls.Add(this.RemovePipelinePluginBtn);
+            this.PluginsPage.Controls.Add(this.RemovePluginBtn);
             this.PluginsPage.Controls.Add(this.EditPipelinePluginBtn);
             this.PluginsPage.Controls.Add(this.AddPipelinePluginBtn);
             this.PluginsPage.Controls.Add(this.BevelLineLbl);
@@ -211,17 +211,17 @@
             this.BevelLineLbl2.Size = new System.Drawing.Size(75, 2);
             this.BevelLineLbl2.TabIndex = 11;
             // 
-            // RemovePipelinePluginBtn
+            // RemovePluginBtn
             // 
-            this.RemovePipelinePluginBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.RemovePipelinePluginBtn.Location = new System.Drawing.Point(384, 197);
-            this.RemovePipelinePluginBtn.Name = "RemovePipelinePluginBtn";
-            this.RemovePipelinePluginBtn.Size = new System.Drawing.Size(75, 23);
-            this.RemovePipelinePluginBtn.TabIndex = 10;
-            this.RemovePipelinePluginBtn.Text = "&Remove";
-            this.MainToolTip.SetToolTip(this.RemovePipelinePluginBtn, "Deletes the selected custom command");
-            this.RemovePipelinePluginBtn.UseVisualStyleBackColor = true;
-            this.RemovePipelinePluginBtn.Click += new System.EventHandler(this.RemovePipelinePluginBtn_Click);
+            this.RemovePluginBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.RemovePluginBtn.Location = new System.Drawing.Point(384, 197);
+            this.RemovePluginBtn.Name = "RemovePluginBtn";
+            this.RemovePluginBtn.Size = new System.Drawing.Size(75, 23);
+            this.RemovePluginBtn.TabIndex = 10;
+            this.RemovePluginBtn.Text = "&Remove";
+            this.MainToolTip.SetToolTip(this.RemovePluginBtn, "Deletes the selected custom command");
+            this.RemovePluginBtn.UseVisualStyleBackColor = true;
+            this.RemovePluginBtn.Click += new System.EventHandler(this.RemovePluginBtn_Click);
             // 
             // EditPipelinePluginBtn
             // 
@@ -829,7 +829,7 @@
         private System.Windows.Forms.Button ImportPipelinePluginsBtn;
         private System.Windows.Forms.Button ExportPipelinePluginsBtn;
         private System.Windows.Forms.Label BevelLineLbl2;
-        private System.Windows.Forms.Button RemovePipelinePluginBtn;
+        private System.Windows.Forms.Button RemovePluginBtn;
         private System.Windows.Forms.Button EditPipelinePluginBtn;
         private System.Windows.Forms.Button AddPipelinePluginBtn;
         private System.Windows.Forms.Label BevelLineLbl;

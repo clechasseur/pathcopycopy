@@ -472,6 +472,28 @@ namespace PathCopyCopy.Settings.UI.Forms
         }
 
         /// <summary>
+        /// Determines if the selected plugins in the data grid are pipeline
+        /// or separator plugins.
+        /// </summary>
+        /// <returns><c>true</c> if all selected plugins are pipeline or
+        /// separator plugins.</returns>
+        /// <remarks>
+        /// If no plugin is selected, this method returns <c>true</c>.
+        /// </remarks>
+        private bool AreOnlyPipelineOrSeparatorPluginsSelected()
+        {
+            bool onlyPipelineOrSeparator = true;
+
+            for (int i = 0; onlyPipelineOrSeparator && i < PluginsDataGrid.SelectedRows.Count; ++i) {
+                DataGridViewRow row = PluginsDataGrid.SelectedRows[i];
+                Plugin rowPlugin = ((PluginDisplayInfo) row.DataBoundItem).Plugin;
+                onlyPipelineOrSeparator = (rowPlugin is PipelinePlugin) || (rowPlugin is SeparatorPlugin);
+            }
+
+            return onlyPipelineOrSeparator;
+        }
+
+        /// <summary>
         /// Updates the state of buttons on the Commands page.
         /// Call this when selection changes somewhere.
         /// </summary>
@@ -485,7 +507,7 @@ namespace PathCopyCopy.Settings.UI.Forms
             AddPipelinePluginBtn.Enabled = true;
             AddSeparatorBtn.Enabled = true;
             EditPipelinePluginBtn.Enabled = PluginsDataGrid.SelectedRows.Count == 1 && AreOnlyPipelinePluginsSelected();
-            RemovePipelinePluginBtn.Enabled = PluginsDataGrid.SelectedRows.Count == 1 && AreOnlyPipelinePluginsSelected();
+            RemovePluginBtn.Enabled = PluginsDataGrid.SelectedRows.Count == 1 && AreOnlyPipelineOrSeparatorPluginsSelected();
 
             ExportPipelinePluginsBtn.Enabled = PluginsDataGrid.SelectedRows.Count > 0 && AreOnlyPipelinePluginsSelected();
             ImportPipelinePluginsBtn.Enabled = true;
@@ -1048,25 +1070,37 @@ namespace PathCopyCopy.Settings.UI.Forms
 
         /// <summary>
         /// Called when the Remove button is pressed. We remove
-        /// selected pipeline plugins.
+        /// selected plugins.
         /// </summary>
         /// <param name="sender">Event sender.</param>
         /// <param name="e">Event arguments.</param>
-        private void RemovePipelinePluginBtn_Click(object sender, EventArgs e)
+        private void RemovePluginBtn_Click(object sender, EventArgs e)
         {
-            Debug.Assert(PluginsDataGrid.SelectedRows.Count == 1);
+            Debug.Assert(PluginsDataGrid.SelectedRows.Count == 1); 
+ 
+            // Check type of selected plugin.
+            DataGridViewRow row = PluginsDataGrid.SelectedRows[0]; 
+            int rowIndex = row.Index; 
+            PluginDisplayInfo displayInfo = (PluginDisplayInfo) row.DataBoundItem; 
 
-            // First confirm since this is an "irreversible" action. We have a string
-            // in resources for this message and it includes a format placeholder
-            // for the plugin description.
-            DataGridViewRow row = PluginsDataGrid.SelectedRows[0];
-            int rowIndex = row.Index;
-            PluginDisplayInfo displayInfo = (PluginDisplayInfo) row.DataBoundItem;
-            PipelinePluginInfo pluginInfo = ((PipelinePlugin) displayInfo.Plugin).Info;
-            DialogResult res = MessageBox.Show(this, String.Format(Resources.REMOVE_PIPELINE_PLUGIN_MESSAGE, pluginInfo.Description),
-                Resources.REMOVE_PIPELINE_PLUGIN_TITLE, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-            if (res == DialogResult.OK) {
-                // Remove plugin from data grid.
+            if (displayInfo.Plugin is PipelinePlugin) {
+                // First confirm since this is an "irreversible" action. We have a string 
+                // in resources for this message and it includes a format placeholder 
+                // for the plugin description. 
+                PipelinePluginInfo pluginInfo = ((PipelinePlugin) displayInfo.Plugin).Info; 
+                DialogResult res = MessageBox.Show(this, String.Format(Resources.REMOVE_PIPELINE_PLUGIN_MESSAGE, pluginInfo.Description), 
+                    Resources.REMOVE_PIPELINE_PLUGIN_TITLE, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning); 
+                if (res == DialogResult.OK) { 
+                    // Remove plugin from data grid. 
+                    pluginDisplayInfos.RemoveAt(rowIndex); 
+ 
+                    // All this will enable the "Apply" button. 
+                    ApplyBtn.Enabled = true; 
+                }
+            } else {
+                Debug.Assert(displayInfo.Plugin is SeparatorPlugin);
+
+                // No need to confirm removing separator plugins, since it's reversible.
                 pluginDisplayInfos.RemoveAt(rowIndex);
 
                 // All this will enable the "Apply" button.
