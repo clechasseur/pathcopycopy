@@ -197,7 +197,7 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::UnregisterPlugin2(
 // Called by the shell to initialize our contextual menu extension.
 // We need to use this opportunity to look at the files/folders to act upon.
 //
-// @param p_pFolderPIDL Pointer to ITEMIDLIST representing selected folder; unused.
+// @param p_pFolderPIDL Pointer to ITEMIDLIST representing selected folder.
 // @param p_pDataObject Pointer to data object containing information about selected files/folders.
 // @param p_hKeyFileClass Handle to file class key; unused.
 // @return S_OK if successful, otherwise an error code.
@@ -214,7 +214,7 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::Initialize(
         if (p_pDataObject != nullptr) {
             // Extract HDROP from data object.
             StStgMedium stgMedium;
-            FORMATETC formatEtc = {CF_HDROP, 0, DVASPECT_CONTENT, -1, TYMED_HGLOBAL};
+            FORMATETC formatEtc = {CF_HDROP, nullptr, DVASPECT_CONTENT, -1, TYMED_HGLOBAL};
             if (SUCCEEDED(p_pDataObject->GetData(&formatEtc, &stgMedium))) {
                 // Get number of files included in the selection.
                 UINT fileCount = ::DragQueryFileW(
