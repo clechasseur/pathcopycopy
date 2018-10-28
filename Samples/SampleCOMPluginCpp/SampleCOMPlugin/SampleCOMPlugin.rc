@@ -57,8 +57,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 15,0,0,0
- PRODUCTVERSION 15,0,0,0
+ FILEVERSION 15,1,0,0
+ PRODUCTVERSION 15,1,0,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -74,12 +74,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "FileDescription", "Sample Path Copy Copy C++ COM Plugin"
-            VALUE "FileVersion", "15.0.0.0"
+            VALUE "FileVersion", "15.1.0.0"
             VALUE "InternalName", "SampleCOMPlugin.dll"
-            VALUE "LegalCopyright", "(c) 2010-2017, Charles Lechasseur. See LICENSE.TXT for details."
+            VALUE "LegalCopyright", "(c) 2010-2018, Charles Lechasseur. See LICENSE.TXT for details."
             VALUE "OriginalFilename", "SampleCOMPlugin.dll"
             VALUE "ProductName", "Sample Path Copy Copy C++ COM Plugin"
-            VALUE "ProductVersion", "15.0.0.0"
+            VALUE "ProductVersion", "15.1.0.0"
         END
     END
     BLOCK "VarFileInfo"
