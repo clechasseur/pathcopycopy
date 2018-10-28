@@ -53,7 +53,7 @@ HRESULT CPathCopyCopyModule::DllRegisterServer(BOOL p_RegisterTypeLib /*= TRUE*/
             // Register our shell extensions as "approved". We do this here so that
             // it can work in per-user installations.
             AtlRegKey approvedKey;
-            LONG regRes = approvedKey.Open(perUserOverride.Overridden() ? HKEY_CURRENT_USER : HKEY_CLASSES_ROOT,
+            LONG regRes = approvedKey.Open(perUserOverride.Overridden() ? HKEY_CURRENT_USER : HKEY_LOCAL_MACHINE,
                                            L"Software\\Microsoft\\Windows\\CurrentVersion\\Extensions\\Approved",
                                            true, KEY_QUERY_VALUE | KEY_SET_VALUE);
             if (regRes == ERROR_SUCCESS) {

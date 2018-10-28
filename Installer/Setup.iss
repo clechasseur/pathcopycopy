@@ -154,6 +154,16 @@ Root: HKLM32; Subkey: Software\clechasseur\PathCopyCopy; Flags: uninsdeletekeyif
 Root: HKLM64; Subkey: Software\clechasseur\PathCopyCopy\PipelinePlugins; Flags: uninsdeletekeyifempty; Check: IsWin64
 Root: HKLM64; Subkey: Software\clechasseur\PathCopyCopy\Plugins; Flags: uninsdeletekeyifempty; Check: IsWin64
 Root: HKLM64; Subkey: Software\clechasseur\PathCopyCopy; Flags: uninsdeletekeyifempty; Check: IsWin64
+
+; A typo made previous versions of the DLL register approved extensions in the wrong key.
+Root: HKCR; Subkey: Software\Microsoft\Windows\CurrentVersion\Extensions\Approved; ValueName: {{82CB99A2-2F18-4D5D-9476-54347E3B6720}; Flags: deletevalue
+Root: HKCR; Subkey: Software\Microsoft\Windows\CurrentVersion\Extensions\Approved; ValueName: {{16170CA5-25CA-4e6d-928C-7A3A974F4B56}; Flags: deletevalue
+Root: HKCR; Subkey: Software\Microsoft\Windows\CurrentVersion\Extensions\Approved; Flags: uninsdeletekeyifempty
+Root: HKCR; Subkey: Software\Microsoft\Windows\CurrentVersion\Extensions; Flags: uninsdeletekeyifempty
+Root: HKCR; Subkey: Software\Microsoft\Windows\CurrentVersion; Flags: uninsdeletekeyifempty
+Root: HKCR; Subkey: Software\Microsoft\Windows; Flags: uninsdeletekeyifempty
+Root: HKCR; Subkey: Software\Microsoft; Flags: uninsdeletekeyifempty
+Root: HKCR; Subkey: Software; Flags: uninsdeletekeyifempty
 #endif
 
 [InstallDelete]
