@@ -346,7 +346,7 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::QueryContextMenu(
                 const GUID* const pCtrlKeyPluginId = rSettings.GetCtrlKeyPlugin(ctrlKeyPluginId) ? &ctrlKeyPluginId : nullptr;
 
                 // Check if user held down Ctrl key and we have a plugin to use when this happens.
-                if ((::GetKeyState(VK_CONTROL) && 0x8000) != 0 && pCtrlKeyPluginId != nullptr) {
+                if ((::GetKeyState(VK_CONTROL) & 0x8000) != 0 && pCtrlKeyPluginId != nullptr) {
                     // Find plugin to use.
                     auto pluginIt = m_sspAllPlugins.find(*pCtrlKeyPluginId);
                     if (pluginIt != m_sspAllPlugins.end() && !(*pluginIt)->IsSeparator()) {
