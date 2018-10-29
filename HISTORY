@@ -1,4 +1,4 @@
-Version 15.1 (20??-??-??)
+Version 15.1 (2018-10-28)
 -------------------------
 - Allow removing separators in Settings app [https://github.com/clechasseur/pathcopycopy/issues/24]
 - Do not copy path unless Ctrl key is down when corresponding option is used [https://github.com/clechasseur/pathcopycopy/issues/32]
