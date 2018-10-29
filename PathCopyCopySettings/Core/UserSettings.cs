@@ -646,12 +646,13 @@ namespace PathCopyCopy.Settings.Core
         /// </summary>
         /// <param name="fileName">File where to save the registry data.
         /// Should use the <c>.reg</c> extension to be importable later.</param>
+        /// <returns><c>true</c> if the export worked.</returns>
         /// <remarks>
         /// The <c>/y</c> switch is used when calling <c>reg</c>, meaning that
         /// <paramref name="fileName"/> will be overwritten without prompt.
         /// Validate that user wants to overwrite before calling this.
         /// </remarks>
-        public static void ExportUserSettings(string fileName)
+        public static bool ExportUserSettings(string fileName)
         {
             Debug.Assert(!String.IsNullOrEmpty(fileName));
 
@@ -663,6 +664,7 @@ namespace PathCopyCopy.Settings.Core
             };
             using (Process reg = Process.Start(psi)) {
                 reg.WaitForExit();
+                return reg.ExitCode == 0;
             }
         }
         

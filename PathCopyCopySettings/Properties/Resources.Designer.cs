@@ -19,7 +19,7 @@ namespace PathCopyCopy.Settings.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -365,6 +365,24 @@ namespace PathCopyCopy.Settings.Properties {
         internal static string MainForm_Msg_UserSettingsExportedMsgTitle {
             get {
                 return ResourceManager.GetString("MainForm_Msg_UserSettingsExportedMsgTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occured while exporting settings to &quot;{0}&quot;. Settings have not been successfully exported..
+        /// </summary>
+        internal static string MainForm_Msg_UserSettingsNotExported {
+            get {
+                return ResourceManager.GetString("MainForm_Msg_UserSettingsNotExported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings Not Exported.
+        /// </summary>
+        internal static string MainForm_Msg_UserSettingsNotExportedMsgTitle {
+            get {
+                return ResourceManager.GetString("MainForm_Msg_UserSettingsNotExportedMsgTitle", resourceCulture);
             }
         }
         

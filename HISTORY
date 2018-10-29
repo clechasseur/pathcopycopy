@@ -3,6 +3,7 @@ Version 15.1 (20??-??-??)
 - Allow removing separators in Settings app [https://github.com/clechasseur/pathcopycopy/issues/24]
 - Do not copy path unless Ctrl key is down when corresponding option is used [https://github.com/clechasseur/pathcopycopy/issues/32]
 - Report version in Windows' Programs and Features [https://github.com/clechasseur/pathcopycopy/issues/28]
+- Report errors when exporting settings [https://github.com/clechasseur/pathcopycopy/issues/43]
 
 
 Version 15.0 (2017-12-21)
