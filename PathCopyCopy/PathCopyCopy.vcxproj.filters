@@ -181,6 +181,9 @@
     <ClCompile Include="actions\src\LaunchExecutablePathAction.cpp">
       <Filter>Actions\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="plugins\src\WSLPathPlugin.cpp">
+      <Filter>Plugins\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\PathCopyCopy.def">
@@ -384,6 +387,9 @@
     </ClInclude>
     <ClInclude Include="actions\prihdr\LaunchExecutablePathAction.h">
       <Filter>Actions\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="plugins\prihdr\WSLPathPlugin.h">
+      <Filter>Plugins\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

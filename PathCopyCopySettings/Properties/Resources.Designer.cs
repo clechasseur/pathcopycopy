@@ -612,5 +612,23 @@ namespace PathCopyCopy.Settings.Properties {
                 return ResourceManager.GetString("UserSettings_DefaultUpdateChannel", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copy WSL Path.
+        /// </summary>
+        internal static string WSL_PATH_PLUGIN_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("WSL_PATH_PLUGIN_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {BD574871-5DF9-4B64-83D1-2AF9C0C17F66}.
+        /// </summary>
+        internal static string WSL_PATH_PLUGIN_ID {
+            get {
+                return ResourceManager.GetString("WSL_PATH_PLUGIN_ID", resourceCulture);
+            }
+        }
     }
 }

@@ -1,3 +1,8 @@
+Version ??.? (20??-??-??)
+-------------------------
+- Add "Copy WSL Path" command [https://github.com/clechasseur/pathcopycopy/issues/47]
+
+
 Version 15.1 (2018-10-28)
 -------------------------
 - Allow removing separators in Settings app [https://github.com/clechasseur/pathcopycopy/issues/24]

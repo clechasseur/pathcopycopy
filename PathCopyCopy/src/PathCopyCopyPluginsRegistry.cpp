@@ -37,6 +37,7 @@
 #include <ShortUNCFolderPlugin.h>
 #include <ShortUNCPathPlugin.h>
 #include <UnixPathPlugin.h>
+#include <WSLPathPlugin.h>
 
 #include <algorithm>
 #include <iterator>
@@ -213,6 +214,7 @@ namespace PCC
         p_rvspPlugins.push_back(spSeparator);
         p_rvspPlugins.push_back(std::make_shared<Plugins::UnixPathPlugin>());
         p_rvspPlugins.push_back(std::make_shared<Plugins::CygwinPathPlugin>());
+        p_rvspPlugins.push_back(std::make_shared<Plugins::WSLPathPlugin>());
     }
 
     //

@@ -184,6 +184,9 @@ STRINGTABLE
 BEGIN
     IDS_ANDROGYNOUS_UNC_FOLDER_PLUGIN_DESCRIPTION 
                             "Copy UNC Parent Fol&der Path"
+    IDS_WSL_PATH_PLUGIN_DESCRIPTION "Copy &WSL Path"
+    IDS_WSL_PATH_PLUGIN_HINT 
+                            "Copies the path of the file/folder to the clipboard in WSL (Windows Subsystem for Linux) format."
 END
 
 #endif    // English (United States) resources

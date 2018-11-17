@@ -303,4 +303,10 @@ Control-click to avoid displaying an icon for this command.</value>
   <data name="MainForm_Msg_UserSettingsNotExportedMsgTitle" xml:space="preserve">
     <value>Settings Not Exported</value>
   </data>
+  <data name="WSL_PATH_PLUGIN_DESCRIPTION" xml:space="preserve">
+    <value>Copy WSL Path</value>
+  </data>
+  <data name="WSL_PATH_PLUGIN_ID" xml:space="preserve">
+    <value>{BD574871-5DF9-4B64-83D1-2AF9C0C17F66}</value>
+  </data>
 </root>

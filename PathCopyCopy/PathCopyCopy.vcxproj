@@ -271,6 +271,7 @@
     <ClCompile Include="actions\src\CopyToClipboardPathAction.cpp" />
     <ClCompile Include="actions\src\LaunchExecutablePathAction.cpp" />
     <ClCompile Include="plugins\src\AndrogynousInternalPlugin.cpp" />
+    <ClCompile Include="plugins\src\WSLPathPlugin.cpp" />
     <ClCompile Include="src\AllPluginsProvider.cpp" />
     <ClCompile Include="src\AtlRegKey.cpp" />
     <ClCompile Include="src\dlldatax.c">
@@ -376,6 +377,7 @@
     <ClInclude Include="actions\prihdr\CopyToClipboardPathAction.h" />
     <ClInclude Include="actions\prihdr\LaunchExecutablePathAction.h" />
     <ClInclude Include="plugins\prihdr\AndrogynousInternalPlugin.h" />
+    <ClInclude Include="plugins\prihdr\WSLPathPlugin.h" />
     <ClInclude Include="prihdr\AllPluginsProvider.h" />
     <ClInclude Include="prihdr\AtlRegKey.h" />
     <ClInclude Include="prihdr\dlldatax.h" />

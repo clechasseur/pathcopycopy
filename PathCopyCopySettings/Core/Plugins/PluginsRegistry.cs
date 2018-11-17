@@ -286,6 +286,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
             plugins.Add(separator);
             plugins.Add(CreateDefaultPlugin(Resources.UNIX_PATH_PLUGIN_ID, Resources.UNIX_PATH_PLUGIN_DESCRIPTION, settings));
             plugins.Add(CreateDefaultPlugin(Resources.CYGWIN_PATH_PLUGIN_ID, Resources.CYGWIN_PATH_PLUGIN_DESCRIPTION, settings));
+            plugins.Add(CreateDefaultPlugin(Resources.WSL_PATH_PLUGIN_ID, Resources.WSL_PATH_PLUGIN_DESCRIPTION, settings));
         }
 
         /// <summary>
