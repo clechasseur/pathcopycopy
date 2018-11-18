@@ -82,7 +82,7 @@ namespace PCC
         // Returns the path of the specified file in file URI format
         //
         // @param p_File File path.
-        // @return Internet (e.g., URI) path
+        // @return Internet (e.g., URI) path.
         //
         std::wstring InternetPathPlugin::GetPath(const std::wstring& p_File) const
         {
@@ -116,6 +116,18 @@ namespace PCC
             path = newPathSS.str();
 
             return path;
+        }
+
+        //
+        // Protected constructor with custom description and help text resources.
+        //
+        // @param p_DescriptionStringResourceID ID of description resource.
+        // @param p_HelpTextStringResourceID ID of help text resource.
+        //
+        InternetPathPlugin::InternetPathPlugin(const unsigned short p_DescriptionStringResourceID,
+                                               const unsigned short p_HelpTextStringResourceID)
+            : LongUNCPathPlugin(p_DescriptionStringResourceID, p_DescriptionStringResourceID, p_HelpTextStringResourceID)
+        {
         }
 
         //

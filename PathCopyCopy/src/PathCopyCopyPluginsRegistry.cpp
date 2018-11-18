@@ -31,6 +31,7 @@
 #include <LongPathPlugin.h>
 #include <LongUNCFolderPlugin.h>
 #include <LongUNCPathPlugin.h>
+#include <SambaPathPlugin.h>
 #include <ShortFolderPlugin.h>
 #include <ShortNamePlugin.h>
 #include <ShortPathPlugin.h>
@@ -209,6 +210,7 @@ namespace PCC
         // Internet plugins
         p_rvspPlugins.push_back(spSeparator);
         p_rvspPlugins.push_back(std::make_shared<Plugins::InternetPathPlugin>());
+        p_rvspPlugins.push_back(std::make_shared<Plugins::SambaPathPlugin>());
 
         // *NIX plugins
         p_rvspPlugins.push_back(spSeparator);

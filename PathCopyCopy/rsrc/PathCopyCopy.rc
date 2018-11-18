@@ -187,6 +187,9 @@ BEGIN
     IDS_WSL_PATH_PLUGIN_DESCRIPTION "Copy &WSL Path"
     IDS_WSL_PATH_PLUGIN_HINT 
                             "Copies the path of the file/folder to the clipboard in WSL (Windows Subsystem for Linux) format."
+    IDS_SAMBA_PATH_PLUGIN_DESCRIPTION "Copy S&amba Path"
+    IDS_SAMBA_PATH_PLUGIN_HINT 
+                            "Copies the path of the file/folder to the clipboard in Samba format."
 END
 
 #endif    // English (United States) resources

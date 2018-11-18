@@ -497,6 +497,24 @@ namespace PathCopyCopy.Settings.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copy Samba Path.
+        /// </summary>
+        internal static string SAMBA_PATH_PLUGIN_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("SAMBA_PATH_PLUGIN_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {7DA6A4A2-AE54-40E0-9910-EBD9EF3F017E}.
+        /// </summary>
+        internal static string SAMBA_PATH_PLUGIN_ID {
+            get {
+                return ResourceManager.GetString("SAMBA_PATH_PLUGIN_ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Copy Short Parent Folder Path.
         /// </summary>
         internal static string SHORT_FOLDER_PLUGIN_DESCRIPTION {

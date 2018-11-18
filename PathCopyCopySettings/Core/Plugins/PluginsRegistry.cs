@@ -282,6 +282,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
 
             plugins.Add(separator);
             plugins.Add(CreateDefaultPlugin(Resources.INTERNET_PATH_PLUGIN_ID, Resources.INTERNET_PATH_PLUGIN_DESCRIPTION, settings));
+            plugins.Add(CreateDefaultPlugin(Resources.SAMBA_PATH_PLUGIN_ID, Resources.SAMBA_PATH_PLUGIN_DESCRIPTION, settings));
 
             plugins.Add(separator);
             plugins.Add(CreateDefaultPlugin(Resources.UNIX_PATH_PLUGIN_ID, Resources.UNIX_PATH_PLUGIN_DESCRIPTION, settings));

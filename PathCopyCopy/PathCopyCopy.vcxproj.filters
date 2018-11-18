@@ -184,6 +184,9 @@
     <ClCompile Include="plugins\src\WSLPathPlugin.cpp">
       <Filter>Plugins\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="plugins\src\SambaPathPlugin.cpp">
+      <Filter>Plugins\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\PathCopyCopy.def">
@@ -389,6 +392,9 @@
       <Filter>Actions\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="plugins\prihdr\WSLPathPlugin.h">
+      <Filter>Plugins\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="plugins\prihdr\SambaPathPlugin.h">
       <Filter>Plugins\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,6 +1,7 @@
 Version ??.? (20??-??-??)
 -------------------------
 - Add "Copy WSL Path" command [https://github.com/clechasseur/pathcopycopy/issues/47]
+- Add "Copy Samba Path" command [https://github.com/clechasseur/pathcopycopy/issues/46]
 
 
 Version 15.1 (2018-10-28)

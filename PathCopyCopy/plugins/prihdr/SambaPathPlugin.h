@@ -1,5 +1,5 @@
-// InternetPathPlugin.h
-// (c) 2010-2018, Charles Lechasseur
+// SambaPathPlugin.h
+// (c) 2018, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,7 @@
 
 #pragma once
 
-#include "LongUNCPathPlugin.h"
+#include "InternetPathPlugin.h"
 
 
 namespace PCC
@@ -29,30 +29,21 @@ namespace PCC
     namespace Plugins
     {
         //
-        // InternetPathPlugin
+        // SambaPathPlugin
         //
-        // Plugin that returns path of a file/folder in URI format, like
-        // file://path/to/file
+        // Plugin that returns path of a file/folder in Samba format, like
+        // smb://path/to/file
         //
-        class InternetPathPlugin : public LongUNCPathPlugin
+        class SambaPathPlugin : public InternetPathPlugin
         {
         public:
-                                    InternetPathPlugin();
-                                    InternetPathPlugin(const InternetPathPlugin&) = delete;
-            InternetPathPlugin&     operator=(const InternetPathPlugin&) = delete;
+                                    SambaPathPlugin();
+                                    SambaPathPlugin(const SambaPathPlugin&) = delete;
+            SambaPathPlugin&        operator=(const SambaPathPlugin&) = delete;
 
             virtual const GUID&     Id() const override;
 
-            virtual bool            Enabled(const std::wstring& p_ParentPath,
-                                            const std::wstring& p_File) const override;
-
             virtual std::wstring    GetPath(const std::wstring& p_File) const override;
-
-        protected:
-                                    InternetPathPlugin(const unsigned short p_DescriptionStringResourceID,
-                                                       const unsigned short p_HelpTextStringResourceID);
-
-            virtual bool            IsAndrogynous() const override;
         };
 
     } // namespace Plugins
