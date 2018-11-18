@@ -2,6 +2,7 @@ Version ??.? (20??-??-??)
 -------------------------
 - Add "Copy WSL Path" command [https://github.com/clechasseur/pathcopycopy/issues/47]
 - Add "Copy Samba Path" command [https://github.com/clechasseur/pathcopycopy/issues/46]
+- Quotes can now be added only if there are spaces in the path [https://github.com/clechasseur/pathcopycopy/issues/38]
 
 
 Version 15.1 (2018-10-28)

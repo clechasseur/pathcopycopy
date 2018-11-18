@@ -161,6 +161,8 @@ private:
 
     HRESULT             ActOnFiles(const PCC::PluginSP& p_spPlugin,
                                    HWND p_hWnd);
+    void                AddQuotes(std::wstring& p_rName,
+                                  const bool p_Optional) const;
 
     void                RemoveFromExtToMenu();
     void                CheckForUpdates();

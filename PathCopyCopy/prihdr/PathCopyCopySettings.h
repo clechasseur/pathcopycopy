@@ -61,6 +61,7 @@ namespace PCC
 
         bool            GetUseHiddenShares() const;
         bool            GetAddQuotesAroundPaths() const;
+        bool            GetAreQuotesOptional() const;
         bool            GetMakePathsIntoEmailLinks() const;
         StringUtils::EncodeParam
                         GetEncodeParam() const;

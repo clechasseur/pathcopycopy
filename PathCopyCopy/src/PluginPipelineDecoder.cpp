@@ -32,6 +32,7 @@ namespace
     // Each pipeline element type is represented using a single character
     // in the encoded string. This is a list of all possible values.
     const wchar_t   ELEMENT_CODE_QUOTES                     = L'"';
+    const wchar_t   ELEMENT_CODE_OPTIONAL_QUOTES            = L'q';
     const wchar_t   ELEMENT_CODE_EMAIL_LINKS                = L'<';
     const wchar_t   ELEMENT_CODE_ENCODE_URI_WHITESPACE      = L's';
     const wchar_t   ELEMENT_CODE_ENCODE_URI_CHARS           = L'%';
@@ -115,6 +116,10 @@ namespace PCC
         switch (code) {
             case ELEMENT_CODE_QUOTES: {
                 spElement = std::make_shared<QuotesPipelineElement>();
+                break;
+            }
+            case ELEMENT_CODE_OPTIONAL_QUOTES: {
+                spElement = std::make_shared<OptionalQuotesPipelineElement>();
                 break;
             }
             case ELEMENT_CODE_EMAIL_LINKS: {

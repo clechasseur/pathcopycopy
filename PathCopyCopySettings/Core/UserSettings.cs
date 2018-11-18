@@ -68,6 +68,9 @@ namespace PathCopyCopy.Settings.Core
         /// Name of registry value determining whether we add quotes to copied paths.
         private const string ADD_QUOTES_VALUE_NAME = "AddQuotes";
 
+        ///Name of registry value determining whether quotes around the paths are optional.
+        private const string ARE_QUOTES_OPTIONAL_VALUE_NAME = "AreQuotesOptional";
+
        /// Name of registry value determining whether we turn paths into e-mail links.
         private const string MAKE_EMAIL_LINKS_VALUE_NAME = "MakeEmailLinks";
 
@@ -157,6 +160,9 @@ namespace PathCopyCopy.Settings.Core
         /// Default value of the "add quotes around paths" setting.
         private const int ADD_QUOTES_DEFAULT_VALUE = 0;
 
+        /// Default value of the "are quotes optional" setting.
+        private const int ARE_QUOTES_OPTIONAL_DEFAULT_VALUE = 0;
+
         /// Default value of the "make e-mail links" setting.
         private const int MAKE_EMAIL_LINKS_DEFAULT_VALUE = 0;
 
@@ -237,6 +243,19 @@ namespace PathCopyCopy.Settings.Core
             }
             set {
                 userKey.SetValue(ADD_QUOTES_VALUE_NAME, value ? 1 : 0);
+            }
+        }
+
+        /// <summary>
+        /// Whether quotes are optional around copied paths, e.g. they are added only if there are spaces in the path.
+        /// </summary>
+        public bool AreQuotesOptional
+        {
+            get {
+                return ((int) GetUserOrGlobalValue(ARE_QUOTES_OPTIONAL_VALUE_NAME, ARE_QUOTES_OPTIONAL_DEFAULT_VALUE)) != 0;
+            }
+            set {
+                userKey.SetValue(ARE_QUOTES_OPTIONAL_VALUE_NAME, value ? 1 : 0);
             }
         }
 

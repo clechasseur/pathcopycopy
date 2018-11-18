@@ -768,6 +768,48 @@ namespace PathCopyCopy.Settings.Core.Plugins
             return String.Empty;
         }
     }
+
+    /// <summary>
+    /// Pipeline element that instructs Path Copy Copy to optionally add quotes
+    /// around the returned path if it contains spaces.
+    /// </summary>
+    public class OptionalQuotesPipelineElement : PipelineElement
+    {
+        /// <summary>
+        /// Code representing this pipeline element type.
+        /// </summary>
+        public const char CODE = 'q';
+
+        /// <summary>
+        /// Code representing this pipeline element type.
+        /// </summary>
+        public override char Code
+        {
+            get {
+                return CODE;
+            }
+        }
+
+        /// <summary>
+        /// Minimum version of Path Copy Copy required to use this pipeline element.
+        /// </summary>
+        public override Version RequiredVersion
+        {
+            get {
+                return new Version(16, 0, 0, 0);
+            }
+        }
+
+        /// <summary>
+        /// Encodes this pipeliine element in a string.
+        /// </summary>
+        /// <returns>Encoded element data.</returns>
+        public override string Encode()
+        {
+            // No other data to encode.
+            return String.Empty;
+        }
+    }
     
     /// <summary>
     /// Pipeline element that instructs Path Copy Copy to turn the path into
@@ -1392,6 +1434,10 @@ namespace PathCopyCopy.Settings.Core.Plugins
             switch (elementCode) {
                 case QuotesPipelineElement.CODE: {
                     element = new QuotesPipelineElement();
+                    break;
+                }
+                case OptionalQuotesPipelineElement.CODE: {
+                    element = new OptionalQuotesPipelineElement();
                     break;
                 }
                 case EmailLinksPipelineElement.CODE: {

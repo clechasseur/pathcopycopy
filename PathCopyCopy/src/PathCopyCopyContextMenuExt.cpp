@@ -942,6 +942,7 @@ HRESULT CPathCopyCopyContextMenuExt::ActOnFiles(const PCC::PluginSP& p_spPlugin,
     if (p_spPlugin != nullptr) {
         // Loop through files and compute filenames using plugin.
         bool addQuotes = GetSettings().GetAddQuotesAroundPaths();
+        bool areQuotesOptional = GetSettings().GetAreQuotesOptional();
         bool makeEmailLinks = GetSettings().GetMakePathsIntoEmailLinks();
         StringUtils::EncodeParam encodeParam = GetSettings().GetEncodeParam();
         std::wstring pathsSeparator = p_spPlugin->PathsSeparator();
@@ -962,15 +963,12 @@ HRESULT CPathCopyCopyContextMenuExt::ActOnFiles(const PCC::PluginSP& p_spPlugin,
             if (makeEmailLinks) {
                 newFiles += L"<";
             }
-            if (addQuotes) {
-                newFiles += L"\"";
-            }
             std::wstring newName = p_spPlugin->GetPath(oldName);
             StringUtils::EncodeURICharacters(newName, encodeParam);
-            newFiles += newName;
             if (addQuotes) {
-                newFiles += L"\"";
+                AddQuotes(newName, areQuotesOptional);
             }
+            newFiles += newName;
             if (makeEmailLinks) {
                 newFiles += L">";
             }
@@ -990,6 +988,25 @@ HRESULT CPathCopyCopyContextMenuExt::ActOnFiles(const PCC::PluginSP& p_spPlugin,
     }
 
     return hRes;
+}
+
+//
+// Add quotes around the given file name.
+//
+// @param p_rName File name to add quotes to. Will be modified in place.
+// @param p_Optional Whether quotes are optional, e.g. should only be
+//                   added if there are spaces in the path.
+//
+void CPathCopyCopyContextMenuExt::AddQuotes(std::wstring& p_rName,
+                                            const bool p_Optional) const
+{
+    bool needToAddQuotes = true;
+    if (p_Optional) {
+        needToAddQuotes = p_rName.find(' ') != std::wstring::npos;
+    }
+    if (needToAddQuotes) {
+        p_rName = L"\"" + p_rName + L"\"";
+    }
 }
 
 //

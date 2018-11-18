@@ -61,6 +61,7 @@
             this.OKBtn = new System.Windows.Forms.Button();
             this.CancelBtn = new System.Windows.Forms.Button();
             this.ChooseExecutableOpenDlg = new System.Windows.Forms.OpenFileDialog();
+            this.OptionalQuotesChk = new System.Windows.Forms.CheckBox();
             this.MainTabControl.SuspendLayout();
             this.BasePluginPage.SuspendLayout();
             this.OptionsPage.SuspendLayout();
@@ -98,7 +99,7 @@
             this.MainTabControl.Location = new System.Drawing.Point(12, 38);
             this.MainTabControl.Name = "MainTabControl";
             this.MainTabControl.SelectedIndex = 0;
-            this.MainTabControl.Size = new System.Drawing.Size(382, 465);
+            this.MainTabControl.Size = new System.Drawing.Size(382, 488);
             this.MainTabControl.TabIndex = 2;
             // 
             // BasePluginPage
@@ -153,7 +154,7 @@
             this.OptionsPage.Location = new System.Drawing.Point(4, 22);
             this.OptionsPage.Name = "OptionsPage";
             this.OptionsPage.Padding = new System.Windows.Forms.Padding(3);
-            this.OptionsPage.Size = new System.Drawing.Size(374, 439);
+            this.OptionsPage.Size = new System.Drawing.Size(374, 462);
             this.OptionsPage.TabIndex = 1;
             this.OptionsPage.Text = "Options";
             this.OptionsPage.UseVisualStyleBackColor = true;
@@ -167,7 +168,7 @@
             this.OptionsGroupBox.Controls.Add(this.ExecutableLbl);
             this.OptionsGroupBox.Controls.Add(this.LaunchExecutableChk);
             this.OptionsGroupBox.Controls.Add(this.CopyOnSameLineChk);
-            this.OptionsGroupBox.Location = new System.Drawing.Point(6, 334);
+            this.OptionsGroupBox.Location = new System.Drawing.Point(6, 357);
             this.OptionsGroupBox.Name = "OptionsGroupBox";
             this.OptionsGroupBox.Size = new System.Drawing.Size(362, 99);
             this.OptionsGroupBox.TabIndex = 3;
@@ -238,7 +239,7 @@
             this.FindReplaceGroupBox.Controls.Add(this.ReplaceLbl);
             this.FindReplaceGroupBox.Controls.Add(this.FindTxt);
             this.FindReplaceGroupBox.Controls.Add(this.FindLbl);
-            this.FindReplaceGroupBox.Location = new System.Drawing.Point(6, 223);
+            this.FindReplaceGroupBox.Location = new System.Drawing.Point(6, 246);
             this.FindReplaceGroupBox.Name = "FindReplaceGroupBox";
             this.FindReplaceGroupBox.Size = new System.Drawing.Size(362, 105);
             this.FindReplaceGroupBox.TabIndex = 2;
@@ -322,7 +323,7 @@
             this.SlashesGroupBox.Controls.Add(this.NoSlashesChangeRadio);
             this.SlashesGroupBox.Controls.Add(this.BackToForwardSlashesRadio);
             this.SlashesGroupBox.Controls.Add(this.ForwardToBackslashesRadio);
-            this.SlashesGroupBox.Location = new System.Drawing.Point(6, 127);
+            this.SlashesGroupBox.Location = new System.Drawing.Point(6, 150);
             this.SlashesGroupBox.Name = "SlashesGroupBox";
             this.SlashesGroupBox.Size = new System.Drawing.Size(362, 90);
             this.SlashesGroupBox.TabIndex = 1;
@@ -365,13 +366,14 @@
             // 
             this.DecorationsGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.DecorationsGroupBox.Controls.Add(this.OptionalQuotesChk);
             this.DecorationsGroupBox.Controls.Add(this.EncodeURICharsChk);
             this.DecorationsGroupBox.Controls.Add(this.EncodeURIWhitespaceChk);
             this.DecorationsGroupBox.Controls.Add(this.EmailLinksChk);
             this.DecorationsGroupBox.Controls.Add(this.QuotesChk);
             this.DecorationsGroupBox.Location = new System.Drawing.Point(6, 6);
             this.DecorationsGroupBox.Name = "DecorationsGroupBox";
-            this.DecorationsGroupBox.Size = new System.Drawing.Size(362, 115);
+            this.DecorationsGroupBox.Size = new System.Drawing.Size(362, 138);
             this.DecorationsGroupBox.TabIndex = 0;
             this.DecorationsGroupBox.TabStop = false;
             this.DecorationsGroupBox.Text = "Decorations";
@@ -380,20 +382,20 @@
             // 
             this.EncodeURICharsChk.AutoSize = true;
             this.EncodeURICharsChk.Enabled = false;
-            this.EncodeURICharsChk.Location = new System.Drawing.Point(25, 88);
+            this.EncodeURICharsChk.Location = new System.Drawing.Point(25, 111);
             this.EncodeURICharsChk.Name = "EncodeURICharsChk";
             this.EncodeURICharsChk.Size = new System.Drawing.Size(225, 17);
-            this.EncodeURICharsChk.TabIndex = 3;
+            this.EncodeURICharsChk.TabIndex = 4;
             this.EncodeURICharsChk.Text = "...and all in&valid URI characters (e.g., %xx)";
             this.EncodeURICharsChk.UseVisualStyleBackColor = true;
             // 
             // EncodeURIWhitespaceChk
             // 
             this.EncodeURIWhitespaceChk.AutoSize = true;
-            this.EncodeURIWhitespaceChk.Location = new System.Drawing.Point(6, 65);
+            this.EncodeURIWhitespaceChk.Location = new System.Drawing.Point(6, 88);
             this.EncodeURIWhitespaceChk.Name = "EncodeURIWhitespaceChk";
             this.EncodeURIWhitespaceChk.Size = new System.Drawing.Size(287, 17);
-            this.EncodeURIWhitespaceChk.TabIndex = 2;
+            this.EncodeURIWhitespaceChk.TabIndex = 3;
             this.EncodeURIWhitespaceChk.Text = "Encode w&hitespace using percent-encoding (e.g., %20)";
             this.EncodeURIWhitespaceChk.UseVisualStyleBackColor = true;
             this.EncodeURIWhitespaceChk.CheckedChanged += new System.EventHandler(this.EncodeURIWhitespaceChk_CheckedChanged);
@@ -401,10 +403,10 @@
             // EmailLinksChk
             // 
             this.EmailLinksChk.AutoSize = true;
-            this.EmailLinksChk.Location = new System.Drawing.Point(6, 42);
+            this.EmailLinksChk.Location = new System.Drawing.Point(6, 65);
             this.EmailLinksChk.Name = "EmailLinksChk";
             this.EmailLinksChk.Size = new System.Drawing.Size(243, 17);
-            this.EmailLinksChk.TabIndex = 1;
+            this.EmailLinksChk.TabIndex = 2;
             this.EmailLinksChk.Text = "Enclose path in < and > (to create e-&mail links)";
             this.EmailLinksChk.UseVisualStyleBackColor = true;
             // 
@@ -417,12 +419,13 @@
             this.QuotesChk.TabIndex = 0;
             this.QuotesChk.Text = "Enclose path in &quotation marks";
             this.QuotesChk.UseVisualStyleBackColor = true;
+            this.QuotesChk.CheckedChanged += new System.EventHandler(this.QuotesChk_CheckedChanged);
             // 
             // OKBtn
             // 
             this.OKBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.OKBtn.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.OKBtn.Location = new System.Drawing.Point(238, 516);
+            this.OKBtn.Location = new System.Drawing.Point(238, 539);
             this.OKBtn.Name = "OKBtn";
             this.OKBtn.Size = new System.Drawing.Size(75, 23);
             this.OKBtn.TabIndex = 3;
@@ -433,7 +436,7 @@
             // 
             this.CancelBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.CancelBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.CancelBtn.Location = new System.Drawing.Point(319, 516);
+            this.CancelBtn.Location = new System.Drawing.Point(319, 539);
             this.CancelBtn.Name = "CancelBtn";
             this.CancelBtn.Size = new System.Drawing.Size(75, 23);
             this.CancelBtn.TabIndex = 4;
@@ -445,13 +448,24 @@
             this.ChooseExecutableOpenDlg.Filter = "Executable files (*.exe;*.com;*.bat;*.cmd)|*.exe;*.com;*.bat;*.cmd|All files (*.*" +
     ")|*.*";
             // 
+            // OptionalQuotesChk
+            // 
+            this.OptionalQuotesChk.AutoSize = true;
+            this.OptionalQuotesChk.Enabled = false;
+            this.OptionalQuotesChk.Location = new System.Drawing.Point(25, 42);
+            this.OptionalQuotesChk.Name = "OptionalQuotesChk";
+            this.OptionalQuotesChk.Size = new System.Drawing.Size(150, 17);
+            this.OptionalQuotesChk.TabIndex = 1;
+            this.OptionalQuotesChk.Text = "...only if it contains spaces";
+            this.OptionalQuotesChk.UseVisualStyleBackColor = true;
+            // 
             // PipelinePluginForm
             // 
             this.AcceptButton = this.OKBtn;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.CancelBtn;
-            this.ClientSize = new System.Drawing.Size(406, 551);
+            this.ClientSize = new System.Drawing.Size(406, 574);
             this.Controls.Add(this.CancelBtn);
             this.Controls.Add(this.OKBtn);
             this.Controls.Add(this.MainTabControl);
@@ -459,7 +473,7 @@
             this.Controls.Add(this.NameLbl);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(422, 590);
+            this.MinimumSize = new System.Drawing.Size(422, 613);
             this.Name = "PipelinePluginForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
@@ -520,5 +534,6 @@
         private System.Windows.Forms.Label ExecutableLbl;
         private System.Windows.Forms.CheckBox LaunchExecutableChk;
         private System.Windows.Forms.OpenFileDialog ChooseExecutableOpenDlg;
+        private System.Windows.Forms.CheckBox OptionalQuotesChk;
     }
 }

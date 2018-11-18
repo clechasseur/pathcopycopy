@@ -54,6 +54,30 @@ namespace PCC
     //
     // Constructor.
     //
+    OptionalQuotesPipelineElement::OptionalQuotesPipelineElement()
+        : PipelineElement()
+    {
+    }
+
+    //
+    // Modifies the given path by surrounding it with quotes if the
+    // path contains spaces.
+    //
+    // @param p_rPath Path to modify (in-place).
+    // @param p_pPluginProvider Optional object to access plugins.
+    //
+    void OptionalQuotesPipelineElement::ModifyPath(std::wstring& p_rPath,
+                                                   const PluginProvider* const /*p_pPluginProvider*/) const
+    {
+        if (p_rPath.find(' ') != std::wstring::npos) {
+            p_rPath.insert(p_rPath.begin(), 1, L'\"');
+            p_rPath.append(1, L'\"');
+        }
+    }
+
+    //
+    // Constructor.
+    //
     EmailLinksPipelineElement::EmailLinksPipelineElement()
         : PipelineElement()
     {

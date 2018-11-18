@@ -123,7 +123,12 @@ namespace PathCopyCopy.Settings.UI.Forms
                 if (element != null) {
                     basePluginId = ((ApplyPluginPipelineElement) element).PluginID;
                 }
-                QuotesChk.Checked = pipeline.Elements.Find(el => el is QuotesPipelineElement) != null;
+                if (pipeline.Elements.Find(el => el is OptionalQuotesPipelineElement) != null) {
+                    QuotesChk.Checked = true;
+                    OptionalQuotesChk.Checked = true;
+                } else if (pipeline.Elements.Find(el => el is QuotesPipelineElement) != null) {
+                    QuotesChk.Checked = true;
+                }
                 EmailLinksChk.Checked = pipeline.Elements.Find(el => el is EmailLinksPipelineElement) != null;
                 if (pipeline.Elements.Find(el => el is EncodeURICharsPipelineElement) != null) {
                     EncodeURIWhitespaceChk.Checked = true;
@@ -250,7 +255,9 @@ namespace PathCopyCopy.Settings.UI.Forms
                     } else if (ForwardToBackslashesRadio.Checked) {
                         pipeline.Elements.Add(new ForwardToBackslashesPipelineElement());
                     }
-                    if (QuotesChk.Checked) {
+                    if (OptionalQuotesChk.Checked) {
+                        pipeline.Elements.Add(new OptionalQuotesPipelineElement());
+                    } else if (QuotesChk.Checked) {
                         pipeline.Elements.Add(new QuotesPipelineElement());
                     }
                     if (EmailLinksChk.Checked) {
@@ -283,6 +290,19 @@ namespace PathCopyCopy.Settings.UI.Forms
                     e.Cancel = true;
                 }
             }
+        }
+
+        /// <summary>
+        /// Called when the user checks or unchecks the "Add quotes"
+        /// checkbox. We need to enable to disable the "...only if
+        /// there's space" checkbox when this occurs since it's
+        /// conditional to the former.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QuotesChk_CheckedChanged(object sender, EventArgs e)
+        {
+            OptionalQuotesChk.Enabled = QuotesChk.Checked;
         }
 
         /// <summary>

@@ -246,6 +246,9 @@ namespace PathCopyCopy.Settings.UI.Forms
 
             // Set options checkboxes.
             AddQuotesChk.Checked = settings.AddQuotes;
+            if (AddQuotesChk.Checked) {
+                AreQuotesOptionalChk.Checked = settings.AreQuotesOptional;
+            }
             EmailLinksChk.Checked = settings.MakeEmailLinks;
             HiddenSharesChk.Checked = settings.UseHiddenShares;
             AlwaysShowSubmenuChk.Checked = settings.AlwaysShowSubmenu;
@@ -391,6 +394,9 @@ namespace PathCopyCopy.Settings.UI.Forms
             // Save options.
             if (AddQuotesChk.Checked != settings.AddQuotes) {
                 settings.AddQuotes = AddQuotesChk.Checked;
+            }
+            if ((AreQuotesOptionalChk.Enabled && AreQuotesOptionalChk.Checked) != settings.AreQuotesOptional) {
+                settings.AreQuotesOptional = AreQuotesOptionalChk.Enabled && AreQuotesOptionalChk.Checked;
             }
             if (EmailLinksChk.Checked != settings.MakeEmailLinks) {
                 settings.MakeEmailLinks = EmailLinksChk.Checked;
@@ -667,6 +673,18 @@ namespace PathCopyCopy.Settings.UI.Forms
         private void Chk_CheckedChanged(object sender, EventArgs e)
         {
             ApplyBtn.Enabled = true;
+        }
+
+        /// <summary>
+        /// Called when the user checks or unchecks the "Add quotes" checkbox.
+        /// We need to enable or disable the "...only if path contains space"
+        /// checkbox when this occurs since it's conditional to the former.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AddQuotesChk_CheckedChanged(object sender, EventArgs e)
+        {
+            AreQuotesOptionalChk.Enabled = AddQuotesChk.Checked;
         }
 
         /// <summary>

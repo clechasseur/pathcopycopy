@@ -54,6 +54,7 @@ namespace
     const wchar_t* const    SETTING_REVISIONS                               = L"Revisions";
     const wchar_t* const    SETTING_USE_HIDDEN_SHARES                       = L"UseHiddenShares";
     const wchar_t* const    SETTING_ADD_QUOTES                              = L"AddQuotes";
+    const wchar_t* const    SETTING_ARE_QUOTES_OPTIONAL                     = L"AreQuotesOptional";
     const wchar_t* const    SETTING_MAKE_EMAIL_LINKS                        = L"MakeEmailLinks";
     const wchar_t* const    SETTING_ENCODE_PARAM                            = L"EncodeParam";
     const wchar_t* const    SETTING_USE_ICON_FOR_DEFAULT_PLUGIN             = L"UseIconForDefaultPlugin";
@@ -88,6 +89,7 @@ namespace
     // Default values for PCC settings.
     const bool              SETTING_USE_HIDDEN_SHARES_DEFAULT               = false;
     const bool              SETTING_ADD_QUOTES_DEFAULT                      = false;
+    const bool              SETTING_ARE_QUOTES_OPTIONAL_DEFAULT             = false;
     const bool              SETTING_MAKE_EMAIL_LINKS_DEFAULT                = false;
     const wchar_t* const    SETTING_ENCODE_PARAM_DEFAULT                    = SETTING_ENCODE_PARAM_VALUE_NONE;
     const bool              SETTING_USE_ICON_FOR_DEFAULT_PLUGIN_DEFAULT     = false;
@@ -237,6 +239,27 @@ namespace PCC
             addQuotes = regAddQuotes != 0;
         }
         return addQuotes;
+    }
+
+    //
+    // Checks whether user wants quotes around paths to be optional,
+    // e.g. present only when there are spaces in the path. Only used
+    // when AddQuotesAroundPath is true. This applies to all plugins.
+    //
+    // @return true if quotes should be used only when needed.
+    //
+    bool Settings::GetAreQuotesOptional() const
+    {
+        // Perform late-revising.
+        Revise();
+
+        // Check if value exists. If so, read it, otherwise use default value.
+        bool areQuotesOptional = SETTING_ARE_QUOTES_OPTIONAL_DEFAULT;
+        DWORD regAreQuotesOptional = 0;
+        if (m_UserKey.QueryDWORDValue(SETTING_ARE_QUOTES_OPTIONAL, regAreQuotesOptional) == ERROR_SUCCESS) {
+            areQuotesOptional = regAreQuotesOptional != 0;
+        }
+        return areQuotesOptional;
     }
 
     //

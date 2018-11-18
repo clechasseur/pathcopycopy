@@ -50,6 +50,24 @@ namespace PCC
     };
 
     //
+    // OptionalQuotesPipelineElement
+    //
+    // Pipeline element that adds quotes around the path if there
+    // are spaces in the path.
+    //
+    class OptionalQuotesPipelineElement : public PipelineElement
+    {
+    public:
+                        OptionalQuotesPipelineElement();
+                        OptionalQuotesPipelineElement(const OptionalQuotesPipelineElement&) = delete;
+        OptionalQuotesPipelineElement&
+                        operator=(const OptionalQuotesPipelineElement&) = delete;
+
+        virtual void    ModifyPath(std::wstring& p_rPath,
+                                   const PluginProvider* const p_pPluginProvider) const override;
+    };
+
+    //
     // EmailLinksPipelineElement
     //
     // Pipeline element that turns paths into e-mail links
