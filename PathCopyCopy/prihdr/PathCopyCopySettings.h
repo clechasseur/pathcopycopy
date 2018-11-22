@@ -60,6 +60,7 @@ namespace PCC
         Settings&       operator=(const Settings&) = delete;
 
         bool            GetUseHiddenShares() const;
+        bool            GetUseFQDN() const;
         bool            GetAddQuotesAroundPaths() const;
         bool            GetAreQuotesOptional() const;
         bool            GetMakePathsIntoEmailLinks() const;

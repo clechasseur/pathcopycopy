@@ -30,6 +30,7 @@
 #include <memory>
 #include <sstream>
 
+#include <comutil.h>
 #include <lm.h>
 
 
@@ -226,6 +227,45 @@ namespace PCC
         }
 
         return converted;
+    }
+
+    //
+    // Replaces the hostname in the given UNC path with a
+    // fully-qualified domain name (FQDN).
+    //
+    // @param p_rFilePath UNC path. Upon exit, host name will have been replaced.
+    //
+    void PluginUtils::ConvertUNCHostToFQDN(std::wstring& p_rFilePath)
+    {
+        // Find hostname in file path.
+        std::wstring hostname, restOfPath;
+        if (p_rFilePath.substr(0, 2) == L"\\\\") {
+            auto withoutPrefix = p_rFilePath.substr(2);
+            auto delimPos = withoutPrefix.find_first_of(L"\\/");
+            if (delimPos != std::wstring::npos) {
+                hostname = withoutPrefix.substr(0, delimPos);
+                restOfPath = withoutPrefix.substr(delimPos);
+            }
+        }
+        if (!hostname.empty()) {
+            // First initialize Winsock if it's not already initialized in the process.
+            WSADATA wsaData;
+            if (::WSAStartup(MAKEWORD(2, 2), &wsaData) == 0) {
+                // Try fetching info for the hostname
+                hostent* pHostEnt = gethostbyname(_bstr_t(hostname.c_str()));
+                if (pHostEnt != nullptr) {
+                    // Rebuild the path by replacing the hostname with its FQDN
+                    std::wstringstream wss;
+                    wss << L"\\\\"
+                        << _bstr_t(pHostEnt->h_name)
+                        << restOfPath;
+                    p_rFilePath = wss.str();
+                }
+
+                // Cleanup Winsock before returning.
+                ::WSACleanup();
+            }
+        }
     }
 
     //

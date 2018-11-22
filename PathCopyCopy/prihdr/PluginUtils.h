@@ -51,6 +51,7 @@ namespace PCC
         static bool     GetNetworkShareFilePath(std::wstring& p_rFilePath,
                                                 const bool p_UseHiddenShares);
         static bool     GetHiddenDriveShareFilePath(std::wstring& p_rFilePath);
+        static void     ConvertUNCHostToFQDN(std::wstring& p_rFilePath);
         static const std::wstring&
                         GetLocalComputerName();
 

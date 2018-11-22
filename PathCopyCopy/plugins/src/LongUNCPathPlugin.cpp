@@ -141,6 +141,12 @@ namespace PCC
                     converted = PluginUtils::GetHiddenDriveShareFilePath(newPath);
                 }
 
+                // If we got a path and we must use FQDN, convert it.
+                const bool useFQDN = m_pSettings != nullptr ? m_pSettings->GetUseFQDN() : false;
+                if (converted && useFQDN) {
+                    PluginUtils::ConvertUNCHostToFQDN(newPath);
+                }
+
                 if (converted) {
                     p_rPath = newPath;
                 }

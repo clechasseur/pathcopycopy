@@ -251,6 +251,7 @@ namespace PathCopyCopy.Settings.UI.Forms
             }
             EmailLinksChk.Checked = settings.MakeEmailLinks;
             HiddenSharesChk.Checked = settings.UseHiddenShares;
+            UseFQDNChk.Checked = settings.UseFQDN;
             AlwaysShowSubmenuChk.Checked = settings.AlwaysShowSubmenu;
             UseIconForSubmenuChk.Checked = settings.UseIconForSubmenu;
             UsePreviewModeChk.Checked = settings.UsePreviewMode;
@@ -403,6 +404,9 @@ namespace PathCopyCopy.Settings.UI.Forms
             }
             if (HiddenSharesChk.Checked != settings.UseHiddenShares) {
                 settings.UseHiddenShares = HiddenSharesChk.Checked;
+            }
+            if (UseFQDNChk.Checked != settings.UseFQDN) {
+                settings.UseFQDN = UseFQDNChk.Checked;
             }
             if (AlwaysShowSubmenuChk.Checked != settings.AlwaysShowSubmenu) {
                 settings.AlwaysShowSubmenu = AlwaysShowSubmenuChk.Checked;

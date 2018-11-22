@@ -65,6 +65,9 @@ namespace PathCopyCopy.Settings.Core
         /// Name of registry value determining whether we use hidden shares in UNC plugins.
         private const string USE_HIDDEN_SHARES_VALUE_NAME = "UseHiddenShares";
 
+        /// Name of registry value determining whether we use fully-qualified domain names in UNC plugins.
+        private const string USE_FQDN_VALUE_NAME = "UseFQDN";
+
         /// Name of registry value determining whether we add quotes to copied paths.
         private const string ADD_QUOTES_VALUE_NAME = "AddQuotes";
 
@@ -157,6 +160,9 @@ namespace PathCopyCopy.Settings.Core
         /// Default value of the "use hidden shares" setting.
         private const int USE_HIDDEN_SHARES_DEFAULT_VALUE = 0;
 
+        /// Default value of the "use FQDN" setting.
+        private const int USE_FQDN_DEFAULT_VALUE = 0;
+
         /// Default value of the "add quotes around paths" setting.
         private const int ADD_QUOTES_DEFAULT_VALUE = 0;
 
@@ -230,6 +236,19 @@ namespace PathCopyCopy.Settings.Core
             }
             set {
                 userKey.SetValue(USE_HIDDEN_SHARES_VALUE_NAME, value ? 1 : 0);
+            }
+        }
+
+        /// <summary>
+        /// Whether the UNC plugins should use fully-qualified domain names or not.
+        /// </summary>
+        public bool UseFQDN
+        {
+            get {
+                return ((int) GetUserOrGlobalValue(USE_FQDN_VALUE_NAME, USE_FQDN_DEFAULT_VALUE)) != 0;
+            }
+            set {
+                userKey.SetValue(USE_FQDN_VALUE_NAME, value ? 1 : 0);
             }
         }
 

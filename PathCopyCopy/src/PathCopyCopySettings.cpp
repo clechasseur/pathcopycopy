@@ -53,6 +53,7 @@ namespace
     // Values used for PCC settings.
     const wchar_t* const    SETTING_REVISIONS                               = L"Revisions";
     const wchar_t* const    SETTING_USE_HIDDEN_SHARES                       = L"UseHiddenShares";
+    const wchar_t* const    SETTING_USE_FQDN                                = L"UseFQDN";
     const wchar_t* const    SETTING_ADD_QUOTES                              = L"AddQuotes";
     const wchar_t* const    SETTING_ARE_QUOTES_OPTIONAL                     = L"AreQuotesOptional";
     const wchar_t* const    SETTING_MAKE_EMAIL_LINKS                        = L"MakeEmailLinks";
@@ -88,6 +89,7 @@ namespace
 
     // Default values for PCC settings.
     const bool              SETTING_USE_HIDDEN_SHARES_DEFAULT               = false;
+    const bool              SETTING_USE_FQDN_DEFAULT                        = false;
     const bool              SETTING_ADD_QUOTES_DEFAULT                      = false;
     const bool              SETTING_ARE_QUOTES_OPTIONAL_DEFAULT             = false;
     const bool              SETTING_MAKE_EMAIL_LINKS_DEFAULT                = false;
@@ -219,6 +221,26 @@ namespace PCC
             useHiddenShares = regUseHiddenShares != 0;
         }
         return useHiddenShares;
+    }
+
+    //
+    // Checks whether user wants to use fully-qualified domain names
+    // (FQDN) when returning paths for the UNC plugins.
+    //
+    // @return true if FQDNs should be used, false otherwise.
+    //
+    bool Settings::GetUseFQDN() const
+    {
+        // Perform late-revising.
+        Revise();
+
+        // Check if value exists. If so, read it, otherwise use default value.
+        bool useFQDN = SETTING_USE_FQDN_DEFAULT;
+        DWORD regUseFQDN = 0;
+        if (m_UserKey.QueryDWORDValue(SETTING_USE_FQDN, regUseFQDN) == ERROR_SUCCESS) {
+            useFQDN = regUseFQDN != 0;
+        }
+        return useFQDN;
     }
 
     //
