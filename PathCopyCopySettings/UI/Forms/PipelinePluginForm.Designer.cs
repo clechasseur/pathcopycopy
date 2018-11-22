@@ -54,6 +54,7 @@
             this.BackToForwardSlashesRadio = new System.Windows.Forms.RadioButton();
             this.ForwardToBackslashesRadio = new System.Windows.Forms.RadioButton();
             this.DecorationsGroupBox = new System.Windows.Forms.GroupBox();
+            this.OptionalQuotesChk = new System.Windows.Forms.CheckBox();
             this.EncodeURICharsChk = new System.Windows.Forms.CheckBox();
             this.EncodeURIWhitespaceChk = new System.Windows.Forms.CheckBox();
             this.EmailLinksChk = new System.Windows.Forms.CheckBox();
@@ -61,7 +62,6 @@
             this.OKBtn = new System.Windows.Forms.Button();
             this.CancelBtn = new System.Windows.Forms.Button();
             this.ChooseExecutableOpenDlg = new System.Windows.Forms.OpenFileDialog();
-            this.OptionalQuotesChk = new System.Windows.Forms.CheckBox();
             this.MainTabControl.SuspendLayout();
             this.BasePluginPage.SuspendLayout();
             this.OptionsPage.SuspendLayout();
@@ -110,7 +110,7 @@
             this.BasePluginPage.Location = new System.Drawing.Point(4, 22);
             this.BasePluginPage.Name = "BasePluginPage";
             this.BasePluginPage.Padding = new System.Windows.Forms.Padding(3);
-            this.BasePluginPage.Size = new System.Drawing.Size(374, 439);
+            this.BasePluginPage.Size = new System.Drawing.Size(374, 462);
             this.BasePluginPage.TabIndex = 0;
             this.BasePluginPage.Text = "Base Command";
             this.BasePluginPage.UseVisualStyleBackColor = true;
@@ -378,6 +378,17 @@
             this.DecorationsGroupBox.TabStop = false;
             this.DecorationsGroupBox.Text = "Decorations";
             // 
+            // OptionalQuotesChk
+            // 
+            this.OptionalQuotesChk.AutoSize = true;
+            this.OptionalQuotesChk.Enabled = false;
+            this.OptionalQuotesChk.Location = new System.Drawing.Point(25, 42);
+            this.OptionalQuotesChk.Name = "OptionalQuotesChk";
+            this.OptionalQuotesChk.Size = new System.Drawing.Size(150, 17);
+            this.OptionalQuotesChk.TabIndex = 1;
+            this.OptionalQuotesChk.Text = "...only if it contains s&paces";
+            this.OptionalQuotesChk.UseVisualStyleBackColor = true;
+            // 
             // EncodeURICharsChk
             // 
             this.EncodeURICharsChk.AutoSize = true;
@@ -447,17 +458,6 @@
             // 
             this.ChooseExecutableOpenDlg.Filter = "Executable files (*.exe;*.com;*.bat;*.cmd)|*.exe;*.com;*.bat;*.cmd|All files (*.*" +
     ")|*.*";
-            // 
-            // OptionalQuotesChk
-            // 
-            this.OptionalQuotesChk.AutoSize = true;
-            this.OptionalQuotesChk.Enabled = false;
-            this.OptionalQuotesChk.Location = new System.Drawing.Point(25, 42);
-            this.OptionalQuotesChk.Name = "OptionalQuotesChk";
-            this.OptionalQuotesChk.Size = new System.Drawing.Size(150, 17);
-            this.OptionalQuotesChk.TabIndex = 1;
-            this.OptionalQuotesChk.Text = "...only if it contains spaces";
-            this.OptionalQuotesChk.UseVisualStyleBackColor = true;
             // 
             // PipelinePluginForm
             // 

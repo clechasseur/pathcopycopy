@@ -427,7 +427,7 @@
             this.AreQuotesOptionalChk.Name = "AreQuotesOptionalChk";
             this.AreQuotesOptionalChk.Size = new System.Drawing.Size(166, 17);
             this.AreQuotesOptionalChk.TabIndex = 1;
-            this.AreQuotesOptionalChk.Text = "...only if paths contain spaces";
+            this.AreQuotesOptionalChk.Text = "...only if paths contain &spaces";
             this.MainToolTip.SetToolTip(this.AreQuotesOptionalChk, "Whether to only surround paths with quotes if the paths contain spaces");
             this.AreQuotesOptionalChk.UseVisualStyleBackColor = true;
             // 
