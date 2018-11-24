@@ -62,11 +62,26 @@ namespace PCC
         //
         std::wstring ShortFolderPlugin::GetPath(const std::wstring& p_File) const
         {
+            assert(m_pSettings != nullptr);
+
             // Call parent to get the short path.
             std::wstring shortPath = ShortPathPlugin::GetPath(p_File);
 
-            // Extract parent directory and return it.
+            // If parent appended a separator, remove it here so that we
+            // can properly extract parent folder.
+            if (!shortPath.empty() && (shortPath.back() == L'\\' || shortPath.back() == L'/')) {
+                shortPath = shortPath.substr(0, shortPath.size() - 1);
+            }
+
+            // Extract parent directory.
             PluginUtils::ExtractFolderFromPath(shortPath);
+
+            // If settings instructs us to append separator for directories, append one,
+            // since this plugin always returns directory paths.
+            if (m_pSettings != nullptr && m_pSettings->GetAppendSeparatorForDirectories()) {
+                shortPath += L"\\";
+            }
+
             return shortPath;
         }
 

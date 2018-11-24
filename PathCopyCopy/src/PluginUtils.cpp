@@ -59,6 +59,19 @@ namespace PCC
     std::wregex     PluginUtils::s_HiddenDriveShareRegex(HIDDEN_DRIVE_SHARES_REGEX, std::regex_constants::ECMAScript);
 
     //
+    // Determines if the given path points to a directory or file.
+    //
+    // @param p_Path Path to check.
+    // @return true if path points to a directory.
+    //
+    bool PluginUtils::IsDirectory(const std::wstring& p_Path)
+    {
+        DWORD attribs = ::GetFileAttributesW(p_Path.c_str());
+        return attribs != INVALID_FILE_ATTRIBUTES &&
+               (attribs & FILE_ATTRIBUTE_DIRECTORY) == FILE_ATTRIBUTE_DIRECTORY;
+    }
+
+    //
     // Given a path to a file or folder, will return the path to its
     // parent folder. Ex:
     // C:\Foo\Bar.txt => C:\Foo

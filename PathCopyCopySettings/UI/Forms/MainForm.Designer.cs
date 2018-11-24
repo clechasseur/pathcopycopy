@@ -53,6 +53,7 @@
             this.InSubmenuCol = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.PluginsExplanationLbl = new System.Windows.Forms.Label();
             this.MiscOptionsPage = new System.Windows.Forms.TabPage();
+            this.UseFQDNChk = new System.Windows.Forms.CheckBox();
             this.AreQuotesOptionalChk = new System.Windows.Forms.CheckBox();
             this.CtrlKeyPluginCombo = new System.Windows.Forms.ComboBox();
             this.CtrlKeyPluginChk = new System.Windows.Forms.CheckBox();
@@ -82,7 +83,7 @@
             this.ExportUserSettingsSaveDlg = new System.Windows.Forms.SaveFileDialog();
             this.ExportUserSettingsBtn = new System.Windows.Forms.Button();
             this.MainToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.UseFQDNChk = new System.Windows.Forms.CheckBox();
+            this.AppendSepForDirChk = new System.Windows.Forms.CheckBox();
             this.MainTabCtrl.SuspendLayout();
             this.PluginsPage.SuspendLayout();
             this.PreviewGroupBox.SuspendLayout();
@@ -396,6 +397,7 @@
             // 
             // MiscOptionsPage
             // 
+            this.MiscOptionsPage.Controls.Add(this.AppendSepForDirChk);
             this.MiscOptionsPage.Controls.Add(this.UseFQDNChk);
             this.MiscOptionsPage.Controls.Add(this.AreQuotesOptionalChk);
             this.MiscOptionsPage.Controls.Add(this.CtrlKeyPluginCombo);
@@ -419,6 +421,17 @@
             this.MiscOptionsPage.Text = "Options";
             this.MiscOptionsPage.UseVisualStyleBackColor = true;
             // 
+            // UseFQDNChk
+            // 
+            this.UseFQDNChk.AutoSize = true;
+            this.UseFQDNChk.Location = new System.Drawing.Point(6, 167);
+            this.UseFQDNChk.Name = "UseFQDNChk";
+            this.UseFQDNChk.Size = new System.Drawing.Size(303, 17);
+            this.UseFQDNChk.TabIndex = 7;
+            this.UseFQDNChk.Text = "Use &fully-qualified domain names when copying UNC paths";
+            this.MainToolTip.SetToolTip(this.UseFQDNChk, "Uses fully-qualified domain names (e.g. FQDN) when copying UNC paths");
+            this.UseFQDNChk.UseVisualStyleBackColor = true;
+            // 
             // AreQuotesOptionalChk
             // 
             this.AreQuotesOptionalChk.AutoSize = true;
@@ -439,20 +452,20 @@
             this.CtrlKeyPluginCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CtrlKeyPluginCombo.Enabled = false;
             this.CtrlKeyPluginCombo.FormattingEnabled = true;
-            this.CtrlKeyPluginCombo.Location = new System.Drawing.Point(25, 305);
+            this.CtrlKeyPluginCombo.Location = new System.Drawing.Point(25, 328);
             this.CtrlKeyPluginCombo.Name = "CtrlKeyPluginCombo";
             this.CtrlKeyPluginCombo.Size = new System.Drawing.Size(399, 21);
-            this.CtrlKeyPluginCombo.TabIndex = 13;
+            this.CtrlKeyPluginCombo.TabIndex = 14;
             this.CtrlKeyPluginCombo.ValueMember = "Plugin";
             this.CtrlKeyPluginCombo.SelectedIndexChanged += new System.EventHandler(this.CtrlKeyPluginCombo_SelectedIndexChanged);
             // 
             // CtrlKeyPluginChk
             // 
             this.CtrlKeyPluginChk.AutoSize = true;
-            this.CtrlKeyPluginChk.Location = new System.Drawing.Point(6, 282);
+            this.CtrlKeyPluginChk.Location = new System.Drawing.Point(6, 305);
             this.CtrlKeyPluginChk.Name = "CtrlKeyPluginChk";
             this.CtrlKeyPluginChk.Size = new System.Drawing.Size(418, 17);
-            this.CtrlKeyPluginChk.TabIndex = 12;
+            this.CtrlKeyPluginChk.TabIndex = 13;
             this.CtrlKeyPluginChk.Text = "When user holds down Ctrl &key when opening contextual menu, use this command:";
             this.MainToolTip.SetToolTip(this.CtrlKeyPluginChk, "Choose a command to use automatically when user holds down the Ctrl key when Expl" +
         "orer\'s contextual menu is shown");
@@ -487,10 +500,10 @@
             // CopyOnSameLineChk
             // 
             this.CopyOnSameLineChk.AutoSize = true;
-            this.CopyOnSameLineChk.Location = new System.Drawing.Point(6, 259);
+            this.CopyOnSameLineChk.Location = new System.Drawing.Point(6, 282);
             this.CopyOnSameLineChk.Name = "CopyOnSameLineChk";
             this.CopyOnSameLineChk.Size = new System.Drawing.Size(197, 17);
-            this.CopyOnSameLineChk.TabIndex = 11;
+            this.CopyOnSameLineChk.TabIndex = 12;
             this.CopyOnSameLineChk.Text = "Copy mul&tiple paths on the same line";
             this.MainToolTip.SetToolTip(this.CopyOnSameLineChk, "When copying paths of multiple selected files/folders, copy them all on the same " +
         "line (separating them with whitespace) instead of copying them on different line" +
@@ -500,10 +513,10 @@
             // DropRedundantWordsChk
             // 
             this.DropRedundantWordsChk.AutoSize = true;
-            this.DropRedundantWordsChk.Location = new System.Drawing.Point(6, 236);
+            this.DropRedundantWordsChk.Location = new System.Drawing.Point(6, 259);
             this.DropRedundantWordsChk.Name = "DropRedundantWordsChk";
             this.DropRedundantWordsChk.Size = new System.Drawing.Size(341, 17);
-            this.DropRedundantWordsChk.TabIndex = 10;
+            this.DropRedundantWordsChk.TabIndex = 11;
             this.DropRedundantWordsChk.Text = "Drop &redundant words like \"Copy\" or \"Long/Short\" in the submenu";
             this.MainToolTip.SetToolTip(this.DropRedundantWordsChk, "Drops some redundant words when displaying commands in the submenu");
             this.DropRedundantWordsChk.UseVisualStyleBackColor = true;
@@ -511,10 +524,10 @@
             // UsePreviewModeChk
             // 
             this.UsePreviewModeChk.AutoSize = true;
-            this.UsePreviewModeChk.Location = new System.Drawing.Point(6, 213);
+            this.UsePreviewModeChk.Location = new System.Drawing.Point(6, 236);
             this.UsePreviewModeChk.Name = "UsePreviewModeChk";
             this.UsePreviewModeChk.Size = new System.Drawing.Size(312, 17);
-            this.UsePreviewModeChk.TabIndex = 9;
+            this.UsePreviewModeChk.TabIndex = 10;
             this.UsePreviewModeChk.Text = "Show &previews instead of command descriptions in submenu";
             this.MainToolTip.SetToolTip(this.UsePreviewModeChk, "When displaying commands in the submenu, show previews of what copied paths would" +
         " look like if such commands were selected");
@@ -523,10 +536,10 @@
             // UseIconForSubmenuChk
             // 
             this.UseIconForSubmenuChk.AutoSize = true;
-            this.UseIconForSubmenuChk.Location = new System.Drawing.Point(6, 190);
+            this.UseIconForSubmenuChk.Location = new System.Drawing.Point(6, 213);
             this.UseIconForSubmenuChk.Name = "UseIconForSubmenuChk";
             this.UseIconForSubmenuChk.Size = new System.Drawing.Size(157, 17);
-            this.UseIconForSubmenuChk.TabIndex = 8;
+            this.UseIconForSubmenuChk.TabIndex = 9;
             this.UseIconForSubmenuChk.Text = "Show &icon next to submenu";
             this.MainToolTip.SetToolTip(this.UseIconForSubmenuChk, "Displays a Path Copy Copy icon next to the submenu in Explorer\'s contextual menu");
             this.UseIconForSubmenuChk.UseVisualStyleBackColor = true;
@@ -545,10 +558,10 @@
             // EnableSoftwareUpdateChk
             // 
             this.EnableSoftwareUpdateChk.AutoSize = true;
-            this.EnableSoftwareUpdateChk.Location = new System.Drawing.Point(6, 332);
+            this.EnableSoftwareUpdateChk.Location = new System.Drawing.Point(6, 355);
             this.EnableSoftwareUpdateChk.Name = "EnableSoftwareUpdateChk";
             this.EnableSoftwareUpdateChk.Size = new System.Drawing.Size(177, 17);
-            this.EnableSoftwareUpdateChk.TabIndex = 14;
+            this.EnableSoftwareUpdateChk.TabIndex = 15;
             this.EnableSoftwareUpdateChk.Text = "Check for &updates automatically";
             this.MainToolTip.SetToolTip(this.EnableSoftwareUpdateChk, "Automatically check for new versions of Path Copy Copy and offer them when they a" +
         "re released");
@@ -557,10 +570,10 @@
             // AlwaysShowSubmenuChk
             // 
             this.AlwaysShowSubmenuChk.AutoSize = true;
-            this.AlwaysShowSubmenuChk.Location = new System.Drawing.Point(6, 167);
+            this.AlwaysShowSubmenuChk.Location = new System.Drawing.Point(6, 190);
             this.AlwaysShowSubmenuChk.Name = "AlwaysShowSubmenuChk";
             this.AlwaysShowSubmenuChk.Size = new System.Drawing.Size(133, 17);
-            this.AlwaysShowSubmenuChk.TabIndex = 7;
+            this.AlwaysShowSubmenuChk.TabIndex = 8;
             this.AlwaysShowSubmenuChk.Text = "A&lways show submenu";
             this.MainToolTip.SetToolTip(this.AlwaysShowSubmenuChk, "Always display the Path Copy Copy submenu in the Explorer contextual menu (otherw" +
         "ise, only display it when the Shift key is held down)");
@@ -569,10 +582,10 @@
             // HiddenSharesChk
             // 
             this.HiddenSharesChk.AutoSize = true;
-            this.HiddenSharesChk.Location = new System.Drawing.Point(6, 121);
+            this.HiddenSharesChk.Location = new System.Drawing.Point(6, 144);
             this.HiddenSharesChk.Name = "HiddenSharesChk";
             this.HiddenSharesChk.Size = new System.Drawing.Size(238, 17);
-            this.HiddenSharesChk.TabIndex = 5;
+            this.HiddenSharesChk.TabIndex = 6;
             this.HiddenSharesChk.Text = "Use &hidden shares when copying UNC paths";
             this.MainToolTip.SetToolTip(this.HiddenSharesChk, "Considers hidden shares (shares ending with the $ character, including administra" +
         "tive shares like \\\\server\\C$) when copying UNC paths");
@@ -764,16 +777,17 @@
             this.ExportUserSettingsBtn.UseVisualStyleBackColor = true;
             this.ExportUserSettingsBtn.Click += new System.EventHandler(this.ExportUserSettingsBtn_Click);
             // 
-            // UseFQDNChk
+            // AppendSepForDirChk
             // 
-            this.UseFQDNChk.AutoSize = true;
-            this.UseFQDNChk.Location = new System.Drawing.Point(6, 144);
-            this.UseFQDNChk.Name = "UseFQDNChk";
-            this.UseFQDNChk.Size = new System.Drawing.Size(303, 17);
-            this.UseFQDNChk.TabIndex = 6;
-            this.UseFQDNChk.Text = "Use &fully-qualified domain names when copying UNC paths";
-            this.MainToolTip.SetToolTip(this.UseFQDNChk, "Uses fully-qualified domain names (e.g. FQDN) when copying UNC paths");
-            this.UseFQDNChk.UseVisualStyleBackColor = true;
+            this.AppendSepForDirChk.AutoSize = true;
+            this.AppendSepForDirChk.Location = new System.Drawing.Point(6, 121);
+            this.AppendSepForDirChk.Name = "AppendSepForDirChk";
+            this.AppendSepForDirChk.Size = new System.Drawing.Size(203, 17);
+            this.AppendSepForDirChk.TabIndex = 5;
+            this.AppendSepForDirChk.Text = "Append a s&eparator to directory paths";
+            this.MainToolTip.SetToolTip(this.AppendSepForDirChk, "When copying directory paths, append a separator (e.g. \\ or / ) at the end of the" +
+        " path");
+            this.AppendSepForDirChk.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -872,6 +886,7 @@
         private System.Windows.Forms.CheckBox CtrlKeyPluginChk;
         private System.Windows.Forms.CheckBox AreQuotesOptionalChk;
         private System.Windows.Forms.CheckBox UseFQDNChk;
+        private System.Windows.Forms.CheckBox AppendSepForDirChk;
     }
 }
 

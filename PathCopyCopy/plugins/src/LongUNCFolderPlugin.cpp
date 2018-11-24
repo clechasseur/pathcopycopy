@@ -131,6 +131,13 @@ namespace PCC
 
             // Get parent's path.
             p_rPath = LongPathPlugin::GetPath(p_rPath);
+
+            // If parent appended a separator, remove it since it can mess with the
+            // detection functions below.
+            if (!p_rPath.empty() && (p_rPath.back() == L'\\' || p_rPath.back() == L'/')) {
+                p_rPath = p_rPath.substr(0, p_rPath.size() - 1);
+            }
+
             if ((!p_ExtractFolder) || PluginUtils::ExtractFolderFromPath(p_rPath)) {
                 // Got the parent path, check if this is already an UNC path.
                 converted = PluginUtils::IsUNCPath(p_rPath);
@@ -150,14 +157,27 @@ namespace PCC
                         converted = PluginUtils::GetHiddenDriveShareFilePath(newPath);
                     }
 
+                    // If we got a path and we must use FQDN, convert it.
+                    const bool useFQDN = m_pSettings != nullptr ? m_pSettings->GetUseFQDN() : false;
+                    if (converted && useFQDN) {
+                        PluginUtils::ConvertUNCHostToFQDN(newPath);
+                    }
+
                     // If we got a UNC path, use it, otherwise keep the long path.
                     if (converted) {
                         p_rPath = newPath;
+
+                        // If settings instructs us to append separator for directories, append one,
+                        // since this plugin always returns directory paths.
+                        if (m_pSettings != nullptr && m_pSettings->GetAppendSeparatorForDirectories()) {
+                            p_rPath += L"\\";
+                        }
                     }
                 }
             } else {
                 // No parent for some reason, simply return the original path.
             }
+
             return converted;
         }
 

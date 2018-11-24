@@ -123,6 +123,13 @@ namespace PCC
             // Call parent to get long path.
             p_rPath = LongPathPlugin::GetPath(p_rPath);
 
+            // If parent appended a separator, remove it since it can mess with the
+            // detection functions below.
+            const bool hadASeparator = !p_rPath.empty() && (p_rPath.back() == L'\\' || p_rPath.back() == L'/');
+            if (hadASeparator) {
+                p_rPath = p_rPath.substr(0, p_rPath.size() - 1);
+            }
+
             // Check if it already was an UNC path.
             bool converted = PluginUtils::IsUNCPath(p_rPath);
             if (!converted) {
@@ -151,6 +158,13 @@ namespace PCC
                     p_rPath = newPath;
                 }
             }
+
+            // If this was a directory path with an appended separator and it doesn't
+            // end with one now, append a new one.
+            if (hadASeparator && !p_rPath.empty() && p_rPath.back() != L'\\' && p_rPath.back() != L'/') {
+                p_rPath += L"\\";
+            }
+
             return converted;
         }
 

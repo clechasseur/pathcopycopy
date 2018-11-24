@@ -62,11 +62,26 @@ namespace PCC
         //
         std::wstring LongFolderPlugin::GetPath(const std::wstring& p_File) const
         {
+            assert(m_pSettings != nullptr);
+
             // Call parent to get the long path.
             std::wstring longPath = LongPathPlugin::GetPath(p_File);
 
-            // Extract parent directory and return it.
+            // If parent appended a separator, remove it here so that we
+            // can properly extract parent folder.
+            if (!longPath.empty() && (longPath.back() == L'\\' || longPath.back() == L'/')) {
+                longPath = longPath.substr(0, longPath.size() - 1);
+            }
+
+            // Extract parent directory.
             PluginUtils::ExtractFolderFromPath(longPath);
+
+            // If settings instructs us to append separator for directories, append one,
+            // since this plugin always returns directory paths.
+            if (m_pSettings != nullptr && m_pSettings->GetAppendSeparatorForDirectories()) {
+                longPath += L"\\";
+            }
+
             return longPath;
         }
 

@@ -58,6 +58,7 @@ namespace
     const wchar_t* const    SETTING_ARE_QUOTES_OPTIONAL                     = L"AreQuotesOptional";
     const wchar_t* const    SETTING_MAKE_EMAIL_LINKS                        = L"MakeEmailLinks";
     const wchar_t* const    SETTING_ENCODE_PARAM                            = L"EncodeParam";
+    const wchar_t* const    SETTING_APPEND_SEPARATOR_FOR_DIRECTORIES        = L"AppendSeparatorForDirectories";
     const wchar_t* const    SETTING_USE_ICON_FOR_DEFAULT_PLUGIN             = L"UseIconForDefaultPlugin";
     const wchar_t* const    SETTING_USE_ICON_FOR_SUBMENU                    = L"UseIconForSubmenu";
     const wchar_t* const    SETTING_USE_PREVIEW_MODE                        = L"UsePreviewMode";
@@ -94,6 +95,7 @@ namespace
     const bool              SETTING_ARE_QUOTES_OPTIONAL_DEFAULT             = false;
     const bool              SETTING_MAKE_EMAIL_LINKS_DEFAULT                = false;
     const wchar_t* const    SETTING_ENCODE_PARAM_DEFAULT                    = SETTING_ENCODE_PARAM_VALUE_NONE;
+    const bool              SETTING_APPEND_SEPARATOR_FOR_DIRECTORIES_DEFAULT= false;
     const bool              SETTING_USE_ICON_FOR_DEFAULT_PLUGIN_DEFAULT     = false;
     const bool              SETTING_USE_ICON_FOR_SUBMENU_DEFAULT            = true;
     const bool              SETTING_USE_PREVIEW_MODE_DEFAULT                = false;
@@ -328,6 +330,27 @@ namespace PCC
             assert(encodeParamStr == SETTING_ENCODE_PARAM_VALUE_NONE);
         }
         return encodeParam;
+    }
+
+    //
+    // Checks whether to append a separator at the end of paths
+    // if they point to directories.
+    //
+    // @return true if we should append separators at the end
+    //         of directory paths.
+    //
+    bool Settings::GetAppendSeparatorForDirectories() const
+    {
+        // Perform late-revising.
+        Revise();
+
+        // Check if value exists. If so, read it, otherwise use default value.
+        bool appendSep = SETTING_APPEND_SEPARATOR_FOR_DIRECTORIES_DEFAULT;
+        DWORD regAppendSep = 0;
+        if (m_UserKey.QueryDWORDValue(SETTING_APPEND_SEPARATOR_FOR_DIRECTORIES, regAppendSep) == ERROR_SUCCESS) {
+            appendSep = regAppendSep != 0;
+        }
+        return appendSep;
     }
 
     //

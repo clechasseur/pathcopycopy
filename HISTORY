@@ -4,6 +4,7 @@ Version 16.0 (20??-??-??)
 - Add "Copy Samba Path" command [https://github.com/clechasseur/pathcopycopy/issues/46]
 - Quotes can now be added only if there are spaces in the path [https://github.com/clechasseur/pathcopycopy/issues/38]
 - Can now use fully-qualified domain names (FQDN) when copying UNC paths [https://github.com/clechasseur/pathcopycopy/issues/30]
+- New option to append a separator (e.g. \ or /) at the end of directory paths [https://github.com/clechasseur/pathcopycopy/issues/49]
 
 
 Version 15.1 (2018-10-28)

@@ -80,6 +80,9 @@ namespace PathCopyCopy.Settings.Core
         /// Name of registry value determining how to encode characters in paths.
         private const string ENCODE_PARAM_VALUE_NAME = "EncodeParam";
 
+        /// Name of registry value determining whether to append separators at end of directory paths.
+        private const string APPEND_SEPARATOR_FOR_DIRECTORIES_VALUE_NAME = "AppendSeparatorForDirectories";
+
         /// Name of registry value determining whether we show an icon next to the default plugin.
         private const string USE_ICON_FOR_DEFAULT_PLUGIN_VALUE_NAME = "UseIconForDefaultPlugin";
 
@@ -174,6 +177,9 @@ namespace PathCopyCopy.Settings.Core
 
         /// Default value of the "encode param" setting.
         private const StringEncodeParam ENCODE_PARAM_DEFAULT_VALUE = StringEncodeParam.None;
+
+        /// Default value of the "append separator for directories" setting.
+        private const int APPEND_SEPARATOR_FOR_DIRECTORIES_DEFAULT_VALUE = 0;
 
         /// Default value of the "use icon for default plugin" setting.
         private const int USE_ICON_FOR_DEFAULT_PLUGIN_DEFAULT_VALUE = 0;
@@ -308,6 +314,19 @@ namespace PathCopyCopy.Settings.Core
             }
             set {
                 userKey.SetValue(ENCODE_PARAM_VALUE_NAME, value.ToString());
+            }
+        }
+
+        /// <summary>
+        /// Whether to append a separator at the end of directory paths.
+        /// </summary>
+        public bool AppendSeparatorForDirectories
+        {
+            get {
+                return ((int) GetUserOrGlobalValue(APPEND_SEPARATOR_FOR_DIRECTORIES_VALUE_NAME, APPEND_SEPARATOR_FOR_DIRECTORIES_DEFAULT_VALUE)) != 0;
+            }
+            set {
+                userKey.SetValue(APPEND_SEPARATOR_FOR_DIRECTORIES_VALUE_NAME, value ? 1 : 0);
             }
         }
 

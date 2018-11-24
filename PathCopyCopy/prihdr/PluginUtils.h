@@ -44,6 +44,8 @@ namespace PCC
                         PluginUtils() = delete;
                         ~PluginUtils() = delete;
 
+        static bool     IsDirectory(const std::wstring& p_Path);
+
         static bool     ExtractFolderFromPath(std::wstring& p_rPath);
 
         static bool     IsUNCPath(const std::wstring& p_FilePath);

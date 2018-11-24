@@ -66,6 +66,7 @@ namespace PCC
         bool            GetMakePathsIntoEmailLinks() const;
         StringUtils::EncodeParam
                         GetEncodeParam() const;
+        bool            GetAppendSeparatorForDirectories() const;
         bool            GetUseIconForDefaultPlugin() const;
         bool            GetUseIconForSubmenu() const;
         bool            GetUsePreviewMode() const;

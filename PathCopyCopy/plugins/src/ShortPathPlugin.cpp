@@ -62,6 +62,8 @@ namespace PCC
         //
         std::wstring ShortPathPlugin::GetPath(const std::wstring& p_File) const
         {
+            assert(m_pSettings != nullptr);
+
             std::wstring path(p_File);
             if (!path.empty()) {
                 wchar_t shortPath[MAX_PATH + 1];
@@ -70,6 +72,11 @@ namespace PCC
                                                    sizeof(shortPath) / sizeof(wchar_t));
                 if (copied != 0) {
                     path.assign(shortPath, copied);
+                }
+
+                // Append separator if needed.
+                if (m_pSettings != nullptr && m_pSettings->GetAppendSeparatorForDirectories() && PluginUtils::IsDirectory(path)) {
+                    path += L"\\";
                 }
             }
             return path;

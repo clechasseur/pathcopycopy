@@ -157,9 +157,6 @@
     <ClCompile Include="src\AtlRegKey.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\AllPluginsProvider.cpp">
-      <Filter>Plugins\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\COMPluginProvider.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -186,6 +183,9 @@
     </ClCompile>
     <ClCompile Include="plugins\src\SambaPathPlugin.cpp">
       <Filter>Plugins\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AllPluginsProvider.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

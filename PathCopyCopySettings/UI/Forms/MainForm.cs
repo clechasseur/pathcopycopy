@@ -250,6 +250,7 @@ namespace PathCopyCopy.Settings.UI.Forms
                 AreQuotesOptionalChk.Checked = settings.AreQuotesOptional;
             }
             EmailLinksChk.Checked = settings.MakeEmailLinks;
+            AppendSepForDirChk.Checked = settings.AppendSeparatorForDirectories;
             HiddenSharesChk.Checked = settings.UseHiddenShares;
             UseFQDNChk.Checked = settings.UseFQDN;
             AlwaysShowSubmenuChk.Checked = settings.AlwaysShowSubmenu;
@@ -401,6 +402,9 @@ namespace PathCopyCopy.Settings.UI.Forms
             }
             if (EmailLinksChk.Checked != settings.MakeEmailLinks) {
                 settings.MakeEmailLinks = EmailLinksChk.Checked;
+            }
+            if (AppendSepForDirChk.Checked != settings.AppendSeparatorForDirectories) {
+                settings.AppendSeparatorForDirectories = AppendSepForDirChk.Checked;
             }
             if (HiddenSharesChk.Checked != settings.UseHiddenShares) {
                 settings.UseHiddenShares = HiddenSharesChk.Checked;
