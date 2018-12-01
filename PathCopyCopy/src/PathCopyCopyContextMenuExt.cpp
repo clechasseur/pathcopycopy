@@ -335,6 +335,14 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::QueryContextMenu(
                     spPlugin->SetPluginProvider(m_spPluginProvider.get());
                 }
 
+                // Quick helper to create a default plugin if needed later.
+                auto createDefaultPlugin = [&]() {
+                    PCC::PluginSP spDefaultPlugin = std::make_shared<PCC::Plugins::DefaultPlugin>();
+                    spDefaultPlugin->SetSettings(&rSettings);
+                    spDefaultPlugin->SetPluginProvider(m_spPluginProvider.get());
+                    return spDefaultPlugin;
+                };
+
                 // Get a few setting values.
                 const bool useIconForDefaultPlugin = rSettings.GetUseIconForDefaultPlugin();
                 const bool usePreviewMode = rSettings.GetUsePreviewMode();
@@ -367,14 +375,12 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::QueryContextMenu(
                             }
                         } else {
                             // Default plugin is specified, use our own instead.
-                            PCC::PluginSP spDefaultPlugin = std::make_shared<PCC::Plugins::DefaultPlugin>();
-                            hRes = AddPluginToMenu(spDefaultPlugin, p_hMenu, useIconForDefaultPlugin, false, false, cmdId, position);
+                            hRes = AddPluginToMenu(createDefaultPlugin(), p_hMenu, useIconForDefaultPlugin, false, false, cmdId, position);
                         }
                     }
                 } else {
                     // No setting specified for items in the main menu. Add our default plugin.
-                    PCC::PluginSP spDefaultPlugin = std::make_shared<PCC::Plugins::DefaultPlugin>();
-                    hRes = AddPluginToMenu(spDefaultPlugin, p_hMenu, useIconForDefaultPlugin, false, false, cmdId, position);
+                    hRes = AddPluginToMenu(createDefaultPlugin(), p_hMenu, useIconForDefaultPlugin, false, false, cmdId, position);
                 }
 
                 // Create sub-menu to populate it with the other plugins.
