@@ -1,5 +1,5 @@
-Version ??.? (20??-??-??)
--------------------------
+Version 16.0.1 (20??-??-??)
+---------------------------
 - Default command will now add separator at end of directory paths when needed [https://github.com/clechasseur/pathcopycopy/issues/52]
 
 
