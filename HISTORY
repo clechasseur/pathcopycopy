@@ -1,3 +1,8 @@
+Version ??.? (20??-??-??)
+-------------------------
+- Default command will now add separator at end of directory paths when needed [https://github.com/clechasseur/pathcopycopy/issues/52]
+
+
 Version 16.0 (2018-11-24)
 -------------------------
 - Add "Copy WSL Path" command [https://github.com/clechasseur/pathcopycopy/issues/47]
