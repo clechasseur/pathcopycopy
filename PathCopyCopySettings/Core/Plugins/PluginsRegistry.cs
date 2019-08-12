@@ -24,7 +24,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Security;
 using Microsoft.Win32;
-using PathCopyCopy.Settings.Core.Base;
 using PathCopyCopy.Settings.Properties;
 
 namespace PathCopyCopy.Settings.Core.Plugins
@@ -170,7 +169,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// Should represent the default way of displaying <paramref name="plugins"/>.
         /// Ignored unless <paramref name="knownPlugins"/> is also set.</param>
         /// <returns>List of plugins in the order they should be displayed.</returns>
-        public static List<Plugin> OrderPluginsToDisplay(SortedPluginsSet plugins,
+        public static List<Plugin> OrderPluginsToDisplay(IDictionary<Guid, Plugin> plugins,
             IEnumerable<Guid> displayOrder, ISet<Guid> knownPlugins,
             IEnumerable<Plugin> pluginsInDefaultOrder)
         {
@@ -181,8 +180,8 @@ namespace PathCopyCopy.Settings.Core.Plugins
             // First generate list of plugins from display order.
             List<Plugin> orderedPlugins = new List<Plugin>();
             foreach (Guid id in displayOrder) {
-                Plugin plugin = plugins.FindKey(id);
-                if (plugin != null) {
+                Plugin plugin;
+                if (plugins.TryGetValue(id, out plugin)) {
                     orderedPlugins.Add(plugin);
                 }
             }
@@ -192,7 +191,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
             if (knownPlugins != null) {
                 // Create set of plugin IDs for all plugins.
                 SortedSet<Guid> pluginIds = new SortedSet<Guid>();
-                foreach (Plugin plugin in plugins) {
+                foreach (Plugin plugin in plugins.Values) {
                     pluginIds.Add(plugin.Id);
                 }
 
@@ -232,8 +231,8 @@ namespace PathCopyCopy.Settings.Core.Plugins
                         // No info on how to display plugins, simply add them in
                         // a possibly-random order.
                         foreach (Guid id in pluginIds) {
-                            Plugin plugin = plugins.FindKey(id);
-                            if (plugin != null) {
+                            Plugin plugin;
+                            if (plugins.TryGetValue(id, out plugin)) {
                                 orderedPlugins.Add(plugin);
                             }
                         }

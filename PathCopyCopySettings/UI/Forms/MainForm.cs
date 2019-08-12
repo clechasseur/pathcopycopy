@@ -28,7 +28,6 @@ using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 using PathCopyCopy.Settings.Core;
-using PathCopyCopy.Settings.Core.Base;
 using PathCopyCopy.Settings.Core.Plugins;
 using PathCopyCopy.Settings.Properties;
 using PathCopyCopy.Settings.UI.Utils;
@@ -188,8 +187,13 @@ namespace PathCopyCopy.Settings.UI.Forms
             // Load list of plugins in default order.
             List<Plugin> pluginsInDefaultOrder = PluginsRegistry.GetPluginsInDefaultOrder(settings);
 
-            // Create sorted set of all plugins from the list above, to be able to perform lookups.
-            SortedPluginsSet setOfAllPlugins = new SortedPluginsSet(pluginsInDefaultOrder);
+            // Create sorted dictionary of all plugins from the list above, to be able to perform lookups.
+            SortedDictionary<Guid, Plugin> dictionaryOfAllPlugins = new SortedDictionary<Guid, Plugin>();
+            foreach (Plugin plugin in pluginsInDefaultOrder) {
+                if (!dictionaryOfAllPlugins.ContainsKey(plugin.Id)) {
+                    dictionaryOfAllPlugins.Add(plugin.Id, plugin);
+                }
+            }
 
             // Create binding list to store plugins to display. Populate it by ordering
             // plugins using UI display order from settings. (We use UI display order as
@@ -205,7 +209,7 @@ namespace PathCopyCopy.Settings.UI.Forms
                 }
             }
             SortedSet<Guid> uiDisplayOrderAsSet = new SortedSet<Guid>(uiDisplayOrder);
-            List<Plugin> plugins = PluginsRegistry.OrderPluginsToDisplay(setOfAllPlugins,
+            List<Plugin> plugins = PluginsRegistry.OrderPluginsToDisplay(dictionaryOfAllPlugins,
                 uiDisplayOrder, uiDisplayOrderAsSet, pluginsInDefaultOrder);
             pluginDisplayInfos = new BindingList<PluginDisplayInfo>();
             foreach (Plugin plugin in plugins) {
