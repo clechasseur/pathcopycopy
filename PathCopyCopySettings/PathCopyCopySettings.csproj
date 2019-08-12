@@ -190,10 +190,10 @@
     <PostBuildEvent>mkdir "$(SolutionDir)bin\x64\$(ConfigurationName)"
 copy /Y "$(TargetDir)$(TargetName).*" "$(SolutionDir)bin\x64\$(ConfigurationName)\"
 mkdir "$(SolutionDir)Schemas"
-xsd "$(TargetPath)" /outputdir:"$(SolutionDir)Schemas" /type:PathCopyCopy.Settings.Core.Plugins.PipelinePluginCollection
+"$(SDK35ToolsPath)xsd.exe" "$(TargetPath)" /outputdir:"$(SolutionDir)Schemas" /type:PathCopyCopy.Settings.Core.Plugins.PipelinePluginCollection
 del /Q "$(SolutionDir)Schemas\PipelinePluginCollection.xsd"
 rename "$(SolutionDir)Schemas\schema0.xsd" PipelinePluginCollection.xsd
-xsd "$(TargetPath)" /outputdir:"$(SolutionDir)Schemas" /type:PathCopyCopy.Settings.Core.SoftwareUpdateCollection
+"$(SDK35ToolsPath)xsd.exe" "$(TargetPath)" /outputdir:"$(SolutionDir)Schemas" /type:PathCopyCopy.Settings.Core.SoftwareUpdateCollection
 del /Q "$(SolutionDir)Schemas\SoftwareUpdates.xsd"
 rename "$(SolutionDir)Schemas\schema0.xsd" SoftwareUpdates.xsd</PostBuildEvent>
   </PropertyGroup>
