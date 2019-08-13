@@ -48,13 +48,6 @@
 #define MyAppCopyright "(c) 2008-2018, Charles Lechasseur. See LICENSE.TXT for details."
 #define MyLicenseFile "..\LICENSE"
 
-; Include Inno Download Plugin script to be able to download dependencies.
-; To use this, make sure Inno Download Plugin is installed: http://mitrich.net23.net/?/inno-download-plugin.html
-; Note: don't include it for portable installations since we don't need it; this will save space.
-#ifndef PER_USER
-  #include <idp.iss>
-#endif
-
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
@@ -114,10 +107,6 @@ Name: english; MessagesFile: compiler:Default.isl
 WelcomeLabel2=This will install [name/ver] for this user only.%n%nIt is recommended that you close all other applications before continuing.
 #endif
 
-[CustomMessages]
-InstallNetFx2=Installing .NET Framework 2.0...
-EnableNetFx3=Enabling .NET Framework 3.5...
-
 [Files]
 Source: ..\bin\Win32\{#MyConfiguration}\PathCopyCopy.dll; DestDir: {app}; Flags: ignoreversion restartreplace overwritereadonly uninsrestartdelete uninsremovereadonly; DestName: PCC32.dll
 Source: ..\bin\x64\{#MyConfiguration}\PathCopyCopy.dll; DestDir: {app}; Flags: ignoreversion restartreplace overwritereadonly uninsrestartdelete uninsremovereadonly; DestName: PCC64.dll; Check: Is64BitInstallMode
@@ -175,8 +164,6 @@ Type: files; Name: {app}\Path Copy Copy on CodePlex.url
 [Run]
 Filename: {sys}\regsvr32.exe; Parameters: "{code:Regsvr32InstallParameters} ""{app}\PCC32.dll"""; WorkingDir: {app}; StatusMsg: {code:GetStatusRegisterFiles}; Flags: runhidden 32bit
 Filename: {sys}\regsvr32.exe; Parameters: "{code:Regsvr32InstallParameters} ""{app}\PCC64.dll"""; WorkingDir: {app}; StatusMsg: {code:GetStatusRegisterFiles}; Flags: runhidden 64bit; Check: Is64BitInstallMode
-Filename: {tmp}\NetFX.exe; StatusMsg: {cm:InstallNetFx2}; Flags: skipifsilent; Check: ShouldlInstallNetFramework20
-Filename: dism.exe; Parameters: /online /enable-feature /featurename:NetFx3 /All; StatusMsg: {cm:EnableNetFx3}; Flags: runhidden skipifsilent; Check: ShouldEnableNetFramework35
 
 [UninstallRun]
 Filename: {sys}\regsvr32.exe; Parameters: "{code:Regsvr32InstallParameters|/u} ""{app}\PCC32.dll"""; WorkingDir: {app}; RunOnceId: UnregisterPCC32; Flags: runhidden 32bit
@@ -192,23 +179,14 @@ const
   CSettingsRootKey = HKEY_LOCAL_MACHINE;
 #endif
 
-  CNetFX32Url = 'https://bitbucket.org/clechasseur/ondemandfiles/downloads/NetFx32.exe';
-  CNetFX64Url = 'https://bitbucket.org/clechasseur/ondemandfiles/downloads/NetFx64.exe';
-
   CDwordSwitch = '/PCCREGVALUEDWORD=';
   CStringSwitch = '/PCCREGVALUESZ=';
   CPipelinePluginSwitch = '/PCCREGPIPELINEPLUGIN=';
   CLegacyPipelinePluginsDisplayOrderSwitch = '/PCCREGPIPELINEPLUGINSDISPLAYORDER=';
-  CNetFXUrlSwitch = '/NETFXURL=';
-  CForceOfferNetFXSwitch = '/FORCEOFFERNETFX';
-  CDontOfferNetFXSwitch = '/DONOTOFFERNETFX';
   CInitialCommandsChoiceSwitch = '/INITIALCOMMANDSCHOICE=';
   CInstallSourceSwitch = '/INSTALLSOURCE=';
   CStringSeparator = ',';
-  
-  CInstallChoice = 0;
-  CDoNotInstallChoice = 1;
-  
+    
   CCommonCommandsChoice = 0;
   CNetworkCommandsChoice = 1;
   CAllCommandsChoice = 2;
@@ -231,10 +209,6 @@ const
     '{7da6a4a2-ae54-40e0-9910-ebd9ef3f017e}';
   
 var
-  GOfferToInstallDotNetFxOnWinXP: Boolean;
-  GOfferToEnableNETFramework35OnWin8: Boolean;
-  GInstallDotNetFxOnWinXPPage: TInputOptionWizardPage;
-  GEnableNETFramework35OnWin8Page: TInputOptionWizardPage;
   GCommandsPage: TInputOptionWizardPage;
   GIsUpgrade: Boolean;
   GLastUserPageID: Integer;
@@ -262,37 +236,6 @@ begin
       Result := True;
       Break;
     end;
-  end;
-end;
-
-// This function will return the URL to use to download the installer
-// for the .NET Framework 2.0.
-function NetFXUrl: string;
-var
-  I: Integer;
-  S: string;
-begin
-  // Check if user overrode the URL through a command-line argument.
-  Result := '';
-  for I := 1 to ParamCount do
-  begin
-    S := ParamStr(I);
-    if Pos(CNetFXUrlSwitch, Uppercase(S)) = 1 then
-    begin
-      // This is the argument we're looking for; URL follows.
-      Result := MyRemoveQuotes(Copy(S, Length(CNetFXUrlSwitch) + 1, MaxInt));
-      Break;
-    end;
-  end;
-  
-  // If user did not specify an URL, use the appropriate URL
-  // depending on install mode (32- or 64-bit).
-  if Result = '' then
-  begin
-    if Is64BitInstallMode then
-      Result := CNetFX64Url
-    else
-      Result := CNetFX32Url;
   end;
 end;
 
@@ -369,20 +312,6 @@ end;
 function GetStatusRegisterFiles(Params: string): string;
 begin
   Result := SetupMessage(msgStatusRegisterFiles);
-end;
-
-// Called to know if we should install .NET Framework 2.0 on a Win XP system.
-function ShouldlInstallNetFramework20: Boolean;
-begin
-  Result := GOfferToInstallDotNetFxOnWinXP and
-    (GInstallDotNetFxOnWinXPPage.SelectedValueIndex = CInstallChoice);
-end;
-
-// Called to know if we should enable .NET Framework 3.5 on a Win 8+ system.
-function ShouldEnableNetFramework35: Boolean;
-begin
-  Result := GOfferToEnableNETFramework35OnWin8 and
-    (GEnableNETFramework35OnWin8Page.SelectedValueIndex = CInstallChoice);
 end;
 
 // This procedure scans the command-line for values to write
@@ -503,62 +432,7 @@ end;
 // Called when setup first initializes. Note that the
 // wizard form does not exist at that point.
 function InitializeSetup: Boolean;
-#ifndef PER_USER
-var
-  WinVer: TWindowsVersion;
-  NetFramework2Installed, NetFramework35Installed: Cardinal;
-#endif
 begin
-#ifdef PER_USER
-  // Never offer to install/enable .NET Frameworks in portable mode, since
-  // setup is running in lowest privileges. The system will need to have
-  // the prerequisites for a portable installation to work.
-  GOfferToInstallDotNetFxOnWinXP := False;
-  GOfferToEnableNETFramework35OnWin8 := False;
-#else
-  // Check for debug switch that forces us to offer .NET Framework pages
-  // and for switch that tells us not to offer them.
-  if SwitchPresent(CForceOfferNetFXSwitch) then
-  begin
-    GOfferToInstallDotNetFxOnWinXP := True;
-    GOfferToEnableNETFramework35OnWin8 := True;
-  end
-  else if SwitchPresent(CDontOfferNetFXSwitch) then
-  begin
-    GOfferToInstallDotNetFxOnWinXP := False;
-    GOfferToEnableNETFramework35OnWin8 := False;
-  end
-  else
-  begin
-    // Check if we're trying to install on Windows XP and .NET Framework 2 isn't there.
-    // If so, we'll offer to install it.
-    GetWindowsVersionEx(WinVer);
-    if (WinVer.Major = 5) and (WinVer.Minor = 1) then
-    begin
-      NetFramework2Installed := 0;
-      RegQueryDWordValue(HKEY_LOCAL_MACHINE,
-        'Software\Microsoft\NET Framework Setup\NDP\v2.0.50727',
-        'Install', NetFramework2Installed);
-      GOfferToInstallDotNetFxOnWinXP := (NetFramework2Installed = 0);
-    end
-    else
-      GOfferToInstallDotNetFxOnWinXP := False;
-    
-    // Check if we're trying to install on Windows 8 or later and .NET Framework 3.5 isn't there.
-    // If so, we'll offer to enable it.
-    if (WinVer.Major > 6) or ((WinVer.Major = 6) and (WinVer.Minor >= 2)) then
-    begin
-      NetFramework35Installed := 0;
-      RegQueryDWordValue(HKEY_LOCAL_MACHINE,
-        'Software\Microsoft\NET Framework Setup\NDP\v3.5',
-        'Install', NetFramework35Installed);
-      GOfferToEnableNETFramework35OnWin8 := (NetFramework35Installed = 0);
-    end
-    else
-      GOfferToEnableNETFramework35OnWin8 := False;
-  end;
-#endif
-
   // Check if this is an upgrade by checking the main DLL's AppID registry
   // entry. (We could also check the installer's AppID in the Uninstall key.)
 #ifdef PER_USER
@@ -577,31 +451,9 @@ end;
 // We can use this opportunity to add pages to it.
 procedure InitializeWizard;
 begin
-  // Create a page to allow user to install .NET Framework 2.
-  GInstallDotNetFxOnWinXPPage := CreateInputOptionPage(wpSelectTasks,
-    'Prerequisites', 'Installing .NET Framework 2.0',
-    'Path Copy Copy requires .NET Framework 2.0, which is not installed on ' +
-    'your system. Do you wish Setup to download and install it now?',
-    True, False);
-  GInstallDotNetFxOnWinXPPage.Add('Install .NET Framework 2.0');
-  GInstallDotNetFxOnWinXPPage.Add('Do not install .NET Framework 2.0; ' +
-    'I will install it later');
-  GInstallDotNetFxOnWinXPPage.SelectedValueIndex := CInstallChoice;
-    
-  // Create a page to allow user to enable .NET Framework 3.5.
-  GEnableNETFramework35OnWin8Page := CreateInputOptionPage(GInstallDotNetFxOnWinXPPage.ID,
-    'Prerequisites', 'Enabling .NET Framework 3.5',
-    'Path Copy Copy requires .NET Framework 3.5 to be enabled on your system. ' +
-    'Do you wish Setup to enable this feature now? (Note: this requires access ' +
-    'to your official Windows installation media.)', True, False);
-  GEnableNETFramework35OnWin8Page.Add('Enable .NET Framework 3.5');
-  GEnableNETFramework35OnWin8Page.Add('Do not enable .NET Framework 3.5; ' +
-    'Windows will offer to enable it later');
-  GEnableNETFramework35OnWin8Page.SelectedValueIndex := CDoNotInstallChoice;
-
   // Create a page to allow the user to select which commands
   // to include in the submenu by default.
-  GCommandsPage := CreateInputOptionPage(GEnableNETFramework35OnWin8Page.ID,
+  GCommandsPage := CreateInputOptionPage(wpSelectTasks,
     'Configuration', 'Pre-configure commands',
     'Path Copy Copy ships with multiple commands used to copy paths ' +
     '(long path, network path, etc.) Please choose which ones to include ' +
@@ -615,21 +467,8 @@ begin
   // Since Ready page is disabled, it depends on what pages will be visible.
   if not GIsUpgrade then
     GLastUserPageID := GCommandsPage.ID
-  else if GOfferToEnableNETFramework35OnWin8 then
-    GLastUserPageID := GEnableNETFramework35OnWin8Page.ID
-  else if GOfferToInstallDotNetFxOnWinXP then
-    GLastUserPageID := GInstallDotNetFxOnWinXPPage.ID
   else
     GLastUserPageID := wpSelectDir;
-  
-#ifndef PER_USER
-  // Instruct Inno Download Plugin to download any files after the Ready page.
-  // This doesn't queue any files yet though.
-  idpDownloadAfter(wpReady);
-  
-  // Ask Inno Download Plugin to always show download details.
-  idpSetOption('DetailedMode', '1');
-#endif
 end;
 
 // Called for each wizard page. Returning True will skip that page.
@@ -639,33 +478,10 @@ begin
   // We do this to avoid overwriting existing settings and
   // since it's difficult to parse the "SubmenuDisplayOrder"
   // registry value, which can be modified by other means.
-  // Also skip the .NET Framework pages unless we need them.
   if PageID = GCommandsPage.ID then
     Result := GIsUpgrade
-  else if PageID = GInstallDotNetFxOnWinXPPage.ID then
-    Result := not GOfferToInstallDotNetFxOnWinXP
-  else if PageID = GEnableNETFramework35OnWin8Page.ID then
-    Result := not GOfferToEnableNETFramework35OnWin8
   else
     Result := False;
-end;
-
-// Called for each wizard page when the Next button is clicked. Returning True
-// will continue to the next page, False will stay on the page.
-function NextButtonClick(CurPageID: Integer): Boolean;
-begin
-  if CurPageID = GLastUserPageID then
-  begin
-#ifndef PER_USER
-    // We're moving to the Inno Download Plugin's download page now.
-    // Queue up download for .NET Framework 2.0 if needed (except in silent mode).
-    if ShouldlInstallNetFramework20 and not WizardSilent then
-      idpAddFile(NetFXUrl, ExpandConstant('{tmp}\NetFX.exe'));
-#endif
-    Result := True;
-  end
-  else
-    Result := True;
 end;
 
 // Called for each wizard page when the page is shown. We use this opportunity
