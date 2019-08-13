@@ -1,3 +1,8 @@
+Version 1?.? (20??-??-??)
+-------------------------
+- Settings application now requires .NET Framework 4 instead of 2 [https://github.com/clechasseur/pathcopycopy/issues/64]
+
+
 Version 16.0.1 (2018-11-30)
 ---------------------------
 - Default command will now add separator at end of directory paths when needed [https://github.com/clechasseur/pathcopycopy/issues/52]
