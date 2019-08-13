@@ -714,7 +714,7 @@ namespace PathCopyCopy.Settings.Core
             Debug.Assert(!String.IsNullOrEmpty(fileName));
 
             ProcessStartInfo psi = new ProcessStartInfo("cmd.exe") {
-                Arguments = String.Format("/c \"reg export HKCU\\{0} \"\"{1}\"\" /y\"",
+                Arguments = String.Format("/c \"reg export HKCU\\{0} \"{1}\" /y\"",
                     PCC_USER_SETTINGS_KEY, fileName),
                 CreateNoWindow = true,
                 UseShellExecute = false,
