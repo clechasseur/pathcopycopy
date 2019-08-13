@@ -1,5 +1,5 @@
 ; Inno Setup script file for PathCopyCopy
-; Copyright (c) 2008-2018 Charles Lechasseur
+; Copyright (c) 2008-2019 Charles Lechasseur
 ;
 ; Permission is hereby granted, free of charge, to any person obtaining a copy
 ; of this software and associated documentation files (the "Software"), to deal
@@ -26,26 +26,26 @@
   #define MyConfiguration "Release"
   #ifdef PER_USER
     #define MyAppName "Path Copy Copy (Portable)"
-    #define MyAppVersion "16.0.1"
-    #define MyAppFullVersion "16.0.1"
-    #define MyAppVerName "Path Copy Copy (Portable) 16.0.1"
+    #define MyAppVersion "17.0"
+    #define MyAppFullVersion "17.0"
+    #define MyAppVerName "Path Copy Copy (Portable) 17.0"
   #else
     #define MyAppName "Path Copy Copy"
-    #define MyAppVersion "16.0.1"
-    #define MyAppFullVersion "16.0.1"
-    #define MyAppVerName "Path Copy Copy 16.0.1"
+    #define MyAppVersion "17.0"
+    #define MyAppFullVersion "17.0"
+    #define MyAppVerName "Path Copy Copy 17.0"
   #endif
 #else
   #define MyConfiguration "Debug"
   #define MyAppName "Path Copy Copy DEBUG"
-  #define MyAppVersion "16.0.1"
-  #define MyAppFullVersion "16.0.1"
-  #define MyAppVerName "Path Copy Copy DEBUG 16.0.1"
+  #define MyAppVersion "17.0"
+  #define MyAppFullVersion "17.0"
+  #define MyAppVerName "Path Copy Copy DEBUG 17.0"
 #endif
 #define MyAppPublisher "Charles Lechasseur"
 #define MyAppURL "https://pathcopycopy.github.io/"
 #define MyAppDescription "Path Copy Copy Shell Contextual Menu Extension"
-#define MyAppCopyright "(c) 2008-2018, Charles Lechasseur. See LICENSE.TXT for details."
+#define MyAppCopyright "(c) 2008-2019, Charles Lechasseur. See LICENSE.TXT for details."
 #define MyLicenseFile "..\LICENSE"
 
 [Setup]

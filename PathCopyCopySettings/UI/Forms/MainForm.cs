@@ -1,5 +1,5 @@
 ﻿// MainForm.cs
-// (c) 2011-2018, Charles Lechasseur
+// (c) 2011-2019, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -149,7 +149,7 @@ namespace PathCopyCopy.Settings.UI.Forms
             } else {
                 // Use default copyright.
                 Debug.Fail("No copyright attribute on assembly?");
-                copyrightString = "(c) 2008-2018, Charles Lechasseur";
+                copyrightString = "(c) 2008-2019, Charles Lechasseur";
             }
 
             // Replace "(c)" with the copyright symbol

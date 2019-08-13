@@ -1,5 +1,5 @@
 // PathCopyCopyCOMPluginExecutor.cpp
-// (c) 2014-2018, Charles Lechasseur
+// (c) 2014-2019, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
