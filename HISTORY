@@ -1,6 +1,7 @@
 Version 17.0 (20??-??-??)
 -------------------------
 - Settings application now requires .NET Framework 4 instead of 2 [https://github.com/clechasseur/pathcopycopy/issues/64]
+- Next button during upgrade will correctly read "Install" [https://github.com/clechasseur/pathcopycopy/issues/73]
 
 
 Version 16.0.1 (2018-11-30)

@@ -468,7 +468,13 @@ begin
   if not GIsUpgrade then
     GLastUserPageID := GCommandsPage.ID
   else
-    GLastUserPageID := wpSelectDir;
+    GLastUserPageID := wpLicense;
+    
+  // If this is an upgrade, the only page we'll show is the License page,
+  // which means the CurPageChanged event will never be called to let us
+  // change the next button caption. Change it here.
+  if GIsUpgrade then
+    WizardForm.NextButton.Caption := SetupMessage(msgButtonInstall);
 end;
 
 // Called for each wizard page. Returning True will skip that page.
