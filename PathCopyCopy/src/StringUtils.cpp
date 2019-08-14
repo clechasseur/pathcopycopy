@@ -102,7 +102,6 @@ void StringUtils::EncodeURICharacters(std::wstring& p_rString,
         switch (p_EncodeParam) {
             case EncodeParam::Whitespace: {
                 identifyFunc = [](const wchar_t p_Char) {
-                    // #clp TODO validate
                     const unsigned int val = static_cast<unsigned int>(p_Char);
                     return val <= 0x1F || val == 0x20 || val == 0x7F;
                 };
