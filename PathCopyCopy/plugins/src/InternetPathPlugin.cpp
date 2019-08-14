@@ -31,7 +31,8 @@
 namespace
 {
     const std::wstring  NETWORK_SHARE_PREFIX    = L"\\\\";      // Prefix of string for network share paths
-    const std::wstring  FILE_URI_PREFIX         = L"file://";   // Prefix of file URI paths
+    const std::wstring  FILE_URI_PREFIX         = L"file:///";  // Prefix of file URI paths
+    const std::wstring  NETWORK_FILE_URI_PREFIX = L"file://";   // Prefix of network file URI paths
     const std::wstring  WHITESPACE_TO_ESCAPE    = L"\t\r ";     // Whitespace to escape in internet paths
     const std::wstring  WHITESPACE_ESCAPE_SEQ   = L"%20";       // Escape sequence to use instead of whitespace
 
@@ -94,7 +95,7 @@ namespace PCC
             // For network shares, we use
             // \\computer\share\path\to\file -> file://computer/share/path/to/file
             if (path.find(NETWORK_SHARE_PREFIX) == 0) {
-                path = FILE_URI_PREFIX + path.replace(0, NETWORK_SHARE_PREFIX.size(), L"");
+                path = NETWORK_FILE_URI_PREFIX + path.replace(0, NETWORK_SHARE_PREFIX.size(), L"");
             } else {
                 path = FILE_URI_PREFIX + path;
             }
