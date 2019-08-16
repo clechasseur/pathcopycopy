@@ -4,6 +4,7 @@ Version 17.0 (20??-??-??)
 - Next button during upgrade will correctly read "Install" [https://github.com/clechasseur/pathcopycopy/issues/73]
 - Exporting settings to a path with spaces now works properly [https://github.com/clechasseur/pathcopycopy/issues/68]
 - Copying an Internet Path with spaces now works properly [https://github.com/clechasseur/pathcopycopy/issues/63]
+- New option to display previews instead of descriptions in the main menu also. [https://github.com/clechasseur/pathcopycopy/issues/70]
 
 
 Version 16.0.1 (2018-11-30)
