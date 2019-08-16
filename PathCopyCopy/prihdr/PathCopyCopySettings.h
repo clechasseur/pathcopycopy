@@ -70,6 +70,7 @@ namespace PCC
         bool            GetUseIconForDefaultPlugin() const;
         bool            GetUseIconForSubmenu() const;
         bool            GetUsePreviewMode() const;
+        bool            GetUsePreviewModeInMainMenu() const;
         bool            GetDropRedundantWords() const;
         bool            GetAlwaysShowSubmenu() const;
         std::wstring    GetPathsSeparator() const;

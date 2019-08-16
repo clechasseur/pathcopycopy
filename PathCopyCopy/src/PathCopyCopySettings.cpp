@@ -62,6 +62,7 @@ namespace
     const wchar_t* const    SETTING_USE_ICON_FOR_DEFAULT_PLUGIN             = L"UseIconForDefaultPlugin";
     const wchar_t* const    SETTING_USE_ICON_FOR_SUBMENU                    = L"UseIconForSubmenu";
     const wchar_t* const    SETTING_USE_PREVIEW_MODE                        = L"UsePreviewMode";
+    const wchar_t* const    SETTING_USE_PREVIEW_MODE_IN_MAIN_MENU           = L"UsePreviewModeInMainMenu";
     const wchar_t* const    SETTING_DROP_REDUNDANT_WORDS                    = L"DropRedundantWords";
     const wchar_t* const    SETTING_ALWAYS_SHOW_SUBMENU                     = L"AlwaysShowSubmenu";
     const wchar_t* const    SETTING_PATHS_SEPARATOR                         = L"PathsSeparator";
@@ -99,6 +100,7 @@ namespace
     const bool              SETTING_USE_ICON_FOR_DEFAULT_PLUGIN_DEFAULT     = false;
     const bool              SETTING_USE_ICON_FOR_SUBMENU_DEFAULT            = true;
     const bool              SETTING_USE_PREVIEW_MODE_DEFAULT                = false;
+    const bool              SETTING_USE_PREVIEW_MODE_IN_MAIN_MENU_DEFAULT   = false;
     const bool              SETTING_DROP_REDUNDANT_WORDS_DEFAULT            = false;
     const bool              SETTING_ALWAYS_SHOW_SUBMENU_DEFAULT             = true;
     const wchar_t* const    SETTING_PATHS_SEPARATOR_DEFAULT                 = L"";
@@ -393,9 +395,10 @@ namespace PCC
     }
 
     //
-    // Checks whether we want to show a preview of plugin results instead of plugin names.
+    // Checks whether we want to show a preview of plugin results
+    // instead of plugin names in the submenu.
     //
-    // @return true if we should use preview mode.
+    // @return true if we should use preview mode in submenu.
     //
     bool Settings::GetUsePreviewMode() const
     {
@@ -409,6 +412,26 @@ namespace PCC
             previewMode = regPreviewMode != 0;
         }
         return previewMode;
+    }
+
+    //
+    // Checks whether we want to show a preview of plugin results
+    // instead of plugin names in the main menu.
+    //
+    // @return true if we should use preview mode in main menu.
+    //
+    bool Settings::GetUsePreviewModeInMainMenu() const
+    {
+        // Perform late-revising.
+        Revise();
+
+        // Check if value exists. If so, read it, otherwise use default value.
+        bool previewModeInMainMenu = SETTING_USE_PREVIEW_MODE_IN_MAIN_MENU_DEFAULT;
+        DWORD regPreviewModeInMainMenu = 0;
+        if (m_UserKey.QueryDWORDValue(SETTING_USE_PREVIEW_MODE_IN_MAIN_MENU, regPreviewModeInMainMenu) == ERROR_SUCCESS) {
+            previewModeInMainMenu = regPreviewModeInMainMenu != 0;
+        }
+        return previewModeInMainMenu;
     }
 
     //

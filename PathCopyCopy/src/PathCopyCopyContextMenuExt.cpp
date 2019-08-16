@@ -346,6 +346,7 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::QueryContextMenu(
                 // Get a few setting values.
                 const bool useIconForDefaultPlugin = rSettings.GetUseIconForDefaultPlugin();
                 const bool usePreviewMode = rSettings.GetUsePreviewMode();
+                const bool usePreviewModeInMainMenu = rSettings.GetUsePreviewModeInMainMenu();
                 const bool dropRedundantWords = rSettings.GetDropRedundantWords();
                 const bool alwaysShowSubmenu = rSettings.GetAlwaysShowSubmenu();
                 PCC::GUIDV vKnownPlugins;
@@ -375,12 +376,12 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::QueryContextMenu(
                             }
                         } else {
                             // Default plugin is specified, use our own instead.
-                            hRes = AddPluginToMenu(createDefaultPlugin(), p_hMenu, useIconForDefaultPlugin, false, false, cmdId, position);
+                            hRes = AddPluginToMenu(createDefaultPlugin(), p_hMenu, useIconForDefaultPlugin, usePreviewModeInMainMenu, false, cmdId, position);
                         }
                     }
                 } else {
                     // No setting specified for items in the main menu. Add our default plugin.
-                    hRes = AddPluginToMenu(createDefaultPlugin(), p_hMenu, useIconForDefaultPlugin, false, false, cmdId, position);
+                    hRes = AddPluginToMenu(createDefaultPlugin(), p_hMenu, useIconForDefaultPlugin, usePreviewModeInMainMenu, false, cmdId, position);
                 }
 
                 // Create sub-menu to populate it with the other plugins.
