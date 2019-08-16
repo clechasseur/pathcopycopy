@@ -92,6 +92,9 @@ namespace PathCopyCopy.Settings.Core
         /// Name of registry value determining whether to show previews in submenu instead of descriptions.
         private const string USE_PREVIEW_MODE_VALUE_NAME = "UsePreviewMode";
 
+        /// Name of registry value determining whether to show previews in main menu instead of descriptions.
+        private const string USE_PREVIEW_MODE_IN_MAIN_MENU_VALUE_NAME = "UsePreviewModeInMainMenu";
+
         /// Name of registry value determining whether to drop redundant words in plugin descriptions.
         private const string DROP_REDUNDANT_WORDS_VALUE_NAME = "DropRedundantWords";
 
@@ -189,6 +192,9 @@ namespace PathCopyCopy.Settings.Core
 
         /// Default value of the "use preview mode" setting.
         private const int USE_PREVIEW_MODE_DEFAULT_VALUE = 0;
+
+        /// Default value of the "use preview mode in main menu" setting.
+        private const int USE_PREVIEW_MODE_IN_MAIN_MENU_DEFAULT_VALUE = 0;
 
         /// Default value of the "drop redundant words" setting.
         private const int DROP_REDUNDANT_WORDS_DEFAULT_VALUE = 0;
@@ -357,7 +363,7 @@ namespace PathCopyCopy.Settings.Core
         }
 
         /// <summary>
-        /// Whether to use preview mode, e.g. display preview of result instead of descriptions in submenu.
+        /// Whether to use preview mode in submenu, e.g. display preview of result instead of descriptions.
         /// </summary>
         public bool UsePreviewMode
         {
@@ -366,6 +372,19 @@ namespace PathCopyCopy.Settings.Core
             }
             set {
                 userKey.SetValue(USE_PREVIEW_MODE_VALUE_NAME, value ? 1 : 0);
+            }
+        }
+
+        /// <summary>
+        /// Whether to use preview mode in main menu, e.g. display preview of result instead of descriptions.
+        /// </summary>
+        public bool UsePreviewModeInMainMenu
+        {
+            get {
+                return ((int) GetUserOrGlobalValue(USE_PREVIEW_MODE_IN_MAIN_MENU_VALUE_NAME, USE_PREVIEW_MODE_IN_MAIN_MENU_DEFAULT_VALUE)) != 0;
+            }
+            set {
+                userKey.SetValue(USE_PREVIEW_MODE_IN_MAIN_MENU_VALUE_NAME, value ? 1 : 0);
             }
         }
 

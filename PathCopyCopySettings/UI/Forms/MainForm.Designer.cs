@@ -53,6 +53,8 @@
             this.InSubmenuCol = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.PluginsExplanationLbl = new System.Windows.Forms.Label();
             this.MiscOptionsPage = new System.Windows.Forms.TabPage();
+            this.UsePreviewModeInMainMenuChk = new System.Windows.Forms.CheckBox();
+            this.AppendSepForDirChk = new System.Windows.Forms.CheckBox();
             this.UseFQDNChk = new System.Windows.Forms.CheckBox();
             this.AreQuotesOptionalChk = new System.Windows.Forms.CheckBox();
             this.CtrlKeyPluginCombo = new System.Windows.Forms.ComboBox();
@@ -83,7 +85,6 @@
             this.ExportUserSettingsSaveDlg = new System.Windows.Forms.SaveFileDialog();
             this.ExportUserSettingsBtn = new System.Windows.Forms.Button();
             this.MainToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.AppendSepForDirChk = new System.Windows.Forms.CheckBox();
             this.MainTabCtrl.SuspendLayout();
             this.PluginsPage.SuspendLayout();
             this.PreviewGroupBox.SuspendLayout();
@@ -397,6 +398,7 @@
             // 
             // MiscOptionsPage
             // 
+            this.MiscOptionsPage.Controls.Add(this.UsePreviewModeInMainMenuChk);
             this.MiscOptionsPage.Controls.Add(this.AppendSepForDirChk);
             this.MiscOptionsPage.Controls.Add(this.UseFQDNChk);
             this.MiscOptionsPage.Controls.Add(this.AreQuotesOptionalChk);
@@ -420,6 +422,29 @@
             this.MiscOptionsPage.TabIndex = 0;
             this.MiscOptionsPage.Text = "Options";
             this.MiscOptionsPage.UseVisualStyleBackColor = true;
+            // 
+            // UsePreviewModeInMainMenuChk
+            // 
+            this.UsePreviewModeInMainMenuChk.AutoSize = true;
+            this.UsePreviewModeInMainMenuChk.Enabled = false;
+            this.UsePreviewModeInMainMenuChk.Location = new System.Drawing.Point(25, 259);
+            this.UsePreviewModeInMainMenuChk.Name = "UsePreviewModeInMainMenuChk";
+            this.UsePreviewModeInMainMenuChk.Size = new System.Drawing.Size(118, 17);
+            this.UsePreviewModeInMainMenuChk.TabIndex = 11;
+            this.UsePreviewModeInMainMenuChk.Text = "...and in mai&n menu";
+            this.UsePreviewModeInMainMenuChk.UseVisualStyleBackColor = true;
+            // 
+            // AppendSepForDirChk
+            // 
+            this.AppendSepForDirChk.AutoSize = true;
+            this.AppendSepForDirChk.Location = new System.Drawing.Point(6, 121);
+            this.AppendSepForDirChk.Name = "AppendSepForDirChk";
+            this.AppendSepForDirChk.Size = new System.Drawing.Size(203, 17);
+            this.AppendSepForDirChk.TabIndex = 5;
+            this.AppendSepForDirChk.Text = "Append a s&eparator to directory paths";
+            this.MainToolTip.SetToolTip(this.AppendSepForDirChk, "When copying directory paths, append a separator (e.g. \\ or / ) at the end of the" +
+        " path");
+            this.AppendSepForDirChk.UseVisualStyleBackColor = true;
             // 
             // UseFQDNChk
             // 
@@ -452,20 +477,20 @@
             this.CtrlKeyPluginCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CtrlKeyPluginCombo.Enabled = false;
             this.CtrlKeyPluginCombo.FormattingEnabled = true;
-            this.CtrlKeyPluginCombo.Location = new System.Drawing.Point(25, 328);
+            this.CtrlKeyPluginCombo.Location = new System.Drawing.Point(25, 351);
             this.CtrlKeyPluginCombo.Name = "CtrlKeyPluginCombo";
             this.CtrlKeyPluginCombo.Size = new System.Drawing.Size(399, 21);
-            this.CtrlKeyPluginCombo.TabIndex = 14;
+            this.CtrlKeyPluginCombo.TabIndex = 15;
             this.CtrlKeyPluginCombo.ValueMember = "Plugin";
             this.CtrlKeyPluginCombo.SelectedIndexChanged += new System.EventHandler(this.CtrlKeyPluginCombo_SelectedIndexChanged);
             // 
             // CtrlKeyPluginChk
             // 
             this.CtrlKeyPluginChk.AutoSize = true;
-            this.CtrlKeyPluginChk.Location = new System.Drawing.Point(6, 305);
+            this.CtrlKeyPluginChk.Location = new System.Drawing.Point(6, 328);
             this.CtrlKeyPluginChk.Name = "CtrlKeyPluginChk";
             this.CtrlKeyPluginChk.Size = new System.Drawing.Size(418, 17);
-            this.CtrlKeyPluginChk.TabIndex = 13;
+            this.CtrlKeyPluginChk.TabIndex = 14;
             this.CtrlKeyPluginChk.Text = "When user holds down Ctrl &key when opening contextual menu, use this command:";
             this.MainToolTip.SetToolTip(this.CtrlKeyPluginChk, "Choose a command to use automatically when user holds down the Ctrl key when Expl" +
         "orer\'s contextual menu is shown");
@@ -500,10 +525,10 @@
             // CopyOnSameLineChk
             // 
             this.CopyOnSameLineChk.AutoSize = true;
-            this.CopyOnSameLineChk.Location = new System.Drawing.Point(6, 282);
+            this.CopyOnSameLineChk.Location = new System.Drawing.Point(6, 305);
             this.CopyOnSameLineChk.Name = "CopyOnSameLineChk";
             this.CopyOnSameLineChk.Size = new System.Drawing.Size(197, 17);
-            this.CopyOnSameLineChk.TabIndex = 12;
+            this.CopyOnSameLineChk.TabIndex = 13;
             this.CopyOnSameLineChk.Text = "Copy mul&tiple paths on the same line";
             this.MainToolTip.SetToolTip(this.CopyOnSameLineChk, "When copying paths of multiple selected files/folders, copy them all on the same " +
         "line (separating them with whitespace) instead of copying them on different line" +
@@ -513,10 +538,10 @@
             // DropRedundantWordsChk
             // 
             this.DropRedundantWordsChk.AutoSize = true;
-            this.DropRedundantWordsChk.Location = new System.Drawing.Point(6, 259);
+            this.DropRedundantWordsChk.Location = new System.Drawing.Point(6, 282);
             this.DropRedundantWordsChk.Name = "DropRedundantWordsChk";
             this.DropRedundantWordsChk.Size = new System.Drawing.Size(341, 17);
-            this.DropRedundantWordsChk.TabIndex = 11;
+            this.DropRedundantWordsChk.TabIndex = 12;
             this.DropRedundantWordsChk.Text = "Drop &redundant words like \"Copy\" or \"Long/Short\" in the submenu";
             this.MainToolTip.SetToolTip(this.DropRedundantWordsChk, "Drops some redundant words when displaying commands in the submenu");
             this.DropRedundantWordsChk.UseVisualStyleBackColor = true;
@@ -532,6 +557,7 @@
             this.MainToolTip.SetToolTip(this.UsePreviewModeChk, "When displaying commands in the submenu, show previews of what copied paths would" +
         " look like if such commands were selected");
             this.UsePreviewModeChk.UseVisualStyleBackColor = true;
+            this.UsePreviewModeChk.CheckedChanged += new System.EventHandler(this.UsePreviewModeChk_CheckedChanged);
             // 
             // UseIconForSubmenuChk
             // 
@@ -558,10 +584,10 @@
             // EnableSoftwareUpdateChk
             // 
             this.EnableSoftwareUpdateChk.AutoSize = true;
-            this.EnableSoftwareUpdateChk.Location = new System.Drawing.Point(6, 355);
+            this.EnableSoftwareUpdateChk.Location = new System.Drawing.Point(6, 378);
             this.EnableSoftwareUpdateChk.Name = "EnableSoftwareUpdateChk";
             this.EnableSoftwareUpdateChk.Size = new System.Drawing.Size(177, 17);
-            this.EnableSoftwareUpdateChk.TabIndex = 15;
+            this.EnableSoftwareUpdateChk.TabIndex = 16;
             this.EnableSoftwareUpdateChk.Text = "Check for &updates automatically";
             this.MainToolTip.SetToolTip(this.EnableSoftwareUpdateChk, "Automatically check for new versions of Path Copy Copy and offer them when they a" +
         "re released");
@@ -777,18 +803,6 @@
             this.ExportUserSettingsBtn.UseVisualStyleBackColor = true;
             this.ExportUserSettingsBtn.Click += new System.EventHandler(this.ExportUserSettingsBtn_Click);
             // 
-            // AppendSepForDirChk
-            // 
-            this.AppendSepForDirChk.AutoSize = true;
-            this.AppendSepForDirChk.Location = new System.Drawing.Point(6, 121);
-            this.AppendSepForDirChk.Name = "AppendSepForDirChk";
-            this.AppendSepForDirChk.Size = new System.Drawing.Size(203, 17);
-            this.AppendSepForDirChk.TabIndex = 5;
-            this.AppendSepForDirChk.Text = "Append a s&eparator to directory paths";
-            this.MainToolTip.SetToolTip(this.AppendSepForDirChk, "When copying directory paths, append a separator (e.g. \\ or / ) at the end of the" +
-        " path");
-            this.AppendSepForDirChk.UseVisualStyleBackColor = true;
-            // 
             // MainForm
             // 
             this.AcceptButton = this.OKBtn;
@@ -887,6 +901,7 @@
         private System.Windows.Forms.CheckBox AreQuotesOptionalChk;
         private System.Windows.Forms.CheckBox UseFQDNChk;
         private System.Windows.Forms.CheckBox AppendSepForDirChk;
+        private System.Windows.Forms.CheckBox UsePreviewModeInMainMenuChk;
     }
 }
 

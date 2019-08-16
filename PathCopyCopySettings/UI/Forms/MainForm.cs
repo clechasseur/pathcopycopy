@@ -260,6 +260,9 @@ namespace PathCopyCopy.Settings.UI.Forms
             AlwaysShowSubmenuChk.Checked = settings.AlwaysShowSubmenu;
             UseIconForSubmenuChk.Checked = settings.UseIconForSubmenu;
             UsePreviewModeChk.Checked = settings.UsePreviewMode;
+            if (UsePreviewModeChk.Checked) {
+                UsePreviewModeInMainMenuChk.Checked = settings.UsePreviewModeInMainMenu;
+            }
             DropRedundantWordsChk.Checked = settings.DropRedundantWords;
             EnableSoftwareUpdateChk.Checked = !settings.DisableSoftwareUpdate;
 
@@ -424,6 +427,9 @@ namespace PathCopyCopy.Settings.UI.Forms
             }
             if (UsePreviewModeChk.Checked != settings.UsePreviewMode) {
                 settings.UsePreviewMode = UsePreviewModeChk.Checked;
+            }
+            if ((UsePreviewModeInMainMenuChk.Enabled && UsePreviewModeInMainMenuChk.Checked) != settings.UsePreviewModeInMainMenu) {
+                settings.UsePreviewModeInMainMenu = UsePreviewModeInMainMenuChk.Enabled && UsePreviewModeInMainMenuChk.Checked;
             }
             if (DropRedundantWordsChk.Checked != settings.DropRedundantWords) {
                 settings.DropRedundantWords = DropRedundantWordsChk.Checked;
@@ -709,6 +715,19 @@ namespace PathCopyCopy.Settings.UI.Forms
         private void EncodeURIWhitespaceChk_CheckedChanged(object sender, EventArgs e)
         {
             EncodeURICharsChk.Enabled = EncodeURIWhitespaceChk.Checked;
+        }
+
+        /// <summary>
+        /// Called when the user checks or unchecks the "Use preview mode"
+        /// checkbox. We need to enable or disable the "Use preview mode
+        /// in main menu" checkbox when this occurs since it's conditional
+        /// to the former.
+        /// </summary>
+        /// <param name="sender">Event sender.</param>
+        /// <param name="e">Event arguments.</param>
+        private void UsePreviewModeChk_CheckedChanged(object sender, EventArgs e)
+        {
+            UsePreviewModeInMainMenuChk.Enabled = UsePreviewModeChk.Checked;
         }
 
         /// <summary>
