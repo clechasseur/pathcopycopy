@@ -246,7 +246,7 @@ namespace PathCopyCopy.Settings.UI.Forms
             }
 
             // Set binding list as data source for the data grid.
-            PluginsDataGrid.DataSource = pluginDisplayInfos;
+            PluginsDataGridBindingSource.DataSource = pluginDisplayInfos;
 
             // Set options checkboxes.
             AddQuotesChk.Checked = settings.AddQuotes;
@@ -267,7 +267,7 @@ namespace PathCopyCopy.Settings.UI.Forms
             EnableSoftwareUpdateChk.Checked = !settings.DisableSoftwareUpdate;
 
             // Set binding list as data source for the combo box used to pick ctrl key plugin.
-            CtrlKeyPluginCombo.DataSource = pluginDisplayInfos;
+            CtrlKeyPluginComboBindingSource.DataSource = pluginDisplayInfos;
 
             // Encode param is a little special since it has two checkboxes.
             switch (settings.EncodeParam) {

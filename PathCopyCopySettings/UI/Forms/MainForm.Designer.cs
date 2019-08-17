@@ -85,6 +85,8 @@
             this.ExportUserSettingsSaveDlg = new System.Windows.Forms.SaveFileDialog();
             this.ExportUserSettingsBtn = new System.Windows.Forms.Button();
             this.MainToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.PluginsDataGridBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.CtrlKeyPluginComboBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.MainTabCtrl.SuspendLayout();
             this.PluginsPage.SuspendLayout();
             this.PreviewGroupBox.SuspendLayout();
@@ -92,6 +94,8 @@
             this.MiscOptionsPage.SuspendLayout();
             this.AboutPage.SuspendLayout();
             this.AboutTableLayoutPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PluginsDataGridBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CtrlKeyPluginComboBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // ApplyBtn
@@ -326,6 +330,7 @@
             this.PluginsDataGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.PluginsDataGrid.AutoGenerateColumns = false;
             this.PluginsDataGrid.BackgroundColor = System.Drawing.SystemColors.Window;
             this.PluginsDataGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.PluginsDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -334,6 +339,7 @@
             this.PluginCol,
             this.InMainMenuCol,
             this.InSubmenuCol});
+            this.PluginsDataGrid.DataSource = this.PluginsDataGridBindingSource;
             this.PluginsDataGrid.Location = new System.Drawing.Point(9, 44);
             this.PluginsDataGrid.Name = "PluginsDataGrid";
             this.PluginsDataGrid.RowHeadersVisible = false;
@@ -473,7 +479,7 @@
             // 
             this.CtrlKeyPluginCombo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.CtrlKeyPluginCombo.DisplayMember = "Name";
+            this.CtrlKeyPluginCombo.DataSource = this.CtrlKeyPluginComboBindingSource;
             this.CtrlKeyPluginCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CtrlKeyPluginCombo.Enabled = false;
             this.CtrlKeyPluginCombo.FormattingEnabled = true;
@@ -839,6 +845,8 @@
             this.AboutPage.ResumeLayout(false);
             this.AboutTableLayoutPanel.ResumeLayout(false);
             this.AboutTableLayoutPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PluginsDataGridBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CtrlKeyPluginComboBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -902,6 +910,8 @@
         private System.Windows.Forms.CheckBox UseFQDNChk;
         private System.Windows.Forms.CheckBox AppendSepForDirChk;
         private System.Windows.Forms.CheckBox UsePreviewModeInMainMenuChk;
+        private System.Windows.Forms.BindingSource PluginsDataGridBindingSource;
+        private System.Windows.Forms.BindingSource CtrlKeyPluginComboBindingSource;
     }
 }
 
