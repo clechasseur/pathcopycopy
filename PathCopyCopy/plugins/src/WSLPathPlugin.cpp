@@ -21,6 +21,7 @@
 
 #include <stdafx.h>
 #include <WSLPathPlugin.h>
+#include <StringUtils.h>
 #include <resource.h>
 
 #include <sstream>
@@ -79,6 +80,9 @@ namespace PCC
                           << path.substr(2);                            // Rest of the path, including the slash after that : we had.
                 path = newPathSS.str();
             }
+
+            // Escape spaces bash-style. This works without quotes.
+            StringUtils::ReplaceAll(path, L" ", L"\\ ");
 
             // Return modified path.
             return path;
