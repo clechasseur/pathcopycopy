@@ -190,6 +190,9 @@ BEGIN
     IDS_SAMBA_PATH_PLUGIN_DESCRIPTION "Copy S&amba Path"
     IDS_SAMBA_PATH_PLUGIN_HINT 
                             "Copies the path of the file/folder to the clipboard in Samba format."
+    IDS_MSYS_PATH_PLUGIN_DESCRIPTION "Copy MS&YS/MSYS2 Path"
+    IDS_MSYS_PATH_PLUGIN_HINT 
+                            "Copies the path of the file/folder to the clipboard in MSYS/MSYS2 format."
 END
 
 #endif    // English (United States) resources

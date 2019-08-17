@@ -206,7 +206,7 @@ const
     '{73188fb3-8e14-409c-95ef-ba608fdc1274},{e2c942ac-917c-4aee-a867-8f6ab960ba76},' +
     '{8f2adccc-9693-407d-9300-fccb9a12b982},{5b5da5cb-3284-45a9-a1e5-4d6b03107924},' +
     '{cd50dce3-9a5c-4adf-b552-1741361567d6},{bd574871-5df9-4b64-83d1-2af9c0c17f66},' +
-    '{7da6a4a2-ae54-40e0-9910-ebd9ef3f017e}';
+    '{7da6a4a2-ae54-40e0-9910-ebd9ef3f017e},{31022a3d-6fee-4b36-843e-bbb4556ab35b}';
   
 var
   GCommandsPage: TInputOptionWizardPage;

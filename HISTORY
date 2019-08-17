@@ -6,6 +6,7 @@ Version 17.0 (20??-??-??)
 - Copying an Internet Path with spaces now works properly [https://github.com/clechasseur/pathcopycopy/issues/63]
 - New option to display previews instead of descriptions in the main menu also. [https://github.com/clechasseur/pathcopycopy/issues/70]
 - "Copy WSL Path" command now escapes spaces bash-style. [https://github.com/clechasseur/pathcopycopy/issues/61]
+- Add "Copy MSYS/MSYS2 Path" command [https://github.com/clechasseur/pathcopycopy/issues/51]
 
 
 Version 16.0.1 (2018-11-30)

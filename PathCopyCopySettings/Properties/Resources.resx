@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CYGWIN_PATH_PLUGIN_DESCRIPTION" xml:space="preserve">
     <value>Copy Cygwin Path</value>
@@ -252,7 +252,7 @@
   <data name="ImportPipelinePluginsForm_IncompatiblePluginsMsg" xml:space="preserve">
     <value>Custom commands with a listed version requirement are incompatible with this version of Path Copy Copy. They can still be imported, but they will be disabled.</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="DefaultIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\..\icons\PathCopyCopy2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -314,5 +314,11 @@ Control-click to avoid displaying an icon for this command.</value>
   </data>
   <data name="SAMBA_PATH_PLUGIN_ID" xml:space="preserve">
     <value>{7DA6A4A2-AE54-40E0-9910-EBD9EF3F017E}</value>
+  </data>
+  <data name="MSYS_PATH_PLUGIN_DESCRIPTION" xml:space="preserve">
+    <value>Copy MSYS/MSYS2 Path</value>
+  </data>
+  <data name="MSYS_PATH_PLUGIN_ID" xml:space="preserve">
+    <value>{31022A3D-6FEE-4B36-843E-BBB4556AB35B}</value>
   </data>
 </root>

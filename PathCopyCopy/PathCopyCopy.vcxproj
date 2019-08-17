@@ -271,6 +271,7 @@
     <ClCompile Include="actions\src\CopyToClipboardPathAction.cpp" />
     <ClCompile Include="actions\src\LaunchExecutablePathAction.cpp" />
     <ClCompile Include="plugins\src\AndrogynousInternalPlugin.cpp" />
+    <ClCompile Include="plugins\src\MSYSPathPlugin.cpp" />
     <ClCompile Include="plugins\src\SambaPathPlugin.cpp" />
     <ClCompile Include="plugins\src\WSLPathPlugin.cpp" />
     <ClCompile Include="src\AllPluginsProvider.cpp" />
@@ -378,6 +379,7 @@
     <ClInclude Include="actions\prihdr\CopyToClipboardPathAction.h" />
     <ClInclude Include="actions\prihdr\LaunchExecutablePathAction.h" />
     <ClInclude Include="plugins\prihdr\AndrogynousInternalPlugin.h" />
+    <ClInclude Include="plugins\prihdr\MSYSPathPlugin.h" />
     <ClInclude Include="plugins\prihdr\SambaPathPlugin.h" />
     <ClInclude Include="plugins\prihdr\WSLPathPlugin.h" />
     <ClInclude Include="prihdr\AllPluginsProvider.h" />

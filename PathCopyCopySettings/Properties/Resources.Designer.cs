@@ -398,6 +398,24 @@ namespace PathCopyCopy.Settings.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copy MSYS/MSYS2 Path.
+        /// </summary>
+        internal static string MSYS_PATH_PLUGIN_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("MSYS_PATH_PLUGIN_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {31022A3D-6FEE-4B36-843E-BBB4556AB35B}.
+        /// </summary>
+        internal static string MSYS_PATH_PLUGIN_ID {
+            get {
+                return ResourceManager.GetString("MSYS_PATH_PLUGIN_ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to PCC32.dll.
         /// </summary>
         internal static string PCC_EXECUTOR_DLL_NAME_32 {
