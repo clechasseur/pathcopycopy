@@ -62,6 +62,7 @@
             this.OKBtn = new System.Windows.Forms.Button();
             this.CancelBtn = new System.Windows.Forms.Button();
             this.ChooseExecutableOpenDlg = new System.Windows.Forms.OpenFileDialog();
+            this.WithFilelistChk = new System.Windows.Forms.CheckBox();
             this.MainTabControl.SuspendLayout();
             this.BasePluginPage.SuspendLayout();
             this.OptionsPage.SuspendLayout();
@@ -99,7 +100,7 @@
             this.MainTabControl.Location = new System.Drawing.Point(12, 38);
             this.MainTabControl.Name = "MainTabControl";
             this.MainTabControl.SelectedIndex = 0;
-            this.MainTabControl.Size = new System.Drawing.Size(382, 488);
+            this.MainTabControl.Size = new System.Drawing.Size(382, 511);
             this.MainTabControl.TabIndex = 2;
             // 
             // BasePluginPage
@@ -154,7 +155,7 @@
             this.OptionsPage.Location = new System.Drawing.Point(4, 22);
             this.OptionsPage.Name = "OptionsPage";
             this.OptionsPage.Padding = new System.Windows.Forms.Padding(3);
-            this.OptionsPage.Size = new System.Drawing.Size(374, 462);
+            this.OptionsPage.Size = new System.Drawing.Size(374, 485);
             this.OptionsPage.TabIndex = 1;
             this.OptionsPage.Text = "Options";
             this.OptionsPage.UseVisualStyleBackColor = true;
@@ -163,6 +164,7 @@
             // 
             this.OptionsGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.OptionsGroupBox.Controls.Add(this.WithFilelistChk);
             this.OptionsGroupBox.Controls.Add(this.BrowserForExecutableBtn);
             this.OptionsGroupBox.Controls.Add(this.ExecutableTxt);
             this.OptionsGroupBox.Controls.Add(this.ExecutableLbl);
@@ -170,7 +172,7 @@
             this.OptionsGroupBox.Controls.Add(this.CopyOnSameLineChk);
             this.OptionsGroupBox.Location = new System.Drawing.Point(6, 357);
             this.OptionsGroupBox.Name = "OptionsGroupBox";
-            this.OptionsGroupBox.Size = new System.Drawing.Size(362, 99);
+            this.OptionsGroupBox.Size = new System.Drawing.Size(362, 122);
             this.OptionsGroupBox.TabIndex = 3;
             this.OptionsGroupBox.TabStop = false;
             this.OptionsGroupBox.Text = "Options";
@@ -179,10 +181,10 @@
             // 
             this.BrowserForExecutableBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BrowserForExecutableBtn.Enabled = false;
-            this.BrowserForExecutableBtn.Location = new System.Drawing.Point(281, 65);
+            this.BrowserForExecutableBtn.Location = new System.Drawing.Point(281, 88);
             this.BrowserForExecutableBtn.Name = "BrowserForExecutableBtn";
             this.BrowserForExecutableBtn.Size = new System.Drawing.Size(75, 23);
-            this.BrowserForExecutableBtn.TabIndex = 4;
+            this.BrowserForExecutableBtn.TabIndex = 5;
             this.BrowserForExecutableBtn.Text = "Br&owse";
             this.BrowserForExecutableBtn.UseVisualStyleBackColor = true;
             this.BrowserForExecutableBtn.Click += new System.EventHandler(this.BrowserForExecutableBtn_Click);
@@ -192,19 +194,19 @@
             this.ExecutableTxt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ExecutableTxt.Enabled = false;
-            this.ExecutableTxt.Location = new System.Drawing.Point(91, 67);
+            this.ExecutableTxt.Location = new System.Drawing.Point(91, 90);
             this.ExecutableTxt.Name = "ExecutableTxt";
             this.ExecutableTxt.Size = new System.Drawing.Size(184, 20);
-            this.ExecutableTxt.TabIndex = 3;
+            this.ExecutableTxt.TabIndex = 4;
             // 
             // ExecutableLbl
             // 
             this.ExecutableLbl.AutoSize = true;
             this.ExecutableLbl.Enabled = false;
-            this.ExecutableLbl.Location = new System.Drawing.Point(22, 70);
+            this.ExecutableLbl.Location = new System.Drawing.Point(22, 93);
             this.ExecutableLbl.Name = "ExecutableLbl";
             this.ExecutableLbl.Size = new System.Drawing.Size(63, 13);
-            this.ExecutableLbl.TabIndex = 2;
+            this.ExecutableLbl.TabIndex = 3;
             this.ExecutableLbl.Text = "E&xecutable:";
             // 
             // LaunchExecutableChk
@@ -436,7 +438,7 @@
             // 
             this.OKBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.OKBtn.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.OKBtn.Location = new System.Drawing.Point(238, 539);
+            this.OKBtn.Location = new System.Drawing.Point(238, 562);
             this.OKBtn.Name = "OKBtn";
             this.OKBtn.Size = new System.Drawing.Size(75, 23);
             this.OKBtn.TabIndex = 3;
@@ -447,7 +449,7 @@
             // 
             this.CancelBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.CancelBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.CancelBtn.Location = new System.Drawing.Point(319, 539);
+            this.CancelBtn.Location = new System.Drawing.Point(319, 562);
             this.CancelBtn.Name = "CancelBtn";
             this.CancelBtn.Size = new System.Drawing.Size(75, 23);
             this.CancelBtn.TabIndex = 4;
@@ -459,13 +461,24 @@
             this.ChooseExecutableOpenDlg.Filter = "Executable files (*.exe;*.com;*.bat;*.cmd)|*.exe;*.com;*.bat;*.cmd|All files (*.*" +
     ")|*.*";
             // 
+            // WithFilelistChk
+            // 
+            this.WithFilelistChk.AutoSize = true;
+            this.WithFilelistChk.Enabled = false;
+            this.WithFilelistChk.Location = new System.Drawing.Point(25, 65);
+            this.WithFilelistChk.Name = "WithFilelistChk";
+            this.WithFilelistChk.Size = new System.Drawing.Size(306, 17);
+            this.WithFilelistChk.TabIndex = 2;
+            this.WithFilelistChk.Text = "...and save paths in a filelist instead of passing them &directly";
+            this.WithFilelistChk.UseVisualStyleBackColor = true;
+            // 
             // PipelinePluginForm
             // 
             this.AcceptButton = this.OKBtn;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.CancelBtn;
-            this.ClientSize = new System.Drawing.Size(406, 574);
+            this.ClientSize = new System.Drawing.Size(406, 597);
             this.Controls.Add(this.CancelBtn);
             this.Controls.Add(this.OKBtn);
             this.Controls.Add(this.MainTabControl);
@@ -473,7 +486,7 @@
             this.Controls.Add(this.NameLbl);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(422, 613);
+            this.MinimumSize = new System.Drawing.Size(422, 636);
             this.Name = "PipelinePluginForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
@@ -535,5 +548,6 @@
         private System.Windows.Forms.CheckBox LaunchExecutableChk;
         private System.Windows.Forms.OpenFileDialog ChooseExecutableOpenDlg;
         private System.Windows.Forms.CheckBox OptionalQuotesChk;
+        private System.Windows.Forms.CheckBox WithFilelistChk;
     }
 }

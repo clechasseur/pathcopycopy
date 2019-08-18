@@ -409,4 +409,27 @@ namespace PCC
         p_rOptions.SetExecutable(m_Executable);
     }
 
+    //
+    // Constructor.
+    //
+    // @param p_Executable Path to executable to launch.
+    //
+    ExecutableWithFilelistPipelineElement::ExecutableWithFilelistPipelineElement(const std::wstring& p_Executable)
+        : ExecutablePipelineElement(p_Executable)
+    {
+    }
+
+    //
+    // Modifies global pipeline options by specifying the path of the
+    // executable to launch, as well as specifying to launch it with
+    // filelist instead of paths directly.
+    //
+    // @param p_rOptions Global options to modify (in-place).
+    //
+    void ExecutableWithFilelistPipelineElement::ModifyOptions(PipelineOptions& p_rOptions) const
+    {
+        ExecutablePipelineElement::ModifyOptions(p_rOptions);
+        p_rOptions.SetUseFilelist(true);
+    }
+
 } // namespace PCC

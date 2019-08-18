@@ -73,6 +73,26 @@ namespace PCC
     }
 
     //
+    // Returns whether to launch executable with filelist instead of paths directly.
+    //
+    // @return Whether to launch executable with filelist instead of paths.
+    //
+    bool PipelineOptions::GetUseFilelist() const
+    {
+        return m_UseFilelist;
+    }
+
+    //
+    // Sets whether to launch executable with filelist instead of paths directly.
+    //
+    // @param p_UseFilelist true to launch executable with filelist instead of paths.
+    //
+    void PipelineOptions::SetUseFilelist(const bool p_UseFilelist)
+    {
+        m_UseFilelist = p_UseFilelist;
+    }
+
+    //
     // Constructor with pre-built elements.
     //
     // @param p_vspElements List of elements in the pipeline.

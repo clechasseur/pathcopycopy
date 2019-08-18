@@ -22,6 +22,9 @@
 #include <stdafx.h>
 #include <LaunchExecutablePathAction.h>
 
+#include <fstream>
+#include <memory>
+
 
 namespace PCC
 {
@@ -31,10 +34,13 @@ namespace PCC
         // Constructor.
         //
         // @param p_Executable Name of executable to launch.
+        // @param p_UseFilelist Whether to use a filelist to launch executable instead of passing paths directly.
         //
-        LaunchExecutablePathAction::LaunchExecutablePathAction(const std::wstring& p_Executable)
+        LaunchExecutablePathAction::LaunchExecutablePathAction(const std::wstring& p_Executable,
+                                                               const bool          p_UseFilelist)
             : PCC::PathAction(),
-              m_Executable(p_Executable)
+              m_Executable(p_Executable),
+              m_UseFilelist(p_UseFilelist)
         {
         }
         
@@ -48,7 +54,29 @@ namespace PCC
         void LaunchExecutablePathAction::Act(const std::wstring& p_Paths,
                                              const HWND          p_hWnd) const
         {
-            auto res = reinterpret_cast<size_t>(::ShellExecuteW(p_hWnd, nullptr, m_Executable.c_str(), p_Paths.c_str(), nullptr, SW_SHOWDEFAULT));
+            std::wstring arguments = p_Paths;
+            if (m_UseFilelist) {
+                wchar_t tempPath[MAX_PATH + 1];
+                if (::GetTempPathW(MAX_PATH + 1, tempPath) != 0) {
+                    wchar_t tempFilePath[MAX_PATH + 1];
+                    if (::GetTempFileNameW(tempPath, L"pcc", 0, tempFilePath) != 0) {
+                        int reqdBufferSize = ::WideCharToMultiByte(CP_ACP, 0, p_Paths.c_str(), -1,
+                                                                   nullptr, 0, nullptr, nullptr);
+                        std::unique_ptr<char[]> buffer = std::unique_ptr<char[]>(new char[reqdBufferSize]);
+                        int retVal = ::WideCharToMultiByte(CP_ACP, 0, p_Paths.c_str(), -1, buffer.get(),
+                                                           reqdBufferSize, nullptr, nullptr);
+                        if (retVal != 0) {
+                            {
+                                std::ofstream of(tempFilePath);
+                                of << std::string(buffer.get()) << std::endl;
+                            }
+                            arguments = tempFilePath;
+                        }
+                    }
+                }
+            }
+
+            auto res = reinterpret_cast<size_t>(::ShellExecuteW(p_hWnd, nullptr, m_Executable.c_str(), arguments.c_str(), nullptr, SW_SHOWDEFAULT));
             if (res <= 32) {
                 throw LaunchExecutableException();
             }

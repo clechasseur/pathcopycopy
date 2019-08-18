@@ -176,9 +176,16 @@ namespace PathCopyCopy.Settings.UI.Forms
                     LaunchExecutableChk.Checked = true;
                     ExecutableTxt.Text = ((ExecutablePipelineElement) element).Executable;
                 } else {
-                    Debug.Assert(!ExecutableLbl.Enabled);
-                    Debug.Assert(!ExecutableTxt.Enabled);
-                    Debug.Assert(!BrowserForExecutableBtn.Enabled);
+                    element = pipeline.Elements.Find(el => el is ExecutableWithFilelistPipelineElement);
+                    if (element != null) {
+                        LaunchExecutableChk.Checked = true;
+                        WithFilelistChk.Checked = true;
+                        ExecutableTxt.Text = ((ExecutableWithFilelistPipelineElement) element).Executable;
+                    } else {
+                        Debug.Assert(!ExecutableLbl.Enabled);
+                        Debug.Assert(!ExecutableTxt.Enabled);
+                        Debug.Assert(!BrowserForExecutableBtn.Enabled);
+                    }
                 }
             }
 
@@ -228,7 +235,11 @@ namespace PathCopyCopy.Settings.UI.Forms
                         pipeline.Clear();
                     }
                     if (LaunchExecutableChk.Checked) {
-                        pipeline.Elements.Add(new ExecutablePipelineElement(ExecutableTxt.Text));
+                        if (WithFilelistChk.Checked) {
+                            pipeline.Elements.Add(new ExecutableWithFilelistPipelineElement(ExecutableTxt.Text));
+                        } else {
+                            pipeline.Elements.Add(new ExecutablePipelineElement(ExecutableTxt.Text));
+                        }
                     }
                     if (CopyOnSameLineChk.Enabled) {
                         if (CopyOnSameLineChk.Checked) {
@@ -332,13 +343,13 @@ namespace PathCopyCopy.Settings.UI.Forms
 
         /// <summary>
         /// Called when the user checks or unchecks the "Launch executable..."
-        /// checkbox. We need to enable or disable the executable path textbox
-        /// and the browse button when this occurs.
+        /// checkbox. We need to enable or disable other controls when this occurs.
         /// </summary>
         /// <param name="sender">Event sender.</param>
         /// <param name="e">Event arguments.</param>
         private void LaunchExecutableChk_CheckedChanged(object sender, EventArgs e)
         {
+            WithFilelistChk.Enabled = LaunchExecutableChk.Checked;
             ExecutableLbl.Enabled = LaunchExecutableChk.Checked;
             ExecutableTxt.Enabled = LaunchExecutableChk.Checked;
             BrowserForExecutableBtn.Enabled = LaunchExecutableChk.Checked;

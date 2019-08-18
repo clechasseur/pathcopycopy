@@ -282,4 +282,22 @@ namespace PCC
         std::wstring    m_Executable;       // Executable to launch.
     };
 
+    //
+    // ExecutableWithFilelistPipelineElement
+    //
+    // Pipeline element similar to ExecutablePipelineElement, but that
+    // additionally instructs Path Copy Copy to launch the executable
+    // with a filelist instead of with paths directly.
+    //
+    class ExecutableWithFilelistPipelineElement : public ExecutablePipelineElement
+    {
+    public:
+        explicit        ExecutableWithFilelistPipelineElement(const std::wstring& p_Executable);
+                        ExecutableWithFilelistPipelineElement(const ExecutableWithFilelistPipelineElement&) = delete;
+        ExecutableWithFilelistPipelineElement&
+                        operator=(const ExecutableWithFilelistPipelineElement&) = delete;
+
+        virtual void    ModifyOptions(PipelineOptions& p_rOptions) const override;
+    };
+
 } // namespace PCC

@@ -47,9 +47,13 @@ namespace PCC
                         GetExecutable() const;
         void            SetExecutable(const std::wstring& p_Executable);
 
+        bool            GetUseFilelist() const;
+        void            SetUseFilelist(const bool p_UseFilelist);
+
     private:
-        std::wstring    m_PathsSeparator;   // Separator to use between multiple paths.
-        std::wstring    m_Executable;       // Path to executable to start.
+        std::wstring    m_PathsSeparator;       // Separator to use between multiple paths.
+        std::wstring    m_Executable;           // Path to executable to start.
+        bool            m_UseFilelist = false;  // Whether to launch executable with filelist instead of paths directly.
     };
 
     //

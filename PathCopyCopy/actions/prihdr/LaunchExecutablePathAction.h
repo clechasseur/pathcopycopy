@@ -38,7 +38,8 @@ namespace PCC
         class LaunchExecutablePathAction final : public PCC::PathAction
         {
         public:
-            explicit                LaunchExecutablePathAction(const std::wstring& p_Executable);
+                                    LaunchExecutablePathAction(const std::wstring& p_Executable,
+                                                               const bool          p_UseFilelist);
                                     LaunchExecutablePathAction(const LaunchExecutablePathAction&) = delete;
             LaunchExecutablePathAction&
                                     operator=(const LaunchExecutablePathAction&) = delete;
@@ -48,6 +49,7 @@ namespace PCC
 
         private:
             std::wstring            m_Executable;   // Name of executable to launch.
+            bool                    m_UseFilelist;  // Whether to use a filelist.txt file instead of passing paths directly.
         };
 
         //
