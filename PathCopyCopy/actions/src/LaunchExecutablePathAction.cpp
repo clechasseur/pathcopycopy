@@ -56,24 +56,26 @@ namespace PCC
         {
             std::wstring arguments = p_Paths;
             if (m_UseFilelist) {
-                wchar_t tempPath[MAX_PATH + 1];
-                if (::GetTempPathW(MAX_PATH + 1, tempPath) != 0) {
-                    wchar_t tempFilePath[MAX_PATH + 1];
-                    if (::GetTempFileNameW(tempPath, L"pcc", 0, tempFilePath) != 0) {
-                        int reqdBufferSize = ::WideCharToMultiByte(CP_ACP, 0, p_Paths.c_str(), -1,
-                                                                   nullptr, 0, nullptr, nullptr);
-                        std::unique_ptr<char[]> buffer = std::unique_ptr<char[]>(new char[reqdBufferSize]);
-                        int retVal = ::WideCharToMultiByte(CP_ACP, 0, p_Paths.c_str(), -1, buffer.get(),
-                                                           reqdBufferSize, nullptr, nullptr);
-                        if (retVal != 0) {
-                            {
-                                std::ofstream of(tempFilePath);
-                                of << std::string(buffer.get()) << std::endl;
-                            }
-                            arguments = tempFilePath;
-                        }
-                    }
+                wchar_t tempDirPath[MAX_PATH + 1];
+                if (::GetTempPathW(sizeof(tempDirPath) / sizeof(wchar_t), tempDirPath) == 0) {
+                    throw LaunchExecutableException();
                 }
+
+                wchar_t tempFilePath[MAX_PATH + 1];
+                if (::GetTempFileNameW(tempDirPath, L"pcc", 0, tempFilePath) == 0) {
+                    throw LaunchExecutableException();
+                }
+
+                int reqdBufferSize = ::WideCharToMultiByte(CP_ACP, 0, p_Paths.c_str(), -1, nullptr, 0, nullptr, nullptr);
+                auto buffer = std::make_unique<char[]>(reqdBufferSize);
+                int convertRetVal = ::WideCharToMultiByte(CP_ACP, 0, p_Paths.c_str(), -1, buffer.get(), reqdBufferSize, nullptr, nullptr);
+                if (convertRetVal == 0) {
+                    throw LaunchExecutableException();
+                }
+
+                std::ofstream of(tempFilePath, std::ios::out | std::ios::binary);
+                of.write(buffer.get(), convertRetVal - 1);
+                arguments = tempFilePath;
             }
 
             auto res = reinterpret_cast<size_t>(::ShellExecuteW(p_hWnd, nullptr, m_Executable.c_str(), arguments.c_str(), nullptr, SW_SHOWDEFAULT));
