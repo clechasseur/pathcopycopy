@@ -372,16 +372,16 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::QueryContextMenu(
                         if (vPluginIds.size() != 1 || !::IsEqualGUID(vPluginIds.front(), PCC::Plugins::LongPathPlugin::ID)) {
                             PCC::CLSIDV::const_iterator it, end = vPluginIds.end();
                             for (it = vPluginIds.begin(); SUCCEEDED(hRes) && it != end; ++it) {
-                                hRes = AddPluginToMenu(*it, p_hMenu, useIconForDefaultPlugin, false, false, cmdId, position);
+                                hRes = AddPluginToMenu(*it, p_hMenu, useIconForDefaultPlugin, false, false, true, cmdId, position);
                             }
                         } else {
                             // Default plugin is specified, use our own instead.
-                            hRes = AddPluginToMenu(createDefaultPlugin(), p_hMenu, useIconForDefaultPlugin, usePreviewModeInMainMenu, false, cmdId, position);
+                            hRes = AddPluginToMenu(createDefaultPlugin(), p_hMenu, useIconForDefaultPlugin, usePreviewModeInMainMenu, false, true, cmdId, position);
                         }
                     }
                 } else {
                     // No setting specified for items in the main menu. Add our default plugin.
-                    hRes = AddPluginToMenu(createDefaultPlugin(), p_hMenu, useIconForDefaultPlugin, usePreviewModeInMainMenu, false, cmdId, position);
+                    hRes = AddPluginToMenu(createDefaultPlugin(), p_hMenu, useIconForDefaultPlugin, usePreviewModeInMainMenu, false, true, cmdId, position);
                 }
 
                 // Create sub-menu to populate it with the other plugins.
@@ -412,7 +412,7 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::QueryContextMenu(
                             // Try to insert this plugin in the menu.
                             const PCC::PluginSP& spPlugin = *it;
                             if (!spPlugin->IsSeparator()) {
-                                hRes = AddPluginToMenu(spPlugin, hSubMenu, false, usePreviewMode, dropRedundantWords, cmdId, subPosition);
+                                hRes = AddPluginToMenu(spPlugin, hSubMenu, false, usePreviewMode, dropRedundantWords, false, cmdId, subPosition);
                                 prevWasSeparator = false;
                             } else {
                                 // This is a proxy to insert a separator.
@@ -458,7 +458,7 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::QueryContextMenu(
 
                     if (SUCCEEDED(hRes) && ::GetMenuItemCount(hSubMenu) > 0) {
                         // Submenu was populated. Add it to the contextual menu.
-                        ATL::CStringW subMenuCaption(MAKEINTRESOURCEW(IDS_PATH_COPY_MENU_ITEM));
+                        std::wstring subMenuCaption = GetMenuCaptionWithShortcut(p_hMenu, (LPCWSTR) ATL::CStringW(MAKEINTRESOURCEW(IDS_PATH_COPY_MENU_ITEM)));
                         PCCDEBUGCODE(subMenuCaption += L" (DEBUG)");
                         MENUITEMINFOW menuItemInfo;
                         menuItemInfo.cbSize = sizeof(MENUITEMINFOW);
@@ -466,7 +466,7 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::QueryContextMenu(
                         menuItemInfo.fType = MFT_STRING;
                         menuItemInfo.wID = cmdId;
                         menuItemInfo.hSubMenu = hSubMenu;
-                        menuItemInfo.dwTypeData = const_cast<LPWSTR>((LPCWSTR) subMenuCaption);
+                        menuItemInfo.dwTypeData = &*subMenuCaption.begin();
                         if (rSettings.GetUseIconForSubmenu()) {
                             // Add an icon next to the submenu.
                             HBITMAP hIconBitmap = GetPCCIcon();
@@ -695,6 +695,8 @@ PCC::Settings& CPathCopyCopyContextMenuExt::GetSettings()
 //                         its description as caption in the menu.
 // @param p_DropRedundantWords Whether to drop redundant words in the plugin
 //                             description, like "copy".
+// @param p_ComputeShortcut Whether to compute the best shortcut for
+//                          the menu item according to existing menu items.
 // @param p_rCmdId Command ID to use for the item. Upon return, this
 //                 will be incremented to the next command ID to use.
 // @param p_rPosition Position where to insert the item in the menu.
@@ -707,6 +709,7 @@ HRESULT CPathCopyCopyContextMenuExt::AddPluginToMenu(const GUID& p_PluginId,
                                                      const bool p_UsePCCIcon,
                                                      const bool p_UsePreviewMode,
                                                      const bool p_DropRedundantWords,
+                                                     const bool p_ComputeShortcut,
                                                      UINT& p_rCmdId,
                                                      UINT& p_rPosition)
 {
@@ -717,7 +720,7 @@ HRESULT CPathCopyCopyContextMenuExt::AddPluginToMenu(const GUID& p_PluginId,
     HRESULT hRes = E_INVALIDARG;
     if (pluginIt != m_sspAllPlugins.end()) {
         hRes = AddPluginToMenu(*pluginIt, p_hMenu, p_UsePCCIcon, p_UsePreviewMode,
-            p_DropRedundantWords, p_rCmdId, p_rPosition);
+            p_DropRedundantWords, p_ComputeShortcut, p_rCmdId, p_rPosition);
     }
 
     return hRes;
@@ -736,6 +739,8 @@ HRESULT CPathCopyCopyContextMenuExt::AddPluginToMenu(const GUID& p_PluginId,
 //                         its description as caption in the menu.
 // @param p_DropRedundantWords Whether to drop redundant words in the plugin
 //                             description, like "copy".
+// @param p_ComputeShortcut Whether to compute the best shortcut for
+//                          the menu item according to existing menu items.
 // @param p_rCmdId Command ID to use for the item. Upon return, this
 //                 will be incremented to the next command ID to use.
 // @param p_rPosition Position where to insert the item in the menu.
@@ -748,6 +753,7 @@ HRESULT CPathCopyCopyContextMenuExt::AddPluginToMenu(const PCC::PluginSP& p_spPl
                                                      const bool p_UsePCCIcon,
                                                      const bool p_UsePreviewMode,
                                                      const bool p_DropRedundantWords,
+                                                     const bool p_ComputeShortcut,
                                                      UINT& p_rCmdId,
                                                      UINT& p_rPosition)
 {
@@ -774,6 +780,9 @@ HRESULT CPathCopyCopyContextMenuExt::AddPluginToMenu(const PCC::PluginSP& p_spPl
                 // The description starts with "Copy ", drop it.
                 description.erase(0, static_cast<std::wstring::size_type>(redundantCopy.GetLength()));
             }
+        }
+        if (p_ComputeShortcut) {
+            description = GetMenuCaptionWithShortcut(p_hMenu, description);
         }
     }
     MENUITEMINFOW menuItemInfo;
@@ -819,6 +828,55 @@ HRESULT CPathCopyCopyContextMenuExt::AddPluginToMenu(const PCC::PluginSP& p_spPl
     }
 
     return hRes;
+}
+
+//
+// Returns a caption usable for a menu item, with the first shortcut available.
+//
+// @param p_hMenu Handle to main menu.
+// @param p_Caption Caption to add a shortcut to.
+// @return Caption for the menu item.
+//
+std::wstring CPathCopyCopyContextMenuExt::GetMenuCaptionWithShortcut(HMENU const p_hMenu,
+                                                                     const std::wstring& p_Caption) const
+{
+    // Scan provided menu and build a set of already-used shortcuts.
+    std::set<wchar_t> shortcuts;
+    int itemsCount = ::GetMenuItemCount(p_hMenu);
+    for (int i = 0; i < itemsCount; ++i) {
+        wchar_t buffer[1000];
+        MENUITEMINFOW menuItemInfo;
+        menuItemInfo.cbSize = sizeof(MENUITEMINFOW);
+        menuItemInfo.fMask = MIIM_STRING | MIIM_STATE;
+        menuItemInfo.dwTypeData = buffer;
+        menuItemInfo.cch = sizeof(buffer) / sizeof(wchar_t);
+        if (::GetMenuItemInfoW(p_hMenu, i, TRUE, &menuItemInfo) && (menuItemInfo.fState & MFS_DISABLED) == 0) {
+            std::wstring menuItemCaption = menuItemInfo.dwTypeData;
+            auto shortcutCharIdx = menuItemCaption.find(L'&');
+            if (shortcutCharIdx != std::wstring::npos && shortcutCharIdx < (menuItemCaption.size() - 1)) {
+                shortcuts.insert(::towlower(menuItemCaption[shortcutCharIdx + 1]));
+            }
+        }
+    }
+
+    // Check if the caption already has a shortcut. If it's available, keep it.
+    std::wstring caption = p_Caption;
+    auto idx = caption.find(L'&');
+    if (idx == std::wstring::npos || idx == (caption.size() - 1) || shortcuts.find(::towlower(caption[idx + 1])) != shortcuts.end()) {
+        // No caption or can't use this caption.
+        StringUtils::ReplaceAll(caption, L"&", L"");
+
+        // Scan our caption and select first available shortcut.
+        for (auto it = caption.begin(); it != caption.end(); ++it) {
+            if (::iswalpha(*it) && shortcuts.find(::towlower(*it)) == shortcuts.end()) {
+                caption.insert(it, L'&');
+                break;
+            }
+        }
+    }
+
+    ::MessageBoxW(NULL, caption.c_str(), NULL, MB_OK);
+    return caption;
 }
 
 //

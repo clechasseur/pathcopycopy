@@ -146,6 +146,7 @@ private:
                                         const bool p_UsePCCIcon,
                                         const bool p_UsePreviewMode,
                                         const bool p_DropRedundantWords,
+                                        const bool p_ComputeShortcut,
                                         UINT& p_rCmdId,
                                         UINT& p_rPosition);
     HRESULT             AddPluginToMenu(const PCC::PluginSP& p_spPlugin,
@@ -153,8 +154,11 @@ private:
                                         const bool p_UsePCCIcon,
                                         const bool p_UsePreviewMode,
                                         const bool p_DropRedundantWords,
+                                        const bool p_ComputeShortcut,
                                         UINT& p_rCmdId,
                                         UINT& p_rPosition);
+    std::wstring        GetMenuCaptionWithShortcut(HMENU const p_hMenu,
+                                                   const std::wstring& p_Caption) const;
 
     HBITMAP             GetPCCIcon();
     HBITMAP             GetIconForIconFile(const std::wstring& p_IconFile);

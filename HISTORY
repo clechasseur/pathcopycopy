@@ -9,6 +9,7 @@ Version 17.0 (20??-??-??)
 - Add "Copy MSYS/MSYS2 Path" command [https://github.com/clechasseur/pathcopycopy/issues/51]
 - Selecting a command in the Commands page of the Settings application no longer changes the Ctrl key command selection [https://github.com/clechasseur/pathcopycopy/issues/74]
 - Add custom command option to launch executable with a filelist instead of passing paths directly [https://github.com/clechasseur/pathcopycopy/issues/27]
+- Items added to the main contextual menu will now use the first appropriate shortcut key if the one originally selected is not available [https://github.com/clechasseur/pathcopycopy/issues/57]
 
 
 Version 16.0.1 (2018-11-30)
