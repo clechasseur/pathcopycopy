@@ -208,7 +208,7 @@ namespace PCC
         bool            m_IgnoreCase;   // Whether to ignore case when looking for matches.
         mutable std::unique_ptr<std::wregex>
                         m_upRegex;      // Regex object to use to perform lookups.
-        mutable bool    m_RegexTested;  // true if we tried to create m_apRegex.
+        mutable bool    m_RegexTested;  // true if we tried to create m_upRegex.
 
         void            InitRegex() const;
     };
