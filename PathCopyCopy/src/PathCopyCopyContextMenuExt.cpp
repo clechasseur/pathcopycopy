@@ -875,7 +875,6 @@ std::wstring CPathCopyCopyContextMenuExt::GetMenuCaptionWithShortcut(HMENU const
         }
     }
 
-    ::MessageBoxW(NULL, caption.c_str(), NULL, MB_OK);
     return caption;
 }
 
