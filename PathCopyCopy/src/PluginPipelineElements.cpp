@@ -179,6 +179,27 @@ namespace PCC
     //
     // Constructor.
     //
+    RemoveFileExtPipelineElement::RemoveFileExtPipelineElement()
+        : PipelineElement()
+    {
+    }
+
+    //
+    // Modified our path by removing any file extension at the end of it.
+    //
+    // @param p_rPath Path to modify (in-place).
+    // @param p_pPluginProvider Optional object to access plugins.
+    //
+    void RemoveFileExtPipelineElement::ModifyPath(std::wstring& p_rPath,
+                                                  const PluginProvider* const /*p_pPluginProvider*/) const
+    {
+        std::wregex extRegex(L"^(.*[^\\\\/])(?:\\.[^\\\\/.]+)$", std::regex_constants::ECMAScript);
+        p_rPath = std::regex_replace(p_rPath, extRegex, L"$1");
+    }
+
+    //
+    // Constructor.
+    //
     // @param p_OldValue Value to replace.
     // @param p_NewValue Replacement value.
     //

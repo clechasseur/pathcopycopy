@@ -158,6 +158,23 @@ namespace PCC
     };
 
     //
+    // RemoveFileExtPipelineElement
+    //
+    // Pipeline element that removes the file extension in a path.
+    //
+    class RemoveFileExtPipelineElement : public PipelineElement
+    {
+    public:
+                        RemoveFileExtPipelineElement();
+                        RemoveFileExtPipelineElement(const RemoveFileExtPipelineElement&) = delete;
+        RemoveFileExtPipelineElement&
+                        operator=(const RemoveFileExtPipelineElement&) = delete;
+
+        virtual void    ModifyPath(std::wstring& p_rPath,
+                                   const PluginProvider* const p_pPluginProvider) const override;
+    };
+
+    //
     // FindReplacePipelineElement
     //
     // Pipeline element that replaces all instances of one string

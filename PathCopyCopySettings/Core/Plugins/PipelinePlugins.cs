@@ -1000,6 +1000,48 @@ namespace PathCopyCopy.Settings.Core.Plugins
             return String.Empty;
         }
     }
+
+    /// <summary>
+    /// Pipeline element that removes any extension from the file at
+    /// the end of the path.
+    /// </summary>
+    public class RemoveExtPipelineElement : PipelineElement
+    {
+        /// <summary>
+        /// Code representing this pipeline element type.
+        /// </summary>
+        public const char CODE = '.';
+
+        /// <summary>
+        /// Code representing this pipeline element type.
+        /// </summary>
+        public override char Code
+        {
+            get {
+                return CODE;
+            }
+        }
+
+        /// <summary>
+        /// Minumum version of Path Copy Copy required to use this pipeline element.
+        /// </summary>
+        public override Version RequiredVersion
+        {
+            get {
+                return new Version(17, 0, 0, 0);
+            }
+        }
+
+        /// <summary>
+        /// Encodes this pipeline element in a string.
+        /// </summary>
+        /// <returns>Encoded element data.</returns>
+        public override string Encode()
+        {
+            // No other data to encode.
+            return String.Empty;
+        }
+    }
     
     /// <summary>
     /// Pipeline element that performs a find & replace operation in the path.
@@ -1526,6 +1568,10 @@ namespace PathCopyCopy.Settings.Core.Plugins
                 }
                 case ForwardToBackslashesPipelineElement.CODE: {
                     element = new ForwardToBackslashesPipelineElement();
+                    break;
+                }
+                case RemoveExtPipelineElement.CODE: {
+                    element = new RemoveExtPipelineElement();
                     break;
                 }
                 case FindReplacePipelineElement.CODE: {

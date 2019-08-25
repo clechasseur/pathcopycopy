@@ -38,6 +38,7 @@ namespace
     const wchar_t   ELEMENT_CODE_ENCODE_URI_CHARS           = L'%';
     const wchar_t   ELEMENT_CODE_BACK_TO_FORWARD_SLASHES    = L'\\';
     const wchar_t   ELEMENT_CODE_FORWARD_TO_BACKSLASHES     = L'/';
+    const wchar_t   ELEMENT_CODE_REMOVE_EXT                 = L'.';
     const wchar_t   ELEMENT_CODE_FIND_REPLACE               = L'?';
     const wchar_t   ELEMENT_CODE_REGEX                      = L'^';
     const wchar_t   ELEMENT_CODE_APPLY_PLUGIN               = L'{';
@@ -141,6 +142,10 @@ namespace PCC
             }
             case ELEMENT_CODE_FORWARD_TO_BACKSLASHES: {
                 spElement = std::make_shared<ForwardToBackslashesPipelineElement>();
+                break;
+            }
+            case ELEMENT_CODE_REMOVE_EXT: {
+                spElement = std::make_shared<RemoveFileExtPipelineElement>();
                 break;
             }
             case ELEMENT_CODE_FIND_REPLACE: {

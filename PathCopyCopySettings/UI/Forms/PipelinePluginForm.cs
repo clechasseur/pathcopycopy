@@ -136,6 +136,7 @@ namespace PathCopyCopy.Settings.UI.Forms
                 } else if (pipeline.Elements.Find(el => el is EncodeURIWhitespacePipelineElement) != null) {
                     EncodeURIWhitespaceChk.Checked = true;
                 }
+                RemoveExtChk.Checked = pipeline.Elements.Find(el => el is RemoveExtPipelineElement) != null;
                 if (pipeline.Elements.Find(el => el is BackToForwardSlashesPipelineElement) != null) {
                     BackToForwardSlashesRadio.Checked = true;
                 } else if (pipeline.Elements.Find(el => el is ForwardToBackslashesPipelineElement) != null) {
@@ -265,6 +266,9 @@ namespace PathCopyCopy.Settings.UI.Forms
                         pipeline.Elements.Add(new BackToForwardSlashesPipelineElement());
                     } else if (ForwardToBackslashesRadio.Checked) {
                         pipeline.Elements.Add(new ForwardToBackslashesPipelineElement());
+                    }
+                    if (RemoveExtChk.Checked) {
+                        pipeline.Elements.Add(new RemoveExtPipelineElement());
                     }
                     if (OptionalQuotesChk.Checked) {
                         pipeline.Elements.Add(new OptionalQuotesPipelineElement());

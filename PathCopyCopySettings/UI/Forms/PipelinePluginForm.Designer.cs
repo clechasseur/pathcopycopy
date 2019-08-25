@@ -36,6 +36,7 @@
             this.BaseCommandLbl = new System.Windows.Forms.Label();
             this.OptionsPage = new System.Windows.Forms.TabPage();
             this.OptionsGroupBox = new System.Windows.Forms.GroupBox();
+            this.WithFilelistChk = new System.Windows.Forms.CheckBox();
             this.BrowserForExecutableBtn = new System.Windows.Forms.Button();
             this.ExecutableTxt = new System.Windows.Forms.TextBox();
             this.ExecutableLbl = new System.Windows.Forms.Label();
@@ -54,6 +55,7 @@
             this.BackToForwardSlashesRadio = new System.Windows.Forms.RadioButton();
             this.ForwardToBackslashesRadio = new System.Windows.Forms.RadioButton();
             this.DecorationsGroupBox = new System.Windows.Forms.GroupBox();
+            this.RemoveExtChk = new System.Windows.Forms.CheckBox();
             this.OptionalQuotesChk = new System.Windows.Forms.CheckBox();
             this.EncodeURICharsChk = new System.Windows.Forms.CheckBox();
             this.EncodeURIWhitespaceChk = new System.Windows.Forms.CheckBox();
@@ -62,7 +64,6 @@
             this.OKBtn = new System.Windows.Forms.Button();
             this.CancelBtn = new System.Windows.Forms.Button();
             this.ChooseExecutableOpenDlg = new System.Windows.Forms.OpenFileDialog();
-            this.WithFilelistChk = new System.Windows.Forms.CheckBox();
             this.MainTabControl.SuspendLayout();
             this.BasePluginPage.SuspendLayout();
             this.OptionsPage.SuspendLayout();
@@ -100,7 +101,7 @@
             this.MainTabControl.Location = new System.Drawing.Point(12, 38);
             this.MainTabControl.Name = "MainTabControl";
             this.MainTabControl.SelectedIndex = 0;
-            this.MainTabControl.Size = new System.Drawing.Size(382, 511);
+            this.MainTabControl.Size = new System.Drawing.Size(382, 534);
             this.MainTabControl.TabIndex = 2;
             // 
             // BasePluginPage
@@ -111,7 +112,7 @@
             this.BasePluginPage.Location = new System.Drawing.Point(4, 22);
             this.BasePluginPage.Name = "BasePluginPage";
             this.BasePluginPage.Padding = new System.Windows.Forms.Padding(3);
-            this.BasePluginPage.Size = new System.Drawing.Size(374, 462);
+            this.BasePluginPage.Size = new System.Drawing.Size(374, 508);
             this.BasePluginPage.TabIndex = 0;
             this.BasePluginPage.Text = "Base Command";
             this.BasePluginPage.UseVisualStyleBackColor = true;
@@ -155,7 +156,7 @@
             this.OptionsPage.Location = new System.Drawing.Point(4, 22);
             this.OptionsPage.Name = "OptionsPage";
             this.OptionsPage.Padding = new System.Windows.Forms.Padding(3);
-            this.OptionsPage.Size = new System.Drawing.Size(374, 485);
+            this.OptionsPage.Size = new System.Drawing.Size(374, 508);
             this.OptionsPage.TabIndex = 1;
             this.OptionsPage.Text = "Options";
             this.OptionsPage.UseVisualStyleBackColor = true;
@@ -170,12 +171,23 @@
             this.OptionsGroupBox.Controls.Add(this.ExecutableLbl);
             this.OptionsGroupBox.Controls.Add(this.LaunchExecutableChk);
             this.OptionsGroupBox.Controls.Add(this.CopyOnSameLineChk);
-            this.OptionsGroupBox.Location = new System.Drawing.Point(6, 357);
+            this.OptionsGroupBox.Location = new System.Drawing.Point(6, 380);
             this.OptionsGroupBox.Name = "OptionsGroupBox";
             this.OptionsGroupBox.Size = new System.Drawing.Size(362, 122);
             this.OptionsGroupBox.TabIndex = 3;
             this.OptionsGroupBox.TabStop = false;
             this.OptionsGroupBox.Text = "Options";
+            // 
+            // WithFilelistChk
+            // 
+            this.WithFilelistChk.AutoSize = true;
+            this.WithFilelistChk.Enabled = false;
+            this.WithFilelistChk.Location = new System.Drawing.Point(25, 65);
+            this.WithFilelistChk.Name = "WithFilelistChk";
+            this.WithFilelistChk.Size = new System.Drawing.Size(306, 17);
+            this.WithFilelistChk.TabIndex = 2;
+            this.WithFilelistChk.Text = "...and save paths in a filelist instead of passing them &directly";
+            this.WithFilelistChk.UseVisualStyleBackColor = true;
             // 
             // BrowserForExecutableBtn
             // 
@@ -185,7 +197,7 @@
             this.BrowserForExecutableBtn.Name = "BrowserForExecutableBtn";
             this.BrowserForExecutableBtn.Size = new System.Drawing.Size(75, 23);
             this.BrowserForExecutableBtn.TabIndex = 5;
-            this.BrowserForExecutableBtn.Text = "Br&owse";
+            this.BrowserForExecutableBtn.Text = "Browse";
             this.BrowserForExecutableBtn.UseVisualStyleBackColor = true;
             this.BrowserForExecutableBtn.Click += new System.EventHandler(this.BrowserForExecutableBtn_Click);
             // 
@@ -241,7 +253,7 @@
             this.FindReplaceGroupBox.Controls.Add(this.ReplaceLbl);
             this.FindReplaceGroupBox.Controls.Add(this.FindTxt);
             this.FindReplaceGroupBox.Controls.Add(this.FindLbl);
-            this.FindReplaceGroupBox.Location = new System.Drawing.Point(6, 246);
+            this.FindReplaceGroupBox.Location = new System.Drawing.Point(6, 269);
             this.FindReplaceGroupBox.Name = "FindReplaceGroupBox";
             this.FindReplaceGroupBox.Size = new System.Drawing.Size(362, 105);
             this.FindReplaceGroupBox.TabIndex = 2;
@@ -325,7 +337,7 @@
             this.SlashesGroupBox.Controls.Add(this.NoSlashesChangeRadio);
             this.SlashesGroupBox.Controls.Add(this.BackToForwardSlashesRadio);
             this.SlashesGroupBox.Controls.Add(this.ForwardToBackslashesRadio);
-            this.SlashesGroupBox.Location = new System.Drawing.Point(6, 150);
+            this.SlashesGroupBox.Location = new System.Drawing.Point(6, 173);
             this.SlashesGroupBox.Name = "SlashesGroupBox";
             this.SlashesGroupBox.Size = new System.Drawing.Size(362, 90);
             this.SlashesGroupBox.TabIndex = 1;
@@ -368,6 +380,7 @@
             // 
             this.DecorationsGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.DecorationsGroupBox.Controls.Add(this.RemoveExtChk);
             this.DecorationsGroupBox.Controls.Add(this.OptionalQuotesChk);
             this.DecorationsGroupBox.Controls.Add(this.EncodeURICharsChk);
             this.DecorationsGroupBox.Controls.Add(this.EncodeURIWhitespaceChk);
@@ -375,19 +388,29 @@
             this.DecorationsGroupBox.Controls.Add(this.QuotesChk);
             this.DecorationsGroupBox.Location = new System.Drawing.Point(6, 6);
             this.DecorationsGroupBox.Name = "DecorationsGroupBox";
-            this.DecorationsGroupBox.Size = new System.Drawing.Size(362, 138);
+            this.DecorationsGroupBox.Size = new System.Drawing.Size(362, 161);
             this.DecorationsGroupBox.TabIndex = 0;
             this.DecorationsGroupBox.TabStop = false;
             this.DecorationsGroupBox.Text = "Decorations";
+            // 
+            // RemoveExtChk
+            // 
+            this.RemoveExtChk.AutoSize = true;
+            this.RemoveExtChk.Location = new System.Drawing.Point(6, 19);
+            this.RemoveExtChk.Name = "RemoveExtChk";
+            this.RemoveExtChk.Size = new System.Drawing.Size(130, 17);
+            this.RemoveExtChk.TabIndex = 0;
+            this.RemoveExtChk.Text = "Remove file extensi&on";
+            this.RemoveExtChk.UseVisualStyleBackColor = true;
             // 
             // OptionalQuotesChk
             // 
             this.OptionalQuotesChk.AutoSize = true;
             this.OptionalQuotesChk.Enabled = false;
-            this.OptionalQuotesChk.Location = new System.Drawing.Point(25, 42);
+            this.OptionalQuotesChk.Location = new System.Drawing.Point(25, 65);
             this.OptionalQuotesChk.Name = "OptionalQuotesChk";
             this.OptionalQuotesChk.Size = new System.Drawing.Size(150, 17);
-            this.OptionalQuotesChk.TabIndex = 1;
+            this.OptionalQuotesChk.TabIndex = 2;
             this.OptionalQuotesChk.Text = "...only if it contains s&paces";
             this.OptionalQuotesChk.UseVisualStyleBackColor = true;
             // 
@@ -395,20 +418,20 @@
             // 
             this.EncodeURICharsChk.AutoSize = true;
             this.EncodeURICharsChk.Enabled = false;
-            this.EncodeURICharsChk.Location = new System.Drawing.Point(25, 111);
+            this.EncodeURICharsChk.Location = new System.Drawing.Point(25, 134);
             this.EncodeURICharsChk.Name = "EncodeURICharsChk";
             this.EncodeURICharsChk.Size = new System.Drawing.Size(225, 17);
-            this.EncodeURICharsChk.TabIndex = 4;
+            this.EncodeURICharsChk.TabIndex = 5;
             this.EncodeURICharsChk.Text = "...and all in&valid URI characters (e.g., %xx)";
             this.EncodeURICharsChk.UseVisualStyleBackColor = true;
             // 
             // EncodeURIWhitespaceChk
             // 
             this.EncodeURIWhitespaceChk.AutoSize = true;
-            this.EncodeURIWhitespaceChk.Location = new System.Drawing.Point(6, 88);
+            this.EncodeURIWhitespaceChk.Location = new System.Drawing.Point(6, 111);
             this.EncodeURIWhitespaceChk.Name = "EncodeURIWhitespaceChk";
             this.EncodeURIWhitespaceChk.Size = new System.Drawing.Size(287, 17);
-            this.EncodeURIWhitespaceChk.TabIndex = 3;
+            this.EncodeURIWhitespaceChk.TabIndex = 4;
             this.EncodeURIWhitespaceChk.Text = "Encode w&hitespace using percent-encoding (e.g., %20)";
             this.EncodeURIWhitespaceChk.UseVisualStyleBackColor = true;
             this.EncodeURIWhitespaceChk.CheckedChanged += new System.EventHandler(this.EncodeURIWhitespaceChk_CheckedChanged);
@@ -416,20 +439,20 @@
             // EmailLinksChk
             // 
             this.EmailLinksChk.AutoSize = true;
-            this.EmailLinksChk.Location = new System.Drawing.Point(6, 65);
+            this.EmailLinksChk.Location = new System.Drawing.Point(6, 88);
             this.EmailLinksChk.Name = "EmailLinksChk";
             this.EmailLinksChk.Size = new System.Drawing.Size(243, 17);
-            this.EmailLinksChk.TabIndex = 2;
+            this.EmailLinksChk.TabIndex = 3;
             this.EmailLinksChk.Text = "Enclose path in < and > (to create e-&mail links)";
             this.EmailLinksChk.UseVisualStyleBackColor = true;
             // 
             // QuotesChk
             // 
             this.QuotesChk.AutoSize = true;
-            this.QuotesChk.Location = new System.Drawing.Point(6, 19);
+            this.QuotesChk.Location = new System.Drawing.Point(6, 42);
             this.QuotesChk.Name = "QuotesChk";
             this.QuotesChk.Size = new System.Drawing.Size(177, 17);
-            this.QuotesChk.TabIndex = 0;
+            this.QuotesChk.TabIndex = 1;
             this.QuotesChk.Text = "Enclose path in &quotation marks";
             this.QuotesChk.UseVisualStyleBackColor = true;
             this.QuotesChk.CheckedChanged += new System.EventHandler(this.QuotesChk_CheckedChanged);
@@ -438,7 +461,7 @@
             // 
             this.OKBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.OKBtn.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.OKBtn.Location = new System.Drawing.Point(238, 562);
+            this.OKBtn.Location = new System.Drawing.Point(238, 585);
             this.OKBtn.Name = "OKBtn";
             this.OKBtn.Size = new System.Drawing.Size(75, 23);
             this.OKBtn.TabIndex = 3;
@@ -449,7 +472,7 @@
             // 
             this.CancelBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.CancelBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.CancelBtn.Location = new System.Drawing.Point(319, 562);
+            this.CancelBtn.Location = new System.Drawing.Point(319, 585);
             this.CancelBtn.Name = "CancelBtn";
             this.CancelBtn.Size = new System.Drawing.Size(75, 23);
             this.CancelBtn.TabIndex = 4;
@@ -461,24 +484,13 @@
             this.ChooseExecutableOpenDlg.Filter = "Executable files (*.exe;*.com;*.bat;*.cmd)|*.exe;*.com;*.bat;*.cmd|All files (*.*" +
     ")|*.*";
             // 
-            // WithFilelistChk
-            // 
-            this.WithFilelistChk.AutoSize = true;
-            this.WithFilelistChk.Enabled = false;
-            this.WithFilelistChk.Location = new System.Drawing.Point(25, 65);
-            this.WithFilelistChk.Name = "WithFilelistChk";
-            this.WithFilelistChk.Size = new System.Drawing.Size(306, 17);
-            this.WithFilelistChk.TabIndex = 2;
-            this.WithFilelistChk.Text = "...and save paths in a filelist instead of passing them &directly";
-            this.WithFilelistChk.UseVisualStyleBackColor = true;
-            // 
             // PipelinePluginForm
             // 
             this.AcceptButton = this.OKBtn;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.CancelBtn;
-            this.ClientSize = new System.Drawing.Size(406, 597);
+            this.ClientSize = new System.Drawing.Size(406, 620);
             this.Controls.Add(this.CancelBtn);
             this.Controls.Add(this.OKBtn);
             this.Controls.Add(this.MainTabControl);
@@ -486,7 +498,7 @@
             this.Controls.Add(this.NameLbl);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(422, 636);
+            this.MinimumSize = new System.Drawing.Size(422, 659);
             this.Name = "PipelinePluginForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
@@ -549,5 +561,6 @@
         private System.Windows.Forms.OpenFileDialog ChooseExecutableOpenDlg;
         private System.Windows.Forms.CheckBox OptionalQuotesChk;
         private System.Windows.Forms.CheckBox WithFilelistChk;
+        private System.Windows.Forms.CheckBox RemoveExtChk;
     }
 }
