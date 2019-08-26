@@ -27,10 +27,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.ChoosePipelinePluginsLbl = new System.Windows.Forms.Label();
             this.PipelinePluginsLst = new System.Windows.Forms.ListBox();
             this.OKBtn = new System.Windows.Forms.Button();
             this.CancelBtn = new System.Windows.Forms.Button();
+            this.ImportPipelinePluginsToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // ChoosePipelinePluginsLbl
@@ -54,6 +56,7 @@
             this.PipelinePluginsLst.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.PipelinePluginsLst.Size = new System.Drawing.Size(364, 251);
             this.PipelinePluginsLst.TabIndex = 1;
+            this.ImportPipelinePluginsToolTip.SetToolTip(this.PipelinePluginsLst, "Custom commands to be imported");
             this.PipelinePluginsLst.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.PipelinePluginsLst_DrawItem);
             this.PipelinePluginsLst.SelectedIndexChanged += new System.EventHandler(this.PipelinePluginsLst_SelectedIndexChanged);
             // 
@@ -66,6 +69,7 @@
             this.OKBtn.Size = new System.Drawing.Size(75, 23);
             this.OKBtn.TabIndex = 2;
             this.OKBtn.Text = "OK";
+            this.ImportPipelinePluginsToolTip.SetToolTip(this.OKBtn, "Import selected custom commands and close the window");
             this.OKBtn.UseVisualStyleBackColor = true;
             // 
             // CancelBtn
@@ -77,6 +81,7 @@
             this.CancelBtn.Size = new System.Drawing.Size(75, 23);
             this.CancelBtn.TabIndex = 3;
             this.CancelBtn.Text = "Cancel";
+            this.ImportPipelinePluginsToolTip.SetToolTip(this.CancelBtn, "Cancel importing custom commands and close the window");
             this.CancelBtn.UseVisualStyleBackColor = true;
             // 
             // ImportPipelinePluginsForm
@@ -111,5 +116,6 @@
         private System.Windows.Forms.ListBox PipelinePluginsLst;
         private System.Windows.Forms.Button OKBtn;
         private System.Windows.Forms.Button CancelBtn;
+        private System.Windows.Forms.ToolTip ImportPipelinePluginsToolTip;
     }
 }

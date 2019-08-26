@@ -102,6 +102,8 @@
             this.CloseBtn.Size = new System.Drawing.Size(75, 23);
             this.CloseBtn.TabIndex = 6;
             this.CloseBtn.Text = "&Close";
+            this.SoftwareUpdatesTooltip.SetToolTip(this.CloseBtn, "Close the window without applying this update; the update will be offered again a" +
+        "t a later time");
             this.CloseBtn.UseVisualStyleBackColor = true;
             // 
             // IgnoreUpdateBtn
@@ -112,6 +114,8 @@
             this.IgnoreUpdateBtn.Size = new System.Drawing.Size(116, 23);
             this.IgnoreUpdateBtn.TabIndex = 5;
             this.IgnoreUpdateBtn.Text = "&Ignore this update";
+            this.SoftwareUpdatesTooltip.SetToolTip(this.IgnoreUpdateBtn, "Do not apply this update; you will only be notified once another update is releas" +
+        "ed");
             this.IgnoreUpdateBtn.UseVisualStyleBackColor = true;
             this.IgnoreUpdateBtn.Click += new System.EventHandler(this.IgnoreUpdateBtn_Click);
             // 

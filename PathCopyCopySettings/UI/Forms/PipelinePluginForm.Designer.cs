@@ -27,6 +27,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.NameLbl = new System.Windows.Forms.Label();
             this.NameTxt = new System.Windows.Forms.TextBox();
             this.MainTabControl = new System.Windows.Forms.TabControl();
@@ -64,6 +65,7 @@
             this.OKBtn = new System.Windows.Forms.Button();
             this.CancelBtn = new System.Windows.Forms.Button();
             this.ChooseExecutableOpenDlg = new System.Windows.Forms.OpenFileDialog();
+            this.PipelinePluginToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.MainTabControl.SuspendLayout();
             this.BasePluginPage.SuspendLayout();
             this.OptionsPage.SuspendLayout();
@@ -90,6 +92,7 @@
             this.NameTxt.Name = "NameTxt";
             this.NameTxt.Size = new System.Drawing.Size(338, 20);
             this.NameTxt.TabIndex = 1;
+            this.PipelinePluginToolTip.SetToolTip(this.NameTxt, "Name of this custom command");
             // 
             // MainTabControl
             // 
@@ -127,6 +130,7 @@
             this.BasePluginLst.Name = "BasePluginLst";
             this.BasePluginLst.Size = new System.Drawing.Size(355, 355);
             this.BasePluginLst.TabIndex = 2;
+            this.PipelinePluginToolTip.SetToolTip(this.BasePluginLst, "Base command to use to fetch path initially. Options will be applied afterwards");
             this.BasePluginLst.SelectedIndexChanged += new System.EventHandler(this.BasePluginLst_SelectedIndexChanged);
             // 
             // BaseCommandLbl2
@@ -187,6 +191,8 @@
             this.WithFilelistChk.Size = new System.Drawing.Size(306, 17);
             this.WithFilelistChk.TabIndex = 2;
             this.WithFilelistChk.Text = "...and save paths in a filelist instead of passing them &directly";
+            this.PipelinePluginToolTip.SetToolTip(this.WithFilelistChk, "Instead of passing paths to the executable as arguments directly, save them in a " +
+        "filelist and pass the path to that filelist to the executable");
             this.WithFilelistChk.UseVisualStyleBackColor = true;
             // 
             // BrowserForExecutableBtn
@@ -198,6 +204,7 @@
             this.BrowserForExecutableBtn.Size = new System.Drawing.Size(75, 23);
             this.BrowserForExecutableBtn.TabIndex = 5;
             this.BrowserForExecutableBtn.Text = "Browse";
+            this.PipelinePluginToolTip.SetToolTip(this.BrowserForExecutableBtn, "Open a dialog to choose the executable to launch on disk");
             this.BrowserForExecutableBtn.UseVisualStyleBackColor = true;
             this.BrowserForExecutableBtn.Click += new System.EventHandler(this.BrowserForExecutableBtn_Click);
             // 
@@ -210,6 +217,7 @@
             this.ExecutableTxt.Name = "ExecutableTxt";
             this.ExecutableTxt.Size = new System.Drawing.Size(184, 20);
             this.ExecutableTxt.TabIndex = 4;
+            this.PipelinePluginToolTip.SetToolTip(this.ExecutableTxt, "Path to the executable to launch");
             // 
             // ExecutableLbl
             // 
@@ -229,6 +237,8 @@
             this.LaunchExecutableChk.Size = new System.Drawing.Size(339, 17);
             this.LaunchExecutableChk.TabIndex = 1;
             this.LaunchExecutableChk.Text = "&Launch executable with path(s) instead of copying to the clipboard";
+            this.PipelinePluginToolTip.SetToolTip(this.LaunchExecutableChk, "Instead of copying paths to the clipboard, launch an executable on disk, passing " +
+        "the paths as arguments");
             this.LaunchExecutableChk.UseVisualStyleBackColor = true;
             this.LaunchExecutableChk.CheckedChanged += new System.EventHandler(this.LaunchExecutableChk_CheckedChanged);
             // 
@@ -240,6 +250,9 @@
             this.CopyOnSameLineChk.Size = new System.Drawing.Size(197, 17);
             this.CopyOnSameLineChk.TabIndex = 0;
             this.CopyOnSameLineChk.Text = "Cop&y multiple paths on the same line";
+            this.PipelinePluginToolTip.SetToolTip(this.CopyOnSameLineChk, "When copying paths of multiple selected files/folders, copy them all on the same " +
+        "line (separating them with whitespace) instead of copying them on different line" +
+        "s (separated with newlines)");
             this.CopyOnSameLineChk.UseVisualStyleBackColor = true;
             // 
             // FindReplaceGroupBox
@@ -269,6 +282,8 @@
             this.TestRegexBtn.Size = new System.Drawing.Size(75, 23);
             this.TestRegexBtn.TabIndex = 6;
             this.TestRegexBtn.Text = "&Test...";
+            this.PipelinePluginToolTip.SetToolTip(this.TestRegexBtn, "Open a window to test the current regular expression/replacement expression combi" +
+        "nation");
             this.TestRegexBtn.UseVisualStyleBackColor = true;
             this.TestRegexBtn.Click += new System.EventHandler(this.TestRegexBtn_Click);
             // 
@@ -281,6 +296,8 @@
             this.IgnoreCaseChk.Size = new System.Drawing.Size(82, 17);
             this.IgnoreCaseChk.TabIndex = 5;
             this.IgnoreCaseChk.Text = "&Ignore case";
+            this.PipelinePluginToolTip.SetToolTip(this.IgnoreCaseChk, "Whether to ignore case when performing regular expression-based find/replace oper" +
+        "ations");
             this.IgnoreCaseChk.UseVisualStyleBackColor = true;
             // 
             // UseRegexChk
@@ -291,6 +308,7 @@
             this.UseRegexChk.Size = new System.Drawing.Size(138, 17);
             this.UseRegexChk.TabIndex = 4;
             this.UseRegexChk.Text = "Use r&egular expressions";
+            this.PipelinePluginToolTip.SetToolTip(this.UseRegexChk, "Whether to use regular expressions to perform find/replace operations");
             this.UseRegexChk.UseVisualStyleBackColor = true;
             this.UseRegexChk.CheckedChanged += new System.EventHandler(this.UseRegexChk_CheckedChanged);
             // 
@@ -302,6 +320,8 @@
             this.ReplaceTxt.Name = "ReplaceTxt";
             this.ReplaceTxt.Size = new System.Drawing.Size(272, 20);
             this.ReplaceTxt.TabIndex = 3;
+            this.PipelinePluginToolTip.SetToolTip(this.ReplaceTxt, "Character string to replace any found element in the path with; if regular expres" +
+        "sions are used, this is a replacement expression");
             // 
             // ReplaceLbl
             // 
@@ -320,6 +340,8 @@
             this.FindTxt.Name = "FindTxt";
             this.FindTxt.Size = new System.Drawing.Size(288, 20);
             this.FindTxt.TabIndex = 1;
+            this.PipelinePluginToolTip.SetToolTip(this.FindTxt, "Character string to look for and replace in the path; if regular expressions are " +
+        "used, this is a regular expression");
             // 
             // FindLbl
             // 
@@ -354,6 +376,7 @@
             this.NoSlashesChangeRadio.TabIndex = 2;
             this.NoSlashesChangeRadio.TabStop = true;
             this.NoSlashesChangeRadio.Text = "Do not change &slashes";
+            this.PipelinePluginToolTip.SetToolTip(this.NoSlashesChangeRadio, "Do not change slash characters in the path");
             this.NoSlashesChangeRadio.UseVisualStyleBackColor = true;
             // 
             // BackToForwardSlashesRadio
@@ -364,6 +387,8 @@
             this.BackToForwardSlashesRadio.Size = new System.Drawing.Size(225, 17);
             this.BackToForwardSlashesRadio.TabIndex = 1;
             this.BackToForwardSlashesRadio.Text = "Change all backslashes to &forward slashes";
+            this.PipelinePluginToolTip.SetToolTip(this.BackToForwardSlashesRadio, "Replace all backslash characters ( \\ ) in the path with forward slash characters " +
+        "( / )");
             this.BackToForwardSlashesRadio.UseVisualStyleBackColor = true;
             // 
             // ForwardToBackslashesRadio
@@ -374,6 +399,8 @@
             this.ForwardToBackslashesRadio.Size = new System.Drawing.Size(265, 17);
             this.ForwardToBackslashesRadio.TabIndex = 0;
             this.ForwardToBackslashesRadio.Text = "Change all forward slashes ( / ) to &backslashes ( \\ )";
+            this.PipelinePluginToolTip.SetToolTip(this.ForwardToBackslashesRadio, "Replace all forward slash characters ( / ) in the path with backslash characters " +
+        "( \\ )");
             this.ForwardToBackslashesRadio.UseVisualStyleBackColor = true;
             // 
             // DecorationsGroupBox
@@ -401,6 +428,7 @@
             this.RemoveExtChk.Size = new System.Drawing.Size(130, 17);
             this.RemoveExtChk.TabIndex = 0;
             this.RemoveExtChk.Text = "Remove file extensi&on";
+            this.PipelinePluginToolTip.SetToolTip(this.RemoveExtChk, "Remove any extension from the file at the end of the path");
             this.RemoveExtChk.UseVisualStyleBackColor = true;
             // 
             // OptionalQuotesChk
@@ -412,6 +440,7 @@
             this.OptionalQuotesChk.Size = new System.Drawing.Size(150, 17);
             this.OptionalQuotesChk.TabIndex = 2;
             this.OptionalQuotesChk.Text = "...only if it contains s&paces";
+            this.PipelinePluginToolTip.SetToolTip(this.OptionalQuotesChk, "Whether to only surround path with quotes if the path contains spaces");
             this.OptionalQuotesChk.UseVisualStyleBackColor = true;
             // 
             // EncodeURICharsChk
@@ -423,6 +452,8 @@
             this.EncodeURICharsChk.Size = new System.Drawing.Size(225, 17);
             this.EncodeURICharsChk.TabIndex = 5;
             this.EncodeURICharsChk.Text = "...and all in&valid URI characters (e.g., %xx)";
+            this.PipelinePluginToolTip.SetToolTip(this.EncodeURICharsChk, "Replace all characters in path that are invalid in a URI by percent-encoding ( %x" +
+        "x )");
             this.EncodeURICharsChk.UseVisualStyleBackColor = true;
             // 
             // EncodeURIWhitespaceChk
@@ -433,6 +464,7 @@
             this.EncodeURIWhitespaceChk.Size = new System.Drawing.Size(287, 17);
             this.EncodeURIWhitespaceChk.TabIndex = 4;
             this.EncodeURIWhitespaceChk.Text = "Encode w&hitespace using percent-encoding (e.g., %20)";
+            this.PipelinePluginToolTip.SetToolTip(this.EncodeURIWhitespaceChk, "Replace all whitespace characters in path with %20");
             this.EncodeURIWhitespaceChk.UseVisualStyleBackColor = true;
             this.EncodeURIWhitespaceChk.CheckedChanged += new System.EventHandler(this.EncodeURIWhitespaceChk_CheckedChanged);
             // 
@@ -444,6 +476,7 @@
             this.EmailLinksChk.Size = new System.Drawing.Size(243, 17);
             this.EmailLinksChk.TabIndex = 3;
             this.EmailLinksChk.Text = "Enclose path in < and > (to create e-&mail links)";
+            this.PipelinePluginToolTip.SetToolTip(this.EmailLinksChk, "Surround path with < and > characters (this creates e-mail links)");
             this.EmailLinksChk.UseVisualStyleBackColor = true;
             // 
             // QuotesChk
@@ -454,6 +487,7 @@
             this.QuotesChk.Size = new System.Drawing.Size(177, 17);
             this.QuotesChk.TabIndex = 1;
             this.QuotesChk.Text = "Enclose path in &quotation marks";
+            this.PipelinePluginToolTip.SetToolTip(this.QuotesChk, "Surround path with quotes ( \" )");
             this.QuotesChk.UseVisualStyleBackColor = true;
             this.QuotesChk.CheckedChanged += new System.EventHandler(this.QuotesChk_CheckedChanged);
             // 
@@ -466,6 +500,7 @@
             this.OKBtn.Size = new System.Drawing.Size(75, 23);
             this.OKBtn.TabIndex = 3;
             this.OKBtn.Text = "OK";
+            this.PipelinePluginToolTip.SetToolTip(this.OKBtn, "Save this custom command and close the window");
             this.OKBtn.UseVisualStyleBackColor = true;
             // 
             // CancelBtn
@@ -477,6 +512,7 @@
             this.CancelBtn.Size = new System.Drawing.Size(75, 23);
             this.CancelBtn.TabIndex = 4;
             this.CancelBtn.Text = "Cancel";
+            this.PipelinePluginToolTip.SetToolTip(this.CancelBtn, "Do not save this custom command and close the window");
             this.CancelBtn.UseVisualStyleBackColor = true;
             // 
             // ChooseExecutableOpenDlg
@@ -562,5 +598,6 @@
         private System.Windows.Forms.CheckBox OptionalQuotesChk;
         private System.Windows.Forms.CheckBox WithFilelistChk;
         private System.Windows.Forms.CheckBox RemoveExtChk;
+        private System.Windows.Forms.ToolTip PipelinePluginToolTip;
     }
 }

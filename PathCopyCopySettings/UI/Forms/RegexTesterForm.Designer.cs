@@ -27,6 +27,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.ParamsGroupBox = new System.Windows.Forms.GroupBox();
             this.IgnoreCaseChk = new System.Windows.Forms.CheckBox();
             this.ReplacementTxt = new System.Windows.Forms.TextBox();
@@ -47,6 +48,7 @@
             this.CancelBtn = new System.Windows.Forms.Button();
             this.OKBtn = new System.Windows.Forms.Button();
             this.RegexSyntaxHelpLinkLbl2 = new System.Windows.Forms.LinkLabel();
+            this.RegexToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.ParamsGroupBox.SuspendLayout();
             this.ExecutionGroupBox.SuspendLayout();
             this.SuspendLayout();
@@ -75,6 +77,7 @@
             this.IgnoreCaseChk.Size = new System.Drawing.Size(82, 17);
             this.IgnoreCaseChk.TabIndex = 4;
             this.IgnoreCaseChk.Text = "&Ignore case";
+            this.RegexToolTip.SetToolTip(this.IgnoreCaseChk, "Whether to ignore case when performing find/replace operations");
             this.IgnoreCaseChk.UseVisualStyleBackColor = true;
             // 
             // ReplacementTxt
@@ -85,6 +88,7 @@
             this.ReplacementTxt.Name = "ReplacementTxt";
             this.ReplacementTxt.Size = new System.Drawing.Size(272, 20);
             this.ReplacementTxt.TabIndex = 3;
+            this.RegexToolTip.SetToolTip(this.ReplacementTxt, "The replacement expression used to perform find/replace operations");
             // 
             // RegexTxt
             // 
@@ -94,6 +98,7 @@
             this.RegexTxt.Name = "RegexTxt";
             this.RegexTxt.Size = new System.Drawing.Size(298, 20);
             this.RegexTxt.TabIndex = 1;
+            this.RegexToolTip.SetToolTip(this.RegexTxt, "The regular expression used to perform find/replace operations");
             // 
             // ReplacementLbl
             // 
@@ -151,6 +156,8 @@
             this.TestBtn.Size = new System.Drawing.Size(75, 23);
             this.TestBtn.TabIndex = 6;
             this.TestBtn.Text = "&Test";
+            this.RegexToolTip.SetToolTip(this.TestBtn, "Execute a find/replace operation with the provided regular and replacement expres" +
+        "sions, applying them to the provided sample string");
             this.TestBtn.UseVisualStyleBackColor = true;
             this.TestBtn.Click += new System.EventHandler(this.TestBtn_Click);
             // 
@@ -172,6 +179,7 @@
             this.ResultTxt.ReadOnly = true;
             this.ResultTxt.Size = new System.Drawing.Size(358, 20);
             this.ResultTxt.TabIndex = 4;
+            this.RegexToolTip.SetToolTip(this.ResultTxt, "Result of the find/replace operation");
             // 
             // SampleTxt
             // 
@@ -182,6 +190,7 @@
             this.SampleTxt.Size = new System.Drawing.Size(353, 20);
             this.SampleTxt.TabIndex = 2;
             this.SampleTxt.Text = "C:\\Program Files\\Internet Explorer\\iexplore.exe";
+            this.RegexToolTip.SetToolTip(this.SampleTxt, "Sample text on which the regular and replacement expressions will be applied");
             // 
             // SampleLbl
             // 
@@ -231,6 +240,7 @@
             this.RegexSyntaxHelpLinkLbl1.TabIndex = 4;
             this.RegexSyntaxHelpLinkLbl1.TabStop = true;
             this.RegexSyntaxHelpLinkLbl1.Text = "http://www.regular-expressions.info/reference.html";
+            this.RegexToolTip.SetToolTip(this.RegexSyntaxHelpLinkLbl1, "http://www.regular-expressions.info/reference.html");
             this.RegexSyntaxHelpLinkLbl1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.RegexSyntaxHelpLinkLbl_LinkClicked);
             // 
             // CancelBtn
@@ -242,6 +252,7 @@
             this.CancelBtn.Size = new System.Drawing.Size(75, 23);
             this.CancelBtn.TabIndex = 7;
             this.CancelBtn.Text = "Cancel";
+            this.RegexToolTip.SetToolTip(this.CancelBtn, "Go back to the parent dialog without changing regular or replacement expression");
             this.CancelBtn.UseVisualStyleBackColor = true;
             // 
             // OKBtn
@@ -253,6 +264,8 @@
             this.OKBtn.Size = new System.Drawing.Size(75, 23);
             this.OKBtn.TabIndex = 6;
             this.OKBtn.Text = "OK";
+            this.RegexToolTip.SetToolTip(this.OKBtn, "Copy changes to the regular and replacement expression back to the parent dialog " +
+        "and close this window");
             this.OKBtn.UseVisualStyleBackColor = true;
             // 
             // RegexSyntaxHelpLinkLbl2
@@ -265,6 +278,7 @@
             this.RegexSyntaxHelpLinkLbl2.TabIndex = 5;
             this.RegexSyntaxHelpLinkLbl2.TabStop = true;
             this.RegexSyntaxHelpLinkLbl2.Text = "http://www.regular-expressions.info/javascript.html";
+            this.RegexToolTip.SetToolTip(this.RegexSyntaxHelpLinkLbl2, "http://www.regular-expressions.info/javascript.html");
             this.RegexSyntaxHelpLinkLbl2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.RegexSyntaxHelpLinkLbl_LinkClicked);
             // 
             // RegexTesterForm
@@ -321,6 +335,6 @@
         private System.Windows.Forms.Button CancelBtn;
         private System.Windows.Forms.Button OKBtn;
         private System.Windows.Forms.LinkLabel RegexSyntaxHelpLinkLbl2;
-
+        private System.Windows.Forms.ToolTip RegexToolTip;
     }
 }

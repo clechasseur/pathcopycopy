@@ -51,6 +51,7 @@
             this.PluginCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.InMainMenuCol = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.InSubmenuCol = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.PluginsDataGridBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.PluginsExplanationLbl = new System.Windows.Forms.Label();
             this.MiscOptionsPage = new System.Windows.Forms.TabPage();
             this.UsePreviewModeInMainMenuChk = new System.Windows.Forms.CheckBox();
@@ -58,6 +59,7 @@
             this.UseFQDNChk = new System.Windows.Forms.CheckBox();
             this.AreQuotesOptionalChk = new System.Windows.Forms.CheckBox();
             this.CtrlKeyPluginCombo = new System.Windows.Forms.ComboBox();
+            this.CtrlKeyPluginComboBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.CtrlKeyPluginChk = new System.Windows.Forms.CheckBox();
             this.EncodeURICharsChk = new System.Windows.Forms.CheckBox();
             this.EncodeURIWhitespaceChk = new System.Windows.Forms.CheckBox();
@@ -85,17 +87,15 @@
             this.ExportUserSettingsSaveDlg = new System.Windows.Forms.SaveFileDialog();
             this.ExportUserSettingsBtn = new System.Windows.Forms.Button();
             this.MainToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.PluginsDataGridBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.CtrlKeyPluginComboBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.MainTabCtrl.SuspendLayout();
             this.PluginsPage.SuspendLayout();
             this.PreviewGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PluginsDataGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PluginsDataGridBindingSource)).BeginInit();
             this.MiscOptionsPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CtrlKeyPluginComboBindingSource)).BeginInit();
             this.AboutPage.SuspendLayout();
             this.AboutTableLayoutPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PluginsDataGridBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CtrlKeyPluginComboBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // ApplyBtn
@@ -182,7 +182,7 @@
             this.AddSeparatorBtn.Size = new System.Drawing.Size(75, 23);
             this.AddSeparatorBtn.TabIndex = 8;
             this.AddSeparatorBtn.Text = "&Separator";
-            this.MainToolTip.SetToolTip(this.AddSeparatorBtn, "Inserts a separator after the currently selected command");
+            this.MainToolTip.SetToolTip(this.AddSeparatorBtn, "Insert a separator after the currently selected command");
             this.AddSeparatorBtn.UseVisualStyleBackColor = true;
             this.AddSeparatorBtn.Click += new System.EventHandler(this.AddSeparatorBtn_Click);
             // 
@@ -194,7 +194,7 @@
             this.ImportPipelinePluginsBtn.Size = new System.Drawing.Size(75, 23);
             this.ImportPipelinePluginsBtn.TabIndex = 13;
             this.ImportPipelinePluginsBtn.Text = "&Import...";
-            this.MainToolTip.SetToolTip(this.ImportPipelinePluginsBtn, "Imports custom commands from a file on disk");
+            this.MainToolTip.SetToolTip(this.ImportPipelinePluginsBtn, "Import custom commands from a file on disk");
             this.ImportPipelinePluginsBtn.UseVisualStyleBackColor = true;
             this.ImportPipelinePluginsBtn.Click += new System.EventHandler(this.ImportPipelinePluginsBtn_Click);
             // 
@@ -206,7 +206,7 @@
             this.ExportPipelinePluginsBtn.Size = new System.Drawing.Size(75, 23);
             this.ExportPipelinePluginsBtn.TabIndex = 12;
             this.ExportPipelinePluginsBtn.Text = "Ex&port...";
-            this.MainToolTip.SetToolTip(this.ExportPipelinePluginsBtn, "Exports the selected custom commands to a file on disk");
+            this.MainToolTip.SetToolTip(this.ExportPipelinePluginsBtn, "Export the selected custom commands to a file on disk");
             this.ExportPipelinePluginsBtn.UseVisualStyleBackColor = true;
             this.ExportPipelinePluginsBtn.Click += new System.EventHandler(this.ExportPipelinePluginsBtn_Click);
             // 
@@ -227,7 +227,7 @@
             this.RemovePluginBtn.Size = new System.Drawing.Size(75, 23);
             this.RemovePluginBtn.TabIndex = 10;
             this.RemovePluginBtn.Text = "&Remove";
-            this.MainToolTip.SetToolTip(this.RemovePluginBtn, "Deletes the selected custom command");
+            this.MainToolTip.SetToolTip(this.RemovePluginBtn, "Delete the selected custom command or separator");
             this.RemovePluginBtn.UseVisualStyleBackColor = true;
             this.RemovePluginBtn.Click += new System.EventHandler(this.RemovePluginBtn_Click);
             // 
@@ -239,7 +239,7 @@
             this.EditPipelinePluginBtn.Size = new System.Drawing.Size(75, 23);
             this.EditPipelinePluginBtn.TabIndex = 9;
             this.EditPipelinePluginBtn.Text = "&Edit...";
-            this.MainToolTip.SetToolTip(this.EditPipelinePluginBtn, "Modifies the selected custom command");
+            this.MainToolTip.SetToolTip(this.EditPipelinePluginBtn, "Modify the selected custom command");
             this.EditPipelinePluginBtn.UseVisualStyleBackColor = true;
             this.EditPipelinePluginBtn.Click += new System.EventHandler(this.EditPipelinePluginBtn_Click);
             // 
@@ -251,7 +251,7 @@
             this.AddPipelinePluginBtn.Size = new System.Drawing.Size(75, 23);
             this.AddPipelinePluginBtn.TabIndex = 7;
             this.AddPipelinePluginBtn.Text = "&New...";
-            this.MainToolTip.SetToolTip(this.AddPipelinePluginBtn, "Creates a new custom command");
+            this.MainToolTip.SetToolTip(this.AddPipelinePluginBtn, "Create a new custom command");
             this.AddPipelinePluginBtn.UseVisualStyleBackColor = true;
             this.AddPipelinePluginBtn.Click += new System.EventHandler(this.AddPipelinePluginBtn_Click);
             // 
@@ -272,7 +272,7 @@
             this.MovePluginDownBtn.Size = new System.Drawing.Size(75, 23);
             this.MovePluginDownBtn.TabIndex = 5;
             this.MovePluginDownBtn.Text = "&Down";
-            this.MainToolTip.SetToolTip(this.MovePluginDownBtn, "Moves the selected command down one position");
+            this.MainToolTip.SetToolTip(this.MovePluginDownBtn, "Move the selected command down one position");
             this.MovePluginDownBtn.UseVisualStyleBackColor = true;
             this.MovePluginDownBtn.Click += new System.EventHandler(this.MovePluginDownBtn_Click);
             // 
@@ -284,7 +284,7 @@
             this.MovePluginUpBtn.Size = new System.Drawing.Size(75, 23);
             this.MovePluginUpBtn.TabIndex = 4;
             this.MovePluginUpBtn.Text = "&Up";
-            this.MainToolTip.SetToolTip(this.MovePluginUpBtn, "Moves the selected command up one position");
+            this.MainToolTip.SetToolTip(this.MovePluginUpBtn, "Move the selected command up one position");
             this.MovePluginUpBtn.UseVisualStyleBackColor = true;
             this.MovePluginUpBtn.Click += new System.EventHandler(this.MovePluginUpBtn_Click);
             // 
@@ -438,6 +438,7 @@
             this.UsePreviewModeInMainMenuChk.Size = new System.Drawing.Size(118, 17);
             this.UsePreviewModeInMainMenuChk.TabIndex = 11;
             this.UsePreviewModeInMainMenuChk.Text = "...and in mai&n menu";
+            this.MainToolTip.SetToolTip(this.UsePreviewModeInMainMenuChk, "Also show previews for commands in the main contextual menu");
             this.UsePreviewModeInMainMenuChk.UseVisualStyleBackColor = true;
             // 
             // AppendSepForDirChk
@@ -460,7 +461,7 @@
             this.UseFQDNChk.Size = new System.Drawing.Size(303, 17);
             this.UseFQDNChk.TabIndex = 7;
             this.UseFQDNChk.Text = "Use &fully-qualified domain names when copying UNC paths";
-            this.MainToolTip.SetToolTip(this.UseFQDNChk, "Uses fully-qualified domain names (e.g. FQDN) when copying UNC paths");
+            this.MainToolTip.SetToolTip(this.UseFQDNChk, "Use fully-qualified domain names (e.g. FQDN) when copying UNC paths");
             this.UseFQDNChk.UseVisualStyleBackColor = true;
             // 
             // AreQuotesOptionalChk
@@ -480,6 +481,7 @@
             this.CtrlKeyPluginCombo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.CtrlKeyPluginCombo.DataSource = this.CtrlKeyPluginComboBindingSource;
+            this.CtrlKeyPluginCombo.DisplayMember = "Plugin";
             this.CtrlKeyPluginCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CtrlKeyPluginCombo.Enabled = false;
             this.CtrlKeyPluginCombo.FormattingEnabled = true;
@@ -487,6 +489,8 @@
             this.CtrlKeyPluginCombo.Name = "CtrlKeyPluginCombo";
             this.CtrlKeyPluginCombo.Size = new System.Drawing.Size(399, 21);
             this.CtrlKeyPluginCombo.TabIndex = 15;
+            this.MainToolTip.SetToolTip(this.CtrlKeyPluginCombo, "Command to use automatically when user holds down the Ctrl key when Explorer\'s co" +
+        "ntextual menu is shown");
             this.CtrlKeyPluginCombo.ValueMember = "Plugin";
             this.CtrlKeyPluginCombo.SelectedIndexChanged += new System.EventHandler(this.CtrlKeyPluginCombo_SelectedIndexChanged);
             // 
@@ -512,8 +516,8 @@
             this.EncodeURICharsChk.Size = new System.Drawing.Size(225, 17);
             this.EncodeURICharsChk.TabIndex = 4;
             this.EncodeURICharsChk.Text = "...and all in&valid URI characters (e.g., %xx)";
-            this.MainToolTip.SetToolTip(this.EncodeURICharsChk, "Replaces all characters in copied paths that are invalid in a URI by percent-enco" +
-        "ding ( %xx )");
+            this.MainToolTip.SetToolTip(this.EncodeURICharsChk, "Replace all characters in copied paths that are invalid in a URI by percent-encod" +
+        "ing ( %xx )");
             this.EncodeURICharsChk.UseVisualStyleBackColor = true;
             // 
             // EncodeURIWhitespaceChk
@@ -524,7 +528,7 @@
             this.EncodeURIWhitespaceChk.Size = new System.Drawing.Size(287, 17);
             this.EncodeURIWhitespaceChk.TabIndex = 3;
             this.EncodeURIWhitespaceChk.Text = "Encode &whitespace using percent-encoding (e.g., %20)";
-            this.MainToolTip.SetToolTip(this.EncodeURIWhitespaceChk, "Encodes all whitespace characters in paths, replacing them with %20");
+            this.MainToolTip.SetToolTip(this.EncodeURIWhitespaceChk, "Replace all whitespace characters in paths with %20");
             this.EncodeURIWhitespaceChk.UseVisualStyleBackColor = true;
             this.EncodeURIWhitespaceChk.CheckedChanged += new System.EventHandler(this.EncodeURIWhitespaceChk_CheckedChanged);
             // 
@@ -549,7 +553,7 @@
             this.DropRedundantWordsChk.Size = new System.Drawing.Size(341, 17);
             this.DropRedundantWordsChk.TabIndex = 12;
             this.DropRedundantWordsChk.Text = "Drop &redundant words like \"Copy\" or \"Long/Short\" in the submenu";
-            this.MainToolTip.SetToolTip(this.DropRedundantWordsChk, "Drops some redundant words when displaying commands in the submenu");
+            this.MainToolTip.SetToolTip(this.DropRedundantWordsChk, "Drop some redundant words when displaying commands in the submenu");
             this.DropRedundantWordsChk.UseVisualStyleBackColor = true;
             // 
             // UsePreviewModeChk
@@ -573,7 +577,7 @@
             this.UseIconForSubmenuChk.Size = new System.Drawing.Size(157, 17);
             this.UseIconForSubmenuChk.TabIndex = 9;
             this.UseIconForSubmenuChk.Text = "Show &icon next to submenu";
-            this.MainToolTip.SetToolTip(this.UseIconForSubmenuChk, "Displays a Path Copy Copy icon next to the submenu in Explorer\'s contextual menu");
+            this.MainToolTip.SetToolTip(this.UseIconForSubmenuChk, "Display a Path Copy Copy icon next to the submenu in Explorer\'s contextual menu");
             this.UseIconForSubmenuChk.UseVisualStyleBackColor = true;
             // 
             // EmailLinksChk
@@ -584,7 +588,7 @@
             this.EmailLinksChk.Size = new System.Drawing.Size(289, 17);
             this.EmailLinksChk.TabIndex = 2;
             this.EmailLinksChk.Text = "Add < and > around copied paths (to create e-&mail links)";
-            this.MainToolTip.SetToolTip(this.EmailLinksChk, "Surrounds all copied paths with < and > characters (this creates e-mail links)");
+            this.MainToolTip.SetToolTip(this.EmailLinksChk, "Surround all copied paths with < and > characters (this creates e-mail links)");
             this.EmailLinksChk.UseVisualStyleBackColor = true;
             // 
             // EnableSoftwareUpdateChk
@@ -619,8 +623,8 @@
             this.HiddenSharesChk.Size = new System.Drawing.Size(238, 17);
             this.HiddenSharesChk.TabIndex = 6;
             this.HiddenSharesChk.Text = "Use &hidden shares when copying UNC paths";
-            this.MainToolTip.SetToolTip(this.HiddenSharesChk, "Considers hidden shares (shares ending with the $ character, including administra" +
-        "tive shares like \\\\server\\C$) when copying UNC paths");
+            this.MainToolTip.SetToolTip(this.HiddenSharesChk, "Consider hidden shares (shares ending with the $ character, including administrat" +
+        "ive shares like \\\\server\\C$) when copying UNC paths");
             this.HiddenSharesChk.UseVisualStyleBackColor = true;
             // 
             // AddQuotesChk
@@ -631,7 +635,7 @@
             this.AddQuotesChk.Size = new System.Drawing.Size(180, 17);
             this.AddQuotesChk.TabIndex = 0;
             this.AddQuotesChk.Text = "Add &quotes around copied paths";
-            this.MainToolTip.SetToolTip(this.AddQuotesChk, "Surrounds all copied paths with quotes ( \" )");
+            this.MainToolTip.SetToolTip(this.AddQuotesChk, "Surround all copied paths with quotes ( \" )");
             this.AddQuotesChk.UseVisualStyleBackColor = true;
             this.AddQuotesChk.CheckedChanged += new System.EventHandler(this.AddQuotesChk_CheckedChanged);
             // 
@@ -840,13 +844,13 @@
             this.PreviewGroupBox.ResumeLayout(false);
             this.PreviewGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PluginsDataGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PluginsDataGridBindingSource)).EndInit();
             this.MiscOptionsPage.ResumeLayout(false);
             this.MiscOptionsPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CtrlKeyPluginComboBindingSource)).EndInit();
             this.AboutPage.ResumeLayout(false);
             this.AboutTableLayoutPanel.ResumeLayout(false);
             this.AboutTableLayoutPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PluginsDataGridBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CtrlKeyPluginComboBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
