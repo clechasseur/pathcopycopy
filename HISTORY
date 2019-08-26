@@ -12,6 +12,7 @@ Version 17.0 (20??-??-??)
 - Items added to the main contextual menu will now use the first appropriate shortcut key if the one originally selected is not available [https://github.com/clechasseur/pathcopycopy/issues/57]
 - New custom command option to remove file extension [https://github.com/clechasseur/pathcopycopy/issues/76]
 - Improved tooltips in Settings application
+- Can now copy paths of .url (internet shortcut) and .website (pinned website) files [https://github.com/clechasseur/pathcopycopy/issues/77]
 
 
 Version 16.0.1 (2018-11-30)

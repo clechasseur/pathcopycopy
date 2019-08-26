@@ -55,4 +55,24 @@ HKCR
 			}
 		}
 	}
+	NoRemove IE.AssocFile.URL
+	{
+		NoRemove shellex
+		{
+			ContextMenuHandlers
+			{
+				ForceRemove PathCopyCopy = s '{82CB99A2-2F18-4D5D-9476-54347E3B6720}'
+			}
+		}
+	}
+	NoRemove IE.AssocFile.WEBSITE
+	{
+		NoRemove shellex
+		{
+			ContextMenuHandlers
+			{
+				ForceRemove PathCopyCopy = s '{82CB99A2-2F18-4D5D-9476-54347E3B6720}'
+			}
+		}
+	}
 }
