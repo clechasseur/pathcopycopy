@@ -71,10 +71,12 @@ namespace PathCopyCopy.Settings.UI.Forms
         /// <param name="oldInfo">Info about a pipeline plugin. If set, we'll
         /// populate the form with the plugin's values to allow the user to
         /// edit the plugin.</param>
+        /// <param name="switchToExpert">Upon exit, will indicate whether user
+        /// chose to switch to Expert Mode.</param>
         /// <returns>Info about the new plugin that user edited. Will be
         /// <c>null</c> if user cancels editing.</returns>
-        public PipelinePluginInfo EditPlugin(IWin32Window owner, 
-            UserSettings settings, PipelinePluginInfo oldInfo)
+        public PipelinePluginInfo EditPlugin(IWin32Window owner, UserSettings settings,
+            PipelinePluginInfo oldInfo, out bool switchToExpert)
         {
             // Save settings object or create one if we didn't get one.
             this.settings = settings ?? new UserSettings();
@@ -92,8 +94,9 @@ namespace PathCopyCopy.Settings.UI.Forms
             DialogResult dialogRes = ShowDialog(owner);
 
             // If user saved, return the new info.
-            Debug.Assert(dialogRes != DialogResult.OK || pluginInfo != null);
-            return dialogRes == DialogResult.OK ? pluginInfo : null;
+            Debug.Assert(dialogRes == DialogResult.Cancel || pluginInfo != null);
+            switchToExpert = dialogRes == DialogResult.Retry;
+            return dialogRes != DialogResult.Cancel ? pluginInfo : null;
         }
         
         /// <summary>
@@ -225,8 +228,8 @@ namespace PathCopyCopy.Settings.UI.Forms
         /// <param name="e">Event arguments.</param>
         private void PipelinePluginForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            // If user chose to press OK, save plugin info.
-            if (this.DialogResult == DialogResult.OK) {
+            // If user chose to press OK or switch to Expert Mode, save plugin info.
+            if (this.DialogResult == DialogResult.OK || this.DialogResult == DialogResult.Retry) {
                 // Make sure user has entered a name.
                 if (!String.IsNullOrEmpty(NameTxt.Text)) {
                     // Create a pipeline based on form controls.

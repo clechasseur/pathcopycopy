@@ -66,6 +66,7 @@
             this.CancelBtn = new System.Windows.Forms.Button();
             this.ChooseExecutableOpenDlg = new System.Windows.Forms.OpenFileDialog();
             this.PipelinePluginToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.SwitchBtn = new System.Windows.Forms.Button();
             this.MainTabControl.SuspendLayout();
             this.BasePluginPage.SuspendLayout();
             this.OptionsPage.SuspendLayout();
@@ -128,7 +129,7 @@
             this.BasePluginLst.FormattingEnabled = true;
             this.BasePluginLst.Location = new System.Drawing.Point(9, 32);
             this.BasePluginLst.Name = "BasePluginLst";
-            this.BasePluginLst.Size = new System.Drawing.Size(355, 355);
+            this.BasePluginLst.Size = new System.Drawing.Size(355, 459);
             this.BasePluginLst.TabIndex = 2;
             this.PipelinePluginToolTip.SetToolTip(this.BasePluginLst, "Base command to use to fetch path initially. Options will be applied afterwards");
             this.BasePluginLst.SelectedIndexChanged += new System.EventHandler(this.BasePluginLst_SelectedIndexChanged);
@@ -520,6 +521,19 @@
             this.ChooseExecutableOpenDlg.Filter = "Executable files (*.exe;*.com;*.bat;*.cmd)|*.exe;*.com;*.bat;*.cmd|All files (*.*" +
     ")|*.*";
             // 
+            // SwitchBtn
+            // 
+            this.SwitchBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.SwitchBtn.DialogResult = System.Windows.Forms.DialogResult.Retry;
+            this.SwitchBtn.Location = new System.Drawing.Point(12, 585);
+            this.SwitchBtn.Name = "SwitchBtn";
+            this.SwitchBtn.Size = new System.Drawing.Size(94, 23);
+            this.SwitchBtn.TabIndex = 5;
+            this.SwitchBtn.Text = "Expert Mode";
+            this.PipelinePluginToolTip.SetToolTip(this.SwitchBtn, "Switch to Expert Mode, which allows more customization options but is more comple" +
+        "x to use");
+            this.SwitchBtn.UseVisualStyleBackColor = true;
+            // 
             // PipelinePluginForm
             // 
             this.AcceptButton = this.OKBtn;
@@ -527,6 +541,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.CancelBtn;
             this.ClientSize = new System.Drawing.Size(406, 620);
+            this.Controls.Add(this.SwitchBtn);
             this.Controls.Add(this.CancelBtn);
             this.Controls.Add(this.OKBtn);
             this.Controls.Add(this.MainTabControl);
@@ -599,5 +614,6 @@
         private System.Windows.Forms.CheckBox WithFilelistChk;
         private System.Windows.Forms.CheckBox RemoveExtChk;
         private System.Windows.Forms.ToolTip PipelinePluginToolTip;
+        private System.Windows.Forms.Button SwitchBtn;
     }
 }

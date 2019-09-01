@@ -117,15 +117,24 @@ namespace PathCopyCopy.Settings.UI.Utils
         /// user cancelled the editing.</returns>
         private PipelinePluginInfo Edit()
         {
-            if (pipeline == null || IsPipelineSimple(pipeline)) {
-                using (PipelinePluginForm editForm = new PipelinePluginForm()) {
-                    return editForm.EditPlugin(owner, settings, pluginInfo);
+            // Determine what form to show initially depending on the complexity of the pipeline.
+            bool advanced = pipeline == null || IsPipelineSimple(pipeline);
+
+            // Loop until user is satisfied.
+            PipelinePluginInfo info = pluginInfo;
+            bool switchMode = true;
+            while (switchMode) {
+                if (advanced) {
+                    // TODO
+                    advanced = false;
+                } else {
+                    using (PipelinePluginForm editForm = new PipelinePluginForm()) {
+                        info = editForm.EditPlugin(owner, settings, info, out switchMode);
+                    }
                 }
-            } else if (pluginInfo != null) {
-                throw new InvalidPipelineException(pluginInfo.EncodedElements);
-            } else {
-                throw new InvalidPipelineException();
             }
+
+            return info;
         }
 
         /// <summary>

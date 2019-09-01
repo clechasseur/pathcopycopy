@@ -1026,24 +1026,22 @@ namespace PathCopyCopy.Settings.UI.Forms
         private void AddPipelinePluginBtn_Click(object sender, EventArgs e)
         {
             // Ask user to create a new plugin.
-            using (PipelinePluginForm editForm = new PipelinePluginForm()) {
-                PipelinePluginInfo pluginInfo = editForm.EditPlugin(this, settings, null);
-                if (pluginInfo != null) {
-                    // User pressed OK. Add the new plugin to the list view
-                    // and select it.
-                    Plugin plugin = pluginInfo.ToPlugin();
-                    PluginDisplayInfo displayInfo = new PluginDisplayInfo(plugin);
-                    displayInfo.ShowInSubmenu = true;
-                    pluginDisplayInfos.Add(displayInfo);
-                    PluginsDataGrid.ClearSelection();
-                    PluginsDataGrid.Rows[pluginDisplayInfos.Count - 1].Selected = true;
-                    if (!PluginsDataGrid.Rows[pluginDisplayInfos.Count - 1].Displayed) {
-                        PluginsDataGrid.FirstDisplayedScrollingRowIndex = pluginDisplayInfos.Count - 1;
-                    }
-                    
-                    // All this will enable the "Apply" button.
-                    ApplyBtn.Enabled = true;
+            PipelinePluginInfo pluginInfo = PipelinePluginEditor.EditPlugin(this, settings, null);
+            if (pluginInfo != null) {
+                // User pressed OK. Add the new plugin to the list view
+                // and select it.
+                Plugin plugin = pluginInfo.ToPlugin();
+                PluginDisplayInfo displayInfo = new PluginDisplayInfo(plugin);
+                displayInfo.ShowInSubmenu = true;
+                pluginDisplayInfos.Add(displayInfo);
+                PluginsDataGrid.ClearSelection();
+                PluginsDataGrid.Rows[pluginDisplayInfos.Count - 1].Selected = true;
+                if (!PluginsDataGrid.Rows[pluginDisplayInfos.Count - 1].Displayed) {
+                    PluginsDataGrid.FirstDisplayedScrollingRowIndex = pluginDisplayInfos.Count - 1;
                 }
+                    
+                // All this will enable the "Apply" button.
+                ApplyBtn.Enabled = true;
             }
         }
 
