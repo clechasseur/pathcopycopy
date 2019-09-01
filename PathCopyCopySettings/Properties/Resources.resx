@@ -324,4 +324,46 @@ Control-click to avoid displaying an icon for this command.</value>
   <data name="PipelinePluginForm_PipelineTooComplexForSimpleMode" xml:space="preserve">
     <value>This custom command is now too complex to be edited in Simple Mode. If you switch, you will lose some customization. Do you really want to switch to Simple Mode?</value>
   </data>
+  <data name="PipelineElement_ApplyPlugin" xml:space="preserve">
+    <value>Use Base Command</value>
+  </data>
+  <data name="PipelineElement_BackToForwardSlashes" xml:space="preserve">
+    <value>Turn Backslashes Into Forward Slashes</value>
+  </data>
+  <data name="PipelineElement_EmailLinks" xml:space="preserve">
+    <value>Create Email Links</value>
+  </data>
+  <data name="PipelineElement_EncodeURIChars" xml:space="preserve">
+    <value>Encode URI Characters</value>
+  </data>
+  <data name="PipelineElement_EncodeURIWhitespace" xml:space="preserve">
+    <value>Encode URI Whitespace</value>
+  </data>
+  <data name="PipelineElement_Executable" xml:space="preserve">
+    <value>Option: Launch Executable</value>
+  </data>
+  <data name="PipelineElement_ExecutableWithFilelist" xml:space="preserve">
+    <value>Option: Launch Executable With Filelist</value>
+  </data>
+  <data name="PipelineElement_FindReplace" xml:space="preserve">
+    <value>Find / Replace</value>
+  </data>
+  <data name="PipelineElement_ForwardToBackslashes" xml:space="preserve">
+    <value>Turn Forward Slashes Into Backslashes</value>
+  </data>
+  <data name="PipelineElement_OptionalQuotes" xml:space="preserve">
+    <value>Add Quotes If Needed</value>
+  </data>
+  <data name="PipelineElement_PathsSeparator" xml:space="preserve">
+    <value>Option: Paths Separator</value>
+  </data>
+  <data name="PipelineElement_Quotes" xml:space="preserve">
+    <value>Add Quotes</value>
+  </data>
+  <data name="PipelineElement_Regex" xml:space="preserve">
+    <value>Find / Replace Using Regular Expressions</value>
+  </data>
+  <data name="PipelineElement_RemoveExt" xml:space="preserve">
+    <value>Remove File Extension</value>
+  </data>
 </root>

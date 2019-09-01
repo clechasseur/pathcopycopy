@@ -22,7 +22,6 @@
 using System;
 using System.Diagnostics;
 using System.Windows.Forms;
-using PathCopyCopy.Settings.Core;
 using PathCopyCopy.Settings.Core.Plugins;
 using PathCopyCopy.Settings.Properties;
 using PathCopyCopy.Settings.UI.Utils;
@@ -35,9 +34,6 @@ namespace PathCopyCopy.Settings.UI.Forms
     /// </summary>
     public partial class AdvancedPipelinePluginForm : Form
     {
-        /// Object to access user settings.
-        private UserSettings settings;
-
         /// Plugin info for the plugin we're editing.
         private PipelinePluginInfo pluginInfo;
 
@@ -59,8 +55,6 @@ namespace PathCopyCopy.Settings.UI.Forms
         /// if the user accepted the changes.
         /// </summary>
         /// <param name="owner">Owner of this dialog. Can be <c>null</c>.</param>
-        /// <param name="settings">Object to access user settings. If <c>null</c>,
-        /// a new <see cref="UserSettings"/> object will be created.</param>
         /// <param name="oldInfo">Info about a pipeline plugin. If set, we'll
         /// populate the form with the plugin's values to allow the user to
         /// edit the plugin.</param>
@@ -68,12 +62,9 @@ namespace PathCopyCopy.Settings.UI.Forms
         /// chose to switch to Simple Mode.</param>
         /// <returns>Info about the new plugin that user edited. Will be
         /// <c>null</c> if user cancels editing.</returns>
-        public PipelinePluginInfo EditPlugin(IWin32Window owner, UserSettings settings,
-            PipelinePluginInfo oldInfo, out bool switchToSimple)
+        public PipelinePluginInfo EditPlugin(IWin32Window owner, PipelinePluginInfo oldInfo,
+            out bool switchToSimple)
         {
-            // Save settings object or create one if we didn't get one.
-            this.settings = settings ?? new UserSettings();
-
             // Save old info so that the OnLoad event handler can use it.
             pluginInfo = oldInfo;
 
@@ -81,6 +72,9 @@ namespace PathCopyCopy.Settings.UI.Forms
             // We want pipeline exceptions to propagate out *before* we show the form.
             if (pluginInfo != null) {
                 pipeline = PipelineDecoder.DecodePipeline(pluginInfo.EncodedElements);
+            } else {
+                // No plugin info to decode, create new empty pipeline.
+                pipeline = new Pipeline();
             }
 
             // Show the form and check result.
@@ -100,13 +94,11 @@ namespace PathCopyCopy.Settings.UI.Forms
         /// <param name="e">Event arguments.</param>
         private void AdvancedPipelinePluginForm_Load(object sender, EventArgs e)
         {
-            if (pluginInfo != null) {
-                Debug.Assert(pipeline != null);
+            Debug.Assert(pipeline != null);
 
-                // Populate our controls.
-                NameTxt.Text = pluginInfo.Description;
-                // TODO
-            }
+            // Populate our controls.
+            NameTxt.Text = pluginInfo?.Description ?? String.Empty;
+            ElementsLst.DataSource = pipeline.Elements;
         }
 
         /// <summary>
@@ -117,18 +109,12 @@ namespace PathCopyCopy.Settings.UI.Forms
         /// <param name="e">Event arguments.</param>
         private void AdvancedPipelinePluginForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            Debug.Assert(pipeline != null);
+
             // If user chose to press OK or switch to Simple Mode, save plugin info.
             if (this.DialogResult == DialogResult.OK || this.DialogResult == DialogResult.Retry) {
                 // Make sure user has entered a name (unless we're switching to Simple Mode).
                 if (!String.IsNullOrEmpty(NameTxt.Text) || this.DialogResult == DialogResult.Retry) {
-                    // Create a pipeline based on form controls.
-                    if (pipeline == null) {
-                        pipeline = new Pipeline();
-                    } else {
-                        //pipeline.Clear(); // TODO clear existing elements
-                    }
-                    // TODO
-
                     // If pipeline is too complex, user might lose customization by switching
                     // to simple mode. Warn in this case.
                     if (this.DialogResult == DialogResult.Retry && !PipelinePluginEditor.IsPipelineSimple(pipeline)) {

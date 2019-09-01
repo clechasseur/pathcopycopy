@@ -1026,7 +1026,7 @@ namespace PathCopyCopy.Settings.UI.Forms
         private void AddPipelinePluginBtn_Click(object sender, EventArgs e)
         {
             // Ask user to create a new plugin.
-            PipelinePluginInfo pluginInfo = PipelinePluginEditor.EditPlugin(this, settings, null);
+            PipelinePluginInfo pluginInfo = PipelinePluginEditor.EditPlugin(this, null);
             if (pluginInfo != null) {
                 // User pressed OK. Add the new plugin to the list view
                 // and select it.
@@ -1093,7 +1093,7 @@ namespace PathCopyCopy.Settings.UI.Forms
 
             // Ask user to edit the plugin info.
             try {
-                PipelinePluginInfo newPluginInfo = PipelinePluginEditor.EditPlugin(this, settings, pluginInfo);
+                PipelinePluginInfo newPluginInfo = PipelinePluginEditor.EditPlugin(this, pluginInfo);
                 if (newPluginInfo != null) {
                     // Replace the existing plugin object in the data grid.
                     Debug.Assert(newPluginInfo.Id == pluginInfo.Id);

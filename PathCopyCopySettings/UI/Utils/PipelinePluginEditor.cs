@@ -24,7 +24,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
-using PathCopyCopy.Settings.Core;
 using PathCopyCopy.Settings.Core.Plugins;
 using PathCopyCopy.Settings.UI.Forms;
 
@@ -39,9 +38,6 @@ namespace PathCopyCopy.Settings.UI.Utils
         /// Owner of any form we create.
         private IWin32Window owner;
 
-        /// Object to access user settings.
-        private UserSettings settings;
-
         /// Plugin info for the plugin we're editing.
         private PipelinePluginInfo pluginInfo;
 
@@ -52,16 +48,13 @@ namespace PathCopyCopy.Settings.UI.Utils
         /// Edits a new or existing pipeline plugin.
         /// </summary>
         /// <param name="owner">Owner to use for new forms. Can be <c>null</c>.</param>
-        /// <param name="settings">Object to access user settings. Can be
-        /// <c>null</c>, in which case a new one will be created.</param>
         /// <param name="oldInfo">Info about pipeline plugin to edit. If <c>null</c>,
         /// a new pipeline plugin will be edited.</param>
         /// <returns>Info about pipeline plugin edited. Will be <c>null</c> if the
         /// user cancelled the editing.</returns>
-        public static PipelinePluginInfo EditPlugin(IWin32Window owner,
-            UserSettings settings, PipelinePluginInfo oldInfo)
+        public static PipelinePluginInfo EditPlugin(IWin32Window owner, PipelinePluginInfo oldInfo)
         {
-            PipelinePluginEditor editor = new PipelinePluginEditor(owner, settings, oldInfo);
+            PipelinePluginEditor editor = new PipelinePluginEditor(owner, oldInfo);
             return editor.Edit();
         }
 
@@ -83,22 +76,15 @@ namespace PathCopyCopy.Settings.UI.Utils
         }
 
         /// <summary>
-        /// Private constructor called via
-        /// <see cref="PipelinePluginEditor.EditPlugin(IWin32Window, UserSettings, PipelinePluginInfo)"/>
+        /// Private constructor called via <see cref="EditPlugin"/>.
         /// </summary>
         /// <param name="owner">Owner to use for new forms. Can be <c>null</c>.</param>
-        /// <param name="settings">Object to access user settings. Can be
-        /// <c>null</c>, in which case a new one will be created.</param>
         /// <param name="oldInfo">Info about pipeline plugin to edit. If <c>null</c>,
         /// a new pipeline plugin will be edited.</param>
-        private PipelinePluginEditor(IWin32Window owner, UserSettings settings,
-            PipelinePluginInfo oldInfo)
+        private PipelinePluginEditor(IWin32Window owner, PipelinePluginInfo oldInfo)
         {
             // Save owner for any form we create.
             this.owner = owner;
-
-            // Save settings or create new object.
-            this.settings = settings ?? new UserSettings();
 
             // Save old plugin info if we have one.
             pluginInfo = oldInfo;
@@ -126,11 +112,11 @@ namespace PathCopyCopy.Settings.UI.Utils
             while (switchMode) {
                 if (advanced) {
                     using (AdvancedPipelinePluginForm editForm = new AdvancedPipelinePluginForm()) {
-                        info = editForm.EditPlugin(owner, settings, info, out switchMode);
+                        info = editForm.EditPlugin(owner, info, out switchMode);
                     }
                 } else {
                     using (PipelinePluginForm editForm = new PipelinePluginForm()) {
-                        info = editForm.EditPlugin(owner, settings, info, out switchMode);
+                        info = editForm.EditPlugin(owner, info, out switchMode);
                     }
                 }
                 if (switchMode) {

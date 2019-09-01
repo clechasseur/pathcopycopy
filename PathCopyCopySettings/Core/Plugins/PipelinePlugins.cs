@@ -545,8 +545,6 @@ namespace PathCopyCopy.Settings.Core.Plugins
     
     /// <summary>
     /// Base class for pipeline elements to be chained in a pipeline plugin.
-    /// Since we only care about configuration in the settings app, it merely
-    /// contains methods to encode element data to a string.
     /// </summary>
     abstract public class PipelineElement
     {
@@ -555,6 +553,15 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// The pipeline uses this code to encode its elements.
         /// </summary>
         abstract public char Code
+        {
+            get;
+        }
+
+        /// <summary>
+        /// Every pipeline element type must have a display value.
+        /// It will be used when the element is displayed in Expert Mode in the UI.
+        /// </summary>
+        abstract public string DisplayValue
         {
             get;
         }
@@ -757,7 +764,17 @@ namespace PathCopyCopy.Settings.Core.Plugins
                 return CODE;
             }
         }
-        
+
+        /// <summary>
+        /// Pipeline element display value for the UI.
+        /// </summary>
+        public override string DisplayValue
+        {
+            get {
+                return Resources.PipelineElement_Quotes;
+            }
+        }
+
         /// <summary>
         /// Encodes this pipeline element in a string.
         /// </summary>
@@ -787,6 +804,16 @@ namespace PathCopyCopy.Settings.Core.Plugins
         {
             get {
                 return CODE;
+            }
+        }
+
+        /// <summary>
+        /// Pipeline element display value for the UI.
+        /// </summary>
+        public override string DisplayValue
+        {
+            get {
+                return Resources.PipelineElement_OptionalQuotes;
             }
         }
 
@@ -833,6 +860,16 @@ namespace PathCopyCopy.Settings.Core.Plugins
         }
 
         /// <summary>
+        /// Pipeline element display value for the UI.
+        /// </summary>
+        public override string DisplayValue
+        {
+            get {
+                return Resources.PipelineElement_EmailLinks;
+            }
+        }
+
+        /// <summary>
         /// Minimum version of Path Copy Copy required to use this pipeline element.
         /// </summary>
         public override Version RequiredVersion
@@ -871,6 +908,16 @@ namespace PathCopyCopy.Settings.Core.Plugins
         {
             get {
                 return CODE;
+            }
+        }
+
+        /// <summary>
+        /// Pipeline element display value for the UI.
+        /// </summary>
+        public override string DisplayValue
+        {
+            get {
+                return Resources.PipelineElement_EncodeURIWhitespace;
             }
         }
 
@@ -917,6 +964,16 @@ namespace PathCopyCopy.Settings.Core.Plugins
         }
 
         /// <summary>
+        /// Pipeline element display value for the UI.
+        /// </summary>
+        public override string DisplayValue
+        {
+            get {
+                return Resources.PipelineElement_EncodeURIChars;
+            }
+        }
+
+        /// <summary>
         /// Minimum version of Path Copy Copy required to use this pipeline element.
         /// </summary>
         public override Version RequiredVersion
@@ -957,6 +1014,16 @@ namespace PathCopyCopy.Settings.Core.Plugins
                 return CODE;
             }
         }
+
+        /// <summary>
+        /// Pipeline element display value for the UI.
+        /// </summary>
+        public override string DisplayValue
+        {
+            get {
+                return Resources.PipelineElement_BackToForwardSlashes;
+            }
+        }
         
         /// <summary>
         /// Encodes this pipeline element in a string.
@@ -989,6 +1056,16 @@ namespace PathCopyCopy.Settings.Core.Plugins
                 return CODE;
             }
         }
+
+        /// <summary>
+        /// Pipeline element display value for the UI.
+        /// </summary>
+        public override string DisplayValue
+        {
+            get {
+                return Resources.PipelineElement_ForwardToBackslashes;
+            }
+        }
         
         /// <summary>
         /// Encodes this pipeline element in a string.
@@ -1019,6 +1096,16 @@ namespace PathCopyCopy.Settings.Core.Plugins
         {
             get {
                 return CODE;
+            }
+        }
+
+        /// <summary>
+        /// Pipeline element display value for the UI.
+        /// </summary>
+        public override string DisplayValue
+        {
+            get {
+                return Resources.PipelineElement_RemoveExt;
             }
         }
 
@@ -1060,6 +1147,16 @@ namespace PathCopyCopy.Settings.Core.Plugins
         {
             get {
                 return CODE;
+            }
+        }
+
+        /// <summary>
+        /// Pipeline element display value for the UI.
+        /// </summary>
+        public override string DisplayValue
+        {
+            get {
+                return Resources.PipelineElement_FindReplace;
             }
         }
 
@@ -1139,6 +1236,16 @@ namespace PathCopyCopy.Settings.Core.Plugins
         {
             get {
                 return CODE;
+            }
+        }
+
+        /// <summary>
+        /// Pipeline element display value for the UI.
+        /// </summary>
+        public override string DisplayValue
+        {
+            get {
+                return Resources.PipelineElement_Regex;
             }
         }
 
@@ -1245,6 +1352,16 @@ namespace PathCopyCopy.Settings.Core.Plugins
         }
 
         /// <summary>
+        /// Pipeline element display value for the UI.
+        /// </summary>
+        public override string DisplayValue
+        {
+            get {
+                return Resources.PipelineElement_ApplyPlugin;
+            }
+        }
+
+        /// <summary>
         /// ID of plugin to apply to the path.
         /// </summary>
         public Guid PluginID
@@ -1299,6 +1416,16 @@ namespace PathCopyCopy.Settings.Core.Plugins
         {
             get {
                 return CODE;
+            }
+        }
+
+        /// <summary>
+        /// Pipeline element display value for the UI.
+        /// </summary>
+        public override string DisplayValue
+        {
+            get {
+                return Resources.PipelineElement_PathsSeparator;
             }
         }
 
@@ -1371,6 +1498,16 @@ namespace PathCopyCopy.Settings.Core.Plugins
         }
 
         /// <summary>
+        /// Pipeline element display value for the UI.
+        /// </summary>
+        public override string DisplayValue
+        {
+            get {
+                return Resources.PipelineElement_Executable;
+            }
+        }
+
+        /// <summary>
         /// Minumum version of Path Copy Copy required to use this pipeline element.
         /// </summary>
         public override Version RequiredVersion
@@ -1435,6 +1572,16 @@ namespace PathCopyCopy.Settings.Core.Plugins
         {
             get {
                 return CODE;
+            }
+        }
+
+        /// <summary>
+        /// Pipeline element display value for the UI.
+        /// </summary>
+        public override string DisplayValue
+        {
+            get {
+                return Resources.PipelineElement_ExecutableWithFilelist;
             }
         }
 

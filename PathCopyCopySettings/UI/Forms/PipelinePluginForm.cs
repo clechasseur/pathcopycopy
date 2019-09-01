@@ -39,9 +39,6 @@ namespace PathCopyCopy.Settings.UI.Forms
         /// Paths separator that copies multiple paths on the same line.
         private const string PATHS_SEPARATOR_ON_SAME_LINE = " ";
 
-        /// Object to access user settings.
-        private UserSettings settings;
-
         /// Plugin info for the plugin we're editing.
         private PipelinePluginInfo pluginInfo;
 
@@ -66,8 +63,6 @@ namespace PathCopyCopy.Settings.UI.Forms
         /// if the user accepted the changes.
         /// </summary>
         /// <param name="owner">Owner of this dialog. Can be <c>null</c>.</param>
-        /// <param name="settings">Object to access user settings. If <c>null</c>,
-        /// a new <see cref="UserSettings"/> object will be created.</param>
         /// <param name="oldInfo">Info about a pipeline plugin. If set, we'll
         /// populate the form with the plugin's values to allow the user to
         /// edit the plugin.</param>
@@ -75,12 +70,9 @@ namespace PathCopyCopy.Settings.UI.Forms
         /// chose to switch to Expert Mode.</param>
         /// <returns>Info about the new plugin that user edited. Will be
         /// <c>null</c> if user cancels editing.</returns>
-        public PipelinePluginInfo EditPlugin(IWin32Window owner, UserSettings settings,
-            PipelinePluginInfo oldInfo, out bool switchToExpert)
+        public PipelinePluginInfo EditPlugin(IWin32Window owner, PipelinePluginInfo oldInfo,
+            out bool switchToExpert)
         {
-            // Save settings object or create one if we didn't get one.
-            this.settings = settings ?? new UserSettings();
-
             // Save old info so that the OnLoad event handler can use it.
             pluginInfo = oldInfo;
 
@@ -110,7 +102,10 @@ namespace PathCopyCopy.Settings.UI.Forms
             // First load list of plugins to display in the listbox for the base
             // plugin. We only load default and COM plugins for this since we
             // don't want a pipeline plugin to be based off another (for now at least).
-            List<Plugin> plugins = PluginsRegistry.GetPluginsInDefaultOrder(settings, false);
+            List<Plugin> plugins;
+            using (UserSettings settings = new UserSettings()) {
+                plugins = PluginsRegistry.GetPluginsInDefaultOrder(settings, false);
+            }
 
             // Add all plugins to the list box.
             BasePluginLst.Items.AddRange(plugins.ToArray());
