@@ -26,9 +26,11 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Serialization;
 using PathCopyCopy.Settings.Properties;
+using PathCopyCopy.Settings.UI.UserControls;
 
 namespace PathCopyCopy.Settings.Core.Plugins
 {
@@ -591,6 +593,23 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// <param name="p_Param">Parameter summary</param>
         /// <returns>Return value summary</returns>
         abstract public string Encode();
+
+        /// <summary>
+        /// Returns a user control to edit this pipeline element. The control
+        /// must be data-bound to the element somehow.
+        /// </summary>
+        /// <returns>User control instance.</returns>
+        /// <remarks>
+        /// A new control will be created every time this is called.
+        /// User assumes "ownership" of the returned control.
+        /// </remarks>
+        public virtual UserControl GetEditingControl()
+        {
+            // By default, we return a user control that has no additional
+            // configuration required. Subclasses that require custom
+            // user controls must override this.
+            return new ConfiglessPipelineElementUserControl();
+        }
         
         /// <summary>
         /// Encodes the specified int value in a format suitable to be included in

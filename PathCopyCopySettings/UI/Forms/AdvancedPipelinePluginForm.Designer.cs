@@ -42,6 +42,7 @@
             this.DeleteElementBtn = new System.Windows.Forms.Button();
             this.MoveElementUpBtn = new System.Windows.Forms.Button();
             this.MoveElementDownBtn = new System.Windows.Forms.Button();
+            this.SelectElementLbl = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // CancelBtn
@@ -51,7 +52,7 @@
             this.CancelBtn.Location = new System.Drawing.Point(551, 395);
             this.CancelBtn.Name = "CancelBtn";
             this.CancelBtn.Size = new System.Drawing.Size(75, 23);
-            this.CancelBtn.TabIndex = 10;
+            this.CancelBtn.TabIndex = 11;
             this.CancelBtn.Text = "Cancel";
             this.AdvancedPipelinePluginToolTip.SetToolTip(this.CancelBtn, "Do not save this custom command and close the window");
             this.CancelBtn.UseVisualStyleBackColor = true;
@@ -63,7 +64,7 @@
             this.OKBtn.Location = new System.Drawing.Point(470, 395);
             this.OKBtn.Name = "OKBtn";
             this.OKBtn.Size = new System.Drawing.Size(75, 23);
-            this.OKBtn.TabIndex = 9;
+            this.OKBtn.TabIndex = 10;
             this.OKBtn.Text = "OK";
             this.AdvancedPipelinePluginToolTip.SetToolTip(this.OKBtn, "Save this custom command and close the window");
             this.OKBtn.UseVisualStyleBackColor = true;
@@ -75,7 +76,7 @@
             this.SwitchBtn.Location = new System.Drawing.Point(12, 395);
             this.SwitchBtn.Name = "SwitchBtn";
             this.SwitchBtn.Size = new System.Drawing.Size(94, 23);
-            this.SwitchBtn.TabIndex = 8;
+            this.SwitchBtn.TabIndex = 9;
             this.SwitchBtn.Text = "Simple Mode";
             this.AdvancedPipelinePluginToolTip.SetToolTip(this.SwitchBtn, "Switch to Simple Mode, which is easier to use but has less customzation options");
             this.SwitchBtn.UseVisualStyleBackColor = true;
@@ -117,8 +118,9 @@
             this.ElementsLst.Location = new System.Drawing.Point(12, 67);
             this.ElementsLst.Name = "ElementsLst";
             this.ElementsLst.Size = new System.Drawing.Size(238, 316);
-            this.ElementsLst.TabIndex = 7;
+            this.ElementsLst.TabIndex = 8;
             this.AdvancedPipelinePluginToolTip.SetToolTip(this.ElementsLst, "List of elements in this custom command");
+            this.ElementsLst.SelectedIndexChanged += new System.EventHandler(this.ElementsLst_SelectedIndexChanged);
             // 
             // NewElementBtn
             // 
@@ -128,7 +130,7 @@
             this.NewElementBtn.Name = "NewElementBtn";
             this.NewElementBtn.Size = new System.Drawing.Size(23, 23);
             this.NewElementBtn.TabIndex = 3;
-            this.AdvancedPipelinePluginToolTip.SetToolTip(this.NewElementBtn, "Add a new element in this custom command");
+            this.AdvancedPipelinePluginToolTip.SetToolTip(this.NewElementBtn, "Add a new element to this custom command");
             this.NewElementBtn.UseVisualStyleBackColor = true;
             // 
             // ElementsImageList
@@ -176,6 +178,15 @@
             this.AdvancedPipelinePluginToolTip.SetToolTip(this.MoveElementDownBtn, "Move the selected element down one position");
             this.MoveElementDownBtn.UseVisualStyleBackColor = true;
             // 
+            // SelectElementLbl
+            // 
+            this.SelectElementLbl.AutoSize = true;
+            this.SelectElementLbl.Location = new System.Drawing.Point(256, 67);
+            this.SelectElementLbl.Name = "SelectElementLbl";
+            this.SelectElementLbl.Size = new System.Drawing.Size(266, 13);
+            this.SelectElementLbl.TabIndex = 7;
+            this.SelectElementLbl.Text = "Please select an element in the list to edit its properties.";
+            // 
             // AdvancedPipelinePluginForm
             // 
             this.AcceptButton = this.OKBtn;
@@ -183,6 +194,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.CancelBtn;
             this.ClientSize = new System.Drawing.Size(638, 430);
+            this.Controls.Add(this.SelectElementLbl);
             this.Controls.Add(this.MoveElementDownBtn);
             this.Controls.Add(this.MoveElementUpBtn);
             this.Controls.Add(this.DeleteElementBtn);
@@ -196,6 +208,7 @@
             this.Controls.Add(this.CancelBtn);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(654, 469);
             this.Name = "AdvancedPipelinePluginForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
@@ -223,5 +236,6 @@
         private System.Windows.Forms.Button DeleteElementBtn;
         private System.Windows.Forms.Button MoveElementUpBtn;
         private System.Windows.Forms.Button MoveElementDownBtn;
+        private System.Windows.Forms.Label SelectElementLbl;
     }
 }

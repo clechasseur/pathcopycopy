@@ -21,6 +21,7 @@
 
 using System;
 using System.Diagnostics;
+using System.Drawing;
 using System.Windows.Forms;
 using PathCopyCopy.Settings.Core.Plugins;
 using PathCopyCopy.Settings.Properties;
@@ -39,6 +40,9 @@ namespace PathCopyCopy.Settings.UI.Forms
 
         /// Pipeline of the plugin info, if we have one.
         private Pipeline pipeline;
+
+        /// User control to edit currently-selected pipeline element.
+        private UserControl currentUserControl;
 
         /// <summary>
         /// Constructor.
@@ -99,6 +103,9 @@ namespace PathCopyCopy.Settings.UI.Forms
             // Populate our controls.
             NameTxt.Text = pluginInfo?.Description ?? String.Empty;
             ElementsLst.DataSource = pipeline.Elements;
+
+            // Update initial controls.
+            UpdateControls();
         }
 
         /// <summary>
@@ -145,6 +152,48 @@ namespace PathCopyCopy.Settings.UI.Forms
                     e.Cancel = true;
                 }
             }
+        }
+
+        /// <summary>
+        /// Updates controls that are dependent on the list selection.
+        /// </summary>
+        private void UpdateControls()
+        {
+            DeleteElementBtn.Enabled = ElementsLst.SelectedIndex >= 0;
+            MoveElementUpBtn.Enabled = ElementsLst.SelectedIndex > 0;
+            MoveElementDownBtn.Enabled = ElementsLst.SelectedIndex >= 0 &&
+                ElementsLst.SelectedIndex < (pipeline.Elements.Count - 1);
+        }
+
+        /// <summary>
+        /// Called when a new pipeline element is selected in the list.
+        /// We must show the appropriate user control to enable editing.
+        /// </summary>
+        /// <param name="sender">Event sender.</param>
+        /// <param name="e">Event arguments.</param>
+        private void ElementsLst_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (currentUserControl != null) {
+                // We currently display a user control for another element, remove it.
+                Controls.Remove(currentUserControl);
+                currentUserControl.Dispose();
+                currentUserControl = null;
+            }
+
+            // Show or hide label instructing user to select an element.
+            SelectElementLbl.Visible = ElementsLst.SelectedIndex < 0;
+
+            // If user selected an element, display its control.
+            if (ElementsLst.SelectedIndex >= 0) {
+                currentUserControl = pipeline.Elements[ElementsLst.SelectedIndex].GetEditingControl();
+                Controls.Add(currentUserControl);
+                currentUserControl.Location = SelectElementLbl.Location;
+                currentUserControl.Size = new Size(this.Size.Width - currentUserControl.Location.X - 23, ElementsLst.Size.Height);
+                currentUserControl.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Right;
+            }
+
+            // Update selection-dependent controls.
+            UpdateControls();
         }
     }
 }
