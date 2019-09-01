@@ -321,4 +321,7 @@ Control-click to avoid displaying an icon for this command.</value>
   <data name="MSYS_PATH_PLUGIN_ID" xml:space="preserve">
     <value>{31022A3D-6FEE-4B36-843E-BBB4556AB35B}</value>
   </data>
+  <data name="PipelinePluginForm_PipelineTooComplexForSimpleMode" xml:space="preserve">
+    <value>This custom command is now too complex to be edited in Simple Mode. If you switch, you will lose some customization. Do you really want to switch to Simple Mode?</value>
+  </data>
 </root>

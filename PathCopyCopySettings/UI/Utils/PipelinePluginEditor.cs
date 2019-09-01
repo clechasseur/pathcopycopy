@@ -118,19 +118,23 @@ namespace PathCopyCopy.Settings.UI.Utils
         private PipelinePluginInfo Edit()
         {
             // Determine what form to show initially depending on the complexity of the pipeline.
-            bool advanced = pipeline == null || IsPipelineSimple(pipeline);
+            bool advanced = pipeline != null && !IsPipelineSimple(pipeline);
 
             // Loop until user is satisfied.
             PipelinePluginInfo info = pluginInfo;
             bool switchMode = true;
             while (switchMode) {
                 if (advanced) {
-                    // TODO
-                    advanced = false;
+                    using (AdvancedPipelinePluginForm editForm = new AdvancedPipelinePluginForm()) {
+                        info = editForm.EditPlugin(owner, settings, info, out switchMode);
+                    }
                 } else {
                     using (PipelinePluginForm editForm = new PipelinePluginForm()) {
                         info = editForm.EditPlugin(owner, settings, info, out switchMode);
                     }
+                }
+                if (switchMode) {
+                    advanced = !advanced;
                 }
             }
 

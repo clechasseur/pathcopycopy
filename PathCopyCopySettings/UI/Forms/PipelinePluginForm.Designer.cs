@@ -499,7 +499,7 @@
             this.OKBtn.Location = new System.Drawing.Point(238, 585);
             this.OKBtn.Name = "OKBtn";
             this.OKBtn.Size = new System.Drawing.Size(75, 23);
-            this.OKBtn.TabIndex = 3;
+            this.OKBtn.TabIndex = 4;
             this.OKBtn.Text = "OK";
             this.PipelinePluginToolTip.SetToolTip(this.OKBtn, "Save this custom command and close the window");
             this.OKBtn.UseVisualStyleBackColor = true;
@@ -511,7 +511,7 @@
             this.CancelBtn.Location = new System.Drawing.Point(319, 585);
             this.CancelBtn.Name = "CancelBtn";
             this.CancelBtn.Size = new System.Drawing.Size(75, 23);
-            this.CancelBtn.TabIndex = 4;
+            this.CancelBtn.TabIndex = 5;
             this.CancelBtn.Text = "Cancel";
             this.PipelinePluginToolTip.SetToolTip(this.CancelBtn, "Do not save this custom command and close the window");
             this.CancelBtn.UseVisualStyleBackColor = true;
@@ -528,7 +528,7 @@
             this.SwitchBtn.Location = new System.Drawing.Point(12, 585);
             this.SwitchBtn.Name = "SwitchBtn";
             this.SwitchBtn.Size = new System.Drawing.Size(94, 23);
-            this.SwitchBtn.TabIndex = 5;
+            this.SwitchBtn.TabIndex = 3;
             this.SwitchBtn.Text = "Expert Mode";
             this.PipelinePluginToolTip.SetToolTip(this.SwitchBtn, "Switch to Expert Mode, which allows more customization options but is more comple" +
         "x to use");

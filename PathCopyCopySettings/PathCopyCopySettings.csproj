@@ -71,6 +71,12 @@
     <Compile Include="3rdParty\CommandLineArguments.cs" />
     <Compile Include="Core\Plugins\COMPluginExecutor.cs" />
     <Compile Include="Core\Plugins\COMPlugin.cs" />
+    <Compile Include="UI\Forms\AdvancedPipelinePluginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\AdvancedPipelinePluginForm.Designer.cs">
+      <DependentUpon>AdvancedPipelinePluginForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Utils\CursorChanger.cs" />
     <Compile Include="UI\Forms\ImportPipelinePluginsForm.cs">
       <SubType>Form</SubType>
@@ -99,6 +105,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\Utils\PipelinePluginEditor.cs" />
     <Compile Include="UI\Utils\PluginDisplayInfo.cs" />
+    <EmbeddedResource Include="UI\Forms\AdvancedPipelinePluginForm.resx">
+      <DependentUpon>AdvancedPipelinePluginForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\ImportPipelinePluginsForm.resx">
       <DependentUpon>ImportPipelinePluginsForm.cs</DependentUpon>
       <SubType>Designer</SubType>

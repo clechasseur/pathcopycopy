@@ -461,6 +461,15 @@ namespace PathCopyCopy.Settings.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This custom command is now too complex to be edited in Simple Mode. If you switch, you will lose some customization. Do you really want to switch to Simple Mode?.
+        /// </summary>
+        internal static string PipelinePluginForm_PipelineTooComplexForSimpleMode {
+            get {
+                return ResourceManager.GetString("PipelinePluginForm_PipelineTooComplexForSimpleMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} (Required version: {1}).
         /// </summary>
         internal static string PipelinePluginInfo_DescriptionWithRequiredVersion {
