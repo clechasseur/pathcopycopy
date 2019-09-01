@@ -34,15 +34,16 @@
             this.SwitchBtn = new System.Windows.Forms.Button();
             this.AdvancedPipelinePluginToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.NameTxt = new System.Windows.Forms.TextBox();
-            this.NameLbl = new System.Windows.Forms.Label();
-            this.ElementsLbl = new System.Windows.Forms.Label();
             this.ElementsLst = new System.Windows.Forms.ListBox();
             this.NewElementBtn = new System.Windows.Forms.Button();
             this.ElementsImageList = new System.Windows.Forms.ImageList(this.components);
             this.DeleteElementBtn = new System.Windows.Forms.Button();
             this.MoveElementUpBtn = new System.Windows.Forms.Button();
             this.MoveElementDownBtn = new System.Windows.Forms.Button();
+            this.NameLbl = new System.Windows.Forms.Label();
+            this.ElementsLbl = new System.Windows.Forms.Label();
             this.SelectElementLbl = new System.Windows.Forms.Label();
+            this.NewElementContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.SuspendLayout();
             // 
             // CancelBtn
@@ -91,24 +92,6 @@
             this.NameTxt.TabIndex = 1;
             this.AdvancedPipelinePluginToolTip.SetToolTip(this.NameTxt, "Name of this custom command");
             // 
-            // NameLbl
-            // 
-            this.NameLbl.AutoSize = true;
-            this.NameLbl.Location = new System.Drawing.Point(12, 15);
-            this.NameLbl.Name = "NameLbl";
-            this.NameLbl.Size = new System.Drawing.Size(38, 13);
-            this.NameLbl.TabIndex = 0;
-            this.NameLbl.Text = "&Name:";
-            // 
-            // ElementsLbl
-            // 
-            this.ElementsLbl.AutoSize = true;
-            this.ElementsLbl.Location = new System.Drawing.Point(12, 48);
-            this.ElementsLbl.Name = "ElementsLbl";
-            this.ElementsLbl.Size = new System.Drawing.Size(53, 13);
-            this.ElementsLbl.TabIndex = 2;
-            this.ElementsLbl.Text = "Elements:";
-            // 
             // ElementsLst
             // 
             this.ElementsLst.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -132,6 +115,7 @@
             this.NewElementBtn.TabIndex = 3;
             this.AdvancedPipelinePluginToolTip.SetToolTip(this.NewElementBtn, "Add a new element to this custom command");
             this.NewElementBtn.UseVisualStyleBackColor = true;
+            this.NewElementBtn.Click += new System.EventHandler(this.NewElementBtn_Click);
             // 
             // ElementsImageList
             // 
@@ -178,6 +162,24 @@
             this.AdvancedPipelinePluginToolTip.SetToolTip(this.MoveElementDownBtn, "Move the selected element down one position");
             this.MoveElementDownBtn.UseVisualStyleBackColor = true;
             // 
+            // NameLbl
+            // 
+            this.NameLbl.AutoSize = true;
+            this.NameLbl.Location = new System.Drawing.Point(12, 15);
+            this.NameLbl.Name = "NameLbl";
+            this.NameLbl.Size = new System.Drawing.Size(38, 13);
+            this.NameLbl.TabIndex = 0;
+            this.NameLbl.Text = "&Name:";
+            // 
+            // ElementsLbl
+            // 
+            this.ElementsLbl.AutoSize = true;
+            this.ElementsLbl.Location = new System.Drawing.Point(12, 48);
+            this.ElementsLbl.Name = "ElementsLbl";
+            this.ElementsLbl.Size = new System.Drawing.Size(53, 13);
+            this.ElementsLbl.TabIndex = 2;
+            this.ElementsLbl.Text = "Elements:";
+            // 
             // SelectElementLbl
             // 
             this.SelectElementLbl.AutoSize = true;
@@ -186,6 +188,11 @@
             this.SelectElementLbl.Size = new System.Drawing.Size(266, 13);
             this.SelectElementLbl.TabIndex = 7;
             this.SelectElementLbl.Text = "Please select an element in the list to edit its properties.";
+            // 
+            // NewElementContextMenuStrip
+            // 
+            this.NewElementContextMenuStrip.Name = "NewElementContextMenuStrip";
+            this.NewElementContextMenuStrip.Size = new System.Drawing.Size(61, 4);
             // 
             // AdvancedPipelinePluginForm
             // 
@@ -237,5 +244,6 @@
         private System.Windows.Forms.Button MoveElementUpBtn;
         private System.Windows.Forms.Button MoveElementDownBtn;
         private System.Windows.Forms.Label SelectElementLbl;
+        private System.Windows.Forms.ContextMenuStrip NewElementContextMenuStrip;
     }
 }

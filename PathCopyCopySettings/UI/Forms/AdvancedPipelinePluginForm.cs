@@ -100,6 +100,12 @@ namespace PathCopyCopy.Settings.UI.Forms
         {
             Debug.Assert(pipeline != null);
 
+            // Populate the context menu strip used to create new elements.
+            // We do this in code to be able to reuse resources to avoid string duplication.
+            NewElementContextMenuStrip.Items.Add(Resources.PipelineElement_ApplyPlugin);
+            NewElementContextMenuStrip.Items.Add("-");
+            NewElementContextMenuStrip.Items.Add(Resources.PipelineElement_RemoveExt);
+
             // Populate our controls.
             NameTxt.Text = pluginInfo?.Description ?? String.Empty;
             ElementsLst.DataSource = pipeline.Elements;
@@ -194,6 +200,17 @@ namespace PathCopyCopy.Settings.UI.Forms
 
             // Update selection-dependent controls.
             UpdateControls();
+        }
+
+        /// <summary>
+        /// Called when the user clicks the button to create a new pipeline element.
+        /// We must display a drop-down menu with the choice of element types.
+        /// </summary>
+        /// <param name="sender">Event sender.</param>
+        /// <param name="e">Event arguments.</param>
+        private void NewElementBtn_Click(object sender, EventArgs e)
+        {
+            NewElementContextMenuStrip.Show(NewElementBtn, new Point(0, NewElementBtn.Size.Height));
         }
     }
 }
