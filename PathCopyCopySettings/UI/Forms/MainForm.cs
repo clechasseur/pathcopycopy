@@ -1094,33 +1094,31 @@ namespace PathCopyCopy.Settings.UI.Forms
             PipelinePluginInfo pluginInfo = ((PipelinePlugin) oldDisplayInfo.Plugin).Info;
 
             // Ask user to edit the plugin info.
-            using (PipelinePluginForm editForm = new PipelinePluginForm()) {
-                try {
-                    PipelinePluginInfo newPluginInfo = editForm.EditPlugin(this, settings, pluginInfo);
-                    if (newPluginInfo != null) {
-                        // Replace the existing plugin object in the data grid.
-                        Debug.Assert(newPluginInfo.Id == pluginInfo.Id);
-                        PluginDisplayInfo newDisplayInfo = new PluginDisplayInfo(newPluginInfo.ToPlugin());
-                        newDisplayInfo.ShowInMainMenu = oldDisplayInfo.ShowInMainMenu;
-                        newDisplayInfo.ShowInSubmenu = oldDisplayInfo.ShowInSubmenu;
-                        pluginDisplayInfos.RemoveAt(rowIndex);
-                        pluginDisplayInfos.Insert(rowIndex, newDisplayInfo);
+            try {
+                PipelinePluginInfo newPluginInfo = PipelinePluginEditor.EditPlugin(this, settings, pluginInfo);
+                if (newPluginInfo != null) {
+                    // Replace the existing plugin object in the data grid.
+                    Debug.Assert(newPluginInfo.Id == pluginInfo.Id);
+                    PluginDisplayInfo newDisplayInfo = new PluginDisplayInfo(newPluginInfo.ToPlugin());
+                    newDisplayInfo.ShowInMainMenu = oldDisplayInfo.ShowInMainMenu;
+                    newDisplayInfo.ShowInSubmenu = oldDisplayInfo.ShowInSubmenu;
+                    pluginDisplayInfos.RemoveAt(rowIndex);
+                    pluginDisplayInfos.Insert(rowIndex, newDisplayInfo);
 
-                        // Make sure to reselect the plugin.
-                        PluginsDataGrid.ClearSelection();
-                        PluginsDataGrid.Rows[rowIndex].Selected = true;
-                        if (!PluginsDataGrid.Rows[rowIndex].Displayed) {
-                            PluginsDataGrid.FirstDisplayedScrollingRowIndex = rowIndex;
-                        }
-
-                        // All this will enable the "Apply" button.
-                        ApplyBtn.Enabled = true;
+                    // Make sure to reselect the plugin.
+                    PluginsDataGrid.ClearSelection();
+                    PluginsDataGrid.Rows[rowIndex].Selected = true;
+                    if (!PluginsDataGrid.Rows[rowIndex].Displayed) {
+                        PluginsDataGrid.FirstDisplayedScrollingRowIndex = rowIndex;
                     }
-                } catch (InvalidPipelineException) {
-                    // Maybe a plugin created by a newer version of Path Copy Copy?
-                    MessageBox.Show(this, Resources.MainForm_Error_InvalidPipelinePluginEncodedElements,
-                        Resources.MainForm_Confirm_EditMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    // All this will enable the "Apply" button.
+                    ApplyBtn.Enabled = true;
                 }
+            } catch (InvalidPipelineException) {
+                // Maybe a plugin created by a newer version of Path Copy Copy?
+                MessageBox.Show(this, Resources.MainForm_Error_InvalidPipelinePluginEncodedElements,
+                    Resources.MainForm_Confirm_EditMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
