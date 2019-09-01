@@ -230,8 +230,8 @@ namespace PathCopyCopy.Settings.UI.Forms
         {
             // If user chose to press OK or switch to Expert Mode, save plugin info.
             if (this.DialogResult == DialogResult.OK || this.DialogResult == DialogResult.Retry) {
-                // Make sure user has entered a name.
-                if (!String.IsNullOrEmpty(NameTxt.Text)) {
+                // Make sure user has entered a name (unless we're switching to Expert Mode).
+                if (!String.IsNullOrEmpty(NameTxt.Text) || this.DialogResult == DialogResult.Retry) {
                     // Create a pipeline based on form controls.
                     if (pipeline == null) {
                         pipeline = new Pipeline();

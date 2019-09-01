@@ -100,7 +100,13 @@ namespace PathCopyCopy.Settings.UI.Forms
         /// <param name="e">Event arguments.</param>
         private void AdvancedPipelinePluginForm_Load(object sender, EventArgs e)
         {
-            // TODO
+            if (pluginInfo != null) {
+                Debug.Assert(pipeline != null);
+
+                // Populate our controls.
+                NameTxt.Text = pluginInfo.Description;
+                // TODO
+            }
         }
 
         /// <summary>
@@ -113,34 +119,44 @@ namespace PathCopyCopy.Settings.UI.Forms
         {
             // If user chose to press OK or switch to Simple Mode, save plugin info.
             if (this.DialogResult == DialogResult.OK || this.DialogResult == DialogResult.Retry) {
-                // Create a pipeline based on form controls.
-                if (pipeline == null) {
-                    pipeline = new Pipeline();
-                } else {
-                    //pipeline.Clear(); // TODO clear existing elements
-                }
-                // TODO
-
-                // Create plugin info if we don't already have one.
-                if (pluginInfo == null) {
-                    pluginInfo = new PipelinePluginInfo();
-                    pluginInfo.Id = Guid.NewGuid();
-                }
-
-                // Save info in plugin info wrapper.
-                //pluginInfo.Description = NameTxt.Text; // TODO save description
-                pluginInfo.EncodedElements = pipeline.Encode();
-                pluginInfo.RequiredVersion = pipeline.RequiredVersion;
-                Debug.Assert(!pluginInfo.Global);
-
-                // If pipeline is too complex, user might lose customization by switching
-                // to simple mode. Warn in this case.
-                if (this.DialogResult == DialogResult.Retry && !PipelinePluginEditor.IsPipelineSimple(pipeline)) {
-                    DialogResult subDialogRes = MessageBox.Show(Resources.PipelinePluginForm_PipelineTooComplexForSimpleMode,
-                        Resources.PipelinePluginForm_MsgTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                    if (subDialogRes == DialogResult.No) {
-                        e.Cancel = true;
+                // Make sure user has entered a name (unless we're switching to Simple Mode).
+                if (!String.IsNullOrEmpty(NameTxt.Text) || this.DialogResult == DialogResult.Retry) {
+                    // Create a pipeline based on form controls.
+                    if (pipeline == null) {
+                        pipeline = new Pipeline();
+                    } else {
+                        //pipeline.Clear(); // TODO clear existing elements
                     }
+                    // TODO
+
+                    // If pipeline is too complex, user might lose customization by switching
+                    // to simple mode. Warn in this case.
+                    if (this.DialogResult == DialogResult.Retry && !PipelinePluginEditor.IsPipelineSimple(pipeline)) {
+                        DialogResult subDialogRes = MessageBox.Show(Resources.PipelinePluginForm_PipelineTooComplexForSimpleMode,
+                            Resources.PipelinePluginForm_MsgTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        if (subDialogRes == DialogResult.No) {
+                            e.Cancel = true;
+                        }
+                    }
+                    if (!e.Cancel) {
+                        // Create plugin info if we don't already have one.
+                        if (pluginInfo == null) {
+                            pluginInfo = new PipelinePluginInfo();
+                            pluginInfo.Id = Guid.NewGuid();
+                        }
+
+                        // Save info in plugin info wrapper.
+                        pluginInfo.Description = NameTxt.Text;
+                        pluginInfo.EncodedElements = pipeline.Encode();
+                        pluginInfo.RequiredVersion = pipeline.RequiredVersion;
+                        Debug.Assert(!pluginInfo.Global);
+                    }
+                } else {
+                    // Warn user that we need a non-empty name.
+                    MessageBox.Show(Resources.PipelinePluginForm_EmptyName, Resources.PipelinePluginForm_MsgTitle,
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    NameTxt.Focus();
+                    e.Cancel = true;
                 }
             }
         }
