@@ -1119,10 +1119,6 @@ namespace PathCopyCopy.Settings.UI.Forms
                 // Maybe a plugin created by a newer version of Path Copy Copy?
                 MessageBox.Show(this, Resources.MainForm_Error_InvalidPipelinePluginEncodedElements,
                     Resources.MainForm_Confirm_EditMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            } catch (PipelinePluginEditorException) {
-                // Maybe a plugin created by a newer version of Path Copy Copy? We can't know for sure though.
-                MessageBox.Show(this, Resources.MainForm_Error_PipelinePluginEditorExceptionThrown,
-                    Resources.MainForm_Confirm_EditMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 

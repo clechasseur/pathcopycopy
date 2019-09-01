@@ -66,6 +66,23 @@ namespace PathCopyCopy.Settings.UI.Utils
         }
 
         /// <summary>
+        /// Determines if the given pipeline is "simple" - e.g., can be
+        /// edited with the simple form instead of the advanced form.
+        /// </summary>
+        /// <param name="pipeline">Pipeline to validate. Cannot be <c>null</c>.</param>
+        /// <returns><c>true</c> if the pipeline can be edited with the
+        /// simple form.</returns>
+        internal static bool IsPipelineSimple(Pipeline pipeline)
+        {
+            Debug.Assert(pipeline != null);
+
+            // All elements must be of different types, and pipeline must contain
+            // an ApplyPlugin element.
+            return pipeline.Elements.Distinct(new PipelineElementEqualityComparerByClassType()).Count() == pipeline.Elements.Count &&
+                pipeline.Elements.Find(el => el is ApplyPluginPipelineElement) != null;
+        }
+
+        /// <summary>
         /// Private constructor called via
         /// <see cref="PipelinePluginEditor.EditPlugin(IWin32Window, UserSettings, PipelinePluginInfo)"/>
         /// </summary>
@@ -104,36 +121,11 @@ namespace PathCopyCopy.Settings.UI.Utils
                 using (PipelinePluginForm editForm = new PipelinePluginForm()) {
                     return editForm.EditPlugin(owner, settings, pluginInfo);
                 }
+            } else if (pluginInfo != null) {
+                throw new InvalidPipelineException(pluginInfo.EncodedElements);
             } else {
-                throw new PipelinePluginEditorException("Pipeline plugin is too complex to edit");
+                throw new InvalidPipelineException();
             }
-        }
-
-        /// <summary>
-        /// Determines if the given pipeline is "simple" - e.g., can be
-        /// edited with the simple form instead of the advanced form.
-        /// </summary>
-        /// <param name="pipeline">Pipeline to validate. Cannot be <c>null</c>.</param>
-        /// <returns><c>true</c> if the pipeline can be edited with the
-        /// simple form.</returns>
-        private static bool IsPipelineSimple(Pipeline pipeline)
-        {
-            Debug.Assert(pipeline != null);
-
-            bool simple = false;
-            if (pipeline.Elements.Count > 0) {
-                // Pipeline must start with an ApplyPlugin element.
-                if (pipeline.Elements.First() is ApplyPluginPipelineElement) {
-                    // All other elements must be of different types and must
-                    // not be ApplyPlugin elements.
-                    if (pipeline.Elements.Distinct(new PipelineElementEqualityComparerByClassType()).Count() == pipeline.Elements.Count) {
-                        // This is a simple pipeline.
-                        simple = true;
-                    }
-                }
-            }
-
-            return simple;
         }
 
         /// <summary>
@@ -155,7 +147,7 @@ namespace PathCopyCopy.Settings.UI.Utils
                 Debug.Assert(x != null);
                 Debug.Assert(y != null);
 
-                return x.GetType().Equals(y.GetType());
+                return GetElementType(x).Equals(GetElementType(y));
             }
 
             /// <summary>
@@ -167,31 +159,33 @@ namespace PathCopyCopy.Settings.UI.Utils
             {
                 Debug.Assert(obj != null);
 
-                return obj.GetType().GetHashCode();
+                return GetElementType(obj).GetHashCode();
             }
-        }
-    }
 
-    /// <summary>
-    /// Exception thrown when something goes wrong when editing a pipeline plugin.
-    /// </summary>
-    public class PipelinePluginEditorException : Exception
-    {
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        public PipelinePluginEditorException()
-            : base()
-        {
-        }
-
-        /// <summary>
-        /// Constructor with exception message.
-        /// </summary>
-        /// <param name="message">Exception message.</param>
-        public PipelinePluginEditorException(string message)
-            : base(message)
-        {
+            /// <summary>
+            /// Returns the <see cref="Type"/> of the given pipeline element.
+            /// We do some substitution behind the scenes for some element types.
+            /// </summary>
+            /// <param name="obj">Element to get type of.</param>
+            /// <returns><see cref="Type"/> of <paramref name="obj"/>.</returns>
+            private Type GetElementType(PipelineElement obj)
+            {
+                // Some elements are mutually exclusive, so we'll consider them
+                // the same type so that using Distinct can detect duplicates.
+                Type type = obj.GetType();
+                if (obj is OptionalQuotesPipelineElement) {
+                    type = typeof(QuotesPipelineElement);
+                } else if (obj is EncodeURIWhitespacePipelineElement) {
+                    type = typeof(EncodeURICharsPipelineElement);
+                } else if (obj is ForwardToBackslashesPipelineElement) {
+                    type = typeof(BackToForwardSlashesPipelineElement);
+                } else if (obj is FindReplacePipelineElement) {
+                    type = typeof(RegexPipelineElement);
+                } else if (obj is ExecutableWithFilelistPipelineElement) {
+                    type = typeof(ExecutablePipelineElement);
+                }
+                return type;
+            }
         }
     }
 }
