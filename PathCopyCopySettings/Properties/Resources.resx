@@ -321,4 +321,7 @@ Control-click to avoid displaying an icon for this command.</value>
   <data name="MSYS_PATH_PLUGIN_ID" xml:space="preserve">
     <value>{31022A3D-6FEE-4B36-843E-BBB4556AB35B}</value>
   </data>
+  <data name="MainForm_Error_PipelinePluginEditorExceptionThrown" xml:space="preserve">
+    <value>An error occured while trying to edit this custom command. Perhaps it has been created by a newer version of Path Copy Copy? It might be impossible to edit it.</value>
+  </data>
 </root>

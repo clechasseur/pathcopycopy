@@ -351,6 +351,15 @@ namespace PathCopyCopy.Settings.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An error occured while trying to edit this custom command. Perhaps it has been created by a newer version of Path Copy Copy? It might be impossible to edit it..
+        /// </summary>
+        internal static string MainForm_Error_PipelinePluginEditorExceptionThrown {
+            get {
+                return ResourceManager.GetString("MainForm_Error_PipelinePluginEditorExceptionThrown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settings have been exported to &quot;{0}&quot;. To import them back (possibly on another machine), simply double-click the .reg file in Windows Explorer..
         /// </summary>
         internal static string MainForm_Msg_UserSettingsExported {
