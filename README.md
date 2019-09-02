@@ -4,4 +4,6 @@ A Windows Explorer add-on that adds a contextual menu item on all files and fold
 
 Works on Windows XP or later. Grab the [latest release here!](https://github.com/clechasseur/pathcopycopy/releases/latest)
 
+For help and information, please refer to the [wiki](https://github.com/clechasseur/pathcopycopy/wiki).
+
 ![The Path Copy Copy contextual menu items](screenshots/PathCopyCopyContextualMenu.png)
