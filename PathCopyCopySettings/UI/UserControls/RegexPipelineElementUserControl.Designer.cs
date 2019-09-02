@@ -27,12 +27,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.FindLbl = new System.Windows.Forms.Label();
             this.ReplaceLbl = new System.Windows.Forms.Label();
             this.ReplaceTxt = new System.Windows.Forms.TextBox();
             this.FindTxt = new System.Windows.Forms.TextBox();
             this.IgnoreCaseChk = new System.Windows.Forms.CheckBox();
             this.TestBtn = new System.Windows.Forms.Button();
+            this.RegexToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // FindLbl
@@ -61,6 +63,8 @@
             this.ReplaceTxt.Name = "ReplaceTxt";
             this.ReplaceTxt.Size = new System.Drawing.Size(158, 20);
             this.ReplaceTxt.TabIndex = 3;
+            this.RegexToolTip.SetToolTip(this.ReplaceTxt, "Expression used to perform replacement in conjunction with the regular expression" +
+        "");
             this.ReplaceTxt.Validated += new System.EventHandler(this.ReplaceTxt_Validated);
             // 
             // FindTxt
@@ -71,6 +75,7 @@
             this.FindTxt.Name = "FindTxt";
             this.FindTxt.Size = new System.Drawing.Size(184, 20);
             this.FindTxt.TabIndex = 1;
+            this.RegexToolTip.SetToolTip(this.FindTxt, "Regular expression to match against the path");
             this.FindTxt.Validated += new System.EventHandler(this.FindTxt_Validated);
             // 
             // IgnoreCaseChk
@@ -81,6 +86,7 @@
             this.IgnoreCaseChk.Size = new System.Drawing.Size(82, 17);
             this.IgnoreCaseChk.TabIndex = 4;
             this.IgnoreCaseChk.Text = "&Ignore case";
+            this.RegexToolTip.SetToolTip(this.IgnoreCaseChk, "Whether to ignore case when performing find/replace operations");
             this.IgnoreCaseChk.UseVisualStyleBackColor = true;
             this.IgnoreCaseChk.CheckedChanged += new System.EventHandler(this.IgnoreCaseChk_CheckedChanged);
             // 
@@ -92,6 +98,7 @@
             this.TestBtn.Size = new System.Drawing.Size(75, 23);
             this.TestBtn.TabIndex = 5;
             this.TestBtn.Text = "&Test...";
+            this.RegexToolTip.SetToolTip(this.TestBtn, "Open a window to test the current regular/replacement expressions");
             this.TestBtn.UseVisualStyleBackColor = true;
             this.TestBtn.Click += new System.EventHandler(this.TestBtn_Click);
             // 
@@ -121,5 +128,6 @@
         private System.Windows.Forms.TextBox FindTxt;
         private System.Windows.Forms.CheckBox IgnoreCaseChk;
         private System.Windows.Forms.Button TestBtn;
+        private System.Windows.Forms.ToolTip RegexToolTip;
     }
 }
