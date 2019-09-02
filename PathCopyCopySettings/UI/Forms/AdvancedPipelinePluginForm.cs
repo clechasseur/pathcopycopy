@@ -20,6 +20,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
@@ -38,8 +39,11 @@ namespace PathCopyCopy.Settings.UI.Forms
         /// Plugin info for the plugin we're editing.
         private PipelinePluginInfo pluginInfo;
 
-        /// Pipeline of the plugin info, if we have one.
+        /// Pipeline of the plugin info.
         private Pipeline pipeline;
+
+        /// Binding list that will store the pipeline elements so that we can use data binding.
+        private BindingList<PipelineElement> elements = new BindingList<PipelineElement>();
 
         /// User control to edit currently-selected pipeline element.
         private UserControl currentUserControl;
@@ -102,13 +106,36 @@ namespace PathCopyCopy.Settings.UI.Forms
 
             // Populate the context menu strip used to create new elements.
             // We do this in code to be able to reuse resources to avoid string duplication.
-            NewElementContextMenuStrip.Items.Add(Resources.PipelineElement_ApplyPlugin);
-            NewElementContextMenuStrip.Items.Add("-");
-            NewElementContextMenuStrip.Items.Add(Resources.PipelineElement_RemoveExt);
+            AddNewElementMenuItem(Resources.PipelineElement_ApplyPlugin,
+                () => new ApplyPluginPipelineElement(new Guid(Resources.LONG_PATH_PLUGIN_ID)));
+            AddNewElementMenuItem("-", null);
+            AddNewElementMenuItem(Resources.PipelineElement_RemoveExt, () => new RemoveExtPipelineElement());
+            AddNewElementMenuItem(Resources.PipelineElement_Quotes, () => new QuotesPipelineElement());
+            AddNewElementMenuItem(Resources.PipelineElement_OptionalQuotes, () => new OptionalQuotesPipelineElement());
+            AddNewElementMenuItem(Resources.PipelineElement_EmailLinks, () => new EmailLinksPipelineElement());
+            AddNewElementMenuItem(Resources.PipelineElement_EncodeURIWhitespace, () => new EncodeURIWhitespacePipelineElement());
+            AddNewElementMenuItem(Resources.PipelineElement_EncodeURIChars, () => new EncodeURICharsPipelineElement());
+            AddNewElementMenuItem("-", null);
+            AddNewElementMenuItem(Resources.PipelineElement_ForwardToBackslashes, () => new ForwardToBackslashesPipelineElement());
+            AddNewElementMenuItem(Resources.PipelineElement_BackToForwardSlashes, () => new BackToForwardSlashesPipelineElement());
+            AddNewElementMenuItem("-", null);
+            AddNewElementMenuItem(Resources.PipelineElement_FindReplace, () => new FindReplacePipelineElement());
+            AddNewElementMenuItem(Resources.PipelineElement_Regex, () => new RegexPipelineElement());
+            AddNewElementMenuItem("-", null);
+            AddNewElementMenuItem(Resources.PipelineElement_PathsSeparator,
+                () => new PathsSeparatorPipelineElement(PipelinePluginEditor.PATHS_SEPARATOR_ON_SAME_LINE));
+            AddNewElementMenuItem(Resources.PipelineElement_Executable, () => new ExecutablePipelineElement());
+            AddNewElementMenuItem(Resources.PipelineElement_ExecutableWithFilelist, () => new ExecutableWithFilelistPipelineElement());
+
+            // Copy pipeline elements from the pipeline to a list that supports data binding.
+            // This is needed otherwise the list box won't properly function.
+            foreach (PipelineElement element in pipeline.Elements) {
+                elements.Add(element);
+            }
 
             // Populate our controls.
             NameTxt.Text = pluginInfo?.Description ?? String.Empty;
-            ElementsLst.DataSource = pipeline.Elements;
+            ElementsLst.DataSource = elements;
 
             // Update initial controls.
             UpdateControls();
@@ -128,6 +155,10 @@ namespace PathCopyCopy.Settings.UI.Forms
             if (this.DialogResult == DialogResult.OK || this.DialogResult == DialogResult.Retry) {
                 // Make sure user has entered a name (unless we're switching to Simple Mode).
                 if (!String.IsNullOrEmpty(NameTxt.Text) || this.DialogResult == DialogResult.Retry) {
+                    // Clear content of pipeline and copy elements back from the binding list.
+                    pipeline.Clear();
+                    pipeline.Elements.AddRange(elements);
+
                     // If pipeline is too complex, user might lose customization by switching
                     // to simple mode. Warn in this case.
                     if (this.DialogResult == DialogResult.Retry && !PipelinePluginEditor.IsPipelineSimple(pipeline)) {
@@ -161,6 +192,21 @@ namespace PathCopyCopy.Settings.UI.Forms
         }
 
         /// <summary>
+        /// Adds a new item to the contextual menu strip used to create
+        /// new pipeline elements.
+        /// </summary>
+        /// <param name="description">Menu item description.</param>
+        /// <param name="creator">Function used to instanciate a new pipeline element.</param>
+        private void AddNewElementMenuItem(string description, Func<PipelineElement> creator)
+        {
+            ToolStripItem newItem = NewElementContextMenuStrip.Items.Add(description);
+            newItem.Click += NewElementMenuItem_Click;
+            if (creator != null) {
+                newItem.Tag = creator;
+            }
+        }
+
+        /// <summary>
         /// Updates controls that are dependent on the list selection.
         /// </summary>
         private void UpdateControls()
@@ -168,7 +214,7 @@ namespace PathCopyCopy.Settings.UI.Forms
             DeleteElementBtn.Enabled = ElementsLst.SelectedIndex >= 0;
             MoveElementUpBtn.Enabled = ElementsLst.SelectedIndex > 0;
             MoveElementDownBtn.Enabled = ElementsLst.SelectedIndex >= 0 &&
-                ElementsLst.SelectedIndex < (pipeline.Elements.Count - 1);
+                ElementsLst.SelectedIndex < (elements.Count - 1);
         }
 
         /// <summary>
@@ -191,7 +237,7 @@ namespace PathCopyCopy.Settings.UI.Forms
 
             // If user selected an element, display its control.
             if (ElementsLst.SelectedIndex >= 0) {
-                currentUserControl = pipeline.Elements[ElementsLst.SelectedIndex].GetEditingControl();
+                currentUserControl = elements[ElementsLst.SelectedIndex].GetEditingControl();
                 Controls.Add(currentUserControl);
                 currentUserControl.Location = SelectElementLbl.Location;
                 currentUserControl.Size = new Size(this.Size.Width - currentUserControl.Location.X - 23, ElementsLst.Size.Height);
@@ -211,6 +257,78 @@ namespace PathCopyCopy.Settings.UI.Forms
         private void NewElementBtn_Click(object sender, EventArgs e)
         {
             NewElementContextMenuStrip.Show(NewElementBtn, new Point(0, NewElementBtn.Size.Height));
+        }
+
+        /// <summary>
+        /// Called when the user selects a menu item to create a new pipeline element.
+        /// We need to instanciate the new element and add it to the pipeline.
+        /// </summary>
+        /// <param name="sender">Event sender.</param>
+        /// <param name="e">Event arguments.</param>
+        private void NewElementMenuItem_Click(object sender, EventArgs e)
+        {
+            // A function to create the new element is stored in the item's Tag.
+            Func<PipelineElement> creator = ((ToolStripMenuItem) sender).Tag as Func<PipelineElement>;
+            if (creator != null) {
+                // Instanciate element and add it to the end of the pipeline.
+                elements.Add(creator());
+
+                // Select the new pipeline element so that user can edit it.
+                ElementsLst.SelectedIndex = elements.Count - 1;
+
+                // Update our selection-dependent controls.
+                UpdateControls();
+            }
+        }
+
+        /// <summary>
+        /// Called when the user clicks on the button to delete a pipeline element.
+        /// </summary>
+        /// <param name="sender">Event sender.</param>
+        /// <param name="e">Event arguments.</param>
+        private void DeleteElementBtn_Click(object sender, EventArgs e)
+        {
+            // Remove selected element then update our selection-dependent controls.
+            elements.RemoveAt(ElementsLst.SelectedIndex);
+            UpdateControls();
+        }
+
+        /// <summary>
+        /// Called when the user clicks on the button to move a pipeline element
+        /// up towards the beginning of the pipeline.
+        /// </summary>
+        /// <param name="sender">Event sender.</param>
+        /// <param name="e">Event arguments.</param>
+        private void MoveElementUpBtn_Click(object sender, EventArgs e)
+        {
+            // We need to remove element and reinsert it.
+            int selectedIdx = ElementsLst.SelectedIndex;
+            PipelineElement element = elements[selectedIdx];
+            elements.RemoveAt(selectedIdx);
+            elements.Insert(selectedIdx - 1, element);
+
+            // Reselect the element and update our selection-dependent controls.
+            ElementsLst.SelectedIndex = selectedIdx - 1;
+            UpdateControls();
+        }
+
+        /// <summary>
+        /// Called when the user clicks on the button to move a pipeline element
+        /// down towards the end of the pipeline.
+        /// </summary>
+        /// <param name="sender">Event sender.</param>
+        /// <param name="e">Event arguments.</param>
+        private void MoveElementDownBtn_Click(object sender, EventArgs e)
+        {
+            // We need to remove element and reinsert it.
+            int selectedIdx = ElementsLst.SelectedIndex;
+            PipelineElement element = elements[selectedIdx];
+            elements.RemoveAt(selectedIdx);
+            elements.Insert(selectedIdx + 1, element);
+
+            // Reselect the element and update our selection-dependent controls.
+            ElementsLst.SelectedIndex = selectedIdx + 1;
+            UpdateControls();
         }
     }
 }

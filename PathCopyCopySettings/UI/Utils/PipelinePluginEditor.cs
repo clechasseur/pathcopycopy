@@ -35,6 +35,9 @@ namespace PathCopyCopy.Settings.UI.Utils
     /// </summary>
     public sealed class PipelinePluginEditor
     {
+        /// Paths separator that copies multiple paths on the same line.
+        internal const string PATHS_SEPARATOR_ON_SAME_LINE = " ";
+
         /// Owner of any form we create.
         private IWin32Window owner;
 

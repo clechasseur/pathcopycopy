@@ -27,6 +27,7 @@ using System.Windows.Forms;
 using PathCopyCopy.Settings.Core;
 using PathCopyCopy.Settings.Core.Plugins;
 using PathCopyCopy.Settings.Properties;
+using PathCopyCopy.Settings.UI.Utils;
 
 namespace PathCopyCopy.Settings.UI.Forms
 {
@@ -36,9 +37,6 @@ namespace PathCopyCopy.Settings.UI.Forms
     /// </summary>
     public partial class PipelinePluginForm : Form
     {
-        /// Paths separator that copies multiple paths on the same line.
-        private const string PATHS_SEPARATOR_ON_SAME_LINE = " ";
-
         /// Plugin info for the plugin we're editing.
         private PipelinePluginInfo pluginInfo;
 
@@ -164,7 +162,7 @@ namespace PathCopyCopy.Settings.UI.Forms
                 // "Copy on same line" is a little special since it could be any string.
                 element = pipeline.Elements.Find(el => el is PathsSeparatorPipelineElement);
                 pathsSeparator = element == null ? null : ((PathsSeparatorPipelineElement) element).PathsSeparator;
-                if (pathsSeparator == PATHS_SEPARATOR_ON_SAME_LINE) {
+                if (pathsSeparator == PipelinePluginEditor.PATHS_SEPARATOR_ON_SAME_LINE) {
                     CopyOnSameLineChk.Checked = true;
                 } else if (!String.IsNullOrEmpty(pathsSeparator)) {
                     CopyOnSameLineChk.Enabled = false;
@@ -242,7 +240,7 @@ namespace PathCopyCopy.Settings.UI.Forms
                     }
                     if (CopyOnSameLineChk.Enabled) {
                         if (CopyOnSameLineChk.Checked) {
-                            pipeline.Elements.Add(new PathsSeparatorPipelineElement(PATHS_SEPARATOR_ON_SAME_LINE));
+                            pipeline.Elements.Add(new PathsSeparatorPipelineElement(PipelinePluginEditor.PATHS_SEPARATOR_ON_SAME_LINE));
                         }
                     } else {
                         // Copy non-standard value we had earlier

@@ -137,6 +137,7 @@
             this.DeleteElementBtn.TabIndex = 4;
             this.AdvancedPipelinePluginToolTip.SetToolTip(this.DeleteElementBtn, "Remove the selected element from this custom command");
             this.DeleteElementBtn.UseVisualStyleBackColor = true;
+            this.DeleteElementBtn.Click += new System.EventHandler(this.DeleteElementBtn_Click);
             // 
             // MoveElementUpBtn
             // 
@@ -149,6 +150,7 @@
             this.MoveElementUpBtn.TabIndex = 5;
             this.AdvancedPipelinePluginToolTip.SetToolTip(this.MoveElementUpBtn, "Move the selected element up one position");
             this.MoveElementUpBtn.UseVisualStyleBackColor = true;
+            this.MoveElementUpBtn.Click += new System.EventHandler(this.MoveElementUpBtn_Click);
             // 
             // MoveElementDownBtn
             // 
@@ -161,6 +163,7 @@
             this.MoveElementDownBtn.TabIndex = 6;
             this.AdvancedPipelinePluginToolTip.SetToolTip(this.MoveElementDownBtn, "Move the selected element down one position");
             this.MoveElementDownBtn.UseVisualStyleBackColor = true;
+            this.MoveElementDownBtn.Click += new System.EventHandler(this.MoveElementDownBtn_Click);
             // 
             // NameLbl
             // 
