@@ -225,28 +225,36 @@ namespace PathCopyCopy.Settings.UI.Forms
         /// <param name="e">Event arguments.</param>
         private void ElementsLst_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (currentUserControl != null) {
-                // We currently display a user control for another element, remove it.
-                Controls.Remove(currentUserControl);
-                currentUserControl.Dispose();
-                currentUserControl = null;
+            // Suspend layout operations while we modify our controls.
+            SuspendLayout();
+            try {
+                if (currentUserControl != null) {
+                    // We currently display a user control for another element, remove it.
+                    Controls.Remove(currentUserControl);
+                    currentUserControl.Dispose();
+                    currentUserControl = null;
+                }
+
+                // Show or hide label instructing user to select an element.
+                SelectElementLbl.Visible = ElementsLst.SelectedIndex < 0;
+
+                // If user selected an element, display its control.
+                if (ElementsLst.SelectedIndex >= 0) {
+                    currentUserControl = elements[ElementsLst.SelectedIndex].GetEditingControl();
+                    currentUserControl.Visible = false;
+                    Controls.Add(currentUserControl);
+                    currentUserControl.Location = SelectElementLbl.Location;
+                    currentUserControl.Size = new Size(this.Size.Width - currentUserControl.Location.X - 23, ElementsLst.Size.Height);
+                    currentUserControl.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Right;
+                    currentUserControl.TabIndex = SelectElementLbl.TabIndex;
+                    currentUserControl.Visible = true;
+                }
+
+                // Update selection-dependent controls.
+                UpdateControls();
+            } finally {
+                ResumeLayout(true);
             }
-
-            // Show or hide label instructing user to select an element.
-            SelectElementLbl.Visible = ElementsLst.SelectedIndex < 0;
-
-            // If user selected an element, display its control.
-            if (ElementsLst.SelectedIndex >= 0) {
-                currentUserControl = elements[ElementsLst.SelectedIndex].GetEditingControl();
-                Controls.Add(currentUserControl);
-                currentUserControl.Location = SelectElementLbl.Location;
-                currentUserControl.Size = new Size(this.Size.Width - currentUserControl.Location.X - 23, ElementsLst.Size.Height);
-                currentUserControl.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Right;
-                currentUserControl.TabIndex = SelectElementLbl.TabIndex;
-            }
-
-            // Update selection-dependent controls.
-            UpdateControls();
         }
 
         /// <summary>
