@@ -244,8 +244,11 @@ namespace PathCopyCopy.Settings.UI.Forms
                     currentUserControl.Visible = false;
                     Controls.Add(currentUserControl);
                     currentUserControl.Location = SelectElementLbl.Location;
-                    currentUserControl.Size = new Size(this.Size.Width - currentUserControl.Location.X - 23, ElementsLst.Size.Height);
-                    currentUserControl.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Right;
+                    currentUserControl.Size = new Size(this.Size.Width - currentUserControl.Location.X -
+                        (this.Size.Width - (NameTxt.Location.X + NameTxt.Size.Width)),
+                        ElementsLst.Size.Height);
+                    currentUserControl.Anchor = AnchorStyles.Top | AnchorStyles.Left |
+                        AnchorStyles.Bottom | AnchorStyles.Right;
                     currentUserControl.TabIndex = SelectElementLbl.TabIndex;
                     currentUserControl.Visible = true;
                 }
