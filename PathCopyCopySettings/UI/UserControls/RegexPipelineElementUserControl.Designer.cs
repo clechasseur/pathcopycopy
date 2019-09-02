@@ -61,7 +61,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ReplaceTxt.Location = new System.Drawing.Point(129, 26);
             this.ReplaceTxt.Name = "ReplaceTxt";
-            this.ReplaceTxt.Size = new System.Drawing.Size(158, 20);
+            this.ReplaceTxt.Size = new System.Drawing.Size(161, 20);
             this.ReplaceTxt.TabIndex = 3;
             this.RegexToolTip.SetToolTip(this.ReplaceTxt, "Expression used to perform replacement in conjunction with the regular expression" +
         "");
@@ -73,7 +73,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.FindTxt.Location = new System.Drawing.Point(103, 0);
             this.FindTxt.Name = "FindTxt";
-            this.FindTxt.Size = new System.Drawing.Size(184, 20);
+            this.FindTxt.Size = new System.Drawing.Size(187, 20);
             this.FindTxt.TabIndex = 1;
             this.RegexToolTip.SetToolTip(this.FindTxt, "Regular expression to match against the path");
             this.FindTxt.Validated += new System.EventHandler(this.FindTxt_Validated);
@@ -93,7 +93,7 @@
             // TestBtn
             // 
             this.TestBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.TestBtn.Location = new System.Drawing.Point(212, 52);
+            this.TestBtn.Location = new System.Drawing.Point(215, 52);
             this.TestBtn.Name = "TestBtn";
             this.TestBtn.Size = new System.Drawing.Size(75, 23);
             this.TestBtn.TabIndex = 5;
@@ -113,7 +113,7 @@
             this.Controls.Add(this.ReplaceLbl);
             this.Controls.Add(this.FindLbl);
             this.Name = "RegexPipelineElementUserControl";
-            this.Size = new System.Drawing.Size(290, 77);
+            this.Size = new System.Drawing.Size(290, 76);
             this.Load += new System.EventHandler(this.RegexPipelineElementUserControl_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -59,7 +59,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ReplaceTxt.Location = new System.Drawing.Point(75, 26);
             this.ReplaceTxt.Name = "ReplaceTxt";
-            this.ReplaceTxt.Size = new System.Drawing.Size(137, 20);
+            this.ReplaceTxt.Size = new System.Drawing.Size(154, 20);
             this.ReplaceTxt.TabIndex = 3;
             this.FindReplaceToolTip.SetToolTip(this.ReplaceTxt, "Character string to replace any found element in the path with");
             this.ReplaceTxt.Validated += new System.EventHandler(this.ReplaceTxt_Validated);
@@ -70,7 +70,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.FindTxt.Location = new System.Drawing.Point(59, 0);
             this.FindTxt.Name = "FindTxt";
-            this.FindTxt.Size = new System.Drawing.Size(153, 20);
+            this.FindTxt.Size = new System.Drawing.Size(170, 20);
             this.FindTxt.TabIndex = 1;
             this.FindReplaceToolTip.SetToolTip(this.FindTxt, "Character string to look for and replace in the path");
             this.FindTxt.Validated += new System.EventHandler(this.FindTxt_Validated);
@@ -84,7 +84,7 @@
             this.Controls.Add(this.ReplaceLbl);
             this.Controls.Add(this.FindLbl);
             this.Name = "FindReplacePipelineElementUserControl";
-            this.Size = new System.Drawing.Size(219, 52);
+            this.Size = new System.Drawing.Size(229, 47);
             this.Load += new System.EventHandler(this.FindReplacePipelineElementUserControl_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
