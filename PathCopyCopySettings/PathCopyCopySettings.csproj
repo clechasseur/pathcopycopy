@@ -83,6 +83,18 @@
     <Compile Include="UI\UserControls\ConfiglessPipelineElementUserControl.Designer.cs">
       <DependentUpon>ConfiglessPipelineElementUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\UserControls\FindReplacePipelineElementUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UserControls\FindReplacePipelineElementUserControl.Designer.cs">
+      <DependentUpon>FindReplacePipelineElementUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UserControls\RegexPipelineElementUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UserControls\RegexPipelineElementUserControl.Designer.cs">
+      <DependentUpon>RegexPipelineElementUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Utils\CursorChanger.cs" />
     <Compile Include="UI\Forms\ImportPipelinePluginsForm.cs">
       <SubType>Form</SubType>
@@ -143,6 +155,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\ConfiglessPipelineElementUserControl.resx">
       <DependentUpon>ConfiglessPipelineElementUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserControls\FindReplacePipelineElementUserControl.resx">
+      <DependentUpon>FindReplacePipelineElementUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserControls\RegexPipelineElementUserControl.resx">
+      <DependentUpon>RegexPipelineElementUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">

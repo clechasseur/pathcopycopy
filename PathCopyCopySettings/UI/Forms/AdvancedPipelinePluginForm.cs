@@ -242,6 +242,7 @@ namespace PathCopyCopy.Settings.UI.Forms
                 currentUserControl.Location = SelectElementLbl.Location;
                 currentUserControl.Size = new Size(this.Size.Width - currentUserControl.Location.X - 23, ElementsLst.Size.Height);
                 currentUserControl.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Right;
+                currentUserControl.TabIndex = SelectElementLbl.TabIndex;
             }
 
             // Update selection-dependent controls.
@@ -288,8 +289,19 @@ namespace PathCopyCopy.Settings.UI.Forms
         /// <param name="e">Event arguments.</param>
         private void DeleteElementBtn_Click(object sender, EventArgs e)
         {
-            // Remove selected element then update our selection-dependent controls.
-            elements.RemoveAt(ElementsLst.SelectedIndex);
+            // Remove selected element.
+            int selectedIdx = ElementsLst.SelectedIndex;
+            elements.RemoveAt(selectedIdx);
+
+            // This won't trigger selected index changed event, so deselect and reselect the item.
+            ElementsLst.SelectedIndex = -1;
+            if (elements.Count > selectedIdx) {
+                ElementsLst.SelectedIndex = selectedIdx;
+            } else if (elements.Count > 0) {
+                ElementsLst.SelectedIndex = elements.Count - 1;
+            }
+
+            // Update selection-dependent controls.
             UpdateControls();
         }
 

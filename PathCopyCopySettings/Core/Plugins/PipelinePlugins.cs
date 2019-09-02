@@ -1226,6 +1226,15 @@ namespace PathCopyCopy.Settings.Core.Plugins
             // Encode old and new value one after the other.
             return EncodeString(OldValue) + EncodeString(NewValue);
         }
+
+        /// <summary>
+        /// Returns a user control to configure this pipeline element.
+        /// </summary>
+        /// <returns>User control.</returns>
+        public override UserControl GetEditingControl()
+        {
+            return new FindReplacePipelineElementUserControl(this);
+        }
     }
     
     /// <summary>
@@ -1347,6 +1356,15 @@ namespace PathCopyCopy.Settings.Core.Plugins
             encoder.Append(EncodeBool(IgnoreCase));
 
             return encoder.ToString();
+        }
+
+        /// <summary>
+        /// Returns a user control to configure this pipeline element.
+        /// </summary>
+        /// <returns>User control.</returns>
+        public override UserControl GetEditingControl()
+        {
+            return new RegexPipelineElementUserControl(this);
         }
     }
     
