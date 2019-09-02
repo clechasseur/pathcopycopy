@@ -21,15 +21,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using PathCopyCopy.Settings.Core.Plugins;
 using System.Diagnostics;
+using System.Windows.Forms;
 using PathCopyCopy.Settings.Core;
+using PathCopyCopy.Settings.Core.Plugins;
 using PathCopyCopy.Settings.Properties;
 
 namespace PathCopyCopy.Settings.UI.UserControls
