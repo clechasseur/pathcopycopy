@@ -19,6 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using System.Diagnostics;
 using System.Windows.Forms;
 using PathCopyCopy.Settings.Core.Plugins;
@@ -51,7 +52,7 @@ namespace PathCopyCopy.Settings.UI.UserControls
         /// </summary>
         /// <param name="sender">Event sender.</param>
         /// <param name="e">Event arguments.</param>
-        private void PathsSeparatorPipelineElementUserControl_Load(object sender, System.EventArgs e)
+        private void PathsSeparatorPipelineElementUserControl_Load(object sender, EventArgs e)
         {
             SeparatorTxt.Text = element.PathsSeparator;
         }
@@ -62,7 +63,7 @@ namespace PathCopyCopy.Settings.UI.UserControls
         /// </summary>
         /// <param name="sender">Event sender.</param>
         /// <param name="e">Event arguments.</param>
-        private void SeparatorTxt_Validated(object sender, System.EventArgs e)
+        private void SeparatorTxt_Validated(object sender, EventArgs e)
         {
             element.PathsSeparator = SeparatorTxt.Text;
         }

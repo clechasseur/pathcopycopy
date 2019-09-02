@@ -101,6 +101,12 @@
     <Compile Include="UI\UserControls\PathsSeparatorPipelineElementUserControl.Designer.cs">
       <DependentUpon>PathsSeparatorPipelineElementUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\UserControls\PipelineElementWithExecutableUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UserControls\PipelineElementWithExecutableUserControl.Designer.cs">
+      <DependentUpon>PipelineElementWithExecutableUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\UserControls\RegexPipelineElementUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -176,6 +182,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\PathsSeparatorPipelineElementUserControl.resx">
       <DependentUpon>PathsSeparatorPipelineElementUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserControls\PipelineElementWithExecutableUserControl.resx">
+      <DependentUpon>PipelineElementWithExecutableUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\RegexPipelineElementUserControl.resx">
       <DependentUpon>RegexPipelineElementUserControl.cs</DependentUpon>

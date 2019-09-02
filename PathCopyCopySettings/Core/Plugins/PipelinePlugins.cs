@@ -1531,11 +1531,63 @@ namespace PathCopyCopy.Settings.Core.Plugins
     }
 
     /// <summary>
+    /// Abstract subclass of <see cref="PipelineElement"/> that has a
+    /// single data member: an executable path. Used to be able to edit
+    /// both types of executable-based pipeline elements in a common way.
+    /// </summary>
+    abstract public class PipelineElementWithExecutable : PipelineElement
+    {
+        /// <summary>
+        /// Path to executable.
+        /// </summary>
+        public string Executable
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        public PipelineElementWithExecutable()
+        {
+        }
+
+        /// <summary>
+        /// Constructor with arguments.
+        /// </summary>
+        /// <param name="executable">Path to executable.</param>
+        public PipelineElementWithExecutable(string executable)
+        {
+            Executable = executable;
+        }
+
+        /// <summary>
+        /// Encodes this pipeline element in a string.
+        /// </summary>
+        /// <returns>Encoded element data.</returns>
+        public override string Encode()
+        {
+            // Encode the executable path.
+            return EncodeString(Executable);
+        }
+
+        /// <summary>
+        /// Returns a user control to configure this pipeline element.
+        /// </summary>
+        /// <returns>User control.</returns>
+        public override UserControl GetEditingControl()
+        {
+            return new PipelineElementWithExecutableUserControl(this);
+        }
+    }
+
+    /// <summary>
     /// Pipeline element that does not modify the path but instructs
     /// Path Copy Copy to launch an executable with path(s) as argument
     /// instead of copying them to the clipboard.
     /// </summary>
-    public class ExecutablePipelineElement : PipelineElement
+    public class ExecutablePipelineElement : PipelineElementWithExecutable
     {
         /// <summary>
         /// Code representing this pipeline element type.
@@ -1573,18 +1625,10 @@ namespace PathCopyCopy.Settings.Core.Plugins
         }
 
         /// <summary>
-        /// Path to executable to launch with path(s) as argument.
-        /// </summary>
-        public string Executable
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
         /// Default constructor.
         /// </summary>
         public ExecutablePipelineElement()
+            : base()
         {
         }
 
@@ -1593,18 +1637,8 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// </summary>
         /// <param name="executable">Path to executable.</param>
         public ExecutablePipelineElement(string executable)
+            : base(executable)
         {
-            Executable = executable;
-        }
-
-        /// <summary>
-        /// Encodes this pipeline element in a string.
-        /// </summary>
-        /// <returns>Encoded element data.</returns>
-        public override string Encode()
-        {
-            // Encode the executable path.
-            return EncodeString(Executable);
         }
     }
 
@@ -1613,7 +1647,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
     /// Path Copy Copy to launch an executable with filelist as argument
     /// instead of copying them to the clipboard.
     /// </summary>
-    public class ExecutableWithFilelistPipelineElement : PipelineElement
+    public class ExecutableWithFilelistPipelineElement : PipelineElementWithExecutable
     {
         /// <summary>
         /// Code representing this pipeline element type.
@@ -1651,18 +1685,10 @@ namespace PathCopyCopy.Settings.Core.Plugins
         }
 
         /// <summary>
-        /// Path to executable to launch with filelist as argument.
-        /// </summary>
-        public string Executable
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
         /// Default constructor.
         /// </summary>
         public ExecutableWithFilelistPipelineElement()
+            : base()
         {
         }
 
@@ -1671,18 +1697,8 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// </summary>
         /// <param name="executable">Path to executable.</param>
         public ExecutableWithFilelistPipelineElement(string executable)
+            : base(executable)
         {
-            Executable = executable;
-        }
-
-        /// <summary>
-        /// Encodes this pipeline element in a string.
-        /// </summary>
-        /// <returns>Encoded element data.</returns>
-        public override string Encode()
-        {
-            // Encode the executable path.
-            return EncodeString(Executable);
         }
     }
 
