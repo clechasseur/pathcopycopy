@@ -27,6 +27,7 @@ using System.Windows.Forms;
 using PathCopyCopy.Settings.Core;
 using PathCopyCopy.Settings.Core.Plugins;
 using PathCopyCopy.Settings.Properties;
+using PathCopyCopy.Settings.UI.Utils;
 
 namespace PathCopyCopy.Settings.UI.Forms
 {
@@ -36,12 +37,6 @@ namespace PathCopyCopy.Settings.UI.Forms
     /// </summary>
     public partial class PipelinePluginForm : Form
     {
-        /// Paths separator that copies multiple paths on the same line.
-        private const string PATHS_SEPARATOR_ON_SAME_LINE = " ";
-
-        /// Object to access user settings.
-        private UserSettings settings;
-
         /// Plugin info for the plugin we're editing.
         private PipelinePluginInfo pluginInfo;
 
@@ -66,19 +61,16 @@ namespace PathCopyCopy.Settings.UI.Forms
         /// if the user accepted the changes.
         /// </summary>
         /// <param name="owner">Owner of this dialog. Can be <c>null</c>.</param>
-        /// <param name="settings">Object to access user settings. If <c>null</c>,
-        /// a new <see cref="UserSettings"/> object will be created.</param>
         /// <param name="oldInfo">Info about a pipeline plugin. If set, we'll
         /// populate the form with the plugin's values to allow the user to
         /// edit the plugin.</param>
+        /// <param name="switchToExpert">Upon exit, will indicate whether user
+        /// chose to switch to Expert Mode.</param>
         /// <returns>Info about the new plugin that user edited. Will be
         /// <c>null</c> if user cancels editing.</returns>
-        public PipelinePluginInfo EditPlugin(IWin32Window owner, 
-            UserSettings settings, PipelinePluginInfo oldInfo)
+        public PipelinePluginInfo EditPlugin(IWin32Window owner, PipelinePluginInfo oldInfo,
+            out bool switchToExpert)
         {
-            // Save settings object or create one if we didn't get one.
-            this.settings = settings ?? new UserSettings();
-
             // Save old info so that the OnLoad event handler can use it.
             pluginInfo = oldInfo;
 
@@ -92,8 +84,9 @@ namespace PathCopyCopy.Settings.UI.Forms
             DialogResult dialogRes = ShowDialog(owner);
 
             // If user saved, return the new info.
-            Debug.Assert(dialogRes != DialogResult.OK || pluginInfo != null);
-            return dialogRes == DialogResult.OK ? pluginInfo : null;
+            Debug.Assert(dialogRes == DialogResult.Cancel || pluginInfo != null);
+            switchToExpert = dialogRes == DialogResult.Retry;
+            return dialogRes != DialogResult.Cancel ? pluginInfo : null;
         }
         
         /// <summary>
@@ -107,7 +100,10 @@ namespace PathCopyCopy.Settings.UI.Forms
             // First load list of plugins to display in the listbox for the base
             // plugin. We only load default and COM plugins for this since we
             // don't want a pipeline plugin to be based off another (for now at least).
-            List<Plugin> plugins = PluginsRegistry.GetPluginsInDefaultOrder(settings, false);
+            List<Plugin> plugins;
+            using (UserSettings settings = new UserSettings()) {
+                plugins = PluginsRegistry.GetPluginsInDefaultOrder(settings, false);
+            }
 
             // Add all plugins to the list box.
             BasePluginLst.Items.AddRange(plugins.ToArray());
@@ -166,7 +162,7 @@ namespace PathCopyCopy.Settings.UI.Forms
                 // "Copy on same line" is a little special since it could be any string.
                 element = pipeline.Elements.Find(el => el is PathsSeparatorPipelineElement);
                 pathsSeparator = element == null ? null : ((PathsSeparatorPipelineElement) element).PathsSeparator;
-                if (pathsSeparator == PATHS_SEPARATOR_ON_SAME_LINE) {
+                if (pathsSeparator == PipelinePluginEditor.PATHS_SEPARATOR_ON_SAME_LINE) {
                     CopyOnSameLineChk.Checked = true;
                 } else if (!String.IsNullOrEmpty(pathsSeparator)) {
                     CopyOnSameLineChk.Enabled = false;
@@ -225,10 +221,10 @@ namespace PathCopyCopy.Settings.UI.Forms
         /// <param name="e">Event arguments.</param>
         private void PipelinePluginForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            // If user chose to press OK, save plugin info.
-            if (this.DialogResult == DialogResult.OK) {
-                // Make sure user has entered a name.
-                if (!String.IsNullOrEmpty(NameTxt.Text)) {
+            // If user chose to press OK or switch to Expert Mode, save plugin info.
+            if (this.DialogResult == DialogResult.OK || this.DialogResult == DialogResult.Retry) {
+                // Make sure user has entered a name (unless we're switching to Expert Mode).
+                if (!String.IsNullOrEmpty(NameTxt.Text) || this.DialogResult == DialogResult.Retry) {
                     // Create a pipeline based on form controls.
                     if (pipeline == null) {
                         pipeline = new Pipeline();
@@ -244,7 +240,7 @@ namespace PathCopyCopy.Settings.UI.Forms
                     }
                     if (CopyOnSameLineChk.Enabled) {
                         if (CopyOnSameLineChk.Checked) {
-                            pipeline.Elements.Add(new PathsSeparatorPipelineElement(PATHS_SEPARATOR_ON_SAME_LINE));
+                            pipeline.Elements.Add(new PathsSeparatorPipelineElement(PipelinePluginEditor.PATHS_SEPARATOR_ON_SAME_LINE));
                         }
                     } else {
                         // Copy non-standard value we had earlier

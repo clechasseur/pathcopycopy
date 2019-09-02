@@ -26,9 +26,11 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Serialization;
 using PathCopyCopy.Settings.Properties;
+using PathCopyCopy.Settings.UI.UserControls;
 
 namespace PathCopyCopy.Settings.Core.Plugins
 {
@@ -545,8 +547,6 @@ namespace PathCopyCopy.Settings.Core.Plugins
     
     /// <summary>
     /// Base class for pipeline elements to be chained in a pipeline plugin.
-    /// Since we only care about configuration in the settings app, it merely
-    /// contains methods to encode element data to a string.
     /// </summary>
     abstract public class PipelineElement
     {
@@ -555,6 +555,15 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// The pipeline uses this code to encode its elements.
         /// </summary>
         abstract public char Code
+        {
+            get;
+        }
+
+        /// <summary>
+        /// Every pipeline element type must have a display value.
+        /// It will be used when the element is displayed in Expert Mode in the UI.
+        /// </summary>
+        abstract public string DisplayValue
         {
             get;
         }
@@ -584,6 +593,23 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// <param name="p_Param">Parameter summary</param>
         /// <returns>Return value summary</returns>
         abstract public string Encode();
+
+        /// <summary>
+        /// Returns a user control to edit this pipeline element. The control
+        /// must be data-bound to the element somehow.
+        /// </summary>
+        /// <returns>User control instance.</returns>
+        /// <remarks>
+        /// A new control will be created every time this is called.
+        /// User assumes "ownership" of the returned control.
+        /// </remarks>
+        public virtual UserControl GetEditingControl()
+        {
+            // By default, we return a user control that has no additional
+            // configuration required. Subclasses that require custom
+            // user controls must override this.
+            return new ConfiglessPipelineElementUserControl();
+        }
         
         /// <summary>
         /// Encodes the specified int value in a format suitable to be included in
@@ -757,7 +783,17 @@ namespace PathCopyCopy.Settings.Core.Plugins
                 return CODE;
             }
         }
-        
+
+        /// <summary>
+        /// Pipeline element display value for the UI.
+        /// </summary>
+        public override string DisplayValue
+        {
+            get {
+                return Resources.PipelineElement_Quotes;
+            }
+        }
+
         /// <summary>
         /// Encodes this pipeline element in a string.
         /// </summary>
@@ -787,6 +823,16 @@ namespace PathCopyCopy.Settings.Core.Plugins
         {
             get {
                 return CODE;
+            }
+        }
+
+        /// <summary>
+        /// Pipeline element display value for the UI.
+        /// </summary>
+        public override string DisplayValue
+        {
+            get {
+                return Resources.PipelineElement_OptionalQuotes;
             }
         }
 
@@ -833,6 +879,16 @@ namespace PathCopyCopy.Settings.Core.Plugins
         }
 
         /// <summary>
+        /// Pipeline element display value for the UI.
+        /// </summary>
+        public override string DisplayValue
+        {
+            get {
+                return Resources.PipelineElement_EmailLinks;
+            }
+        }
+
+        /// <summary>
         /// Minimum version of Path Copy Copy required to use this pipeline element.
         /// </summary>
         public override Version RequiredVersion
@@ -871,6 +927,16 @@ namespace PathCopyCopy.Settings.Core.Plugins
         {
             get {
                 return CODE;
+            }
+        }
+
+        /// <summary>
+        /// Pipeline element display value for the UI.
+        /// </summary>
+        public override string DisplayValue
+        {
+            get {
+                return Resources.PipelineElement_EncodeURIWhitespace;
             }
         }
 
@@ -917,6 +983,16 @@ namespace PathCopyCopy.Settings.Core.Plugins
         }
 
         /// <summary>
+        /// Pipeline element display value for the UI.
+        /// </summary>
+        public override string DisplayValue
+        {
+            get {
+                return Resources.PipelineElement_EncodeURIChars;
+            }
+        }
+
+        /// <summary>
         /// Minimum version of Path Copy Copy required to use this pipeline element.
         /// </summary>
         public override Version RequiredVersion
@@ -957,6 +1033,16 @@ namespace PathCopyCopy.Settings.Core.Plugins
                 return CODE;
             }
         }
+
+        /// <summary>
+        /// Pipeline element display value for the UI.
+        /// </summary>
+        public override string DisplayValue
+        {
+            get {
+                return Resources.PipelineElement_BackToForwardSlashes;
+            }
+        }
         
         /// <summary>
         /// Encodes this pipeline element in a string.
@@ -989,6 +1075,16 @@ namespace PathCopyCopy.Settings.Core.Plugins
                 return CODE;
             }
         }
+
+        /// <summary>
+        /// Pipeline element display value for the UI.
+        /// </summary>
+        public override string DisplayValue
+        {
+            get {
+                return Resources.PipelineElement_ForwardToBackslashes;
+            }
+        }
         
         /// <summary>
         /// Encodes this pipeline element in a string.
@@ -1019,6 +1115,16 @@ namespace PathCopyCopy.Settings.Core.Plugins
         {
             get {
                 return CODE;
+            }
+        }
+
+        /// <summary>
+        /// Pipeline element display value for the UI.
+        /// </summary>
+        public override string DisplayValue
+        {
+            get {
+                return Resources.PipelineElement_RemoveExt;
             }
         }
 
@@ -1060,6 +1166,16 @@ namespace PathCopyCopy.Settings.Core.Plugins
         {
             get {
                 return CODE;
+            }
+        }
+
+        /// <summary>
+        /// Pipeline element display value for the UI.
+        /// </summary>
+        public override string DisplayValue
+        {
+            get {
+                return Resources.PipelineElement_FindReplace;
             }
         }
 
@@ -1110,6 +1226,15 @@ namespace PathCopyCopy.Settings.Core.Plugins
             // Encode old and new value one after the other.
             return EncodeString(OldValue) + EncodeString(NewValue);
         }
+
+        /// <summary>
+        /// Returns a user control to configure this pipeline element.
+        /// </summary>
+        /// <returns>User control.</returns>
+        public override UserControl GetEditingControl()
+        {
+            return new FindReplacePipelineElementUserControl(this);
+        }
     }
     
     /// <summary>
@@ -1139,6 +1264,16 @@ namespace PathCopyCopy.Settings.Core.Plugins
         {
             get {
                 return CODE;
+            }
+        }
+
+        /// <summary>
+        /// Pipeline element display value for the UI.
+        /// </summary>
+        public override string DisplayValue
+        {
+            get {
+                return Resources.PipelineElement_Regex;
             }
         }
 
@@ -1222,6 +1357,15 @@ namespace PathCopyCopy.Settings.Core.Plugins
 
             return encoder.ToString();
         }
+
+        /// <summary>
+        /// Returns a user control to configure this pipeline element.
+        /// </summary>
+        /// <returns>User control.</returns>
+        public override UserControl GetEditingControl()
+        {
+            return new RegexPipelineElementUserControl(this);
+        }
     }
     
     /// <summary>
@@ -1241,6 +1385,16 @@ namespace PathCopyCopy.Settings.Core.Plugins
         {
             get {
                 return CODE;
+            }
+        }
+
+        /// <summary>
+        /// Pipeline element display value for the UI.
+        /// </summary>
+        public override string DisplayValue
+        {
+            get {
+                return Resources.PipelineElement_ApplyPlugin;
             }
         }
 
@@ -1279,6 +1433,15 @@ namespace PathCopyCopy.Settings.Core.Plugins
             // side will know how many characters to read.
             return PluginID.ToString("B");
         }
+
+        /// <summary>
+        /// Returns a user control to configure this pipeline element.
+        /// </summary>
+        /// <returns>User control.</returns>
+        public override UserControl GetEditingControl()
+        {
+            return new ApplyPluginPipelineElementUserControl(this);
+        }
     }
 
     /// <summary>
@@ -1299,6 +1462,16 @@ namespace PathCopyCopy.Settings.Core.Plugins
         {
             get {
                 return CODE;
+            }
+        }
+
+        /// <summary>
+        /// Pipeline element display value for the UI.
+        /// </summary>
+        public override string DisplayValue
+        {
+            get {
+                return Resources.PipelineElement_PathsSeparator;
             }
         }
 
@@ -1346,6 +1519,67 @@ namespace PathCopyCopy.Settings.Core.Plugins
             // Encode the paths separator.
             return EncodeString(PathsSeparator);
         }
+
+        /// <summary>
+        /// Returns a user control to configure this pipeline element.
+        /// </summary>
+        /// <returns>User control.</returns>
+        public override UserControl GetEditingControl()
+        {
+            return new PathsSeparatorPipelineElementUserControl(this);
+        }
+    }
+
+    /// <summary>
+    /// Abstract subclass of <see cref="PipelineElement"/> that has a
+    /// single data member: an executable path. Used to be able to edit
+    /// both types of executable-based pipeline elements in a common way.
+    /// </summary>
+    abstract public class PipelineElementWithExecutable : PipelineElement
+    {
+        /// <summary>
+        /// Path to executable.
+        /// </summary>
+        public string Executable
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        public PipelineElementWithExecutable()
+        {
+        }
+
+        /// <summary>
+        /// Constructor with arguments.
+        /// </summary>
+        /// <param name="executable">Path to executable.</param>
+        public PipelineElementWithExecutable(string executable)
+        {
+            Executable = executable;
+        }
+
+        /// <summary>
+        /// Encodes this pipeline element in a string.
+        /// </summary>
+        /// <returns>Encoded element data.</returns>
+        public override string Encode()
+        {
+            // Encode the executable path.
+            return EncodeString(Executable);
+        }
+
+        /// <summary>
+        /// Returns a user control to configure this pipeline element.
+        /// </summary>
+        /// <returns>User control.</returns>
+        public override UserControl GetEditingControl()
+        {
+            return new PipelineElementWithExecutableUserControl(this);
+        }
     }
 
     /// <summary>
@@ -1353,7 +1587,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
     /// Path Copy Copy to launch an executable with path(s) as argument
     /// instead of copying them to the clipboard.
     /// </summary>
-    public class ExecutablePipelineElement : PipelineElement
+    public class ExecutablePipelineElement : PipelineElementWithExecutable
     {
         /// <summary>
         /// Code representing this pipeline element type.
@@ -1371,6 +1605,16 @@ namespace PathCopyCopy.Settings.Core.Plugins
         }
 
         /// <summary>
+        /// Pipeline element display value for the UI.
+        /// </summary>
+        public override string DisplayValue
+        {
+            get {
+                return Resources.PipelineElement_Executable;
+            }
+        }
+
+        /// <summary>
         /// Minumum version of Path Copy Copy required to use this pipeline element.
         /// </summary>
         public override Version RequiredVersion
@@ -1381,18 +1625,10 @@ namespace PathCopyCopy.Settings.Core.Plugins
         }
 
         /// <summary>
-        /// Path to executable to launch with path(s) as argument.
-        /// </summary>
-        public string Executable
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
         /// Default constructor.
         /// </summary>
         public ExecutablePipelineElement()
+            : base()
         {
         }
 
@@ -1401,18 +1637,8 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// </summary>
         /// <param name="executable">Path to executable.</param>
         public ExecutablePipelineElement(string executable)
+            : base(executable)
         {
-            Executable = executable;
-        }
-
-        /// <summary>
-        /// Encodes this pipeline element in a string.
-        /// </summary>
-        /// <returns>Encoded element data.</returns>
-        public override string Encode()
-        {
-            // Encode the executable path.
-            return EncodeString(Executable);
         }
     }
 
@@ -1421,7 +1647,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
     /// Path Copy Copy to launch an executable with filelist as argument
     /// instead of copying them to the clipboard.
     /// </summary>
-    public class ExecutableWithFilelistPipelineElement : PipelineElement
+    public class ExecutableWithFilelistPipelineElement : PipelineElementWithExecutable
     {
         /// <summary>
         /// Code representing this pipeline element type.
@@ -1439,6 +1665,16 @@ namespace PathCopyCopy.Settings.Core.Plugins
         }
 
         /// <summary>
+        /// Pipeline element display value for the UI.
+        /// </summary>
+        public override string DisplayValue
+        {
+            get {
+                return Resources.PipelineElement_ExecutableWithFilelist;
+            }
+        }
+
+        /// <summary>
         /// Minumum version of Path Copy Copy required to use this pipeline element.
         /// </summary>
         public override Version RequiredVersion
@@ -1449,18 +1685,10 @@ namespace PathCopyCopy.Settings.Core.Plugins
         }
 
         /// <summary>
-        /// Path to executable to launch with filelist as argument.
-        /// </summary>
-        public string Executable
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
         /// Default constructor.
         /// </summary>
         public ExecutableWithFilelistPipelineElement()
+            : base()
         {
         }
 
@@ -1469,18 +1697,8 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// </summary>
         /// <param name="executable">Path to executable.</param>
         public ExecutableWithFilelistPipelineElement(string executable)
+            : base(executable)
         {
-            Executable = executable;
-        }
-
-        /// <summary>
-        /// Encodes this pipeline element in a string.
-        /// </summary>
-        /// <returns>Encoded element data.</returns>
-        public override string Encode()
-        {
-            // Encode the executable path.
-            return EncodeString(Executable);
         }
     }
 

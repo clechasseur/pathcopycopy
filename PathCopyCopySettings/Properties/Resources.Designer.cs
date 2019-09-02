@@ -443,6 +443,132 @@ namespace PathCopyCopy.Settings.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Use Base Command.
+        /// </summary>
+        internal static string PipelineElement_ApplyPlugin {
+            get {
+                return ResourceManager.GetString("PipelineElement_ApplyPlugin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Turn Backslashes Into Forward Slashes.
+        /// </summary>
+        internal static string PipelineElement_BackToForwardSlashes {
+            get {
+                return ResourceManager.GetString("PipelineElement_BackToForwardSlashes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create Email Links.
+        /// </summary>
+        internal static string PipelineElement_EmailLinks {
+            get {
+                return ResourceManager.GetString("PipelineElement_EmailLinks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Encode URI Characters.
+        /// </summary>
+        internal static string PipelineElement_EncodeURIChars {
+            get {
+                return ResourceManager.GetString("PipelineElement_EncodeURIChars", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Encode URI Whitespace.
+        /// </summary>
+        internal static string PipelineElement_EncodeURIWhitespace {
+            get {
+                return ResourceManager.GetString("PipelineElement_EncodeURIWhitespace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Option: Launch Executable.
+        /// </summary>
+        internal static string PipelineElement_Executable {
+            get {
+                return ResourceManager.GetString("PipelineElement_Executable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Option: Launch Executable With Filelist.
+        /// </summary>
+        internal static string PipelineElement_ExecutableWithFilelist {
+            get {
+                return ResourceManager.GetString("PipelineElement_ExecutableWithFilelist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Find / Replace.
+        /// </summary>
+        internal static string PipelineElement_FindReplace {
+            get {
+                return ResourceManager.GetString("PipelineElement_FindReplace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Turn Forward Slashes Into Backslashes.
+        /// </summary>
+        internal static string PipelineElement_ForwardToBackslashes {
+            get {
+                return ResourceManager.GetString("PipelineElement_ForwardToBackslashes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Quotes If Needed.
+        /// </summary>
+        internal static string PipelineElement_OptionalQuotes {
+            get {
+                return ResourceManager.GetString("PipelineElement_OptionalQuotes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Option: Paths Separator.
+        /// </summary>
+        internal static string PipelineElement_PathsSeparator {
+            get {
+                return ResourceManager.GetString("PipelineElement_PathsSeparator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Quotes.
+        /// </summary>
+        internal static string PipelineElement_Quotes {
+            get {
+                return ResourceManager.GetString("PipelineElement_Quotes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Find / Replace Using Regular Expressions.
+        /// </summary>
+        internal static string PipelineElement_Regex {
+            get {
+                return ResourceManager.GetString("PipelineElement_Regex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove File Extension.
+        /// </summary>
+        internal static string PipelineElement_RemoveExt {
+            get {
+                return ResourceManager.GetString("PipelineElement_RemoveExt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please enter a name for the custom command..
         /// </summary>
         internal static string PipelinePluginForm_EmptyName {
@@ -457,6 +583,15 @@ namespace PathCopyCopy.Settings.Properties {
         internal static string PipelinePluginForm_MsgTitle {
             get {
                 return ResourceManager.GetString("PipelinePluginForm_MsgTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This custom command is now too complex to be edited in Simple Mode. If you switch, you will lose some customization. Do you really want to switch to Simple Mode?.
+        /// </summary>
+        internal static string PipelinePluginForm_PipelineTooComplexForSimpleMode {
+            get {
+                return ResourceManager.GetString("PipelinePluginForm_PipelineTooComplexForSimpleMode", resourceCulture);
             }
         }
         
