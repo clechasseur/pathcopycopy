@@ -1433,6 +1433,15 @@ namespace PathCopyCopy.Settings.Core.Plugins
             // side will know how many characters to read.
             return PluginID.ToString("B");
         }
+
+        /// <summary>
+        /// Returns a user control to configure this pipeline element.
+        /// </summary>
+        /// <returns>User control.</returns>
+        public override UserControl GetEditingControl()
+        {
+            return new ApplyPluginPipelineElementUserControl(this);
+        }
     }
 
     /// <summary>
