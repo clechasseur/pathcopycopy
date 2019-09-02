@@ -6,4 +6,4 @@ Works on Windows XP or later. Grab the [latest release here!](https://github.com
 
 For help and information, please refer to the [wiki](https://github.com/clechasseur/pathcopycopy/wiki).
 
-![The Path Copy Copy contextual menu items](screenshots/PathCopyCopyContextualMenu.png)
+![The Path Copy Copy contextual menu items](screenshots/PCC_ContextMenu_wiki.png)
