@@ -347,7 +347,8 @@
             this.PluginsDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.PluginsDataGrid.Size = new System.Drawing.Size(369, 410);
             this.PluginsDataGrid.TabIndex = 2;
-            this.PluginsDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.PluginsDataGrid_CellContentClick);
+            this.PluginsDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.PluginsDataGrid_CellClick);
+            this.PluginsDataGrid.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.PluginsDataGrid_CellDoubleClick);
             this.PluginsDataGrid.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.PluginsDataGrid_CellMouseEnter);
             this.PluginsDataGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.PluginsDataGrid_CellValueChanged);
             this.PluginsDataGrid.CurrentCellDirtyStateChanged += new System.EventHandler(this.PluginsDataGrid_CurrentCellDirtyStateChanged);

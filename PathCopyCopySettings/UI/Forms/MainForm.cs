@@ -869,12 +869,12 @@ namespace PathCopyCopy.Settings.UI.Forms
         }
 
         /// <summary>
-        /// Called when the content of a cell is clicked in the plugins data grid.
+        /// Called when a cell is clicked in the plugins data grid.
         /// We need to handle clicks in icon cells to ask for an icon file.
         /// </summary>
         /// <param name="sender">Event sender.</param>
         /// <param name="e">Event arguments.</param>
-        private void PluginsDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void PluginsDataGrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             // Immediately get current key modifiers to be able to determine the action to perform.
             Keys modifierKeys = Control.ModifierKeys & Keys.Modifiers;
@@ -914,6 +914,22 @@ namespace PathCopyCopy.Settings.UI.Forms
                         }
                     }
                 }
+            }
+        }
+
+        /// <summary>
+        /// Called when a cell is double-clicked in the plugins data grid.
+        /// If user double-clicked on a pipeline plugin, we want to act as
+        /// if the Edit button was pressed.
+        /// </summary>
+        /// <param name="sender">Event sender.</param>
+        /// <param name="e">Event arguments.</param>
+        private void PluginsDataGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // If user double-clicked in the Command column and the Edit button is enabled,
+            // act as if that button was pressed.
+            if (e.ColumnIndex == PluginCol.Index && EditPipelinePluginBtn.Enabled) {
+                EditPipelinePluginBtn_Click(EditPipelinePluginBtn, EventArgs.Empty);
             }
         }
 
