@@ -36,6 +36,9 @@ namespace PathCopyCopy.Settings.UI.Forms
     /// </summary>
     public partial class AdvancedPipelinePluginForm : Form
     {
+        /// URL to navigate to to get help about Expert Mode.
+        private const string EXPERT_MODE_HELP_URL = "https://github.com/clechasseur/pathcopycopy/wiki/Custom-Commands-:-Expert-Mode";
+
         /// Plugin info for the plugin we're editing.
         private PipelinePluginInfo pluginInfo;
 
@@ -352,6 +355,17 @@ namespace PathCopyCopy.Settings.UI.Forms
             // Reselect the element and update our selection-dependent controls.
             ElementsLst.SelectedIndex = selectedIdx + 1;
             UpdateControls();
+        }
+
+        /// <summary>
+        /// Called when the user presses the button to get help.
+        /// We navigate to the proper help page.
+        /// </summary>
+        /// <param name="sender">Event sender.</param>
+        /// <param name="e">Event arguments.</param>
+        private void HelpBtn_Click(object sender, EventArgs e)
+        {
+            Process.Start(EXPERT_MODE_HELP_URL);
         }
     }
 }
