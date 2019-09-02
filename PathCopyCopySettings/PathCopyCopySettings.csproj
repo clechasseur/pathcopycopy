@@ -95,6 +95,12 @@
     <Compile Include="UI\UserControls\FindReplacePipelineElementUserControl.Designer.cs">
       <DependentUpon>FindReplacePipelineElementUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\UserControls\PathsSeparatorPipelineElementUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UserControls\PathsSeparatorPipelineElementUserControl.Designer.cs">
+      <DependentUpon>PathsSeparatorPipelineElementUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\UserControls\RegexPipelineElementUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -167,6 +173,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\FindReplacePipelineElementUserControl.resx">
       <DependentUpon>FindReplacePipelineElementUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserControls\PathsSeparatorPipelineElementUserControl.resx">
+      <DependentUpon>PathsSeparatorPipelineElementUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\RegexPipelineElementUserControl.resx">
       <DependentUpon>RegexPipelineElementUserControl.cs</DependentUpon>

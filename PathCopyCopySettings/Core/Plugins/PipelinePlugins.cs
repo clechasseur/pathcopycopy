@@ -1519,6 +1519,15 @@ namespace PathCopyCopy.Settings.Core.Plugins
             // Encode the paths separator.
             return EncodeString(PathsSeparator);
         }
+
+        /// <summary>
+        /// Returns a user control to configure this pipeline element.
+        /// </summary>
+        /// <returns>User control.</returns>
+        public override UserControl GetEditingControl()
+        {
+            return new PathsSeparatorPipelineElementUserControl(this);
+        }
     }
 
     /// <summary>
