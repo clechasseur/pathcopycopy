@@ -183,7 +183,7 @@
     </Link>
     <PostBuildEvent>
       <Message>Registering output (x64)...</Message>
-      <Command>$(SolutionDir)3rdParty\Regsvr64.exe /s $(TargetPath)</Command>
+      <Command>"$(SolutionDir)3rdParty\Regsvr64.exe" /s "$(TargetPath)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -264,7 +264,7 @@
     </Link>
     <PostBuildEvent>
       <Message>Registering output (x64)...</Message>
-      <Command>$(SolutionDir)3rdParty\Regsvr64.exe /s $(TargetPath)</Command>
+      <Command>"$(SolutionDir)3rdParty\Regsvr64.exe" /s "$(TargetPath)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
