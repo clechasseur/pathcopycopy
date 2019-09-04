@@ -40,11 +40,11 @@
             this.DeleteElementBtn = new System.Windows.Forms.Button();
             this.MoveElementUpBtn = new System.Windows.Forms.Button();
             this.MoveElementDownBtn = new System.Windows.Forms.Button();
+            this.HelpBtn = new System.Windows.Forms.Button();
             this.NameLbl = new System.Windows.Forms.Label();
             this.ElementsLbl = new System.Windows.Forms.Label();
             this.SelectElementLbl = new System.Windows.Forms.Label();
             this.NewElementContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.HelpBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // CancelBtn
@@ -166,6 +166,17 @@
             this.MoveElementDownBtn.UseVisualStyleBackColor = true;
             this.MoveElementDownBtn.Click += new System.EventHandler(this.MoveElementDownBtn_Click);
             // 
+            // HelpBtn
+            // 
+            this.HelpBtn.Location = new System.Drawing.Point(111, 38);
+            this.HelpBtn.Name = "HelpBtn";
+            this.HelpBtn.Size = new System.Drawing.Size(23, 23);
+            this.HelpBtn.TabIndex = 4;
+            this.HelpBtn.Text = "?";
+            this.AdvancedPipelinePluginToolTip.SetToolTip(this.HelpBtn, "Open a web page with help on custom command Expert Mode");
+            this.HelpBtn.UseVisualStyleBackColor = true;
+            this.HelpBtn.Click += new System.EventHandler(this.HelpBtn_Click);
+            // 
             // NameLbl
             // 
             this.NameLbl.AutoSize = true;
@@ -196,18 +207,7 @@
             // NewElementContextMenuStrip
             // 
             this.NewElementContextMenuStrip.Name = "NewElementContextMenuStrip";
-            this.NewElementContextMenuStrip.Size = new System.Drawing.Size(61, 4);
-            // 
-            // HelpBtn
-            // 
-            this.HelpBtn.Location = new System.Drawing.Point(111, 38);
-            this.HelpBtn.Name = "HelpBtn";
-            this.HelpBtn.Size = new System.Drawing.Size(23, 23);
-            this.HelpBtn.TabIndex = 4;
-            this.HelpBtn.Text = "?";
-            this.AdvancedPipelinePluginToolTip.SetToolTip(this.HelpBtn, "Open a web page with help on custom command Expert Mode");
-            this.HelpBtn.UseVisualStyleBackColor = true;
-            this.HelpBtn.Click += new System.EventHandler(this.HelpBtn_Click);
+            this.NewElementContextMenuStrip.Size = new System.Drawing.Size(181, 26);
             // 
             // AdvancedPipelinePluginForm
             // 

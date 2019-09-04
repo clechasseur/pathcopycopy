@@ -452,11 +452,29 @@ namespace PathCopyCopy.Settings.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Choose a base command to use to get an initial path value.
+        /// </summary>
+        internal static string PipelineElement_ApplyPlugin_HelpText {
+            get {
+                return ResourceManager.GetString("PipelineElement_ApplyPlugin_HelpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Turn Backslashes Into Forward Slashes.
         /// </summary>
         internal static string PipelineElement_BackToForwardSlashes {
             get {
                 return ResourceManager.GetString("PipelineElement_BackToForwardSlashes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Replace every backslash ( \ ) in the path with a forward slash ( / ).
+        /// </summary>
+        internal static string PipelineElement_BackToForwardSlashes_HelpText {
+            get {
+                return ResourceManager.GetString("PipelineElement_BackToForwardSlashes_HelpText", resourceCulture);
             }
         }
         
@@ -470,11 +488,29 @@ namespace PathCopyCopy.Settings.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Surround the path with &lt; and &gt; characters to create e-mail links.
+        /// </summary>
+        internal static string PipelineElement_EmailLinks_HelpText {
+            get {
+                return ResourceManager.GetString("PipelineElement_EmailLinks_HelpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Encode URI Characters.
         /// </summary>
         internal static string PipelineElement_EncodeURIChars {
             get {
                 return ResourceManager.GetString("PipelineElement_EncodeURIChars", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Replace all characters in the path that are invalid in a URI by percent-encoding ( %xx ).
+        /// </summary>
+        internal static string PipelineElement_EncodeURIChars_HelpText {
+            get {
+                return ResourceManager.GetString("PipelineElement_EncodeURIChars_HelpText", resourceCulture);
             }
         }
         
@@ -488,11 +524,29 @@ namespace PathCopyCopy.Settings.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Replace all whitespace characters in the path with %20.
+        /// </summary>
+        internal static string PipelineElement_EncodeURIWhitespace_HelpText {
+            get {
+                return ResourceManager.GetString("PipelineElement_EncodeURIWhitespace_HelpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Option: Launch Executable.
         /// </summary>
         internal static string PipelineElement_Executable {
             get {
                 return ResourceManager.GetString("PipelineElement_Executable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Instead of copying paths to the clipboard, launch an executable on disk, passing the paths as arguments.
+        /// </summary>
+        internal static string PipelineElement_Executable_HelpText {
+            get {
+                return ResourceManager.GetString("PipelineElement_Executable_HelpText", resourceCulture);
             }
         }
         
@@ -506,11 +560,29 @@ namespace PathCopyCopy.Settings.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Instead of copying paths to the clipboard, save them to a filelist, then launch an executable on disk, passing the filelist as argument.
+        /// </summary>
+        internal static string PipelineElement_ExecutableWithFilelist_HelpText {
+            get {
+                return ResourceManager.GetString("PipelineElement_ExecutableWithFilelist_HelpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Find / Replace.
         /// </summary>
         internal static string PipelineElement_FindReplace {
             get {
                 return ResourceManager.GetString("PipelineElement_FindReplace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Replace every instance of a specific character string in the path with another.
+        /// </summary>
+        internal static string PipelineElement_FindReplace_HelpText {
+            get {
+                return ResourceManager.GetString("PipelineElement_FindReplace_HelpText", resourceCulture);
             }
         }
         
@@ -524,11 +596,29 @@ namespace PathCopyCopy.Settings.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Replace every forward slash ( / ) in the path with a backslash ( \ ).
+        /// </summary>
+        internal static string PipelineElement_ForwardToBackslashes_HelpText {
+            get {
+                return ResourceManager.GetString("PipelineElement_ForwardToBackslashes_HelpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add Quotes If Needed.
         /// </summary>
         internal static string PipelineElement_OptionalQuotes {
             get {
                 return ResourceManager.GetString("PipelineElement_OptionalQuotes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Surround the path with quotes ( &quot; ) if it contains spaces.
+        /// </summary>
+        internal static string PipelineElement_OptionalQuotes_HelpText {
+            get {
+                return ResourceManager.GetString("PipelineElement_OptionalQuotes_HelpText", resourceCulture);
             }
         }
         
@@ -542,11 +632,29 @@ namespace PathCopyCopy.Settings.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Configure the character string to use to separate multiple copied paths; if not present, a newline is used.
+        /// </summary>
+        internal static string PipelineElement_PathsSeparator_HelpText {
+            get {
+                return ResourceManager.GetString("PipelineElement_PathsSeparator_HelpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add Quotes.
         /// </summary>
         internal static string PipelineElement_Quotes {
             get {
                 return ResourceManager.GetString("PipelineElement_Quotes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Surround the path with quotes ( &quot; ).
+        /// </summary>
+        internal static string PipelineElement_Quotes_HelpText {
+            get {
+                return ResourceManager.GetString("PipelineElement_Quotes_HelpText", resourceCulture);
             }
         }
         
@@ -560,11 +668,29 @@ namespace PathCopyCopy.Settings.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Perform a find/replace operation on the path using regular expressions.
+        /// </summary>
+        internal static string PipelineElement_Regex_HelpText {
+            get {
+                return ResourceManager.GetString("PipelineElement_Regex_HelpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remove File Extension.
         /// </summary>
         internal static string PipelineElement_RemoveExt {
             get {
                 return ResourceManager.GetString("PipelineElement_RemoveExt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove any extension from the file at the end of the path.
+        /// </summary>
+        internal static string PipelineElement_RemoveExt_HelpText {
+            get {
+                return ResourceManager.GetString("PipelineElement_RemoveExt_HelpText", resourceCulture);
             }
         }
         

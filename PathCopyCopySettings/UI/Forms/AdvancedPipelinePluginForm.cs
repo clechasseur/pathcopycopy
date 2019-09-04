@@ -110,25 +110,51 @@ namespace PathCopyCopy.Settings.UI.Forms
             // Populate the context menu strip used to create new elements.
             // We do this in code to be able to reuse resources to avoid string duplication.
             AddNewElementMenuItem(Resources.PipelineElement_ApplyPlugin,
+                Resources.PipelineElement_ApplyPlugin_HelpText,
                 () => new ApplyPluginPipelineElement(new Guid(Resources.LONG_PATH_PLUGIN_ID)));
-            AddNewElementMenuItem("-", null);
-            AddNewElementMenuItem(Resources.PipelineElement_RemoveExt, () => new RemoveExtPipelineElement());
-            AddNewElementMenuItem(Resources.PipelineElement_Quotes, () => new QuotesPipelineElement());
-            AddNewElementMenuItem(Resources.PipelineElement_OptionalQuotes, () => new OptionalQuotesPipelineElement());
-            AddNewElementMenuItem(Resources.PipelineElement_EmailLinks, () => new EmailLinksPipelineElement());
-            AddNewElementMenuItem(Resources.PipelineElement_EncodeURIWhitespace, () => new EncodeURIWhitespacePipelineElement());
-            AddNewElementMenuItem(Resources.PipelineElement_EncodeURIChars, () => new EncodeURICharsPipelineElement());
-            AddNewElementMenuItem("-", null);
-            AddNewElementMenuItem(Resources.PipelineElement_ForwardToBackslashes, () => new ForwardToBackslashesPipelineElement());
-            AddNewElementMenuItem(Resources.PipelineElement_BackToForwardSlashes, () => new BackToForwardSlashesPipelineElement());
-            AddNewElementMenuItem("-", null);
-            AddNewElementMenuItem(Resources.PipelineElement_FindReplace, () => new FindReplacePipelineElement());
-            AddNewElementMenuItem(Resources.PipelineElement_Regex, () => new RegexPipelineElement());
-            AddNewElementMenuItem("-", null);
+            AddNewElementMenuItem("-", null, null);
+            AddNewElementMenuItem(Resources.PipelineElement_RemoveExt,
+                Resources.PipelineElement_RemoveExt_HelpText,
+                () => new RemoveExtPipelineElement());
+            AddNewElementMenuItem(Resources.PipelineElement_Quotes,
+                Resources.PipelineElement_Quotes_HelpText,
+                () => new QuotesPipelineElement());
+            AddNewElementMenuItem(Resources.PipelineElement_OptionalQuotes,
+                Resources.PipelineElement_OptionalQuotes_HelpText,
+                () => new OptionalQuotesPipelineElement());
+            AddNewElementMenuItem(Resources.PipelineElement_EmailLinks,
+                Resources.PipelineElement_EmailLinks_HelpText,
+                () => new EmailLinksPipelineElement());
+            AddNewElementMenuItem(Resources.PipelineElement_EncodeURIWhitespace,
+                Resources.PipelineElement_EncodeURIWhitespace_HelpText,
+                () => new EncodeURIWhitespacePipelineElement());
+            AddNewElementMenuItem(Resources.PipelineElement_EncodeURIChars,
+                Resources.PipelineElement_EncodeURIChars_HelpText,
+                () => new EncodeURICharsPipelineElement());
+            AddNewElementMenuItem("-", null, null);
+            AddNewElementMenuItem(Resources.PipelineElement_ForwardToBackslashes,
+                Resources.PipelineElement_ForwardToBackslashes_HelpText,
+                () => new ForwardToBackslashesPipelineElement());
+            AddNewElementMenuItem(Resources.PipelineElement_BackToForwardSlashes,
+                Resources.PipelineElement_BackToForwardSlashes_HelpText,
+                () => new BackToForwardSlashesPipelineElement());
+            AddNewElementMenuItem("-", null, null);
+            AddNewElementMenuItem(Resources.PipelineElement_FindReplace,
+                Resources.PipelineElement_FindReplace_HelpText,
+                () => new FindReplacePipelineElement());
+            AddNewElementMenuItem(Resources.PipelineElement_Regex,
+                Resources.PipelineElement_Regex_HelpText,
+                () => new RegexPipelineElement());
+            AddNewElementMenuItem("-", null, null);
             AddNewElementMenuItem(Resources.PipelineElement_PathsSeparator,
+                Resources.PipelineElement_PathsSeparator_HelpText,
                 () => new PathsSeparatorPipelineElement(PipelinePluginEditor.PATHS_SEPARATOR_ON_SAME_LINE));
-            AddNewElementMenuItem(Resources.PipelineElement_Executable, () => new ExecutablePipelineElement());
-            AddNewElementMenuItem(Resources.PipelineElement_ExecutableWithFilelist, () => new ExecutableWithFilelistPipelineElement());
+            AddNewElementMenuItem(Resources.PipelineElement_Executable,
+                Resources.PipelineElement_Executable_HelpText,
+                () => new ExecutablePipelineElement());
+            AddNewElementMenuItem(Resources.PipelineElement_ExecutableWithFilelist,
+                Resources.PipelineElement_ExecutableWithFilelist_HelpText,
+                () => new ExecutableWithFilelistPipelineElement());
 
             // Copy pipeline elements from the pipeline to a list that supports data binding.
             // This is needed otherwise the list box won't properly function.
@@ -199,14 +225,21 @@ namespace PathCopyCopy.Settings.UI.Forms
         /// new pipeline elements.
         /// </summary>
         /// <param name="description">Menu item description.</param>
+        /// <param name="helpText">Menu item help text. Will be shown in a tooltip
+        /// when the mouse hovers over the item.</param>
         /// <param name="creator">Function used to instanciate a new pipeline element.</param>
-        private void AddNewElementMenuItem(string description, Func<PipelineElement> creator)
+        private void AddNewElementMenuItem(string description, string helpText,
+            Func<PipelineElement> creator)
         {
             ToolStripItem newItem = NewElementContextMenuStrip.Items.Add(description);
-            newItem.Click += NewElementMenuItem_Click;
+            if (!String.IsNullOrEmpty(helpText)) {
+                newItem.AutoToolTip = false;
+                newItem.ToolTipText = helpText;
+            }
             if (creator != null) {
                 newItem.Tag = creator;
             }
+            newItem.Click += NewElementMenuItem_Click;
         }
 
         /// <summary>

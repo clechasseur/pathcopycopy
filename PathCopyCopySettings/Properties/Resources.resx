@@ -366,4 +366,46 @@ Control-click to avoid displaying an icon for this command.</value>
   <data name="PipelineElement_RemoveExt" xml:space="preserve">
     <value>Remove File Extension</value>
   </data>
+  <data name="PipelineElement_ApplyPlugin_HelpText" xml:space="preserve">
+    <value>Choose a base command to use to get an initial path value</value>
+  </data>
+  <data name="PipelineElement_BackToForwardSlashes_HelpText" xml:space="preserve">
+    <value>Replace every backslash ( \ ) in the path with a forward slash ( / )</value>
+  </data>
+  <data name="PipelineElement_EmailLinks_HelpText" xml:space="preserve">
+    <value>Surround the path with &lt; and &gt; characters to create e-mail links</value>
+  </data>
+  <data name="PipelineElement_EncodeURIChars_HelpText" xml:space="preserve">
+    <value>Replace all characters in the path that are invalid in a URI by percent-encoding ( %xx )</value>
+  </data>
+  <data name="PipelineElement_EncodeURIWhitespace_HelpText" xml:space="preserve">
+    <value>Replace all whitespace characters in the path with %20</value>
+  </data>
+  <data name="PipelineElement_ExecutableWithFilelist_HelpText" xml:space="preserve">
+    <value>Instead of copying paths to the clipboard, save them to a filelist, then launch an executable on disk, passing the filelist as argument</value>
+  </data>
+  <data name="PipelineElement_Executable_HelpText" xml:space="preserve">
+    <value>Instead of copying paths to the clipboard, launch an executable on disk, passing the paths as arguments</value>
+  </data>
+  <data name="PipelineElement_FindReplace_HelpText" xml:space="preserve">
+    <value>Replace every instance of a specific character string in the path with another</value>
+  </data>
+  <data name="PipelineElement_ForwardToBackslashes_HelpText" xml:space="preserve">
+    <value>Replace every forward slash ( / ) in the path with a backslash ( \ )</value>
+  </data>
+  <data name="PipelineElement_OptionalQuotes_HelpText" xml:space="preserve">
+    <value>Surround the path with quotes ( " ) if it contains spaces</value>
+  </data>
+  <data name="PipelineElement_PathsSeparator_HelpText" xml:space="preserve">
+    <value>Configure the character string to use to separate multiple copied paths; if not present, a newline is used</value>
+  </data>
+  <data name="PipelineElement_Quotes_HelpText" xml:space="preserve">
+    <value>Surround the path with quotes ( " )</value>
+  </data>
+  <data name="PipelineElement_Regex_HelpText" xml:space="preserve">
+    <value>Perform a find/replace operation on the path using regular expressions</value>
+  </data>
+  <data name="PipelineElement_RemoveExt_HelpText" xml:space="preserve">
+    <value>Remove any extension from the file at the end of the path</value>
+  </data>
 </root>
