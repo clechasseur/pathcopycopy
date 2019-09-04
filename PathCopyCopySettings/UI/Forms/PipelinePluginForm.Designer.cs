@@ -547,6 +547,7 @@
             this.Controls.Add(this.MainTabControl);
             this.Controls.Add(this.NameTxt);
             this.Controls.Add(this.NameLbl);
+            this.HelpButton = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(422, 659);
@@ -555,6 +556,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Custom Command";
+            this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.PipelinePluginForm_HelpButtonClicked);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PipelinePluginForm_FormClosing);
             this.Load += new System.EventHandler(this.PipelinePluginForm_Load);
             this.MainTabControl.ResumeLayout(false);

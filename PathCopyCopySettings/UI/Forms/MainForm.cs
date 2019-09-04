@@ -1337,5 +1337,19 @@ namespace PathCopyCopy.Settings.UI.Forms
                 settings.SettingsFormSizeHeight = this.Size.Height;
             }
         }
+
+        /// <summary>
+        /// Called when the user presses the Help button in the form's caption bar.
+        /// We navigate to the wiki to show help in such a case.
+        /// </summary>
+        /// <param name="sender">Event sender.</param>
+        /// <param name="e">Event arguments.</param>
+        private void MainForm_HelpButtonClicked(object sender, CancelEventArgs e)
+        {
+            // Open wiki link to Settings page, then cancel the event to avoid
+            // displaying a help mouse pointer like the default behavior.
+            Process.Start(Resources.WikiLink_Settings);
+            e.Cancel = true;
+        }
     }
 }

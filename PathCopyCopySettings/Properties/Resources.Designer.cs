@@ -911,6 +911,33 @@ namespace PathCopyCopy.Settings.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to https://github.com/clechasseur/pathcopycopy/wiki/Custom-Commands.
+        /// </summary>
+        internal static string WikiLink_CustomCommands {
+            get {
+                return ResourceManager.GetString("WikiLink_CustomCommands", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://github.com/clechasseur/pathcopycopy/wiki/Custom-Commands-:-Expert-Mode.
+        /// </summary>
+        internal static string WikiLink_CustomCommandsExpertMode {
+            get {
+                return ResourceManager.GetString("WikiLink_CustomCommandsExpertMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://github.com/clechasseur/pathcopycopy/wiki/Settings.
+        /// </summary>
+        internal static string WikiLink_Settings {
+            get {
+                return ResourceManager.GetString("WikiLink_Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Copy WSL Path.
         /// </summary>
         internal static string WSL_PATH_PLUGIN_DESCRIPTION {

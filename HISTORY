@@ -14,6 +14,7 @@ Version 17.0 (20??-??-??)
 - Improved tooltips in Settings application
 - Can now copy paths of .url (internet shortcut) and .website (pinned website) files [https://github.com/clechasseur/pathcopycopy/issues/77]
 - New Expert Mode for editing custom commands [https://github.com/clechasseur/pathcopycopy/issues/5]
+- Settings application now has Help buttons linking to the wiki [https://github.com/clechasseur/pathcopycopy/issues/81]
 
 
 Version 16.0.1 (2018-11-30)

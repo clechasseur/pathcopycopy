@@ -296,6 +296,7 @@
             this.Controls.Add(this.RegexSyntaxHelpLbl1);
             this.Controls.Add(this.ExecutionGroupBox);
             this.Controls.Add(this.ParamsGroupBox);
+            this.HelpButton = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(462, 364);
@@ -304,6 +305,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Regular Expression Testing";
+            this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.RegexTesterForm_HelpButtonClicked);
             this.ParamsGroupBox.ResumeLayout(false);
             this.ParamsGroupBox.PerformLayout();
             this.ExecutionGroupBox.ResumeLayout(false);

@@ -19,9 +19,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Forms;
 using PathCopyCopy.Settings.Core.Regexes;
+using PathCopyCopy.Settings.Properties;
 using PathCopyCopy.Settings.UI.Utils;
 
 namespace PathCopyCopy.Settings.UI.Forms
@@ -129,6 +131,20 @@ namespace PathCopyCopy.Settings.UI.Forms
         private void RegexSyntaxHelpLinkLbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start((sender as LinkLabel).Text);
+        }
+
+        /// <summary>
+        /// Called when the user presses the Help button in the form's caption bar.
+        /// We navigate to the wiki to show help in such a case.
+        /// </summary>
+        /// <param name="sender">Event sender.</param>
+        /// <param name="e">Event arguments.</param>
+        private void RegexTesterForm_HelpButtonClicked(object sender, CancelEventArgs e)
+        {
+            // Open wiki link to Custom Commands page, then cancel the event to avoid
+            // displaying a help mouse pointer like the default behavior.
+            Process.Start(Resources.WikiLink_CustomCommands);
+            e.Cancel = true;
         }
     }
 }

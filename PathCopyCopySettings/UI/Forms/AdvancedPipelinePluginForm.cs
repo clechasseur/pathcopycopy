@@ -36,9 +36,6 @@ namespace PathCopyCopy.Settings.UI.Forms
     /// </summary>
     public partial class AdvancedPipelinePluginForm : Form
     {
-        /// URL to navigate to to get help about Expert Mode.
-        private const string EXPERT_MODE_HELP_URL = "https://github.com/clechasseur/pathcopycopy/wiki/Custom-Commands-:-Expert-Mode";
-
         /// Plugin info for the plugin we're editing.
         private PipelinePluginInfo pluginInfo;
 
@@ -391,14 +388,17 @@ namespace PathCopyCopy.Settings.UI.Forms
         }
 
         /// <summary>
-        /// Called when the user presses the button to get help.
-        /// We navigate to the proper help page.
+        /// Called when the user presses the Help button in the form's caption bar.
+        /// We navigate to the wiki to show help in such a case.
         /// </summary>
         /// <param name="sender">Event sender.</param>
         /// <param name="e">Event arguments.</param>
-        private void HelpBtn_Click(object sender, EventArgs e)
+        private void AdvancedPipelinePluginForm_HelpButtonClicked(object sender, CancelEventArgs e)
         {
-            Process.Start(EXPERT_MODE_HELP_URL);
+            // Open wiki link to Expert Mode page, then cancel the event to avoid
+            // displaying a help mouse pointer like the default behavior.
+            Process.Start(Resources.WikiLink_CustomCommandsExpertMode);
+            e.Cancel = true;
         }
     }
 }
