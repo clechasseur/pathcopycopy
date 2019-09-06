@@ -308,79 +308,94 @@ namespace PCC
     }
 
     //
-    // Standardized method to read an integer value encoded in a pipeline string.
+    // Constructor.
     //
-    // @param p_rElementIt Iterator pointing at the beginning of the integer data in
-    //                     the encoded string. After the method returns, the iterator
-    //                     points just past the integer data.
-    // @param p_ElementEnd Iterator pointing at the end of the encoded string.
-    // @return The resulting integer value
+    // @param p_EncodedElements String containing encoded pipeline elements data.
     //
-    long PipelineDecoder::DecodePipelineInt(std::wstring::const_iterator& p_rElementIt,
-                                            const std::wstring::const_iterator& p_ElementEnd)
+    PipelineDecoder::EncodedElementsStream::EncodedElementsStream(const std::wstring& p_EncodedElements)
+        : m_EncodedElements(p_EncodedElements),
+          m_CurIndex(0)
     {
-        // Encoded as four consecutive characters corresponding the integer value.
-        if (std::distance(p_rElementIt, p_ElementEnd) < 4) {
-            throw InvalidPipelineException();
+    }
+
+    //
+    // Reads a number of characters from the stream.
+    //
+    // @param p_DataSize Size of data to read, in number of characters.
+    // @return String containing the data.
+    //
+    auto PipelineDecoder::EncodedElementsStream::ReadData(const std::wstring::size_type p_DataSize) -> std::wstring
+    {
+        if (m_EncodedElements.size() - m_CurIndex < p_DataSize) {
+            throw InvalidPipelineException(m_EncodedElements);
         }
+        std::wstring data = m_EncodedElements.substr(m_CurIndex, p_DataSize);
+        m_CurIndex += p_DataSize;
+        return data;
+    }
+
+    //
+    // Reads the number of elements in the pipeline. This must be called
+    // first before any other data is read to get the number of encoded
+    // elements that follow.
+    //
+    // @return Number of encoded elements in the pipeline.
+    //
+    auto PipelineDecoder::EncodedElementsStream::ReadElementCount() -> size_t
+    {
+        assert(m_CurIndex == 0);
+
+        // The first two characters are a string representation of the number
+        // of elements in the pipeline (99 being the maximum number of elements
+        // there can be).
+        std::wstringstream wss(ReadData(2));
+        size_t numElements = 0;
+        wss >> numElements;
+        return numElements;
+    }
+
+    //
+    // Reads an encoded integer from the elements stream.
+    //
+    // @return Integer value.
+    //
+    auto PipelineDecoder::EncodedElementsStream::ReadLong() -> long
+    {
+        // Encoded as four consecutive characters corresponding to the integer value.
+        std::wstringstream wss(ReadData(4));
         long intValue = 0;
-        {
-            std::wstringstream wss;
-            wss << *p_rElementIt++;
-            wss << *p_rElementIt++;
-            wss << *p_rElementIt++;
-            wss << *p_rElementIt++;
-            assert(wss.tellg() == std::streamoff{0});
-            wss >> intValue;
-        }
+        wss >> intValue;
         return intValue;
     }
 
     //
-    // Standardized method to read a string encoded in a pipeline string.
+    // Reads an encoded string from the elements stream.
     //
-    // @param p_rElementIt Iterator pointing at the beginning of the string data in
-    //                     the encoded string. After the method returns, the iterator
-    //                     points just past the string data.
-    // @param p_ElementEnd Iterator pointing at the end of the encoded string.
-    // @param p_rString Where to store the resulting string.
+    // @return String value.
     //
-    void PipelineDecoder::DecodePipelineString(std::wstring::const_iterator& p_rElementIt,
-                                               const std::wstring::const_iterator& p_ElementEnd,
-                                               std::wstring& p_rString)
+    auto PipelineDecoder::EncodedElementsStream::ReadString() -> std::wstring
     {
         // First is encoded string size.
-        std::wstring::size_type stringSize = static_cast<std::wstring::size_type>(DecodePipelineInt(p_rElementIt, p_ElementEnd));
+        const auto stringSize = std::wstring::size_type{ReadLong()};
 
         // Now that we know the length of the string that is encoded, we simply
         // need to copy that much characters from the encoded string.
-        if (std::distance(p_rElementIt, p_ElementEnd) < static_cast<ptrdiff_t>(stringSize)) {
-            throw InvalidPipelineException();
-        }
-        p_rString.assign(p_rElementIt, p_rElementIt + stringSize);
-        p_rElementIt += stringSize;
+        return ReadData(stringSize);
     }
 
     //
-    // Standardized method to read a boolean value encoded in a pipeline string.
+    // Reads an encoded boolean value from the elements stream.
     //
-    // @param p_rElementIt Iterator pointing at the beginning of the boolean data in
-    //                     the encoded string. After the method returns, the iterator
-    //                     points just past the boolean data.
-    // @param p_ElementEnd Iterator pointing at the end of the encoded string.
-    // @return Resulting boolean value.
+    // @return Boolean value.
     //
-    bool PipelineDecoder::DecodePipelineBool(std::wstring::const_iterator& p_rElementIt,
-                                             const std::wstring::const_iterator& p_ElementEnd)
+    auto PipelineDecoder::EncodedElementsStream::ReadBool() -> bool
     {
         // Boolean values are merely encoded as 0 or 1.
-        if (p_rElementIt == p_ElementEnd) {
-            throw InvalidPipelineException();
+        const wchar_t boolChar = ReadData(1).front();
+        if (boolChar != L'0' && boolChar != L'1') {
+            throw InvalidPipelineException(m_EncodedElements);
         }
-        if (*p_rElementIt != L'0' && *p_rElementIt != L'1') {
-            throw InvalidPipelineException();
-        }
-        return (*p_rElementIt++ == L'1');
+        return boolChar == L'1';
     }
 
     //
