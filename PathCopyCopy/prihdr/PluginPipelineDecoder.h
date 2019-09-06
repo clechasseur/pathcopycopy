@@ -41,17 +41,14 @@ namespace PCC
                         PipelineDecoder() = delete;
                         ~PipelineDecoder() = delete;
 
-        static void     DecodePipeline(const std::wstring& p_EncodedElements,
-                                       PipelineElementSPV& p_rvspElements);
+        static auto     DecodePipeline(const std::wstring& p_EncodedElements) -> PipelineElementSPV;
 
     private:
-        static void     DecodePipelineElement(std::wstring::const_iterator& p_rElementIt,
-                                              const std::wstring::const_iterator& p_ElementEnd,
-                                              PipelineElementSPV& p_rvspElements);
+        static auto     DecodePipelineElement(const std::wstring& p_EncodedElements,
+                                              std::wstring::size_type& p_rElementIndex) -> PipelineElementSP;
 
-        static void     DecodeFindReplaceElement(std::wstring::const_iterator& p_rElementIt,
-                                                 const std::wstring::const_iterator& p_ElementEnd,
-                                                 PipelineElementSP& p_rspElement);
+        static auto     DecodeFindReplaceElement(const std::wstring& p_EncodedElements,
+                                                 std::wstring::size_type& p_rElementIndex) -> PipelineElementSP;
         static void     DecodeRegexElement(std::wstring::const_iterator& p_rElementIt,
                                            const std::wstring::const_iterator& p_ElementEnd,
                                            PipelineElementSP& p_rspElement);
@@ -81,14 +78,13 @@ namespace PCC
     class InvalidPipelineException : public std::exception
     {
     public:
-                        InvalidPipelineException();
+                        InvalidPipelineException() noexcept;
         explicit        InvalidPipelineException(const std::wstring& p_EncodedElements);
 
         const std::wstring&
-                        EncodedElements() const;
+                        EncodedElements() const noexcept;
 
-        virtual const char*
-                        what() const override;
+        const char*     what() const noexcept override;
 
     private:
         std::wstring    m_EncodedElements;      // The pipeline's encoded string.

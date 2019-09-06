@@ -59,52 +59,46 @@ namespace PCC
     // in a string and produces a list of corresponding pipeline element objects.
     //
     // @param p_EncodedElements Elements encoded in a string.
-    // @param p_rvspElements Where to store the resulting elements.
+    // @return Vector of resulting elements.
     //
-    void PipelineDecoder::DecodePipeline(const std::wstring& p_EncodedElements,
-                                         PipelineElementSPV& p_rvspElements)
+    auto PipelineDecoder::DecodePipeline(const std::wstring& p_EncodedElements) -> PipelineElementSPV
     {
-        try {
-            // The first two characters are a string representation of the number
-            // of elements in the pipeline (99 being the maximum number of elements
-            // there can be). Read that using a string stream.
-            if (p_EncodedElements.size() < 2) {
-                throw InvalidPipelineException();
-            }
-            std::wstring::const_iterator eIt = p_EncodedElements.begin();
-            std::wstring::const_iterator eEnd = p_EncodedElements.end();
-            size_t numElements = 0;
-            {
-                std::wstringstream wss;
-                wss << *eIt++;
-                wss << *eIt++;
-                assert(wss.tellg().seekpos() == 0);
-                wss >> numElements;
-            }
-
-            // Loop to read the appropriate number of elements.
-            for (size_t i = 0; i < numElements; ++i) {
-                DecodePipelineElement(eIt, eEnd, p_rvspElements);
-            }
-        } catch (const InvalidPipelineException&) {
-            // Re-throw with the pipeline string.
-            throw InvalidPipelineException(p_EncodedElements);
+        // The first two characters are a string representation of the number
+        // of elements in the pipeline (99 being the maximum number of elements
+        // there can be).
+        if (p_EncodedElements.size() < 2) {
+            throw InvalidPipelineException();
         }
+        size_t numElements = 0;
+        {
+            std::wstringstream wss;
+            wss << p_EncodedElements[0];
+            wss << p_EncodedElements[1];
+            assert(wss.tellg() == std::streamoff{0});
+            wss >> numElements;
+        }
+
+        // Loop to read the appropriate number of elements.
+        PipelineElementSPV vspPipelineElements;
+        vspPipelineElements.reserve(numElements);
+        std::wstring::size_type elementIndex = 2;
+        for (size_t i = 0; i < numElements; ++i) {
+            vspPipelineElements.emplace_back(DecodePipelineElement(p_EncodedElements, elementIndex));
+        }
+
+        return vspPipelineElements;
     }
 
     //
     // Decodes a pipeline element found at the given position in an encoded string
     // and adds it to an existing list of pipeline elements.
     //
-    // @param p_rElementIt Iterator pointing at the beginning of the element data
-    //                     in the encoded string. After the method returns, the
-    //                     iterator points just pass the element's data.
-    // @param p_ElementEnd Iterator pointing at the end of the encoded string.
-    // @param p_rvspElements Where to store the new elements.
+    // @param p_EncodedElements String containing encoded elements.
+    // @param p_rElementIndex Index of current element to decode in encoded elements string.
+    // @return New pipeline element.
     //
-    void PipelineDecoder::DecodePipelineElement(std::wstring::const_iterator& p_rElementIt,
-                                                const std::wstring::const_iterator& p_ElementEnd,
-                                                PipelineElementSPV& p_rvspElements)
+    auto PipelineDecoder::DecodePipelineElement(const std::wstring& p_EncodedElements,
+                                                std::wstring::size_type& p_rElementIndex) -> PipelineElementSP
     {
         PipelineElementSP spElement;
 
@@ -217,7 +211,7 @@ namespace PCC
     {
         // The data starts by a version number. This is used in case we need to add
         // support for extra options in the future.
-        long version = DecodePipelineInt(p_rElementIt, p_ElementEnd);
+        const long version = DecodePipelineInt(p_rElementIt, p_ElementEnd);
 
         // Make sure it's a version we can support.
         if (version > REGEX_ELEMENT_MAX_VERSION) {
@@ -252,14 +246,12 @@ namespace PCC
         if (std::distance(p_rElementIt, p_ElementEnd) < (GUIDSTRING_MAX - 1)) {
             throw InvalidPipelineException();
         }
-        wchar_t guidString[GUIDSTRING_MAX];
-        std::copy(p_rElementIt, p_rElementIt + (GUIDSTRING_MAX - 1), guidString);
+        std::wstring guidString(p_rElementIt, p_rElementIt + (GUIDSTRING_MAX - 1));
         p_rElementIt += (GUIDSTRING_MAX - 1);
-        guidString[GUIDSTRING_MAX - 1] = L'\0';
 
         // Now that we have the data, convert it to a GUID.
         CLSID pluginGuid;
-        if (FAILED(::CLSIDFromString(guidString, &pluginGuid))) {
+        if (FAILED(::CLSIDFromString(guidString.c_str(), &pluginGuid))) {
             // Invalid GUID format.
             throw InvalidPipelineException();
         }
@@ -338,7 +330,7 @@ namespace PCC
             wss << *p_rElementIt++;
             wss << *p_rElementIt++;
             wss << *p_rElementIt++;
-            assert(wss.tellg().seekpos() == 0);
+            assert(wss.tellg() == std::streamoff{0});
             wss >> intValue;
         }
         return intValue;
@@ -394,7 +386,7 @@ namespace PCC
     //
     // Default constructor. Does not set the encoded pipeline string.
     //
-    InvalidPipelineException::InvalidPipelineException()
+    InvalidPipelineException::InvalidPipelineException() noexcept
         : std::exception(),
           m_EncodedElements()
     {
@@ -416,7 +408,7 @@ namespace PCC
     //
     // @return Encoded pipeline string reference.
     //
-    const std::wstring& InvalidPipelineException::EncodedElements() const
+    const std::wstring& InvalidPipelineException::EncodedElements() const noexcept
     {
         return m_EncodedElements;
     }
@@ -426,7 +418,7 @@ namespace PCC
     //
     // @return Exception description.
     //
-    const char* InvalidPipelineException::what() const
+    const char* InvalidPipelineException::what() const noexcept
     {
         return "PCC::InvalidPipelineException";
     }

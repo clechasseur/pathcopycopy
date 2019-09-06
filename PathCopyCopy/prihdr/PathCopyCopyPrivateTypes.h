@@ -53,7 +53,7 @@ namespace PCC
     // Predicate used to compare GUID or CLSID structures, like std::less.
     //
     struct GUIDLess {
-        bool operator()(const GUID& p_Left, const GUID& p_Right) const {
+        bool operator()(const GUID& p_Left, const GUID& p_Right) const noexcept {
             return ::memcmp(&p_Left, &p_Right, sizeof(GUID)) < 0;
         }
     };
@@ -63,7 +63,7 @@ namespace PCC
     // Predicate used to check GUID or CLSID structures for equality, like std::equal_to.
     //
     struct GUIDEqualTo {
-        bool operator()(const GUID& p_Left, const GUID& p_Right) const {
+        bool operator()(const GUID& p_Left, const GUID& p_Right) const noexcept {
             return ::memcmp(&p_Left, &p_Right, sizeof(GUID)) == 0;
         }
     };
