@@ -30,12 +30,11 @@
 #include "StringUtils.h"
 #include "UserOverrideableRegKey.h"
 
-#include <cl/optional.h>
-
 #include <cstdint>
 #include <exception>
 #include <functional>
 #include <map>
+#include <optional>
 #include <string>
 #include <vector>
 
@@ -82,7 +81,7 @@ namespace PCC
         bool            NeedsUpdateCheck() const;
         void            SetLastUpdateCheckNow();
 
-        cl::optional<std::wstring>
+        std::optional<std::wstring>
                         GetIconFileForPlugin(const CLSID& p_PluginId) const;
 
         bool            GetEditingDisabled() const;

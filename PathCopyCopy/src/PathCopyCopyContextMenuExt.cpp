@@ -443,7 +443,7 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::QueryContextMenu(
                             if (SUCCEEDED(hRes)) {
                                 ATL::CStringW settingsCaption(MAKEINTRESOURCEW(IDS_PCC_SETTINGS_DESCRIPTION));
                                 if (::InsertMenuW(hSubMenu, subPosition, MF_BYPOSITION | MF_STRING, cmdId, settingsCaption)) {
-                                    m_SettingsCmdId = static_cast<UINT_PTR>(cmdId);
+                                    m_SettingsCmdId = cmdId;
                                     ++cmdId;
                                     ++subPosition;
                                 } else {
@@ -476,7 +476,7 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::QueryContextMenu(
                             }
                         }
                         if (::InsertMenuItemW(p_hMenu, position, TRUE, &menuItemInfo)) {
-                            m_SubMenuCmdId = static_cast<UINT_PTR>(cmdId);
+                            m_SubMenuCmdId = cmdId;
                             ++cmdId;
                             ++position;
                         } else {
@@ -819,7 +819,7 @@ HRESULT CPathCopyCopyContextMenuExt::AddPluginToMenu(const PCC::PluginSP& p_spPl
     if (::InsertMenuItemW(p_hMenu, p_rPosition, TRUE, &menuItemInfo)) {
         m_mPluginsByCmdId[p_rCmdId] = p_spPlugin;
         if (!m_FirstCmdId.has_value()) {
-            m_FirstCmdId = static_cast<UINT_PTR>(p_rCmdId);
+            m_FirstCmdId = p_rCmdId;
         }
         ++p_rCmdId;
         ++p_rPosition;
