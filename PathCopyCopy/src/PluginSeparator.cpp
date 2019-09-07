@@ -33,14 +33,6 @@ namespace
 namespace PCC
 {
     //
-    // Constructor.
-    //
-    PluginSeparator::PluginSeparator()
-        : Plugin()
-    {
-    }
-
-    //
     // Returns the plugin's unique identifier.
     //
     // @return Unique identifier.
@@ -77,7 +69,7 @@ namespace PCC
     //
     // @return true since we are a separator proxy.
     //
-    bool PluginSeparator::IsSeparator() const
+    bool PluginSeparator::IsSeparator() const noexcept
     {
         return true;
     }

@@ -37,16 +37,16 @@ namespace PCC
         class DefaultPlugin final : public LongPathPlugin
         {
         public:
-                                    DefaultPlugin();
+                                    DefaultPlugin() noexcept(false);
                                     DefaultPlugin(const DefaultPlugin&) = delete;
             DefaultPlugin&          operator=(const DefaultPlugin&) = delete;
 
-            virtual const GUID&     Id() const override;
+            const GUID&             Id() const noexcept(false) override;
 
-            virtual bool            CanDropRedundantWords() const override;
+            bool                    CanDropRedundantWords() const noexcept(false) override;
 
         protected:
-            virtual bool            IsAndrogynous() const override;
+            bool                    IsAndrogynous() const noexcept(false) override;
         };
 
     } // namespace Plugins

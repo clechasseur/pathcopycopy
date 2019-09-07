@@ -31,13 +31,6 @@
 namespace PCC
 {
     //
-    // Destructor.
-    //
-    Plugin::~Plugin()
-    {
-    }
-
-    //
     // Returns the help text to show in the Windows Explorer status bar
     // when the user hovers the cursor over the plugin's menu item.
     // If not overridden, no help text will be shown.
@@ -67,7 +60,7 @@ namespace PCC
     //
     // @return true to use default icon, false otherwise.
     //
-    bool Plugin::UseDefaultIcon() const
+    bool Plugin::UseDefaultIcon() const noexcept(false)
     {
         return false;
     }
@@ -82,7 +75,7 @@ namespace PCC
     // @return true if plugin should be enabled in contextual menu.
     //
     bool Plugin::Enabled(const std::wstring& /*p_ParentPath*/,
-                         const std::wstring& /*p_File*/) const
+                         const std::wstring& /*p_File*/) const noexcept(false)
     {
         return true;
     }
@@ -116,7 +109,7 @@ namespace PCC
     //
     // @return true if this plugin is a submenu separator proxy.
     //
-    bool Plugin::IsSeparator() const
+    bool Plugin::IsSeparator() const noexcept
     {
         return false;
     }
@@ -129,7 +122,7 @@ namespace PCC
     //
     // @return true if PCC can drop redundant words from this plugin's description.
     //
-    bool Plugin::CanDropRedundantWords() const
+    bool Plugin::CanDropRedundantWords() const noexcept(false)
     {
         return true;
     }
@@ -141,7 +134,7 @@ namespace PCC
     // @param p_pSettings Pointer to settings object.
     //                    Can be nullptr to remove an existing settings object.
     //
-    void Plugin::SetSettings(const Settings* const p_pSettings)
+    void Plugin::SetSettings(const Settings* const p_pSettings) noexcept
     {
         m_pSettings = p_pSettings;
     }
@@ -153,18 +146,9 @@ namespace PCC
     // @param p_pPluginProvider Pointer to plugin provider.
     //                          Can be nullptr to remove an existing provider.
     //
-    void Plugin::SetPluginProvider(const PluginProvider* const p_pPluginProvider)
+    void Plugin::SetPluginProvider(const PluginProvider* const p_pPluginProvider) noexcept
     {
         m_pPluginProvider = p_pPluginProvider;
-    }
-
-    //
-    // Constructor.
-    //
-    Plugin::Plugin()
-        : m_pSettings(nullptr),
-          m_pPluginProvider(nullptr)
-    {
     }
 
     //

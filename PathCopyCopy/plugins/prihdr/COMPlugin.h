@@ -45,20 +45,20 @@ namespace PCC
                                     COMPlugin(const COMPlugin&) = delete;
             COMPlugin&              operator=(const COMPlugin&) = delete;
 
-            virtual const GUID&     Id() const override;
+            const GUID&             Id() const noexcept(false) override;
             ULONG                   GroupId() const;
             ULONG                   GroupPosition() const;
 
-            virtual std::wstring    Description() const override;
-            virtual std::wstring    HelpText() const override;
-            virtual std::wstring    IconFile() const override;
-            virtual bool            UseDefaultIcon() const override;
-            virtual bool            Enabled(const std::wstring& p_ParentPath,
+            std::wstring            Description() const override;
+            std::wstring            HelpText() const override;
+            std::wstring            IconFile() const override;
+            bool                    UseDefaultIcon() const override;
+            bool                    Enabled(const std::wstring& p_ParentPath,
                                             const std::wstring& p_File) const override;
 
-            virtual std::wstring    GetPath(const std::wstring& p_File) const override;
+            std::wstring            GetPath(const std::wstring& p_File) const override;
 
-            virtual bool            CanDropRedundantWords() const override;
+            bool                    CanDropRedundantWords() const noexcept(false) override;
 
         private:
             GUID                    m_Id;               // Unique plugin ID.
@@ -81,12 +81,12 @@ namespace PCC
         class COMPluginError : public std::exception
         {
         public:
-            explicit                COMPluginError(const HRESULT p_Result);
+            explicit                COMPluginError(HRESULT p_Result) noexcept;
 
-            virtual const char*     what() const override;
+            const char*             what() const noexcept(false) override;
 
         private:
-            HRESULT                 m_Result;   // Contains an HRESULT returned by the call.
+            const HRESULT           m_Result;   // Contains an HRESULT returned by the call.
         };
 
     } // namespace Plugins

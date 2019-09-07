@@ -45,6 +45,8 @@ class ATL_NO_VTABLE CPathCopyCopyConfigHelper :
 public:
 	CPathCopyCopyConfigHelper();
 
+#pragma warning(disable: ALL_CPPCORECHECK_WARNINGS)
+
     DECLARE_REGISTRY_RESOURCEID(IDR_PATHCOPYCOPYCONFIGHELPER)
 
     DECLARE_NOT_AGGREGATABLE(CPathCopyCopyConfigHelper)
@@ -55,12 +57,16 @@ public:
 
 	DECLARE_PROTECT_FINAL_CONSTRUCT()
 
-	HRESULT FinalConstruct()
+#pragma warning(default: ALL_CPPCORECHECK_WARNINGS)
+
+    [[gsl::suppress(c.128)]]
+	HRESULT FinalConstruct() noexcept
 	{
 		return S_OK;
 	}
 
-	void FinalRelease()
+    [[gsl::suppress(c.128)]]
+	void FinalRelease() noexcept
 	{
 	}
 
@@ -80,4 +86,5 @@ private:
     void                Initialize();
 };
 
+#pragma warning(suppress: ALL_CPPCORECHECK_WARNINGS)
 OBJECT_ENTRY_AUTO(__uuidof(PathCopyCopyConfigHelper), CPathCopyCopyConfigHelper)

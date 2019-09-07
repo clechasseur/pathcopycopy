@@ -46,7 +46,6 @@ namespace PCC
                                     operator=(const LaunchExecutablePathAction&) = delete;
             LaunchExecutablePathAction&
                                     operator=(LaunchExecutablePathAction&&) = delete;
-                                    ~LaunchExecutablePathAction() override = default;
 
             void                    Act(const std::wstring& p_Paths,
                                         HWND p_hWnd) const override;

@@ -45,15 +45,15 @@ namespace PCC
                                     InternalPlugin(const InternalPlugin&) = delete;
             InternalPlugin&         operator=(const InternalPlugin&) = delete;
 
-            virtual std::wstring    Description() const override;
-            virtual std::wstring    HelpText() const override;
+            std::wstring            Description() const override;
+            std::wstring            HelpText() const override;
 
         protected:
             ATL::CStringW           m_DescriptionString;    // String containing plugin description.
             ATL::CStringW           m_HelpTextString;       // String containing plugin help text.
 
-                                    InternalPlugin(const unsigned short p_DescriptionStringResourceID,
-                                                   const unsigned short p_HelpTextStringResourceID);
+                                    InternalPlugin(unsigned short p_DescriptionStringResourceID,
+                                                   unsigned short p_HelpTextStringResourceID);
         };
 
     } // namespace Plugins

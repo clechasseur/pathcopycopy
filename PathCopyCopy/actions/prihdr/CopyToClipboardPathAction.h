@@ -45,7 +45,6 @@ namespace PCC
                                     operator=(const CopyToClipboardPathAction&) = delete;
             CopyToClipboardPathAction&
                                     operator=(CopyToClipboardPathAction&&) = delete;
-                                    ~CopyToClipboardPathAction() override = default;
 
             void                    Act(const std::wstring& p_Paths,
                                         HWND p_hWnd) const override;

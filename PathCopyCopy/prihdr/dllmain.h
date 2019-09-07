@@ -33,12 +33,13 @@ class CPathCopyCopyModule final : public ATL::CAtlDllModuleT<CPathCopyCopyModule
 {
 public :
 	DECLARE_LIBID(LIBID_PathCopyCopyLib)
-	DECLARE_REGISTRY_APPID_RESOURCEID(IDR_PATHCOPYCOPY, "{44F7E5A2-1286-45F5-9A7A-A95A41B72918}")
+#pragma warning(suppress: ALL_CPPCORECHECK_WARNINGS)
+    DECLARE_REGISTRY_APPID_RESOURCEID(IDR_PATHCOPYCOPY, "{44F7E5A2-1286-45F5-9A7A-A95A41B72918}")
 
     HRESULT             DllRegisterServer(BOOL p_RegisterTypeLib = TRUE) throw();
     HRESULT             DllUnregisterServer(BOOL p_UnregisterTypeLib = TRUE) throw();
 
-    static HINSTANCE    HInstance();
+    static HINSTANCE    HInstance() noexcept;
 };
 
 extern class CPathCopyCopyModule _AtlModule;

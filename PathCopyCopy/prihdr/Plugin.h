@@ -47,8 +47,10 @@ namespace PCC
     {
     public:
                                     Plugin(const Plugin&) = delete;
+                                    Plugin(Plugin&&) = delete;
         Plugin&                     operator=(const Plugin&) = delete;
-        virtual                     ~Plugin();
+        Plugin&                     operator=(Plugin&&) = delete;
+        virtual                     ~Plugin() = default;
 
                                     //
                                     // Returns a unique identifier for the plugin. This will
@@ -67,9 +69,9 @@ namespace PCC
         virtual std::wstring        Description() const = 0;
         virtual std::wstring        HelpText() const;
         virtual std::wstring        IconFile() const;
-        virtual bool                UseDefaultIcon() const;
+        virtual bool                UseDefaultIcon() const noexcept(false);
         virtual bool                Enabled(const std::wstring& p_ParentPath,
-                                            const std::wstring& p_File) const;
+                                            const std::wstring& p_File) const noexcept(false);
 
                                     //
                                     // Returns the path of the given file, as determined
@@ -83,17 +85,17 @@ namespace PCC
 
         virtual PathActionSP        Action() const;
 
-        virtual bool                IsSeparator() const;
-        virtual bool                CanDropRedundantWords() const;
+        virtual bool                IsSeparator() const noexcept;
+        virtual bool                CanDropRedundantWords() const noexcept(false);
 
-        void                        SetSettings(const Settings* const p_pSettings);
-        void                        SetPluginProvider(const PluginProvider* const p_pPluginProvider);
+        void                        SetSettings(const Settings* p_pSettings) noexcept;
+        void                        SetPluginProvider(const PluginProvider* p_pPluginProvider) noexcept;
 
     protected:
-        const Settings*             m_pSettings;        // Optional object to access PCC settings.
-        const PluginProvider*       m_pPluginProvider;  // Optional object to access other plugins.
+        const Settings*             m_pSettings = nullptr;          // Optional object to access PCC settings.
+        const PluginProvider*       m_pPluginProvider = nullptr;    // Optional object to access other plugins.
 
-                                    Plugin();
+                                    Plugin() = default;
     };
 
     // Comparison operators for plugins and unique identifiers (e.g. GUIDs).

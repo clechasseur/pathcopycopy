@@ -44,7 +44,7 @@ namespace PCC
             AndrogynousInternalPlugin&
                                     operator=(const AndrogynousInternalPlugin&) = delete;
 
-            virtual std::wstring    Description() const override;
+            std::wstring            Description() const override;
 
         protected:
             ATL::CStringW           m_AndrogynousDescriptionString;     // String containing plugin androgynous description.

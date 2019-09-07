@@ -30,7 +30,7 @@
 namespace {
 
 // Keeps the global instance passed to DllMain.
-HINSTANCE g_hInstance = NULL;
+HINSTANCE g_hInstance = nullptr;
 
 } // anonymous namespace
 
@@ -42,34 +42,39 @@ HINSTANCE g_hInstance = NULL;
 // @param p_RegisterTypeLib Whether to register type libraries.
 // @return Result code.
 //
+[[gsl::suppress(c.128)]]
 HRESULT CPathCopyCopyModule::DllRegisterServer(BOOL p_RegisterTypeLib /*= TRUE*/) throw()
 {
-    // Setup per-user registration if needed.
-    StAtlPerUserOverride perUserOverride;
-    HRESULT hRes = perUserOverride.Succeeded() ? S_OK : E_FAIL;
-    if (SUCCEEDED(hRes)) {
-        hRes = ATL::CAtlDllModuleT<CPathCopyCopyModule>::DllRegisterServer(p_RegisterTypeLib);
+    try {
+        // Setup per-user registration if needed.
+        StAtlPerUserOverride perUserOverride;
+        HRESULT hRes = perUserOverride.Succeeded() ? S_OK : E_FAIL;
         if (SUCCEEDED(hRes)) {
-            // Register our shell extensions as "approved". We do this here so that
-            // it can work in per-user installations.
-            AtlRegKey approvedKey;
-            LONG regRes = approvedKey.Open(perUserOverride.Overridden() ? HKEY_CURRENT_USER : HKEY_LOCAL_MACHINE,
-                                           L"Software\\Microsoft\\Windows\\CurrentVersion\\Extensions\\Approved",
-                                           true, KEY_QUERY_VALUE | KEY_SET_VALUE);
-            if (regRes == ERROR_SUCCESS) {
-                regRes = approvedKey.SetStringValue(L"{82CB99A2-2F18-4D5D-9476-54347E3B6720}",
-                                                    L"PathCopyCopy Contextual Menu Handler");
-            }
-            if (regRes == ERROR_SUCCESS) {
-                regRes = approvedKey.SetStringValue(L"{16170CA5-25CA-4e6d-928C-7A3A974F4B56}",
-                                                    L"PathCopyCopy Data Handler");
-            }
-            if (regRes != ERROR_SUCCESS) {
-                hRes = HRESULT_FROM_WIN32(regRes);
+            hRes = ATL::CAtlDllModuleT<CPathCopyCopyModule>::DllRegisterServer(p_RegisterTypeLib);
+            if (SUCCEEDED(hRes)) {
+                // Register our shell extensions as "approved". We do this here so that
+                // it can work in per-user installations.
+                AtlRegKey approvedKey;
+                LONG regRes = approvedKey.Open(perUserOverride.Overridden() ? HKEY_CURRENT_USER : HKEY_LOCAL_MACHINE,
+                                               L"Software\\Microsoft\\Windows\\CurrentVersion\\Extensions\\Approved",
+                                               true, KEY_QUERY_VALUE | KEY_SET_VALUE);
+                if (regRes == ERROR_SUCCESS) {
+                    regRes = approvedKey.SetStringValue(L"{82CB99A2-2F18-4D5D-9476-54347E3B6720}",
+                                                        L"PathCopyCopy Contextual Menu Handler");
+                }
+                if (regRes == ERROR_SUCCESS) {
+                    regRes = approvedKey.SetStringValue(L"{16170CA5-25CA-4e6d-928C-7A3A974F4B56}",
+                                                        L"PathCopyCopy Data Handler");
+                }
+                if (regRes != ERROR_SUCCESS) {
+                    hRes = HRESULT_FROM_WIN32(regRes);
+                }
             }
         }
+        return hRes;
+    } catch (...) {
+        return E_UNEXPECTED;
     }
-    return hRes;
 }
 
 //
@@ -80,30 +85,35 @@ HRESULT CPathCopyCopyModule::DllRegisterServer(BOOL p_RegisterTypeLib /*= TRUE*/
 // @param p_UnregisterTypeLib Whether to unregister type libraries.
 // @return Result code.
 //
+[[gsl::suppress(c.128)]]
 HRESULT CPathCopyCopyModule::DllUnregisterServer(BOOL p_UnregisterTypeLib /*= TRUE*/) throw()
 {
-    // Setup per-user unregistration if needed.
-    StAtlPerUserOverride perUserOverride;
-    HRESULT hRes = perUserOverride.Succeeded() ? S_OK : E_FAIL;
-    if (SUCCEEDED(hRes)) {
-        hRes = ATL::CAtlDllModuleT<CPathCopyCopyModule>::DllUnregisterServer(p_UnregisterTypeLib);
+    try {
+        // Setup per-user unregistration if needed.
+        StAtlPerUserOverride perUserOverride;
+        HRESULT hRes = perUserOverride.Succeeded() ? S_OK : E_FAIL;
         if (SUCCEEDED(hRes)) {
-            // Unregister our approved shell extensions. We do this here so that
-            // it can work in per-user installations.
-            // Note that if it doesn't exist, we consider it a success.
-            AtlRegKey approvedKey;
-            LONG regRes = approvedKey.Open(perUserOverride.Overridden() ? HKEY_CURRENT_USER : HKEY_LOCAL_MACHINE,
-                                           L"Software\\Microsoft\\Windows\\CurrentVersion\\Extensions\\Approved",
-                                           false, KEY_QUERY_VALUE | KEY_SET_VALUE);
-            if (regRes != ERROR_SUCCESS && regRes != ERROR_FILE_NOT_FOUND) {
-                hRes = HRESULT_FROM_WIN32(regRes);
-            } else if (regRes == ERROR_SUCCESS) {
-                approvedKey.DeleteValue(L"{82CB99A2-2F18-4D5D-9476-54347E3B6720}");
-                approvedKey.DeleteValue(L"{16170CA5-25CA-4e6d-928C-7A3A974F4B56}");
+            hRes = ATL::CAtlDllModuleT<CPathCopyCopyModule>::DllUnregisterServer(p_UnregisterTypeLib);
+            if (SUCCEEDED(hRes)) {
+                // Unregister our approved shell extensions. We do this here so that
+                // it can work in per-user installations.
+                // Note that if it doesn't exist, we consider it a success.
+                AtlRegKey approvedKey;
+                const LONG regRes = approvedKey.Open(perUserOverride.Overridden() ? HKEY_CURRENT_USER : HKEY_LOCAL_MACHINE,
+                                                     L"Software\\Microsoft\\Windows\\CurrentVersion\\Extensions\\Approved",
+                                                     false, KEY_QUERY_VALUE | KEY_SET_VALUE);
+                if (regRes != ERROR_SUCCESS && regRes != ERROR_FILE_NOT_FOUND) {
+                    hRes = HRESULT_FROM_WIN32(regRes);
+                } else if (regRes == ERROR_SUCCESS) {
+                    approvedKey.DeleteValue(L"{82CB99A2-2F18-4D5D-9476-54347E3B6720}");
+                    approvedKey.DeleteValue(L"{16170CA5-25CA-4e6d-928C-7A3A974F4B56}");
+                }
             }
         }
+        return hRes;
+    } catch (...) {
+        return E_UNEXPECTED;
     }
-    return hRes;
 }
 
 //
@@ -113,11 +123,12 @@ HRESULT CPathCopyCopyModule::DllUnregisterServer(BOOL p_UnregisterTypeLib /*= TR
 //
 // @return Module instance handle.
 //
-HINSTANCE CPathCopyCopyModule::HInstance()
+HINSTANCE CPathCopyCopyModule::HInstance() noexcept
 {
     return g_hInstance;
 }
 
+#pragma warning(suppress: ALL_CPPCORECHECK_WARNINGS)
 CPathCopyCopyModule _AtlModule;
 
 // DLL Entry Point
