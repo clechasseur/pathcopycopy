@@ -31,14 +31,6 @@
 namespace PCC
 {
     //
-    // Constructor.
-    //
-    QuotesPipelineElement::QuotesPipelineElement()
-        : PipelineElement()
-    {
-    }
-
-    //
     // Modifies the given path by surrounding it with quotes.
     //
     // @param p_rPath Path to modify (in-place).
@@ -49,14 +41,6 @@ namespace PCC
     {
         p_rPath.insert(p_rPath.begin(), 1, L'\"');
         p_rPath.append(1, L'\"');
-    }
-
-    //
-    // Constructor.
-    //
-    OptionalQuotesPipelineElement::OptionalQuotesPipelineElement()
-        : PipelineElement()
-    {
     }
 
     //
@@ -76,14 +60,6 @@ namespace PCC
     }
 
     //
-    // Constructor.
-    //
-    EmailLinksPipelineElement::EmailLinksPipelineElement()
-        : PipelineElement()
-    {
-    }
-
-    //
     // Modifies the given path by turning it into an e-mail link.
     //
     // @param p_rPath Path to modify (in-place).
@@ -97,14 +73,6 @@ namespace PCC
     }
 
     //
-    // Constructor.
-    //
-    EncodeURIWhitespacePipelineElement::EncodeURIWhitespacePipelineElement()
-        : PipelineElement()
-    {
-    }
-
-    //
     // Modifies the given path by encoding URI whitespace.
     //
     // @param p_rPath Path to modify (in-place).
@@ -114,14 +82,6 @@ namespace PCC
                                                         const PluginProvider* const /*p_pPluginProvider*/) const
     {
         StringUtils::EncodeURICharacters(p_rPath, StringUtils::EncodeParam::Whitespace);
-    }
-
-    //
-    // Constructor.
-    //
-    EncodeURICharsPipelineElement::EncodeURICharsPipelineElement()
-        : PipelineElement()
-    {
     }
 
     //

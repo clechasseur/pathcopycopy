@@ -37,8 +37,10 @@ namespace PCC
     {
     public:
                         PathAction(const PathAction&) = delete;
+                        PathAction(PathAction&&) = delete;
         PathAction&     operator=(const PathAction&) = delete;
-        virtual         ~PathAction();
+        PathAction&     operator=(PathAction&&) = delete;
+        virtual         ~PathAction() = default;
 
                         //
                         // Performs the action on the given path or paths.
@@ -49,7 +51,7 @@ namespace PCC
                         // @param p_hWnd Parent window handle, if needed.
                         //
         virtual void    Act(const std::wstring& p_Paths,
-                            const HWND          p_hWnd) const = 0;
+                            HWND p_hWnd) const = 0;
 
     protected:
                         PathAction() = default;

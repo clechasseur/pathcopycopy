@@ -39,17 +39,21 @@ namespace PCC
         {
         public:
                                     LaunchExecutablePathAction(const std::wstring& p_Executable,
-                                                               const bool          p_UseFilelist);
+                                                               bool p_UseFilelist);
                                     LaunchExecutablePathAction(const LaunchExecutablePathAction&) = delete;
+                                    LaunchExecutablePathAction(LaunchExecutablePathAction&&) = delete;
             LaunchExecutablePathAction&
                                     operator=(const LaunchExecutablePathAction&) = delete;
+            LaunchExecutablePathAction&
+                                    operator=(LaunchExecutablePathAction&&) = delete;
+                                    ~LaunchExecutablePathAction() override = default;
 
-            virtual void            Act(const std::wstring& p_Paths,
-                                        const HWND          p_hWnd) const override;
+            void                    Act(const std::wstring& p_Paths,
+                                        HWND p_hWnd) const override;
 
         private:
-            std::wstring            m_Executable;   // Name of executable to launch.
-            bool                    m_UseFilelist;  // Whether to use a filelist.txt file instead of passing paths directly.
+            const std::wstring      m_Executable;   // Name of executable to launch.
+            const bool              m_UseFilelist;  // Whether to use a filelist.txt file instead of passing paths directly.
         };
 
         //
@@ -60,7 +64,7 @@ namespace PCC
         class LaunchExecutableException : public std::exception
         {
         public:
-            virtual const char*     what() const override;
+            const char*             what() const noexcept(false) override;
         };
 
     } // namespace Actions

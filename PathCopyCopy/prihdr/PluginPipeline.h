@@ -40,15 +40,15 @@ namespace PCC
     {
     public:
         const std::wstring&
-                        GetPathsSeparator() const;
+                        GetPathsSeparator() const noexcept;
         void            SetPathsSeparator(const std::wstring& p_PathsSeparator);
 
         const std::wstring&
-                        GetExecutable() const;
+                        GetExecutable() const noexcept;
         void            SetExecutable(const std::wstring& p_Executable);
 
-        bool            GetUseFilelist() const;
-        void            SetUseFilelist(const bool p_UseFilelist);
+        bool            GetUseFilelist() const noexcept;
+        void            SetUseFilelist(const bool p_UseFilelist) noexcept;
 
     private:
         std::wstring    m_PathsSeparator;       // Separator to use between multiple paths.
@@ -71,14 +71,14 @@ namespace PCC
         Pipeline&       operator=(const Pipeline&) = delete;
 
         void            ModifyPath(std::wstring& p_rPath,
-                                   const PluginProvider* const p_pPluginProvider) const;
+                                   const PluginProvider* p_pPluginProvider) const;
         void            ModifyOptions(PipelineOptions& p_rOptions) const;
         bool            ShouldBeEnabledFor(const std::wstring& p_ParentPath,
                                            const std::wstring& p_File,
-                                           const PluginProvider* const p_pPluginProvider) const;
+                                           const PluginProvider* p_pPluginProvider) const;
 
     private:
-        PipelineElementSPV
+        const PipelineElementSPV
                         m_vspElements;      // Elements in the pipeline.
     };
 
@@ -90,18 +90,19 @@ namespace PCC
     class PipelineElement
     {
     public:
-                        PipelineElement();
+                        PipelineElement() noexcept = default;
                         PipelineElement(const PipelineElement&) = delete;
-        PipelineElement&
-                        operator=(const PipelineElement&) = delete;
-        virtual         ~PipelineElement();
+                        PipelineElement(PipelineElement&&) = delete;
+        PipelineElement& operator=(const PipelineElement&) = delete;
+        PipelineElement& operator=(PipelineElement&&) = delete;
+        virtual         ~PipelineElement() = default;
 
         virtual void    ModifyPath(std::wstring& p_rPath,
-                                   const PluginProvider* const p_pPluginProvider) const = 0;
-        virtual void    ModifyOptions(PipelineOptions& p_rOptions) const;
+                                   const PluginProvider* p_pPluginProvider) const = 0;
+        virtual void    ModifyOptions(PipelineOptions& p_rOptions) const noexcept(false);
         virtual bool    ShouldBeEnabledFor(const std::wstring& p_ParentPath,
                                            const std::wstring& p_File,
-                                           const PluginProvider* const p_pPluginProvider) const;
+                                           const PluginProvider* p_pPluginProvider) const noexcept(false);
     };
 
 } // namespace PCC

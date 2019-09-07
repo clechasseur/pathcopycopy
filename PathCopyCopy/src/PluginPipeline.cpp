@@ -32,7 +32,7 @@ namespace PCC
     // @return Separator between multiple paths. An empty string
     //         means to use the default value.
     //
-    const std::wstring& PipelineOptions::GetPathsSeparator() const
+    const std::wstring& PipelineOptions::GetPathsSeparator() const noexcept
     {
         return m_PathsSeparator;
     }
@@ -55,7 +55,7 @@ namespace PCC
     // @return Path of executable to start. An empty string means
     //         to copy to clipboard instead.
     //
-    const std::wstring& PipelineOptions::GetExecutable() const
+    const std::wstring& PipelineOptions::GetExecutable() const noexcept
     {
         return m_Executable;
     }
@@ -77,7 +77,7 @@ namespace PCC
     //
     // @return Whether to launch executable with filelist instead of paths.
     //
-    bool PipelineOptions::GetUseFilelist() const
+    bool PipelineOptions::GetUseFilelist() const noexcept
     {
         return m_UseFilelist;
     }
@@ -87,7 +87,7 @@ namespace PCC
     //
     // @param p_UseFilelist true to launch executable with filelist instead of paths.
     //
-    void PipelineOptions::SetUseFilelist(const bool p_UseFilelist)
+    void PipelineOptions::SetUseFilelist(const bool p_UseFilelist) noexcept
     {
         m_UseFilelist = p_UseFilelist;
     }
@@ -109,22 +109,8 @@ namespace PCC
     // @param p_EncodedElements Elements encoded in a string.
     //
     Pipeline::Pipeline(const std::wstring& p_EncodedElements)
-        : m_vspElements()
+        : m_vspElements(PipelineDecoder::DecodePipeline(p_EncodedElements))
     {
-        PipelineDecoder::DecodePipeline(p_EncodedElements, m_vspElements);
-    }
-
-    //
-    // Modifies global pipeline options by successively applying all pipeline
-    // elements to it. Returns the final version of the pipeline options.
-    //
-    // @param p_rOptions Global pipeline options to modify.
-    //
-    void Pipeline::ModifyOptions(PipelineOptions& p_rOptions) const
-    {
-        for (const PipelineElementSP& spElement : m_vspElements) {
-            spElement->ModifyOptions(p_rOptions);
-        }
     }
 
     //
@@ -139,6 +125,19 @@ namespace PCC
     {
         for (const PipelineElementSP& spElement : m_vspElements) {
             spElement->ModifyPath(p_rPath, p_pPluginProvider);
+        }
+    }
+
+    //
+    // Modifies global pipeline options by successively applying all pipeline
+    // elements to it. Returns the final version of the pipeline options.
+    //
+    // @param p_rOptions Global pipeline options to modify.
+    //
+    void Pipeline::ModifyOptions(PipelineOptions& p_rOptions) const
+    {
+        for (const PipelineElementSP& spElement : m_vspElements) {
+            spElement->ModifyOptions(p_rOptions);
         }
     }
 
@@ -164,26 +163,12 @@ namespace PCC
     }
 
     //
-    // Default constructor.
-    //
-    PipelineElement::PipelineElement()
-    {
-    }
-
-    //
-    // Destructor.
-    //
-    PipelineElement::~PipelineElement()
-    {
-    }
-
-    //
     // Modifies global pipeline options. Each element has the opportunity
     // to modify them when a path is modified.
     //
     // @param p_rOptions Global pipeline options to modify.
     //
-    void PipelineElement::ModifyOptions(PipelineOptions& /*p_rOptions*/) const
+    void PipelineElement::ModifyOptions(PipelineOptions& /*p_rOptions*/) const noexcept(false)
     {
     }
 
@@ -198,7 +183,7 @@ namespace PCC
     //
     bool PipelineElement::ShouldBeEnabledFor(const std::wstring& /*p_ParentPath*/,
                                              const std::wstring& /*p_File*/,
-                                             const PluginProvider* const /*p_pPluginProvider*/) const
+                                             const PluginProvider* const /*p_pPluginProvider*/) const noexcept(false)
     {
         return true;
     }

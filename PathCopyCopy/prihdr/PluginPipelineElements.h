@@ -40,13 +40,17 @@ namespace PCC
     class QuotesPipelineElement : public PipelineElement
     {
     public:
-                        QuotesPipelineElement();
+                        QuotesPipelineElement() = default;
                         QuotesPipelineElement(const QuotesPipelineElement&) = delete;
+                        QuotesPipelineElement(QuotesPipelineElement&&) = delete;
         QuotesPipelineElement&
                         operator=(const QuotesPipelineElement&) = delete;
+        QuotesPipelineElement&
+                        operator=(QuotesPipelineElement&&) = delete;
+                        ~QuotesPipelineElement() override = default;
 
-        virtual void    ModifyPath(std::wstring& p_rPath,
-                                   const PluginProvider* const p_pPluginProvider) const override;
+        void            ModifyPath(std::wstring& p_rPath,
+                                   const PluginProvider* p_pPluginProvider) const override;
     };
 
     //
@@ -58,13 +62,17 @@ namespace PCC
     class OptionalQuotesPipelineElement : public PipelineElement
     {
     public:
-                        OptionalQuotesPipelineElement();
+                        OptionalQuotesPipelineElement() = default;
                         OptionalQuotesPipelineElement(const OptionalQuotesPipelineElement&) = delete;
+                        OptionalQuotesPipelineElement(OptionalQuotesPipelineElement&&) = delete;
         OptionalQuotesPipelineElement&
                         operator=(const OptionalQuotesPipelineElement&) = delete;
+        OptionalQuotesPipelineElement&
+                        operator=(OptionalQuotesPipelineElement&&) = delete;
+                        ~OptionalQuotesPipelineElement() override = default;
 
-        virtual void    ModifyPath(std::wstring& p_rPath,
-                                   const PluginProvider* const p_pPluginProvider) const override;
+        void            ModifyPath(std::wstring& p_rPath,
+                                   const PluginProvider* p_pPluginProvider) const override;
     };
 
     //
@@ -76,13 +84,17 @@ namespace PCC
     class EmailLinksPipelineElement : public PipelineElement
     {
     public:
-                        EmailLinksPipelineElement();
+                        EmailLinksPipelineElement() = default;
                         EmailLinksPipelineElement(const EmailLinksPipelineElement&) = delete;
+                        EmailLinksPipelineElement(EmailLinksPipelineElement&&) = delete;
         EmailLinksPipelineElement&
                         operator=(const EmailLinksPipelineElement&) = delete;
+        EmailLinksPipelineElement&
+                        operator=(EmailLinksPipelineElement&&) = delete;
+                        ~EmailLinksPipelineElement() override = default;
 
-        virtual void    ModifyPath(std::wstring& p_rPath,
-                                   const PluginProvider* const p_pPluginProvider) const override;
+        void            ModifyPath(std::wstring& p_rPath,
+                                   const PluginProvider* p_pPluginProvider) const override;
     };
 
     //
@@ -94,13 +106,17 @@ namespace PCC
     class EncodeURIWhitespacePipelineElement : public PipelineElement
     {
     public:
-                        EncodeURIWhitespacePipelineElement();
+                        EncodeURIWhitespacePipelineElement() = default;
                         EncodeURIWhitespacePipelineElement(const EncodeURIWhitespacePipelineElement&) = delete;
+                        EncodeURIWhitespacePipelineElement(EncodeURIWhitespacePipelineElement&&) = delete;
         EncodeURIWhitespacePipelineElement&
                         operator=(const EncodeURIWhitespacePipelineElement&) = delete;
+        EncodeURIWhitespacePipelineElement&
+                        operator=(EncodeURIWhitespacePipelineElement&&) = delete;
+                        ~EncodeURIWhitespacePipelineElement() override = default;
 
-        virtual void    ModifyPath(std::wstring& p_rPath,
-                                   const PluginProvider* const p_pPluginProvider) const override;
+        void            ModifyPath(std::wstring& p_rPath,
+                                   const PluginProvider* p_pPluginProvider) const override;
     };
 
     //
@@ -112,13 +128,17 @@ namespace PCC
     class EncodeURICharsPipelineElement : public PipelineElement
     {
     public:
-                        EncodeURICharsPipelineElement();
+                        EncodeURICharsPipelineElement() = default;
                         EncodeURICharsPipelineElement(const EncodeURICharsPipelineElement&) = delete;
+                        EncodeURICharsPipelineElement(EncodeURICharsPipelineElement&&) = delete;
         EncodeURICharsPipelineElement&
                         operator=(const EncodeURICharsPipelineElement&) = delete;
+        EncodeURICharsPipelineElement&
+                        operator=(EncodeURICharsPipelineElement&&) = delete;
+                        ~EncodeURICharsPipelineElement() override = default;
 
-        virtual void    ModifyPath(std::wstring& p_rPath,
-                                   const PluginProvider* const p_pPluginProvider) const override;
+        void            ModifyPath(std::wstring& p_rPath,
+                                   const PluginProvider* p_pPluginProvider) const override;
     };
 
     //

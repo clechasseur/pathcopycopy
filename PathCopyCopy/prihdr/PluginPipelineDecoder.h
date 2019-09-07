@@ -56,6 +56,8 @@ namespace PCC
             EncodedElementsStream&
                         operator=(const EncodedElementsStream&) = delete;
 
+            auto        GetEncodedElements() const noexcept -> const std::wstring&;
+
             auto        ReadData(std::wstring::size_type p_DataSize) -> std::wstring;
             auto        ReadElementCount() -> size_t;
             auto        ReadLong() -> long;

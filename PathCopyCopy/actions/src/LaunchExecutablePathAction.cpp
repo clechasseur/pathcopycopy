@@ -23,7 +23,6 @@
 #include <LaunchExecutablePathAction.h>
 
 #include <fstream>
-#include <memory>
 
 
 namespace PCC
@@ -37,7 +36,7 @@ namespace PCC
         // @param p_UseFilelist Whether to use a filelist to launch executable instead of passing paths directly.
         //
         LaunchExecutablePathAction::LaunchExecutablePathAction(const std::wstring& p_Executable,
-                                                               const bool          p_UseFilelist)
+                                                               const bool p_UseFilelist)
             : PCC::PathAction(),
               m_Executable(p_Executable),
               m_UseFilelist(p_UseFilelist)
@@ -52,35 +51,45 @@ namespace PCC
         // @param p_hWnd Parent window handle, if needed.
         //
         void LaunchExecutablePathAction::Act(const std::wstring& p_Paths,
-                                             const HWND          p_hWnd) const
+                                             HWND const p_hWnd) const
         {
             std::wstring arguments = p_Paths;
             if (m_UseFilelist) {
-                wchar_t tempDirPath[MAX_PATH + 1];
-                if (::GetTempPathW(sizeof(tempDirPath) / sizeof(wchar_t), tempDirPath) == 0) {
+                // Get path to temp directory
+                std::wstring tempDirPath;
+                tempDirPath.resize(MAX_PATH + 1);
+                if (::GetTempPathW(tempDirPath.size(), &*tempDirPath.begin()) == 0) {
                     throw LaunchExecutableException();
                 }
 
-                wchar_t tempFilePath[MAX_PATH + 1];
-                if (::GetTempFileNameW(tempDirPath, L"pcc", 0, tempFilePath) == 0) {
+                // Generate temp file for the paths
+                std::wstring tempFilePath;
+                tempFilePath.resize(MAX_PATH + 1);
+                if (::GetTempFileNameW(tempDirPath.c_str(), L"pcc", 0, &*tempFilePath.begin()) == 0) {
                     throw LaunchExecutableException();
                 }
 
-                int reqdBufferSize = ::WideCharToMultiByte(CP_ACP, 0, p_Paths.c_str(), -1, nullptr, 0, nullptr, nullptr);
-                auto buffer = std::make_unique<char[]>(reqdBufferSize);
-                int convertRetVal = ::WideCharToMultiByte(CP_ACP, 0, p_Paths.c_str(), -1, buffer.get(), reqdBufferSize, nullptr, nullptr);
-                if (convertRetVal == 0) {
-                    throw LaunchExecutableException();
-                }
+                // Convert paths to single-byte string
+                const ATL::CStringA mbPaths(p_Paths.c_str());
 
+                // Write paths to the temp file and use path to that file as argument to executable
                 std::ofstream of(tempFilePath, std::ios::out | std::ios::binary);
-                of.write(buffer.get(), convertRetVal - 1);
+                of.write((LPCSTR) mbPaths, mbPaths.GetLength());
                 arguments = tempFilePath;
             }
 
-            auto res = reinterpret_cast<size_t>(::ShellExecuteW(p_hWnd, nullptr, m_Executable.c_str(), arguments.c_str(), nullptr, SW_SHOWDEFAULT));
-            if (res <= 32) {
-                throw LaunchExecutableException();
+            // Need reinterpret_cast here because of legacy Win32 API
+            [[gsl::suppress(type.1)]]
+            {
+                const auto res = reinterpret_cast<size_t>(::ShellExecuteW(p_hWnd,
+                                                                          nullptr,
+                                                                          m_Executable.c_str(),
+                                                                          arguments.c_str(),
+                                                                          nullptr,
+                                                                          SW_SHOWDEFAULT));
+                if (res <= 32) {
+                    throw LaunchExecutableException();
+                }
             }
         }
 
@@ -89,7 +98,7 @@ namespace PCC
         //
         // @return Exception textual description.
         //
-        const char* LaunchExecutableException::what() const
+        const char* LaunchExecutableException::what() const noexcept(false)
         {
             return "LaunchExecutableException";
         }

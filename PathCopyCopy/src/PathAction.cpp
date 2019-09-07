@@ -20,18 +20,5 @@
 // THE SOFTWARE.
 
 #include <stdafx.h>
-#include <Plugin.h>
 
 #include <PathAction.h>
-
-
-namespace PCC
-{
-    //
-    // Destructor.
-    //
-    PathAction::~PathAction()
-    {
-    }
-
-} // namespace PCC

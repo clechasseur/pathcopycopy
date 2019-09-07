@@ -40,11 +40,15 @@ namespace PCC
         public:
                                     CopyToClipboardPathAction() = default;
                                     CopyToClipboardPathAction(const CopyToClipboardPathAction&) = delete;
+                                    CopyToClipboardPathAction(CopyToClipboardPathAction&&) = delete;
             CopyToClipboardPathAction&
                                     operator=(const CopyToClipboardPathAction&) = delete;
+            CopyToClipboardPathAction&
+                                    operator=(CopyToClipboardPathAction&&) = delete;
+                                    ~CopyToClipboardPathAction() override = default;
 
-            virtual void            Act(const std::wstring& p_Paths,
-                                        const HWND          p_hWnd) const override;
+            void                    Act(const std::wstring& p_Paths,
+                                        HWND p_hWnd) const override;
         };
 
         //
@@ -55,7 +59,7 @@ namespace PCC
         class CopyToClipboardException : public std::exception
         {
         public:
-            virtual const char*     what() const override;
+            const char*             what() const noexcept(false) override;
         };
 
     } // namespace Actions
