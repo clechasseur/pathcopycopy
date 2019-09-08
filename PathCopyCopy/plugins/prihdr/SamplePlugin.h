@@ -37,13 +37,13 @@ namespace PCC
         class SamplePlugin : public InternalPlugin
         {
         public:
-                                    SamplePlugin();
+                                    SamplePlugin() noexcept(false);
                                     SamplePlugin(const SamplePlugin&) = delete;
             SamplePlugin&           operator=(const SamplePlugin&) = delete;
 
-            virtual const GUID&     Id() const override;
+            const GUID&             Id() const noexcept(false) override;
 
-            virtual std::wstring    GetPath(const std::wstring& p_File) const override;
+            std::wstring            GetPath(const std::wstring& p_File) const override;
         };
 
     } // namespace Plugins

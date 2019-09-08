@@ -39,7 +39,7 @@ namespace PCC
         //
         // Constructor.
         //
-        ShortPathPlugin::ShortPathPlugin()
+        ShortPathPlugin::ShortPathPlugin() noexcept(false)
             : AndrogynousInternalPlugin(IDS_SHORT_PATH_PLUGIN_DESCRIPTION, IDS_ANDROGYNOUS_PATH_PLUGIN_DESCRIPTION, IDS_SHORT_PATH_PLUGIN_HINT)
         {
         }
@@ -49,7 +49,7 @@ namespace PCC
         //
         // @return Unique identifier.
         //
-        const GUID& ShortPathPlugin::Id() const
+        const GUID& ShortPathPlugin::Id() const noexcept(false)
         {
             return ID;
         }
@@ -66,12 +66,10 @@ namespace PCC
 
             std::wstring path(p_File);
             if (!path.empty()) {
-                wchar_t shortPath[MAX_PATH + 1];
-                DWORD copied = ::GetShortPathNameW(p_File.c_str(),
-                                                   shortPath,
-                                                   sizeof(shortPath) / sizeof(wchar_t));
-                if (copied != 0) {
-                    path.assign(shortPath, copied);
+                std::wstring shortPath;
+                shortPath.resize(MAX_PATH + 1);
+                if (::GetShortPathNameW(p_File.c_str(), &*shortPath.begin(), shortPath.size()) != 0) {
+                    path = shortPath.c_str();
                 }
 
                 // Append separator if needed.

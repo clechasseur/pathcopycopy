@@ -39,7 +39,7 @@ namespace PCC
         //
         // Constructor.
         //
-        ShortFolderPlugin::ShortFolderPlugin()
+        ShortFolderPlugin::ShortFolderPlugin() noexcept(false)
             : ShortPathPlugin(IDS_SHORT_FOLDER_PLUGIN_DESCRIPTION, IDS_ANDROGYNOUS_FOLDER_PLUGIN_DESCRIPTION, IDS_SHORT_FOLDER_PLUGIN_HINT)
         {
         }
@@ -49,7 +49,7 @@ namespace PCC
         //
         // @return Unique identifier.
         //
-        const GUID& ShortFolderPlugin::Id() const
+        const GUID& ShortFolderPlugin::Id() const noexcept(false)
         {
             return ShortFolderPlugin::ID;
         }

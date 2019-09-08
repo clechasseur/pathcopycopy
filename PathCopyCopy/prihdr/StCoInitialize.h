@@ -36,8 +36,8 @@ public:
                         //
                         // Default constructor. Will call CoInitialize without arguments.
                         //
-                        StCoInitialize()
-                            : m_InitRes(::CoInitialize(NULL))
+                        StCoInitialize() noexcept(false)
+                            : m_InitRes(::CoInitialize(nullptr))
                         {
                         }
 
@@ -46,16 +46,18 @@ public:
                         //
                         // @param p_InitFlags Initialization flags. See MSDN for details.
                         //
-    explicit            StCoInitialize(const DWORD p_InitFlags)
-                            : m_InitRes(::CoInitializeEx(NULL, p_InitFlags))
+    explicit            StCoInitialize(const DWORD p_InitFlags) noexcept(false)
+                            : m_InitRes(::CoInitializeEx(nullptr, p_InitFlags))
                         {
                         }
 
                         //
-                        // Copying not supported.
+                        // Copying/moving not supported.
                         //
                         StCoInitialize(const StCoInitialize&) = delete;
+                        StCoInitialize(StCoInitialize&&) = delete;
     StCoInitialize&     operator=(const StCoInitialize&) = delete;
+    StCoInitialize&     operator=(StCoInitialize&&) = delete;
 
                         //
                         // Destructor. Will call CoUninitialize if the constructor
@@ -75,11 +77,11 @@ public:
                         //
                         // @return Initialization result.
                         //
-    HRESULT             GetInitResult() const
+    HRESULT             GetInitResult() const noexcept
                         {
                             return m_InitRes;
                         }
 
 private:
-    HRESULT             m_InitRes;      // Result of the CoInit call.
+    const HRESULT       m_InitRes;      // Result of the CoInit call.
 };

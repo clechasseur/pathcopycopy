@@ -42,21 +42,21 @@ public:
                         // Constructor. Will override HKEY_CLASSES_ROOT
                         // if this is a per-user registration.
                         //
-                        StAtlPerUserOverride()
+                        StAtlPerUserOverride() noexcept(false)
                             : m_Overriden(false),
                               m_Succeeded(false)
                         {
                             // Check if this is a per-user registration.
                             bool perUser = false;
-                            HRESULT hRes = ATL::AtlGetPerUserRegistration(&perUser);
+                            const HRESULT hRes = ATL::AtlGetPerUserRegistration(&perUser);
                             if (SUCCEEDED(hRes)) {
                                 if (perUser) {
                                     // Override HKCR with the user CR key.
                                     ATL::CRegKey softwareClassesKey;
                                     softwareClassesKey.Create(HKEY_CURRENT_USER, L"Software\\Classes", nullptr, REG_OPTION_NON_VOLATILE,
                                                               KEY_QUERY_VALUE | KEY_SET_VALUE | KEY_CREATE_SUB_KEY);
-                                    if (softwareClassesKey.m_hKey != NULL &&
-                                        ::RegOverridePredefKey(HKEY_CLASSES_ROOT, softwareClassesKey.m_hKey) == ERROR_SUCCESS) {
+                                    if (softwareClassesKey.m_hKey != nullptr &&
+                                        ::RegOverridePredefKey(HKEY_CLASSES_ROOT, softwareClassesKey) == ERROR_SUCCESS) {
 
                                         // Success overriding the key.
                                         m_Overriden = true;
@@ -70,11 +70,14 @@ public:
                         }
 
                         //
-                        // Copying not supported.
+                        // Copying/moving not supported.
                         //
                         StAtlPerUserOverride(const StAtlPerUserOverride&) = delete;
+                        StAtlPerUserOverride(StAtlPerUserOverride&&) = delete;
     StAtlPerUserOverride&
                         operator=(const StAtlPerUserOverride&) = delete;
+    StAtlPerUserOverride&
+                        operator=(StAtlPerUserOverride&&) = delete;
 
                         //
                         // Destructor. Restores the default mapping of
@@ -84,7 +87,7 @@ public:
                         {
                             // If HKCR was overridden, restore default mapping.
                             if (m_Overriden) {
-                                ::RegOverridePredefKey(HKEY_CLASSES_ROOT, NULL);
+                                ::RegOverridePredefKey(HKEY_CLASSES_ROOT, nullptr);
                             }
                         }
 
@@ -93,7 +96,7 @@ public:
                         //
                         // @return true if HKEY_CLASSES_ROOT has been overriden.
                         //
-    bool                Overridden() const
+    bool                Overridden() const noexcept
                         {
                             return m_Overriden;
                         }
@@ -104,7 +107,7 @@ public:
                         //
                         // @return true if everything went smoothly in constructor.
                         //
-    bool                Succeeded() const
+    bool                Succeeded() const noexcept
                         {
                             return m_Succeeded;
                         }

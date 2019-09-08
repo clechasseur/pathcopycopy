@@ -37,7 +37,7 @@ namespace PCC
         //
         // Constructor.
         //
-        ShortUNCPathPlugin::ShortUNCPathPlugin()
+        ShortUNCPathPlugin::ShortUNCPathPlugin() noexcept(false)
             : LongUNCPathPlugin(IDS_SHORT_UNC_PATH_PLUGIN_DESCRIPTION, IDS_ANDROGYNOUS_UNC_PATH_PLUGIN_DESCRIPTION, IDS_SHORT_UNC_PATH_PLUGIN_HINT)
         {
         }
@@ -47,7 +47,7 @@ namespace PCC
         //
         // @return Unique identifier.
         //
-        const GUID& ShortUNCPathPlugin::Id() const
+        const GUID& ShortUNCPathPlugin::Id() const noexcept(false)
         {
             return ShortUNCPathPlugin::ID;
         }
@@ -65,12 +65,10 @@ namespace PCC
 
             // Now ask for a short version and return it.
             if (!path.empty()) {
-                wchar_t shortPath[MAX_PATH + 1];
-                DWORD copied = ::GetShortPathNameW(path.c_str(),
-                                                   shortPath,
-                                                   sizeof(shortPath) / sizeof(wchar_t));
-                if (copied != 0) {
-                    path.assign(shortPath, copied);
+                std::wstring shortPath;
+                shortPath.resize(MAX_PATH + 1);
+                if (::GetShortPathNameW(path.c_str(), &*shortPath.begin(), shortPath.size()) != 0) {
+                    path = shortPath.c_str();
                 }
             }
             return path;

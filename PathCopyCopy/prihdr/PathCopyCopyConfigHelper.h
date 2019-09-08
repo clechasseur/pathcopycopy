@@ -43,7 +43,12 @@ class ATL_NO_VTABLE CPathCopyCopyConfigHelper :
 	public IPathCopyCopyConfigHelper
 {
 public:
-	CPathCopyCopyConfigHelper();
+	CPathCopyCopyConfigHelper() noexcept(false);
+    CPathCopyCopyConfigHelper(const CPathCopyCopyConfigHelper&) = delete;
+    CPathCopyCopyConfigHelper(CPathCopyCopyConfigHelper&&) = delete;
+    CPathCopyCopyConfigHelper& operator=(const CPathCopyCopyConfigHelper&) = delete;
+    CPathCopyCopyConfigHelper& operator=(CPathCopyCopyConfigHelper&&) = delete;
+    virtual ~CPathCopyCopyConfigHelper() = default;
 
 #pragma warning(disable: ALL_CPPCORECHECK_WARNINGS)
 

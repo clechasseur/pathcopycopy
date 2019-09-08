@@ -39,7 +39,7 @@ namespace PCC
         //
         // Constructor.
         //
-        LongNamePlugin::LongNamePlugin()
+        LongNamePlugin::LongNamePlugin() noexcept(false)
             : LongPathPlugin(IDS_LONG_NAME_PLUGIN_DESCRIPTION, IDS_ANDROGYNOUS_NAME_PLUGIN_DESCRIPTION, IDS_LONG_NAME_PLUGIN_HINT)
         {
         }
@@ -49,7 +49,7 @@ namespace PCC
         //
         // @return Unique identifier.
         //
-        const GUID& LongNamePlugin::Id() const
+        const GUID& LongNamePlugin::Id() const noexcept(false)
         {
             return LongNamePlugin::ID;
         }

@@ -42,7 +42,7 @@
 
 namespace {
 
-const wchar_t   DEFAULT_PATHS_SEPARATOR[]   = L"\r\n";  // Default separator used between paths when copying multiple file names.
+const wchar_t* const DEFAULT_PATHS_SEPARATOR = L"\r\n"; // Default separator used between paths when copying multiple file names.
 
 }
 
@@ -55,7 +55,7 @@ std::mutex                                  CPathCopyCopyContextMenuExt::s_ExtTo
 //
 // Constructor.
 //
-CPathCopyCopyContextMenuExt::CPathCopyCopyContextMenuExt()
+CPathCopyCopyContextMenuExt::CPathCopyCopyContextMenuExt() noexcept(false)
     : m_spSettings(),
       m_vspPluginsInDefaultOrder(),
       m_sspAllPlugins(),
@@ -76,14 +76,18 @@ CPathCopyCopyContextMenuExt::CPathCopyCopyContextMenuExt()
 //
 CPathCopyCopyContextMenuExt::~CPathCopyCopyContextMenuExt()
 {
-    // Remove this instance from the map of instances modifying menus (if it's there).
-    RemoveFromExtToMenu();
+    try {
+        // Remove this instance from the map of instances modifying menus (if it's there).
+        RemoveFromExtToMenu();
 
-    // Check for updates, but ONLY if settings were created. Otherwise, it means
-    // that either COM object hasn't been used by the shell or it was used to register plugins.
-    // In both cases we don't want to check for updates.
-    if (m_spSettings != nullptr) {
-        CheckForUpdates();
+        // Check for updates, but ONLY if settings were created. Otherwise, it means
+        // that either COM object hasn't been used by the shell or it was used to register plugins.
+        // In both cases we don't want to check for updates.
+        if (m_spSettings != nullptr) {
+            CheckForUpdates();
+        }
+    } catch (...) {
+        // Don't throw from destructor, it could crash COM app
     }
 }
 

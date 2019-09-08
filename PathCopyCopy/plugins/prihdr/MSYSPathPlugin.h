@@ -39,13 +39,13 @@ namespace PCC
         class MSYSPathPlugin : public UnixPathPlugin
         {
         public:
-                                    MSYSPathPlugin();
+                                    MSYSPathPlugin() noexcept(false);
                                     MSYSPathPlugin(const MSYSPathPlugin&) = delete;
             MSYSPathPlugin&         operator=(const MSYSPathPlugin&) = delete;
 
-            virtual const GUID&     Id() const override;
+            const GUID&             Id() const noexcept(false) override;
 
-            virtual std::wstring    GetPath(const std::wstring& p_File) const override;
+            std::wstring            GetPath(const std::wstring& p_File) const override;
         };
 
     } // namespace Plugins

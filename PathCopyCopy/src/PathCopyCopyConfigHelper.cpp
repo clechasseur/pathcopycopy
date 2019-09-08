@@ -33,7 +33,7 @@
 //
 // Constructor.
 //
-CPathCopyCopyConfigHelper::CPathCopyCopyConfigHelper()
+CPathCopyCopyConfigHelper::CPathCopyCopyConfigHelper() noexcept(false)
     : m_spSettings(),
       m_sspAllPlugins(),
       m_spPluginProvider(),

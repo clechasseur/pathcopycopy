@@ -59,10 +59,10 @@ namespace PCC
 
         // Bean containing information about a COM plugin.
         struct COMPluginInfo {
-            CLSID       m_CLSID;            // CLSID of COM object implementing the plugin.
-            COMPluginSP m_spPlugin;         // The actual COM plugin.
-            ULONG       m_GroupId;          // ID of plugin group.
-            ULONG       m_GroupPosition;    // Position of plugin in the group.
+            CLSID       m_CLSID{0};             // CLSID of COM object implementing the plugin.
+            COMPluginSP m_spPlugin;             // The actual COM plugin.
+            ULONG       m_GroupId = 0;          // ID of plugin group.
+            ULONG       m_GroupPosition = 0;    // Position of plugin in the group.
 
             bool        operator<(const COMPluginInfo& p_Right) const;
         };

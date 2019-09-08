@@ -42,20 +42,19 @@ public:
                         //
                         // @param p_hOwnerWnd Handle of window that will become the clipboard owner.
                         //
-    explicit            StClipboard(HWND p_hOwnerWnd)
+    explicit            StClipboard(HWND const p_hOwnerWnd) noexcept(false)
                             : m_Opened(::OpenClipboard(p_hOwnerWnd) != FALSE),
-                              m_Result(m_Opened)
+                              m_Result(m_Opened && ::EmptyClipboard() != FALSE)
                         {
-                            if (m_Result) {
-                                m_Result = (::EmptyClipboard() != FALSE);
-                            }
                         }
 
                         //
-                        // Copying not supported.
+                        // Copying/moving not supported.
                         //
                         StClipboard(const StClipboard&) = delete;
+                        StClipboard(StClipboard&&) = delete;
     StClipboard&        operator=(const StClipboard&) = delete;
+    StClipboard&        operator=(StClipboard&&) = delete;
 
                         //
                         // Destructor.
@@ -76,12 +75,12 @@ public:
                         //
                         // @return Clipboard initialization result.
                         //
-    bool                InitResult() const
+    bool                InitResult() const noexcept
                         {
                             return m_Result;
                         }
 
 private:
-    bool                m_Opened;   // Whether clipboard has been opened.
-    bool                m_Result;   // Result of clipboard initialization.
+    const bool          m_Opened;   // Whether clipboard has been opened.
+    const bool          m_Result;   // Result of clipboard initialization.
 };

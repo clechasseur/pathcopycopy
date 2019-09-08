@@ -46,7 +46,14 @@ class ATL_NO_VTABLE CPathCopyCopyDataHandler :
     public IDataObject
 {
 public:
-	CPathCopyCopyDataHandler();
+	CPathCopyCopyDataHandler() noexcept(false);
+    CPathCopyCopyDataHandler(const CPathCopyCopyDataHandler&) = delete;
+    CPathCopyCopyDataHandler(CPathCopyCopyDataHandler&&) = delete;
+    CPathCopyCopyDataHandler& operator=(const CPathCopyCopyDataHandler&) = delete;
+    CPathCopyCopyDataHandler& operator=(CPathCopyCopyDataHandler&&) = delete;
+    virtual ~CPathCopyCopyDataHandler() = default;
+
+#pragma warning(disable: ALL_CPPCORECHECK_WARNINGS)
 
     DECLARE_REGISTRY_RESOURCEID(IDR_PATHCOPYCOPYDATAHANDLER)
 
@@ -61,12 +68,16 @@ public:
 
 	DECLARE_PROTECT_FINAL_CONSTRUCT()
 
-	HRESULT FinalConstruct()
+#pragma warning(default: ALL_CPPCORECHECK_WARNINGS)
+
+    [[gsl::suppress(c.128)]]
+	HRESULT FinalConstruct() noexcept
 	{
 		return S_OK;
 	}
 
-	void FinalRelease()
+    [[gsl::suppress(c.128)]]
+	void FinalRelease() noexcept
 	{
 	}
 
@@ -96,4 +107,5 @@ private:
     std::wstring        m_FileName;     // Name of file to act upon (only one).
 };
 
+#pragma warning(suppress: ALL_CPPCORECHECK_WARNINGS)
 OBJECT_ENTRY_AUTO(__uuidof(PathCopyCopyDataHandler), CPathCopyCopyDataHandler)

@@ -37,19 +37,19 @@ namespace PCC
         class UnixPathPlugin : public LongPathPlugin
         {
         public:
-                                    UnixPathPlugin();
+                                    UnixPathPlugin() noexcept(false);
                                     UnixPathPlugin(const UnixPathPlugin&) = delete;
             UnixPathPlugin&         operator=(const UnixPathPlugin&) = delete;
 
-            virtual const GUID&     Id() const override;
+            const GUID&             Id() const noexcept(false) override;
 
-            virtual std::wstring    GetPath(const std::wstring& p_File) const override;
+            std::wstring            GetPath(const std::wstring& p_File) const override;
 
         protected:
-                                    UnixPathPlugin(const unsigned short p_DescriptionStringResourceID,
-                                                   const unsigned short p_HelpTextStringResourceID);
+                                    UnixPathPlugin(unsigned short p_DescriptionStringResourceID,
+                                                   unsigned short p_HelpTextStringResourceID);
 
-            virtual bool            IsAndrogynous() const override;
+            bool                    IsAndrogynous() const noexcept(false) override;
         };
 
     } // namespace Plugins

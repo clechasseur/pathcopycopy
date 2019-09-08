@@ -39,16 +39,16 @@ namespace PCC
             // ID of this type of plugin.
             static const GUID       ID;
 
-                                    LongFolderPlugin();
+                                    LongFolderPlugin() noexcept(false);
                                     LongFolderPlugin(const LongFolderPlugin&) = delete;
             LongFolderPlugin&       operator=(const LongFolderPlugin&) = delete;
 
-            virtual const GUID&     Id() const override;
+            const GUID&             Id() const noexcept(false) override;
 
-            virtual std::wstring    GetPath(const std::wstring& p_File) const override;
+            std::wstring            GetPath(const std::wstring& p_File) const override;
 
         protected:
-            virtual bool            IsAndrogynous() const override;
+            bool                    IsAndrogynous() const override;
         };
 
     } // namespace Plugins

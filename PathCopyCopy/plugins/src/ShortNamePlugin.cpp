@@ -39,7 +39,7 @@ namespace PCC
         //
         // Constructor.
         //
-        ShortNamePlugin::ShortNamePlugin()
+        ShortNamePlugin::ShortNamePlugin() noexcept(false)
             : ShortPathPlugin(IDS_SHORT_NAME_PLUGIN_DESCRIPTION, IDS_ANDROGYNOUS_NAME_PLUGIN_DESCRIPTION, IDS_SHORT_NAME_PLUGIN_HINT)
         {
         }
@@ -49,7 +49,7 @@ namespace PCC
         //
         // @return Unique identifier.
         //
-        const GUID& ShortNamePlugin::Id() const
+        const GUID& ShortNamePlugin::Id() const noexcept(false)
         {
             return ShortNamePlugin::ID;
         }

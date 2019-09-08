@@ -38,7 +38,7 @@ namespace PCC
         //
         // Constructor.
         //
-        LongUNCPathPlugin::LongUNCPathPlugin()
+        LongUNCPathPlugin::LongUNCPathPlugin() noexcept(false)
             : LongPathPlugin(IDS_LONG_UNC_PATH_PLUGIN_DESCRIPTION, IDS_ANDROGYNOUS_UNC_PATH_PLUGIN_DESCRIPTION, IDS_LONG_UNC_PATH_PLUGIN_HINT)
         {
         }
@@ -48,7 +48,7 @@ namespace PCC
         //
         // @return Unique identifier.
         //
-        const GUID& LongUNCPathPlugin::Id() const
+        const GUID& LongUNCPathPlugin::Id() const noexcept(false)
         {
             return LongUNCPathPlugin::ID;
         }

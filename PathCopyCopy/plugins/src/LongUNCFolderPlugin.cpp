@@ -38,7 +38,7 @@ namespace PCC
         //
         // Constructor.
         //
-        LongUNCFolderPlugin::LongUNCFolderPlugin()
+        LongUNCFolderPlugin::LongUNCFolderPlugin() noexcept(false)
             : LongPathPlugin(IDS_LONG_UNC_FOLDER_PLUGIN_DESCRIPTION, IDS_ANDROGYNOUS_UNC_FOLDER_PLUGIN_DESCRIPTION, IDS_LONG_UNC_FOLDER_PLUGIN_HINT)
         {
         }
@@ -48,7 +48,7 @@ namespace PCC
         //
         // @return Unique identifier.
         //
-        const GUID& LongUNCFolderPlugin::Id() const
+        const GUID& LongUNCFolderPlugin::Id() const noexcept(false)
         {
             return LongUNCFolderPlugin::ID;
         }

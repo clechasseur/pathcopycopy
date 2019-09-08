@@ -41,7 +41,7 @@ namespace PCC
         //
         // Constructor.
         //
-        UnixPathPlugin::UnixPathPlugin()
+        UnixPathPlugin::UnixPathPlugin() noexcept(false)
             : LongPathPlugin(IDS_UNIX_PATH_PLUGIN_DESCRIPTION, IDS_UNIX_PATH_PLUGIN_DESCRIPTION, IDS_UNIX_PATH_PLUGIN_HINT)
         {
         }
@@ -51,7 +51,7 @@ namespace PCC
         //
         // @return Unique identifier.
         //
-        const GUID& UnixPathPlugin::Id() const
+        const GUID& UnixPathPlugin::Id() const noexcept(false)
         {
             return UNIX_PATH_PLUGIN_ID;
         }
@@ -89,7 +89,7 @@ namespace PCC
         //
         // @return true to use androgynous description, false to use normal description.
         //
-        bool UnixPathPlugin::IsAndrogynous() const
+        bool UnixPathPlugin::IsAndrogynous() const noexcept(false)
         {
             return false;
         }

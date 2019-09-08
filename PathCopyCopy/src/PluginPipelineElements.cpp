@@ -97,14 +97,6 @@ namespace PCC
     }
 
     //
-    // Constructor.
-    //
-    BackToForwardSlashesPipelineElement::BackToForwardSlashesPipelineElement()
-        : PipelineElement()
-    {
-    }
-
-    //
     // Modifies the given path by replacing all backslashes by forward slashes.
     //
     // @param p_rPath Path to modify (in-place).
@@ -114,14 +106,6 @@ namespace PCC
                                                          const PluginProvider* const /*p_pPluginProvider*/) const
     {
         std::replace(p_rPath.begin(), p_rPath.end(), L'\\', L'/');
-    }
-
-    //
-    // Constructor.
-    //
-    ForwardToBackslashesPipelineElement::ForwardToBackslashesPipelineElement()
-        : PipelineElement()
-    {
     }
 
     //
@@ -137,14 +121,6 @@ namespace PCC
     }
 
     //
-    // Constructor.
-    //
-    RemoveFileExtPipelineElement::RemoveFileExtPipelineElement()
-        : PipelineElement()
-    {
-    }
-
-    //
     // Modified our path by removing any file extension at the end of it.
     //
     // @param p_rPath Path to modify (in-place).
@@ -153,7 +129,7 @@ namespace PCC
     void RemoveFileExtPipelineElement::ModifyPath(std::wstring& p_rPath,
                                                   const PluginProvider* const /*p_pPluginProvider*/) const
     {
-        std::wregex extRegex(L"^(.*[^\\\\/])(?:\\.[^\\\\/.]+)$", std::regex_constants::ECMAScript);
+        const std::wregex extRegex(L"^(.*[^\\\\/])(?:\\.[^\\\\/.]+)$", std::regex_constants::ECMAScript);
         p_rPath = std::regex_replace(p_rPath, extRegex, L"$1");
     }
 
@@ -273,7 +249,7 @@ namespace PCC
     //
     // @param p_PluginId ID of plugin to apply.
     //
-    ApplyPluginPipelineElement::ApplyPluginPipelineElement(const GUID& p_PluginId)
+    ApplyPluginPipelineElement::ApplyPluginPipelineElement(const GUID& p_PluginId) noexcept
         : PipelineElement(),
           m_PluginId(p_PluginId)
     {

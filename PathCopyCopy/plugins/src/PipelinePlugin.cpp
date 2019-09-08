@@ -67,7 +67,7 @@ namespace PCC
         //
         // @return Plugin ID.
         //
-        const GUID& PipelinePlugin::Id() const
+        const GUID& PipelinePlugin::Id() const noexcept(false)
         {
             return m_Id;
         }
@@ -98,7 +98,7 @@ namespace PCC
         //
         // @return true to use default icon, false otherwise.
         //
-        bool PipelinePlugin::UseDefaultIcon() const
+        bool PipelinePlugin::UseDefaultIcon() const noexcept(false)
         {
             return m_UseDefaultIcon;
         }
@@ -190,7 +190,7 @@ namespace PCC
         // @return Always false to indicate PCC should not drop
         //         redundant words like "copy" from plugin's description.
         //
-        bool PipelinePlugin::CanDropRedundantWords() const
+        bool PipelinePlugin::CanDropRedundantWords() const noexcept(false)
         {
             return false;
         }

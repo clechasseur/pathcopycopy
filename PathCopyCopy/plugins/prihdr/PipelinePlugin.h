@@ -41,31 +41,31 @@ namespace PCC
                                         PipelinePlugin(const GUID& p_PluginId,
                                                        const std::wstring& p_PluginDescription,
                                                        const std::wstring& p_PluginIconFile,
-                                                       const bool p_UseDefaultIcon,
+                                                       bool p_UseDefaultIcon,
                                                        const std::wstring& p_EncodedElements);
                                         PipelinePlugin(const PipelinePlugin&) = delete;
             PipelinePlugin&             operator=(const PipelinePlugin&) = delete;
 
-            virtual const GUID&         Id() const override;
+            const GUID&                 Id() const noexcept(false) override;
 
-            virtual std::wstring        Description() const override;
-            virtual std::wstring        IconFile() const override;
-            virtual bool                UseDefaultIcon() const override;
-            virtual bool                Enabled(const std::wstring& p_ParentPath,
+            std::wstring                Description() const override;
+            std::wstring                IconFile() const override;
+            bool                        UseDefaultIcon() const noexcept(false) override;
+            bool                        Enabled(const std::wstring& p_ParentPath,
                                                 const std::wstring& p_File) const override;
 
-            virtual std::wstring        GetPath(const std::wstring& p_File) const override;
-            virtual std::wstring        PathsSeparator() const override;
+            std::wstring                GetPath(const std::wstring& p_File) const override;
+            std::wstring                PathsSeparator() const override;
 
-            virtual PCC::PathActionSP   Action() const override;
+            PCC::PathActionSP           Action() const override;
 
-            virtual bool                CanDropRedundantWords() const override;
+            bool                        CanDropRedundantWords() const noexcept(false) override;
 
         private:
-            GUID                        m_Id;               // Plugin ID.
-            std::wstring                m_Description;      // Plugin description.
-            std::wstring                m_IconFile;         // Plugin icon file.
-            bool                        m_UseDefaultIcon;   // Whether to use default icon for plugin.
+            const GUID                  m_Id;               // Plugin ID.
+            const std::wstring          m_Description;      // Plugin description.
+            const std::wstring          m_IconFile;         // Plugin icon file.
+            const bool                  m_UseDefaultIcon;   // Whether to use default icon for plugin.
             PipelineSP                  m_spPipeline;       // Pipeline to execute on each path received.
         };
 

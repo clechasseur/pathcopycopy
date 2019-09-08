@@ -37,7 +37,7 @@
 //
 // Constructor.
 //
-CPathCopyCopyDataHandler::CPathCopyCopyDataHandler()
+CPathCopyCopyDataHandler::CPathCopyCopyDataHandler() noexcept(false)
     : m_FileName()
 {
 }

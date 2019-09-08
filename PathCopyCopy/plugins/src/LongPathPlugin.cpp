@@ -39,7 +39,7 @@ namespace PCC
         //
         // Constructor.
         //
-        LongPathPlugin::LongPathPlugin()
+        LongPathPlugin::LongPathPlugin() noexcept(false)
             : AndrogynousInternalPlugin(IDS_LONG_PATH_PLUGIN_DESCRIPTION, IDS_ANDROGYNOUS_PATH_PLUGIN_DESCRIPTION, IDS_LONG_PATH_PLUGIN_HINT)
         {
         }
@@ -49,7 +49,7 @@ namespace PCC
         //
         // @return Unique identifier.
         //
-        const GUID& LongPathPlugin::Id() const
+        const GUID& LongPathPlugin::Id() const noexcept(false)
         {
             return ID;
         }
@@ -66,12 +66,10 @@ namespace PCC
 
             std::wstring path(p_File);
             if (!path.empty()) {
-                wchar_t longPath[MAX_PATH + 1];
-                DWORD copied = ::GetLongPathNameW(p_File.c_str(),
-                                                  longPath,
-                                                  sizeof(longPath) / sizeof(wchar_t));
-                if (copied != 0) {
-                    path.assign(longPath, copied);
+                std::wstring longPath;
+                longPath.resize(MAX_PATH + 1);
+                if (::GetLongPathNameW(p_File.c_str(), &*longPath.begin(), longPath.size()) != 0) {
+                    path = longPath.c_str();
                 }
 
                 // Append separator if needed.
