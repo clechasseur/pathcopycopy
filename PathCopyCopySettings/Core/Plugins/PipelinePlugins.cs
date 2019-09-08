@@ -1204,6 +1204,8 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// </summary>
         public FindReplacePipelineElement()
         {
+            OldValue = String.Empty;
+            NewValue = String.Empty;
         }
         
         /// <summary>
@@ -1324,6 +1326,8 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// </summary>
         public RegexPipelineElement()
         {
+            Regex = String.Empty;
+            Format = String.Empty;
         }
         
         /// <summary>
@@ -1412,6 +1416,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// </summary>
         public ApplyPluginPipelineElement()
         {
+            PluginID = Guid.Empty;
         }
         
         /// <summary>
@@ -1499,6 +1504,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// </summary>
         public PathsSeparatorPipelineElement()
         {
+            PathsSeparator = String.Empty;
         }
 
         /// <summary>
@@ -1551,6 +1557,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// </summary>
         public PipelineElementWithExecutable()
         {
+            Executable = String.Empty;
         }
 
         /// <summary>
