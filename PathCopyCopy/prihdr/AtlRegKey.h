@@ -35,46 +35,46 @@
 class AtlRegKey final : public RegKey
 {
 public:
-                        AtlRegKey();
-                        AtlRegKey(HKEY const p_hParent,
-                                  const wchar_t* const p_pKeyPath,
-                                  const bool p_Create,
-                                  const REGSAM p_SecurityAccess = KEY_READ | KEY_WRITE);
-    explicit            AtlRegKey(HKEY const p_hKey);
+                        AtlRegKey() noexcept(false);
+                        AtlRegKey(HKEY p_hParent,
+                                  const wchar_t* p_pKeyPath,
+                                  bool p_Create,
+                                  REGSAM p_SecurityAccess = KEY_READ | KEY_WRITE);
+    explicit            AtlRegKey(HKEY p_hKey) noexcept(false);
                         AtlRegKey(const AtlRegKey&) = delete;
     AtlRegKey&          operator=(const AtlRegKey&) = delete;
 
-    virtual bool        Valid() const override;
-    HKEY                GetHKEY() const;
-    long                Open(HKEY const p_hParent,
-                             const wchar_t* const p_pKeyPath,
-                             const bool p_Create,
-                             const REGSAM p_SecurityAccess = KEY_READ | KEY_WRITE);
+    bool                Valid() const override;
+    HKEY                GetHKEY() const noexcept;
+    long                Open(HKEY p_hParent,
+                             const wchar_t* p_pKeyPath,
+                             bool p_Create,
+                             REGSAM p_SecurityAccess = KEY_READ | KEY_WRITE);
 
-    virtual long        QueryDWORDValue(const wchar_t* const p_pValueName,
+    long                QueryDWORDValue(const wchar_t* p_pValueName,
                                         DWORD& p_rValue) const override;
-    virtual long        QueryQWORDValue(const wchar_t* const p_pValueName,
+    long                QueryQWORDValue(const wchar_t* p_pValueName,
                                         ULONGLONG& p_rValue) const override;
-    virtual long        QueryGUIDValue(const wchar_t* const p_pValueName,
+    long                QueryGUIDValue(const wchar_t* p_pValueName,
                                        GUID& p_rValue) const override;
-    virtual long        QueryValue(const wchar_t* const p_pValueName,
-                                   DWORD* const p_pValueType,
-                                   void* const p_pValue,
-                                   DWORD* const p_pValueSize) const override;
+    long                QueryValue(const wchar_t* p_pValueName,
+                                   DWORD* p_pValueType,
+                                   void* p_pValue,
+                                   DWORD* p_pValueSize) const override;
 
-    virtual void        GetValues(ValueInfoV& p_rvValues) const override;
-    virtual void        GetSubKeys(SubkeyInfoV& p_rvSubkeys) const override;
+    void                GetValues(ValueInfoV& p_rvValues) const override;
+    void                GetSubKeys(SubkeyInfoV& p_rvSubkeys) const override;
 
-    virtual long        SetDWORDValue(const wchar_t* const p_pValueName,
-                                      const DWORD p_Value) override;
-    virtual long        SetQWORDValue(const wchar_t* const p_pValueName,
-                                      const ULONGLONG p_Value) override;
-    virtual long        SetGUIDValue(const wchar_t* const p_pValueName,
+    long                SetDWORDValue(const wchar_t* p_pValueName,
+                                      DWORD p_Value) override;
+    long                SetQWORDValue(const wchar_t* p_pValueName,
+                                      ULONGLONG p_Value) override;
+    long                SetGUIDValue(const wchar_t* p_pValueName,
                                      const GUID& p_Value) override;
-    virtual long        SetStringValue(const wchar_t* const p_pValueName,
-                                       const wchar_t* const p_pValue) override;
+    long                SetStringValue(const wchar_t* p_pValueName,
+                                       const wchar_t* p_pValue) override;
 
-    virtual long        DeleteValue(const wchar_t* const p_pValueName) override;
+    long                DeleteValue(const wchar_t* p_pValueName) override;
 
 private:
     mutable ATL::CRegKey m_Key;     // Wrapper for the registry key.

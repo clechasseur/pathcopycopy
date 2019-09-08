@@ -38,27 +38,27 @@ class RegKey
 public:
     // Info about values in this registry key.
     struct ValueInfo {
-        HKEY            m_hKey;         // Key containing the value.
-        std::wstring    m_ValueName;    // Name of this value.
+        HKEY            m_hKey = nullptr;   // Key containing the value.
+        std::wstring    m_ValueName;        // Name of this value.
 
-                        ValueInfo();
-                        ValueInfo(HKEY const p_hKey,
-                                  const wchar_t* const p_pValueName);
+                        ValueInfo() = default;
+                        ValueInfo(HKEY p_hKey,
+                                  const wchar_t* p_pValueName);
     };
     typedef std::vector<ValueInfo> ValueInfoV;
 
     // Info about subkeys of this registry key.
     struct SubkeyInfo {
-        HKEY            m_hParent;      // Parent of this subkey.
-        std::wstring    m_KeyName;      // Name of the subkey.
+        HKEY            m_hParent = nullptr;    // Parent of this subkey.
+        std::wstring    m_KeyName;              // Name of the subkey.
 
-                        SubkeyInfo();
-                        SubkeyInfo(HKEY const p_hParent,
-                                   const wchar_t* const p_pKeyName);
+                        SubkeyInfo() = default;
+                        SubkeyInfo(HKEY p_hParent,
+                                   const wchar_t* p_pKeyName);
     };
     typedef std::vector<SubkeyInfo> SubkeyInfoV;
 
-    virtual             ~RegKey();
+    virtual             ~RegKey() = default;
 
                         //
                         // Checks if this wrapper's registry key is valid.
@@ -75,7 +75,7 @@ public:
                         // @param p_rValue Where to store value.
                         // @return Result code (ERROR_SUCCESS if it worked).
                         //
-    virtual long        QueryDWORDValue(const wchar_t* const p_pValueName,
+    virtual long        QueryDWORDValue(const wchar_t* p_pValueName,
                                         DWORD& p_rValue) const = 0;
 
                         //
@@ -85,7 +85,7 @@ public:
                         // @param p_rValue Where to store value.
                         // @return Result code (ERROR_SUCCESS if it worked).
                         //
-    virtual long        QueryQWORDValue(const wchar_t* const p_pValueName,
+    virtual long        QueryQWORDValue(const wchar_t* p_pValueName,
                                         ULONGLONG& p_rValue) const = 0;
 
                         //
@@ -95,7 +95,7 @@ public:
                         // @param p_rValue Where to store value.
                         // @return Result code (ERROR_SUCCESS if it worked).
                         //
-    virtual long        QueryGUIDValue(const wchar_t* const p_pValueName,
+    virtual long        QueryGUIDValue(const wchar_t* p_pValueName,
                                        GUID& p_rValue) const = 0;
 
                         //
@@ -109,10 +109,10 @@ public:
                         //                     value copied to p_pValue. Can be null only if p_pValue is too.
                         // @return Result code (ERROR_SUCCESS if it worked).
                         //
-    virtual long        QueryValue(const wchar_t* const p_pValueName,
-                                   DWORD* const p_pValueType,
-                                   void* const p_pValue,
-                                   DWORD* const p_pValueSize) const = 0;
+    virtual long        QueryValue(const wchar_t* p_pValueName,
+                                   DWORD* p_pValueType,
+                                   void* p_pValue,
+                                   DWORD* p_pValueSize) const = 0;
 
                         //
                         // Returns a list of values in this registry key.
@@ -135,8 +135,8 @@ public:
                         // @param p_pValue Value to save.
                         // @return Result code (ERROR_SUCCESS if it worked).
                         //
-    virtual long        SetDWORDValue(const wchar_t* const p_pValueName,
-                                      const DWORD p_Value) = 0;
+    virtual long        SetDWORDValue(const wchar_t* p_pValueName,
+                                      DWORD p_Value) = 0;
 
                         //
                         // Tries to save a QWORD value in the registry key.
@@ -145,8 +145,8 @@ public:
                         // @param p_pValue Value to save.
                         // @return Result code (ERROR_SUCCESS if it worked).
                         //
-    virtual long        SetQWORDValue(const wchar_t* const p_pValueName,
-                                      const ULONGLONG p_Value) = 0;
+    virtual long        SetQWORDValue(const wchar_t* p_pValueName,
+                                      ULONGLONG p_Value) = 0;
 
                         //
                         // Tries to save a GUID value in the registry key (as a string).
@@ -155,7 +155,7 @@ public:
                         // @param p_pValue Value to save.
                         // @return Result code (ERROR_SUCCESS if it worked).
                         //
-    virtual long        SetGUIDValue(const wchar_t* const p_pValueName,
+    virtual long        SetGUIDValue(const wchar_t* p_pValueName,
                                      const GUID& p_Value) = 0;
 
                         //
@@ -165,8 +165,8 @@ public:
                         // @param p_pValue Value to save.
                         // @return Result code (ERROR_SUCCESS if it worked).
                         //
-    virtual long        SetStringValue(const wchar_t* const p_pValueName,
-                                       const wchar_t* const p_pValue) = 0;
+    virtual long        SetStringValue(const wchar_t* p_pValueName,
+                                       const wchar_t* p_pValue) = 0;
 
                         //
                         // Tries to delete a value from the registry key.
@@ -174,10 +174,12 @@ public:
                         // @param p_pValueName Name of value to delete.
                         // @return Result code (ERROR_SUCCESS if it worked).
                         //
-    virtual long        DeleteValue(const wchar_t* const p_pValueName) = 0;
+    virtual long        DeleteValue(const wchar_t* p_pValueName) = 0;
 
 protected:
-                        RegKey() = default;
+                        RegKey() noexcept = default;
                         RegKey(const RegKey&) = default;
+                        RegKey(RegKey&&) = default;
     RegKey&             operator=(const RegKey&) = default;
+    RegKey&             operator=(RegKey&&) = default;
 };

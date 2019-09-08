@@ -28,7 +28,7 @@
 //
 // Default constructor. Does not open the key.
 //
-AtlRegKey::AtlRegKey()
+AtlRegKey::AtlRegKey() noexcept(false)
     : RegKey(),
       m_Key()
 {
@@ -57,7 +57,7 @@ AtlRegKey::AtlRegKey(HKEY const p_hParent,
 //
 // @param p_hKey Existing key handle. We assume ownership.
 //
-AtlRegKey::AtlRegKey(HKEY const p_hKey)
+AtlRegKey::AtlRegKey(HKEY const p_hKey) noexcept(false)
     : RegKey(),
       m_Key(p_hKey)
 {
@@ -70,15 +70,15 @@ AtlRegKey::AtlRegKey(HKEY const p_hKey)
 //
 bool AtlRegKey::Valid() const
 {
-    return m_Key.m_hKey != NULL;
+    return m_Key.m_hKey != nullptr;
 }
 
 //
 // Returns the handle of our registry key.
 //
-// @return Registry key handle. NULL if not open.
+// @return Registry key handle. null if not open.
 //
-HKEY AtlRegKey::GetHKEY() const
+HKEY AtlRegKey::GetHKEY() const noexcept
 {
     return m_Key.m_hKey;
 }
@@ -96,10 +96,10 @@ long AtlRegKey::Open(HKEY const p_hParent,
                      const bool p_Create,
                      const REGSAM p_SecurityAccess /*= KEY_READ | KEY_WRITE*/)
 {
-    assert(m_Key.m_hKey == NULL);
+    assert(m_Key.m_hKey == nullptr);
 
     return p_Create
-        ? m_Key.Create(p_hParent, p_pKeyPath, REG_NONE, REG_OPTION_NON_VOLATILE, p_SecurityAccess)
+        ? m_Key.Create(p_hParent, p_pKeyPath, nullptr, REG_OPTION_NON_VOLATILE, p_SecurityAccess)
         : m_Key.Open(p_hParent, p_pKeyPath, p_SecurityAccess);
 }
 
@@ -169,13 +169,15 @@ long AtlRegKey::QueryValue(const wchar_t* const p_pValueName,
 void AtlRegKey::GetValues(ValueInfoV& p_rvValues) const
 {
     // Scan values, starting with the first one.
-    wchar_t valueName[16384];   // See MSDN
+    std::wstring valueName;
+    valueName.resize(16384);    // See MSDN
     LONG res = ERROR_SUCCESS;
     for (DWORD index = 0; res == ERROR_SUCCESS; ++index) {
-        DWORD valueNameSize = 16384;
-        res = ::RegEnumValueW(m_Key.m_hKey, index, valueName, &valueNameSize, nullptr, nullptr, nullptr, nullptr);
+        DWORD valueNameSize = valueName.size();
+        res = ::RegEnumValueW(m_Key.m_hKey, index, &*valueName.begin(), &valueNameSize,
+                              nullptr, nullptr, nullptr, nullptr);
         if (res == ERROR_SUCCESS) {
-            p_rvValues.emplace_back(m_Key.m_hKey, valueName);
+            p_rvValues.emplace_back(m_Key.m_hKey, valueName.c_str());
         }
     }
 }

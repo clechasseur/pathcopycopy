@@ -34,12 +34,12 @@ namespace PCC
     class AllPluginsProvider : public PluginProvider
     {
     public:
-        explicit        AllPluginsProvider(const PluginSPS& p_sspAllPlugins);
+        explicit        AllPluginsProvider(const PluginSPS& p_sspAllPlugins) noexcept;
                         AllPluginsProvider(const AllPluginsProvider&) = delete;
         AllPluginsProvider&
                         operator=(const AllPluginsProvider&) = delete;
 
-        virtual PluginSP GetPlugin(const GUID& p_PluginId) const override;
+        PluginSP        GetPlugin(const GUID& p_PluginId) const override;
 
     private:
         const PluginSPS& m_sspAllPlugins;   // Set containing all plugins. We do not assume ownership.

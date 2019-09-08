@@ -31,7 +31,7 @@ namespace PCC
     // @param p_sspAllPlugins Set containing all plugins. We only store the reference to this set;
     //                        it must remain alive for the lifetime of this plugin provider.
     //
-    AllPluginsProvider::AllPluginsProvider(const PluginSPS& p_sspAllPlugins)
+    AllPluginsProvider::AllPluginsProvider(const PluginSPS& p_sspAllPlugins) noexcept
         : PluginProvider(),
           m_sspAllPlugins(p_sspAllPlugins)
     {
