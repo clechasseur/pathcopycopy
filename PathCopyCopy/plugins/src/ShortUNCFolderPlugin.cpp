@@ -65,8 +65,7 @@ namespace PCC
 
             // Now ask for a short version and return it.
             if (!path.empty()) {
-                std::wstring shortPath;
-                shortPath.resize(MAX_PATH + 1);
+                std::wstring shortPath(MAX_PATH + 1, L'\0');
                 if (::GetShortPathNameW(path.c_str(), &*shortPath.begin(), shortPath.size()) != 0) {
                     path = shortPath.c_str();
                 }

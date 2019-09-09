@@ -32,7 +32,7 @@
 STDAPI DllCanUnloadNow(void)
 {
 #ifdef _MERGE_PROXYSTUB
-    HRESULT hr = PrxDllCanUnloadNow();
+    const HRESULT hr = PrxDllCanUnloadNow();
     if (hr != S_OK)
         return hr;
 #endif
@@ -87,8 +87,9 @@ STDAPI DllInstall(BOOL bInstall, LPCWSTR pszCmdLine)
     HRESULT hr = E_FAIL;
     static const wchar_t szUserSwitch[] = _T("user");
 
-    if (pszCmdLine != NULL)
+    if (pszCmdLine != nullptr)
     {
+#pragma warning(suppress: ALL_CPPCORECHECK_WARNINGS)
     	if (_wcsnicmp(pszCmdLine, szUserSwitch, _countof(szUserSwitch)) == 0)
     	{
     		ATL::AtlSetPerUserRegistration(true);

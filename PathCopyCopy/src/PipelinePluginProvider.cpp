@@ -21,15 +21,3 @@
 
 #include <stdafx.h>
 #include <PipelinePluginProvider.h>
-
-
-namespace PCC
-{
-    //
-    // Destructor.
-    //
-    PipelinePluginProvider::~PipelinePluginProvider()
-    {
-    }
-
-} // namespace PCC

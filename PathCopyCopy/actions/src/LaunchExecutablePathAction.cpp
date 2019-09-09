@@ -56,15 +56,13 @@ namespace PCC
             std::wstring arguments = p_Paths;
             if (m_UseFilelist) {
                 // Get path to temp directory
-                std::wstring tempDirPath;
-                tempDirPath.resize(MAX_PATH + 1);
+                std::wstring tempDirPath(MAX_PATH + 1, L'\0');
                 if (::GetTempPathW(tempDirPath.size(), &*tempDirPath.begin()) == 0) {
                     throw LaunchExecutableException();
                 }
 
                 // Generate temp file for the paths
-                std::wstring tempFilePath;
-                tempFilePath.resize(MAX_PATH + 1);
+                std::wstring tempFilePath(MAX_PATH + 1, L'\0');
                 if (::GetTempFileNameW(tempDirPath.c_str(), L"pcc", 0, &*tempFilePath.begin()) == 0) {
                     throw LaunchExecutableException();
                 }

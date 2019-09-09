@@ -21,15 +21,3 @@
 
 #include <stdafx.h>
 #include <PluginProvider.h>
-
-
-namespace PCC
-{
-    //
-    // Destructor.
-    //
-    PluginProvider::~PluginProvider()
-    {
-    }
-
-} // namespace PCC

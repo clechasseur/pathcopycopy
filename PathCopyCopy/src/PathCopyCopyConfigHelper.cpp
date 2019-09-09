@@ -49,13 +49,14 @@ CPathCopyCopyConfigHelper::CPathCopyCopyConfigHelper() noexcept(false)
 // @param p_pCount Will contain the number of available plugins.
 // @return Result code.
 //
+[[gsl::suppress(c.128)]]
 STDMETHODIMP CPathCopyCopyConfigHelper::get_PluginCount(ULONG *p_pCount)
 {
     Initialize();
     HRESULT hRes = S_OK;
 
     if (p_pCount != nullptr) {
-        *p_pCount = static_cast<ULONG>(m_vspPlugins.size());
+        *p_pCount = m_vspPlugins.size();
     } else {
         hRes = E_INVALIDARG;
     }
@@ -74,16 +75,17 @@ STDMETHODIMP CPathCopyCopyConfigHelper::get_PluginCount(ULONG *p_pCount)
 // @param p_pIsSeparator Will contain VARIANT_TRUE if this is a separator plugin, otherwise VARIANT_FALSE.
 // @return Result code.
 //
+[[gsl::suppress(c.128), gsl::suppress(lifetime)]]
 STDMETHODIMP CPathCopyCopyConfigHelper::GetPluginInfo(ULONG p_Index, BSTR *p_ppId, BSTR *p_ppDescription, VARIANT_BOOL *p_pIsSeparator)
 {
     Initialize();
     HRESULT hRes = S_OK;
 
     if (p_ppId != nullptr && p_ppDescription != nullptr && p_Index < m_vspPlugins.size()) {
-        const PCC::PluginSP& spPlugin = m_vspPlugins[p_Index];
-        OLECHAR pluginId[40];
-        if (::StringFromGUID2(spPlugin->Id(), pluginId, 40) != 0) {
-            *p_ppId = ::SysAllocString(pluginId);
+        const PCC::PluginSP& spPlugin = m_vspPlugins.at(p_Index);
+        std::wstring pluginId(40, L'\0');
+        if (::StringFromGUID2(spPlugin->Id(), &*pluginId.begin(), pluginId.size()) != 0) {
+            *p_ppId = ::SysAllocString(pluginId.c_str());
             *p_ppDescription = ::SysAllocString(spPlugin->Description().c_str());
             if (p_pIsSeparator != nullptr) {
                 *p_pIsSeparator = spPlugin->IsSeparator() ? VARIANT_TRUE : VARIANT_FALSE;
@@ -113,13 +115,16 @@ void CPathCopyCopyConfigHelper::Initialize()
         m_sspAllPlugins.insert(m_vspPluginsInDefaultOrder.cbegin(), m_vspPluginsInDefaultOrder.cend());
         m_spPluginProvider = std::make_shared<PCC::AllPluginsProvider>(m_sspAllPlugins);
         PCC::GUIDV vKnownPlugins, vSubmenuPluginDisplayOrder;
-        const PCC::GUIDV* const pvKnownPlugins = m_spSettings->GetKnownPlugins(vKnownPlugins) ? &vKnownPlugins : nullptr;
-        if (m_spSettings->GetSubmenuPluginDisplayOrder(vSubmenuPluginDisplayOrder)) {
-            m_vspPlugins = PCC::PluginsRegistry::OrderPluginsToDisplay(m_sspAllPlugins,
-                vSubmenuPluginDisplayOrder, pvKnownPlugins, &m_vspPluginsInDefaultOrder);
-        } else {
-            // Submenu plugin display order unspecified, use default.
-            m_vspPlugins = m_vspPluginsInDefaultOrder;
+        [[gsl::suppress(lifetime)]]   // Compiler thinks m_spSettings can be null, but we allocate it above
+        {
+            const PCC::GUIDV* const pvKnownPlugins = m_spSettings->GetKnownPlugins(vKnownPlugins) ? &vKnownPlugins : nullptr;
+            if (m_spSettings->GetSubmenuPluginDisplayOrder(vSubmenuPluginDisplayOrder)) {
+                m_vspPlugins = PCC::PluginsRegistry::OrderPluginsToDisplay(m_sspAllPlugins,
+                    vSubmenuPluginDisplayOrder, pvKnownPlugins, &m_vspPluginsInDefaultOrder);
+            } else {
+                // Submenu plugin display order unspecified, use default.
+                m_vspPlugins = m_vspPluginsInDefaultOrder;
+            }
         }
 
         // Provide each plugin with settings object and plugin provider, since some require this to work.

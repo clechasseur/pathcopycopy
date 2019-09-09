@@ -44,37 +44,37 @@ public:
                         AtlRegKey(const AtlRegKey&) = delete;
     AtlRegKey&          operator=(const AtlRegKey&) = delete;
 
-    bool                Valid() const override;
+    bool                Valid() const noexcept(false) override;
     HKEY                GetHKEY() const noexcept;
     long                Open(HKEY p_hParent,
                              const wchar_t* p_pKeyPath,
                              bool p_Create,
-                             REGSAM p_SecurityAccess = KEY_READ | KEY_WRITE);
+                             REGSAM p_SecurityAccess = KEY_READ | KEY_WRITE) noexcept(false);
 
     long                QueryDWORDValue(const wchar_t* p_pValueName,
-                                        DWORD& p_rValue) const override;
+                                        DWORD& p_rValue) const noexcept(false) override;
     long                QueryQWORDValue(const wchar_t* p_pValueName,
-                                        ULONGLONG& p_rValue) const override;
+                                        ULONGLONG& p_rValue) const noexcept(false) override;
     long                QueryGUIDValue(const wchar_t* p_pValueName,
-                                       GUID& p_rValue) const override;
+                                       GUID& p_rValue) const noexcept(false) override;
     long                QueryValue(const wchar_t* p_pValueName,
                                    DWORD* p_pValueType,
                                    void* p_pValue,
-                                   DWORD* p_pValueSize) const override;
+                                   DWORD* p_pValueSize) const noexcept(false) override;
 
     void                GetValues(ValueInfoV& p_rvValues) const override;
     void                GetSubKeys(SubkeyInfoV& p_rvSubkeys) const override;
 
     long                SetDWORDValue(const wchar_t* p_pValueName,
-                                      DWORD p_Value) override;
+                                      DWORD p_Value) noexcept(false) override;
     long                SetQWORDValue(const wchar_t* p_pValueName,
-                                      ULONGLONG p_Value) override;
+                                      ULONGLONG p_Value) noexcept(false) override;
     long                SetGUIDValue(const wchar_t* p_pValueName,
-                                     const GUID& p_Value) override;
+                                     const GUID& p_Value) noexcept(false) override;
     long                SetStringValue(const wchar_t* p_pValueName,
-                                       const wchar_t* p_pValue) override;
+                                       const wchar_t* p_pValue) noexcept(false) override;
 
-    long                DeleteValue(const wchar_t* p_pValueName) override;
+    long                DeleteValue(const wchar_t* p_pValueName) noexcept(false) override;
 
 private:
     mutable ATL::CRegKey m_Key;     // Wrapper for the registry key.

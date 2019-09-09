@@ -35,7 +35,14 @@ namespace PCC
     class PipelinePluginProvider
     {
     public:
-        virtual         ~PipelinePluginProvider();
+                        PipelinePluginProvider() = default;
+                        PipelinePluginProvider(const PipelinePluginProvider&) = delete;
+                        PipelinePluginProvider(PipelinePluginProvider&&) = delete;
+        PipelinePluginProvider&
+                        operator=(const PipelinePluginProvider&) = delete;
+        PipelinePluginProvider&
+                        operator=(PipelinePluginProvider&&) = delete;
+        virtual         ~PipelinePluginProvider() = default;
 
         //
         // Returns a list of pipeline plugins.

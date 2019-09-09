@@ -34,7 +34,12 @@ namespace PCC
     class PluginProvider
     {
     public:
-        virtual         ~PluginProvider();
+                        PluginProvider() = default;
+                        PluginProvider(const PluginProvider&) = delete;
+                        PluginProvider(PluginProvider&&) = delete;
+        PluginProvider& operator=(const PluginProvider&) = delete;
+        PluginProvider& operator=(PluginProvider&&) = delete;
+        virtual         ~PluginProvider() = default;
 
         virtual PluginSP GetPlugin(const GUID& p_PluginId) const = 0;
     };

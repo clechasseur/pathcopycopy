@@ -34,7 +34,14 @@ namespace PCC
     class COMPluginProvider
     {
     public:
-        virtual         ~COMPluginProvider();
+                        COMPluginProvider() = default;
+                        COMPluginProvider(const COMPluginProvider&) = delete;
+                        COMPluginProvider(COMPluginProvider&&) = delete;
+        COMPluginProvider&
+                        operator=(const COMPluginProvider&) = delete;
+        COMPluginProvider&
+                        operator=(COMPluginProvider&&) = delete;
+        virtual         ~COMPluginProvider() = default;
 
         //
         // Returns a list of all registered COM plugins.
