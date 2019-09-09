@@ -157,7 +157,9 @@ namespace PCC
     void FindReplacePipelineElement::ModifyPath(std::wstring& p_rPath,
                                                 const PluginProvider* const /*p_pPluginProvider*/) const
     {
-        StringUtils::ReplaceAll(p_rPath, m_OldValue, m_NewValue);
+        if (!m_OldValue.empty()) {
+            StringUtils::ReplaceAll(p_rPath, m_OldValue, m_NewValue);
+        }
     }
 
     //
@@ -232,11 +234,13 @@ namespace PCC
         if (!m_RegexTested) {
             // Try creating regex. Keep null if the regex is invalid.
             try {
-                std::regex_constants::syntax_option_type reOptions = std::regex_constants::ECMAScript;
-                if (m_IgnoreCase) {
-                    reOptions |= std::regex_constants::icase;
+                if (!m_Regex.empty()) {
+                    std::regex_constants::syntax_option_type reOptions = std::regex_constants::ECMAScript;
+                    if (m_IgnoreCase) {
+                        reOptions |= std::regex_constants::icase;
+                    }
+                    m_upRegex = std::make_unique<std::wregex>(m_Regex, reOptions);
                 }
-                m_upRegex = std::make_unique<std::wregex>(m_Regex, reOptions);
             } catch (const std::regex_error&) {
                 assert(m_upRegex == nullptr);
             }
