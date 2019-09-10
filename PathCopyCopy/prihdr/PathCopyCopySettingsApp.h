@@ -40,11 +40,11 @@ namespace PCC
         struct Options final {
             bool        m_UpdateCheck;  // Whether to check for updates instead of launching to edit settings. [default: false]
 
-                        Options();
-            Options&    WithUpdateCheck();
+                        Options() noexcept;
+            Options&    WithUpdateCheck() noexcept;
         };
 
-                        SettingsApp();
+                        SettingsApp() noexcept;
                         SettingsApp(const SettingsApp&) = delete;
         SettingsApp&    operator=(const SettingsApp&) = delete;
 

@@ -273,7 +273,7 @@ namespace PCC
                         operator=(const PathsSeparatorPipelineElement&) = delete;
 
         void            ModifyPath(std::wstring& p_rPath,
-                                   const PluginProvider* p_pPluginProvider) const override;
+                                   const PluginProvider* p_pPluginProvider) const noexcept(false) override;
         void            ModifyOptions(PipelineOptions& p_rOptions) const override;
 
     private:
@@ -297,7 +297,7 @@ namespace PCC
                         operator=(const ExecutablePipelineElement&) = delete;
 
         void            ModifyPath(std::wstring& p_rPath,
-                                   const PluginProvider* p_pPluginProvider) const override;
+                                   const PluginProvider* p_pPluginProvider) const noexcept(false) override;
         void            ModifyOptions(PipelineOptions& p_rOptions) const override;
 
     private:

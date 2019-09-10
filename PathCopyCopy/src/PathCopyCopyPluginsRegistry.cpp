@@ -114,6 +114,7 @@ namespace PCC
 
         // If we have a list of known plugins, add all unknown plugins
         // after those specified in the display order.
+        [[gsl::suppress(lifetime)]] // Iterators keep being flagged as invalid pointers
         if (p_pvKnownPlugins != nullptr) {
             // Sort known plugins to be able to perform a set difference.
             GUIDV vKnownPlugins(*p_pvKnownPlugins);
@@ -235,11 +236,12 @@ namespace PCC
         CLSIDV vPluginCLSIDs = p_COMPluginProvider.GetCOMPlugins();
         if (!vPluginCLSIDs.empty()) {
             // Load list of plugins by creating the COM objects and store group IDs and positions.
-            COMPluginInfoV vCOMPluginInfos;
+            COMPluginInfoV vCOMPluginInfos;            
             for (const CLSID& clsid : vPluginCLSIDs) {
                 try {
                     COMPluginInfo pluginInfo;
                     pluginInfo.m_CLSID = clsid;
+#pragma warning(suppress: 26486) // Complains that clsid ref can be invalid?!?
                     pluginInfo.m_spPlugin = std::make_shared<Plugins::COMPlugin>(clsid);
                     pluginInfo.m_GroupId = pluginInfo.m_spPlugin->GroupId();
                     pluginInfo.m_GroupPosition = pluginInfo.m_spPlugin->GroupPosition();
@@ -306,7 +308,7 @@ namespace PCC
     // @param p_Right Bean to compare with this one.
     // @return true if this bean is before p_Right.
     //
-    bool PluginsRegistry::COMPluginInfo::operator<(const COMPluginInfo& p_Right) const
+    bool PluginsRegistry::COMPluginInfo::operator<(const COMPluginInfo& p_Right) const noexcept
     {
         return m_GroupId < p_Right.m_GroupId ||
                (m_GroupId == p_Right.m_GroupId && m_GroupPosition < p_Right.m_GroupPosition);

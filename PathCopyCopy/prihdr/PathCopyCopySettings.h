@@ -54,7 +54,7 @@ namespace PCC
                            public PipelinePluginProvider
     {
     public:
-        explicit        Settings();
+        explicit        Settings() noexcept(false);
                         Settings(const Settings&) = delete;
         Settings&       operator=(const Settings&) = delete;
 
@@ -86,14 +86,14 @@ namespace PCC
 
         bool            GetEditingDisabled() const;
 
-        virtual CLSIDV  GetCOMPlugins() const override;
+        CLSIDV          GetCOMPlugins() const override;
         bool            RegisterCOMPlugin(const CLSID& p_CLSID,
                                           const bool p_User);
         bool            UnregisterCOMPlugin(const CLSID& p_CLSID,
                                             const bool p_User);
 
-        virtual void    GetPipelinePlugins(PluginSPV& p_rvspPlugins) const override;
-        virtual void    GetTempPipelinePlugins(PluginSPV& p_rvspPlugins) const override;
+        void            GetPipelinePlugins(PluginSPV& p_rvspPlugins) const override;
+        void            GetTempPipelinePlugins(PluginSPV& p_rvspPlugins) const override;
 
         void            ApplyRevisions();
         static void     ApplyGlobalRevisions();
@@ -143,7 +143,7 @@ namespace PCC
 
                         ReviseInfo(RegKey& p_rUserKey,
                                    RegKey& p_rPipelinePluginsKey,
-                                   const COMPluginProvider& p_COMPluginProvider);
+                                   const COMPluginProvider& p_COMPluginProvider) noexcept;
                         ReviseInfo(const ReviseInfo&) = delete;
                 ReviseInfo&
                         operator=(const ReviseInfo&) = delete;
@@ -170,13 +170,12 @@ namespace PCC
         class RegCOMPluginProvider final : public COMPluginProvider
         {
         public:
-            explicit    RegCOMPluginProvider(const RegKey& p_PluginsKey);
+            explicit    RegCOMPluginProvider(const RegKey& p_PluginsKey) noexcept;
                         RegCOMPluginProvider(const RegCOMPluginProvider&) = delete;
             RegCOMPluginProvider&
                         operator=(const RegCOMPluginProvider&) = delete;
 
-            virtual CLSIDV
-                        GetCOMPlugins() const override;
+            CLSIDV      GetCOMPlugins() const override;
 
         private:
             const RegKey&
@@ -188,13 +187,13 @@ namespace PCC
         class RegPipelinePluginProvider final : public PipelinePluginProvider
         {
         public:
-            explicit    RegPipelinePluginProvider(const RegKey& p_PipelinePluginsKey);
+            explicit    RegPipelinePluginProvider(const RegKey& p_PipelinePluginsKey) noexcept;
                         RegPipelinePluginProvider(const RegPipelinePluginProvider&) = delete;
             RegPipelinePluginProvider&
                         operator=(const RegPipelinePluginProvider&) = delete;
         
-            virtual void GetPipelinePlugins(PluginSPV& p_rvspPlugins) const override;
-            virtual void GetTempPipelinePlugins(PluginSPV& p_rvspPlugins) const override;
+            void        GetPipelinePlugins(PluginSPV& p_rvspPlugins) const override;
+            void        GetTempPipelinePlugins(PluginSPV& p_rvspPlugins) const noexcept(false) override;
 
         private:
             const RegKey&
@@ -210,12 +209,11 @@ namespace PCC
     class SettingsException : public std::exception
     {
     public:
-                        SettingsException(const LONG p_ErrorCode);
+                        SettingsException(const LONG p_ErrorCode) noexcept;
 
-        LONG            ErrorCode() const;
+        LONG            ErrorCode() const noexcept;
 
-        virtual const char*
-                        what() const override;
+        const char*     what() const noexcept(false) override;
 
     private:
         LONG            m_ErrorCode;        // The Windows error code.

@@ -131,7 +131,7 @@ namespace
                         //
                         // @param p_pvOrderedPluginIds Vector of ordered pipeline plugin IDs.
                         //
-        explicit        PipelinePluginLess(const PCC::GUIDV& p_vOrderedPluginIds)
+        explicit        PipelinePluginLess(const PCC::GUIDV& p_vOrderedPluginIds) noexcept
                             : m_vOrderedPluginIds(p_vOrderedPluginIds)
                         {
                         }
@@ -169,9 +169,12 @@ namespace
     };
 
 #ifdef _DEBUG
+#   pragma warning(push)
+#   pragma warning(disable: ALL_CPPCORECHECK_WARNINGS)
     // Used to detect recursive revisions
     std::mutex  g_DebugRecursiveCheckMutex;
     bool        g_DebugIsRevising = false;
+#   pragma warning(pop)
 #endif // _DEBUG
 
 } // anonymous namespace
@@ -182,7 +185,7 @@ namespace PCC
     // Constructor. Opens the user key as an overrideable key (see class for details).
     // Also opens the plugins key in read/write mode if possible, otherwise read-only.
     //
-    Settings::Settings()
+    Settings::Settings() noexcept(false)
         : COMPluginProvider(),
           PipelinePluginProvider(),
           m_UserKey(PCC_SETTINGS_KEY),
@@ -531,7 +534,7 @@ namespace PCC
         Revise();
 
         std::wstring pluginsAsString;
-        bool hasValues = PluginUtils::ReadRegistryStringValue(m_UserKey, SETTING_MAIN_MENU_PLUGIN_DISPLAY_ORDER, pluginsAsString) == ERROR_SUCCESS;
+        const bool hasValues = PluginUtils::ReadRegistryStringValue(m_UserKey, SETTING_MAIN_MENU_PLUGIN_DISPLAY_ORDER, pluginsAsString) == ERROR_SUCCESS;
         if (hasValues) {
             p_rvPluginIds.clear();
             if (!pluginsAsString.empty()) {
@@ -555,7 +558,7 @@ namespace PCC
         Revise();
 
         std::wstring pluginsAsString;
-        bool hasValues = PluginUtils::ReadRegistryStringValue(m_UserKey, SETTING_SUBMENU_PLUGIN_DISPLAY_ORDER, pluginsAsString) == ERROR_SUCCESS;
+        const bool hasValues = PluginUtils::ReadRegistryStringValue(m_UserKey, SETTING_SUBMENU_PLUGIN_DISPLAY_ORDER, pluginsAsString) == ERROR_SUCCESS;
         if (hasValues) {
             p_rvPluginIds.clear();
             if (!pluginsAsString.empty()) {
@@ -580,7 +583,7 @@ namespace PCC
         Revise();
 
         std::wstring pluginsAsString;
-        bool hasValues = PluginUtils::ReadRegistryStringValue(m_UserKey, SETTING_KNOWN_PLUGINS, pluginsAsString) == ERROR_SUCCESS;
+        const bool hasValues = PluginUtils::ReadRegistryStringValue(m_UserKey, SETTING_KNOWN_PLUGINS, pluginsAsString) == ERROR_SUCCESS;
         if (hasValues) {
             p_rvPluginIds.clear();
             if (!pluginsAsString.empty()) {
@@ -610,16 +613,16 @@ namespace PCC
         }
         if (!updateDisabled) {
             // Get last time it was performed. If we don't have info on that, assume that it's been a hell of a while.
-            __time64_t lastUpdateCheck;
+            __time64_t lastUpdateCheck = 0;
             ULONGLONG storedLastUpdate = 0;
             if (m_UserKey.QueryQWORDValue(SETTING_LAST_UPDATE_CHECK, storedLastUpdate) == ERROR_SUCCESS) {
-                lastUpdateCheck = static_cast<__time64_t>(storedLastUpdate);
+                lastUpdateCheck = storedLastUpdate;
             } else {
                 lastUpdateCheck = 0;
             }
 
             // Get current time.
-            __time64_t now;
+            __time64_t now = 0;
             ::_time64(&now);
 
             // Get update interval.
@@ -645,7 +648,7 @@ namespace PCC
         // Perform late-revising.
         Revise();
 
-        __time64_t now;
+        __time64_t now = 0;
         ::_time64(&now);
         m_UserKey.SetQWORDValue(SETTING_LAST_UPDATE_CHECK, static_cast<ULONGLONG>(now));
     }
@@ -668,7 +671,7 @@ namespace PCC
 
         // Convert plugin ID to string.
         StOleStr pluginIdAsString;
-        HRESULT hRes = ::StringFromCLSID(p_PluginId, &pluginIdAsString);
+        const HRESULT hRes = ::StringFromCLSID(p_PluginId, &pluginIdAsString);
         if (SUCCEEDED(hRes)) {
             // Look for a value for this plugin in the icons key.
             std::wstring iconFile;
@@ -683,7 +686,7 @@ namespace PCC
                 }
             }
         } else {
-            throw SettingsException(static_cast<LONG>(hRes));
+            throw SettingsException(hRes);
         }
 
         return resultingIconFile;
@@ -747,11 +750,11 @@ namespace PCC
 
             // Convert CLSID to string.
             StOleStr clsidAsString;
-            HRESULT hRes = ::StringFromCLSID(p_CLSID, &clsidAsString);
+            const HRESULT hRes = ::StringFromCLSID(p_CLSID, &clsidAsString);
             if (SUCCEEDED(hRes)) {
                 // Check if plugin was already registered.
                 DWORD valueType = 0;
-                if (::RegQueryValueExW(rKey.GetHKEY(), clsidAsString.Get(), 0, &valueType, 0, 0) != ERROR_SUCCESS) {
+                if (::RegQueryValueExW(rKey.GetHKEY(), clsidAsString.Get(), nullptr, &valueType, nullptr, nullptr) != ERROR_SUCCESS) {
                     // Register plugin.
                     rKey.SetStringValue(clsidAsString.Get(), GetCOMPluginInfo(p_CLSID).c_str());
 
@@ -759,7 +762,7 @@ namespace PCC
                     registered = true;
                 }
             } else {
-                throw SettingsException(static_cast<LONG>(hRes));
+                throw SettingsException(hRes);
             }
         }
 
@@ -787,12 +790,12 @@ namespace PCC
 
             // Convert CLSID to string.
             StOleStr clsidAsString;
-            HRESULT hRes = ::StringFromCLSID(p_CLSID, &clsidAsString);
+            const HRESULT hRes = ::StringFromCLSID(p_CLSID, &clsidAsString);
             if (SUCCEEDED(hRes)) {
                 // Unregister the plugin and check if it worked in one swoop.
                 unregistered = rKey.DeleteValue(clsidAsString.Get()) == ERROR_SUCCESS;
             } else {
-                throw SettingsException(static_cast<LONG>(hRes));
+                throw SettingsException(hRes);
             }
         }
 
@@ -904,6 +907,7 @@ namespace PCC
             // Now include description.
             ATL::CComBSTR bstrDesc;
             wos << INFO_DESCRIPTION_SEPARATOR;
+            [[gsl::suppress(lifetime)]] // We check m_str so we're good here
             if (SUCCEEDED(cpPlugin->get_Description(&bstrDesc)) && bstrDesc.m_str != nullptr) {
                 wos << bstrDesc.m_str;
             }
@@ -967,7 +971,8 @@ namespace PCC
         for (const auto& subkeyInfo : vSubkeyInfos) {
             // Convert key name into a GUID and make sure it's valid.
             GUID pluginId = { 0 };
-            if (::CLSIDFromString(const_cast<wchar_t*>(subkeyInfo.m_KeyName.c_str()), &pluginId) == S_OK) {
+            [[gsl::suppress(lifetime)]] // Not sure exactly why here
+            if (::CLSIDFromString(subkeyInfo.m_KeyName.c_str(), &pluginId) == S_OK) {
                 // Get values for the pipeline encoded elements as well as the plugin description
                 // and its optional icon file.
                 std::wstring encodedElements, description, iconFile;
@@ -982,7 +987,7 @@ namespace PCC
                 }
                 if (res == ERROR_SUCCESS) {
                     // Icon file is optional. If not found, we're not displaying any icon.
-                    LONG iconRes = PluginUtils::ReadRegistryStringValue(pluginKey, SETTING_PIPELINE_ICON_FILE, iconFile);
+                    const LONG iconRes = PluginUtils::ReadRegistryStringValue(pluginKey, SETTING_PIPELINE_ICON_FILE, iconFile);
                     if (iconRes == ERROR_SUCCESS && iconFile.empty()) {
                         // This indicates that we want to use the default icon.
                         useDefaultIcon = true;
@@ -999,13 +1004,13 @@ namespace PCC
         // Get value containing the display order. If found, we'll have to reorder the
         // pipeline plugins according to this value.
         std::wstring displayOrder;
-        LONG res = PluginUtils::ReadRegistryStringValue(p_PipelinePluginsKey, SETTING_PIPELINE_DISPLAY_ORDER, displayOrder);
+        const LONG res = PluginUtils::ReadRegistryStringValue(p_PipelinePluginsKey, SETTING_PIPELINE_DISPLAY_ORDER, displayOrder);
         if (res == ERROR_SUCCESS && !displayOrder.empty()) {
             // The value contains a comma-separated list of pipeline plugin IDs.
             GUIDV vOrderedPluginIds = PluginUtils::StringToPluginIds(displayOrder, PLUGINS_SEPARATOR);
 
             // Sort plugins using our special predicate that will order them properly.
-            PipelinePluginLess lessPredicate(vOrderedPluginIds);
+            const PipelinePluginLess lessPredicate(vOrderedPluginIds);
             std::sort(vspPipelinePlugins.begin(), vspPipelinePlugins.end(), lessPredicate);
         }
 
@@ -1041,7 +1046,8 @@ namespace PCC
             g_DebugIsRevising = true;
         }
         struct ResetIsRevising {
-            ~ResetIsRevising() {
+            [[gsl::suppress(c.21)]] // No use defining everything, this is a helper
+            ~ResetIsRevising() noexcept(false) {
                 std::lock_guard<std::mutex> debugLock(g_DebugRecursiveCheckMutex);
                 assert(g_DebugIsRevising);
                 g_DebugIsRevising = false;
@@ -1050,7 +1056,7 @@ namespace PCC
 #endif // _DEBUG
 
         // Create bean to store revise info.
-        ReviseInfo reviseInfo(p_rUserKey, p_rPipelinePluginsKey, p_COMPluginProvider);
+        const ReviseInfo reviseInfo(p_rUserKey, p_rPipelinePluginsKey, p_COMPluginProvider);
 
         // Get map of revise functions.
         RevisionFuncM mRevisions = CreateRevisionFuncMap();
@@ -1127,14 +1133,14 @@ namespace PCC
         // - Copy value of "DefaultPlugin" (if there is one) to "PluginsInMainMenu"
 
         DWORD dummyValueType = 0;
-        if (p_ReviseInfo.m_rUserKey.QueryValue(OLD_SETTING_PLUGINS_NOT_IN_SUBMENU, &dummyValueType, 0, 0) == ERROR_FILE_NOT_FOUND) {
+        if (p_ReviseInfo.m_rUserKey.QueryValue(OLD_SETTING_PLUGINS_NOT_IN_SUBMENU, &dummyValueType, nullptr, nullptr) == ERROR_FILE_NOT_FOUND) {
             std::wstring disabledPluginsAsString;
             if (PluginUtils::ReadRegistryStringValue(p_ReviseInfo.m_rUserKey, OLD_SETTING_DISABLED_PLUGINS, disabledPluginsAsString) == ERROR_SUCCESS) {
                 p_ReviseInfo.m_rUserKey.SetStringValue(OLD_SETTING_PLUGINS_NOT_IN_SUBMENU, disabledPluginsAsString.c_str());
                 p_ReviseInfo.m_rUserKey.DeleteValue(OLD_SETTING_DISABLED_PLUGINS);
             }
         }
-        if (p_ReviseInfo.m_rUserKey.QueryValue(OLD_SETTING_PLUGINS_IN_MAIN_MENU, &dummyValueType, 0, 0) == ERROR_FILE_NOT_FOUND) {
+        if (p_ReviseInfo.m_rUserKey.QueryValue(OLD_SETTING_PLUGINS_IN_MAIN_MENU, &dummyValueType, nullptr, nullptr) == ERROR_FILE_NOT_FOUND) {
             std::wstring defaultPluginAsString;
             if (PluginUtils::ReadRegistryStringValue(p_ReviseInfo.m_rUserKey, OLD_SETTING_DEFAULT_PLUGIN, defaultPluginAsString) == ERROR_SUCCESS) {
                 p_ReviseInfo.m_rUserKey.SetStringValue(OLD_SETTING_PLUGINS_IN_MAIN_MENU, defaultPluginAsString.c_str());
@@ -1213,6 +1219,7 @@ namespace PCC
     {
         // Check if user had a previous value specifying plugins NOT to display in the submenu.
         std::wstring oldPluginsNotInSubmenuAsString;
+        [[gsl::suppress(lifetime)]] // Thinking about suppressing those globally TBH...
         if (PluginUtils::ReadRegistryStringValue(p_ReviseInfo.m_rUserKey, OLD_SETTING_PLUGINS_NOT_IN_SUBMENU, oldPluginsNotInSubmenuAsString) == ERROR_SUCCESS) {
             // Sort plugin IDs not in submenu to make it easier to perform find operations.
             GUIDV vOldPluginsNotInSubmenu = PluginUtils::StringToPluginIds(oldPluginsNotInSubmenuAsString, PLUGINS_SEPARATOR);
@@ -1314,6 +1321,7 @@ namespace PCC
 
                 // Keep all plugins in default order that are not already in the list.
                 // Be careful not to double up separators.
+                [[gsl::suppress(lifetime)]] // Iterators again
                 for (const PluginSP& spPlugin : vspPlugins) {
                     if (!spPlugin->IsSeparator()) { 
                         if (sPluginIdsInSubmenu.find(spPlugin->Id()) == sPluginIdsInSubmenu.end()) {
@@ -1343,7 +1351,7 @@ namespace PCC
     //
     Settings::Reviser::ReviseInfo::ReviseInfo(RegKey& p_rUserKey,
                                               RegKey& p_rPipelinePluginsKey,
-                                              const COMPluginProvider& p_COMPluginProvider)
+                                              const COMPluginProvider& p_COMPluginProvider) noexcept
         : m_rUserKey(p_rUserKey),
           m_rPipelinePluginsKey(p_rPipelinePluginsKey),
           m_COMPluginProvider(p_COMPluginProvider)
@@ -1355,7 +1363,7 @@ namespace PCC
     //
     // @param p_PluginsKey Registry key storing (COM) plugins.
     //
-    Settings::RegCOMPluginProvider::RegCOMPluginProvider(const RegKey& p_PluginsKey)
+    Settings::RegCOMPluginProvider::RegCOMPluginProvider(const RegKey& p_PluginsKey) noexcept
         : COMPluginProvider(),
           m_PluginsKey(p_PluginsKey)
     {
@@ -1380,7 +1388,7 @@ namespace PCC
     //
     // @param p_PipelinePluginsKey Registry key containing pipeline plugins.
     //
-    Settings::RegPipelinePluginProvider::RegPipelinePluginProvider(const RegKey& p_PipelinePluginsKey)
+    Settings::RegPipelinePluginProvider::RegPipelinePluginProvider(const RegKey& p_PipelinePluginsKey) noexcept
         : PipelinePluginProvider(),
           m_PipelinePluginsKey(p_PipelinePluginsKey)
     {
@@ -1404,7 +1412,7 @@ namespace PCC
     //
     // @param p_rvspPlugins Where to store pipeline plugins; unused.
     //
-    void Settings::RegPipelinePluginProvider::GetTempPipelinePlugins(PluginSPV& /*p_rvspPlugins*/) const
+    void Settings::RegPipelinePluginProvider::GetTempPipelinePlugins(PluginSPV& /*p_rvspPlugins*/) const noexcept(false)
     {
     }
 
@@ -1413,7 +1421,7 @@ namespace PCC
     //
     // @param p_ErrorCode The Windows error code associated with the exception.
     //
-    SettingsException::SettingsException(const LONG p_ErrorCode)
+    SettingsException::SettingsException(const LONG p_ErrorCode) noexcept
         : std::exception(),
           m_ErrorCode(p_ErrorCode)
     {
@@ -1424,7 +1432,7 @@ namespace PCC
     //
     // @return Associated error code.
     //
-    LONG SettingsException::ErrorCode() const
+    LONG SettingsException::ErrorCode() const noexcept
     {
         return m_ErrorCode;
     }
@@ -1434,7 +1442,7 @@ namespace PCC
     //
     // @return Exception description.
     //
-    const char* SettingsException::what() const
+    const char* SettingsException::what() const noexcept(false)
     {
         return "PCC::SettingsException";
     }

@@ -53,6 +53,7 @@ public:
     CPathCopyCopyDataHandler& operator=(CPathCopyCopyDataHandler&&) = delete;
     virtual ~CPathCopyCopyDataHandler() = default;
 
+#pragma warning(push)
 #pragma warning(disable: ALL_CPPCORECHECK_WARNINGS)
 
     DECLARE_REGISTRY_RESOURCEID(IDR_PATHCOPYCOPYDATAHANDLER)
@@ -68,7 +69,7 @@ public:
 
 	DECLARE_PROTECT_FINAL_CONSTRUCT()
 
-#pragma warning(default: ALL_CPPCORECHECK_WARNINGS)
+#pragma warning(pop)
 
     [[gsl::suppress(c.128)]]
 	HRESULT FinalConstruct() noexcept

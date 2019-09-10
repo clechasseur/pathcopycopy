@@ -64,7 +64,7 @@ namespace PCC
             ULONG       m_GroupId = 0;          // ID of plugin group.
             ULONG       m_GroupPosition = 0;    // Position of plugin in the group.
 
-            bool        operator<(const COMPluginInfo& p_Right) const;
+            bool        operator<(const COMPluginInfo& p_Right) const noexcept;
         };
 
         // Vector of COM plugin info beans.

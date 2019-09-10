@@ -46,6 +46,7 @@ CPathCopyCopyDataHandler::CPathCopyCopyDataHandler() noexcept(false)
 // IPersistFile::IsDirty
 // This method is unused for shell data handlers.
 //
+[[gsl::suppress(c.128), gsl::suppress(f.6)]]
 STDMETHODIMP CPathCopyCopyDataHandler::IsDirty()
 {
     return E_NOTIMPL;
@@ -61,6 +62,7 @@ STDMETHODIMP CPathCopyCopyDataHandler::IsDirty()
 // @param dwMode File open mode. We ignore this as we don't need to actually open the file.
 // @return S_OK if successful, otherwise an error code.
 //
+[[gsl::suppress(c.128)]]
 STDMETHODIMP CPathCopyCopyDataHandler::Load(
     LPCOLESTR pszFileName,
     DWORD /*dwMode*/)
@@ -79,6 +81,7 @@ STDMETHODIMP CPathCopyCopyDataHandler::Load(
 // IPersistFile::Save
 // This method is unused for shell data handlers.
 //
+[[gsl::suppress(c.128), gsl::suppress(f.6)]]
 STDMETHODIMP CPathCopyCopyDataHandler::Save(
     LPCOLESTR /*pszFileName*/,
     BOOL /*fRemember*/)
@@ -90,6 +93,7 @@ STDMETHODIMP CPathCopyCopyDataHandler::Save(
 // IPersistFile::SaveCompleted
 // This method is unused for shell data handlers.
 //
+[[gsl::suppress(c.128), gsl::suppress(f.6)]]
 STDMETHODIMP CPathCopyCopyDataHandler::SaveCompleted(
     LPCOLESTR /*pszFileName*/)
 {
@@ -100,6 +104,7 @@ STDMETHODIMP CPathCopyCopyDataHandler::SaveCompleted(
 // IPersistFile::GetCurFile
 // This method is unused for shell data handlers.
 //
+[[gsl::suppress(c.128), gsl::suppress(f.6)]]
 STDMETHODIMP CPathCopyCopyDataHandler::GetCurFile(
     LPOLESTR* /*ppszFileName*/)
 {
@@ -114,6 +119,7 @@ STDMETHODIMP CPathCopyCopyDataHandler::GetCurFile(
 // @param pClassID Where to store our CLSID.
 // @return S_OK if successful, otherwise an error code.
 //
+[[gsl::suppress(c.128), gsl::suppress(f.6)]]
 STDMETHODIMP CPathCopyCopyDataHandler::GetClassID(
     CLSID *pClassID)
 {
@@ -133,6 +139,7 @@ STDMETHODIMP CPathCopyCopyDataHandler::GetClassID(
 // @param pmedium Where to save the storage medium containing our data.
 // @return S_OK if successful, otherwise an error code.
 //
+[[gsl::suppress(c.128)]]
 STDMETHODIMP CPathCopyCopyDataHandler::GetData(
     FORMATETC *pformatetcIn,
     STGMEDIUM *pmedium)
@@ -170,7 +177,7 @@ STDMETHODIMP CPathCopyCopyDataHandler::GetData(
                 // Allocate an HGLOBAL to store the string.
                 const SIZE_T memSizeInBytes = (newPath.size() + 1) * sizeof(wchar_t);
                 StGlobalBlock globalBlock(GHND, memSizeInBytes);
-                if (globalBlock.Get() == NULL) {
+                if (globalBlock.Get() == nullptr) {
 #ifdef PCC_DATA_HANDLER_LOGGING
                     fil << L"GlobalAlloc failed!" << std::endl;
 #endif // PCC_DATA_HANDLER_LOGGING
@@ -207,6 +214,7 @@ STDMETHODIMP CPathCopyCopyDataHandler::GetData(
 // IDataObject::GetDataHere
 // This method is unused for shell data handlers.
 //
+[[gsl::suppress(c.128), gsl::suppress(f.6)]]
 STDMETHODIMP CPathCopyCopyDataHandler::GetDataHere(
     FORMATETC* /*pformatetc*/,
     STGMEDIUM* /*pmedium*/)
@@ -223,6 +231,7 @@ STDMETHODIMP CPathCopyCopyDataHandler::GetDataHere(
 // @param pformatetc Pointer to a FORMATETC struct describing the format.
 // @return S_OK if we support the format, otherwise an error code.
 //
+[[gsl::suppress(c.128), gsl::suppress(f.6)]]
 STDMETHODIMP CPathCopyCopyDataHandler::QueryGetData(
     FORMATETC *pformatetc)
 {
@@ -248,6 +257,7 @@ STDMETHODIMP CPathCopyCopyDataHandler::QueryGetData(
 // IDataObject::GetCanonicalFormatEtc
 // This method is unused for shell data handlers.
 //
+[[gsl::suppress(c.128), gsl::suppress(f.6)]]
 STDMETHODIMP CPathCopyCopyDataHandler::GetCanonicalFormatEtc(
     FORMATETC* /*pformatectIn*/,
     FORMATETC* /*pformatetcOut*/)
@@ -259,6 +269,7 @@ STDMETHODIMP CPathCopyCopyDataHandler::GetCanonicalFormatEtc(
 // IDataObject::SetData
 // This method is unused for shell data handlers.
 //
+[[gsl::suppress(c.128), gsl::suppress(f.6)]]
 STDMETHODIMP CPathCopyCopyDataHandler::SetData(
     FORMATETC* /*pformatetc*/,
     STGMEDIUM* /*pmedium*/,
@@ -276,6 +287,7 @@ STDMETHODIMP CPathCopyCopyDataHandler::SetData(
 //                        that will provide all formats we support.
 // @return S_OK if successful, otherwise an error code.
 //
+[[gsl::suppress(c.128), gsl::suppress(f.6), gsl::suppress(lifetime)]]
 STDMETHODIMP CPathCopyCopyDataHandler::EnumFormatEtc(
     DWORD dwDirection,
     IEnumFORMATETC **ppenumFormatEtc)
@@ -293,6 +305,7 @@ STDMETHODIMP CPathCopyCopyDataHandler::EnumFormatEtc(
 // IDataObject::DAdvise
 // This method is unused for shell data handlers.
 //
+[[gsl::suppress(c.128), gsl::suppress(f.6)]]
 STDMETHODIMP CPathCopyCopyDataHandler::DAdvise(
     FORMATETC* /*pformatetc*/,
     DWORD /*advf*/,
@@ -306,6 +319,7 @@ STDMETHODIMP CPathCopyCopyDataHandler::DAdvise(
 // IDataObject::DUnadvise
 // This method is unused for shell data handlers.
 //
+[[gsl::suppress(c.128), gsl::suppress(f.6)]]
 STDMETHODIMP CPathCopyCopyDataHandler::DUnadvise(
     DWORD /*dwConnection*/)
 {
@@ -316,6 +330,7 @@ STDMETHODIMP CPathCopyCopyDataHandler::DUnadvise(
 // IDataObject::EnumDAdvise
 // This method is unused for shell data handlers.
 //
+[[gsl::suppress(c.128), gsl::suppress(f.6)]]
 STDMETHODIMP CPathCopyCopyDataHandler::EnumDAdvise(
     IEnumSTATDATA** /*ppenumAdvise*/)
 {

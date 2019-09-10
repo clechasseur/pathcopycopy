@@ -36,6 +36,7 @@ namespace PCC
     // @param p_rPath Path to modify (in-place).
     // @param p_pPluginProvider Optional object to access plugins.
     //
+    [[gsl::suppress(lifetime)]]
     void QuotesPipelineElement::ModifyPath(std::wstring& p_rPath,
                                            const PluginProvider* const /*p_pPluginProvider*/) const
     {
@@ -50,6 +51,7 @@ namespace PCC
     // @param p_rPath Path to modify (in-place).
     // @param p_pPluginProvider Optional object to access plugins.
     //
+    [[gsl::suppress(lifetime)]]
     void OptionalQuotesPipelineElement::ModifyPath(std::wstring& p_rPath,
                                                    const PluginProvider* const /*p_pPluginProvider*/) const
     {
@@ -65,6 +67,7 @@ namespace PCC
     // @param p_rPath Path to modify (in-place).
     // @param p_pPluginProvider Optional object to access plugins.
     //
+    [[gsl::suppress(lifetime)]]
     void EmailLinksPipelineElement::ModifyPath(std::wstring& p_rPath,
                                                const PluginProvider* const /*p_pPluginProvider*/) const
     {
@@ -322,7 +325,7 @@ namespace PCC
     // @param p_pPluginProvider Optional object to access plugins.
     //
     void PathsSeparatorPipelineElement::ModifyPath(std::wstring& /*p_rPath*/,
-                                                   const PluginProvider* const /*p_pPluginProvider*/) const
+                                                   const PluginProvider* const /*p_pPluginProvider*/) const noexcept(false)
     {
     }
 
@@ -355,7 +358,7 @@ namespace PCC
     // @param p_pPluginProvider Optional object to access plugins.
     //
     void ExecutablePipelineElement::ModifyPath(std::wstring& /*p_rPath*/,
-                                               const PluginProvider* const /*p_pPluginProvider*/) const
+                                               const PluginProvider* const /*p_pPluginProvider*/) const noexcept(false)
     {
     }
 
