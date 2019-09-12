@@ -28,8 +28,8 @@
 
 #include <WinSDKVer.h>
 
-// Minimum platform: Windows XP
-#define WINVER 0x0501
-#define _WIN32_WINNT 0x0501
+// Minimum platform: Windows Vista
+#define WINVER 0x0600
+#define _WIN32_WINNT 0x0600
 
 #include <SDKDDKVer.h>

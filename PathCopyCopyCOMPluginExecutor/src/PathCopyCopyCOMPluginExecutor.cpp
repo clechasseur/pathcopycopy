@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include "stdafx.h"
+#include <stdafx.h>
 
 #include <StCoInitialize.h>
 #include <PathCopyCopy_i.h>
@@ -41,6 +41,7 @@ int GetUseDefaultIcon(IPathCopyCopyPlugin* p_pPlugin, std::wstring& p_rOutput);
 // @param argv Array of command-line arguments
 // @return Process exit code
 //
+#pragma warning(suppress: 26485) // Not sure what to do with this one, this is generated code
 int wmain(int /*argc*/, wchar_t* /*argv*/[])
 {
     // Assume we'll fail.
@@ -115,7 +116,7 @@ int GetDescription(IPathCopyCopyPlugin* p_pPlugin, std::wstring& p_rOutput)
     assert(p_rOutput.empty());
 
     ATL::CComBSTR bstrDescription;
-    if (SUCCEEDED(p_pPlugin->get_Description(&bstrDescription)) && bstrDescription != NULL) {
+    if (SUCCEEDED(p_pPlugin->get_Description(&bstrDescription)) && bstrDescription != nullptr) {
         p_rOutput = bstrDescription.m_str;
     }
     
@@ -135,7 +136,7 @@ int GetHelpText(IPathCopyCopyPlugin* p_pPlugin, std::wstring& p_rOutput)
     assert(p_rOutput.empty());
 
     ATL::CComBSTR bstrHelpText;
-    if (SUCCEEDED(p_pPlugin->get_HelpText(&bstrHelpText)) && bstrHelpText != NULL) {
+    if (SUCCEEDED(p_pPlugin->get_HelpText(&bstrHelpText)) && bstrHelpText != nullptr) {
         p_rOutput = bstrHelpText.m_str;
     }
     
@@ -213,7 +214,7 @@ int GetIconFile(IPathCopyCopyPlugin* p_pPlugin, std::wstring& p_rOutput)
     ATL::CComQIPtr<IPathCopyCopyPluginIconInfo> cpPluginIconInfo(p_pPlugin);
     if (cpPluginIconInfo.p != nullptr) {
         ATL::CComBSTR bstrIconFile;
-        if (SUCCEEDED(cpPluginIconInfo->get_IconFile(&bstrIconFile)) && bstrIconFile != NULL) {
+        if (SUCCEEDED(cpPluginIconInfo->get_IconFile(&bstrIconFile)) && bstrIconFile != nullptr) {
             p_rOutput = bstrIconFile.m_str;
         }
     }
@@ -245,6 +246,7 @@ int GetUseDefaultIcon(IPathCopyCopyPlugin* p_pPlugin, std::wstring& p_rOutput)
     }
 
     // Convert result to string form.
+#pragma warning(suppress: 26485) // This is a bit weird...
     p_rOutput = (useDefaultIcon ? L"true" : L"false");
     
     return 0;

@@ -28,6 +28,8 @@
 
 #define _ATL_CSTRING_EXPLICIT_CONSTRUCTORS      // some CString constructors will be explicit
 
+#define NOMINMAX    // Conflicts with STL
+
 #include <atlbase.h>
 #include <atlstr.h>
 #include <windows.h>
@@ -41,3 +43,8 @@
 #include <sstream>
 
 #include <resource.h>
+
+// Including this header allows us to suppress C++ Core Guideline warnings more easily
+#include <CppCoreCheck\warnings.h>
+
+#include <gsl/gsl>
