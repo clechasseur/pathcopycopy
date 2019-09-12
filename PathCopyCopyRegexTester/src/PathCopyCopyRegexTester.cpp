@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include "stdafx.h"
+#include <stdafx.h>
 
 #include <regex>
 
@@ -57,8 +57,8 @@ int wmain(int /*argc*/, wchar_t* /*argv*/[])
         if (ignoreCase == L'y') {
             reOptions |= std::regex_constants::icase;
         }
-        std::wregex re(regex, reOptions);
-        std::wstring modified = std::regex_replace(sample, re, format);
+        const std::wregex re(regex, reOptions);
+        const std::wstring modified = std::regex_replace(sample, re, format);
 
         // Output modified string:
         std::wcout << L"Modified string: " << modified << std::endl;

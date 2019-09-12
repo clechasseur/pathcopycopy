@@ -22,6 +22,11 @@
 #pragma once
 
 #include "targetver.h"
-#include "resource.h"
+#include <resource.h>
 
 #include <iostream>
+
+// Including this header allows us to suppress C++ Core Guideline warnings more easily
+#include <CppCoreCheck\warnings.h>
+
+#include <gsl/gsl>
