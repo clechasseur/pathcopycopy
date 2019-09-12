@@ -650,7 +650,7 @@ namespace PCC
 
         __time64_t now = 0;
         ::_time64(&now);
-        m_UserKey.SetQWORDValue(SETTING_LAST_UPDATE_CHECK, static_cast<ULONGLONG>(now));
+        m_UserKey.SetQWORDValue(SETTING_LAST_UPDATE_CHECK, gsl::narrow<ULONGLONG>(now));
     }
 
     //
@@ -907,7 +907,6 @@ namespace PCC
             // Now include description.
             ATL::CComBSTR bstrDesc;
             wos << INFO_DESCRIPTION_SEPARATOR;
-            [[gsl::suppress(lifetime)]] // We check m_str so we're good here
             if (SUCCEEDED(cpPlugin->get_Description(&bstrDesc)) && bstrDesc.m_str != nullptr) {
                 wos << bstrDesc.m_str;
             }
@@ -971,7 +970,6 @@ namespace PCC
         for (const auto& subkeyInfo : vSubkeyInfos) {
             // Convert key name into a GUID and make sure it's valid.
             GUID pluginId = { 0 };
-            [[gsl::suppress(lifetime)]] // Not sure exactly why here
             if (::CLSIDFromString(subkeyInfo.m_KeyName.c_str(), &pluginId) == S_OK) {
                 // Get values for the pipeline encoded elements as well as the plugin description
                 // and its optional icon file.
@@ -1219,7 +1217,6 @@ namespace PCC
     {
         // Check if user had a previous value specifying plugins NOT to display in the submenu.
         std::wstring oldPluginsNotInSubmenuAsString;
-        [[gsl::suppress(lifetime)]] // Thinking about suppressing those globally TBH...
         if (PluginUtils::ReadRegistryStringValue(p_ReviseInfo.m_rUserKey, OLD_SETTING_PLUGINS_NOT_IN_SUBMENU, oldPluginsNotInSubmenuAsString) == ERROR_SUCCESS) {
             // Sort plugin IDs not in submenu to make it easier to perform find operations.
             GUIDV vOldPluginsNotInSubmenu = PluginUtils::StringToPluginIds(oldPluginsNotInSubmenuAsString, PLUGINS_SEPARATOR);
@@ -1321,7 +1318,6 @@ namespace PCC
 
                 // Keep all plugins in default order that are not already in the list.
                 // Be careful not to double up separators.
-                [[gsl::suppress(lifetime)]] // Iterators again
                 for (const PluginSP& spPlugin : vspPlugins) {
                     if (!spPlugin->IsSeparator()) { 
                         if (sPluginIdsInSubmenu.find(spPlugin->Id()) == sPluginIdsInSubmenu.end()) {

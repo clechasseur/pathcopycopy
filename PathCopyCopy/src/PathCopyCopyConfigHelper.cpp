@@ -115,7 +115,6 @@ void CPathCopyCopyConfigHelper::Initialize()
         m_sspAllPlugins.insert(m_vspPluginsInDefaultOrder.cbegin(), m_vspPluginsInDefaultOrder.cend());
         m_spPluginProvider = std::make_shared<PCC::AllPluginsProvider>(m_sspAllPlugins);
         PCC::GUIDV vKnownPlugins, vSubmenuPluginDisplayOrder;
-        [[gsl::suppress(lifetime)]]   // Compiler thinks m_spSettings can be null, but we allocate it above
         {
             const PCC::GUIDV* const pvKnownPlugins = m_spSettings->GetKnownPlugins(vKnownPlugins) ? &vKnownPlugins : nullptr;
             if (m_spSettings->GetSubmenuPluginDisplayOrder(vSubmenuPluginDisplayOrder)) {

@@ -74,6 +74,7 @@ namespace PCC
             }
 
             // Launch the settings app and don't wait for the result.
+#pragma warning(suppress: 26476) // Something about this type doesn't fit, but I can't change the Win32 API
             SHELLEXECUTEINFOW execInfo{0};
             execInfo.cbSize = sizeof(execInfo);
             execInfo.fMask = 0;

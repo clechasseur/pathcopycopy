@@ -37,7 +37,7 @@ namespace PCC
     //
     // @return Unique identifier.
     //
-    const GUID& PluginSeparator::Id() const
+    const GUID& PluginSeparator::Id() const noexcept(false)
     {
         return PLUGIN_SEPARATOR_ID;
     }

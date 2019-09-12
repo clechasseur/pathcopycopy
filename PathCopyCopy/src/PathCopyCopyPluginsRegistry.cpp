@@ -114,7 +114,6 @@ namespace PCC
 
         // If we have a list of known plugins, add all unknown plugins
         // after those specified in the display order.
-        [[gsl::suppress(lifetime)]] // Iterators keep being flagged as invalid pointers
         if (p_pvKnownPlugins != nullptr) {
             // Sort known plugins to be able to perform a set difference.
             GUIDV vKnownPlugins(*p_pvKnownPlugins);

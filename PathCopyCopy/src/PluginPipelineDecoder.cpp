@@ -334,7 +334,7 @@ namespace PCC
     auto PipelineDecoder::EncodedElementsStream::ReadString() -> std::wstring
     {
         // First is encoded string size.
-        const auto stringSize = static_cast<std::wstring::size_type>(ReadLong());
+        const auto stringSize = gsl::narrow<std::wstring::size_type>(ReadLong());
 
         // Now that we know the length of the string that is encoded, we simply
         // need to copy that much characters from the encoded string.

@@ -371,7 +371,6 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::QueryContextMenu(
                 if ((::GetKeyState(VK_CONTROL) & 0x8000) != 0 && pCtrlKeyPluginId != nullptr) {
                     // Find plugin to use.
                     const auto pluginIt = m_sspAllPlugins.find(*pCtrlKeyPluginId);
-                    [[gsl::suppress(lifetime)]] // This one seems a bit buggy or at least too cautious
                     if (pluginIt != m_sspAllPlugins.end() && !(*pluginIt)->IsSeparator()) {
                         ActOnFiles(*pluginIt, nullptr);
                     }
@@ -383,7 +382,6 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::QueryContextMenu(
                     PCC::PluginSPV vspPlugins = PCC::PluginsRegistry::OrderPluginsToDisplay(
                         m_sspAllPlugins, vPluginIds, pvKnownPlugins, &m_vspPluginsInDefaultOrder);
                     if (!vPluginIds.empty()) {
-                        [[gsl::suppress(lifetime)]] // vPluginIds.front is valid since we check beforehand
                         if (vPluginIds.size() != 1 || !::IsEqualGUID(vPluginIds.front(), PCC::Plugins::LongPathPlugin::ID)) {
                             PCC::CLSIDV::const_iterator it, end = vPluginIds.end();
                             for (it = vPluginIds.begin(); SUCCEEDED(hRes) && it != end; ++it) {
@@ -568,10 +566,7 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::InvokeCommand(
                     PCC::PluginSP spPlugin = itId->second;
 
                     // Act on the files using the plugin.
-                    [[gsl::suppress(lifetime)]]
-                    {
-                        hRes = ActOnFiles(spPlugin, p_pCommandInfo->hwnd);
-                    }
+                    hRes = ActOnFiles(spPlugin, p_pCommandInfo->hwnd);
                 }
             }
         }
@@ -739,7 +734,6 @@ HRESULT CPathCopyCopyContextMenuExt::AddPluginToMenu(const GUID& p_PluginId,
 
     // If we have a plugin, continue.
     HRESULT hRes = E_INVALIDARG;
-    [[gsl::suppress(lifetime)]] // This one is getting annoying. pluginIt is checked against end.
     if (pluginIt != m_sspAllPlugins.end()) {
         hRes = AddPluginToMenu(*pluginIt, p_hMenu, p_UsePCCIcon, p_UsePreviewMode,
             p_DropRedundantWords, p_ComputeShortcut, p_rCmdId, p_rPosition);
@@ -796,7 +790,7 @@ HRESULT CPathCopyCopyContextMenuExt::AddPluginToMenu(const PCC::PluginSP& p_spPl
         description = p_spPlugin->Description();
         if (p_DropRedundantWords && p_spPlugin->CanDropRedundantWords()) {
             ATL::CStringW redundantCopy(MAKEINTRESOURCEW(IDS_REDUNDANT_WORD_COPY));
-            if (description.size() >= static_cast<std::wstring::size_type>(redundantCopy.GetLength()) &&
+            if (description.size() >= gsl::narrow_cast<std::wstring::size_type>(redundantCopy.GetLength()) &&
                 ::_wcsnicmp(description.c_str(), (LPCWSTR) redundantCopy, redundantCopy.GetLength()) == 0) {
 
                 // The description starts with "Copy ", drop it.
@@ -884,7 +878,6 @@ std::wstring CPathCopyCopyContextMenuExt::GetMenuCaptionWithShortcut(HMENU const
     // Check if the caption already has a shortcut. If it's available, keep it.
     std::wstring caption = p_Caption;
     const auto idx = caption.find(L'&');
-    [[gsl::suppress(lifetime)]] // Annoying that iterators keep getting flagged with this
     if (idx == std::wstring::npos || idx == (caption.size() - 1) || shortcuts.find(::towlower(caption.at(idx + 1))) != shortcuts.end()) {
         // No caption or can't use this caption.
         StringUtils::ReplaceAll(caption, L"&", L"");

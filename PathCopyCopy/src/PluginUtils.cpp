@@ -36,27 +36,32 @@
 
 namespace
 {
-    const DWORD         INITIAL_BUFFER_SIZE     = 1024;     // Initial size of buffer used to fetch UNC name.
-    const DWORD         MAX_REG_KEY_NAME_SIZE   = 255;      // Max size of a registry key's name.
+    const DWORD             INITIAL_BUFFER_SIZE         = 1024;     // Initial size of buffer used to fetch UNC name.
+    const DWORD             MAX_REG_KEY_NAME_SIZE       = 255;      // Max size of a registry key's name.
 
-    const std::wstring  SHARES_KEY_NAME     = L"SYSTEM\\CurrentControlSet\\Services\\Lanmanserver\\Shares"; // Name of key storing network shares
-    const std::wstring  SHARE_PATH_VALUE    = L"Path=";     // Part of a share key's value containing the share path.
-    const wchar_t       HIDDEN_SHARE_SUFFIX = L'$';         // Suffix used for hidden shares; we will not consider them unless specified.
+    const wchar_t* const    SHARES_KEY_NAME             = L"SYSTEM\\CurrentControlSet\\Services\\Lanmanserver\\Shares"; // Name of key storing network shares
+    const wchar_t* const    SHARE_PATH_VALUE            = L"Path=";     // Part of a share key's value containing the share path.
+    const wchar_t           HIDDEN_SHARE_SUFFIX         = L'$';         // Suffix used for hidden shares; we will not consider them unless specified.
 
-    const std::wstring  HIDDEN_DRIVE_SHARES_REGEX   = L"^([A-Za-z])\\:((\\\\|/).*)$";   // Regex used to convert hidden drive shares.
-    const std::wstring  HIDDEN_DRIVE_SHARES_FORMAT  = L"$1$$$2";                        // Format string used to convert hidden drive shares.
+    const wchar_t* const    HIDDEN_DRIVE_SHARES_REGEX   = L"^([A-Za-z])\\:((\\\\|/).*)$";   // Regex used to convert hidden drive shares.
+    const wchar_t* const    HIDDEN_DRIVE_SHARES_FORMAT  = L"$1$$$2";                        // Format string used to convert hidden drive shares.
 
-    const ULONG         REG_BUFFER_CHUNK_SIZE = 512;        // Size of chunks allocated to read the registry.
+    const ULONG             REG_BUFFER_CHUNK_SIZE = 512;        // Size of chunks allocated to read the registry.
 
 } // anonymous namespace
 
 namespace PCC
 {
     // Static members of PluginUtils
+
+#pragma warning(push)
+#pragma warning(disable: 26426)
+
     std::mutex      PluginUtils::s_Lock;
     std::wstring    PluginUtils::s_ComputerName;
     bool            PluginUtils::s_HasComputerName = false;
-    std::wregex     PluginUtils::s_HiddenDriveShareRegex(HIDDEN_DRIVE_SHARES_REGEX, std::regex_constants::ECMAScript);
+
+#pragma warning(pop)
 
     //
     // Determines if the given path points to a directory or file.
@@ -64,9 +69,9 @@ namespace PCC
     // @param p_Path Path to check.
     // @return true if path points to a directory.
     //
-    bool PluginUtils::IsDirectory(const std::wstring& p_Path)
+    bool PluginUtils::IsDirectory(const std::wstring& p_Path) noexcept
     {
-        DWORD attribs = ::GetFileAttributesW(p_Path.c_str());
+        const DWORD attribs = ::GetFileAttributesW(p_Path.c_str());
         return attribs != INVALID_FILE_ATTRIBUTES &&
                (attribs & FILE_ATTRIBUTE_DIRECTORY) == FILE_ATTRIBUTE_DIRECTORY;
     }
@@ -84,7 +89,7 @@ namespace PCC
         // Find the last delimiter in the path and truncate path
         // as appropriate to return only the parent's path.
         std::wstring::size_type lastDelimPos = p_rPath.find_last_of(L"/\\");
-        bool found = (lastDelimPos != std::wstring::npos);
+        const bool found = (lastDelimPos != std::wstring::npos);
         if (found) {
             // We found a delimiter, clear everything after that
             // (and the delimiter as well). Exception: if we're left
@@ -104,7 +109,7 @@ namespace PCC
     // @param p_FilePath Path to verify.
     // @return true if the path is a UNC path.
     //
-    bool PluginUtils::IsUNCPath(const std::wstring& p_FilePath)
+    bool PluginUtils::IsUNCPath(const std::wstring& p_FilePath) noexcept
     {
         return p_FilePath.find(L"\\\\") == 0 && p_FilePath.find(L'\\', 2) > 2;
     }
@@ -123,18 +128,19 @@ namespace PCC
         // if file is on a mapped drive.
         bool converted = false;
         DWORD bufferSize = INITIAL_BUFFER_SIZE;
-        std::unique_ptr<char[]> upBuffer;
+        std::vector<char> vBuffer;
         DWORD ret = ERROR_MORE_DATA;
         while (ret == ERROR_MORE_DATA) {
-            upBuffer.reset(new char[bufferSize]);
+            vBuffer.resize(bufferSize, '\0');
             ret = ::WNetGetUniversalNameW(p_rFilePath.c_str(),
                                           UNIVERSAL_NAME_INFO_LEVEL,
-                                          upBuffer.get(),
+                                          vBuffer.data(),
                                           &bufferSize);
         }
         if (ret == NO_ERROR) {
             // Got UNC path, return it.
-            p_rFilePath.assign(reinterpret_cast<UNIVERSAL_NAME_INFO*>(upBuffer.get())->lpUniversalName);
+#pragma warning(suppress: 26490) // No choice but to use reinterpret_cast here, can't change the Win32 API
+            p_rFilePath.assign(reinterpret_cast<UNIVERSAL_NAME_INFOW*>(vBuffer.data())->lpUniversalName);
             converted = true;
         }
         return converted;
@@ -157,9 +163,9 @@ namespace PCC
         // Scan registry to see if we can find a share that contains this path.
         // Shares are stored in multi-string registry values in the Lanmanserver service keys.
         ATL::CRegKey shareKey;
-        if (shareKey.Open(HKEY_LOCAL_MACHINE, SHARES_KEY_NAME.c_str(), KEY_READ) == ERROR_SUCCESS) {
+        if (shareKey.Open(HKEY_LOCAL_MACHINE, SHARES_KEY_NAME, KEY_READ) == ERROR_SUCCESS) {
             // Iterate registry values to check each share.
-            wchar_t valueName[MAX_REG_KEY_NAME_SIZE + 1];
+            std::wstring valueName(MAX_REG_KEY_NAME_SIZE + 1, L'\0');
             std::wstring multiStringValue;
             std::wstring path;
             LONG ret = 0;
@@ -167,20 +173,20 @@ namespace PCC
             do {
                 DWORD valueNameSize = MAX_REG_KEY_NAME_SIZE;
                 DWORD valueType = 0;
-                ret = ::RegEnumValue(shareKey, i, valueName, &valueNameSize, 0, &valueType, 0, 0);
+                ret = ::RegEnumValue(shareKey, i, &*valueName.begin(), &valueNameSize, nullptr, &valueType, nullptr, nullptr);
                 if (ret == ERROR_SUCCESS && valueType == REG_MULTI_SZ) {
                     // Get the multi-string values.
                     ULONG bufferSize = INITIAL_BUFFER_SIZE;
-                    std::unique_ptr<wchar_t[]> buffer;
+                    std::vector<wchar_t> vBuffer;
                     do {
-                        buffer.reset(new wchar_t[bufferSize]);
-                        ret = shareKey.QueryMultiStringValue(valueName, buffer.get(), &bufferSize);
+                        vBuffer.resize(bufferSize, L'\0');
+                        ret = shareKey.QueryMultiStringValue(valueName.c_str(), vBuffer.data(), &bufferSize);
                     } while (ret == ERROR_MORE_DATA);
                     if (ret == ERROR_SUCCESS) {
                         // Make sure this is not a hidden share (unless we use them).
-                        if (valueNameSize != 0 && (p_UseHiddenShares || valueName[valueNameSize - 1] != HIDDEN_SHARE_SUFFIX)) {
+                        if (valueNameSize != 0 && (p_UseHiddenShares || valueName.at(valueNameSize - 1) != HIDDEN_SHARE_SUFFIX)) {
                             // Find the "Path=" part of the mult-string. This contains the share path.
-                            multiStringValue.assign(buffer.get(), bufferSize);
+                            multiStringValue.assign(vBuffer.data(), bufferSize);
                             path = GetMultiStringLineBeginningWith(multiStringValue, SHARE_PATH_VALUE);
                             if (!path.empty()) {
                                 // Check if our path is in that share.
@@ -188,7 +194,7 @@ namespace PCC
                                     // Success: this is a share that contains our path.
                                     // Replace the start of the path with the computer and share name.
                                     std::wstringstream ss;
-                                    ss << L"\\\\" << GetLocalComputerName() << L"\\" << valueName;
+                                    ss << L"\\\\" << GetLocalComputerName() << L"\\" << valueName.c_str();
                                     if (*path.rbegin() == L'\\' || *path.rbegin() == L'/') {
                                         // The substr below will remove the terminator if the share path
                                         // ends with one (for example, for drives' administrative shares).
@@ -196,8 +202,7 @@ namespace PCC
                                         ss << L'\\';
                                     }
                                     ss << p_rFilePath.substr(path.size());
-                                    std::wstring newPath = ss.str();
-                                    p_rFilePath = newPath;
+                                    p_rFilePath = ss.str();
                                     converted = true;
                                     break;
                                 }
@@ -228,7 +233,8 @@ namespace PCC
         bool converted = false;
 
         try {
-            std::wstring replaced = std::regex_replace(p_rFilePath, s_HiddenDriveShareRegex, HIDDEN_DRIVE_SHARES_FORMAT);
+            const std::wregex hiddenDriveShareRegex(HIDDEN_DRIVE_SHARES_REGEX, std::regex_constants::ECMAScript);
+            const std::wstring replaced = std::regex_replace(p_rFilePath, hiddenDriveShareRegex, HIDDEN_DRIVE_SHARES_FORMAT);
             if (!replaced.empty()) {
                 std::wstringstream ss;
                 ss << L"\\\\" << GetLocalComputerName() << L"\\" << replaced;
@@ -254,7 +260,7 @@ namespace PCC
         std::wstring hostname, restOfPath;
         if (p_rFilePath.substr(0, 2) == L"\\\\") {
             auto withoutPrefix = p_rFilePath.substr(2);
-            auto delimPos = withoutPrefix.find_first_of(L"\\/");
+            const auto delimPos = withoutPrefix.find_first_of(L"\\/");
             if (delimPos != std::wstring::npos) {
                 hostname = withoutPrefix.substr(0, delimPos);
                 restOfPath = withoutPrefix.substr(delimPos);
@@ -265,7 +271,7 @@ namespace PCC
             WSADATA wsaData;
             if (::WSAStartup(MAKEWORD(2, 2), &wsaData) == 0) {
                 // Try fetching info for the hostname
-                hostent* pHostEnt = gethostbyname(_bstr_t(hostname.c_str()));
+                hostent* const pHostEnt = gethostbyname(_bstr_t(hostname.c_str()));
                 if (pHostEnt != nullptr) {
                     // Rebuild the path by replacing the hostname with its FQDN
                     std::wstringstream wss;
@@ -291,11 +297,11 @@ namespace PCC
         if (!s_HasComputerName) {
             std::lock_guard<std::mutex> lock(s_Lock);
             if (!s_HasComputerName) {
-                DWORD length = MAX_COMPUTERNAME_LENGTH + 1;
-                wchar_t name[MAX_COMPUTERNAME_LENGTH + 1];
-                if (::GetComputerNameW(name, &length) != FALSE) {
-                    if (::_wcslwr_s(name, length + 1) == 0) {
-                        s_ComputerName = name;
+                std::wstring name(MAX_COMPUTERNAME_LENGTH + 1, L'\0');
+                DWORD length = name.size();
+                if (::GetComputerNameW(&*name.begin(), &length) != FALSE) {
+                    if (::_wcslwr_s(&*name.begin(), length + 1) == 0) {
+                        s_ComputerName = name.c_str();
                     }
                 }
                 s_HasComputerName = true;
@@ -326,15 +332,15 @@ namespace PCC
         ULONG curSize = 0;
         while (lRes == ERROR_MORE_DATA) {
             curSize += REG_BUFFER_CHUNK_SIZE;
-            std::unique_ptr<wchar_t[]> upBuffer(new wchar_t[curSize]);
+            std::vector<wchar_t> vBuffer(curSize, L'\0');
             DWORD valueType = REG_SZ;
             DWORD curSizeInBytes = curSize * sizeof(wchar_t);
-            lRes = p_Key.QueryValue(p_pValueName, &valueType, upBuffer.get(), &curSizeInBytes);
+            lRes = p_Key.QueryValue(p_pValueName, &valueType, vBuffer.data(), &curSizeInBytes);
             if (lRes == ERROR_SUCCESS) {
                 // Make sure it is a string.
                 if (valueType == REG_SZ && (curSizeInBytes % sizeof(wchar_t)) == 0) {
                     // Success, copy resulting string.
-                    p_rValue.assign(upBuffer.get());
+                    p_rValue.assign(vBuffer.data());
                 } else {
                     lRes = ERROR_INVALID_DATATYPE;
                 }
@@ -360,7 +366,7 @@ namespace PCC
         // Multi-line values contain embedded NULLs to separate the lines.
         std::wstring::size_type offset = 0;
         do {
-            std::wstring::size_type endOffset = p_MultiStringValue.find_first_of(L'\0', offset);
+            const std::wstring::size_type endOffset = p_MultiStringValue.find_first_of(L'\0', offset);
             if (endOffset == offset) {
                 // We're at the end of the value.
                 break;
@@ -368,7 +374,7 @@ namespace PCC
 
             if (p_MultiStringValue.find(p_Prefix, offset) == offset) {
                 // This is the line we're looking for.
-                std::wstring::size_type prefixSize = p_Prefix.size();
+                const std::wstring::size_type prefixSize = p_Prefix.size();
                 line = p_MultiStringValue.substr(offset + prefixSize, endOffset - offset - prefixSize);
                 break;
             } else {
@@ -450,9 +456,10 @@ namespace PCC
     std::wstring PluginUtils::PluginIdsToString(const GUIDV& p_vPluginIds,
                                                 const wchar_t p_Separator)
     {
-        wchar_t guidBuffer[40]; // See StringFromGUID2 in MSDN
-        auto guidToString = [&](const GUID& p_GUID) -> std::wstring {
-            return (::StringFromGUID2(p_GUID, guidBuffer, 40) != 0) ? guidBuffer : L"";
+        std::wstring guidBuffer(40, L'\0'); // See StringFromGUID2 in MSDN
+        const auto guidToString = [&](const GUID& p_GUID) -> std::wstring {
+#pragma warning(suppress: 26485) // Not sure why here
+            return (::StringFromGUID2(p_GUID, &*guidBuffer.begin(), 40) != 0) ? guidBuffer.c_str() : L"";
         };
 
         // Insert the first plugin ID without separator.
@@ -527,7 +534,7 @@ namespace PCC
         }
 
         // Scan lists to find our plugin.
-        auto isOurPlugin = [&](const GUID& p_Id) -> bool {
+        const auto isOurPlugin = [&](const GUID& p_Id) noexcept -> bool {
             return ::IsEqualGUID(p_Id, p_PluginId) != FALSE;
         };
         if (std::find_if(vPluginsInMainMenu.cbegin(), vPluginsInMainMenu.cend(), isOurPlugin) == vPluginsInMainMenu.cend() &&

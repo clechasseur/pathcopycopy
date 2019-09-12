@@ -46,9 +46,9 @@ public:
                                    const std::wstring& p_OldValue,
                                    const std::wstring& p_NewValue);
     static void         Split(std::wstring& p_rString,
-                              const wchar_t p_Separator,
+                              wchar_t p_Separator,
                               PCC::WStringV& p_rParts);
 
     static void         EncodeURICharacters(std::wstring& p_rString,
-                                            const EncodeParam p_EncodeParam);
+                                            EncodeParam p_EncodeParam);
 };

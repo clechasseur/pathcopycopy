@@ -39,7 +39,7 @@ namespace PCC
                                     PluginSeparator(const PluginSeparator&) = delete;
         PluginSeparator&            operator=(const PluginSeparator&) = delete;
 
-        const GUID&                 Id() const override;
+        const GUID&                 Id() const noexcept(false) override;
         std::wstring                Description() const override;
         std::wstring                GetPath(const std::wstring& p_File) const override;
         bool                        IsSeparator() const noexcept override;
