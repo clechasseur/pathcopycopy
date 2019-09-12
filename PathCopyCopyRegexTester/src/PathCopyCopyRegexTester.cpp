@@ -31,6 +31,7 @@
 // @param argv Array of command-line arguments
 // @return Process exit code
 //
+#pragma warning(suppress: 26485) // Not sure what to do with this one, this is generated code
 int wmain(int /*argc*/, wchar_t* /*argv*/[])
 {
     // Ask user to provide sample string, regex and replacement format.
