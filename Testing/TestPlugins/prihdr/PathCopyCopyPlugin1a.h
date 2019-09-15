@@ -44,32 +44,40 @@ class ATL_NO_VTABLE CPathCopyCopyPlugin1a :
     public IPathCopyCopyPluginIconInfo
 {
 public:
-	CPathCopyCopyPlugin1a()
-	{
-	}
+	CPathCopyCopyPlugin1a() noexcept(false) = default;
+    CPathCopyCopyPlugin1a(const CPathCopyCopyPlugin1a&) = delete;
+    CPathCopyCopyPlugin1a(CPathCopyCopyPlugin1a&&) = delete;
+    CPathCopyCopyPlugin1a& operator=(const CPathCopyCopyPlugin1a&) = delete;
+    CPathCopyCopyPlugin1a& operator=(CPathCopyCopyPlugin1a&&) = delete;
+    virtual ~CPathCopyCopyPlugin1a() = default;
 
-DECLARE_REGISTRY_RESOURCEID(IDR_PATHCOPYCOPYPLUGIN1A)
+#pragma warning(push)
+#pragma warning(disable: ALL_CPPCORECHECK_WARNINGS)
 
-DECLARE_NOT_AGGREGATABLE(CPathCopyCopyPlugin1a)
+    DECLARE_REGISTRY_RESOURCEID(IDR_PATHCOPYCOPYPLUGIN1A)
 
-BEGIN_COM_MAP(CPathCopyCopyPlugin1a)
-	COM_INTERFACE_ENTRY(IPathCopyCopyPlugin1a)
-    COM_INTERFACE_ENTRY(IPathCopyCopyPlugin)
-    COM_INTERFACE_ENTRY(IPathCopyCopyPluginGroupInfo)
-    COM_INTERFACE_ENTRY(IPathCopyCopyPluginStateInfo)
-    COM_INTERFACE_ENTRY(IPathCopyCopyPluginIconInfo)
-END_COM_MAP()
+    DECLARE_NOT_AGGREGATABLE(CPathCopyCopyPlugin1a)
 
+    BEGIN_COM_MAP(CPathCopyCopyPlugin1a)
+	    COM_INTERFACE_ENTRY(IPathCopyCopyPlugin1a)
+        COM_INTERFACE_ENTRY(IPathCopyCopyPlugin)
+        COM_INTERFACE_ENTRY(IPathCopyCopyPluginGroupInfo)
+        COM_INTERFACE_ENTRY(IPathCopyCopyPluginStateInfo)
+        COM_INTERFACE_ENTRY(IPathCopyCopyPluginIconInfo)
+    END_COM_MAP()
+    
+    DECLARE_PROTECT_FINAL_CONSTRUCT()
 
+#pragma warning(pop)
 
-	DECLARE_PROTECT_FINAL_CONSTRUCT()
-
-	HRESULT FinalConstruct()
+    [[gsl::suppress(c.128)]]
+	HRESULT FinalConstruct() noexcept
 	{
 		return S_OK;
 	}
 
-	void FinalRelease()
+    [[gsl::suppress(c.128)]]
+	void FinalRelease() noexcept
 	{
 	}
 
@@ -90,4 +98,5 @@ END_COM_MAP()
     STDMETHOD(get_UseDefaultIcon)(VARIANT_BOOL *p_pUseDefaultIcon);
 };
 
+#pragma warning(suppress: ALL_CPPCORECHECK_WARNINGS)
 OBJECT_ENTRY_AUTO(__uuidof(PathCopyCopyPlugin1a), CPathCopyCopyPlugin1a)

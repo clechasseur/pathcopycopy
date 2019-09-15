@@ -75,7 +75,7 @@ STDMETHODIMP CPathCopyCopyConfigHelper::get_PluginCount(ULONG *p_pCount)
 // @param p_pIsSeparator Will contain VARIANT_TRUE if this is a separator plugin, otherwise VARIANT_FALSE.
 // @return Result code.
 //
-[[gsl::suppress(c.128), gsl::suppress(lifetime)]]
+[[gsl::suppress(c.128)]]
 STDMETHODIMP CPathCopyCopyConfigHelper::GetPluginInfo(ULONG p_Index, BSTR *p_ppId, BSTR *p_ppDescription, VARIANT_BOOL *p_pIsSeparator)
 {
     Initialize();

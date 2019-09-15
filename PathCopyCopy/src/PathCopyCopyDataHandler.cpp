@@ -287,7 +287,7 @@ STDMETHODIMP CPathCopyCopyDataHandler::SetData(
 //                        that will provide all formats we support.
 // @return S_OK if successful, otherwise an error code.
 //
-[[gsl::suppress(c.128), gsl::suppress(f.6), gsl::suppress(lifetime)]]
+[[gsl::suppress(c.128), gsl::suppress(f.6)]]
 STDMETHODIMP CPathCopyCopyDataHandler::EnumFormatEtc(
     DWORD dwDirection,
     IEnumFORMATETC **ppenumFormatEtc)
