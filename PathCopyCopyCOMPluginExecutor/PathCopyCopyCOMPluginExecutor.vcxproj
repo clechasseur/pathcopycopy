@@ -112,7 +112,7 @@
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <DisableSpecificWarnings>26486;28251</DisableSpecificWarnings>
+      <DisableSpecificWarnings>26485;26486;28251</DisableSpecificWarnings>
       <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <Link>
@@ -133,7 +133,7 @@
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <DisableSpecificWarnings>26486;28251</DisableSpecificWarnings>
+      <DisableSpecificWarnings>26485;26486;28251</DisableSpecificWarnings>
       <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <Link>
@@ -155,7 +155,7 @@
       <AdditionalIncludeDirectories>.\prihdr;.\rsrc;..\PathCopyCopy\prihdr;..\PathCopyCopy\generated;$(SolutionDir)3rdParty\microsoft_gsl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <DisableSpecificWarnings>26486;28251</DisableSpecificWarnings>
+      <DisableSpecificWarnings>26485;26486;28251</DisableSpecificWarnings>
       <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <Link>
@@ -179,7 +179,7 @@
       <AdditionalIncludeDirectories>.\prihdr;.\rsrc;..\PathCopyCopy\prihdr;..\PathCopyCopy\generated;$(SolutionDir)3rdParty\microsoft_gsl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <DisableSpecificWarnings>26486;28251</DisableSpecificWarnings>
+      <DisableSpecificWarnings>26485;26486;28251</DisableSpecificWarnings>
       <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <Link>

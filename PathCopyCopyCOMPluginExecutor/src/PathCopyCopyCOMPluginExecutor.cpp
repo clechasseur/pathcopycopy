@@ -112,12 +112,13 @@ int wmain(int /*argc*/, wchar_t* /*argv*/[])
 //
 int GetDescription(IPathCopyCopyPlugin* p_pPlugin, std::wstring& p_rOutput)
 {
-    assert(p_pPlugin != nullptr);
     assert(p_rOutput.empty());
 
-    ATL::CComBSTR bstrDescription;
-    if (SUCCEEDED(p_pPlugin->get_Description(&bstrDescription)) && bstrDescription != nullptr) {
-        p_rOutput = bstrDescription.m_str;
+    if (p_pPlugin != nullptr) {
+        ATL::CComBSTR bstrDescription;
+        if (SUCCEEDED(p_pPlugin->get_Description(&bstrDescription)) && bstrDescription != nullptr) {
+            p_rOutput = bstrDescription.m_str;
+        }
     }
     
     return 0;
@@ -132,12 +133,13 @@ int GetDescription(IPathCopyCopyPlugin* p_pPlugin, std::wstring& p_rOutput)
 //
 int GetHelpText(IPathCopyCopyPlugin* p_pPlugin, std::wstring& p_rOutput)
 {
-    assert(p_pPlugin != nullptr);
     assert(p_rOutput.empty());
 
-    ATL::CComBSTR bstrHelpText;
-    if (SUCCEEDED(p_pPlugin->get_HelpText(&bstrHelpText)) && bstrHelpText != nullptr) {
-        p_rOutput = bstrHelpText.m_str;
+    if (p_pPlugin != nullptr) {
+        ATL::CComBSTR bstrHelpText;
+        if (SUCCEEDED(p_pPlugin->get_HelpText(&bstrHelpText)) && bstrHelpText != nullptr) {
+            p_rOutput = bstrHelpText.m_str;
+        }
     }
     
     return 0;
@@ -152,7 +154,6 @@ int GetHelpText(IPathCopyCopyPlugin* p_pPlugin, std::wstring& p_rOutput)
 //
 int GetGroupId(IPathCopyCopyPlugin* p_pPlugin, std::wstring& p_rOutput)
 {
-    assert(p_pPlugin != nullptr);
     assert(p_rOutput.empty());
 
     // Ask for the group state interface. If it's not supported or if the
@@ -179,7 +180,6 @@ int GetGroupId(IPathCopyCopyPlugin* p_pPlugin, std::wstring& p_rOutput)
 //
 int GetGroupPosition(IPathCopyCopyPlugin* p_pPlugin, std::wstring& p_rOutput)
 {
-    assert(p_pPlugin != nullptr);
     assert(p_rOutput.empty());
 
     // Ask for the group state interface. If it's not supported or if the
@@ -206,7 +206,6 @@ int GetGroupPosition(IPathCopyCopyPlugin* p_pPlugin, std::wstring& p_rOutput)
 //
 int GetIconFile(IPathCopyCopyPlugin* p_pPlugin, std::wstring& p_rOutput)
 {
-    assert(p_pPlugin != nullptr);
     assert(p_rOutput.empty());
 
     // Ask for the icon state interface. If it's not supported or if the
@@ -231,7 +230,6 @@ int GetIconFile(IPathCopyCopyPlugin* p_pPlugin, std::wstring& p_rOutput)
 //
 int GetUseDefaultIcon(IPathCopyCopyPlugin* p_pPlugin, std::wstring& p_rOutput)
 {
-    assert(p_pPlugin != nullptr);
     assert(p_rOutput.empty());
 
     // Ask for the icon state interface. If it's not supported or if the
@@ -246,7 +244,6 @@ int GetUseDefaultIcon(IPathCopyCopyPlugin* p_pPlugin, std::wstring& p_rOutput)
     }
 
     // Convert result to string form.
-#pragma warning(suppress: 26485) // This is a bit weird...
     p_rOutput = (useDefaultIcon ? L"true" : L"false");
     
     return 0;

@@ -312,14 +312,9 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::QueryContextMenu(
             bool alreadyModified = false;
             {
                 std::lock_guard<std::mutex> lock(s_ExtToMenusLock);
-                ExtToMenuPairV::const_iterator it, end = s_vExtToMenus.end();
-                for (it = s_vExtToMenus.begin(); it != end; ++it) {
-                    if (it->second == p_hMenu) {
-                        // Modified already, bail out.
-                        alreadyModified = true;
-                        break;
-                    }
-                }
+                alreadyModified = std::any_of(s_vExtToMenus.begin(), s_vExtToMenus.end(), [&](const auto& extToMenu) {
+                    return extToMenu.second == p_hMenu;
+                });
             }
 
             // Do not add items if the default action is chosen, if we have no files
@@ -379,12 +374,12 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::QueryContextMenu(
                 // Add all plugins requested to the main menu.
                 PCC::GUIDV vPluginIds;
                 if (rSettings.GetMainMenuPluginDisplayOrder(vPluginIds)) {
+                    // TODO why are we not using vspPlugins here?
                     PCC::PluginSPV vspPlugins = PCC::PluginsRegistry::OrderPluginsToDisplay(
                         m_sspAllPlugins, vPluginIds, pvKnownPlugins, &m_vspPluginsInDefaultOrder);
                     if (!vPluginIds.empty()) {
                         if (vPluginIds.size() != 1 || !::IsEqualGUID(vPluginIds.front(), PCC::Plugins::LongPathPlugin::ID)) {
-                            PCC::CLSIDV::const_iterator it, end = vPluginIds.end();
-                            for (it = vPluginIds.begin(); SUCCEEDED(hRes) && it != end; ++it) {
+                            for (auto it = vPluginIds.cbegin(); SUCCEEDED(hRes) && cmdId <= p_LastCmdId && it != vPluginIds.cend(); ++it) {
                                 hRes = AddPluginToMenu(*it, p_hMenu, useIconForDefaultPlugin, false, false, true, cmdId, position);
                             }
                         } else {
@@ -419,9 +414,8 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::QueryContextMenu(
 
                         // Iterate plugins and try to add them to the submenu.
                         UINT subPosition = 0;
-                        PCC::PluginSPV::const_iterator it, end = pvspPlugins->cend();
                         bool prevWasSeparator = true;
-                        for (it = pvspPlugins->cbegin(); SUCCEEDED(hRes) && cmdId <= p_LastCmdId && it != end; ++it) {
+                        for (auto it = pvspPlugins->cbegin(); SUCCEEDED(hRes) && cmdId <= p_LastCmdId && it != pvspPlugins->cend(); ++it) {
                             // Try to insert this plugin in the menu.
                             const PCC::PluginSP& spPlugin = *it;
                             if (!spPlugin->IsSeparator()) {
@@ -550,7 +544,7 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::InvokeCommand(
             } else {
                 // Check which command it is that is invoked.
                 const UINT_PTR cmdId = cmdOffset + *m_FirstCmdId;
-                CmdIdPluginM::const_iterator itId = m_mPluginsByCmdId.find(cmdId);
+                const auto itId = m_mPluginsByCmdId.find(cmdId);
                 if (itId == m_mPluginsByCmdId.end()) {
                     // This is not a recognized plugin command ID.
                     if (m_SettingsCmdId.has_value() && *m_SettingsCmdId == cmdId) {
@@ -730,7 +724,7 @@ HRESULT CPathCopyCopyContextMenuExt::AddPluginToMenu(const GUID& p_PluginId,
                                                      UINT& p_rPosition)
 {
     // Look for the plugin in the set of all plugins.
-    auto pluginIt = m_sspAllPlugins.find(p_PluginId);
+    const auto pluginIt = m_sspAllPlugins.find(p_PluginId);
 
     // If we have a plugin, continue.
     HRESULT hRes = E_INVALIDARG;
@@ -967,8 +961,8 @@ HBITMAP CPathCopyCopyContextMenuExt::GetIconForIconFile(const std::wstring& p_Ic
         lowerIconFile.resize(p_IconFile.size());
         std::transform(p_IconFile.cbegin(), p_IconFile.cend(), lowerIconFile.begin(),
             [&](wchar_t p_Char) { return std::tolower(p_Char, ourLocale); });
-        IconFilesM::const_iterator foundIconFile = m_mspIcons.find(lowerIconFile);
-        if (foundIconFile != m_mspIcons.cend()) {
+        const auto foundIconFile = m_mspIcons.find(lowerIconFile);
+        if (foundIconFile != m_mspIcons.end()) {
             // We loaded this bitmap previously, return it again.
             const StImage& loadedImage = *foundIconFile->second;
             if (loadedImage.GetLoadResult() == ERROR_SUCCESS) {
@@ -1033,8 +1027,7 @@ HRESULT CPathCopyCopyContextMenuExt::ActOnFiles(const PCC::PluginSP& p_spPlugin,
             }
         }
         std::wstring newFiles;
-        PCC::FilesV::const_iterator it, end = m_vFiles.end();
-        for (it = m_vFiles.begin(); it != end; ++it) {
+        for (auto it = m_vFiles.cbegin(); it != m_vFiles.cend(); ++it) {
             // Ask plugin to compute filename using its scheme and save it.
             const std::wstring& oldName = *it;
             if (!newFiles.empty()) {
@@ -1096,13 +1089,9 @@ void CPathCopyCopyContextMenuExt::AddQuotes(std::wstring& p_rName,
 void CPathCopyCopyContextMenuExt::RemoveFromExtToMenu()
 {
     std::lock_guard<std::mutex> lock(s_ExtToMenusLock);
-    ExtToMenuPairV::iterator it, end = s_vExtToMenus.end();
-    for (it = s_vExtToMenus.begin(); it != end; ++it) {
-        if (it->first == this) {
-            s_vExtToMenus.erase(it);
-            break;
-        }
-    }
+    s_vExtToMenus.erase(std::remove_if(s_vExtToMenus.begin(), s_vExtToMenus.end(), [&](const auto& extToMenu) {
+        return extToMenu.first == this;
+    }), s_vExtToMenus.end());
 }
 
 //

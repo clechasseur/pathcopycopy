@@ -143,6 +143,9 @@ namespace
         PipelinePluginLess&
                         operator=(const PipelinePluginLess&) = delete;
 
+#pragma warning(push)
+#pragma warning(disable: 26415 26418)
+
                         //
                         // Comparison operator that sorts pipeline plugins according to the
                         // position of their IDs in an ordered vector of plugin IDs.
@@ -158,10 +161,12 @@ namespace
                             assert(p_spPlugin2 != nullptr);
 
                             // Find each plugin ID in our ordered vector and compare the positions.
-                            auto it1 = std::find(m_vOrderedPluginIds.cbegin(), m_vOrderedPluginIds.cend(), p_spPlugin1->Id());
-                            auto it2 = std::find(m_vOrderedPluginIds.cbegin(), m_vOrderedPluginIds.cend(), p_spPlugin2->Id());
+                            const auto it1 = std::find(m_vOrderedPluginIds.cbegin(), m_vOrderedPluginIds.cend(), p_spPlugin1->Id());
+                            const auto it2 = std::find(m_vOrderedPluginIds.cbegin(), m_vOrderedPluginIds.cend(), p_spPlugin2->Id());
                             return it1 < it2;
                         }
+
+#pragma warning(pop)
 
     private:
         const PCC::GUIDV&

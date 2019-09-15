@@ -86,7 +86,7 @@ void CALLBACK GetPathWithPluginW(HWND p_hWnd,
                     spPlugin->SetSettings(&settings);
                     spPlugin->SetPluginProvider(&pluginProvider);
                 }
-                auto it = sspAllPlugins.find(pluginId);
+                const auto it = sspAllPlugins.find(pluginId);
                 if (it != sspAllPlugins.end()) {
                     // We got a plugin, now call its GetPath method.
                     const PCC::PluginSP& spPlugin = *it;
@@ -180,7 +180,7 @@ void CALLBACK RegGetPathWithPluginW(HWND /*p_hWnd*/,
                     spPlugin->SetSettings(&settings);
                     spPlugin->SetPluginProvider(&pluginProvider);
                 }
-                auto it = sspAllPlugins.find(pluginId);
+                const auto it = sspAllPlugins.find(pluginId);
                 if (it != sspAllPlugins.end()) {
                     // Separate the value name from the path.
                     cmdLine.erase(cmdLine.begin(), cmdLine.begin() + sepPos + 1);

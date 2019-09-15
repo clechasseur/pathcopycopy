@@ -458,7 +458,6 @@ namespace PCC
     {
         std::wstring guidBuffer(40, L'\0'); // See StringFromGUID2 in MSDN
         const auto guidToString = [&](const GUID& p_GUID) -> std::wstring {
-#pragma warning(suppress: 26485) // Not sure why here
             return (::StringFromGUID2(p_GUID, &*guidBuffer.begin(), 40) != 0) ? guidBuffer.c_str() : L"";
         };
 
@@ -468,8 +467,7 @@ namespace PCC
             wos << guidToString(p_vPluginIds.front());
 
             // Insert the other elements with separators.
-            GUIDV::const_iterator it, end = p_vPluginIds.cend();
-            for (it = p_vPluginIds.cbegin() + 1; it != end; ++it) {
+            for (auto it = p_vPluginIds.cbegin() + 1; it != p_vPluginIds.cend(); ++it) {
                 wos << p_Separator << guidToString(*it);
             }
         }
@@ -495,8 +493,7 @@ namespace PCC
             wos << p_vUInt32s.front();
 
             // Insert the other elements with separators.
-            UInt32V::const_iterator it, end = p_vUInt32s.cend();
-            for (it = p_vUInt32s.cbegin() + 1; it != end; ++it) {
+            for (auto it = p_vUInt32s.cbegin() + 1; it != p_vUInt32s.cend(); ++it) {
                 wos << p_Separator << *it;
             }
         }

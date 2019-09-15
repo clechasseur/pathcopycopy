@@ -45,7 +45,7 @@ namespace PCC
     //
     PluginSP AllPluginsProvider::GetPlugin(const GUID& p_PluginId) const
     {
-        auto it = m_sspAllPlugins.find(p_PluginId);
+        const auto it = m_sspAllPlugins.find(p_PluginId);
         return it != m_sspAllPlugins.end() ? *it : nullptr;
     }
 

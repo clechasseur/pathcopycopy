@@ -154,12 +154,9 @@ namespace PCC
                                       const std::wstring& p_File,
                                       const PluginProvider* const p_pPluginProvider) const
     {
-        bool enabled = true;
-        PipelineElementSPV::const_iterator it, end = m_vspElements.cend();
-        for (it = m_vspElements.cbegin(); enabled && it != end; ++it) {
-            enabled = (*it)->ShouldBeEnabledFor(p_ParentPath, p_File, p_pPluginProvider);
-        }
-        return enabled;
+        return std::all_of(m_vspElements.cbegin(), m_vspElements.cend(), [&](const auto& spElement) {
+            return spElement->ShouldBeEnabledFor(p_ParentPath, p_File, p_pPluginProvider);
+        });
     }
 
     //

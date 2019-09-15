@@ -106,7 +106,7 @@ namespace PCC
         // First generate list of plugins from display order.
         PluginSPV vspPlugins;
         for (const GUID& pluginId : p_vPluginDisplayOrder) {
-            auto it = p_sspAllPlugins.find(pluginId);
+            const auto it = p_sspAllPlugins.find(pluginId);
             if (it != p_sspAllPlugins.end()) {
                 vspPlugins.push_back(*it);
             }
@@ -143,7 +143,7 @@ namespace PCC
                     // We know how to display plugins in default order: scan that
                     // list and add all unknown plugins. This will probably help
                     // display them in correct order.
-                    auto defEnd = p_pvspPluginsInDefaultOrder->cend();
+                    const auto defEnd = p_pvspPluginsInDefaultOrder->cend();
                     for (auto defIt = p_pvspPluginsInDefaultOrder->cbegin(); defIt != defEnd; ++defIt) {
                         if (std::binary_search(vUnknownPlugins.cbegin(), vUnknownPlugins.cend(), (*defIt)->Id(), guidLess)) {
                             // This is an unknown plugin, add it.
@@ -162,7 +162,7 @@ namespace PCC
                     // No info on how to display plugins, simply add them in
                     // a possibly-random order.
                     for (const GUID& unknownPluginId : vUnknownPlugins) {
-                        auto it = p_sspAllPlugins.find(unknownPluginId);
+                        const auto it = p_sspAllPlugins.find(unknownPluginId);
                         if (it != p_sspAllPlugins.end()) {
                             vspPlugins.push_back(*it);
                         }
@@ -240,7 +240,6 @@ namespace PCC
                 try {
                     COMPluginInfo pluginInfo;
                     pluginInfo.m_CLSID = clsid;
-#pragma warning(suppress: 26486) // Complains that clsid ref can be invalid?!?
                     pluginInfo.m_spPlugin = std::make_shared<Plugins::COMPlugin>(clsid);
                     pluginInfo.m_GroupId = pluginInfo.m_spPlugin->GroupId();
                     pluginInfo.m_GroupPosition = pluginInfo.m_spPlugin->GroupPosition();
