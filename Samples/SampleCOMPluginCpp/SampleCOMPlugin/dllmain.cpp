@@ -7,9 +7,11 @@
 #include "dlldatax.h"
 #include "PathCopyCopy_i.h"
 
+#pragma warning(suppress: ALL_CPPCORECHECK_WARNINGS)
 CSampleCOMPluginModule _AtlModule;
 
 // Registers our COM object. Let's use the opportunity to register ourselves as a Path Copy Copy plugin.
+[[gsl::suppress(c.128)]]
 HRESULT CSampleCOMPluginModule::DllRegisterServer( BOOL bRegTypeLib /*= TRUE*/ ) throw()
 {
     HRESULT hRes = CAtlDllModuleT< CSampleCOMPluginModule >::DllRegisterServer(bRegTypeLib);
@@ -24,6 +26,7 @@ HRESULT CSampleCOMPluginModule::DllRegisterServer( BOOL bRegTypeLib /*= TRUE*/ )
 }
 
 // Unregisters our COM object. We will also remove our plugin from Path Copy Copy.
+[[gsl::suppress(c.128)]]
 HRESULT CSampleCOMPluginModule::DllUnregisterServer( BOOL bUnRegTypeLib /*= TRUE*/ ) throw()
 {
     HRESULT hRes = CAtlDllModuleT< CSampleCOMPluginModule >::DllUnregisterServer(bUnRegTypeLib);

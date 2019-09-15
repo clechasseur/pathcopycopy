@@ -21,3 +21,6 @@
 #include <atlctl.h>
 
 using namespace ATL;
+
+// Including this header allows us to suppress C++ Core Guideline warnings more easily
+#include <CppCoreCheck\warnings.h>
