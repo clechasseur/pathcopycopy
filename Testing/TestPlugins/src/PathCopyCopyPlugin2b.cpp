@@ -118,7 +118,7 @@ STDMETHODIMP CPathCopyCopyPlugin2b::get_IconFile(BSTR *p_ppIconFile)
     try {
         // Get path to this module.
         std::wstring thisModulePath(MAX_PATH + 1, L'\0');
-        if (::GetModuleFileNameW(CTestPluginsModule::HInstance(), &*thisModulePath.begin(), thisModulePath.size()) != 0) {
+        if (::GetModuleFileNameW(CTestPluginsModule::HInstance(), &*thisModulePath.begin(), gsl::narrow<DWORD>(thisModulePath.size())) != 0) {
             // Remove filename from path.
             std::wstring path(thisModulePath.c_str());
             std::wstring::size_type lastDelimPos = path.find_last_of(L"\\/");

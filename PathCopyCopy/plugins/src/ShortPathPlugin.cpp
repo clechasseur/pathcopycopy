@@ -67,7 +67,7 @@ namespace PCC
             std::wstring path(p_File);
             if (!path.empty()) {
                 std::wstring shortPath(MAX_PATH + 1, L'\0');
-                if (::GetShortPathNameW(p_File.c_str(), &*shortPath.begin(), shortPath.size()) != 0) {
+                if (::GetShortPathNameW(p_File.c_str(), &*shortPath.begin(), gsl::narrow<DWORD>(shortPath.size())) != 0) {
                     path = shortPath.c_str();
                 }
 

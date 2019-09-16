@@ -56,7 +56,7 @@ STDMETHODIMP CPathCopyCopyConfigHelper::get_PluginCount(ULONG *p_pCount)
     HRESULT hRes = S_OK;
 
     if (p_pCount != nullptr) {
-        *p_pCount = m_vspPlugins.size();
+        *p_pCount = gsl::narrow_cast<ULONG>(m_vspPlugins.size());
     } else {
         hRes = E_INVALIDARG;
     }
@@ -84,7 +84,7 @@ STDMETHODIMP CPathCopyCopyConfigHelper::GetPluginInfo(ULONG p_Index, BSTR *p_ppI
     if (p_ppId != nullptr && p_ppDescription != nullptr && p_Index < m_vspPlugins.size()) {
         const PCC::PluginSP& spPlugin = m_vspPlugins.at(p_Index);
         std::wstring pluginId(40, L'\0');
-        if (::StringFromGUID2(spPlugin->Id(), &*pluginId.begin(), pluginId.size()) != 0) {
+        if (::StringFromGUID2(spPlugin->Id(), &*pluginId.begin(), gsl::narrow_cast<int>(pluginId.size())) != 0) {
             *p_ppId = ::SysAllocString(pluginId.c_str());
             *p_ppDescription = ::SysAllocString(spPlugin->Description().c_str());
             if (p_pIsSeparator != nullptr) {

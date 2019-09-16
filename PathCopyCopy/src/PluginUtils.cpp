@@ -298,9 +298,10 @@ namespace PCC
             std::lock_guard<std::mutex> lock(s_Lock);
             if (!s_HasComputerName) {
                 std::wstring name(MAX_COMPUTERNAME_LENGTH + 1, L'\0');
-                DWORD length = name.size();
+                DWORD length = gsl::narrow<DWORD>(name.size());
                 if (::GetComputerNameW(&*name.begin(), &length) != FALSE) {
-                    if (::_wcslwr_s(&*name.begin(), length + 1) == 0) {
+#pragma warning(suppress: 26493) // Compiler thinks size_t{length} is a C-style cast
+                    if (::_wcslwr_s(&*name.begin(), size_t{length} + 1) == 0) {
                         s_ComputerName = name.c_str();
                     }
                 }

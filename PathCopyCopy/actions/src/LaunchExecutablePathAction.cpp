@@ -57,7 +57,7 @@ namespace PCC
             if (m_UseFilelist) {
                 // Get path to temp directory
                 std::wstring tempDirPath(MAX_PATH + 1, L'\0');
-                if (::GetTempPathW(tempDirPath.size(), &*tempDirPath.begin()) == 0) {
+                if (::GetTempPathW(gsl::narrow<DWORD>(tempDirPath.size()), &*tempDirPath.begin()) == 0) {
                     throw LaunchExecutableException();
                 }
 

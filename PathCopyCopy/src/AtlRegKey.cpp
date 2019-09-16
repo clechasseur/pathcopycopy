@@ -172,7 +172,7 @@ void AtlRegKey::GetValues(ValueInfoV& p_rvValues) const
     std::wstring valueName(16384, L'\0');   // See MSDN
     LONG res = ERROR_SUCCESS;
     for (DWORD index = 0; res == ERROR_SUCCESS; ++index) {
-        DWORD valueNameSize = valueName.size();
+        DWORD valueNameSize = gsl::narrow<DWORD>(valueName.size());
         res = ::RegEnumValueW(m_Key.m_hKey, index, &*valueName.begin(), &valueNameSize,
                               nullptr, nullptr, nullptr, nullptr);
         if (res == ERROR_SUCCESS) {
@@ -192,7 +192,7 @@ void AtlRegKey::GetSubKeys(SubkeyInfoV& p_rvSubkeys) const
     std::wstring subkeyName(256, L'\0');    // See MSDN's RegEnumKeyEx.
     LONG res = ERROR_SUCCESS;
     for (DWORD index = 0; res == ERROR_SUCCESS; ++index) {
-        DWORD subkeyNameSize = subkeyName.size();
+        DWORD subkeyNameSize = gsl::narrow<DWORD>(subkeyName.size());
         res = m_Key.EnumKey(index, &*subkeyName.begin(), &subkeyNameSize);
         if (res == ERROR_SUCCESS) {
             p_rvSubkeys.emplace_back(m_Key.m_hKey, subkeyName.c_str());

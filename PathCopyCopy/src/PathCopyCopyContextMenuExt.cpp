@@ -239,7 +239,7 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::Initialize(
                     std::wstring buffer(MAX_PATH + 1, L'\0');
                     for(UINT i = 0; i < fileCount; ++i) {
                         const UINT copiedCount = ::DragQueryFileW(static_cast<HDROP>(stgMedium.Get().hGlobal),
-                            i, &*buffer.begin(), buffer.size());
+                            i, &*buffer.begin(), gsl::narrow<UINT>(buffer.size()));
                         m_vFiles.emplace_back(buffer.c_str());
                     }
 
@@ -859,7 +859,7 @@ std::wstring CPathCopyCopyContextMenuExt::GetMenuCaptionWithShortcut(HMENU const
         menuItemInfo.cbSize = sizeof(MENUITEMINFOW);
         menuItemInfo.fMask = MIIM_STRING | MIIM_STATE;
         menuItemInfo.dwTypeData = buffer.data();
-        menuItemInfo.cch = buffer.size();
+        menuItemInfo.cch = gsl::narrow<UINT>(buffer.size());
         if (::GetMenuItemInfoW(p_hMenu, i, TRUE, &menuItemInfo) && (menuItemInfo.fState & MFS_DISABLED) == 0) {
             const std::wstring menuItemCaption = buffer.c_str();
             const auto shortcutCharIdx = menuItemCaption.find(L'&');

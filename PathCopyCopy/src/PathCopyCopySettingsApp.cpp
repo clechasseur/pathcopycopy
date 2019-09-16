@@ -50,7 +50,7 @@ namespace PCC
         std::wstring dllPath(MAX_PATH + 1, L'\0');
 #pragma warning(suppress: 26490) // Dirty trick is dirty
         const DWORD siz = ::GetModuleFileNameW(reinterpret_cast<HINSTANCE>(&__ImageBase),
-                                               dllPath.data(), dllPath.size());
+                                               dllPath.data(), gsl::narrow<DWORD>(dllPath.size()));
         if (siz > 0) {
             // Remove the filename and replace it with the name of the settings app.
             std::wstring path(dllPath.c_str());
