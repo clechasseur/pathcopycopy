@@ -1,3 +1,8 @@
+Version ??.? (20??-??-??)
+-------------------------
+- Now requires Windows Vista at a minimum [https://github.com/clechasseur/pathcopycopy/issues/83]
+
+
 Version 17.0.1 (2019-09-08)
 ---------------------------
 - Adding blank character strings to custom commands in Expert Mode will no longer cause crashes and infinite loops [https://github.com/clechasseur/pathcopycopy/issues/87]
