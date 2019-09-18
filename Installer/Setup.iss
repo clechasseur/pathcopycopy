@@ -94,7 +94,7 @@ DisableReadyMemo=yes
 AlwaysShowComponentsList=no
 DisableReadyPage=yes
 OutputDir=Output
-MinVersion=5.1
+MinVersion=6.0
 #ifdef PER_USER
 PrivilegesRequired=lowest
 #endif
