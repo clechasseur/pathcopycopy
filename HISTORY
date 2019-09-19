@@ -1,3 +1,8 @@
+Version 17.x (20??-??-??)
+-------------------------
+- Modifying regular/replacement expression in Test regex dialog did not persist changes properly [https://github.com/clechasseur/pathcopycopy/issues/90]
+
+
 Version 17.0.1 (2019-09-08)
 ---------------------------
 - Adding blank character strings to custom commands in Expert Mode will no longer cause crashes and infinite loops [https://github.com/clechasseur/pathcopycopy/issues/87]

@@ -52,7 +52,7 @@
             this.SeparatorTxt.TabIndex = 1;
             this.SeparatorToolTip.SetToolTip(this.SeparatorTxt, "Character string used to separate multiple copied paths; the default value (when " +
         "this option is not present) is a carriage return");
-            this.SeparatorTxt.Validated += new System.EventHandler(this.SeparatorTxt_Validated);
+            this.SeparatorTxt.TextChanged += new System.EventHandler(this.SeparatorTxt_TextChanged);
             // 
             // PathsSeparatorPipelineElementUserControl
             // 

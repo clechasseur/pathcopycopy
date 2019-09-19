@@ -57,17 +57,6 @@ namespace PathCopyCopy.Settings.UI.UserControls
         {
             ExecutableTxt.Text = element.Executable;
         }
-
-        /// <summary>
-        /// Called when the focus is lost on the Executable textbox. We update
-        /// our associated pipeline element here.
-        /// </summary>
-        /// <param name="sender">Event sender.</param>
-        /// <param name="e">Event arguments.</param>
-        private void ExecutableTxt_Validated(object sender, EventArgs e)
-        {
-            element.Executable = ExecutableTxt.Text;
-        }
         
         /// <summary>
         /// Called when the text of the Executable textbox changes. We update

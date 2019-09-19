@@ -54,7 +54,6 @@
             this.ExecutableTxt.TabIndex = 1;
             this.ExecutableToolTip.SetToolTip(this.ExecutableTxt, "Path to the executable to launch");
             this.ExecutableTxt.TextChanged += new System.EventHandler(this.ExecutableTxt_TextChanged);
-            this.ExecutableTxt.Validated += new System.EventHandler(this.ExecutableTxt_Validated);
             // 
             // BrowseForExecutableBtn
             // 

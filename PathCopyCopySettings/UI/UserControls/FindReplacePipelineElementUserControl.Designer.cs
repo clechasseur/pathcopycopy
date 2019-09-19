@@ -62,7 +62,7 @@
             this.ReplaceTxt.Size = new System.Drawing.Size(154, 20);
             this.ReplaceTxt.TabIndex = 3;
             this.FindReplaceToolTip.SetToolTip(this.ReplaceTxt, "Character string to replace any found element in the path with");
-            this.ReplaceTxt.Validated += new System.EventHandler(this.ReplaceTxt_Validated);
+            this.ReplaceTxt.TextChanged += new System.EventHandler(this.ReplaceTxt_TextChanged);
             // 
             // FindTxt
             // 
@@ -73,7 +73,7 @@
             this.FindTxt.Size = new System.Drawing.Size(170, 20);
             this.FindTxt.TabIndex = 1;
             this.FindReplaceToolTip.SetToolTip(this.FindTxt, "Character string to look for and replace in the path");
-            this.FindTxt.Validated += new System.EventHandler(this.FindTxt_Validated);
+            this.FindTxt.TextChanged += new System.EventHandler(this.FindTxt_TextChanged);
             // 
             // FindReplacePipelineElementUserControl
             // 

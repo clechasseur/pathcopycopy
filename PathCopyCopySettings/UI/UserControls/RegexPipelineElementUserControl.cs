@@ -61,23 +61,23 @@ namespace PathCopyCopy.Settings.UI.UserControls
         }
 
         /// <summary>
-        /// Called when the focus is lost on the Regex textbox. We update
+        /// Called when the text of the Regex textbox changes. We update
         /// our associated pipeline element here.
         /// </summary>
         /// <param name="sender">Event sender.</param>
         /// <param name="e">Event arguments.</param>
-        private void FindTxt_Validated(object sender, EventArgs e)
+        private void FindTxt_TextChanged(object sender, EventArgs e)
         {
             element.Regex = FindTxt.Text;
         }
 
         /// <summary>
-        /// Called when the focus is lost on the Replace textbox. We update
+        /// Called when the text of the Replace textbox changes. We update
         /// our associated pipeline element here.
         /// </summary>
         /// <param name="sender">Event sender.</param>
         /// <param name="e">Event arguments.</param>
-        private void ReplaceTxt_Validated(object sender, EventArgs e)
+        private void ReplaceTxt_TextChanged(object sender, EventArgs e)
         {
             element.Format = ReplaceTxt.Text;
         }

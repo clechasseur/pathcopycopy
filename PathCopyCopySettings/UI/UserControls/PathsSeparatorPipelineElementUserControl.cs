@@ -58,12 +58,12 @@ namespace PathCopyCopy.Settings.UI.UserControls
         }
 
         /// <summary>
-        /// Called when the focus is lost on the Separator textbox. We update
+        /// Called when the text of the Separator textbox changes. We update
         /// our associated pipeline element here.
         /// </summary>
         /// <param name="sender">Event sender.</param>
         /// <param name="e">Event arguments.</param>
-        private void SeparatorTxt_Validated(object sender, EventArgs e)
+        private void SeparatorTxt_TextChanged(object sender, EventArgs e)
         {
             element.PathsSeparator = SeparatorTxt.Text;
         }

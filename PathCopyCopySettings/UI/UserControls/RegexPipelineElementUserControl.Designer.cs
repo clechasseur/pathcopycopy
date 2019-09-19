@@ -65,7 +65,7 @@
             this.ReplaceTxt.TabIndex = 3;
             this.RegexToolTip.SetToolTip(this.ReplaceTxt, "Expression used to perform replacement in conjunction with the regular expression" +
         "");
-            this.ReplaceTxt.Validated += new System.EventHandler(this.ReplaceTxt_Validated);
+            this.ReplaceTxt.TextChanged += new System.EventHandler(this.ReplaceTxt_TextChanged);
             // 
             // FindTxt
             // 
@@ -76,7 +76,7 @@
             this.FindTxt.Size = new System.Drawing.Size(187, 20);
             this.FindTxt.TabIndex = 1;
             this.RegexToolTip.SetToolTip(this.FindTxt, "Regular expression to match against the path");
-            this.FindTxt.Validated += new System.EventHandler(this.FindTxt_Validated);
+            this.FindTxt.TextChanged += new System.EventHandler(this.FindTxt_TextChanged);
             // 
             // IgnoreCaseChk
             // 
