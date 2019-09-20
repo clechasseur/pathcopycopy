@@ -1,5 +1,6 @@
 Version 17.x (20??-??-??)
 -------------------------
+- Installer and uninstaller are now signed with a valid open-source certificate [https://github.com/clechasseur/pathcopycopy/issues/25]
 - Modifying regular/replacement expression in Test regex dialog did not persist changes properly [https://github.com/clechasseur/pathcopycopy/issues/90]
 
 

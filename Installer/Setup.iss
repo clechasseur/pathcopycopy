@@ -48,6 +48,9 @@
 #define MyAppCopyright "(c) 2008-2019, Charles Lechasseur. See LICENSE.TXT for details."
 #define MyLicenseFile "..\LICENSE"
 
+; Comment this to avoid signing the resulting executable.
+#define SIGNCODE
+
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
@@ -95,6 +98,9 @@ AlwaysShowComponentsList=no
 DisableReadyPage=yes
 OutputDir=Output
 MinVersion=5.1
+#ifdef SIGNCODE
+SignTool=certum
+#endif
 #ifdef PER_USER
 PrivilegesRequired=lowest
 #endif
