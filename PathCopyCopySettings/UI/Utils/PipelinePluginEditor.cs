@@ -106,11 +106,14 @@ namespace PathCopyCopy.Settings.UI.Utils
         /// user cancelled the editing.</returns>
         private PipelinePluginInfo Edit()
         {
-            // Determine what form to show initially depending on the complexity of the pipeline.
-            bool advanced = pipeline != null && !IsPipelineSimple(pipeline);
+            // Determine what form to show initially depending on the complexity of the pipeline
+            // and the last edit mode used for the plugin.
+            PipelinePluginInfo info = pluginInfo;
+            bool advanced = pluginInfo != null && pluginInfo.EditMode.HasValue
+                ? pluginInfo.EditMode.Value == PipelinePluginEditMode.Expert
+                : pipeline != null && !IsPipelineSimple(pipeline);
 
             // Loop until user is satisfied.
-            PipelinePluginInfo info = pluginInfo;
             bool switchMode = true;
             while (switchMode) {
                 if (advanced) {

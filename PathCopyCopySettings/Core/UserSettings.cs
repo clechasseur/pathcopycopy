@@ -149,6 +149,9 @@ namespace PathCopyCopy.Settings.Core
         /// Name of registry value containing the minimum required version for a pipeline plugin.
         private const string PIPELINE_PLUGIN_REQUIRED_VERSION_VALUE_NAME = "RequiredVersion";
 
+        /// Name of registry value containing a pipeline plugin's last edit mode.
+        private const string PIPELINE_PLUGIN_EDIT_MODE_VALUE_NAME = "EditMode";
+
         /// Name of registry value containing the order in which to display pipeline plugins.
         private const string PIPELINE_PLUGINS_DISPLAY_ORDER_VALUE_NAME = "DisplayOrder";
 
@@ -968,6 +971,11 @@ namespace PathCopyCopy.Settings.Core
                             pluginKey.DeleteValue(PIPELINE_PLUGIN_ICON_VALUE_NAME);
                         }
                         pluginKey.SetValue(PIPELINE_PLUGIN_REQUIRED_VERSION_VALUE_NAME, pluginInfo.RequiredVersionAsString);
+                        if (pluginInfo.EditMode.HasValue) {
+                            pluginKey.SetValue(PIPELINE_PLUGIN_EDIT_MODE_VALUE_NAME, pluginInfo.EditMode.Value.ToString());
+                        } else if (pluginKey.GetValue(PIPELINE_PLUGIN_EDIT_MODE_VALUE_NAME) != null) {
+                            pluginKey.DeleteValue(PIPELINE_PLUGIN_EDIT_MODE_VALUE_NAME);
+                        }
                         pluginKey.SetValue(null, pluginInfo.EncodedElements);
                     }
                 }
@@ -1008,11 +1016,12 @@ namespace PathCopyCopy.Settings.Core
 
                     // Open the subkey and read values for the description,
                     // encoded elements, icon file and required version.
-                    string description, encodedElements, iconFile, minVersionAsString;
+                    string description, encodedElements, iconFile, minVersionAsString, editModeAsString;
                     using (RegistryKey subKey = regKey.OpenSubKey(idAsString, false)) {
                         description = (string) subKey.GetValue(PIPELINE_PLUGIN_DESCRIPTION_VALUE_NAME);
                         iconFile = (string) subKey.GetValue(PIPELINE_PLUGIN_ICON_VALUE_NAME);
                         minVersionAsString = (string) subKey.GetValue(PIPELINE_PLUGIN_REQUIRED_VERSION_VALUE_NAME);
+                        editModeAsString = (string) subKey.GetValue(PIPELINE_PLUGIN_EDIT_MODE_VALUE_NAME);
                         encodedElements = (string) subKey.GetValue(null);
                     }
 
@@ -1032,9 +1041,15 @@ namespace PathCopyCopy.Settings.Core
                         }
                     }
 
+                    // If we don't have last edit mode, auto-detect.
+                    PipelinePluginEditMode? editMode = null;
+                    if (!String.IsNullOrEmpty(editModeAsString)) {
+                        editMode = (PipelinePluginEditMode) Enum.Parse(typeof(PipelinePluginEditMode), editModeAsString);
+                    }
+
                     // If we made it here we have the plugin info, add it to the list.
                     pipelinePlugins.Add(new PipelinePluginInfo(id, description, encodedElements,
-                        iconFile, isGlobal, minVersion));
+                        iconFile, editMode, isGlobal, minVersion));
                 } catch (FormatException) {
                 } catch (OverflowException) {
                 }

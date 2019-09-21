@@ -293,6 +293,7 @@ namespace PathCopyCopy.Settings.UI.Forms
                     pluginInfo.Description = NameTxt.Text;
                     pluginInfo.EncodedElements = pipeline.Encode();
                     pluginInfo.RequiredVersion = pipeline.RequiredVersion;
+                    pluginInfo.EditMode = PipelinePluginEditMode.Simple;
                     Debug.Assert(!pluginInfo.Global);
                 } else {
                     // Warn user that we need a non-empty name.

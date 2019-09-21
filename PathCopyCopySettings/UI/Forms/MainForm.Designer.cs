@@ -783,13 +783,13 @@
             // ExportPipelinePluginsSaveDlg
             // 
             this.ExportPipelinePluginsSaveDlg.DefaultExt = "ecc";
-            this.ExportPipelinePluginsSaveDlg.Filter = "Exported custom commands (*.ecc)|*.ecc|Exported custom commands (pre-12.0) (*.pcc" +
-    "pp)|*.pccpp";
+            this.ExportPipelinePluginsSaveDlg.Filter = "Exported custom commands (*.eccv3)|*.eccv3|Exported custom commands (pre-17.1) (*" +
+    ".ecc)|*.ecc|Exported custom commands (pre-12.0) (*.pccpp)|*.pccpp";
             // 
             // ImportPipelinePluginsOpenDlg
             // 
             this.ImportPipelinePluginsOpenDlg.DefaultExt = "ecc";
-            this.ImportPipelinePluginsOpenDlg.Filter = "Exported custom commands (*.ecc;*.pccpp)|*.ecc;*.pccpp";
+            this.ImportPipelinePluginsOpenDlg.Filter = "Exported custom commands (*.eccv3;*.ecc;*.pccpp)|*.eccv3;*.ecc;*.pccpp";
             // 
             // ChoosePluginIconOpenDlg
             // 

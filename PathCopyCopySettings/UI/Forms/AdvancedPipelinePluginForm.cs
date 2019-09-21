@@ -205,6 +205,7 @@ namespace PathCopyCopy.Settings.UI.Forms
                         pluginInfo.Description = NameTxt.Text;
                         pluginInfo.EncodedElements = pipeline.Encode();
                         pluginInfo.RequiredVersion = pipeline.RequiredVersion;
+                        pluginInfo.EditMode = PipelinePluginEditMode.Expert;
                         Debug.Assert(!pluginInfo.Global);
                     }
                 } else {

@@ -135,6 +135,40 @@ namespace PathCopyCopy.Settings.Core.Plugins
             }
         }
     }
+
+    /// <summary>
+    /// Possible edit modes for a pipeline plugin.
+    /// </summary>
+    public enum PipelinePluginEditMode
+    {
+        /// <summary>
+        /// This pipeline plugin was edited in Simple mode.
+        /// </summary>
+        Simple = 1,
+
+        /// <summary>
+        /// This pipeline plugin was edited in Expert mode.
+        /// </summary>
+        Expert = 2,
+    }
+
+    public enum PipelinePluginXmlSerializerVersion
+    {
+        /// <summary>
+        /// First version. Does not serialize RequiredVersion or EditMode.
+        /// </summary>
+        V1 = 1,
+
+        /// <summary>
+        /// Second version. Does not serialize EditMode.
+        /// </summary>
+        V2 = 2,
+
+        /// <summary>
+        /// Third and current version. Serializes everything.
+        /// </summary>
+        V3 = 3,
+    }
     
     /// <summary>
     /// Wrapper for info about a pipeline plugin found in the registry.
@@ -218,6 +252,42 @@ namespace PathCopyCopy.Settings.Core.Plugins
         }
 
         /// <summary>
+        /// How the pipeline plugin was last edited in the UI.
+        /// </summary>
+        /// <remarks>
+        /// If this is set to <c>null</c>, the proper edit mode is auto-detected.
+        /// </remarks>
+        [XmlIgnore]
+        public PipelinePluginEditMode? EditMode
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Value of <see cref="EditMode"/> as a string.
+        /// Used for XML serialization.
+        /// </summary>
+        /// <remarks>
+        /// We serialize the enum value as a string because otherwise, xsd.exe
+        /// generates a mandatory field in the schema, which is wrong.
+        /// </remarks>
+        [XmlElement("EditMode")]
+        public string EditModeAsString
+        {
+            get {
+                return EditMode.HasValue ? EditMode.Value.ToString() : null;
+            }
+            set {
+                if (!String.IsNullOrEmpty(value)) {
+                    EditMode = (PipelinePluginEditMode) Enum.Parse(typeof(PipelinePluginEditMode), value);
+                } else {
+                    EditMode = null;
+                }
+            }
+        }
+
+        /// <summary>
         /// Whether this pipeline plugin is stored in the global key.
         /// Global plugins cannot be deleted or modified.
         /// </summary>
@@ -296,15 +366,17 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// elements.</param>
         /// <param name="iconFile">Path to icon file to use for plugin, or an empty
         /// string to use the default icon, or <c>null</c> to avoid showing an icon.</param>
+        /// <param name="editMode">How the plugin was last edited in the UI.</param>
         /// <param name="isGlobal">Whether this plugin is in the global key.</param>
         /// <param name="minVersion">Minimum required version to use plugin.</param>
         public PipelinePluginInfo(Guid id, string description, string encodedElements,
-            string iconFile, bool isGlobal, Version minVersion)
+            string iconFile, PipelinePluginEditMode? editMode, bool isGlobal, Version minVersion)
         {
             Id = id;
             Description = description;
             EncodedElements = encodedElements;
             IconFile = iconFile;
+            EditMode = editMode;
             Global = isGlobal;
             RequiredVersion = minVersion;
         }
@@ -411,13 +483,11 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// </summary>
         public const string PIPELINE_PLUGINS_XML_NAMESPACE = "http://pathcopycopy.codeplex.com/xsd/PipelinePlugins/V1";
 
-        /// XmlSerializer used for regular XML serialization/deserialization.
-        private static XmlSerializer xmlSerializer;
+        /// Dictionary storing XML serializer instances. Late-filled.
+        private static IDictionary<PipelinePluginXmlSerializerVersion, XmlSerializer> xmlSerializers =
+            new Dictionary<PipelinePluginXmlSerializerVersion, XmlSerializer>();
 
-        /// XmlSerializer used for legacy XML serialization. Does not serialize required versions of pipeline plugins.
-        private static XmlSerializer legacyXmlSerializer;
-
-        /// Object used to protect creation of XmlSerializer objects.
+        /// Lock used to protect creation of XmlSerializer objects.
         private static readonly object xmlSerializersLock = new Object();
 
         /// List storing the pipeline plugins in the collection.
@@ -475,15 +545,14 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// later be accepted by the <see cref="FromXML"/> method.
         /// </summary>
         /// <param name="stream"><see cref="T:Stream"/> where to store the XML data.</param>
-        /// <param name="legacy">Whether to use the legacy <see cref="XmlSerializer"/>.
-        /// If <c>true</c>, required versions won't be written for pipeline plugins.</param>
-        public void ToXML(Stream stream, bool legacy)
+        /// <param name="serializerVersion">Which version of the XML serializer to use.
+        /// Depending on the version, certain attributes are not serialized.</param>
+        public void ToXML(Stream stream, PipelinePluginXmlSerializerVersion serializerVersion)
         {
             Debug.Assert(stream != null);
 
             using (XmlWriter writer = XmlWriter.Create(stream)) {
-                XmlSerializer serializer = legacy ? GetLegacyXmlSerializer() : GetXmlSerializer();
-                serializer.Serialize(writer, this);
+                GetXmlSerializer(serializerVersion).Serialize(writer, this);
             }
         }
         
@@ -498,50 +567,51 @@ namespace PathCopyCopy.Settings.Core.Plugins
             Debug.Assert(stream != null);
 
             using (XmlReader reader = XmlReader.Create(stream)) {
-                return (PipelinePluginCollection) GetXmlSerializer().Deserialize(reader);
+                return (PipelinePluginCollection) GetXmlSerializer(PipelinePluginXmlSerializerVersion.V3).Deserialize(reader);
             }
         }
         
         /// <summary>
-        /// Returns the <see cref="XmlSerializer"/> to use for regular XML
+        /// Returns an <see cref="XmlSerializer"/> to use for XML
         /// serialization/deserialization.
         /// </summary>
+        /// <param name="serializerVersion">Version of the XML serializer requested.
+        /// Depending on the version, certain attributes are not serialized.</param>
         /// <returns>Global <see cref="XmlSerializer"/> instance.</returns>
-        private static XmlSerializer GetXmlSerializer()
+        private static XmlSerializer GetXmlSerializer(PipelinePluginXmlSerializerVersion serializerVersion)
         {
-            // Create XmlSerializer on the first call.
-            if (xmlSerializer == null) {
-                lock (xmlSerializersLock) {
-                    if (xmlSerializer == null) {
+            XmlSerializer xmlSerializer;
+            
+            lock(xmlSerializersLock) {
+                if (!xmlSerializers.TryGetValue(serializerVersion, out xmlSerializer)) {
+                    // Need to create this XML serializer on the first call.
+                    if (serializerVersion == PipelinePluginXmlSerializerVersion.V3) {
+                        // Current version: serialize everything.
                         xmlSerializer = new XmlSerializer(typeof(PipelinePluginCollection), PIPELINE_PLUGINS_XML_NAMESPACE);
-                    }
-                }
-            }
-            return xmlSerializer;
-        }
-        
-        /// <summary>
-        /// Returns the <see cref="XmlSerializer"/> to use for legacy serialization.
-        /// This XmlSerializer will not output required versions for pipeline plugins.
-        /// </summary>
-        /// <returns>Global legacy <see cref="XmlSerializer"/> instance.</returns>
-        private static XmlSerializer GetLegacyXmlSerializer()
-        {
-            // Create XmlSerializer on the first call.
-            if (legacyXmlSerializer == null) {
-                lock (xmlSerializersLock) {
-                    if (legacyXmlSerializer == null) {
-                        // Ignore the "RequiredVersionAsString" property of PipelinePluginInfo.
+                    } else if (serializerVersion == PipelinePluginXmlSerializerVersion.V2) {
+                        // Second version: do not serialize EditMode.
+                        XmlAttributeOverrides overrides = new XmlAttributeOverrides();
+                        XmlAttributes attributes = new XmlAttributes();
+                        attributes.XmlIgnore = true;
+                        overrides.Add(typeof(PipelinePluginInfo), "EditModeAsString", attributes);
+                        xmlSerializer = new XmlSerializer(typeof(PipelinePluginCollection),
+                            overrides, new Type[0], null, PIPELINE_PLUGINS_XML_NAMESPACE);
+                    } else if (serializerVersion == PipelinePluginXmlSerializerVersion.V1) {
+                        // First version: do not serializer RequiredVersion or EditMode.
                         XmlAttributeOverrides overrides = new XmlAttributeOverrides();
                         XmlAttributes attributes = new XmlAttributes();
                         attributes.XmlIgnore = true;
                         overrides.Add(typeof(PipelinePluginInfo), "RequiredVersionAsString", attributes);
-                        legacyXmlSerializer = new XmlSerializer(typeof(PipelinePluginCollection),
+                        overrides.Add(typeof(PipelinePluginInfo), "EditModeAsString", attributes);
+                        xmlSerializer = new XmlSerializer(typeof(PipelinePluginCollection),
                             overrides, new Type[0], null, PIPELINE_PLUGINS_XML_NAMESPACE);
                     }
+                    xmlSerializers.Add(serializerVersion, xmlSerializer);
                 }
             }
-            return legacyXmlSerializer;
+
+            Debug.Assert(xmlSerializer != null);
+            return xmlSerializer;
         }
     }
     
