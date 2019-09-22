@@ -22,6 +22,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using Microsoft.Win32;
 using PathCopyCopy.Settings.Core.Plugins;
 using PathCopyCopy.Settings.Properties;
@@ -61,6 +62,9 @@ namespace PathCopyCopy.Settings.Core
 
         /// Path of registry key containing the temporary pipeline plugins (relative to the main registry key).
         private const string PCC_TEMP_PIPELINE_PLUGINS_KEY = "TempPipelinePlugins";
+
+        /// Path of registry key containing forms information (relative to the main registry key).
+        private const string PCC_FORMS_KEY = "Forms";
 
         /// Name of registry value determining whether we use hidden shares in UNC plugins.
         private const string USE_HIDDEN_SHARES_VALUE_NAME = "UseHiddenShares";
@@ -155,6 +159,18 @@ namespace PathCopyCopy.Settings.Core
         /// Name of registry value containing the order in which to display pipeline plugins.
         private const string PIPELINE_PLUGINS_DISPLAY_ORDER_VALUE_NAME = "DisplayOrder";
 
+        /// Name of registry value containing a form's position's X coordinate.
+        private const string FORMS_POS_X_VALUE_NAME = "X";
+
+        /// Name of registry value containing a form's position's Y coordinate.
+        private const string FORMS_POS_Y_VALUE_NAME = "Y";
+
+        /// Name of registry value containing a form's width.
+        private const string FORMS_SIZE_WIDTH_VALUE_NAME = "Width";
+
+        /// Name of registry value containing a form's height.
+        private const string FORMS_SIZE_HEIGHT_VALUE_NAME = "Height";
+
         /// Name of registry value that can exist in the global key to indicate
         /// that settings editing is disabled.
         private const string EDITING_DISABLED_VALUE_NAME = "KeyLock";
@@ -220,6 +236,9 @@ namespace PathCopyCopy.Settings.Core
         /// Separator used between pipeline plugins in the display order string.
         private const char PIPELINE_PLUGINS_DISPLAY_ORDER_SEPARATOR = ',';
 
+        /// Defaut value for all size and position components of a form.
+        private const int FORMS_POS_SIZE_DEFAULT_VALUE = -1;
+
         /// Registry key containing global settings for all users. Can be null for portable installations.
         private RegistryKey globalKey;
 
@@ -240,6 +259,9 @@ namespace PathCopyCopy.Settings.Core
 
         /// Registry key containing temporary pipeline plugins. They are always user-specific.
         private RegistryKey userTempPipelinePluginsKey;
+
+        /// Registry key containing information on forms. They are always user-specific.
+        private RegistryKey userFormsKey;
 
         /// <summary>
         /// Whether the UNC plugins should use hidden shares or not.
@@ -704,6 +726,9 @@ namespace PathCopyCopy.Settings.Core
 
             // Open the temporary pipeline plugins key for reading and writing. They are always user-specific.
             userTempPipelinePluginsKey = userKey.CreateSubKey(PCC_TEMP_PIPELINE_PLUGINS_KEY);
+
+            // Open the forms key for reading and writing. They are always user-specific.
+            userFormsKey = userKey.CreateSubKey(PCC_FORMS_KEY);
         }
         
         /// <summary>
@@ -711,6 +736,7 @@ namespace PathCopyCopy.Settings.Core
         /// </summary>
         public void Dispose()
         {
+            userFormsKey?.Close();
             userTempPipelinePluginsKey?.Close();
             userPipelinePluginsKey?.Close();
             globalPipelinePluginsKey?.Close();
@@ -804,6 +830,50 @@ namespace PathCopyCopy.Settings.Core
                 userTempPipelinePluginsKey.DeleteSubKeyTree(pluginInfo.Id.ToString("B"));
             } catch (ArgumentException) {
                 // The subkey did not exist, so no need to "remove" it.
+            }
+        }
+
+        /// <summary>
+        /// Returns information stored in the settings for the given form.
+        /// </summary>
+        /// <param name="formName">Name of the form.</param>
+        /// <param name="position">Upon exit, will contain form position information.
+        /// If a component is unavailable, -1 is returned.</param>
+        /// <param name="size">Upon exit, will contain form size information.
+        /// If a component is unavailable, -1 is returned.</param>
+        public void GetFormInformation(string formName, out Point position, out Size size)
+        {
+            Debug.Assert(!String.IsNullOrWhiteSpace(formName));
+
+            using (RegistryKey formKey = userFormsKey.OpenSubKey(formName, false)) {
+                position = new Point(GetFormValue(formKey, FORMS_POS_X_VALUE_NAME),
+                    GetFormValue(formKey, FORMS_POS_Y_VALUE_NAME));
+                size = new Size(GetFormValue(formKey, FORMS_SIZE_WIDTH_VALUE_NAME),
+                    GetFormValue(formKey, FORMS_SIZE_HEIGHT_VALUE_NAME));
+            }
+        }
+
+        /// <summary>
+        /// Stores information for the given form in the settings.
+        /// </summary>
+        /// <param name="formName">Name of the form.</param>
+        /// <param name="position">Form position to save, or <c>null</c>
+        /// to skip saving this information.</param>
+        /// <param name="size">Form size to save, or <c>null</c>
+        /// to skip saving this information.</param>
+        public void SetFormInformation(string formName, Point? position, Size? size)
+        {
+            Debug.Assert(!String.IsNullOrWhiteSpace(formName));
+
+            using (RegistryKey formKey = userFormsKey.CreateSubKey(formName)) {
+                if (position.HasValue) {
+                    formKey.SetValue(FORMS_POS_X_VALUE_NAME, position.Value.X);
+                    formKey.SetValue(FORMS_POS_Y_VALUE_NAME, position.Value.Y);
+                }
+                if (size.HasValue) {
+                    formKey.SetValue(FORMS_SIZE_WIDTH_VALUE_NAME, size.Value.Width);
+                    formKey.SetValue(FORMS_SIZE_HEIGHT_VALUE_NAME, size.Value.Height);
+                }
             }
         }
         
@@ -1096,6 +1166,26 @@ namespace PathCopyCopy.Settings.Core
                 value = null;
             }
             return (string) value;
+        }
+
+        /// <summary>
+        /// Attempts to read a registry key value containing form information.
+        /// </summary>
+        /// <param name="formKey">Registry key storing form information.
+        /// Can be <c>null</c> if form information is not available.</param>
+        /// <param name="valueName">Name of registry value to look for.</param>
+        /// <returns>Form information for value <paramref name="valueName"/>,
+        /// or -1 if no information is available for this form value.</returns>
+        private int GetFormValue(RegistryKey formKey, string valueName)
+        {
+            int value = -1;
+            if (formKey != null) {
+                object valueObj = formKey.GetValue(valueName);
+                if (valueObj != null) {
+                    value = (int) valueObj;
+                }
+            }
+            return value;
         }
     }
 }
