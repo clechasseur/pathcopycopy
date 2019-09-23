@@ -37,6 +37,12 @@ namespace PathCopyCopy.Settings.UI.Forms
     /// <summary>
     /// Main form of the Path Copy Copy settings application.
     /// </summary>
+    /// <remarks>
+    /// The form remembers its position and size, but not through
+    /// the generic <see cref="PositionPersistedForm"/>, because
+    /// it came before that. So it still uses the legacy way of
+    /// doing it, with its own entries in user settings.
+    /// </remarks>
     public partial class MainForm : Form
     {
         /// Paths separator that copies multiple paths on the same line.
