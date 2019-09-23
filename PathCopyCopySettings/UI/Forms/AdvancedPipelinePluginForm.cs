@@ -34,7 +34,7 @@ namespace PathCopyCopy.Settings.UI.Forms
     /// Form used to create or edit a pipeline plugin in Expert Mode. To use,
     /// create the form and call the <see cref="EditPlugin"/> method.
     /// </summary>
-    public partial class AdvancedPipelinePluginForm : Form
+    public partial class AdvancedPipelinePluginForm : PositionPersistedForm
     {
         /// Plugin info for the plugin we're editing.
         private PipelinePluginInfo pluginInfo;

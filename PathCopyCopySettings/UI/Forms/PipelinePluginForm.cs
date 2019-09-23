@@ -36,7 +36,7 @@ namespace PathCopyCopy.Settings.UI.Forms
     /// Form used to create or edit a pipeline plugin. To use, create the form
     /// and call the <see cref="EditPlugin"/> method.
     /// </summary>
-    public partial class PipelinePluginForm : Form
+    public partial class PipelinePluginForm : PositionPersistedForm
     {
         /// Plugin info for the plugin we're editing.
         private PipelinePluginInfo pluginInfo;

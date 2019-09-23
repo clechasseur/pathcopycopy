@@ -1178,7 +1178,7 @@ namespace PathCopyCopy.Settings.Core
         /// or -1 if no information is available for this form value.</returns>
         private int GetFormValue(RegistryKey formKey, string valueName)
         {
-            int value = -1;
+            int value = FORMS_POS_SIZE_DEFAULT_VALUE;
             if (formKey != null) {
                 object valueObj = formKey.GetValue(valueName);
                 if (valueObj != null) {
