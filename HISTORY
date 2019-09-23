@@ -3,6 +3,7 @@ Version 17.1 (20??-??-??)
 - Installer and uninstaller are now signed with a valid open-source certificate [https://github.com/clechasseur/pathcopycopy/issues/25]
 - Modifying regular/replacement expression in Test regex dialog did not persist changes properly [https://github.com/clechasseur/pathcopycopy/issues/90]
 - Settings application now remembers which edit mode was used for custom commands [https://github.com/clechasseur/pathcopycopy/issues/88]
+- Settings application now remembers size and position of custom commands dialogs [https://github.com/clechasseur/pathcopycopy/issues/86]
 
 
 Version 17.0.1 (2019-09-08)
