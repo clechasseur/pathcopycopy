@@ -67,6 +67,7 @@
             this.ChooseExecutableOpenDlg = new System.Windows.Forms.OpenFileDialog();
             this.PipelinePluginToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.SwitchBtn = new System.Windows.Forms.Button();
+            this.PreviewCtrl = new PathCopyCopy.Settings.UI.UserControls.PluginPreviewUserControl();
             this.MainTabControl.SuspendLayout();
             this.BasePluginPage.SuspendLayout();
             this.OptionsPage.SuspendLayout();
@@ -496,10 +497,10 @@
             // 
             this.OKBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.OKBtn.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.OKBtn.Location = new System.Drawing.Point(238, 585);
+            this.OKBtn.Location = new System.Drawing.Point(238, 637);
             this.OKBtn.Name = "OKBtn";
             this.OKBtn.Size = new System.Drawing.Size(75, 23);
-            this.OKBtn.TabIndex = 4;
+            this.OKBtn.TabIndex = 5;
             this.OKBtn.Text = "OK";
             this.PipelinePluginToolTip.SetToolTip(this.OKBtn, "Save this custom command and close the window");
             this.OKBtn.UseVisualStyleBackColor = true;
@@ -508,10 +509,10 @@
             // 
             this.CancelBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.CancelBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.CancelBtn.Location = new System.Drawing.Point(319, 585);
+            this.CancelBtn.Location = new System.Drawing.Point(319, 637);
             this.CancelBtn.Name = "CancelBtn";
             this.CancelBtn.Size = new System.Drawing.Size(75, 23);
-            this.CancelBtn.TabIndex = 5;
+            this.CancelBtn.TabIndex = 6;
             this.CancelBtn.Text = "Cancel";
             this.PipelinePluginToolTip.SetToolTip(this.CancelBtn, "Do not save this custom command and close the window");
             this.CancelBtn.UseVisualStyleBackColor = true;
@@ -525,14 +526,24 @@
             // 
             this.SwitchBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.SwitchBtn.DialogResult = System.Windows.Forms.DialogResult.Retry;
-            this.SwitchBtn.Location = new System.Drawing.Point(12, 585);
+            this.SwitchBtn.Location = new System.Drawing.Point(12, 637);
             this.SwitchBtn.Name = "SwitchBtn";
             this.SwitchBtn.Size = new System.Drawing.Size(94, 23);
-            this.SwitchBtn.TabIndex = 3;
+            this.SwitchBtn.TabIndex = 4;
             this.SwitchBtn.Text = "Expert Mode";
             this.PipelinePluginToolTip.SetToolTip(this.SwitchBtn, "Switch to Expert Mode, which allows more customization options but is more comple" +
         "x to use");
             this.SwitchBtn.UseVisualStyleBackColor = true;
+            // 
+            // PreviewCtrl
+            // 
+            this.PreviewCtrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.PreviewCtrl.Location = new System.Drawing.Point(12, 578);
+            this.PreviewCtrl.Name = "PreviewCtrl";
+            this.PreviewCtrl.Plugin = null;
+            this.PreviewCtrl.Size = new System.Drawing.Size(380, 53);
+            this.PreviewCtrl.TabIndex = 3;
             // 
             // PipelinePluginForm
             // 
@@ -540,7 +551,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.CancelBtn;
-            this.ClientSize = new System.Drawing.Size(406, 620);
+            this.ClientSize = new System.Drawing.Size(406, 672);
+            this.Controls.Add(this.PreviewCtrl);
             this.Controls.Add(this.SwitchBtn);
             this.Controls.Add(this.CancelBtn);
             this.Controls.Add(this.OKBtn);
@@ -550,7 +562,7 @@
             this.HelpButton = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(422, 659);
+            this.MinimumSize = new System.Drawing.Size(422, 711);
             this.Name = "PipelinePluginForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
@@ -617,5 +629,6 @@
         private System.Windows.Forms.CheckBox RemoveExtChk;
         private System.Windows.Forms.ToolTip PipelinePluginToolTip;
         private System.Windows.Forms.Button SwitchBtn;
+        private UserControls.PluginPreviewUserControl PreviewCtrl;
     }
 }
