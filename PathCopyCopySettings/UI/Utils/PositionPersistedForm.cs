@@ -29,7 +29,7 @@ namespace PathCopyCopy.Settings.UI.Utils
     /// Base form class that automatically persists its size and position
     /// in the user settings when moved or resized.
     /// </summary>
-    abstract public class PositionPersistedForm : UserSettingsWieldingForm
+    public class PositionPersistedForm : UserSettingsWieldingForm
     {
         /// Set this when it's OK to listen to size/position changes.
         private bool canSaveFormInfo = false;

@@ -27,7 +27,7 @@ namespace PathCopyCopy.Settings.UI.Utils
     /// <summary>
     /// Base class for forms that need a <see cref="UserSettings"/> instance.
     /// </summary>
-    abstract public class UserSettingsWieldingForm : Form
+    public class UserSettingsWieldingForm : Form
     {
         /// <summary>
         /// <see cref="UserSettings"/> instance usable by the form.
