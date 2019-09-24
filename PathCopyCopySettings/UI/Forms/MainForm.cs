@@ -972,19 +972,9 @@ namespace PathCopyCopy.Settings.UI.Forms
         /// <param name="e">Event arguments.</param>
         private void PluginsDataGrid_SelectionChanged(object sender, EventArgs e)
         {
-            if (PluginsDataGrid.SelectedRows.Count == 1) {
-                // Display preview of plugin.
-                PluginDisplayInfo info = (PluginDisplayInfo) PluginsDataGrid.SelectedRows[0].DataBoundItem;
-                if (info.Plugin is SeparatorPlugin) {
-                    // ...except for separators, which is pointless.
-                    PreviewTxt.Clear();
-                } else {
-                    PreviewTxt.Text = info.Plugin.GetPreview(settings);
-                }
-            } else {
-                // Clear content of preview textbox.
-                PreviewTxt.Clear();
-            }
+            // Update preview control.
+            PreviewCtrl.Plugin = PluginsDataGrid.SelectedRows.Count == 1
+                ? ((PluginDisplayInfo) PluginsDataGrid.SelectedRows[0].DataBoundItem).Plugin : null;
 
             // Also update plugin-related buttons.
             UpdatePluginButtons();

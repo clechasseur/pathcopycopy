@@ -43,8 +43,6 @@
             this.BevelLineLbl = new System.Windows.Forms.Label();
             this.MovePluginDownBtn = new System.Windows.Forms.Button();
             this.MovePluginUpBtn = new System.Windows.Forms.Button();
-            this.PreviewGroupBox = new System.Windows.Forms.GroupBox();
-            this.PreviewTxt = new System.Windows.Forms.TextBox();
             this.PluginsExplanationLbl2 = new System.Windows.Forms.Label();
             this.PluginsDataGrid = new System.Windows.Forms.DataGridView();
             this.IconCol = new System.Windows.Forms.DataGridViewImageColumn();
@@ -87,9 +85,9 @@
             this.ExportUserSettingsSaveDlg = new System.Windows.Forms.SaveFileDialog();
             this.ExportUserSettingsBtn = new System.Windows.Forms.Button();
             this.MainToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.PreviewCtrl = new PathCopyCopy.Settings.UI.UserControls.PluginPreviewUserControl();
             this.MainTabCtrl.SuspendLayout();
             this.PluginsPage.SuspendLayout();
-            this.PreviewGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PluginsDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PluginsDataGridBindingSource)).BeginInit();
             this.MiscOptionsPage.SuspendLayout();
@@ -152,6 +150,7 @@
             // 
             // PluginsPage
             // 
+            this.PluginsPage.Controls.Add(this.PreviewCtrl);
             this.PluginsPage.Controls.Add(this.AddSeparatorBtn);
             this.PluginsPage.Controls.Add(this.ImportPipelinePluginsBtn);
             this.PluginsPage.Controls.Add(this.ExportPipelinePluginsBtn);
@@ -162,7 +161,6 @@
             this.PluginsPage.Controls.Add(this.BevelLineLbl);
             this.PluginsPage.Controls.Add(this.MovePluginDownBtn);
             this.PluginsPage.Controls.Add(this.MovePluginUpBtn);
-            this.PluginsPage.Controls.Add(this.PreviewGroupBox);
             this.PluginsPage.Controls.Add(this.PluginsExplanationLbl2);
             this.PluginsPage.Controls.Add(this.PluginsDataGrid);
             this.PluginsPage.Controls.Add(this.PluginsExplanationLbl);
@@ -287,29 +285,6 @@
             this.MainToolTip.SetToolTip(this.MovePluginUpBtn, "Move the selected command up one position");
             this.MovePluginUpBtn.UseVisualStyleBackColor = true;
             this.MovePluginUpBtn.Click += new System.EventHandler(this.MovePluginUpBtn_Click);
-            // 
-            // PreviewGroupBox
-            // 
-            this.PreviewGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.PreviewGroupBox.Controls.Add(this.PreviewTxt);
-            this.PreviewGroupBox.Location = new System.Drawing.Point(9, 460);
-            this.PreviewGroupBox.Name = "PreviewGroupBox";
-            this.PreviewGroupBox.Size = new System.Drawing.Size(369, 53);
-            this.PreviewGroupBox.TabIndex = 3;
-            this.PreviewGroupBox.TabStop = false;
-            this.PreviewGroupBox.Text = "Preview";
-            // 
-            // PreviewTxt
-            // 
-            this.PreviewTxt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.PreviewTxt.Location = new System.Drawing.Point(6, 19);
-            this.PreviewTxt.Name = "PreviewTxt";
-            this.PreviewTxt.ReadOnly = true;
-            this.PreviewTxt.Size = new System.Drawing.Size(357, 20);
-            this.PreviewTxt.TabIndex = 0;
-            this.MainToolTip.SetToolTip(this.PreviewTxt, "Preview of the effect of the currently selected command when used");
             // 
             // PluginsExplanationLbl2
             // 
@@ -814,6 +789,16 @@
             this.ExportUserSettingsBtn.UseVisualStyleBackColor = true;
             this.ExportUserSettingsBtn.Click += new System.EventHandler(this.ExportUserSettingsBtn_Click);
             // 
+            // PreviewCtrl
+            // 
+            this.PreviewCtrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.PreviewCtrl.Location = new System.Drawing.Point(9, 460);
+            this.PreviewCtrl.Name = "PreviewCtrl";
+            this.PreviewCtrl.Plugin = null;
+            this.PreviewCtrl.Size = new System.Drawing.Size(369, 53);
+            this.PreviewCtrl.TabIndex = 3;
+            // 
             // MainForm
             // 
             this.AcceptButton = this.OKBtn;
@@ -844,8 +829,6 @@
             this.MainTabCtrl.ResumeLayout(false);
             this.PluginsPage.ResumeLayout(false);
             this.PluginsPage.PerformLayout();
-            this.PreviewGroupBox.ResumeLayout(false);
-            this.PreviewGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PluginsDataGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PluginsDataGridBindingSource)).EndInit();
             this.MiscOptionsPage.ResumeLayout(false);
@@ -895,8 +878,6 @@
         private System.Windows.Forms.ToolTip MainToolTip;
         private System.Windows.Forms.Label PluginsExplanationLbl2;
         private System.Windows.Forms.DataGridView PluginsDataGrid;
-        private System.Windows.Forms.GroupBox PreviewGroupBox;
-        private System.Windows.Forms.TextBox PreviewTxt;
         private System.Windows.Forms.Button ImportPipelinePluginsBtn;
         private System.Windows.Forms.Button ExportPipelinePluginsBtn;
         private System.Windows.Forms.Label BevelLineLbl2;
@@ -919,6 +900,7 @@
         private System.Windows.Forms.CheckBox UsePreviewModeInMainMenuChk;
         private System.Windows.Forms.BindingSource PluginsDataGridBindingSource;
         private System.Windows.Forms.BindingSource CtrlKeyPluginComboBindingSource;
+        private UserControls.PluginPreviewUserControl PreviewCtrl;
     }
 }
 

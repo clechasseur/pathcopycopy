@@ -107,6 +107,12 @@
     <Compile Include="UI\UserControls\PipelineElementWithExecutableUserControl.Designer.cs">
       <DependentUpon>PipelineElementWithExecutableUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\UserControls\PluginPreviewUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UserControls\PluginPreviewUserControl.Designer.cs">
+      <DependentUpon>PluginPreviewUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\UserControls\RegexPipelineElementUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -191,6 +197,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\PipelineElementWithExecutableUserControl.resx">
       <DependentUpon>PipelineElementWithExecutableUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserControls\PluginPreviewUserControl.resx">
+      <DependentUpon>PluginPreviewUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\RegexPipelineElementUserControl.resx">
       <DependentUpon>RegexPipelineElementUserControl.cs</DependentUpon>
