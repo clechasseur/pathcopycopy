@@ -301,6 +301,7 @@
             this.PipelinePluginToolTip.SetToolTip(this.IgnoreCaseChk, "Whether to ignore case when performing regular expression-based find/replace oper" +
         "ations");
             this.IgnoreCaseChk.UseVisualStyleBackColor = true;
+            this.IgnoreCaseChk.CheckedChanged += new System.EventHandler(this.PipelinePluginForm_UpdatePreview);
             // 
             // UseRegexChk
             // 
@@ -324,6 +325,7 @@
             this.ReplaceTxt.TabIndex = 3;
             this.PipelinePluginToolTip.SetToolTip(this.ReplaceTxt, "Character string to replace any found element in the path with; if regular expres" +
         "sions are used, this is a replacement expression");
+            this.ReplaceTxt.TextChanged += new System.EventHandler(this.PipelinePluginForm_UpdatePreview);
             // 
             // ReplaceLbl
             // 
@@ -344,6 +346,7 @@
             this.FindTxt.TabIndex = 1;
             this.PipelinePluginToolTip.SetToolTip(this.FindTxt, "Character string to look for and replace in the path; if regular expressions are " +
         "used, this is a regular expression");
+            this.FindTxt.TextChanged += new System.EventHandler(this.PipelinePluginForm_UpdatePreview);
             // 
             // FindLbl
             // 
@@ -380,6 +383,7 @@
             this.NoSlashesChangeRadio.Text = "Do not change &slashes";
             this.PipelinePluginToolTip.SetToolTip(this.NoSlashesChangeRadio, "Do not change slash characters in the path");
             this.NoSlashesChangeRadio.UseVisualStyleBackColor = true;
+            this.NoSlashesChangeRadio.CheckedChanged += new System.EventHandler(this.PipelinePluginForm_UpdatePreview);
             // 
             // BackToForwardSlashesRadio
             // 
@@ -392,6 +396,7 @@
             this.PipelinePluginToolTip.SetToolTip(this.BackToForwardSlashesRadio, "Replace all backslash characters ( \\ ) in the path with forward slash characters " +
         "( / )");
             this.BackToForwardSlashesRadio.UseVisualStyleBackColor = true;
+            this.BackToForwardSlashesRadio.CheckedChanged += new System.EventHandler(this.PipelinePluginForm_UpdatePreview);
             // 
             // ForwardToBackslashesRadio
             // 
@@ -404,6 +409,7 @@
             this.PipelinePluginToolTip.SetToolTip(this.ForwardToBackslashesRadio, "Replace all forward slash characters ( / ) in the path with backslash characters " +
         "( \\ )");
             this.ForwardToBackslashesRadio.UseVisualStyleBackColor = true;
+            this.ForwardToBackslashesRadio.CheckedChanged += new System.EventHandler(this.PipelinePluginForm_UpdatePreview);
             // 
             // DecorationsGroupBox
             // 
@@ -432,6 +438,7 @@
             this.RemoveExtChk.Text = "Remove file extensi&on";
             this.PipelinePluginToolTip.SetToolTip(this.RemoveExtChk, "Remove any extension from the file at the end of the path");
             this.RemoveExtChk.UseVisualStyleBackColor = true;
+            this.RemoveExtChk.CheckedChanged += new System.EventHandler(this.PipelinePluginForm_UpdatePreview);
             // 
             // OptionalQuotesChk
             // 
@@ -444,6 +451,7 @@
             this.OptionalQuotesChk.Text = "...only if it contains s&paces";
             this.PipelinePluginToolTip.SetToolTip(this.OptionalQuotesChk, "Whether to only surround path with quotes if the path contains spaces");
             this.OptionalQuotesChk.UseVisualStyleBackColor = true;
+            this.OptionalQuotesChk.CheckedChanged += new System.EventHandler(this.PipelinePluginForm_UpdatePreview);
             // 
             // EncodeURICharsChk
             // 
@@ -457,6 +465,7 @@
             this.PipelinePluginToolTip.SetToolTip(this.EncodeURICharsChk, "Replace all characters in path that are invalid in a URI by percent-encoding ( %x" +
         "x )");
             this.EncodeURICharsChk.UseVisualStyleBackColor = true;
+            this.EncodeURICharsChk.CheckedChanged += new System.EventHandler(this.PipelinePluginForm_UpdatePreview);
             // 
             // EncodeURIWhitespaceChk
             // 
@@ -480,6 +489,7 @@
             this.EmailLinksChk.Text = "Enclose path in < and > (to create e-&mail links)";
             this.PipelinePluginToolTip.SetToolTip(this.EmailLinksChk, "Surround path with < and > characters (this creates e-mail links)");
             this.EmailLinksChk.UseVisualStyleBackColor = true;
+            this.EmailLinksChk.CheckedChanged += new System.EventHandler(this.PipelinePluginForm_UpdatePreview);
             // 
             // QuotesChk
             // 
