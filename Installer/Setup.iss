@@ -96,6 +96,7 @@ VersionInfoCopyright={#MyAppCopyright}
 DisableReadyMemo=yes
 AlwaysShowComponentsList=no
 DisableReadyPage=yes
+CloseApplications=no
 OutputDir=Output
 MinVersion=5.1
 #ifdef SIGNCODE
