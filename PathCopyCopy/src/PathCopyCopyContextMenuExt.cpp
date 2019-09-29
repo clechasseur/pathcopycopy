@@ -372,7 +372,7 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::QueryContextMenu(
                         if (vPluginIds.size() != 1 || !::IsEqualGUID(vPluginIds.front(), PCC::Plugins::LongPathPlugin::ID)) {
                             PCC::CLSIDV::const_iterator it, end = vPluginIds.end();
                             for (it = vPluginIds.begin(); SUCCEEDED(hRes) && it != end; ++it) {
-                                hRes = AddPluginToMenu(*it, p_hMenu, useIconForDefaultPlugin, false, false, true, cmdId, position);
+                                hRes = AddPluginToMenu(*it, p_hMenu, useIconForDefaultPlugin, usePreviewModeInMainMenu, false, true, cmdId, position);
                             }
                         } else {
                             // Default plugin is specified, use our own instead.
