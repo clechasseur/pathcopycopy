@@ -5,6 +5,7 @@ Version 17.1 (20??-??-??)
 - Settings application now remembers which edit mode was used for custom commands [https://github.com/clechasseur/pathcopycopy/issues/88]
 - Settings application now remembers size and position of custom commands dialogs [https://github.com/clechasseur/pathcopycopy/issues/86]
 - The dialog to edit custom commands now has a preview box (both in Simple and Expert modes) [https://github.com/clechasseur/pathcopycopy/issues/85]
+- Previews displayed in the menu will now correctly display ampersand (&) characters [https://github.com/clechasseur/pathcopycopy/issues/93]
 
 
 Version 17.0.1 (2019-09-08)

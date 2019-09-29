@@ -770,6 +770,9 @@ HRESULT CPathCopyCopyContextMenuExt::AddPluginToMenu(const PCC::PluginSP& p_spPl
         if (description.size() > MAX_PATH) {
             description.resize(MAX_PATH);
         }
+        // If path contains ampersands, they will be treated as shortcuts.
+        // We have to double them.
+        StringUtils::ReplaceAll(description, L"&", L"&&");
     } else {
         description = p_spPlugin->Description();
         if (p_DropRedundantWords && p_spPlugin->CanDropRedundantWords()) {
