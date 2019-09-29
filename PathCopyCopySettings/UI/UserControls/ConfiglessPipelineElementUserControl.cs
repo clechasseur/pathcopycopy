@@ -28,7 +28,7 @@ namespace PathCopyCopy.Settings.UI.UserControls
     /// This is the default user control used unless a pipeline element
     /// returns a custom one.
     /// </summary>
-    public partial class ConfiglessPipelineElementUserControl : UserControl
+    public partial class ConfiglessPipelineElementUserControl : PipelineElementUserControl
     {
         /// <summary>
         /// Constructor.

@@ -30,7 +30,7 @@ namespace PathCopyCopy.Settings.UI.UserControls
     /// <summary>
     /// UserControl used to configure a regex pipeline element.
     /// </summary>
-    public partial class RegexPipelineElementUserControl : UserControl
+    public partial class RegexPipelineElementUserControl : PipelineElementUserControl
     {
         /// Element we're configuring.
         private RegexPipelineElement element;
@@ -51,10 +51,10 @@ namespace PathCopyCopy.Settings.UI.UserControls
         /// <summary>
         /// Called when the control is initially loaded. We populate our controls here.
         /// </summary>
-        /// <param name="sender">Event sender.</param>
         /// <param name="e">Event arguments.</param>
-        private void RegexPipelineElementUserControl_Load(object sender, EventArgs e)
+        protected override void OnLoad(EventArgs e)
         {
+            base.OnLoad(e);
             FindTxt.Text = element.Regex;
             ReplaceTxt.Text = element.Format;
             IgnoreCaseChk.Checked = element.IgnoreCase;
@@ -69,6 +69,7 @@ namespace PathCopyCopy.Settings.UI.UserControls
         private void FindTxt_TextChanged(object sender, EventArgs e)
         {
             element.Regex = FindTxt.Text;
+            OnPipelineElementChanged(EventArgs.Empty);
         }
 
         /// <summary>
@@ -80,6 +81,7 @@ namespace PathCopyCopy.Settings.UI.UserControls
         private void ReplaceTxt_TextChanged(object sender, EventArgs e)
         {
             element.Format = ReplaceTxt.Text;
+            OnPipelineElementChanged(EventArgs.Empty);
         }
 
         /// <summary>
@@ -91,6 +93,7 @@ namespace PathCopyCopy.Settings.UI.UserControls
         private void IgnoreCaseChk_CheckedChanged(object sender, EventArgs e)
         {
             element.IgnoreCase = IgnoreCaseChk.Checked;
+            OnPipelineElementChanged(EventArgs.Empty);
         }
 
         /// <summary>

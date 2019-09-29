@@ -44,6 +44,8 @@
             this.ElementsLbl = new System.Windows.Forms.Label();
             this.SelectElementLbl = new System.Windows.Forms.Label();
             this.NewElementContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.PreviewCtrl = new PathCopyCopy.Settings.UI.UserControls.PluginPreviewUserControl();
+            this.UserControlPlacementPanel = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // CancelBtn
@@ -53,7 +55,7 @@
             this.CancelBtn.Location = new System.Drawing.Point(551, 395);
             this.CancelBtn.Name = "CancelBtn";
             this.CancelBtn.Size = new System.Drawing.Size(75, 23);
-            this.CancelBtn.TabIndex = 11;
+            this.CancelBtn.TabIndex = 13;
             this.CancelBtn.Text = "Cancel";
             this.AdvancedPipelinePluginToolTip.SetToolTip(this.CancelBtn, "Do not save this custom command and close the window");
             this.CancelBtn.UseVisualStyleBackColor = true;
@@ -65,7 +67,7 @@
             this.OKBtn.Location = new System.Drawing.Point(470, 395);
             this.OKBtn.Name = "OKBtn";
             this.OKBtn.Size = new System.Drawing.Size(75, 23);
-            this.OKBtn.TabIndex = 10;
+            this.OKBtn.TabIndex = 12;
             this.OKBtn.Text = "OK";
             this.AdvancedPipelinePluginToolTip.SetToolTip(this.OKBtn, "Save this custom command and close the window");
             this.OKBtn.UseVisualStyleBackColor = true;
@@ -77,7 +79,7 @@
             this.SwitchBtn.Location = new System.Drawing.Point(12, 395);
             this.SwitchBtn.Name = "SwitchBtn";
             this.SwitchBtn.Size = new System.Drawing.Size(94, 23);
-            this.SwitchBtn.TabIndex = 9;
+            this.SwitchBtn.TabIndex = 11;
             this.SwitchBtn.Text = "Simple Mode";
             this.AdvancedPipelinePluginToolTip.SetToolTip(this.SwitchBtn, "Switch to Simple Mode, which is easier to use but has less customzation options");
             this.SwitchBtn.UseVisualStyleBackColor = true;
@@ -197,6 +199,27 @@
             this.NewElementContextMenuStrip.Name = "NewElementContextMenuStrip";
             this.NewElementContextMenuStrip.Size = new System.Drawing.Size(61, 4);
             // 
+            // PreviewCtrl
+            // 
+            this.PreviewCtrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.PreviewCtrl.Location = new System.Drawing.Point(256, 330);
+            this.PreviewCtrl.Name = "PreviewCtrl";
+            this.PreviewCtrl.Plugin = null;
+            this.PreviewCtrl.Size = new System.Drawing.Size(370, 53);
+            this.PreviewCtrl.TabIndex = 10;
+            // 
+            // UserControlPlacementPanel
+            // 
+            this.UserControlPlacementPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.UserControlPlacementPanel.Location = new System.Drawing.Point(256, 67);
+            this.UserControlPlacementPanel.Name = "UserControlPlacementPanel";
+            this.UserControlPlacementPanel.Size = new System.Drawing.Size(370, 257);
+            this.UserControlPlacementPanel.TabIndex = 9;
+            this.UserControlPlacementPanel.Visible = false;
+            // 
             // AdvancedPipelinePluginForm
             // 
             this.AcceptButton = this.OKBtn;
@@ -204,6 +227,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.CancelBtn;
             this.ClientSize = new System.Drawing.Size(638, 430);
+            this.Controls.Add(this.PreviewCtrl);
             this.Controls.Add(this.SelectElementLbl);
             this.Controls.Add(this.MoveElementDownBtn);
             this.Controls.Add(this.MoveElementUpBtn);
@@ -216,6 +240,7 @@
             this.Controls.Add(this.SwitchBtn);
             this.Controls.Add(this.OKBtn);
             this.Controls.Add(this.CancelBtn);
+            this.Controls.Add(this.UserControlPlacementPanel);
             this.HelpButton = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -250,5 +275,7 @@
         private System.Windows.Forms.Button MoveElementDownBtn;
         private System.Windows.Forms.Label SelectElementLbl;
         private System.Windows.Forms.ContextMenuStrip NewElementContextMenuStrip;
+        private UserControls.PluginPreviewUserControl PreviewCtrl;
+        private System.Windows.Forms.Panel UserControlPlacementPanel;
     }
 }

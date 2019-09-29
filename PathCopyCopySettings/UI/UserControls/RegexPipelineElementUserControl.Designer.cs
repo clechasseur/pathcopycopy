@@ -114,7 +114,6 @@
             this.Controls.Add(this.FindLbl);
             this.Name = "RegexPipelineElementUserControl";
             this.Size = new System.Drawing.Size(290, 76);
-            this.Load += new System.EventHandler(this.RegexPipelineElementUserControl_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

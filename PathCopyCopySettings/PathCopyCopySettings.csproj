@@ -101,6 +101,12 @@
     <Compile Include="UI\UserControls\PathsSeparatorPipelineElementUserControl.Designer.cs">
       <DependentUpon>PathsSeparatorPipelineElementUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\UserControls\PipelineElementUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UserControls\PipelineElementUserControl.Designer.cs">
+      <DependentUpon>PipelineElementUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\UserControls\PipelineElementWithExecutableUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

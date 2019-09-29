@@ -85,7 +85,6 @@
             this.Controls.Add(this.FindLbl);
             this.Name = "FindReplacePipelineElementUserControl";
             this.Size = new System.Drawing.Size(229, 47);
-            this.Load += new System.EventHandler(this.FindReplacePipelineElementUserControl_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

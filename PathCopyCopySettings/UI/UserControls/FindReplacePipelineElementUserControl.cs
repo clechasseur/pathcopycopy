@@ -29,7 +29,7 @@ namespace PathCopyCopy.Settings.UI.UserControls
     /// <summary>
     /// UserControl used to configure a find/replace pipeline element.
     /// </summary>
-    public partial class FindReplacePipelineElementUserControl : UserControl
+    public partial class FindReplacePipelineElementUserControl : PipelineElementUserControl
     {
         /// Element we're configuring.
         private FindReplacePipelineElement element;
@@ -50,10 +50,10 @@ namespace PathCopyCopy.Settings.UI.UserControls
         /// <summary>
         /// Called when the control is initially loaded. We populate our controls here.
         /// </summary>
-        /// <param name="sender">Event sender.</param>
         /// <param name="e">Event arguments.</param>
-        private void FindReplacePipelineElementUserControl_Load(object sender, EventArgs e)
+        protected override void OnLoad(EventArgs e)
         {
+            base.OnLoad(e);
             FindTxt.Text = element.OldValue;
             ReplaceTxt.Text = element.NewValue;
         }
@@ -67,6 +67,7 @@ namespace PathCopyCopy.Settings.UI.UserControls
         private void FindTxt_TextChanged(object sender, EventArgs e)
         {
             element.OldValue = FindTxt.Text;
+            OnPipelineElementChanged(EventArgs.Empty);
         }
 
         /// <summary>
@@ -78,6 +79,7 @@ namespace PathCopyCopy.Settings.UI.UserControls
         private void ReplaceTxt_TextChanged(object sender, EventArgs e)
         {
             element.NewValue = ReplaceTxt.Text;
+            OnPipelineElementChanged(EventArgs.Empty);
         }
     }
 }

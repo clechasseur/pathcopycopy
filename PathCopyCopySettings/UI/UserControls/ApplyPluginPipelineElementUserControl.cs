@@ -32,7 +32,7 @@ namespace PathCopyCopy.Settings.UI.UserControls
     /// <summary>
     /// UserControl used to configure an Apply Plugin pipeline element.
     /// </summary>
-    public partial class ApplyPluginPipelineElementUserControl : UserControl
+    public partial class ApplyPluginPipelineElementUserControl : PipelineElementUserControl
     {
         /// Element we're configuring.
         private ApplyPluginPipelineElement element;
@@ -53,10 +53,11 @@ namespace PathCopyCopy.Settings.UI.UserControls
         /// <summary>
         /// Called when the control is initially loaded. We populate our controls here.
         /// </summary>
-        /// <param name="sender">Event sender.</param>
         /// <param name="e">Event arguments.</param>
-        private void ApplyPluginPipelineElementUserControl_Load(object sender, EventArgs e)
+        protected override void OnLoad(EventArgs e)
         {
+            base.OnLoad(e);
+
             // First load list of plugins to display in the listbox for the base
             // plugin. We only load default and COM plugins for this since we
             // don't want a pipeline plugin to be based off another (for now at least).
@@ -107,10 +108,12 @@ namespace PathCopyCopy.Settings.UI.UserControls
                 Plugin plugin = (Plugin) BasePluginLst.Items[BasePluginLst.SelectedIndex];
                 if (!(plugin is SeparatorPlugin)) {
                     element.PluginID = plugin.Id;
+                    OnPipelineElementChanged(EventArgs.Empty);
                 }
             } else {
                 // User deselected plugins, use default one.
                 element.PluginID = new Guid(Resources.LONG_PATH_PLUGIN_ID);
+                OnPipelineElementChanged(EventArgs.Empty);
             }
         }
     }

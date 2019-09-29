@@ -81,7 +81,6 @@
             this.Controls.Add(this.ExecutableLbl);
             this.Name = "PipelineElementWithExecutableUserControl";
             this.Size = new System.Drawing.Size(318, 24);
-            this.Load += new System.EventHandler(this.PipelineElementWithExecutableUserControl_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

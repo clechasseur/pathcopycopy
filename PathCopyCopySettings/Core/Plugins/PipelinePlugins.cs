@@ -673,7 +673,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// A new control will be created every time this is called.
         /// User assumes "ownership" of the returned control.
         /// </remarks>
-        public virtual UserControl GetEditingControl()
+        public virtual PipelineElementUserControl GetEditingControl()
         {
             // By default, we return a user control that has no additional
             // configuration required. Subclasses that require custom
@@ -1303,7 +1303,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// Returns a user control to configure this pipeline element.
         /// </summary>
         /// <returns>User control.</returns>
-        public override UserControl GetEditingControl()
+        public override PipelineElementUserControl GetEditingControl()
         {
             return new FindReplacePipelineElementUserControl(this);
         }
@@ -1436,7 +1436,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// Returns a user control to configure this pipeline element.
         /// </summary>
         /// <returns>User control.</returns>
-        public override UserControl GetEditingControl()
+        public override PipelineElementUserControl GetEditingControl()
         {
             return new RegexPipelineElementUserControl(this);
         }
@@ -1513,7 +1513,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// Returns a user control to configure this pipeline element.
         /// </summary>
         /// <returns>User control.</returns>
-        public override UserControl GetEditingControl()
+        public override PipelineElementUserControl GetEditingControl()
         {
             return new ApplyPluginPipelineElementUserControl(this);
         }
@@ -1600,7 +1600,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// Returns a user control to configure this pipeline element.
         /// </summary>
         /// <returns>User control.</returns>
-        public override UserControl GetEditingControl()
+        public override PipelineElementUserControl GetEditingControl()
         {
             return new PathsSeparatorPipelineElementUserControl(this);
         }
@@ -1653,7 +1653,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// Returns a user control to configure this pipeline element.
         /// </summary>
         /// <returns>User control.</returns>
-        public override UserControl GetEditingControl()
+        public override PipelineElementUserControl GetEditingControl()
         {
             return new PipelineElementWithExecutableUserControl(this);
         }

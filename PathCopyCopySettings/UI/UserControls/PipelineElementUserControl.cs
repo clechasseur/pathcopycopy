@@ -1,4 +1,4 @@
-﻿// PathsSeparatorPipelineElementUserControl.cs
+﻿// PipelineElementUserControl.cs
 // (c) 2019, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -20,53 +20,35 @@
 // THE SOFTWARE.
 
 using System;
-using System.Diagnostics;
 using System.Windows.Forms;
-using PathCopyCopy.Settings.Core.Plugins;
 
 namespace PathCopyCopy.Settings.UI.UserControls
 {
     /// <summary>
-    /// UserControl used to configure a paths separator pipeline element.
+    /// Base class for pipeline element editing controls.
     /// </summary>
-    public partial class PathsSeparatorPipelineElementUserControl : PipelineElementUserControl
+    public partial class PipelineElementUserControl : UserControl
     {
-        /// Element we're configuring.
-        private PathsSeparatorPipelineElement element;
+        /// <summary>
+        /// Event fired when the underlying pipeline element has changed.
+        /// </summary>
+        public event EventHandler PipelineElementChanged;
 
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="element">Pipeline element to configure.</param>
-        public PathsSeparatorPipelineElementUserControl(PathsSeparatorPipelineElement element)
+        public PipelineElementUserControl()
         {
-            Debug.Assert(element != null);
-
-            this.element = element;
-
             InitializeComponent();
         }
 
         /// <summary>
-        /// Called when the control is initially loaded. We populate our controls here.
+        /// Fires the <see cref="PipelineElementChanged"/> event.
         /// </summary>
         /// <param name="e">Event arguments.</param>
-        protected override void OnLoad(EventArgs e)
+        protected virtual void OnPipelineElementChanged(EventArgs e)
         {
-            base.OnLoad(e);
-            SeparatorTxt.Text = element.PathsSeparator;
-        }
-
-        /// <summary>
-        /// Called when the text of the Separator textbox changes. We update
-        /// our associated pipeline element here.
-        /// </summary>
-        /// <param name="sender">Event sender.</param>
-        /// <param name="e">Event arguments.</param>
-        private void SeparatorTxt_TextChanged(object sender, EventArgs e)
-        {
-            element.PathsSeparator = SeparatorTxt.Text;
-            OnPipelineElementChanged(EventArgs.Empty);
+            PipelineElementChanged(this, e);
         }
     }
 }

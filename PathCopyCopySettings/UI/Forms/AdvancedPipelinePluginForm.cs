@@ -26,6 +26,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using PathCopyCopy.Settings.Core.Plugins;
 using PathCopyCopy.Settings.Properties;
+using PathCopyCopy.Settings.UI.UserControls;
 using PathCopyCopy.Settings.UI.Utils;
 
 namespace PathCopyCopy.Settings.UI.Forms
@@ -36,17 +37,29 @@ namespace PathCopyCopy.Settings.UI.Forms
     /// </summary>
     public partial class AdvancedPipelinePluginForm : PositionPersistedForm
     {
-        /// Plugin info for the plugin we're editing.
-        private PipelinePluginInfo pluginInfo;
+        /// Initial plugin info used to populate our controls.
+        /// Will be null if we're creating a new pipeline plugin.
+        private PipelinePluginInfo oldPluginInfo;
 
-        /// Pipeline of the plugin info.
-        private Pipeline pipeline;
+        /// Pipeline of the initial plugin, if we have one.
+        private Pipeline oldPipeline;
+
+        /// ID of the plugin we're editing. Will be generated
+        /// if we're creating a new pipeline plugin.
+        private Guid pluginId;
 
         /// Binding list that will store the pipeline elements so that we can use data binding.
         private BindingList<PipelineElement> elements = new BindingList<PipelineElement>();
 
         /// User control to edit currently-selected pipeline element.
-        private UserControl currentUserControl;
+        private PipelineElementUserControl currentUserControl;
+
+        /// Plugin info of the plugin being edited. Updated as
+        /// the control changes. Will be returned if user chooses OK.
+        private PipelinePluginInfo newPluginInfo;
+
+        /// Pipeline of the new plugin info, if we have one.
+        private Pipeline newPipeline;
 
         /// <summary>
         /// Constructor.
@@ -74,24 +87,28 @@ namespace PathCopyCopy.Settings.UI.Forms
             out bool switchToSimple)
         {
             // Save old info so that the OnLoad event handler can use it.
-            pluginInfo = oldInfo;
+            oldPluginInfo = oldInfo;
 
             // If a plugin info was specified, decode its pipeline immediately.
             // We want pipeline exceptions to propagate out *before* we show the form.
-            if (pluginInfo != null) {
-                pipeline = PipelineDecoder.DecodePipeline(pluginInfo.EncodedElements);
+            if (oldPluginInfo != null) {
+                oldPipeline = PipelineDecoder.DecodePipeline(oldPluginInfo.EncodedElements);
+            }
+
+            // Save plugin ID, or generate a new one if this is a new plugin.
+            if (oldPluginInfo != null) {
+                pluginId = oldPluginInfo.Id;
             } else {
-                // No plugin info to decode, create new empty pipeline.
-                pipeline = new Pipeline();
+                pluginId = Guid.NewGuid();
             }
 
             // Show the form and check result.
             DialogResult dialogRes = ShowDialog(owner);
 
             // If user saved, return the new info.
-            Debug.Assert(dialogRes == DialogResult.Cancel || pluginInfo != null);
+            Debug.Assert(dialogRes == DialogResult.Cancel || newPluginInfo != null);
             switchToSimple = dialogRes == DialogResult.Retry;
-            return dialogRes != DialogResult.Cancel ? pluginInfo : null;
+            return dialogRes != DialogResult.Cancel ? newPluginInfo : null;
         }
 
         /// <summary>
@@ -102,8 +119,6 @@ namespace PathCopyCopy.Settings.UI.Forms
         /// <param name="e">Event arguments.</param>
         private void AdvancedPipelinePluginForm_Load(object sender, EventArgs e)
         {
-            Debug.Assert(pipeline != null);
-
             // Populate the context menu strip used to create new elements.
             // We do this in code to be able to reuse resources to avoid string duplication.
             AddNewElementMenuItem(Resources.PipelineElement_ApplyPlugin,
@@ -153,18 +168,48 @@ namespace PathCopyCopy.Settings.UI.Forms
                 Resources.PipelineElement_ExecutableWithFilelist_HelpText,
                 () => new ExecutableWithFilelistPipelineElement());
 
-            // Copy pipeline elements from the pipeline to a list that supports data binding.
-            // This is needed otherwise the list box won't properly function.
-            foreach (PipelineElement element in pipeline.Elements) {
-                elements.Add(element);
+            if (oldPipeline != null) {
+                // Copy pipeline elements from the pipeline to a list that supports data binding.
+                // This is needed otherwise the list box won't properly function.
+                foreach (PipelineElement element in oldPipeline.Elements) {
+                    elements.Add(element);
+                }
             }
 
             // Populate our controls.
-            NameTxt.Text = pluginInfo?.Description ?? String.Empty;
+            NameTxt.Text = oldPluginInfo?.Description ?? String.Empty;
             ElementsLst.DataSource = elements;
 
             // Update initial controls.
             UpdateControls();
+
+            // Immediately update plugin info so that preview box is initially filled.
+            UpdatePluginInfo();
+        }
+
+        /// <summary>
+        /// Updates <see cref="newPluginInfo"/> with the contents of the
+        /// form's controls. Also updates the preview box.
+        /// </summary>
+        private void UpdatePluginInfo()
+        {
+            // Create new pipeline and copy elements back from the binding list.
+            Pipeline pipeline = new Pipeline();
+            pipeline.Elements.AddRange(elements);
+            
+            // Create new plugin info and save encoded elements.
+            PipelinePluginInfo pluginInfo = new PipelinePluginInfo();
+            pluginInfo.Id = pluginId;
+            pluginInfo.Description = NameTxt.Text;
+            pluginInfo.EncodedElements = pipeline.Encode();
+            pluginInfo.RequiredVersion = pipeline.RequiredVersion;
+            pluginInfo.EditMode = PipelinePluginEditMode.Expert;
+            Debug.Assert(!pluginInfo.Global);
+
+            // Save plugin info and pipeline, then update preview.
+            newPluginInfo = pluginInfo;
+            newPipeline = pipeline;
+            PreviewCtrl.Plugin = newPluginInfo.ToPlugin();
         }
 
         /// <summary>
@@ -175,38 +220,22 @@ namespace PathCopyCopy.Settings.UI.Forms
         /// <param name="e">Event arguments.</param>
         private void AdvancedPipelinePluginForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Debug.Assert(pipeline != null);
-
             // If user chose to press OK or switch to Simple Mode, save plugin info.
             if (this.DialogResult == DialogResult.OK || this.DialogResult == DialogResult.Retry) {
                 // Make sure user has entered a name (unless we're switching to Simple Mode).
                 if (!String.IsNullOrEmpty(NameTxt.Text) || this.DialogResult == DialogResult.Retry) {
-                    // Clear content of pipeline and copy elements back from the binding list.
-                    pipeline.Clear();
-                    pipeline.Elements.AddRange(elements);
+                    // Update plugin info so that we have a pipeline.
+                    UpdatePluginInfo();
 
                     // If pipeline is too complex, user might lose customization by switching
                     // to simple mode. Warn in this case.
-                    if (this.DialogResult == DialogResult.Retry && !PipelinePluginEditor.IsPipelineSimple(pipeline)) {
+                    Debug.Assert(newPipeline != null);
+                    if (this.DialogResult == DialogResult.Retry && !PipelinePluginEditor.IsPipelineSimple(newPipeline)) {
                         DialogResult subDialogRes = MessageBox.Show(Resources.PipelinePluginForm_PipelineTooComplexForSimpleMode,
                             Resources.PipelinePluginForm_MsgTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                         if (subDialogRes == DialogResult.No) {
                             e.Cancel = true;
                         }
-                    }
-                    if (!e.Cancel) {
-                        // Create plugin info if we don't already have one.
-                        if (pluginInfo == null) {
-                            pluginInfo = new PipelinePluginInfo();
-                            pluginInfo.Id = Guid.NewGuid();
-                        }
-
-                        // Save info in plugin info wrapper.
-                        pluginInfo.Description = NameTxt.Text;
-                        pluginInfo.EncodedElements = pipeline.Encode();
-                        pluginInfo.RequiredVersion = pipeline.RequiredVersion;
-                        pluginInfo.EditMode = PipelinePluginEditMode.Expert;
-                        Debug.Assert(!pluginInfo.Global);
                     }
                 } else {
                     // Warn user that we need a non-empty name.
@@ -264,6 +293,7 @@ namespace PathCopyCopy.Settings.UI.Forms
             try {
                 if (currentUserControl != null) {
                     // We currently display a user control for another element, remove it.
+                    currentUserControl.PipelineElementChanged -= PipelineElementUserControl_PipelineElementChanged;
                     Controls.Remove(currentUserControl);
                     currentUserControl.Dispose();
                     currentUserControl = null;
@@ -277,13 +307,11 @@ namespace PathCopyCopy.Settings.UI.Forms
                     currentUserControl = elements[ElementsLst.SelectedIndex].GetEditingControl();
                     currentUserControl.Visible = false;
                     Controls.Add(currentUserControl);
-                    currentUserControl.Location = SelectElementLbl.Location;
-                    currentUserControl.Size = new Size(this.Size.Width - currentUserControl.Location.X -
-                        (this.Size.Width - (NameTxt.Location.X + NameTxt.Size.Width)),
-                        ElementsLst.Size.Height);
-                    currentUserControl.Anchor = AnchorStyles.Top | AnchorStyles.Left |
-                        AnchorStyles.Bottom | AnchorStyles.Right;
-                    currentUserControl.TabIndex = SelectElementLbl.TabIndex;
+                    currentUserControl.Location = UserControlPlacementPanel.Location;
+                    currentUserControl.Size = UserControlPlacementPanel.Size;
+                    currentUserControl.Anchor = UserControlPlacementPanel.Anchor;
+                    currentUserControl.TabIndex = UserControlPlacementPanel.TabIndex;
+                    currentUserControl.PipelineElementChanged += PipelineElementUserControl_PipelineElementChanged;
                     currentUserControl.Visible = true;
                 }
 
@@ -324,6 +352,9 @@ namespace PathCopyCopy.Settings.UI.Forms
 
                 // Update our selection-dependent controls.
                 UpdateControls();
+
+                // Update preview.
+                UpdatePluginInfo();
             }
         }
 
@@ -348,6 +379,9 @@ namespace PathCopyCopy.Settings.UI.Forms
 
             // Update selection-dependent controls.
             UpdateControls();
+
+            // Update preview.
+            UpdatePluginInfo();
         }
 
         /// <summary>
@@ -367,6 +401,9 @@ namespace PathCopyCopy.Settings.UI.Forms
             // Reselect the element and update our selection-dependent controls.
             ElementsLst.SelectedIndex = selectedIdx - 1;
             UpdateControls();
+
+            // Update preview.
+            UpdatePluginInfo();
         }
 
         /// <summary>
@@ -386,6 +423,20 @@ namespace PathCopyCopy.Settings.UI.Forms
             // Reselect the element and update our selection-dependent controls.
             ElementsLst.SelectedIndex = selectedIdx + 1;
             UpdateControls();
+
+            // Update preview.
+            UpdatePluginInfo();
+        }
+
+        /// <summary>
+        /// Called when the currently-edited pipeline element changes. We use this
+        /// opportunity to update the pipeline plugin info and the preview.
+        /// </summary>
+        /// <param name="sender">Event sender.</param>
+        /// <param name="e">Event arguments.</param>
+        private void PipelineElementUserControl_PipelineElementChanged(object sender, EventArgs e)
+        {
+            UpdatePluginInfo();
         }
 
         /// <summary>

@@ -62,7 +62,6 @@
             this.Controls.Add(this.SeparatorLbl);
             this.Name = "PathsSeparatorPipelineElementUserControl";
             this.Size = new System.Drawing.Size(231, 20);
-            this.Load += new System.EventHandler(this.PathsSeparatorPipelineElementUserControl_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
