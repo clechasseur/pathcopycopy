@@ -50,7 +50,6 @@
             this.Controls.Add(this.BasePluginLst);
             this.Name = "ApplyPluginPipelineElementUserControl";
             this.Size = new System.Drawing.Size(314, 306);
-            this.Load += new System.EventHandler(this.ApplyPluginPipelineElementUserControl_Load);
             this.ResumeLayout(false);
 
         }

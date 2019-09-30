@@ -67,6 +67,7 @@
             this.ChooseExecutableOpenDlg = new System.Windows.Forms.OpenFileDialog();
             this.PipelinePluginToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.SwitchBtn = new System.Windows.Forms.Button();
+            this.PreviewCtrl = new PathCopyCopy.Settings.UI.UserControls.PluginPreviewUserControl();
             this.MainTabControl.SuspendLayout();
             this.BasePluginPage.SuspendLayout();
             this.OptionsPage.SuspendLayout();
@@ -300,6 +301,7 @@
             this.PipelinePluginToolTip.SetToolTip(this.IgnoreCaseChk, "Whether to ignore case when performing regular expression-based find/replace oper" +
         "ations");
             this.IgnoreCaseChk.UseVisualStyleBackColor = true;
+            this.IgnoreCaseChk.CheckedChanged += new System.EventHandler(this.PipelinePluginForm_UpdatePreview);
             // 
             // UseRegexChk
             // 
@@ -323,6 +325,7 @@
             this.ReplaceTxt.TabIndex = 3;
             this.PipelinePluginToolTip.SetToolTip(this.ReplaceTxt, "Character string to replace any found element in the path with; if regular expres" +
         "sions are used, this is a replacement expression");
+            this.ReplaceTxt.TextChanged += new System.EventHandler(this.PipelinePluginForm_UpdatePreview);
             // 
             // ReplaceLbl
             // 
@@ -343,6 +346,7 @@
             this.FindTxt.TabIndex = 1;
             this.PipelinePluginToolTip.SetToolTip(this.FindTxt, "Character string to look for and replace in the path; if regular expressions are " +
         "used, this is a regular expression");
+            this.FindTxt.TextChanged += new System.EventHandler(this.PipelinePluginForm_UpdatePreview);
             // 
             // FindLbl
             // 
@@ -379,6 +383,7 @@
             this.NoSlashesChangeRadio.Text = "Do not change &slashes";
             this.PipelinePluginToolTip.SetToolTip(this.NoSlashesChangeRadio, "Do not change slash characters in the path");
             this.NoSlashesChangeRadio.UseVisualStyleBackColor = true;
+            this.NoSlashesChangeRadio.CheckedChanged += new System.EventHandler(this.PipelinePluginForm_UpdatePreview);
             // 
             // BackToForwardSlashesRadio
             // 
@@ -391,6 +396,7 @@
             this.PipelinePluginToolTip.SetToolTip(this.BackToForwardSlashesRadio, "Replace all backslash characters ( \\ ) in the path with forward slash characters " +
         "( / )");
             this.BackToForwardSlashesRadio.UseVisualStyleBackColor = true;
+            this.BackToForwardSlashesRadio.CheckedChanged += new System.EventHandler(this.PipelinePluginForm_UpdatePreview);
             // 
             // ForwardToBackslashesRadio
             // 
@@ -403,6 +409,7 @@
             this.PipelinePluginToolTip.SetToolTip(this.ForwardToBackslashesRadio, "Replace all forward slash characters ( / ) in the path with backslash characters " +
         "( \\ )");
             this.ForwardToBackslashesRadio.UseVisualStyleBackColor = true;
+            this.ForwardToBackslashesRadio.CheckedChanged += new System.EventHandler(this.PipelinePluginForm_UpdatePreview);
             // 
             // DecorationsGroupBox
             // 
@@ -431,6 +438,7 @@
             this.RemoveExtChk.Text = "Remove file extensi&on";
             this.PipelinePluginToolTip.SetToolTip(this.RemoveExtChk, "Remove any extension from the file at the end of the path");
             this.RemoveExtChk.UseVisualStyleBackColor = true;
+            this.RemoveExtChk.CheckedChanged += new System.EventHandler(this.PipelinePluginForm_UpdatePreview);
             // 
             // OptionalQuotesChk
             // 
@@ -443,6 +451,7 @@
             this.OptionalQuotesChk.Text = "...only if it contains s&paces";
             this.PipelinePluginToolTip.SetToolTip(this.OptionalQuotesChk, "Whether to only surround path with quotes if the path contains spaces");
             this.OptionalQuotesChk.UseVisualStyleBackColor = true;
+            this.OptionalQuotesChk.CheckedChanged += new System.EventHandler(this.PipelinePluginForm_UpdatePreview);
             // 
             // EncodeURICharsChk
             // 
@@ -456,6 +465,7 @@
             this.PipelinePluginToolTip.SetToolTip(this.EncodeURICharsChk, "Replace all characters in path that are invalid in a URI by percent-encoding ( %x" +
         "x )");
             this.EncodeURICharsChk.UseVisualStyleBackColor = true;
+            this.EncodeURICharsChk.CheckedChanged += new System.EventHandler(this.PipelinePluginForm_UpdatePreview);
             // 
             // EncodeURIWhitespaceChk
             // 
@@ -479,6 +489,7 @@
             this.EmailLinksChk.Text = "Enclose path in < and > (to create e-&mail links)";
             this.PipelinePluginToolTip.SetToolTip(this.EmailLinksChk, "Surround path with < and > characters (this creates e-mail links)");
             this.EmailLinksChk.UseVisualStyleBackColor = true;
+            this.EmailLinksChk.CheckedChanged += new System.EventHandler(this.PipelinePluginForm_UpdatePreview);
             // 
             // QuotesChk
             // 
@@ -496,10 +507,10 @@
             // 
             this.OKBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.OKBtn.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.OKBtn.Location = new System.Drawing.Point(238, 585);
+            this.OKBtn.Location = new System.Drawing.Point(238, 637);
             this.OKBtn.Name = "OKBtn";
             this.OKBtn.Size = new System.Drawing.Size(75, 23);
-            this.OKBtn.TabIndex = 4;
+            this.OKBtn.TabIndex = 5;
             this.OKBtn.Text = "OK";
             this.PipelinePluginToolTip.SetToolTip(this.OKBtn, "Save this custom command and close the window");
             this.OKBtn.UseVisualStyleBackColor = true;
@@ -508,10 +519,10 @@
             // 
             this.CancelBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.CancelBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.CancelBtn.Location = new System.Drawing.Point(319, 585);
+            this.CancelBtn.Location = new System.Drawing.Point(319, 637);
             this.CancelBtn.Name = "CancelBtn";
             this.CancelBtn.Size = new System.Drawing.Size(75, 23);
-            this.CancelBtn.TabIndex = 5;
+            this.CancelBtn.TabIndex = 6;
             this.CancelBtn.Text = "Cancel";
             this.PipelinePluginToolTip.SetToolTip(this.CancelBtn, "Do not save this custom command and close the window");
             this.CancelBtn.UseVisualStyleBackColor = true;
@@ -525,14 +536,24 @@
             // 
             this.SwitchBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.SwitchBtn.DialogResult = System.Windows.Forms.DialogResult.Retry;
-            this.SwitchBtn.Location = new System.Drawing.Point(12, 585);
+            this.SwitchBtn.Location = new System.Drawing.Point(12, 637);
             this.SwitchBtn.Name = "SwitchBtn";
             this.SwitchBtn.Size = new System.Drawing.Size(94, 23);
-            this.SwitchBtn.TabIndex = 3;
+            this.SwitchBtn.TabIndex = 4;
             this.SwitchBtn.Text = "Expert Mode";
             this.PipelinePluginToolTip.SetToolTip(this.SwitchBtn, "Switch to Expert Mode, which allows more customization options but is more comple" +
         "x to use");
             this.SwitchBtn.UseVisualStyleBackColor = true;
+            // 
+            // PreviewCtrl
+            // 
+            this.PreviewCtrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.PreviewCtrl.Location = new System.Drawing.Point(12, 578);
+            this.PreviewCtrl.Name = "PreviewCtrl";
+            this.PreviewCtrl.Plugin = null;
+            this.PreviewCtrl.Size = new System.Drawing.Size(380, 53);
+            this.PreviewCtrl.TabIndex = 3;
             // 
             // PipelinePluginForm
             // 
@@ -540,7 +561,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.CancelBtn;
-            this.ClientSize = new System.Drawing.Size(406, 620);
+            this.ClientSize = new System.Drawing.Size(406, 672);
+            this.Controls.Add(this.PreviewCtrl);
             this.Controls.Add(this.SwitchBtn);
             this.Controls.Add(this.CancelBtn);
             this.Controls.Add(this.OKBtn);
@@ -550,7 +572,7 @@
             this.HelpButton = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(422, 659);
+            this.MinimumSize = new System.Drawing.Size(422, 711);
             this.Name = "PipelinePluginForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
@@ -617,5 +639,6 @@
         private System.Windows.Forms.CheckBox RemoveExtChk;
         private System.Windows.Forms.ToolTip PipelinePluginToolTip;
         private System.Windows.Forms.Button SwitchBtn;
+        private UserControls.PluginPreviewUserControl PreviewCtrl;
     }
 }

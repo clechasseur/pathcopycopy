@@ -37,6 +37,12 @@ namespace PathCopyCopy.Settings.UI.Forms
     /// <summary>
     /// Main form of the Path Copy Copy settings application.
     /// </summary>
+    /// <remarks>
+    /// The form remembers its position and size, but not through
+    /// the generic <see cref="PositionPersistedForm"/>, because
+    /// it came before that. So it still uses the legacy way of
+    /// doing it, with its own entries in user settings.
+    /// </remarks>
     public partial class MainForm : Form
     {
         /// Paths separator that copies multiple paths on the same line.
@@ -48,11 +54,18 @@ namespace PathCopyCopy.Settings.UI.Forms
         /// URI of the page specifying the Path Copy Copy license on GitHub.
         private const string LICENSE_PAGE_URI = @"https://github.com/clechasseur/pathcopycopy/blob/master/LICENSE";
 
-        /// Extension of legacy pipeline plugins export files.
-        private const string LEGACY_PIPELINE_PLUGINS_EXT = ".pccpp";
-
         /// The standard DPI values in Windows.
         private const int STANDARD_DPI = 96;
+
+        /// Map of pipeline plugins exported file extensions to the
+        /// corresponding XML serializer version needed to read them.
+        private static readonly IDictionary<string, PipelinePluginXmlSerializerVersion> PIPELINE_PLUGINS_EXT_TO_SERIALIZER_VERSION =
+            new Dictionary<string, PipelinePluginXmlSerializerVersion>()
+            {
+                { ".eccv3", PipelinePluginXmlSerializerVersion.V3 },
+                { ".ecc", PipelinePluginXmlSerializerVersion.V2 },
+                { ".pccpp", PipelinePluginXmlSerializerVersion.V1 },
+            };
 
         /// Object used to access user settings.
         private UserSettings settings;
@@ -959,19 +972,9 @@ namespace PathCopyCopy.Settings.UI.Forms
         /// <param name="e">Event arguments.</param>
         private void PluginsDataGrid_SelectionChanged(object sender, EventArgs e)
         {
-            if (PluginsDataGrid.SelectedRows.Count == 1) {
-                // Display preview of plugin.
-                PluginDisplayInfo info = (PluginDisplayInfo) PluginsDataGrid.SelectedRows[0].DataBoundItem;
-                if (info.Plugin is SeparatorPlugin) {
-                    // ...except for separators, which is pointless.
-                    PreviewTxt.Clear();
-                } else {
-                    PreviewTxt.Text = info.Plugin.GetPreview(settings);
-                }
-            } else {
-                // Clear content of preview textbox.
-                PreviewTxt.Clear();
-            }
+            // Update preview control.
+            PreviewCtrl.Plugin = PluginsDataGrid.SelectedRows.Count == 1
+                ? ((PluginDisplayInfo) PluginsDataGrid.SelectedRows[0].DataBoundItem).Plugin : null;
 
             // Also update plugin-related buttons.
             UpdatePluginButtons();
@@ -1195,9 +1198,8 @@ namespace PathCopyCopy.Settings.UI.Forms
                 // Open file where to save data and serialize collection in XML.
                 // Use file extension to determine if we should use legacy serializing.
                 using (FileStream fstream = new FileStream(ExportPipelinePluginsSaveDlg.FileName, FileMode.Create)) {
-                    collection.ToXML(fstream, String.Equals(Path.GetExtension(
-                        ExportPipelinePluginsSaveDlg.FileName), LEGACY_PIPELINE_PLUGINS_EXT,
-                        StringComparison.CurrentCultureIgnoreCase));
+                    collection.ToXML(fstream, PIPELINE_PLUGINS_EXT_TO_SERIALIZER_VERSION[
+                        Path.GetExtension(ExportPipelinePluginsSaveDlg.FileName).ToLower()]);
                 }
             }
         }
@@ -1219,9 +1221,7 @@ namespace PathCopyCopy.Settings.UI.Forms
                         collection = PipelinePluginCollection.FromXML(fstream);
 
                         // If this is a legacy file without required versions, compute them now.
-                        if (String.Equals(Path.GetExtension(ImportPipelinePluginsOpenDlg.FileName),
-                            LEGACY_PIPELINE_PLUGINS_EXT, StringComparison.CurrentCultureIgnoreCase)) {
-
+                        if (PIPELINE_PLUGINS_EXT_TO_SERIALIZER_VERSION[Path.GetExtension(ImportPipelinePluginsOpenDlg.FileName).ToLower()] == PipelinePluginXmlSerializerVersion.V1) {
                             foreach (PipelinePluginInfo info in collection.Plugins) {
                                 try {
                                     Pipeline pipeline = PipelineDecoder.DecodePipeline(info.EncodedElements);

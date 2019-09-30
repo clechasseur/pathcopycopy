@@ -1,4 +1,4 @@
-﻿// PathsSeparatorPipelineElementUserControl.cs
+﻿// PluginPreviewUserControl.cs
 // (c) 2019, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -19,54 +19,61 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System;
-using System.Diagnostics;
 using System.Windows.Forms;
+using PathCopyCopy.Settings.Core;
 using PathCopyCopy.Settings.Core.Plugins;
 
 namespace PathCopyCopy.Settings.UI.UserControls
 {
     /// <summary>
-    /// UserControl used to configure a paths separator pipeline element.
+    /// User control that can be used to display a preview for
+    /// a specific <see cref="Plugin"/>.
     /// </summary>
-    public partial class PathsSeparatorPipelineElementUserControl : PipelineElementUserControl
+    public partial class PluginPreviewUserControl : UserControl
     {
-        /// Element we're configuring.
-        private PathsSeparatorPipelineElement element;
+        /// Plugin we're currently previewing.
+        private Plugin plugin;
+
+        /// Object used to access user settings.
+        private UserSettings settings;
+        
+        /// <summary>
+        /// Plugin to preview. Change this to update the preview displayed.
+        /// </summary>
+        public Plugin Plugin
+        {
+            get {
+                return plugin;
+            }
+            set {
+                if (plugin != value) {
+                    plugin = value;
+                    UpdatePreview();
+                }
+            }
+        }
 
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="element">Pipeline element to configure.</param>
-        public PathsSeparatorPipelineElementUserControl(PathsSeparatorPipelineElement element)
+        public PluginPreviewUserControl()
         {
-            Debug.Assert(element != null);
-
-            this.element = element;
-
             InitializeComponent();
+
+            settings = new UserSettings();
         }
 
         /// <summary>
-        /// Called when the control is initially loaded. We populate our controls here.
+        /// Updates the preview displayed in the control.
         /// </summary>
-        /// <param name="e">Event arguments.</param>
-        protected override void OnLoad(EventArgs e)
+        private void UpdatePreview()
         {
-            base.OnLoad(e);
-            SeparatorTxt.Text = element.PathsSeparator;
-        }
-
-        /// <summary>
-        /// Called when the text of the Separator textbox changes. We update
-        /// our associated pipeline element here.
-        /// </summary>
-        /// <param name="sender">Event sender.</param>
-        /// <param name="e">Event arguments.</param>
-        private void SeparatorTxt_TextChanged(object sender, EventArgs e)
-        {
-            element.PathsSeparator = SeparatorTxt.Text;
-            OnPipelineElementChanged(EventArgs.Empty);
+            if (plugin != null && !(plugin is SeparatorPlugin)) {
+                PreviewTxt.Text = plugin.GetPreview(settings);
+            } else {
+                // Clear content of preview textbox.
+                PreviewTxt.Clear();
+            }
         }
     }
 }

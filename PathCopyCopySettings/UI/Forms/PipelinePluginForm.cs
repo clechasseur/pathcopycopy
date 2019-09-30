@@ -25,7 +25,6 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
-using PathCopyCopy.Settings.Core;
 using PathCopyCopy.Settings.Core.Plugins;
 using PathCopyCopy.Settings.Properties;
 using PathCopyCopy.Settings.UI.Utils;
@@ -36,16 +35,25 @@ namespace PathCopyCopy.Settings.UI.Forms
     /// Form used to create or edit a pipeline plugin. To use, create the form
     /// and call the <see cref="EditPlugin"/> method.
     /// </summary>
-    public partial class PipelinePluginForm : Form
+    public partial class PipelinePluginForm : PositionPersistedForm
     {
-        /// Plugin info for the plugin we're editing.
-        private PipelinePluginInfo pluginInfo;
+        /// Initial plugin info used to populate our controls.
+        /// Will be null if we're creating a new pipeline plugin.
+        private PipelinePluginInfo oldPluginInfo;
 
-        /// Pipeline of the plugin info, if we have one.
-        private Pipeline pipeline;
+        /// Pipeline of the initial plugin, if we have one.
+        private Pipeline oldPipeline;
 
         /// Separator to use between multiple paths. Used to remember non-standard values (see Load).
-        private string pathsSeparator;
+        private string oldPathsSeparator;
+
+        /// ID of the plugin we're editing. Will be generated
+        /// if we're creating a new pipeline plugin.
+        private Guid pluginId;
+
+        /// Plugin info of the plugin being edited. Updated as
+        /// the control changes. Will be returned if user chooses OK.
+        private PipelinePluginInfo newPluginInfo;
         
         /// <summary>
         /// Constructor.
@@ -73,21 +81,28 @@ namespace PathCopyCopy.Settings.UI.Forms
             out bool switchToExpert)
         {
             // Save old info so that the OnLoad event handler can use it.
-            pluginInfo = oldInfo;
+            oldPluginInfo = oldInfo;
 
             // If a plugin info was specified, decode its pipeline immediately.
             // We want pipeline exceptions to propagate out *before* we show the form.
-            if (pluginInfo != null) {
-                pipeline = PipelineDecoder.DecodePipeline(pluginInfo.EncodedElements);
+            if (oldPluginInfo != null) {
+                oldPipeline = PipelineDecoder.DecodePipeline(oldPluginInfo.EncodedElements);
+            }
+
+            // Save plugin ID, or generate a new one if this is a new plugin.
+            if (oldPluginInfo != null) {
+                pluginId = oldPluginInfo.Id;
+            } else {
+                pluginId = Guid.NewGuid();
             }
 
             // Show the form and check result.
             DialogResult dialogRes = ShowDialog(owner);
 
             // If user saved, return the new info.
-            Debug.Assert(dialogRes == DialogResult.Cancel || pluginInfo != null);
+            Debug.Assert(dialogRes == DialogResult.Cancel || newPluginInfo != null);
             switchToExpert = dialogRes == DialogResult.Retry;
-            return dialogRes != DialogResult.Cancel ? pluginInfo : null;
+            return dialogRes != DialogResult.Cancel ? newPluginInfo : null;
         }
         
         /// <summary>
@@ -101,47 +116,44 @@ namespace PathCopyCopy.Settings.UI.Forms
             // First load list of plugins to display in the listbox for the base
             // plugin. We only load default and COM plugins for this since we
             // don't want a pipeline plugin to be based off another (for now at least).
-            List<Plugin> plugins;
-            using (UserSettings settings = new UserSettings()) {
-                plugins = PluginsRegistry.GetPluginsInDefaultOrder(settings, false);
-            }
+            List<Plugin> plugins = PluginsRegistry.GetPluginsInDefaultOrder(Settings, false);
 
             // Add all plugins to the list box.
             BasePluginLst.Items.AddRange(plugins.ToArray());
 
             // Check if we have a plugin info to load.
             Guid? basePluginId = null;
-            if (pluginInfo != null) {
-                Debug.Assert(pipeline != null);
+            if (oldPluginInfo != null) {
+                Debug.Assert(oldPipeline != null);
 
                 // Populate our controls.
-                NameTxt.Text = pluginInfo.Description;
-                PipelineElement element = pipeline.Elements.Find(el => el is ApplyPluginPipelineElement);
+                NameTxt.Text = oldPluginInfo.Description;
+                PipelineElement element = oldPipeline.Elements.Find(el => el is ApplyPluginPipelineElement);
                 if (element != null) {
                     basePluginId = ((ApplyPluginPipelineElement) element).PluginID;
                 }
-                if (pipeline.Elements.Find(el => el is OptionalQuotesPipelineElement) != null) {
+                if (oldPipeline.Elements.Find(el => el is OptionalQuotesPipelineElement) != null) {
                     QuotesChk.Checked = true;
                     OptionalQuotesChk.Checked = true;
-                } else if (pipeline.Elements.Find(el => el is QuotesPipelineElement) != null) {
+                } else if (oldPipeline.Elements.Find(el => el is QuotesPipelineElement) != null) {
                     QuotesChk.Checked = true;
                 }
-                EmailLinksChk.Checked = pipeline.Elements.Find(el => el is EmailLinksPipelineElement) != null;
-                if (pipeline.Elements.Find(el => el is EncodeURICharsPipelineElement) != null) {
+                EmailLinksChk.Checked = oldPipeline.Elements.Find(el => el is EmailLinksPipelineElement) != null;
+                if (oldPipeline.Elements.Find(el => el is EncodeURICharsPipelineElement) != null) {
                     EncodeURIWhitespaceChk.Checked = true;
                     EncodeURICharsChk.Checked = true;
-                } else if (pipeline.Elements.Find(el => el is EncodeURIWhitespacePipelineElement) != null) {
+                } else if (oldPipeline.Elements.Find(el => el is EncodeURIWhitespacePipelineElement) != null) {
                     EncodeURIWhitespaceChk.Checked = true;
                 }
-                RemoveExtChk.Checked = pipeline.Elements.Find(el => el is RemoveExtPipelineElement) != null;
-                if (pipeline.Elements.Find(el => el is BackToForwardSlashesPipelineElement) != null) {
+                RemoveExtChk.Checked = oldPipeline.Elements.Find(el => el is RemoveExtPipelineElement) != null;
+                if (oldPipeline.Elements.Find(el => el is BackToForwardSlashesPipelineElement) != null) {
                     BackToForwardSlashesRadio.Checked = true;
-                } else if (pipeline.Elements.Find(el => el is ForwardToBackslashesPipelineElement) != null) {
+                } else if (oldPipeline.Elements.Find(el => el is ForwardToBackslashesPipelineElement) != null) {
                     ForwardToBackslashesRadio.Checked = true;
                 } else {
                     Debug.Assert(NoSlashesChangeRadio.Checked);
                 }
-                element = pipeline.Elements.Find(el => el is RegexPipelineElement);
+                element = oldPipeline.Elements.Find(el => el is RegexPipelineElement);
                 if (element != null) {
                     UseRegexChk.Checked = true;
                     IgnoreCaseChk.Enabled = true;
@@ -153,7 +165,7 @@ namespace PathCopyCopy.Settings.UI.Forms
                 } else {
                     Debug.Assert(!IgnoreCaseChk.Enabled);
                     Debug.Assert(!TestRegexBtn.Enabled);
-                    element = pipeline.Elements.Find(el => el is FindReplacePipelineElement);
+                    element = oldPipeline.Elements.Find(el => el is FindReplacePipelineElement);
                     if (element != null) {
                         FindTxt.Text = ((FindReplacePipelineElement) element).OldValue;
                         ReplaceTxt.Text = ((FindReplacePipelineElement) element).NewValue;
@@ -161,20 +173,20 @@ namespace PathCopyCopy.Settings.UI.Forms
                 }
 
                 // "Copy on same line" is a little special since it could be any string.
-                element = pipeline.Elements.Find(el => el is PathsSeparatorPipelineElement);
-                pathsSeparator = element == null ? null : ((PathsSeparatorPipelineElement) element).PathsSeparator;
-                if (pathsSeparator == PipelinePluginEditor.PATHS_SEPARATOR_ON_SAME_LINE) {
+                element = oldPipeline.Elements.Find(el => el is PathsSeparatorPipelineElement);
+                oldPathsSeparator = (element as PathsSeparatorPipelineElement)?.PathsSeparator;
+                if (oldPathsSeparator == PipelinePluginEditor.PATHS_SEPARATOR_ON_SAME_LINE) {
                     CopyOnSameLineChk.Checked = true;
-                } else if (!String.IsNullOrEmpty(pathsSeparator)) {
+                } else if (!String.IsNullOrEmpty(oldPathsSeparator)) {
                     CopyOnSameLineChk.Enabled = false;
                 }
 
-                element = pipeline.Elements.Find(el => el is ExecutablePipelineElement);
+                element = oldPipeline.Elements.Find(el => el is ExecutablePipelineElement);
                 if (element != null) {
                     LaunchExecutableChk.Checked = true;
                     ExecutableTxt.Text = ((ExecutablePipelineElement) element).Executable;
                 } else {
-                    element = pipeline.Elements.Find(el => el is ExecutableWithFilelistPipelineElement);
+                    element = oldPipeline.Elements.Find(el => el is ExecutableWithFilelistPipelineElement);
                     if (element != null) {
                         LaunchExecutableChk.Checked = true;
                         WithFilelistChk.Checked = true;
@@ -212,6 +224,82 @@ namespace PathCopyCopy.Settings.UI.Forms
                 }
             }
             Debug.Assert(BasePluginLst.SelectedIndex != -1);
+
+            // Immediately update plugin info so that preview box is initially filled.
+            UpdatePluginInfo();
+        }
+
+        /// <summary>
+        /// Updates <see cref="newPluginInfo"/> with the contents of the
+        /// form's controls. Also updates the preview box.
+        /// </summary>
+        private void UpdatePluginInfo()
+        {
+            // Create a pipeline based on form controls.
+            Pipeline pipeline = new Pipeline();
+            if (LaunchExecutableChk.Checked) {
+                if (WithFilelistChk.Checked) {
+                    pipeline.Elements.Add(new ExecutableWithFilelistPipelineElement(ExecutableTxt.Text));
+                } else {
+                    pipeline.Elements.Add(new ExecutablePipelineElement(ExecutableTxt.Text));
+                }
+            }
+            if (CopyOnSameLineChk.Enabled) {
+                if (CopyOnSameLineChk.Checked) {
+                    pipeline.Elements.Add(new PathsSeparatorPipelineElement(PipelinePluginEditor.PATHS_SEPARATOR_ON_SAME_LINE));
+                }
+            } else {
+                // Copy non-standard value we had earlier
+                Debug.Assert(!String.IsNullOrEmpty(oldPathsSeparator));
+                pipeline.Elements.Add(new PathsSeparatorPipelineElement(oldPathsSeparator));
+            }
+            if (BasePluginLst.SelectedIndex != -1) {
+                pipeline.Elements.Add(new ApplyPluginPipelineElement(
+                    ((Plugin) BasePluginLst.SelectedItem).Id));
+            }
+            if (FindTxt.Text.Length > 0) {
+                if (UseRegexChk.Checked) {
+                    pipeline.Elements.Add(new RegexPipelineElement(FindTxt.Text, ReplaceTxt.Text, IgnoreCaseChk.Checked));
+                } else {
+                    pipeline.Elements.Add(new FindReplacePipelineElement(FindTxt.Text, ReplaceTxt.Text));
+                }
+            }
+            if (BackToForwardSlashesRadio.Checked) {
+                pipeline.Elements.Add(new BackToForwardSlashesPipelineElement());
+            } else if (ForwardToBackslashesRadio.Checked) {
+                pipeline.Elements.Add(new ForwardToBackslashesPipelineElement());
+            }
+            if (RemoveExtChk.Checked) {
+                pipeline.Elements.Add(new RemoveExtPipelineElement());
+            }
+            if (OptionalQuotesChk.Checked) {
+                pipeline.Elements.Add(new OptionalQuotesPipelineElement());
+            } else if (QuotesChk.Checked) {
+                pipeline.Elements.Add(new QuotesPipelineElement());
+            }
+            if (EmailLinksChk.Checked) {
+                pipeline.Elements.Add(new EmailLinksPipelineElement());
+            }
+            if (EncodeURIWhitespaceChk.Checked) {
+                if (EncodeURICharsChk.Enabled && EncodeURICharsChk.Checked) {
+                    pipeline.Elements.Add(new EncodeURICharsPipelineElement());
+                } else {
+                    pipeline.Elements.Add(new EncodeURIWhitespacePipelineElement());
+                }
+            }
+
+            // Create new plugin info and save encoded elements.
+            PipelinePluginInfo pluginInfo = new PipelinePluginInfo();
+            pluginInfo.Id = pluginId;
+            pluginInfo.Description = NameTxt.Text;
+            pluginInfo.EncodedElements = pipeline.Encode();
+            pluginInfo.RequiredVersion = pipeline.RequiredVersion;
+            pluginInfo.EditMode = PipelinePluginEditMode.Simple;
+            Debug.Assert(!pluginInfo.Global);
+
+            // Save plugin info in newPluginInfo and update preview.
+            newPluginInfo = pluginInfo;
+            PreviewCtrl.Plugin = newPluginInfo.ToPlugin();
         }
         
         /// <summary>
@@ -226,74 +314,8 @@ namespace PathCopyCopy.Settings.UI.Forms
             if (this.DialogResult == DialogResult.OK || this.DialogResult == DialogResult.Retry) {
                 // Make sure user has entered a name (unless we're switching to Expert Mode).
                 if (!String.IsNullOrEmpty(NameTxt.Text) || this.DialogResult == DialogResult.Retry) {
-                    // Create a pipeline based on form controls.
-                    if (pipeline == null) {
-                        pipeline = new Pipeline();
-                    } else {
-                        pipeline.Clear();
-                    }
-                    if (LaunchExecutableChk.Checked) {
-                        if (WithFilelistChk.Checked) {
-                            pipeline.Elements.Add(new ExecutableWithFilelistPipelineElement(ExecutableTxt.Text));
-                        } else {
-                            pipeline.Elements.Add(new ExecutablePipelineElement(ExecutableTxt.Text));
-                        }
-                    }
-                    if (CopyOnSameLineChk.Enabled) {
-                        if (CopyOnSameLineChk.Checked) {
-                            pipeline.Elements.Add(new PathsSeparatorPipelineElement(PipelinePluginEditor.PATHS_SEPARATOR_ON_SAME_LINE));
-                        }
-                    } else {
-                        // Copy non-standard value we had earlier
-                        Debug.Assert(!String.IsNullOrEmpty(pathsSeparator));
-                        pipeline.Elements.Add(new PathsSeparatorPipelineElement(pathsSeparator));
-                    }
-                    if (BasePluginLst.SelectedIndex != -1) {
-                        pipeline.Elements.Add(new ApplyPluginPipelineElement(
-                            ((Plugin) BasePluginLst.SelectedItem).Id));
-                    }
-                    if (FindTxt.Text.Length > 0) {
-                        if (UseRegexChk.Checked) {
-                            pipeline.Elements.Add(new RegexPipelineElement(FindTxt.Text, ReplaceTxt.Text, IgnoreCaseChk.Checked));
-                        } else {
-                            pipeline.Elements.Add(new FindReplacePipelineElement(FindTxt.Text, ReplaceTxt.Text));
-                        }
-                    }
-                    if (BackToForwardSlashesRadio.Checked) {
-                        pipeline.Elements.Add(new BackToForwardSlashesPipelineElement());
-                    } else if (ForwardToBackslashesRadio.Checked) {
-                        pipeline.Elements.Add(new ForwardToBackslashesPipelineElement());
-                    }
-                    if (RemoveExtChk.Checked) {
-                        pipeline.Elements.Add(new RemoveExtPipelineElement());
-                    }
-                    if (OptionalQuotesChk.Checked) {
-                        pipeline.Elements.Add(new OptionalQuotesPipelineElement());
-                    } else if (QuotesChk.Checked) {
-                        pipeline.Elements.Add(new QuotesPipelineElement());
-                    }
-                    if (EmailLinksChk.Checked) {
-                        pipeline.Elements.Add(new EmailLinksPipelineElement());
-                    }
-                    if (EncodeURIWhitespaceChk.Checked) {
-                        if (EncodeURICharsChk.Enabled && EncodeURICharsChk.Checked) {
-                            pipeline.Elements.Add(new EncodeURICharsPipelineElement());
-                        } else {
-                            pipeline.Elements.Add(new EncodeURIWhitespacePipelineElement());
-                        }
-                    }
-
-                    // Create plugin info if we don't already have one.
-                    if (pluginInfo == null) {
-                        pluginInfo = new PipelinePluginInfo();
-                        pluginInfo.Id = Guid.NewGuid();
-                    }
-
-                    // Save info in plugin info wrapper.
-                    pluginInfo.Description = NameTxt.Text;
-                    pluginInfo.EncodedElements = pipeline.Encode();
-                    pluginInfo.RequiredVersion = pipeline.RequiredVersion;
-                    Debug.Assert(!pluginInfo.Global);
+                    // Update plugin info in case it's out-of-date, so that EditPlugin can return it.
+                    UpdatePluginInfo();
                 } else {
                     // Warn user that we need a non-empty name.
                     MessageBox.Show(Resources.PipelinePluginForm_EmptyName, Resources.PipelinePluginForm_MsgTitle,
@@ -302,6 +324,17 @@ namespace PathCopyCopy.Settings.UI.Forms
                     e.Cancel = true;
                 }
             }
+        }
+
+        /// <summary>
+        /// Called by controls that modify the plugin info, so that the preview
+        /// is updated when things change.
+        /// </summary>
+        /// <param name="sender">Event sender.</param>
+        /// <param name="e">Event arguments.</param>
+        private void PipelinePluginForm_UpdatePreview(object sender, EventArgs e)
+        {
+            UpdatePluginInfo();
         }
 
         /// <summary>
@@ -315,6 +348,7 @@ namespace PathCopyCopy.Settings.UI.Forms
         private void QuotesChk_CheckedChanged(object sender, EventArgs e)
         {
             OptionalQuotesChk.Enabled = QuotesChk.Checked;
+            UpdatePluginInfo();
         }
 
         /// <summary>
@@ -327,6 +361,7 @@ namespace PathCopyCopy.Settings.UI.Forms
         private void EncodeURIWhitespaceChk_CheckedChanged(object sender, EventArgs e)
         {
             EncodeURICharsChk.Enabled = EncodeURIWhitespaceChk.Checked;
+            UpdatePluginInfo();
         }
         
         /// <summary>
@@ -340,6 +375,7 @@ namespace PathCopyCopy.Settings.UI.Forms
         {
             IgnoreCaseChk.Enabled = UseRegexChk.Checked;
             TestRegexBtn.Enabled = UseRegexChk.Checked;
+            UpdatePluginInfo();
         }
 
         /// <summary>
@@ -414,6 +450,7 @@ namespace PathCopyCopy.Settings.UI.Forms
         {
             OKBtn.Enabled = BasePluginLst.SelectedIndex >= 0 &&
                 !(((Plugin) BasePluginLst.SelectedItem) is SeparatorPlugin);
+            UpdatePluginInfo();
         }
 
         /// <summary>

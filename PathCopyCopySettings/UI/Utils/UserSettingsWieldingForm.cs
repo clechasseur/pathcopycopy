@@ -1,4 +1,4 @@
-﻿// PathsSeparatorPipelineElementUserControl.cs
+﻿// UserSettingsWieldingForm.cs
 // (c) 2019, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -19,54 +19,46 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System;
-using System.Diagnostics;
 using System.Windows.Forms;
-using PathCopyCopy.Settings.Core.Plugins;
+using PathCopyCopy.Settings.Core;
 
-namespace PathCopyCopy.Settings.UI.UserControls
+namespace PathCopyCopy.Settings.UI.Utils
 {
     /// <summary>
-    /// UserControl used to configure a paths separator pipeline element.
+    /// Base class for forms that need a <see cref="UserSettings"/> instance.
     /// </summary>
-    public partial class PathsSeparatorPipelineElementUserControl : PipelineElementUserControl
+    public class UserSettingsWieldingForm : Form
     {
-        /// Element we're configuring.
-        private PathsSeparatorPipelineElement element;
-
         /// <summary>
-        /// Constructor.
+        /// <see cref="UserSettings"/> instance usable by the form.
+        /// Created in constructor and disposed of when form is closed.
         /// </summary>
-        /// <param name="element">Pipeline element to configure.</param>
-        public PathsSeparatorPipelineElementUserControl(PathsSeparatorPipelineElement element)
+        protected UserSettings Settings
         {
-            Debug.Assert(element != null);
-
-            this.element = element;
-
-            InitializeComponent();
+            get;
+            private set;
         }
 
         /// <summary>
-        /// Called when the control is initially loaded. We populate our controls here.
+        /// Constructor. Instanciates the <see cref="UserSettings"/>.
         /// </summary>
-        /// <param name="e">Event arguments.</param>
-        protected override void OnLoad(EventArgs e)
+        public UserSettingsWieldingForm()
+            : base()
         {
-            base.OnLoad(e);
-            SeparatorTxt.Text = element.PathsSeparator;
+            Settings = new UserSettings();
+            this.FormClosed += UserSettingsWieldingForm_FormClosed;
         }
 
         /// <summary>
-        /// Called when the text of the Separator textbox changes. We update
-        /// our associated pipeline element here.
+        /// Called when the form is closed. We dispose of our
+        /// <see cref="UserSettings"/> instance here.
         /// </summary>
         /// <param name="sender">Event sender.</param>
         /// <param name="e">Event arguments.</param>
-        private void SeparatorTxt_TextChanged(object sender, EventArgs e)
+        private void UserSettingsWieldingForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            element.PathsSeparator = SeparatorTxt.Text;
-            OnPipelineElementChanged(EventArgs.Empty);
+            Settings?.Dispose();
+            Settings = null;
         }
     }
 }

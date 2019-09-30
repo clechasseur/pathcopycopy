@@ -29,7 +29,7 @@ namespace PathCopyCopy.Settings.UI.UserControls
     /// <summary>
     /// UserControl used to configure a find/replace pipeline element.
     /// </summary>
-    public partial class FindReplacePipelineElementUserControl : UserControl
+    public partial class FindReplacePipelineElementUserControl : PipelineElementUserControl
     {
         /// Element we're configuring.
         private FindReplacePipelineElement element;
@@ -50,34 +50,36 @@ namespace PathCopyCopy.Settings.UI.UserControls
         /// <summary>
         /// Called when the control is initially loaded. We populate our controls here.
         /// </summary>
-        /// <param name="sender">Event sender.</param>
         /// <param name="e">Event arguments.</param>
-        private void FindReplacePipelineElementUserControl_Load(object sender, EventArgs e)
+        protected override void OnLoad(EventArgs e)
         {
+            base.OnLoad(e);
             FindTxt.Text = element.OldValue;
             ReplaceTxt.Text = element.NewValue;
         }
 
         /// <summary>
-        /// Called when the focus is lost on the Find textbox. We update
+        /// Called when the text of the Find textbox changes. We update
         /// our associated pipeline element here.
         /// </summary>
         /// <param name="sender">Event sender.</param>
         /// <param name="e">Event arguments.</param>
-        private void FindTxt_Validated(object sender, EventArgs e)
+        private void FindTxt_TextChanged(object sender, EventArgs e)
         {
             element.OldValue = FindTxt.Text;
+            OnPipelineElementChanged(EventArgs.Empty);
         }
 
         /// <summary>
-        /// Called when the focus is lost on the Replace textbox. We update
+        /// Called when the text of the Replace textbox changes. We update
         /// our associated pipeline element here.
         /// </summary>
         /// <param name="sender">Event sender.</param>
         /// <param name="e">Event arguments.</param>
-        private void ReplaceTxt_Validated(object sender, EventArgs e)
+        private void ReplaceTxt_TextChanged(object sender, EventArgs e)
         {
             element.NewValue = ReplaceTxt.Text;
+            OnPipelineElementChanged(EventArgs.Empty);
         }
     }
 }

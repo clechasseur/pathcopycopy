@@ -54,7 +54,6 @@
             this.ExecutableTxt.TabIndex = 1;
             this.ExecutableToolTip.SetToolTip(this.ExecutableTxt, "Path to the executable to launch");
             this.ExecutableTxt.TextChanged += new System.EventHandler(this.ExecutableTxt_TextChanged);
-            this.ExecutableTxt.Validated += new System.EventHandler(this.ExecutableTxt_Validated);
             // 
             // BrowseForExecutableBtn
             // 
@@ -82,7 +81,6 @@
             this.Controls.Add(this.ExecutableLbl);
             this.Name = "PipelineElementWithExecutableUserControl";
             this.Size = new System.Drawing.Size(318, 24);
-            this.Load += new System.EventHandler(this.PipelineElementWithExecutableUserControl_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

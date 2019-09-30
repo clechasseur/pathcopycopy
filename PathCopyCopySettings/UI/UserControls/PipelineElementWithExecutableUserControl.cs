@@ -30,7 +30,7 @@ namespace PathCopyCopy.Settings.UI.UserControls
     /// <summary>
     /// UserControl used to configure pipeline elements with an executable path.
     /// </summary>
-    public partial class PipelineElementWithExecutableUserControl : UserControl
+    public partial class PipelineElementWithExecutableUserControl : PipelineElementUserControl
     {
         /// Element we're configuring.
         private PipelineElementWithExecutable element;
@@ -51,22 +51,11 @@ namespace PathCopyCopy.Settings.UI.UserControls
         /// <summary>
         /// Called when the control is initially loaded. We populate our controls here.
         /// </summary>
-        /// <param name="sender">Event sender.</param>
         /// <param name="e">Event arguments.</param>
-        private void PipelineElementWithExecutableUserControl_Load(object sender, EventArgs e)
+        protected override void OnLoad(EventArgs e)
         {
+            base.OnLoad(e);
             ExecutableTxt.Text = element.Executable;
-        }
-
-        /// <summary>
-        /// Called when the focus is lost on the Executable textbox. We update
-        /// our associated pipeline element here.
-        /// </summary>
-        /// <param name="sender">Event sender.</param>
-        /// <param name="e">Event arguments.</param>
-        private void ExecutableTxt_Validated(object sender, EventArgs e)
-        {
-            element.Executable = ExecutableTxt.Text;
         }
         
         /// <summary>
@@ -78,6 +67,7 @@ namespace PathCopyCopy.Settings.UI.UserControls
         private void ExecutableTxt_TextChanged(object sender, EventArgs e)
         {
             element.Executable = ExecutableTxt.Text;
+            OnPipelineElementChanged(EventArgs.Empty);
         }
 
         /// <summary>

@@ -52,7 +52,7 @@
             this.SeparatorTxt.TabIndex = 1;
             this.SeparatorToolTip.SetToolTip(this.SeparatorTxt, "Character string used to separate multiple copied paths; the default value (when " +
         "this option is not present) is a carriage return");
-            this.SeparatorTxt.Validated += new System.EventHandler(this.SeparatorTxt_Validated);
+            this.SeparatorTxt.TextChanged += new System.EventHandler(this.SeparatorTxt_TextChanged);
             // 
             // PathsSeparatorPipelineElementUserControl
             // 
@@ -62,7 +62,6 @@
             this.Controls.Add(this.SeparatorLbl);
             this.Name = "PathsSeparatorPipelineElementUserControl";
             this.Size = new System.Drawing.Size(231, 20);
-            this.Load += new System.EventHandler(this.PathsSeparatorPipelineElementUserControl_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

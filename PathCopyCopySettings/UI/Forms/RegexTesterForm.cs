@@ -34,7 +34,7 @@ namespace PathCopyCopy.Settings.UI.Forms
     /// instance and call the <see cref="TestRegex"/> method.
     /// </summary>
     /// <seealso cref="T:RegexTester"/>
-    public partial class RegexTesterForm : Form
+    public partial class RegexTesterForm : PositionPersistedForm
     {
         /// <summary>
         /// Constructor.

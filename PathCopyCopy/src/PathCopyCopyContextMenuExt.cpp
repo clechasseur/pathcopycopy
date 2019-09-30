@@ -380,7 +380,7 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::QueryContextMenu(
                     if (!vPluginIds.empty()) {
                         if (vPluginIds.size() != 1 || !::IsEqualGUID(vPluginIds.front(), PCC::Plugins::LongPathPlugin::ID)) {
                             for (auto it = vPluginIds.cbegin(); SUCCEEDED(hRes) && cmdId <= p_LastCmdId && it != vPluginIds.cend(); ++it) {
-                                hRes = AddPluginToMenu(*it, p_hMenu, useIconForDefaultPlugin, false, false, true, cmdId, position);
+                                hRes = AddPluginToMenu(*it, p_hMenu, useIconForDefaultPlugin, usePreviewModeInMainMenu, false, true, cmdId, position);
                             }
                         } else {
                             // Default plugin is specified, use our own instead.
@@ -780,6 +780,9 @@ HRESULT CPathCopyCopyContextMenuExt::AddPluginToMenu(const PCC::PluginSP& p_spPl
         if (description.size() > MAX_PATH) {
             description.resize(MAX_PATH);
         }
+        // If path contains ampersands, they will be treated as shortcuts.
+        // We have to double them.
+        StringUtils::ReplaceAll(description, L"&", L"&&");
     } else {
         description = p_spPlugin->Description();
         if (p_DropRedundantWords && p_spPlugin->CanDropRedundantWords()) {
