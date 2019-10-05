@@ -11,6 +11,6 @@ Installer/Output/
 ipch/
 *.VC.db
 *.VC.opendb
+packages/
 Testing/mtexplorer.ini
-
 Samples/SampleCOMPluginCpp/SampleCOMPlugin/Debug/
