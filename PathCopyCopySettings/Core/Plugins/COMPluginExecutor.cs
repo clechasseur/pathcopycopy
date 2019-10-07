@@ -23,6 +23,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
 using PathCopyCopy.Settings.Properties;
 
@@ -37,17 +38,14 @@ namespace PathCopyCopy.Settings.Core.Plugins
     public sealed class COMPluginExecutor
     {
         /// Regex used to extract the output of the COM plugin executor program.
-        private static readonly Regex OUTPUT_REGEX = new Regex(String.Format(@"^{0}(.*)$",
-            Resources.COM_PLUGIN_EXECUTOR_OUTPUT_PREFIX), RegexOptions.Compiled);
+        private static readonly Regex OUTPUT_REGEX = new Regex(
+            $"^{Resources.COM_PLUGIN_EXECUTOR_OUTPUT_PREFIX}(.*)$", RegexOptions.Compiled);
 
         /// Prefix of output lines from COM plugin executor that indicates an error.
         private const string EXECUTOR_ERROR_PREFIX = "ERROR";
 
         /// Output returned by the COM plugin executor for a command that returns a boolean "true" result.
         private const string EXECUTOR_TRUE_OUTPUT = "true";
-
-        /// Output returned by the COM plugin executor for a command that returns a boolean "false" result.
-        private const string EXECUTOR_FALSE_OUTPUT = "false";
         
         /// <summary>
         /// Invokes the COM plugin executor program to get the description for a
@@ -85,8 +83,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// fails for some reason.</exception>
         public int GetGroupId(Guid pluginId)
         {
-            int groupId;
-            return Int32.TryParse(Call(pluginId, "get_GroupId"), out groupId) ? groupId : 0;
+            return Int32.TryParse(Call(pluginId, "get_GroupId"), out int groupId) ? groupId : 0;
         }
         
         /// <summary>
@@ -99,8 +96,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// fails for some reason.</exception>
         public int GetGroupPosition(Guid pluginId)
         {
-            int groupPosition;
-            return Int32.TryParse(Call(pluginId, "get_GroupPosition"), out groupPosition) ? groupPosition : 0;
+            return Int32.TryParse(Call(pluginId, "get_GroupPosition"), out int groupPosition) ? groupPosition : 0;
         }
         
         /// <summary>
@@ -217,6 +213,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
     /// <summary>
     /// Exception class used by the <see cref="COMPluginExecutor"/>.
     /// </summary>
+    [Serializable]
     public class COMPluginExecutorException : Exception
     {
         /// <summary>
@@ -237,20 +234,31 @@ namespace PathCopyCopy.Settings.Core.Plugins
         }
         
         /// <summary>
-        /// Constructor with formatted exception message.
-        /// </summary>
-        /// <param name="format">Format string.</param>
-        /// <param name="args">Format arguments.</param>
-        public COMPluginExecutorException(string format, params object[] args)
-            : base(String.Format(format, args))
-        {
-        }
-        
-        /// <summary>
         /// Constructor with inner exception.
         /// </summary>
+        /// <param name="innerException">Inner exception.</param>
         public COMPluginExecutorException(Exception innerException)
-            : base(innerException.Message, innerException)
+            : base(innerException?.Message, innerException)
+        {
+        }
+
+        /// <summary>
+        /// Constructor with exception message and inner exception.
+        /// </summary>
+        /// <param name="message">Exception message.</param>
+        /// <param name="innerException">Inner exception.</param>
+        public COMPluginExecutorException(string message, Exception innerException)
+            : base(message, innerException)
+        {
+        }
+
+        /// <summary>
+        /// Serialization constructor.
+        /// </summary>
+        /// <param name="serializationInfo">Serialization info.</param>
+        /// <param name="streamingContext">Streaming context.</param>
+        protected COMPluginExecutorException(SerializationInfo serializationInfo, StreamingContext streamingContext)
+            : base(serializationInfo, streamingContext)
         {
         }
     }

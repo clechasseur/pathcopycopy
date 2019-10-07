@@ -30,7 +30,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
     public sealed class COMPlugin : Plugin
     {
         /// Path to icon file for plugin.
-        private string iconFile;
+        private readonly string iconFile;
 
         /// Whether this is a global plugin.
         private bool global;
@@ -57,7 +57,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
             }
             set {
                 global = value;
-                CallPropertyChanged("Global");
+                CallPropertyChanged(nameof(Global));
             }
         }
         
