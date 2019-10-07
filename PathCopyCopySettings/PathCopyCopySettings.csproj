@@ -78,6 +78,7 @@
     <Compile Include="3rdParty\CommandLineArguments.cs" />
     <Compile Include="Core\Plugins\COMPluginExecutor.cs" />
     <Compile Include="Core\Plugins\COMPlugin.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="UI\Forms\AdvancedPipelinePluginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -217,6 +218,7 @@
     <EmbeddedResource Include="UI\UserControls\RegexPipelineElementUserControl.resx">
       <DependentUpon>RegexPipelineElementUserControl.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include=".editorconfig" />
     <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
