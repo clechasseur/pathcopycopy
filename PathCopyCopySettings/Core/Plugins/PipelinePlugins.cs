@@ -25,7 +25,9 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
@@ -70,14 +72,15 @@ namespace PathCopyCopy.Settings.Core.Plugins
         public PipelinePlugin(Guid id, string description, PipelinePluginInfo info)
             : base(id, description)
         {
-            Debug.Assert(info != null);
-            Info = info;
+            Info = info ?? throw new ArgumentNullException(nameof(info));
         }
         
         /// <inheritDoc/>
         public override string GetPreview(UserSettings userSettings)
         {
-            Debug.Assert(userSettings != null);
+            if (userSettings == null) {
+                throw new ArgumentNullException(nameof(userSettings));
+            }
 
             // Since this plugin might have been modified from its official
             // version (or it could not exist at all), we'll create a temp
@@ -97,10 +100,10 @@ namespace PathCopyCopy.Settings.Core.Plugins
         private sealed class TempPipelinePluginSaver : IDisposable
         {
             /// Pipeline plugin info to save and delete.
-            private PipelinePluginInfo pluginInfo;
+            private readonly PipelinePluginInfo pluginInfo;
 
             /// Object to access user settings.
-            private UserSettings settings;
+            private readonly UserSettings settings;
             
             /// <summary>
             /// Constructor.
@@ -109,11 +112,8 @@ namespace PathCopyCopy.Settings.Core.Plugins
             /// <param name="settings">Object to access user settings.</param>
             public TempPipelinePluginSaver(PipelinePluginInfo pluginInfo, UserSettings settings)
             {
-                Debug.Assert(pluginInfo != null);
-                Debug.Assert(settings != null);
-
-                this.pluginInfo = pluginInfo;
-                this.settings = settings;
+                this.pluginInfo = pluginInfo ?? throw new ArgumentNullException(nameof(pluginInfo));
+                this.settings = settings ?? throw new ArgumentNullException(nameof(settings));
 
                 this.settings.SaveTempPipelinePlugin(this.pluginInfo);
             }
@@ -152,6 +152,10 @@ namespace PathCopyCopy.Settings.Core.Plugins
         Expert = 2,
     }
 
+    /// <summary>
+    /// Enum of different versions of the pipeline plugin XML serialization process.
+    /// Will be updated every time the serialization supports something new.
+    /// </summary>
     public enum PipelinePluginXmlSerializerVersion
     {
         /// <summary>
@@ -178,15 +182,15 @@ namespace PathCopyCopy.Settings.Core.Plugins
     {
         /// <summary>
         /// Default version used for the required version when none is specified via the
-        /// <see cref="PipelinePluginInfo.RequiredVersion"/> property. This corresponds to
-        /// the first version of Path Copy Copy that supported pipeline plugins.
+        /// <see cref="RequiredVersion"/> property. This corresponds to the first version
+        /// of Path Copy Copy that supported pipeline plugins.
         /// </summary>
         public static readonly Version DefaultRequiredVersion = new Version(9, 0, 0, 0);
 
         /// <summary>
         /// Default version used for the required version, as a string.
         /// </summary>
-        /// <seealso cref="PipelinePluginInfo.DefaultRequiredVersion"/>
+        /// <seealso cref="DefaultRequiredVersion"/>
         public const string DefaultRequiredVersionAsString = "9.0.0.0";
 
         /// Minimum required version to use this pipeline plugin.
@@ -279,7 +283,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
                 return EditMode.HasValue ? EditMode.Value.ToString() : null;
             }
             set {
-                if (!String.IsNullOrEmpty(value)) {
+                if (!string.IsNullOrEmpty(value)) {
                     EditMode = (PipelinePluginEditMode) Enum.Parse(typeof(PipelinePluginEditMode), value);
                 } else {
                     EditMode = null;
@@ -306,7 +310,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// If this is set to <c>null</c>, the default required Version will be used,
         /// which corresponds to the first version of Path Copy Copy that supported pipeline plugins.
         /// </remarks>
-        /// <seealso cref="DEFAULT_REQUIRED_VERSION"/>
+        /// <seealso cref="DefaultRequiredVersion"/>
         [XmlIgnore]
         public Version RequiredVersion
         {
@@ -319,14 +323,14 @@ namespace PathCopyCopy.Settings.Core.Plugins
         }
 
         /// <summary>
-        /// Value of <see cref="PipelinePluginInfo.RequiredVersion"/> as a string.
+        /// Value of <see cref="RequiredVersion"/> as a string.
         /// Used for XML serialization.
         /// </summary>
         /// <remarks>
         /// If this is set to <c>null</c> or an empty string, the default required Version will be used,
         /// which corresponds to the first version of Path Copy Copy that supported pipeline plugins.
         /// </remarks>
-        /// <seealso cref="DEFAULT_REQUIRED_VERSION"/>
+        /// <seealso cref="DefaultRequiredVersion"/>
         [XmlElement("RequiredVersion"), DefaultValue(DefaultRequiredVersionAsString)]
         public string RequiredVersionAsString
         {
@@ -334,7 +338,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
                 return RequiredVersion.ToString();
             }
             set {
-                RequiredVersion = !String.IsNullOrEmpty(value) ? new Version(value) : DefaultRequiredVersion;
+                RequiredVersion = !string.IsNullOrEmpty(value) ? new Version(value) : DefaultRequiredVersion;
             }
         }
 
@@ -394,7 +398,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
             if (Compatible) {
                 description = Description;
             } else {
-                description = String.Format(CultureInfo.CurrentCulture,
+                description = string.Format(CultureInfo.CurrentCulture,
                     Resources.PipelinePluginInfo_DescriptionWithRequiredVersion,
                     Description, RequiredVersionAsString);
             }
@@ -446,7 +450,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// <paramref name="other"/>.</returns>
         public int CompareTo(PipelinePluginInfo other)
         {
-            return other != null ? Id.CompareTo(other.Id) : 1;
+            return other is object ? Id.CompareTo(other.Id) : 1;
         }
         
         /// <summary>
@@ -459,7 +463,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// <paramref name="obj"/>.</returns>
         int IComparable.CompareTo(object obj)
         {
-            return (obj != null && obj is PipelinePluginInfo) ? CompareTo((PipelinePluginInfo) obj) : 1;
+            return obj is PipelinePluginInfo ? CompareTo((PipelinePluginInfo) obj) : 1;
         }
         
         /// <summary>
@@ -470,7 +474,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// <returns>Whether <c>this</c> is equal to <paramref name="other"/>.</returns>
         public bool Equals(PipelinePluginInfo other)
         {
-            return other != null ? Id.Equals(other.Id) : false;
+            return other is object ? Id.Equals(other.Id) : false;
         }
 
         /// <summary>
@@ -482,7 +486,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// <returns>Whether <c>this</c> is equal to <paramref name="obj"/>.</returns>
         public override bool Equals(object obj)
         {
-            return obj != null && obj is PipelinePluginInfo ? Equals((PipelinePluginInfo) obj) : false;
+            return obj is PipelinePluginInfo ? Equals((PipelinePluginInfo) obj) : false;
         }
 
         /// <summary>
@@ -503,7 +507,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// <returns>Whether <paramref name="left"/> is equal to <paramref name="right"/>.</returns>
         public static bool operator==(PipelinePluginInfo left, PipelinePluginInfo right)
         {
-            return left == null ? right == null : left.Equals(right);
+            return !(left is object) ? !(right is object) : left.Equals(right);
         }
 
         /// <summary>
@@ -525,7 +529,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// <returns>Whether <paramref name="left"/> is less than <paramref name="right"/>.</returns>
         public static bool operator<(PipelinePluginInfo left, PipelinePluginInfo right)
         {
-            return right != null && (left == null || left.CompareTo(right) < 0);
+            return right is object && (!(left is object) || left.CompareTo(right) < 0);
         }
 
         /// <summary>
@@ -583,22 +587,14 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// Lock used to protect creation of XmlSerializer objects.
         private static readonly object xmlSerializersLock = new Object();
 
-        /// List storing the pipeline plugins in the collection.
-        private List<PipelinePluginInfo> infos = new List<PipelinePluginInfo>();
-
         /// <summary>
         /// Pipeline plugins in the collection.
         /// </summary>
         [XmlArray]
         public List<PipelinePluginInfo> Plugins
         {
-            get {
-                return infos;
-            }
-            set {
-                infos = value;
-            }
-        }
+            get;
+        } = new List<PipelinePluginInfo>();
 
         /// <summary>
         /// Minimum version of Path Copy Copy required to use this pipeline plugin collection.
@@ -608,13 +604,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         public Version RequiredVersion
         {
             get {
-                Version reqdVersion = PipelinePluginInfo.DefaultRequiredVersion;
-                foreach (PipelinePluginInfo info in infos) {
-                    if (info.RequiredVersion.CompareTo(reqdVersion) > 0) {
-                        reqdVersion = info.RequiredVersion;
-                    }
-                }
-                return reqdVersion;
+                return Plugins.Max(info => info.RequiredVersion);
             }
         }
 
@@ -625,11 +615,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         public bool Compatible
         {
             get {
-                bool compatible = true;
-                for (int i = 0; compatible && i < infos.Count; ++i) {
-                    compatible = infos[i].Compatible;
-                }
-                return compatible;
+                return Plugins.All(info => info.Compatible);
             }
         }
         
@@ -642,9 +628,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// Depending on the version, certain attributes are not serialized.</param>
         public void ToXML(Stream stream, PipelinePluginXmlSerializerVersion serializerVersion)
         {
-            Debug.Assert(stream != null);
-
-            using (XmlWriter writer = XmlWriter.Create(stream)) {
+            using (XmlWriter writer = XmlWriter.Create(stream ?? throw new ArgumentNullException(nameof(stream)))) {
                 GetXmlSerializer(serializerVersion).Serialize(writer, this);
             }
         }
@@ -657,9 +641,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// <returns>New pipeline plugins collection from XML.</returns>
         public static PipelinePluginCollection FromXML(Stream stream)
         {
-            Debug.Assert(stream != null);
-
-            using (XmlReader reader = XmlReader.Create(stream)) {
+            using (XmlReader reader = XmlReader.Create(stream ?? throw new ArgumentNullException(nameof(stream)))) {
                 return (PipelinePluginCollection) GetXmlSerializer(PipelinePluginXmlSerializerVersion.V3).Deserialize(reader);
             }
         }
@@ -684,16 +666,18 @@ namespace PathCopyCopy.Settings.Core.Plugins
                     } else if (serializerVersion == PipelinePluginXmlSerializerVersion.V2) {
                         // Second version: do not serialize EditMode.
                         XmlAttributeOverrides overrides = new XmlAttributeOverrides();
-                        XmlAttributes attributes = new XmlAttributes();
-                        attributes.XmlIgnore = true;
+                        XmlAttributes attributes = new XmlAttributes() {
+                            XmlIgnore = true,
+                        };
                         overrides.Add(typeof(PipelinePluginInfo), "EditModeAsString", attributes);
                         xmlSerializer = new XmlSerializer(typeof(PipelinePluginCollection),
                             overrides, new Type[0], null, PipelinePluginsXmlNamespace);
                     } else if (serializerVersion == PipelinePluginXmlSerializerVersion.V1) {
                         // First version: do not serializer RequiredVersion or EditMode.
                         XmlAttributeOverrides overrides = new XmlAttributeOverrides();
-                        XmlAttributes attributes = new XmlAttributes();
-                        attributes.XmlIgnore = true;
+                        XmlAttributes attributes = new XmlAttributes() {
+                            XmlIgnore = true,
+                        };
                         overrides.Add(typeof(PipelinePluginInfo), "RequiredVersionAsString", attributes);
                         overrides.Add(typeof(PipelinePluginInfo), "EditModeAsString", attributes);
                         xmlSerializer = new XmlSerializer(typeof(PipelinePluginCollection),
@@ -753,8 +737,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// the element in a string. This will be saved in the registry in the
         /// plugin's encoded elements.
         /// </summary>
-        /// <param name="p_Param">Parameter summary</param>
-        /// <returns>Return value summary</returns>
+        /// <returns>Element's encoded data.</returns>
         abstract public string Encode();
 
         /// <summary>
@@ -782,11 +765,12 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// <returns>Encoded string.</returns>
         public static string EncodeInt(int toEncode)
         {
-            // Encode as four characters.
             if (toEncode >= 10000) {
                 throw new ArgumentOutOfRangeException(nameof(toEncode));
             }
-            return toEncode.ToString("D4");
+
+            // Encode as four characters.
+            return toEncode.ToString("D4", CultureInfo.InvariantCulture);
         }
         
         /// <summary>
@@ -797,6 +781,10 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// <returns>Encoded string.</returns>
         public static string EncodeString(string toEncode)
         {
+            if (toEncode == null) {
+                throw new ArgumentNullException(nameof(toEncode));
+            }
+
             // First write the string length, then the string content.
             return EncodeInt(toEncode.Length) + toEncode;
         }
@@ -824,18 +812,13 @@ namespace PathCopyCopy.Settings.Core.Plugins
     /// encoding/decoding work.</remarks>
     public sealed class Pipeline
     {
-        /// List containing all pipeline elements.
-        private List<PipelineElement> pipelineElements = new List<PipelineElement>();
-
         /// <summary>
         /// List containing all the pipeline elements.
         /// </summary>
         public List<PipelineElement> Elements
         {
-            get {
-                return pipelineElements;
-            }
-        }
+            get;
+        } = new List<PipelineElement>();
 
         /// <summary>
         /// Minimum version of Path Copy Copy required to use this pipeline. This
@@ -844,13 +827,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         public Version RequiredVersion
         {
             get {
-                Version reqdVersion = PipelinePluginInfo.DefaultRequiredVersion;
-                foreach (PipelineElement element in pipelineElements) {
-                    if (element.RequiredVersion.CompareTo(reqdVersion) > 0) {
-                        reqdVersion = element.RequiredVersion;
-                    }
-                }
-                return reqdVersion;
+                return Elements.Max(element => element.RequiredVersion);
             }
         }
         
@@ -861,9 +838,11 @@ namespace PathCopyCopy.Settings.Core.Plugins
         public string Encode()
         {
             // First write the number of elements in the pipeline as a two-char number.
-            Debug.Assert(Elements.Count < 100);
+            if (Elements.Count >= 100) {
+                throw new IndexOutOfRangeException();
+            }
             StringBuilder encodedElements = new StringBuilder();
-            encodedElements.Append(Elements.Count.ToString("D2"));
+            encodedElements.Append(Elements.Count.ToString("D2", CultureInfo.InvariantCulture));
 
             // Encode each pipeline element by first appending its code then
             // asking the element itself to encode its data.
@@ -880,15 +859,18 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// </summary>
         public void Clear()
         {
-            pipelineElements.Clear();
+            Elements.Clear();
         }
     }
     
     /// <summary>
     /// Exception class used to represent an invalid pipeline encoded string.
     /// </summary>
+    [Serializable]
     public class InvalidPipelineException : Exception
     {
+#pragma warning disable CA1303 // Do not pass literals as localized parameters
+
         /// <summary>
         /// Encoded elements in the invalid pipeline.
         /// </summary>
@@ -911,7 +893,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// </summary>
         /// <param name="encodedElements">String of encoded elements.</param>
         public InvalidPipelineException(string encodedElements)
-            : base(String.Format("Invalid pipeline: {0}", encodedElements))
+            : base($"Invalid pipeline: {encodedElements}")
         {
             EncodedElements = encodedElements;
         }
@@ -922,10 +904,22 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// <param name="encodedElements">String of encoded elements.</param>
         /// <param name="innerException">Inner exception object.</param>
         public InvalidPipelineException(string encodedElements, Exception innerException)
-            : base(String.Format("Invalid pipeline: {0}", encodedElements), innerException)
+            : base($"Invalid pipeline: {encodedElements}", innerException)
         {
             EncodedElements = encodedElements;
         }
+
+        /// <summary>
+        /// Serialization constructor.
+        /// </summary>
+        /// <param name="serializationInfo">Serialization info.</param>
+        /// <param name="streamingContext">Streaming context.</param>
+        protected InvalidPipelineException(SerializationInfo serializationInfo, StreamingContext streamingContext)
+            : base(serializationInfo, streamingContext)
+        {
+        }
+
+#pragma warning restore CA1303 // Do not pass literals as localized parameters
     }
     
     /// <summary>
@@ -966,7 +960,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         public override string Encode()
         {
             // No other data to encode.
-            return String.Empty;
+            return string.Empty;
         }
     }
 
@@ -1018,7 +1012,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         public override string Encode()
         {
             // No other data to encode.
-            return String.Empty;
+            return string.Empty;
         }
     }
     
@@ -1070,7 +1064,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         public override string Encode()
         {
             // No other data to encode.
-            return String.Empty;
+            return string.Empty;
         }
     }
 
@@ -1122,7 +1116,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         public override string Encode()
         {
             // No other data to encode.
-            return String.Empty;
+            return string.Empty;
         }
     }
     
@@ -1174,7 +1168,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         public override string Encode()
         {
             // No other data to encode.
-            return String.Empty;
+            return string.Empty;
         }
     }
     
@@ -1216,7 +1210,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         public override string Encode()
         {
             // No other data to encode.
-            return String.Empty;
+            return string.Empty;
         }
     }
     
@@ -1258,7 +1252,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         public override string Encode()
         {
             // No other data to encode.
-            return String.Empty;
+            return string.Empty;
         }
     }
 
@@ -1310,7 +1304,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         public override string Encode()
         {
             // No other data to encode.
-            return String.Empty;
+            return string.Empty;
         }
     }
     
@@ -1369,8 +1363,8 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// </summary>
         public FindReplacePipelineElement()
         {
-            OldValue = String.Empty;
-            NewValue = String.Empty;
+            OldValue = string.Empty;
+            NewValue = string.Empty;
         }
         
         /// <summary>
@@ -1412,12 +1406,12 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// <summary>
         /// Version number used to identify encoded data.
         /// </summary>
-        public const int INITIAL_VERSION = 1;
+        public const int InitialVersion = 1;
 
         /// <summary>
         /// Maximum data version understood by this code.
         /// </summary>
-        public const int MAX_VERSION = INITIAL_VERSION;
+        public const int MaxVersion = InitialVersion;
 
         /// <summary>
         /// Code representing this pipeline element type.
@@ -1491,8 +1485,8 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// </summary>
         public RegexPipelineElement()
         {
-            Regex = String.Empty;
-            Format = String.Empty;
+            Regex = string.Empty;
+            Format = string.Empty;
         }
         
         /// <summary>
@@ -1517,7 +1511,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         {
             // First write currently-used version number.
             StringBuilder encoder = new StringBuilder();
-            encoder.Append(EncodeInt(INITIAL_VERSION));
+            encoder.Append(EncodeInt(InitialVersion));
 
             // Now encode regex, format string and ignore case flag.
             encoder.Append(EncodeString(Regex));
@@ -1669,7 +1663,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// </summary>
         public PathsSeparatorPipelineElement()
         {
-            PathsSeparator = String.Empty;
+            PathsSeparator = string.Empty;
         }
 
         /// <summary>
@@ -1722,7 +1716,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// </summary>
         public PipelineElementWithExecutable()
         {
-            Executable = String.Empty;
+            Executable = string.Empty;
         }
 
         /// <summary>
@@ -1889,6 +1883,10 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// <paramref name="encodedElements"/> contain invalid data.</exception>
         public static Pipeline DecodePipeline(string encodedElements)
         {
+            if (encodedElements == null) {
+                throw new ArgumentNullException(nameof(encodedElements));
+            }
+
             // Initialize new pipeline object.
             Pipeline pipeline = new Pipeline();
 
@@ -1897,7 +1895,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
                 if (encodedElements.Length < 2) {
                     throw new InvalidPipelineException();
                 }
-                int numElements = Int32.Parse(encodedElements.Substring(0, 2));
+                int numElements = int.Parse(encodedElements.Substring(0, 2), CultureInfo.InvariantCulture);
 
                 // Loop to read each element.
                 int curChar = 2;
@@ -1924,7 +1922,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// <returns>New <see cref="PipelineElement"/> instance.</returns>
         private static PipelineElement DecodeElement(string encodedElements, ref int curChar)
         {
-            PipelineElement element = null;
+            PipelineElement element;
 
             // First read the element code.
             if (curChar == encodedElements.Length) {
@@ -2024,7 +2022,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         {
             // First read version number and validate.
             int version = DecodeInt(encodedElements, ref curChar);
-            if (version > RegexPipelineElement.MAX_VERSION) {
+            if (version > RegexPipelineElement.MaxVersion) {
                 throw new InvalidPipelineException();
             }
 
@@ -2117,7 +2115,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
             if (curChar > (encodedElements.Length - 4)) {
                 throw new InvalidPipelineException();
             }
-            int intValue = int.Parse(encodedElements.Substring(curChar, 4));
+            int intValue = int.Parse(encodedElements.Substring(curChar, 4), CultureInfo.InvariantCulture);
             curChar += 4;
             return intValue;
         }
@@ -2171,59 +2169,52 @@ namespace PathCopyCopy.Settings.Core.Plugins
     /// </summary>
     public sealed class ImportedPipelinePluginOverwrites
     {
-        /// Dictionary storing overwrite information.
-        private Dictionary<PipelinePluginInfo, OverwriteInfo> overwriteInfos = new Dictionary<PipelinePluginInfo, OverwriteInfo>();
-
         /// <summary>
         /// Dictionary storing information about overwritten plugins. The key
         /// is the new pipeline plugin infos and the value is the container
         /// containing information about the old plugin being overwritten.
         /// </summary>
-        /// <seealso cref="ImportedPipelinePluginOverwrites.OverwriteInfo"/>
-        public Dictionary<PipelinePluginInfo, OverwriteInfo> OverwriteInfos
+        /// <seealso cref="ImportedPipelinePluginOverwriteInfo"/>
+        public Dictionary<PipelinePluginInfo, ImportedPipelinePluginOverwriteInfo> OverwriteInfos
         {
-            get {
-                return overwriteInfos;
-            }
-        }
-        
+            get;
+        } = new Dictionary<PipelinePluginInfo, ImportedPipelinePluginOverwriteInfo>();
+    }
+
+    /// <summary>
+    /// Information about an overwritten pipeline plugin.
+    /// </summary>
+    public sealed class ImportedPipelinePluginOverwriteInfo
+    {
         /// <summary>
-        /// Information about an overwritten pipeline plugin.
+        /// Reference to the old pipeline plugin info that will be overwritten.
         /// </summary>
-        public sealed class OverwriteInfo
+        public PipelinePluginInfo OldInfo
         {
-            /// <summary>
-            /// Reference to the old pipeline plugin info that will be overwritten.
-            /// </summary>
-            public PipelinePluginInfo OldInfo
-            {
-                get;
-                private set;
-            }
+            get;
+            private set;
+        }
 
-            /// <summary>
-            /// Index of the pipeline plugin that will be overwritten in the list
-            /// of existing pipeline plugins.
-            /// </summary>
-            public int OldIndex
-            {
-                get;
-                private set;
-            }
+        /// <summary>
+        /// Index of the pipeline plugin that will be overwritten in the list
+        /// of existing pipeline plugins.
+        /// </summary>
+        public int OldIndex
+        {
+            get;
+            private set;
+        }
             
-            /// <summary>
-            /// Constructor.
-            /// </summary>
-            /// <param name="oldInfo">Reference to old pipeline plugin info.</param>
-            /// <param name="oldIndex">Index of old pipeline plugin in the list of
-            /// existing pipeline plugins.</param>
-            public OverwriteInfo(PipelinePluginInfo oldInfo, int oldIndex)
-            {
-                Debug.Assert(oldInfo != null);
-
-                this.OldInfo = oldInfo;
-                this.OldIndex = oldIndex;
-            }
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="oldInfo">Reference to old pipeline plugin info.</param>
+        /// <param name="oldIndex">Index of old pipeline plugin in the list of
+        /// existing pipeline plugins.</param>
+        public ImportedPipelinePluginOverwriteInfo(PipelinePluginInfo oldInfo, int oldIndex)
+        {
+            OldInfo = oldInfo ?? throw new ArgumentNullException(nameof(oldInfo));
+            OldIndex = oldIndex;
         }
     }
 }

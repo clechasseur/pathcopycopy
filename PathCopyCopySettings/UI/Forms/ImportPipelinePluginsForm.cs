@@ -93,8 +93,7 @@ namespace PathCopyCopy.Settings.UI.Forms
                 // Disable any plugin that would overwrite a global one set by the administrator.
                 for (int i = 0; i < PipelinePluginsLst.Items.Count; ++i) {
                     PluginToImportDisplayInfo newPlugin = (PluginToImportDisplayInfo) PipelinePluginsLst.Items[i];
-                    ImportedPipelinePluginOverwrites.OverwriteInfo overwriteInfo;
-                    if (pluginOverwrites.OverwriteInfos.TryGetValue(newPlugin.PluginInfo, out overwriteInfo) && overwriteInfo.OldInfo.Global) {
+                    if (pluginOverwrites.OverwriteInfos.TryGetValue(newPlugin.PluginInfo, out var overwriteInfo) && overwriteInfo.OldInfo.Global) {
                         newPlugin.Importable = false;
                     }
                 }
@@ -130,8 +129,7 @@ namespace PathCopyCopy.Settings.UI.Forms
                 // Also rebuild the list of overwrites to only include those we included in the collection.
                 ImportedPipelinePluginOverwrites newOverwrites = new ImportedPipelinePluginOverwrites();
                 foreach (var pluginInfo in pluginCollection.Plugins) {
-                    ImportedPipelinePluginOverwrites.OverwriteInfo overwriteInfo;
-                    if (pluginOverwrites.OverwriteInfos.TryGetValue(pluginInfo, out overwriteInfo)) {
+                    if (pluginOverwrites.OverwriteInfos.TryGetValue(pluginInfo, out var overwriteInfo)) {
                         newOverwrites.OverwriteInfos.Add(pluginInfo, overwriteInfo);
                     }
                 }

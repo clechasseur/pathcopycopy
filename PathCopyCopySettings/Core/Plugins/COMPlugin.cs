@@ -20,7 +20,6 @@
 // THE SOFTWARE.
 
 using System;
-using System.Diagnostics;
 
 namespace PathCopyCopy.Settings.Core.Plugins
 {
@@ -41,9 +40,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
             get {
                 return iconFile;
             }
-            set {
-                Debug.Fail("COM plugins' icon files cannot be modified");
-            }
+            set => throw new InvalidOperationException();
         }
 
         /// <summary>

@@ -21,6 +21,7 @@
 
 using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Runtime.Serialization;
@@ -163,7 +164,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
                 using (Process executor = Process.Start(startInfo)) {
                     // Get standard input and enter the arguments.
                     StreamWriter cin = executor.StandardInput;
-                    cin.WriteLine(pluginId.ToString("B", null));
+                    cin.WriteLine(pluginId.ToString("B", CultureInfo.InvariantCulture));
                     cin.WriteLine(command);
 
                     // Get standard output, parse lines and get command output.

@@ -1247,7 +1247,7 @@ namespace PathCopyCopy.Settings.UI.Forms
                             PipelinePluginInfo newInfo = collection.Plugins.Find(pl => pl.Equals(existingInfo));
                             if (newInfo != null) {
                                 pluginOverwrites.OverwriteInfos[newInfo] =
-                                    new ImportedPipelinePluginOverwrites.OverwriteInfo(existingInfo, i);
+                                    new ImportedPipelinePluginOverwriteInfo(existingInfo, i);
                             }
                         }
                     }
@@ -1274,8 +1274,7 @@ namespace PathCopyCopy.Settings.UI.Forms
                             bool addedNewPlugins = false;
                             foreach (var newPluginInfo in collection.Plugins) {
                                 Plugin newPlugin = newPluginInfo.ToPlugin();
-                                ImportedPipelinePluginOverwrites.OverwriteInfo overwriteInfo;
-                                if (pluginOverwrites.OverwriteInfos.TryGetValue(newPluginInfo, out overwriteInfo)) {
+                                if (pluginOverwrites.OverwriteInfos.TryGetValue(newPluginInfo, out var overwriteInfo)) {
                                     PluginDisplayInfo displayInfo = pluginDisplayInfos[overwriteInfo.OldIndex];
                                     displayInfo.Plugin = newPlugin;
                                 } else {
