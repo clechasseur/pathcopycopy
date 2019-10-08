@@ -148,7 +148,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
             }
             string executorPath = Path.Combine(Path.GetDirectoryName(assemblyPath), executorFileName);
             if (!File.Exists(executorPath)) {
-                throw new COMPluginExecutorException("Could not find COM plugin executor program at: {0}", executorPath);
+                throw new COMPluginExecutorException($"Could not find COM plugin executor program at: {executorPath}");
             }
 
             // Launch tester program, grabbing input and output.
@@ -163,7 +163,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
                 using (Process executor = Process.Start(startInfo)) {
                     // Get standard input and enter the arguments.
                     StreamWriter cin = executor.StandardInput;
-                    cin.WriteLine(pluginId.ToString("B"));
+                    cin.WriteLine(pluginId.ToString("B", null));
                     cin.WriteLine(command);
 
                     // Get standard output, parse lines and get command output.
@@ -175,9 +175,9 @@ namespace PathCopyCopy.Settings.Core.Plugins
                             // We got our command output.
                             output = match.Groups[1].Value;
                             break;
-                        } else if (line.StartsWith(EXECUTOR_ERROR_PREFIX)) {
+                        } else if (line.StartsWith(EXECUTOR_ERROR_PREFIX, StringComparison.InvariantCulture)) {
                             // An error occured during execution.
-                            throw new COMPluginExecutorException("COM plugin execution failed. Error: {0}", line);
+                            throw new COMPluginExecutorException($"COM plugin execution failed. Error: {line}");
                         }
 
                         // Read next line.
@@ -189,13 +189,13 @@ namespace PathCopyCopy.Settings.Core.Plugins
 
                     // Throw if the execution failed.
                     if (executor.ExitCode < 0) {
-                        throw new COMPluginExecutorException("COM plugin execution failed. Exit code: {0}.", executor.ExitCode);
+                        throw new COMPluginExecutorException($"COM plugin execution failed. Exit code: {executor.ExitCode}.");
                     }
 
                     // Make sure we found output.
                     if (output == null) {
                         throw new COMPluginExecutorException("COM plugin execution did not return expected output. " +
-                            "Exit code: {0}.", executor.ExitCode);
+                            $"Exit code: {executor.ExitCode}.");
                     }
                 }
             } catch (COMPluginExecutorException) {

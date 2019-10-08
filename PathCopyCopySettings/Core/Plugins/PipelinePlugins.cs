@@ -23,10 +23,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Text;
-using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Serialization;
 using PathCopyCopy.Settings.Properties;
@@ -47,7 +47,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
             }
             set {
                 Info.IconFile = value;
-                CallPropertyChanged("IconFile");
+                CallPropertyChanged(nameof(IconFile));
             }
         }
 
@@ -181,16 +181,16 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// <see cref="PipelinePluginInfo.RequiredVersion"/> property. This corresponds to
         /// the first version of Path Copy Copy that supported pipeline plugins.
         /// </summary>
-        public static readonly Version DEFAULT_REQUIRED_VERSION = new Version(9, 0, 0, 0);
+        public static readonly Version DefaultRequiredVersion = new Version(9, 0, 0, 0);
 
         /// <summary>
         /// Default version used for the required version, as a string.
         /// </summary>
-        /// <seealso cref="PipelinePluginInfo.DEFAULT_REQUIRED_VERSION"/>
-        public const string DEFAULT_REQUIRED_VERSION_AS_STRING = "9.0.0.0";
+        /// <seealso cref="PipelinePluginInfo.DefaultRequiredVersion"/>
+        public const string DefaultRequiredVersionAsString = "9.0.0.0";
 
         /// Minimum required version to use this pipeline plugin.
-        private Version minVersion = DEFAULT_REQUIRED_VERSION;
+        private Version minVersion = DefaultRequiredVersion;
 
         /// <summary>
         /// ID of this pipeline plugin.
@@ -210,7 +210,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         public string IdAsString
         {
             get {
-                return Id.ToString("B");
+                return Id.ToString("B", CultureInfo.InvariantCulture);
             }
             set {
                 Id = new Guid(value);
@@ -314,7 +314,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
                 return minVersion;
             }
             set {
-                minVersion = value ?? DEFAULT_REQUIRED_VERSION;
+                minVersion = value ?? DefaultRequiredVersion;
             }
         }
 
@@ -327,14 +327,14 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// which corresponds to the first version of Path Copy Copy that supported pipeline plugins.
         /// </remarks>
         /// <seealso cref="DEFAULT_REQUIRED_VERSION"/>
-        [XmlElement("RequiredVersion"), DefaultValue(DEFAULT_REQUIRED_VERSION_AS_STRING)]
+        [XmlElement("RequiredVersion"), DefaultValue(DefaultRequiredVersionAsString)]
         public string RequiredVersionAsString
         {
             get {
                 return RequiredVersion.ToString();
             }
             set {
-                RequiredVersion = !String.IsNullOrEmpty(value) ? new Version(value) : DEFAULT_REQUIRED_VERSION;
+                RequiredVersion = !String.IsNullOrEmpty(value) ? new Version(value) : DefaultRequiredVersion;
             }
         }
 
@@ -394,7 +394,8 @@ namespace PathCopyCopy.Settings.Core.Plugins
             if (Compatible) {
                 description = Description;
             } else {
-                description = String.Format(Resources.PipelinePluginInfo_DescriptionWithRequiredVersion,
+                description = String.Format(CultureInfo.CurrentCulture,
+                    Resources.PipelinePluginInfo_DescriptionWithRequiredVersion,
                     Description, RequiredVersionAsString);
             }
             return description;
@@ -417,7 +418,9 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// <see cref="PipelinePlugin"/>s.</returns>
         public static List<Plugin> ToPlugins(List<PipelinePluginInfo> pluginInfos)
         {
-            Debug.Assert(pluginInfos != null);
+            if (pluginInfos == null) {
+                throw new ArgumentNullException(nameof(pluginInfos));
+            }
             return pluginInfos.ConvertAll(info => info.ToPlugin());
         }
         
@@ -449,7 +452,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// <summary>
         /// Compares this pipeline plugin info with another. They are compared
         /// through their <see cref="PipelinePluginInfo.Id"/>. This is the generic
-        /// version for the <see cref="T:IComparable"/> interface.
+        /// version for the <see cref="IComparable"/> interface.
         /// </summary>
         /// <param name="obj">Other pipeline plug to compare ourselves to.</param>
         /// <returns>Relative position of <c>this</c> compared to
@@ -469,22 +472,112 @@ namespace PathCopyCopy.Settings.Core.Plugins
         {
             return other != null ? Id.Equals(other.Id) : false;
         }
+
+        /// <summary>
+        /// Compares this pipeline plugin info with another object for equality.
+        /// This only works if the other object is a <see cref="PipelinePluginInfo"/>.
+        /// They are compared through their <see cref="PipelinePluginInfo.Id"/>.
+        /// </summary>
+        /// <param name="obj">Object to compare ourselves with.</param>
+        /// <returns>Whether <c>this</c> is equal to <paramref name="obj"/>.</returns>
+        public override bool Equals(object obj)
+        {
+            return obj != null && obj is PipelinePluginInfo ? Equals((PipelinePluginInfo) obj) : false;
+        }
+
+        /// <summary>
+        /// Returns a hash code for this object. In our case, corresponds
+        /// with our <see cref="PipelinePluginInfo.Id"/>'s hash code.
+        /// </summary>
+        /// <returns>Hash code.</returns>
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
+        }
+
+        /// <summary>
+        /// Equality operator.
+        /// </summary>
+        /// <param name="left">Left pipeline plugin info.</param>
+        /// <param name="right">Right pipeline plugin info.</param>
+        /// <returns>Whether <paramref name="left"/> is equal to <paramref name="right"/>.</returns>
+        public static bool operator==(PipelinePluginInfo left, PipelinePluginInfo right)
+        {
+            return left == null ? right == null : left.Equals(right);
+        }
+
+        /// <summary>
+        /// Inequality operator.
+        /// </summary>
+        /// <param name="left">Left pipeline plugin info.</param>
+        /// <param name="right">Right pipeline plugin info.</param>
+        /// <returns>Whether <paramref name="left"/> is different from <paramref name="right"/>.</returns>
+        public static bool operator!=(PipelinePluginInfo left, PipelinePluginInfo right)
+        {
+            return !(left == right);
+        }
+
+        /// <summary>
+        /// Less-than operator.
+        /// </summary>
+        /// <param name="left">Left pipeline plugin info.</param>
+        /// <param name="right">Right pipeline plugin info.</param>
+        /// <returns>Whether <paramref name="left"/> is less than <paramref name="right"/>.</returns>
+        public static bool operator<(PipelinePluginInfo left, PipelinePluginInfo right)
+        {
+            return right != null && (left == null || left.CompareTo(right) < 0);
+        }
+
+        /// <summary>
+        /// Less-than-or-equal operator.
+        /// </summary>
+        /// <param name="left">Left pipeline plugin info.</param>
+        /// <param name="right">Right pipeline plugin info.</param>
+        /// <returns>Whether <paramref name="left"/> is less than or
+        /// equal to <paramref name="right"/>.</returns>
+        public static bool operator<=(PipelinePluginInfo left, PipelinePluginInfo right)
+        {
+            return !(right < left);
+        }
+
+        /// <summary>
+        /// Greater-than operator.
+        /// </summary>
+        /// <param name="left">Left pipeline plugin info.</param>
+        /// <param name="right">Right pipeline plugin info.</param>
+        /// <returns>Whether <paramref name="left"/> is greater than <paramref name="right"/>.</returns>
+        public static bool operator>(PipelinePluginInfo left, PipelinePluginInfo right)
+        {
+            return right < left;
+        }
+
+        /// <summary>
+        /// Greater-than-or-equal-to operator.
+        /// </summary>
+        /// <param name="left">Left pipeline plugin info.</param>
+        /// <param name="right">Right pipeline plugin info.</param>
+        /// <returns>Whether <paramref name="left"/> is greater than or
+        /// equal to <paramref name="right"/>.</returns>
+        public static bool operator>=(PipelinePluginInfo left, PipelinePluginInfo right)
+        {
+            return !(left < right);
+        }
     }
     
     /// <summary>
-    /// Collection of <see cref="T:PipelinePluginInfo"/> objects. Can be used
+    /// Collection of <see cref="PipelinePluginInfo"/> objects. Can be used
     /// to save and load pipeline plugins to and from XML.
     /// </summary>
-    [XmlRoot(Namespace = PIPELINE_PLUGINS_XML_NAMESPACE)]
+    [XmlRoot(Namespace = PipelinePluginsXmlNamespace)]
     public sealed class PipelinePluginCollection
     {
         /// <summary>
         /// XML namespace used to serialize pipeline plugins.
         /// </summary>
-        public const string PIPELINE_PLUGINS_XML_NAMESPACE = "http://pathcopycopy.codeplex.com/xsd/PipelinePlugins/V1";
+        public const string PipelinePluginsXmlNamespace = "http://pathcopycopy.codeplex.com/xsd/PipelinePlugins/V1";
 
         /// Dictionary storing XML serializer instances. Late-filled.
-        private static IDictionary<PipelinePluginXmlSerializerVersion, XmlSerializer> xmlSerializers =
+        private static readonly IDictionary<PipelinePluginXmlSerializerVersion, XmlSerializer> xmlSerializers =
             new Dictionary<PipelinePluginXmlSerializerVersion, XmlSerializer>();
 
         /// Lock used to protect creation of XmlSerializer objects.
@@ -515,7 +608,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         public Version RequiredVersion
         {
             get {
-                Version reqdVersion = PipelinePluginInfo.DEFAULT_REQUIRED_VERSION;
+                Version reqdVersion = PipelinePluginInfo.DefaultRequiredVersion;
                 foreach (PipelinePluginInfo info in infos) {
                     if (info.RequiredVersion.CompareTo(reqdVersion) > 0) {
                         reqdVersion = info.RequiredVersion;
@@ -544,7 +637,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// Serializes this pipeline plugins collection to XML format that will
         /// later be accepted by the <see cref="FromXML"/> method.
         /// </summary>
-        /// <param name="stream"><see cref="T:Stream"/> where to store the XML data.</param>
+        /// <param name="stream"><see cref="Stream"/> where to store the XML data.</param>
         /// <param name="serializerVersion">Which version of the XML serializer to use.
         /// Depending on the version, certain attributes are not serialized.</param>
         public void ToXML(Stream stream, PipelinePluginXmlSerializerVersion serializerVersion)
@@ -557,10 +650,10 @@ namespace PathCopyCopy.Settings.Core.Plugins
         }
         
         /// <summary>
-        /// Deserializes an <see cref="T:PipelinePluginCollection"/> object from
+        /// Deserializes an <see cref="PipelinePluginCollection"/> object from
         /// XML data.
         /// </summary>
-        /// <param name="stream"><see cref="T:Stream"/> containing the XML.</param>
+        /// <param name="stream"><see cref="Stream"/> containing the XML.</param>
         /// <returns>New pipeline plugins collection from XML.</returns>
         public static PipelinePluginCollection FromXML(Stream stream)
         {
@@ -587,7 +680,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
                     // Need to create this XML serializer on the first call.
                     if (serializerVersion == PipelinePluginXmlSerializerVersion.V3) {
                         // Current version: serialize everything.
-                        xmlSerializer = new XmlSerializer(typeof(PipelinePluginCollection), PIPELINE_PLUGINS_XML_NAMESPACE);
+                        xmlSerializer = new XmlSerializer(typeof(PipelinePluginCollection), PipelinePluginsXmlNamespace);
                     } else if (serializerVersion == PipelinePluginXmlSerializerVersion.V2) {
                         // Second version: do not serialize EditMode.
                         XmlAttributeOverrides overrides = new XmlAttributeOverrides();
@@ -595,7 +688,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
                         attributes.XmlIgnore = true;
                         overrides.Add(typeof(PipelinePluginInfo), "EditModeAsString", attributes);
                         xmlSerializer = new XmlSerializer(typeof(PipelinePluginCollection),
-                            overrides, new Type[0], null, PIPELINE_PLUGINS_XML_NAMESPACE);
+                            overrides, new Type[0], null, PipelinePluginsXmlNamespace);
                     } else if (serializerVersion == PipelinePluginXmlSerializerVersion.V1) {
                         // First version: do not serializer RequiredVersion or EditMode.
                         XmlAttributeOverrides overrides = new XmlAttributeOverrides();
@@ -604,7 +697,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
                         overrides.Add(typeof(PipelinePluginInfo), "RequiredVersionAsString", attributes);
                         overrides.Add(typeof(PipelinePluginInfo), "EditModeAsString", attributes);
                         xmlSerializer = new XmlSerializer(typeof(PipelinePluginCollection),
-                            overrides, new Type[0], null, PIPELINE_PLUGINS_XML_NAMESPACE);
+                            overrides, new Type[0], null, PipelinePluginsXmlNamespace);
                     }
                     xmlSerializers.Add(serializerVersion, xmlSerializer);
                 }
@@ -651,7 +744,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         public virtual Version RequiredVersion
         {
             get {
-                return PipelinePluginInfo.DEFAULT_REQUIRED_VERSION;
+                return PipelinePluginInfo.DefaultRequiredVersion;
             }
         }
         
@@ -690,7 +783,9 @@ namespace PathCopyCopy.Settings.Core.Plugins
         public static string EncodeInt(int toEncode)
         {
             // Encode as four characters.
-            Debug.Assert(toEncode < 10000);
+            if (toEncode >= 10000) {
+                throw new ArgumentOutOfRangeException(nameof(toEncode));
+            }
             return toEncode.ToString("D4");
         }
         
@@ -749,7 +844,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         public Version RequiredVersion
         {
             get {
-                Version reqdVersion = PipelinePluginInfo.DEFAULT_REQUIRED_VERSION;
+                Version reqdVersion = PipelinePluginInfo.DefaultRequiredVersion;
                 foreach (PipelineElement element in pipelineElements) {
                     if (element.RequiredVersion.CompareTo(reqdVersion) > 0) {
                         reqdVersion = element.RequiredVersion;
@@ -1506,7 +1601,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         {
             // We encode our guid without length info, since the C++
             // side will know how many characters to read.
-            return PluginID.ToString("B");
+            return PluginID.ToString("B", CultureInfo.InvariantCulture);
         }
 
         /// <summary>
@@ -1956,7 +2051,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
             // The element data is the ID of the plugin to apply. There's no length saved
             // for this since it's always the same length. Format is as follows:
             // {xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}
-            int guidLength = Guid.Empty.ToString("B").Length;
+            int guidLength = Guid.Empty.ToString("B", CultureInfo.InvariantCulture).Length;
             if (curChar > (encodedElements.Length - guidLength)) {
                 throw new InvalidPipelineException();
             }
@@ -2084,7 +2179,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// is the new pipeline plugin infos and the value is the container
         /// containing information about the old plugin being overwritten.
         /// </summary>
-        /// <seealso cref="T:ImportedPipelinePluginOverwrites.OverwriteInfo"/>
+        /// <seealso cref="ImportedPipelinePluginOverwrites.OverwriteInfo"/>
         public Dictionary<PipelinePluginInfo, OverwriteInfo> OverwriteInfos
         {
             get {
