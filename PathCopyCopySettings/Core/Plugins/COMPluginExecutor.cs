@@ -84,7 +84,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// fails for some reason.</exception>
         public int GetGroupId(Guid pluginId)
         {
-            return Int32.TryParse(Call(pluginId, "get_GroupId"), out int groupId) ? groupId : 0;
+            return int.TryParse(Call(pluginId, "get_GroupId"), out int groupId) ? groupId : 0;
         }
         
         /// <summary>
@@ -97,7 +97,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// fails for some reason.</exception>
         public int GetGroupPosition(Guid pluginId)
         {
-            return Int32.TryParse(Call(pluginId, "get_GroupPosition"), out int groupPosition) ? groupPosition : 0;
+            return int.TryParse(Call(pluginId, "get_GroupPosition"), out int groupPosition) ? groupPosition : 0;
         }
         
         /// <summary>

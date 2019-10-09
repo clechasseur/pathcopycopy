@@ -89,7 +89,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
             // preview since we could change during the lifetime of the app.
             PipelinePluginInfo tempInfo = Info.CreateTemp();
             using (new TempPipelinePluginSaver(tempInfo, userSettings)) {
-                return new PCCExecutor().GetPathWithPlugin(tempInfo.Id, Plugin.PREVIEW_PATH);
+                return new PCCExecutor().GetPathWithPlugin(tempInfo.Id, PREVIEW_PATH);
             }
         }
         
@@ -443,7 +443,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         
         /// <summary>
         /// Compares this pipeline plugin info with another. They are compared
-        /// through their <see cref="PipelinePluginInfo.Id"/>.
+        /// through their <see cref="Id"/>.
         /// </summary>
         /// <param name="other">Other pipeline plug to compare ourselves to.</param>
         /// <returns>Relative position of <c>this</c> compared to
@@ -455,8 +455,8 @@ namespace PathCopyCopy.Settings.Core.Plugins
         
         /// <summary>
         /// Compares this pipeline plugin info with another. They are compared
-        /// through their <see cref="PipelinePluginInfo.Id"/>. This is the generic
-        /// version for the <see cref="IComparable"/> interface.
+        /// through their <see cref="Id"/>. This is the generic version for the
+        /// <see cref="IComparable"/> interface.
         /// </summary>
         /// <param name="obj">Other pipeline plug to compare ourselves to.</param>
         /// <returns>Relative position of <c>this</c> compared to
@@ -468,7 +468,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         
         /// <summary>
         /// Compares two pipeline plugin infos for equality. They are compared
-        /// through their <see cref="PipelinePluginInfo.Id"/>.
+        /// through their <see cref="Id"/>.
         /// </summary>
         /// <param name="other">Pipeline plugin info to compare ourselves with.</param>
         /// <returns>Whether <c>this</c> is equal to <paramref name="other"/>.</returns>
@@ -480,7 +480,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// <summary>
         /// Compares this pipeline plugin info with another object for equality.
         /// This only works if the other object is a <see cref="PipelinePluginInfo"/>.
-        /// They are compared through their <see cref="PipelinePluginInfo.Id"/>.
+        /// They are compared through their <see cref="Id"/>.
         /// </summary>
         /// <param name="obj">Object to compare ourselves with.</param>
         /// <returns>Whether <c>this</c> is equal to <paramref name="obj"/>.</returns>
@@ -491,7 +491,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
 
         /// <summary>
         /// Returns a hash code for this object. In our case, corresponds
-        /// with our <see cref="PipelinePluginInfo.Id"/>'s hash code.
+        /// with our <see cref="Id"/>'s hash code.
         /// </summary>
         /// <returns>Hash code.</returns>
         public override int GetHashCode()
@@ -585,7 +585,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
             new Dictionary<PipelinePluginXmlSerializerVersion, XmlSerializer>();
 
         /// Lock used to protect creation of XmlSerializer objects.
-        private static readonly object xmlSerializersLock = new Object();
+        private static readonly object xmlSerializersLock = new object();
 
         /// <summary>
         /// Pipeline plugins in the collection.
