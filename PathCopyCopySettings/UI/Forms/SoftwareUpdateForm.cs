@@ -66,9 +66,9 @@ namespace PathCopyCopy.Settings.UI.Forms
             SoftwareUpdateTitleLbl.Text = updateInfo.Name;
             updateUrl = updateInfo.Url;
             SoftwareUpdatesTooltip.SetToolTip(SoftwareUpdateUrlLinkLbl, updateUrl);
-            if (updateInfo.ReleaseNotes != null && updateInfo.ReleaseNotes.Length != 0) {
+            if (updateInfo.ReleaseNotes != null && updateInfo.ReleaseNotes.Count != 0) {
                 string innerHtml;
-                if (updateInfo.ReleaseNotes.Length == 1) {
+                if (updateInfo.ReleaseNotes.Count == 1) {
                     innerHtml = updateInfo.ReleaseNotes[0];
                 } else {
                     StringBuilder htmlBuilder = new StringBuilder();
