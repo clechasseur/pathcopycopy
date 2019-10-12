@@ -23,6 +23,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
 using PathCopyCopy.Settings.Properties;
 
@@ -34,12 +35,15 @@ namespace PathCopyCopy.Settings.Core.Regexes
     public sealed class RegexTester
     {
         /// Line prefix used by the regex tester program to indicate an error.
-        private const string REGEX_TESTER_ERROR_PREFIX = "ERROR:";
+        private const string ErrorPrefix = "ERROR:";
 
         /// Regex used to identify the modified string output by the regex tester program.
-        private static readonly Regex MODIFIED_STRING_REGEX = new Regex(String.Format(@"^{0}(.*)$",
-                Resources.REGEX_TESTER_MODIFIED_STRING_PREFIX), RegexOptions.Compiled);
+        private static readonly Regex ModifiedStringRegex = new Regex(
+            $"^{Resources.REGEX_TESTER_MODIFIED_STRING_PREFIX}(.*)$", RegexOptions.Compiled);
         
+#pragma warning disable CA1822 // Mark members as static
+#pragma warning disable CA1303 // Do not pass literals as localized parameters
+
         /// <summary>
         /// Invokes the regex tester program with the given arguments and returns
         /// the modified string.
@@ -58,7 +62,7 @@ namespace PathCopyCopy.Settings.Core.Regexes
             string assemblyPath = new Uri(Assembly.GetEntryAssembly().CodeBase).LocalPath;
             string testerPath = Path.Combine(Path.GetDirectoryName(assemblyPath), Resources.REGEX_TESTER_EXE_NAME);
             if (!File.Exists(testerPath)) {
-                throw new RegexTesterException("Could not find regex tester program at: {0}", testerPath);
+                throw new RegexTesterException($"Could not find regex tester program at: {testerPath}");
             }
 
             // Launch tester program, grabbing input and output.
@@ -82,12 +86,12 @@ namespace PathCopyCopy.Settings.Core.Regexes
                     StreamReader cout = tester.StandardOutput;
                     string line = cout.ReadLine();
                     while (line != null) {
-                        Match match = MODIFIED_STRING_REGEX.Match(line);
+                        Match match = ModifiedStringRegex.Match(line);
                         if (match.Success) {
                             // We got our modified string.
                             modified = match.Groups[1].Value;
                             break;
-                        } else if (line.StartsWith(REGEX_TESTER_ERROR_PREFIX)) {
+                        } else if (line.StartsWith(ErrorPrefix, StringComparison.InvariantCulture)) {
                             // This indicates an invalid regular expression.
                             throw new RegexTesterException("Invalid regular expression.");
                         }
@@ -113,11 +117,15 @@ namespace PathCopyCopy.Settings.Core.Regexes
             // Return modified string as provided by the program.
             return modified;
         }
+
+#pragma warning restore CA1303 // Do not pass literals as localized parameters
+#pragma warning restore CA1822 // Mark members as static
     }
     
     /// <summary>
     /// Exception class used by the <see cref="RegexTester"/>.
     /// </summary>
+    [Serializable]
     public class RegexTesterException : Exception
     {
         /// <summary>
@@ -138,20 +146,31 @@ namespace PathCopyCopy.Settings.Core.Regexes
         }
         
         /// <summary>
-        /// Constructor with formatted exception message.
-        /// </summary>
-        /// <param name="format">Format string.</param>
-        /// <param name="args">Format arguments.</param>
-        public RegexTesterException(string format, params object[] args)
-            : base(String.Format(format, args))
-        {
-        }
-        
-        /// <summary>
         /// Constructor with inner exception.
         /// </summary>
+        /// <param name="innerException">Inner exception.</param>
         public RegexTesterException(Exception innerException)
-            : base(innerException.Message, innerException)
+            : base(innerException?.Message, innerException)
+        {
+        }
+
+        /// <summary>
+        /// Constructor with exception message and inner exception.
+        /// </summary>
+        /// <param name="message">Exception message.</param>
+        /// <param name="innerException">Inner exception.</param>
+        public RegexTesterException(string message, Exception innerException)
+            : base(message, innerException)
+        {
+        }
+
+        /// <summary>
+        /// Streaming constructor.
+        /// </summary>
+        /// <param name="serializationInfo">Serialization info.</param>
+        /// <param name="streamingContext">Streaming context.</param>
+        protected RegexTesterException(SerializationInfo serializationInfo, StreamingContext streamingContext)
+            : base(serializationInfo, streamingContext)
         {
         }
     }

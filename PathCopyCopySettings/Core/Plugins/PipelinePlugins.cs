@@ -89,7 +89,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
             // preview since we could change during the lifetime of the app.
             PipelinePluginInfo tempInfo = Info.CreateTemp();
             using (new TempPipelinePluginSaver(tempInfo, userSettings)) {
-                return new PCCExecutor().GetPathWithPlugin(tempInfo.Id, PREVIEW_PATH);
+                return new PCCExecutor().GetPathWithPlugin(tempInfo.Id, PreviewPath);
             }
         }
         

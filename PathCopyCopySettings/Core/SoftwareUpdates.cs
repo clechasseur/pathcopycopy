@@ -25,6 +25,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Reflection;
+using System.Runtime.Serialization;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Serialization;
@@ -37,75 +38,58 @@ namespace PathCopyCopy.Settings.Core
     /// </summary>
     public sealed class SoftwareUpdateInfo
     {
-        /// Version number of latest build.
-        private Version version = new Version("1.0.0.0");
-
-        /// Minimum Windows version required for this update. Defaults to Windows XP.
-        private Version windowsVersion = new Version("5.1.0.0");
-
-        /// Array of supported installation sources.
-        private string[] installSources = new string[0];
-
-        /// Array of release notes.
-        private string[] releaseNotes = new string[0];
-
         /// <summary>
         /// Version number of the latest build.
         /// </summary>
         [XmlIgnore]
         public Version Version
         {
-            get {
-                return version;
-            }
-            set {
-                version = value;
-            }
-        }
+            get;
+            set;
+        } = new Version(1, 0, 0, 0);
 
         /// <summary>
-        /// String representation of <see cref="SoftwareUpdateInfo.Version"/>.
+        /// String representation of <see cref="Version"/>.
         /// Used for XML serialization.
         /// </summary>
         [XmlElement("Version")]
         public string VersionAsString
         {
             get {
-                return version.ToString();
+                return Version.ToString();
             }
             set {
-                version = new Version(value);
+                Version = new Version(value);
             }
         }
 
         /// <summary>
         /// Minimum required version of Windows that is needed to install this update.
         /// </summary>
+        /// <remarks>
+        /// Defaults to Windows XP.
+        /// </remarks>
         /// <seealso cref="System.Environment.OSVersion"/>
         /// <seealso cref="System.OperatingSystem.Version"/>
         [XmlIgnore]
         public Version RequiredWindowsVersion
         {
-            get {
-                return windowsVersion;
-            }
-            set {
-                windowsVersion = value;
-            }
-        }
+            get;
+            set;
+        } = new Version(5, 1, 0, 0);
 
         /// <summary>
-        /// String representation of <see cref="SoftwareUpdateInfo.RequiredWindowsVersion"/>.
+        /// String representation of <see cref="RequiredWindowsVersion"/>.
         /// Used for XML serialization.
         /// </summary>
         [XmlElement("RequiredWindowsVersion")]
         public string RequiredWindowsVersionAsString
         {
             get {
-                return windowsVersion.ToString();
+                return RequiredWindowsVersion.ToString();
             }
             set {
-                windowsVersion = new Version(value);
+                RequiredWindowsVersion = new Version(value);
             }
         }
 
@@ -114,15 +98,10 @@ namespace PathCopyCopy.Settings.Core
         /// to <see cref="UserSettings.InstallSource"/> to see if this update can be used.
         /// </summary>
         [XmlArray]
-        public string[] InstallSources
+        public List<string> InstallSources
         {
-            get {
-                return installSources;
-            }
-            set {
-                installSources = value ?? new string[0];
-            }
-        }
+            get;
+        } = new List<string>();
 
         /// <summary>
         /// Name of the latest build.
@@ -134,6 +113,8 @@ namespace PathCopyCopy.Settings.Core
             set;
         }
 
+#pragma warning disable CA1056 // Uri properties should not be strings
+
         /// <summary>
         /// URL of the build's web page.
         /// </summary>
@@ -144,25 +125,22 @@ namespace PathCopyCopy.Settings.Core
             set;
         }
 
+#pragma warning restore CA1056 // Uri properties should not be strings
+
         /// <summary>
         /// Lines containing build's release notes.
         /// </summary>
         [XmlArray]
-        public string[] ReleaseNotes
+        public List<string> ReleaseNotes
         {
-            get {
-                return releaseNotes;
-            }
-            set {
-                releaseNotes = value ?? new string[0];
-            }
-        }
+            get;
+        } = new List<string>();
     }
     
     /// <summary>
     /// Collection of <see cref="SoftwareUpdateInfo"/>. Can be read from XML.
     /// </summary>
-    [XmlRoot(Namespace = SoftwareUpdateCollection.SOFTWARE_UPDATE_V2_XML_NAMESPACE)]
+    [XmlRoot(Namespace = SoftwareUpdateV2XmlNamespace)]
     public sealed class SoftwareUpdateCollection
     {
         /// <summary>
@@ -192,16 +170,13 @@ namespace PathCopyCopy.Settings.Core
         ///     </item>
         /// </list>
         /// </remarks>
-        public const string SOFTWARE_UPDATE_V2_XML_NAMESPACE = "http://pathcopycopy.codeplex.com/xsd/SoftwareUpdate/V2";
+        public const string SoftwareUpdateV2XmlNamespace = "http://pathcopycopy.codeplex.com/xsd/SoftwareUpdate/V2";
 
         /// XML serializer used to deserialize software update objects.
         private static XmlSerializer xmlSerializer;
 
         /// Object used to synchronize access to the XML serializer.
-        private static readonly object xmlSerializerLock = new Object();
-
-        /// List of software update info beans.
-        private List<SoftwareUpdateInfo> infos = new List<SoftwareUpdateInfo>();
+        private static readonly object xmlSerializerLock = new object();
 
         /// <summary>
         /// List of <see cref="SoftwareUpdateInfo"/> beans containing info about the software
@@ -210,13 +185,8 @@ namespace PathCopyCopy.Settings.Core
         [XmlArray]
         public List<SoftwareUpdateInfo> UpdateInfos
         {
-            get {
-                return infos;
-            }
-            set {
-                infos = value ?? new List<SoftwareUpdateInfo>();
-            }
-        }
+            get;
+        } = new List<SoftwareUpdateInfo>();
         
         /// <summary>
         /// Deserializes a <see cref="SoftwareUpdateCollection"/> object from XML data.
@@ -225,7 +195,9 @@ namespace PathCopyCopy.Settings.Core
         /// <returns>New software updates collection from XML.</returns>
         public static SoftwareUpdateCollection FromXML(string xml)
         {
-            Debug.Assert(xml != null);
+            if (xml == null) {
+                throw new ArgumentNullException(nameof(xml));
+            }
 
             using (StringReader textReader = new StringReader(xml)) {
                 using (XmlReader xmlReader = XmlReader.Create(textReader)) {
@@ -245,7 +217,7 @@ namespace PathCopyCopy.Settings.Core
                 lock (xmlSerializerLock) {
                     if (xmlSerializer == null) {
                         xmlSerializer = new XmlSerializer(typeof(SoftwareUpdateCollection),
-                            SOFTWARE_UPDATE_V2_XML_NAMESPACE);
+                            SoftwareUpdateV2XmlNamespace);
                     }
                 }
             }
@@ -262,10 +234,10 @@ namespace PathCopyCopy.Settings.Core
         /// <summary>
         /// Update channel value to set to disable software updates.
         /// </summary>
-        public const string NULL_UPDATE_CHANNEL = "none";
+        public const string NullUpdateChannelUpperCase = "NONE";
 
         /// UserSettings object used to access settings.
-        private UserSettings userSettings;
+        private readonly UserSettings userSettings;
         
         /// <summary>
         /// Constructor.
@@ -274,9 +246,7 @@ namespace PathCopyCopy.Settings.Core
         /// be <c>null</c>.</param>
         public SoftwareUpdater(UserSettings userSettings)
         {
-            Debug.Assert(userSettings != null);
-
-            this.userSettings = userSettings;
+            this.userSettings = userSettings ?? throw new ArgumentNullException(nameof(userSettings));
         }
         
         /// <summary>
@@ -292,7 +262,7 @@ namespace PathCopyCopy.Settings.Core
         {
             bool hasUpdate = false;
 
-            if (userSettings.UpdateChannel.ToLower() != NULL_UPDATE_CHANNEL) {
+            if (userSettings.UpdateChannel.ToUpperInvariant() != NullUpdateChannelUpperCase) {
                 try {
                     // Download the latest software update collection XML.
                     string updatesXml;
@@ -336,7 +306,9 @@ namespace PathCopyCopy.Settings.Core
                         }
                     }
                 } catch (Exception e) {
+#pragma warning disable CA1303 // Do not pass literals as localized parameters
                     throw new SoftwareUpdateException("Error during CheckForUpdate", e);
+#pragma warning restore CA1303 // Do not pass literals as localized parameters
                 }
             }
 
@@ -352,13 +324,15 @@ namespace PathCopyCopy.Settings.Core
         /// <returns><c>true</c> if this software update can be used.</returns>
         private bool CanBeUsed(SoftwareUpdateInfo updateInfo)
         {
-            Debug.Assert(updateInfo != null);
+            if (updateInfo == null) {
+                throw new ArgumentNullException(nameof(updateInfo));
+            }
 
             // Make sure we meet the minimum Windows requirement and the update
             // supports the installation source of our own installation.
             Debug.Assert(Environment.OSVersion.Platform == PlatformID.Win32NT);
-            return (updateInfo.RequiredWindowsVersion.CompareTo(Environment.OSVersion.Version) <= 0) &&
-                (Array.IndexOf(updateInfo.InstallSources, userSettings.InstallSource) >= 0);
+            return updateInfo.RequiredWindowsVersion.CompareTo(Environment.OSVersion.Version) <= 0 &&
+                updateInfo.InstallSources.Contains(userSettings.InstallSource);
         }
     }
     
@@ -366,6 +340,7 @@ namespace PathCopyCopy.Settings.Core
     /// Exception used by the <see cref="SoftwareUpdater"/> when an error occurs
     /// when checking for software updates.
     /// </summary>
+    [Serializable]
     public class SoftwareUpdateException : Exception
     {
         /// <summary>
@@ -384,14 +359,33 @@ namespace PathCopyCopy.Settings.Core
             : base(message)
         {
         }
-        
+
         /// <summary>
         /// Constructor with inner exception.
+        /// </summary>
+        /// <param name="innerException">Inner exception.</param>
+        public SoftwareUpdateException(Exception innerException)
+            : base(innerException?.Message, innerException)
+        {
+        }
+        
+        /// <summary>
+        /// Constructor with exception message and inner exception.
         /// </summary>
         /// <param name="message">Exception message.</param>
         /// <param name="innerException">Inner exception.</param>
         public SoftwareUpdateException(string message, Exception innerException)
             : base(message, innerException)
+        {
+        }
+
+        /// <summary>
+        /// Streaming constructor.
+        /// </summary>
+        /// <param name="serializationInfo">Serialization info.</param>
+        /// <param name="streamingContext">Streaming context.</param>
+        protected SoftwareUpdateException(SerializationInfo serializationInfo, StreamingContext streamingContext)
+            : base(serializationInfo, streamingContext)
         {
         }
     }

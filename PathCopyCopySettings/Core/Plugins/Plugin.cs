@@ -22,6 +22,7 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
 using PathCopyCopy.Settings.Properties;
@@ -47,7 +48,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// <summary>
         /// Path to use to generate previews.
         /// </summary>
-        public static readonly string PREVIEW_PATH;
+        public static readonly string PreviewPath = GeneratePreviewPath();
 
         /// <summary>
         /// Unique plugin ID: a GUID.
@@ -59,7 +60,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
             }
             protected set {
                 id = value;
-                CallPropertyChanged("Id");
+                CallPropertyChanged(nameof(Id));
             }
         }
 
@@ -73,7 +74,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
             }
             protected set {
                 description = value;
-                CallPropertyChanged("Description");
+                CallPropertyChanged(nameof(Description));
             }
         }
 
@@ -102,17 +103,6 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// Event fired when a property of the plugin changes.
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
-        
-        /// <summary>
-        /// Static constructor. Initializes our read-only static fields.
-        /// </summary>
-        static Plugin()
-        {
-            // Use path to this executable as preview. It will most likely contain
-            // spaces and long names, which is perfect to showcase short paths.
-            string pathToThisExe = new Uri(Assembly.GetEntryAssembly().CodeBase).LocalPath;
-            PREVIEW_PATH = Path.ChangeExtension(pathToThisExe, Path.GetExtension(pathToThisExe).ToLower());
-        }
         
         /// <summary>
         /// Creates a new Plugin bean.
@@ -144,7 +134,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         {
             if (preview == null) {
                 try {
-                    preview = new PCCExecutor().GetPathWithPlugin(Id, PREVIEW_PATH);
+                    preview = new PCCExecutor().GetPathWithPlugin(Id, PreviewPath);
                 } catch (PCCExecutorException) {
                     preview = Resources.Plugin_PreviewError;
                 }
@@ -169,20 +159,20 @@ namespace PathCopyCopy.Settings.Core.Plugins
         public int CompareTo(Plugin other)
         {
             // Null elements are "smaller"
-            return other != null ? Id.CompareTo(other.Id) : 1;
+            return other is object ? Id.CompareTo(other.Id) : 1;
         }
 
         /// <summary>
-        /// Compares this plugin to another arbitrary object.
-        /// If <paramref name="obj"/> is a <see cref="Plugin"/>,
-        /// this will compare the plugins using their IDs;
-        /// otherwise the result is undefined.
+        /// Compares this plugin to another arbitrary object. If
+        /// <paramref name="obj"/> is a <see cref="Plugin"/>, this will
+        /// compare the plugins using their IDs. This is the generic
+        /// version for the <see cref="IComparable"/> interface.
         /// </summary>
         /// <param name="obj">Object to compare to this plugin.</param>
         /// <returns>Comparison result.</returns>
-        public int CompareTo(object obj)
+        int IComparable.CompareTo(object obj)
         {
-            return (obj != null && obj is Plugin) ? CompareTo((Plugin) obj) : 1;
+            return obj is Plugin ? CompareTo((Plugin) obj) : 1;
         }
 
         /// <summary>
@@ -193,7 +183,98 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// as this plugin.</returns>
         public bool Equals(Plugin other)
         {
-            return other != null ? Id.Equals(other.Id) : false;
+            return other is object ? Id.Equals(other.Id) : false;
+        }
+
+        /// <summary>
+        /// Checks if an object is equal to this <see cref="Plugin"/>.
+        /// If <paramref name="obj"/> is also a <see cref="Plugin"/>,
+        /// this checks if they have the same ID.
+        /// </summary>
+        /// <param name="obj">Object to compare to this one.</param>
+        /// <returns><c>true</c> if <paramref name="obj"/> is a
+        /// <see cref="Plugin"/> and has the same ID as this plugin.</returns>
+        public override bool Equals(object obj)
+        {
+            return obj is Plugin ? Equals((Plugin) obj) : false;
+        }
+
+        /// <summary>
+        /// Returns a hash code for this object. In our case,
+        /// returns our ID's hash code.
+        /// </summary>
+        /// <returns>Hash code.</returns>
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
+        }
+
+        /// <summary>
+        /// Equality operator.
+        /// </summary>
+        /// <param name="left">Left plugin.</param>
+        /// <param name="right">Right plugin.</param>
+        /// <returns>Whether <paramref name="left"/> is equal to <paramref name="right"/>.</returns>
+        public static bool operator==(Plugin left, Plugin right)
+        {
+            return !(left is object) ? !(right is object) : left.Equals(right);
+        }
+
+        /// <summary>
+        /// Inequality operator.
+        /// </summary>
+        /// <param name="left">Left plugin.</param>
+        /// <param name="right">Right plugin.</param>
+        /// <returns>Whether <paramref name="left"/> is different from <paramref name="right"/>.</returns>
+        public static bool operator!=(Plugin left, Plugin right)
+        {
+            return !(left == right);
+        }
+
+        /// <summary>
+        /// Less-than operator.
+        /// </summary>
+        /// <param name="left">Left plugin.</param>
+        /// <param name="right">Right plugin.</param>
+        /// <returns>Whether <paramref name="left"/> is less than <paramref name="right"/>.</returns>
+        public static bool operator<(Plugin left, Plugin right)
+        {
+            return right is object && (!(left is object) || left.CompareTo(right) < 0);
+        }
+
+        /// <summary>
+        /// Less-than-or-equal operator.
+        /// </summary>
+        /// <param name="left">Left plugin.</param>
+        /// <param name="right">Right plugin.</param>
+        /// <returns>Whether <paramref name="left"/> is less than or
+        /// equal to <paramref name="right"/>.</returns>
+        public static bool operator<=(Plugin left, Plugin right)
+        {
+            return !(right < left);
+        }
+
+        /// <summary>
+        /// Greater-than operator.
+        /// </summary>
+        /// <param name="left">Left plugin.</param>
+        /// <param name="right">Right plugin.</param>
+        /// <returns>Whether <paramref name="left"/> is greater than <paramref name="right"/>.</returns>
+        public static bool operator>(Plugin left, Plugin right)
+        {
+            return right < left;
+        }
+
+        /// <summary>
+        /// Greater-than-or-equal-to operator.
+        /// </summary>
+        /// <param name="left">Left plugin.</param>
+        /// <param name="right">Right plugin.</param>
+        /// <returns>Whether <paramref name="left"/> is greater than or
+        /// equal to <paramref name="right"/>.</returns>
+        public static bool operator>=(Plugin left, Plugin right)
+        {
+            return !(left < right);
         }
 
         /// <summary>
@@ -206,6 +287,19 @@ namespace PathCopyCopy.Settings.Core.Plugins
         protected void CallPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        /// <summary>
+        /// Generates the path used for previews.
+        /// </summary>
+        /// <returns>Preview path.</returns>
+        private static string GeneratePreviewPath()
+        {
+            // Use path to this executable as preview. It will most likely contain
+            // spaces and long names, which is perfect to showcase short paths.
+            string pathToThisExe = new Uri(Assembly.GetEntryAssembly().CodeBase).LocalPath;
+            return Path.ChangeExtension(pathToThisExe,
+                Path.GetExtension(pathToThisExe).ToLower(CultureInfo.CurrentCulture));
         }
     }
     
@@ -234,7 +328,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         {
             // Separators don't need previews; this shouldn't be called.
             Debug.Fail("Separator plugins don't have previews");
-            return String.Empty;
+            return string.Empty;
         }
     }
 
@@ -254,7 +348,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
             }
             set {
                 iconFile = value;
-                CallPropertyChanged("IconFile");
+                CallPropertyChanged(nameof(IconFile));
             }
         }
         
