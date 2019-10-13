@@ -23,6 +23,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using Microsoft.Win32;
 using PathCopyCopy.Settings.Core.Plugins;
 using PathCopyCopy.Settings.Properties;
@@ -46,222 +47,224 @@ namespace PathCopyCopy.Settings.Core
         }
 
         /// Path of registry key containing global settings.
-        private const string PCC_GLOBAL_SETTINGS_KEY = @"Software\clechasseur\PathCopyCopy";
+        private const string GlobalSettingsKeyPath = @"Software\clechasseur\PathCopyCopy";
 
         /// Path of registry key containing global settings when running under WOW64.
-        private const string PCC_GLOBAL_SETTINGS_KEY_WOW64 = @"Software\Wow6432Node\clechasseur\PathCopyCopy";
+        private const string GlobalSettingsKeyWow64Path = @"Software\Wow6432Node\clechasseur\PathCopyCopy";
 
         /// Path of registry key containing user settings.
-        private const string PCC_USER_SETTINGS_KEY = @"Software\clechasseur\PathCopyCopy";
+        private const string UserSettingsKeyPath = @"Software\clechasseur\PathCopyCopy";
 
-        /// Path of registry key containing icon files per plugin (relative to the main registry key).
-        private const string PCC_ICONS_KEY = "Icons";
+        /// Name of registry key containing icon files per plugin (relative to the main registry key).
+        private const string IconsKeyName = "Icons";
 
-        /// Path of registry key containing the pipeline plugins (relative to the main registry key).
-        private const string PCC_PIPELINE_PLUGINS_KEY = "PipelinePlugins";
+        /// Name of registry key containing the pipeline plugins (relative to the main registry key).
+        private const string PipelinePluginsKeyName = "PipelinePlugins";
 
-        /// Path of registry key containing the temporary pipeline plugins (relative to the main registry key).
-        private const string PCC_TEMP_PIPELINE_PLUGINS_KEY = "TempPipelinePlugins";
+        /// Name of registry key containing the temporary pipeline plugins (relative to the main registry key).
+        private const string TempPipelinePluginsKeyName = "TempPipelinePlugins";
 
-        /// Path of registry key containing forms information (relative to the main registry key).
-        private const string PCC_FORMS_KEY = "Forms";
+        /// Name of registry key containing forms information (relative to the main registry key).
+        private const string FormsKeyName = "Forms";
 
         /// Name of registry value determining whether we use hidden shares in UNC plugins.
-        private const string USE_HIDDEN_SHARES_VALUE_NAME = "UseHiddenShares";
+        private const string UseHiddenSharesValueName = "UseHiddenShares";
 
         /// Name of registry value determining whether we use fully-qualified domain names in UNC plugins.
-        private const string USE_FQDN_VALUE_NAME = "UseFQDN";
+        private const string UseFQDNValueName = "UseFQDN";
 
         /// Name of registry value determining whether we add quotes to copied paths.
-        private const string ADD_QUOTES_VALUE_NAME = "AddQuotes";
+        private const string AddQuotesValueName = "AddQuotes";
 
         ///Name of registry value determining whether quotes around the paths are optional.
-        private const string ARE_QUOTES_OPTIONAL_VALUE_NAME = "AreQuotesOptional";
+        private const string AreQuotesOptionalValueName = "AreQuotesOptional";
 
        /// Name of registry value determining whether we turn paths into e-mail links.
-        private const string MAKE_EMAIL_LINKS_VALUE_NAME = "MakeEmailLinks";
+        private const string MakeEmailLinksValueName = "MakeEmailLinks";
 
         /// Name of registry value determining how to encode characters in paths.
-        private const string ENCODE_PARAM_VALUE_NAME = "EncodeParam";
+        private const string EncodeParamValueName = "EncodeParam";
 
         /// Name of registry value determining whether to append separators at end of directory paths.
-        private const string APPEND_SEPARATOR_FOR_DIRECTORIES_VALUE_NAME = "AppendSeparatorForDirectories";
+        private const string AppendSeparatorForDirectoriesValueName = "AppendSeparatorForDirectories";
 
         /// Name of registry value determining whether we show an icon next to the default plugin.
-        private const string USE_ICON_FOR_DEFAULT_PLUGIN_VALUE_NAME = "UseIconForDefaultPlugin";
+        private const string UseIconForDefaultPluginValueName = "UseIconForDefaultPlugin";
 
         /// Name of registry value determining whether we show an icon next to the submenu.
-        private const string USE_ICON_FOR_SUBMENU_VALUE_NAME = "UseIconForSubmenu";
+        private const string UseIconForSubmenuValueName = "UseIconForSubmenu";
 
         /// Name of registry value determining whether to show previews in submenu instead of descriptions.
-        private const string USE_PREVIEW_MODE_VALUE_NAME = "UsePreviewMode";
+        private const string UsePreviewModeValueName = "UsePreviewMode";
 
         /// Name of registry value determining whether to show previews in main menu instead of descriptions.
-        private const string USE_PREVIEW_MODE_IN_MAIN_MENU_VALUE_NAME = "UsePreviewModeInMainMenu";
+        private const string UsePreviewModeInMainMenuValueName = "UsePreviewModeInMainMenu";
 
         /// Name of registry value determining whether to drop redundant words in plugin descriptions.
-        private const string DROP_REDUNDANT_WORDS_VALUE_NAME = "DropRedundantWords";
+        private const string DropRedundantWordsValueName = "DropRedundantWords";
 
         /// Name of registry value determining whether software updates are disabled.
-        private const string DISABLE_SOFTWARE_UPDATE_VALUE_NAME = "DisableSoftwareUpdate";
+        private const string DisableSoftwareUpdateValueName = "DisableSoftwareUpdate";
 
         /// Name of registry value written by the installer to specify installation source (Inno, MSI, etc.)
-        private const string INSTALL_SOURCE_VALUE_NAME = "InstallSource";
+        private const string InstallSourceValueName = "InstallSource";
 
         /// Name of registry value determining whether the submenu is always shown.
-        private const string ALWAYS_SHOW_SUBMENU_VALUE_NAME = "AlwaysShowSubmenu";
+        private const string AlwaysShowSubmenuValueName = "AlwaysShowSubmenu";
 
         /// Name of registry value specifying the separator to use between multiple copied paths.
-        private const string PATHS_SEPARATOR_VALUE_NAME = "PathsSeparator";
+        private const string PathsSeparatorValueName = "PathsSeparator";
 
         /// Name of registry value containing the ID of the plugin to activate when Ctrl key is held down.
-        private const string CTRL_KEY_PLUGIN_VALUE_NAME = "CtrlKeyPlugin";
+        private const string CtrlKeyPluginValueName = "CtrlKeyPlugin";
 
         /// Name of registry value containing the plugins to display in the main menu, in order.
-        private const string MAIN_MENU_DISPLAY_ORDER_VALUE_NAME = "MainMenuDisplayOrder";
+        private const string MainMenuDisplayOrderValueName = "MainMenuDisplayOrder";
 
         /// Name of registry value containing the plugins to display in the submenu, in order.
-        private const string SUBMENU_DISPLAY_ORDER_VALUE_NAME = "SubmenuDisplayOrder";
+        private const string SubmenuDisplayOrderValueName = "SubmenuDisplayOrder";
 
         /// Name of registry value containing the plugins to display in the Settings UI, in order.
-        private const string UI_DISPLAY_ORDER_VALUE_NAME = "UIDisplayOrder";
+        private const string UIDisplayOrderValueName = "UIDisplayOrder";
 
         /// Name of registry value containing the plugins that are known to the settings app.
-        private const string KNOWN_PLUGINS_VALUE_NAME = "KnownPlugins";
+        private const string KnownPluginsValueName = "KnownPlugins";
 
         /// Name of registry value containing the last ignored software update version.
-        private const string IGNORED_UPDATE_VALUE_NAME = "IgnoredUpdate";
+        private const string IgnoredUpdateValueName = "IgnoredUpdate";
 
         /// Name of registry value containing the X component of the Settings form position.
-        private const string SETTINGS_FORM_POS_X_VALUE_NAME = "SettingsFormPosX";
+        private const string SettingsFormPosXValueName = "SettingsFormPosX";
 
         /// Name of registry value containing the Y component of the Settings form position.
-        private const string SETTINGS_FORM_POS_Y_VALUE_NAME = "SettingsFormPosY";
+        private const string SettingsFormPosYValueName = "SettingsFormPosY";
 
         /// Name of registry value containing the width component of the Settings form size.
-        private const string SETTINGS_FORM_SIZE_WIDTH_VALUE_NAME = "SettingsFormSizeWidth";
+        private const string SettingsFormSizeWidthValueName = "SettingsFormSizeWidth";
 
         /// Name of registry value containing the height component of the Settings form size.
-        private const string SETTINGS_FORM_SIZE_HEIGHT_VALUE_NAME = "SettingsFormSizeHeight";
+        private const string SettingsFormSizeHeightValueName = "SettingsFormSizeHeight";
 
         /// Name of registry value containing a pipeline plugin's description.
-        private const string PIPELINE_PLUGIN_DESCRIPTION_VALUE_NAME = "Description";
+        private const string PipelinePluginDescriptionValueName = "Description";
 
         /// Name of registry value containing the path to a pipeline plugin's icon file.
-        private const string PIPELINE_PLUGIN_ICON_VALUE_NAME = "IconFile";
+        private const string PipelinePluginIconValueName = "IconFile";
 
         /// Name of registry value containing the minimum required version for a pipeline plugin.
-        private const string PIPELINE_PLUGIN_REQUIRED_VERSION_VALUE_NAME = "RequiredVersion";
+        private const string PipelinePluginRequiredVersionValueName = "RequiredVersion";
 
         /// Name of registry value containing a pipeline plugin's last edit mode.
-        private const string PIPELINE_PLUGIN_EDIT_MODE_VALUE_NAME = "EditMode";
+        private const string PipelinePluginEditModeValueName = "EditMode";
 
         /// Name of registry value containing the order in which to display pipeline plugins.
-        private const string PIPELINE_PLUGINS_DISPLAY_ORDER_VALUE_NAME = "DisplayOrder";
+        private const string PipelinePluginsDisplayOrderValueName = "DisplayOrder";
 
         /// Name of registry value containing a form's position's X coordinate.
-        private const string FORMS_POS_X_VALUE_NAME = "X";
+        private const string FormsPosXValueName = "X";
 
         /// Name of registry value containing a form's position's Y coordinate.
-        private const string FORMS_POS_Y_VALUE_NAME = "Y";
+        private const string FormsPosYValueName = "Y";
 
         /// Name of registry value containing a form's width.
-        private const string FORMS_SIZE_WIDTH_VALUE_NAME = "Width";
+        private const string FormsSizeWidthValueName = "Width";
 
         /// Name of registry value containing a form's height.
-        private const string FORMS_SIZE_HEIGHT_VALUE_NAME = "Height";
+        private const string FormsSizeHeightValueName = "Height";
 
         /// Name of registry value that can exist in the global key to indicate
         /// that settings editing is disabled.
-        private const string EDITING_DISABLED_VALUE_NAME = "KeyLock";
+        private const string EditingDisabledValueName = "KeyLock";
 
         /// Name of registry value that can exist in the global key to store
         /// the URL of the software update file to check.
-        private const string UPDATE_CHANNEL_VALUE_NAME = "UpdateChannel";
+        private const string UpdateChannelValueName = "UpdateChannel";
 
         /// Separator used between plugins in the registry values.
-        private const char PLUGINS_VALUE_SEPARATOR = ',';
+        private const char PluginsValueSeparator = ',';
 
         /// Default value of the "use hidden shares" setting.
-        private const int USE_HIDDEN_SHARES_DEFAULT_VALUE = 0;
+        private const int UseHiddenSharesDefaultValue = 0;
 
         /// Default value of the "use FQDN" setting.
-        private const int USE_FQDN_DEFAULT_VALUE = 0;
+        private const int UseFQDNDefaultValue = 0;
 
         /// Default value of the "add quotes around paths" setting.
-        private const int ADD_QUOTES_DEFAULT_VALUE = 0;
+        private const int AddQuotesDefaultValue = 0;
 
         /// Default value of the "are quotes optional" setting.
-        private const int ARE_QUOTES_OPTIONAL_DEFAULT_VALUE = 0;
+        private const int AreQuotesOptionalDefaultValue = 0;
 
         /// Default value of the "make e-mail links" setting.
-        private const int MAKE_EMAIL_LINKS_DEFAULT_VALUE = 0;
+        private const int MakeEmailLinksDefaultValue = 0;
 
         /// Default value of the "encode param" setting.
-        private const StringEncodeParam ENCODE_PARAM_DEFAULT_VALUE = StringEncodeParam.None;
+        private const StringEncodeParam EncodeParamDefaultValue = StringEncodeParam.None;
 
         /// Default value of the "append separator for directories" setting.
-        private const int APPEND_SEPARATOR_FOR_DIRECTORIES_DEFAULT_VALUE = 0;
+        private const int AppendSeparatorForDirectoriesDefaultValue = 0;
 
         /// Default value of the "use icon for default plugin" setting.
-        private const int USE_ICON_FOR_DEFAULT_PLUGIN_DEFAULT_VALUE = 0;
+        private const int UseIconForDefaultPluginDefaultValue = 0;
 
         /// Default value of the "use icon for submenu" setting.
-        private const int USE_ICON_FOR_SUBMENU_DEFAULT_VALUE = 1;
+        private const int UseIconForSubmenuDefaultValue = 1;
 
         /// Default value of the "use preview mode" setting.
-        private const int USE_PREVIEW_MODE_DEFAULT_VALUE = 0;
+        private const int UsePreviewModeDefaultValue = 0;
 
         /// Default value of the "use preview mode in main menu" setting.
-        private const int USE_PREVIEW_MODE_IN_MAIN_MENU_DEFAULT_VALUE = 0;
+        private const int UsePreviewModeInMainMenuDefaultValue = 0;
 
         /// Default value of the "drop redundant words" setting.
-        private const int DROP_REDUNDANT_WORDS_DEFAULT_VALUE = 0;
+        private const int DropRedundantWordsDefaultValue = 0;
 
         /// Default value of the "always show submenu" setting.
-        private const int ALWAYS_SHOW_SUBMENU_DEFAULT_VALUE = 1;
+        private const int AlwaysShowSubmenuDefaultValue = 1;
 
         /// Default value of the "paths separator" setting.
-        private const string PATHS_SEPARATOR_DEFAULT_VALUE = "";
+        private const string PathsSeparatorDefaultValue = "";
 
         /// Default value of the "disable software update" setting.
-        private const int DISABLE_SOFTWARE_UPDATE_DEFAULT_VALUE = 0;
+        private const int DisableSoftwareUpdateDefaultValue = 0;
 
         /// Default value of the "install source" setting.
-        private const string INSTALL_SOURCE_DEFAULT_VALUE = "Inno";
+        private const string InstallSourceDefaultValue = "Inno";
 
         /// Default value for all size and position components of Settings form.
-        private const int SETTINGS_FORM_POS_SIZE_DEFAULT_VALUE = -1;
+        private const int SettingsFormPosSizeDefaultValue = -1;
 
         /// Separator used between pipeline plugins in the display order string.
-        private const char PIPELINE_PLUGINS_DISPLAY_ORDER_SEPARATOR = ',';
+        private const char PipelinePluginsDisplayOrderSeparator = ',';
 
         /// Defaut value for all size and position components of a form.
-        private const int FORMS_POS_SIZE_DEFAULT_VALUE = -1;
+        private const int FormsPosSizeDefaultValue = -1;
 
         /// Registry key containing global settings for all users. Can be null for portable installations.
-        private RegistryKey globalKey;
+        private readonly RegistryKey globalKey;
 
         /// Registry key containing user-specific settings.
-        private RegistryKey userKey;
+        private readonly RegistryKey userKey;
 
         /// Registry key containing the global plugin icon files. Can be null for portable installations.
-        private RegistryKey globalIconsKey;
+        private readonly RegistryKey globalIconsKey;
 
         /// Registry key containing user-specific plugin icon files.
-        private RegistryKey userIconsKey;
+        private readonly RegistryKey userIconsKey;
 
         /// Registry key containing the global pipeline plugins. Can be null for portable installations.
-        private RegistryKey globalPipelinePluginsKey;
+        private readonly RegistryKey globalPipelinePluginsKey;
 
         /// Registry key containing user-specific pipeline plugins.
-        private RegistryKey userPipelinePluginsKey;
+        private readonly RegistryKey userPipelinePluginsKey;
 
         /// Registry key containing temporary pipeline plugins. They are always user-specific.
-        private RegistryKey userTempPipelinePluginsKey;
+        private readonly RegistryKey userTempPipelinePluginsKey;
 
         /// Registry key containing information on forms. They are always user-specific.
-        private RegistryKey userFormsKey;
+        private readonly RegistryKey userFormsKey;
+
+#pragma warning disable CA2227 // Collection properties should be read only
 
         /// <summary>
         /// Whether the UNC plugins should use hidden shares or not.
@@ -269,10 +272,10 @@ namespace PathCopyCopy.Settings.Core
         public bool UseHiddenShares
         {
             get {
-                return ((int) GetUserOrGlobalValue(USE_HIDDEN_SHARES_VALUE_NAME, USE_HIDDEN_SHARES_DEFAULT_VALUE)) != 0;
+                return ((int) GetUserOrGlobalValue(UseHiddenSharesValueName, UseHiddenSharesDefaultValue)) != 0;
             }
             set {
-                userKey.SetValue(USE_HIDDEN_SHARES_VALUE_NAME, value ? 1 : 0);
+                userKey.SetValue(UseHiddenSharesValueName, value ? 1 : 0);
             }
         }
 
@@ -282,10 +285,10 @@ namespace PathCopyCopy.Settings.Core
         public bool UseFQDN
         {
             get {
-                return ((int) GetUserOrGlobalValue(USE_FQDN_VALUE_NAME, USE_FQDN_DEFAULT_VALUE)) != 0;
+                return ((int) GetUserOrGlobalValue(UseFQDNValueName, UseFQDNDefaultValue)) != 0;
             }
             set {
-                userKey.SetValue(USE_FQDN_VALUE_NAME, value ? 1 : 0);
+                userKey.SetValue(UseFQDNValueName, value ? 1 : 0);
             }
         }
 
@@ -295,10 +298,10 @@ namespace PathCopyCopy.Settings.Core
         public bool AddQuotes
         {
             get {
-                return ((int) GetUserOrGlobalValue(ADD_QUOTES_VALUE_NAME, ADD_QUOTES_DEFAULT_VALUE)) != 0;
+                return ((int) GetUserOrGlobalValue(AddQuotesValueName, AddQuotesDefaultValue)) != 0;
             }
             set {
-                userKey.SetValue(ADD_QUOTES_VALUE_NAME, value ? 1 : 0);
+                userKey.SetValue(AddQuotesValueName, value ? 1 : 0);
             }
         }
 
@@ -308,10 +311,10 @@ namespace PathCopyCopy.Settings.Core
         public bool AreQuotesOptional
         {
             get {
-                return ((int) GetUserOrGlobalValue(ARE_QUOTES_OPTIONAL_VALUE_NAME, ARE_QUOTES_OPTIONAL_DEFAULT_VALUE)) != 0;
+                return ((int) GetUserOrGlobalValue(AreQuotesOptionalValueName, AreQuotesOptionalDefaultValue)) != 0;
             }
             set {
-                userKey.SetValue(ARE_QUOTES_OPTIONAL_VALUE_NAME, value ? 1 : 0);
+                userKey.SetValue(AreQuotesOptionalValueName, value ? 1 : 0);
             }
         }
 
@@ -321,10 +324,10 @@ namespace PathCopyCopy.Settings.Core
         public bool MakeEmailLinks
         {
             get {
-                return ((int) GetUserOrGlobalValue(MAKE_EMAIL_LINKS_VALUE_NAME, MAKE_EMAIL_LINKS_DEFAULT_VALUE)) != 0;
+                return ((int) GetUserOrGlobalValue(MakeEmailLinksValueName, MakeEmailLinksDefaultValue)) != 0;
             }
             set {
-                userKey.SetValue(MAKE_EMAIL_LINKS_VALUE_NAME, value ? 1 : 0);
+                userKey.SetValue(MakeEmailLinksValueName, value ? 1 : 0);
             }
         }
 
@@ -336,15 +339,15 @@ namespace PathCopyCopy.Settings.Core
             get {
                 try {
                     return (StringEncodeParam) Enum.Parse(typeof(StringEncodeParam), (string) GetUserOrGlobalValue(
-                        ENCODE_PARAM_VALUE_NAME, ENCODE_PARAM_DEFAULT_VALUE.ToString()), true);
+                        EncodeParamValueName, EncodeParamDefaultValue.ToString()), true);
                 } catch (ArgumentException ae) {
                     // Invalid value in the registry... Don't choke, use default value.
                     Debug.Fail(ae.Message);
-                    return ENCODE_PARAM_DEFAULT_VALUE;
+                    return EncodeParamDefaultValue;
                 }
             }
             set {
-                userKey.SetValue(ENCODE_PARAM_VALUE_NAME, value.ToString());
+                userKey.SetValue(EncodeParamValueName, value.ToString());
             }
         }
 
@@ -354,10 +357,10 @@ namespace PathCopyCopy.Settings.Core
         public bool AppendSeparatorForDirectories
         {
             get {
-                return ((int) GetUserOrGlobalValue(APPEND_SEPARATOR_FOR_DIRECTORIES_VALUE_NAME, APPEND_SEPARATOR_FOR_DIRECTORIES_DEFAULT_VALUE)) != 0;
+                return ((int) GetUserOrGlobalValue(AppendSeparatorForDirectoriesValueName, AppendSeparatorForDirectoriesDefaultValue)) != 0;
             }
             set {
-                userKey.SetValue(APPEND_SEPARATOR_FOR_DIRECTORIES_VALUE_NAME, value ? 1 : 0);
+                userKey.SetValue(AppendSeparatorForDirectoriesValueName, value ? 1 : 0);
             }
         }
 
@@ -367,10 +370,10 @@ namespace PathCopyCopy.Settings.Core
         public bool UseIconForDefaultPlugin
         {
             get {
-                return ((int) GetUserOrGlobalValue(USE_ICON_FOR_DEFAULT_PLUGIN_VALUE_NAME, USE_ICON_FOR_DEFAULT_PLUGIN_DEFAULT_VALUE)) != 0;
+                return ((int) GetUserOrGlobalValue(UseIconForDefaultPluginValueName, UseIconForDefaultPluginDefaultValue)) != 0;
             }
             set {
-                userKey.SetValue(USE_ICON_FOR_DEFAULT_PLUGIN_VALUE_NAME, value ? 1 : 0);
+                userKey.SetValue(UseIconForDefaultPluginValueName, value ? 1 : 0);
             }
         }
 
@@ -380,10 +383,10 @@ namespace PathCopyCopy.Settings.Core
         public bool UseIconForSubmenu
         {
             get {
-                return ((int) GetUserOrGlobalValue(USE_ICON_FOR_SUBMENU_VALUE_NAME, USE_ICON_FOR_SUBMENU_DEFAULT_VALUE)) != 0;
+                return ((int) GetUserOrGlobalValue(UseIconForSubmenuValueName, UseIconForSubmenuDefaultValue)) != 0;
             }
             set {
-                userKey.SetValue(USE_ICON_FOR_SUBMENU_VALUE_NAME, value ? 1 : 0);
+                userKey.SetValue(UseIconForSubmenuValueName, value ? 1 : 0);
             }
         }
 
@@ -393,10 +396,10 @@ namespace PathCopyCopy.Settings.Core
         public bool UsePreviewMode
         {
             get {
-                return ((int) GetUserOrGlobalValue(USE_PREVIEW_MODE_VALUE_NAME, USE_PREVIEW_MODE_DEFAULT_VALUE)) != 0;
+                return ((int) GetUserOrGlobalValue(UsePreviewModeValueName, UsePreviewModeDefaultValue)) != 0;
             }
             set {
-                userKey.SetValue(USE_PREVIEW_MODE_VALUE_NAME, value ? 1 : 0);
+                userKey.SetValue(UsePreviewModeValueName, value ? 1 : 0);
             }
         }
 
@@ -406,10 +409,10 @@ namespace PathCopyCopy.Settings.Core
         public bool UsePreviewModeInMainMenu
         {
             get {
-                return ((int) GetUserOrGlobalValue(USE_PREVIEW_MODE_IN_MAIN_MENU_VALUE_NAME, USE_PREVIEW_MODE_IN_MAIN_MENU_DEFAULT_VALUE)) != 0;
+                return ((int) GetUserOrGlobalValue(UsePreviewModeInMainMenuValueName, UsePreviewModeInMainMenuDefaultValue)) != 0;
             }
             set {
-                userKey.SetValue(USE_PREVIEW_MODE_IN_MAIN_MENU_VALUE_NAME, value ? 1 : 0);
+                userKey.SetValue(UsePreviewModeInMainMenuValueName, value ? 1 : 0);
             }
         }
 
@@ -419,10 +422,10 @@ namespace PathCopyCopy.Settings.Core
         public bool DropRedundantWords
         {
             get {
-                return ((int) GetUserOrGlobalValue(DROP_REDUNDANT_WORDS_VALUE_NAME, DROP_REDUNDANT_WORDS_DEFAULT_VALUE)) != 0;
+                return ((int) GetUserOrGlobalValue(DropRedundantWordsValueName, DropRedundantWordsDefaultValue)) != 0;
             }
             set {
-                userKey.SetValue(DROP_REDUNDANT_WORDS_VALUE_NAME, value ? 1 : 0);
+                userKey.SetValue(DropRedundantWordsValueName, value ? 1 : 0);
             }
         }
 
@@ -433,10 +436,10 @@ namespace PathCopyCopy.Settings.Core
         public bool AlwaysShowSubmenu
         {
             get {
-                return ((int) GetUserOrGlobalValue(ALWAYS_SHOW_SUBMENU_VALUE_NAME, ALWAYS_SHOW_SUBMENU_DEFAULT_VALUE)) != 0;
+                return ((int) GetUserOrGlobalValue(AlwaysShowSubmenuValueName, AlwaysShowSubmenuDefaultValue)) != 0;
             }
             set {
-                userKey.SetValue(ALWAYS_SHOW_SUBMENU_VALUE_NAME, value ? 1 : 0);
+                userKey.SetValue(AlwaysShowSubmenuValueName, value ? 1 : 0);
             }
         }
 
@@ -447,14 +450,14 @@ namespace PathCopyCopy.Settings.Core
         public string PathsSeparator
         {
             get {
-                return (string) GetUserOrGlobalValue(PATHS_SEPARATOR_VALUE_NAME, PATHS_SEPARATOR_DEFAULT_VALUE);
+                return (string) GetUserOrGlobalValue(PathsSeparatorValueName, PathsSeparatorDefaultValue);
             }
             set {
-                if (!String.IsNullOrEmpty(value)) {
-                    userKey.SetValue(PATHS_SEPARATOR_VALUE_NAME, value);
+                if (!string.IsNullOrEmpty(value)) {
+                    userKey.SetValue(PathsSeparatorValueName, value);
                 } else {
                     // Delete the value to use default.
-                    userKey.DeleteValue(PATHS_SEPARATOR_VALUE_NAME, false);
+                    userKey.DeleteValue(PathsSeparatorValueName, false);
                 }
             }
         }
@@ -465,10 +468,10 @@ namespace PathCopyCopy.Settings.Core
         public bool DisableSoftwareUpdate
         {
             get {
-                return ((int) GetUserOrGlobalValue(DISABLE_SOFTWARE_UPDATE_VALUE_NAME, DISABLE_SOFTWARE_UPDATE_DEFAULT_VALUE)) != 0;
+                return ((int) GetUserOrGlobalValue(DisableSoftwareUpdateValueName, DisableSoftwareUpdateDefaultValue)) != 0;
             }
             set {
-                userKey.SetValue(DISABLE_SOFTWARE_UPDATE_VALUE_NAME, value ? 1 : 0);
+                userKey.SetValue(DisableSoftwareUpdateValueName, value ? 1 : 0);
             }
         }
 
@@ -478,7 +481,7 @@ namespace PathCopyCopy.Settings.Core
         public string InstallSource
         {
             get {
-                return (string) GetUserOrGlobalValue(INSTALL_SOURCE_VALUE_NAME, INSTALL_SOURCE_DEFAULT_VALUE);
+                return (string) GetUserOrGlobalValue(InstallSourceValueName, InstallSourceDefaultValue);
             }
         }
 
@@ -489,7 +492,7 @@ namespace PathCopyCopy.Settings.Core
         public Guid? CtrlKeyPlugin
         {
             get {
-                var pluginIds = LoadPluginsFromValue(CTRL_KEY_PLUGIN_VALUE_NAME, false);
+                var pluginIds = LoadPluginsFromValue(CtrlKeyPluginValueName, false);
                 Guid? pluginId = null;
                 if (pluginIds.Count == 1) {
                     pluginId = pluginIds[0];
@@ -498,12 +501,11 @@ namespace PathCopyCopy.Settings.Core
             }
             set {
                 if (value.HasValue) {
-                    List<Guid> pluginIds = new List<Guid>();
-                    pluginIds.Add(value.Value);
-                    SavePluginsInValue(CTRL_KEY_PLUGIN_VALUE_NAME, pluginIds);
+                    List<Guid> pluginIds = new List<Guid> { value.Value };
+                    SavePluginsInValue(CtrlKeyPluginValueName, pluginIds);
                 } else {
                     // Delete the value in the registry instead.
-                    userKey.DeleteValue(CTRL_KEY_PLUGIN_VALUE_NAME, false);
+                    userKey.DeleteValue(CtrlKeyPluginValueName, false);
                 }
             }
         }
@@ -515,14 +517,14 @@ namespace PathCopyCopy.Settings.Core
         public List<Guid> MainMenuDisplayOrder
         {
             get {
-                return LoadPluginsFromValue(MAIN_MENU_DISPLAY_ORDER_VALUE_NAME, true);
+                return LoadPluginsFromValue(MainMenuDisplayOrderValueName, true);
             }
             set {
                 if (value != null) {
-                    SavePluginsInValue(MAIN_MENU_DISPLAY_ORDER_VALUE_NAME, value);
+                    SavePluginsInValue(MainMenuDisplayOrderValueName, value);
                 } else {
                     // Delete the value in the registry instead.
-                    userKey.DeleteValue(MAIN_MENU_DISPLAY_ORDER_VALUE_NAME, false);
+                    userKey.DeleteValue(MainMenuDisplayOrderValueName, false);
                 }
             }
         }
@@ -534,14 +536,14 @@ namespace PathCopyCopy.Settings.Core
         public List<Guid> SubmenuDisplayOrder
         {
             get {
-                return LoadPluginsFromValue(SUBMENU_DISPLAY_ORDER_VALUE_NAME, true);
+                return LoadPluginsFromValue(SubmenuDisplayOrderValueName, true);
             }
             set {
                 if (value != null) {
-                    SavePluginsInValue(SUBMENU_DISPLAY_ORDER_VALUE_NAME, value);
+                    SavePluginsInValue(SubmenuDisplayOrderValueName, value);
                 } else {
                     // Delete the value in the registry instead.
-                    userKey.DeleteValue(SUBMENU_DISPLAY_ORDER_VALUE_NAME, false);
+                    userKey.DeleteValue(SubmenuDisplayOrderValueName, false);
                 }
             }
         }
@@ -553,14 +555,14 @@ namespace PathCopyCopy.Settings.Core
         public List<Guid> UIDisplayOrder
         {
             get {
-                return LoadPluginsFromValue(UI_DISPLAY_ORDER_VALUE_NAME, true);
+                return LoadPluginsFromValue(UIDisplayOrderValueName, true);
             }
             set {
                 if (value != null) {
-                    SavePluginsInValue(UI_DISPLAY_ORDER_VALUE_NAME, value);
+                    SavePluginsInValue(UIDisplayOrderValueName, value);
                 } else {
                     // Delete the value in the registry instead.
-                    userKey.DeleteValue(UI_DISPLAY_ORDER_VALUE_NAME, false);
+                    userKey.DeleteValue(UIDisplayOrderValueName, false);
                 }
             }
         }
@@ -573,14 +575,14 @@ namespace PathCopyCopy.Settings.Core
         public List<Guid> KnownPlugins
         {
             get {
-                return LoadPluginsFromValue(KNOWN_PLUGINS_VALUE_NAME, true);
+                return LoadPluginsFromValue(KnownPluginsValueName, true);
             }
             set {
                 if (value != null) {
-                    SavePluginsInValue(KNOWN_PLUGINS_VALUE_NAME, value);
+                    SavePluginsInValue(KnownPluginsValueName, value);
                 } else {
                     // Delete the value in the registry instead.
-                    userKey.DeleteValue(KNOWN_PLUGINS_VALUE_NAME, false);
+                    userKey.DeleteValue(KnownPluginsValueName, false);
                 }
             }
         }
@@ -594,6 +596,9 @@ namespace PathCopyCopy.Settings.Core
                 return LoadPipelinePlugins(globalPipelinePluginsKey, userPipelinePluginsKey);
             }
             set {
+                if (value == null) {
+                    throw new ArgumentNullException(nameof(value));
+                }
                 SavePipelinePlugins(value, userPipelinePluginsKey, true, true);
             }
         }
@@ -604,14 +609,14 @@ namespace PathCopyCopy.Settings.Core
         public Version IgnoredUpdate
         {
             get {
-                string ignoredValue = (string) GetUserOrGlobalValue(IGNORED_UPDATE_VALUE_NAME, String.Empty);
-                return !String.IsNullOrEmpty(ignoredValue) ? new Version(ignoredValue) : null;
+                string ignoredValue = (string) GetUserOrGlobalValue(IgnoredUpdateValueName, string.Empty);
+                return !string.IsNullOrEmpty(ignoredValue) ? new Version(ignoredValue) : null;
             }
             set {
                 if (value != null) {
-                    userKey.SetValue(IGNORED_UPDATE_VALUE_NAME, value.ToString());
+                    userKey.SetValue(IgnoredUpdateValueName, value.ToString());
                 } else {
-                    userKey.DeleteValue(IGNORED_UPDATE_VALUE_NAME, false);
+                    userKey.DeleteValue(IgnoredUpdateValueName, false);
                 }
             }
         }
@@ -622,10 +627,10 @@ namespace PathCopyCopy.Settings.Core
         public int SettingsFormPosX
         {
             get {
-                return (int) GetUserOrGlobalValue(SETTINGS_FORM_POS_X_VALUE_NAME, SETTINGS_FORM_POS_SIZE_DEFAULT_VALUE);
+                return (int) GetUserOrGlobalValue(SettingsFormPosXValueName, SettingsFormPosSizeDefaultValue);
             }
             set {
-                userKey.SetValue(SETTINGS_FORM_POS_X_VALUE_NAME, value);
+                userKey.SetValue(SettingsFormPosXValueName, value);
             }
         }
 
@@ -635,10 +640,10 @@ namespace PathCopyCopy.Settings.Core
         public int SettingsFormPosY
         {
             get {
-                return (int) GetUserOrGlobalValue(SETTINGS_FORM_POS_Y_VALUE_NAME, SETTINGS_FORM_POS_SIZE_DEFAULT_VALUE);
+                return (int) GetUserOrGlobalValue(SettingsFormPosYValueName, SettingsFormPosSizeDefaultValue);
             }
             set {
-                userKey.SetValue(SETTINGS_FORM_POS_Y_VALUE_NAME, value);
+                userKey.SetValue(SettingsFormPosYValueName, value);
             }
         }
 
@@ -648,10 +653,10 @@ namespace PathCopyCopy.Settings.Core
         public int SettingsFormSizeWidth
         {
             get {
-                return (int) GetUserOrGlobalValue(SETTINGS_FORM_SIZE_WIDTH_VALUE_NAME, SETTINGS_FORM_POS_SIZE_DEFAULT_VALUE);
+                return (int) GetUserOrGlobalValue(SettingsFormSizeWidthValueName, SettingsFormPosSizeDefaultValue);
             }
             set {
-                userKey.SetValue(SETTINGS_FORM_SIZE_WIDTH_VALUE_NAME, value);
+                userKey.SetValue(SettingsFormSizeWidthValueName, value);
             }
         }
 
@@ -661,10 +666,10 @@ namespace PathCopyCopy.Settings.Core
         public int SettingsFormSizeHeight
         {
             get {
-                return (int) GetUserOrGlobalValue(SETTINGS_FORM_SIZE_HEIGHT_VALUE_NAME, SETTINGS_FORM_POS_SIZE_DEFAULT_VALUE);
+                return (int) GetUserOrGlobalValue(SettingsFormSizeHeightValueName, SettingsFormPosSizeDefaultValue);
             }
             set {
-                userKey.SetValue(SETTINGS_FORM_SIZE_HEIGHT_VALUE_NAME, value);
+                userKey.SetValue(SettingsFormSizeHeightValueName, value);
             }
         }
 
@@ -675,7 +680,7 @@ namespace PathCopyCopy.Settings.Core
         public bool EditingDisabled
         {
             get {
-                object keyLockValue = globalKey != null ? globalKey.GetValue(EDITING_DISABLED_VALUE_NAME) : null;
+                object keyLockValue = globalKey?.GetValue(EditingDisabledValueName);
                 return keyLockValue != null ? ((int) keyLockValue) != 0 : false;
             }
         }
@@ -686,10 +691,12 @@ namespace PathCopyCopy.Settings.Core
         public string UpdateChannel
         {
             get {
-                object channelValue = globalKey != null ? globalKey.GetValue(UPDATE_CHANNEL_VALUE_NAME) : null;
+                object channelValue = globalKey?.GetValue(UpdateChannelValueName);
                 return channelValue != null ? (string) channelValue : Resources.UserSettings_DefaultUpdateChannel;
             }
         }
+
+#pragma warning restore CA2227 // Collection properties should be read only
         
         /// <summary>
         /// Constructor. Creates the registry key right away to read the settings,
@@ -701,34 +708,34 @@ namespace PathCopyCopy.Settings.Core
             // running under WOW64 we'll have to adjust.
             string globalKeyPath;
             if (!PCCEnvironment.Is64Bit && PCCEnvironment.IsWow64) {
-                globalKeyPath = PCC_GLOBAL_SETTINGS_KEY_WOW64;
+                globalKeyPath = GlobalSettingsKeyWow64Path;
             } else {
-                globalKeyPath = PCC_GLOBAL_SETTINGS_KEY;
+                globalKeyPath = GlobalSettingsKeyPath;
             }
 
             // Open the global key for reading only.
             globalKey = Registry.LocalMachine.OpenSubKey(globalKeyPath, false);
 
             // Open the user key for reading and writing.
-            userKey = Registry.CurrentUser.CreateSubKey(PCC_USER_SETTINGS_KEY);
+            userKey = Registry.CurrentUser.CreateSubKey(UserSettingsKeyPath);
 
             // Open the global icons key for reading only.
-            globalIconsKey = globalKey?.OpenSubKey(PCC_ICONS_KEY, false);
+            globalIconsKey = globalKey?.OpenSubKey(IconsKeyName, false);
 
             // Open the user icons key for reading and writing.
-            userIconsKey = userKey.CreateSubKey(PCC_ICONS_KEY);
+            userIconsKey = userKey.CreateSubKey(IconsKeyName);
 
             // Open the global pipeline plugins key for reading only.
-            globalPipelinePluginsKey = globalKey?.OpenSubKey(PCC_PIPELINE_PLUGINS_KEY, false);
+            globalPipelinePluginsKey = globalKey?.OpenSubKey(PipelinePluginsKeyName, false);
 
             // Open the user pipeline plugins key for reading and writing.
-            userPipelinePluginsKey = userKey.CreateSubKey(PCC_PIPELINE_PLUGINS_KEY);
+            userPipelinePluginsKey = userKey.CreateSubKey(PipelinePluginsKeyName);
 
             // Open the temporary pipeline plugins key for reading and writing. They are always user-specific.
-            userTempPipelinePluginsKey = userKey.CreateSubKey(PCC_TEMP_PIPELINE_PLUGINS_KEY);
+            userTempPipelinePluginsKey = userKey.CreateSubKey(TempPipelinePluginsKeyName);
 
             // Open the forms key for reading and writing. They are always user-specific.
-            userFormsKey = userKey.CreateSubKey(PCC_FORMS_KEY);
+            userFormsKey = userKey.CreateSubKey(FormsKeyName);
         }
         
         /// <summary>
@@ -762,8 +769,7 @@ namespace PathCopyCopy.Settings.Core
             Debug.Assert(!String.IsNullOrEmpty(fileName));
 
             ProcessStartInfo psi = new ProcessStartInfo("cmd.exe") {
-                Arguments = String.Format("/c \"reg export HKCU\\{0} \"{1}\" /y\"",
-                    PCC_USER_SETTINGS_KEY, fileName),
+                Arguments = $"/c \"reg export HKCU\\{UserSettingsKeyPath} \"{fileName}\" /y\"",
                 CreateNoWindow = true,
                 UseShellExecute = false,
             };
@@ -782,7 +788,7 @@ namespace PathCopyCopy.Settings.Core
         /// otherwise the path to a local file to use for this plugin.</returns>
         public string GetIconFileForPlugin(Guid pluginId)
         {
-            return GetUserOrGlobalIconFile(pluginId.ToString("B"));
+            return GetUserOrGlobalIconFile(pluginId.ToString("B", CultureInfo.InvariantCulture));
         }
         
         /// <summary>
@@ -797,7 +803,7 @@ namespace PathCopyCopy.Settings.Core
         /// pass <c>null</c>.</param>
         public void SetIconFileOfPlugin(Guid pluginId, string iconFile)
         {
-            string pluginIdAsString = pluginId.ToString("B");
+            string pluginIdAsString = pluginId.ToString("B", CultureInfo.InvariantCulture);
             if (iconFile != null) {
                 userIconsKey.SetValue(pluginIdAsString, iconFile);
             } else if (userIconsKey.GetValue(pluginIdAsString) != null) {
@@ -811,10 +817,11 @@ namespace PathCopyCopy.Settings.Core
         /// <param name="pluginInfo"><see cref="PipelinePluginInfo"/> to save.</param>
         public void SaveTempPipelinePlugin(PipelinePluginInfo pluginInfo)
         {
-            Debug.Assert(pluginInfo != null);
-            
-            List<PipelinePluginInfo> pluginInfos = new List<PipelinePluginInfo>();
-            pluginInfos.Add(pluginInfo);
+            if (pluginInfo == null) {
+                throw new ArgumentNullException(nameof(pluginInfo));
+            }
+
+            List<PipelinePluginInfo> pluginInfos = new List<PipelinePluginInfo> { pluginInfo };
             SavePipelinePlugins(pluginInfos, userTempPipelinePluginsKey, false, false);
         }
         
@@ -824,10 +831,13 @@ namespace PathCopyCopy.Settings.Core
         /// <param name="pluginInfo"><see cref="PipelinePluginInfo"/> to remove.</param>
         public void DeleteTempPipelinePlugin(PipelinePluginInfo pluginInfo)
         {
-            Debug.Assert(pluginInfo != null);
+            if (pluginInfo == null) {
+                throw new ArgumentNullException(nameof(pluginInfo));
+            }
 
             try {
-                userTempPipelinePluginsKey.DeleteSubKeyTree(pluginInfo.Id.ToString("B"));
+                userTempPipelinePluginsKey.DeleteSubKeyTree(
+                    pluginInfo.Id.ToString("B", CultureInfo.InvariantCulture));
             } catch (ArgumentException) {
                 // The subkey did not exist, so no need to "remove" it.
             }
@@ -843,13 +853,13 @@ namespace PathCopyCopy.Settings.Core
         /// If a component is unavailable, -1 is returned.</param>
         public void GetFormInformation(string formName, out Point position, out Size size)
         {
-            Debug.Assert(!String.IsNullOrWhiteSpace(formName));
+            Debug.Assert(!string.IsNullOrWhiteSpace(formName));
 
             using (RegistryKey formKey = userFormsKey.OpenSubKey(formName, false)) {
-                position = new Point(GetFormValue(formKey, FORMS_POS_X_VALUE_NAME),
-                    GetFormValue(formKey, FORMS_POS_Y_VALUE_NAME));
-                size = new Size(GetFormValue(formKey, FORMS_SIZE_WIDTH_VALUE_NAME),
-                    GetFormValue(formKey, FORMS_SIZE_HEIGHT_VALUE_NAME));
+                position = new Point(GetFormValue(formKey, FormsPosXValueName),
+                    GetFormValue(formKey, FormsPosYValueName));
+                size = new Size(GetFormValue(formKey, FormsSizeWidthValueName),
+                    GetFormValue(formKey, FormsSizeHeightValueName));
             }
         }
 
@@ -863,16 +873,16 @@ namespace PathCopyCopy.Settings.Core
         /// to skip saving this information.</param>
         public void SetFormInformation(string formName, Point? position, Size? size)
         {
-            Debug.Assert(!String.IsNullOrWhiteSpace(formName));
+            Debug.Assert(!string.IsNullOrWhiteSpace(formName));
 
             using (RegistryKey formKey = userFormsKey.CreateSubKey(formName)) {
                 if (position.HasValue) {
-                    formKey.SetValue(FORMS_POS_X_VALUE_NAME, position.Value.X);
-                    formKey.SetValue(FORMS_POS_Y_VALUE_NAME, position.Value.Y);
+                    formKey.SetValue(FormsPosXValueName, position.Value.X);
+                    formKey.SetValue(FormsPosYValueName, position.Value.Y);
                 }
                 if (size.HasValue) {
-                    formKey.SetValue(FORMS_SIZE_WIDTH_VALUE_NAME, size.Value.Width);
-                    formKey.SetValue(FORMS_SIZE_HEIGHT_VALUE_NAME, size.Value.Height);
+                    formKey.SetValue(FormsSizeWidthValueName, size.Value.Width);
+                    formKey.SetValue(FormsSizeHeightValueName, size.Value.Height);
                 }
             }
         }
@@ -892,7 +902,7 @@ namespace PathCopyCopy.Settings.Core
             object pluginsValue = GetUserOrGlobalValue(valueName);
             if (pluginsValue != null && pluginsValue is string) {
                 // Split the values so we get individual IDs.
-                string[] pluginIds = ((string) pluginsValue).Split(PLUGINS_VALUE_SEPARATOR);
+                string[] pluginIds = ((string) pluginsValue).Split(PluginsValueSeparator);
 
                 // Convert each ID and add it to the list of plugins.
                 plugins = new List<Guid>();
@@ -921,11 +931,11 @@ namespace PathCopyCopy.Settings.Core
         private void SavePluginsInValue(string valueName, List<Guid> plugins)
         {
             // Scan guids and build a registry value.
-            string regValue = String.Empty;
+            string regValue = string.Empty;
             foreach (Guid id in plugins) {
-                string idAsString = id.ToString("B");
+                string idAsString = id.ToString("B", CultureInfo.InvariantCulture);
                 if (regValue.Length != 0) {
-                    regValue += PLUGINS_VALUE_SEPARATOR;
+                    regValue += PluginsValueSeparator;
                 }
                 regValue += idAsString;
             }
@@ -957,13 +967,13 @@ namespace PathCopyCopy.Settings.Core
 
             // Check if we have a value to display the pipeline plugins in a specific
             // order. There could be one in either the user or global key.
-            object displayOrderValue = userRegKey.GetValue(PIPELINE_PLUGINS_DISPLAY_ORDER_VALUE_NAME);
+            object displayOrderValue = userRegKey.GetValue(PipelinePluginsDisplayOrderValueName);
             if (displayOrderValue == null && globalRegKey != null) {
-                displayOrderValue = globalRegKey.GetValue(PIPELINE_PLUGINS_DISPLAY_ORDER_VALUE_NAME);
+                displayOrderValue = globalRegKey.GetValue(PipelinePluginsDisplayOrderValueName);
             }
-            if (displayOrderValue != null && displayOrderValue is string) {
+            if (displayOrderValue is string) {
                 // The display order is represented as a comma-separated list of pipeline plugin IDs.
-                string[] idsAsString = ((string) displayOrderValue).Split(PIPELINE_PLUGINS_DISPLAY_ORDER_SEPARATOR);
+                string[] idsAsString = ((string) displayOrderValue).Split(PipelinePluginsDisplayOrderSeparator);
                 List<Guid> ids = new List<Guid>();
                 foreach (string idAsString in idsAsString) {
                     try {
@@ -1014,9 +1024,12 @@ namespace PathCopyCopy.Settings.Core
 
             if (saveDisplayOrder) {
                 // Build display order string and save it.
-                List<string> idsAsString = pipelinePlugins.ConvertAll(plugin => plugin.Id.ToString("B"));
-                string displayOrder = String.Join(PIPELINE_PLUGINS_DISPLAY_ORDER_SEPARATOR.ToString(), idsAsString.ToArray());
-                regKey.SetValue(PIPELINE_PLUGINS_DISPLAY_ORDER_VALUE_NAME, displayOrder);
+                List<string> idsAsString = pipelinePlugins.ConvertAll(
+                    plugin => plugin.Id.ToString("B", CultureInfo.InvariantCulture));
+                string displayOrder = string.Join(
+                    PipelinePluginsDisplayOrderSeparator.ToString(CultureInfo.InvariantCulture),
+                    idsAsString.ToArray());
+                regKey.SetValue(PipelinePluginsDisplayOrderValueName, displayOrder);
             }
 
             // Here's the algo to save the plugins:
@@ -1033,18 +1046,18 @@ namespace PathCopyCopy.Settings.Core
             foreach (PipelinePluginInfo pluginInfo in pipelinePlugins) {
                 if (!pluginInfo.Global) {
                     // 2a.
-                    using (RegistryKey pluginKey = regKey.CreateSubKey(pluginInfo.Id.ToString("B"))) {
-                        pluginKey.SetValue(PIPELINE_PLUGIN_DESCRIPTION_VALUE_NAME, pluginInfo.Description);
+                    using (RegistryKey pluginKey = regKey.CreateSubKey(pluginInfo.Id.ToString("B", CultureInfo.InvariantCulture))) {
+                        pluginKey.SetValue(PipelinePluginDescriptionValueName, pluginInfo.Description);
                         if (pluginInfo.IconFile != null) {
-                            pluginKey.SetValue(PIPELINE_PLUGIN_ICON_VALUE_NAME, pluginInfo.IconFile);
-                        } else if (pluginKey.GetValue(PIPELINE_PLUGIN_ICON_VALUE_NAME) != null) {
-                            pluginKey.DeleteValue(PIPELINE_PLUGIN_ICON_VALUE_NAME);
+                            pluginKey.SetValue(PipelinePluginIconValueName, pluginInfo.IconFile);
+                        } else if (pluginKey.GetValue(PipelinePluginIconValueName) != null) {
+                            pluginKey.DeleteValue(PipelinePluginIconValueName);
                         }
-                        pluginKey.SetValue(PIPELINE_PLUGIN_REQUIRED_VERSION_VALUE_NAME, pluginInfo.RequiredVersionAsString);
+                        pluginKey.SetValue(PipelinePluginRequiredVersionValueName, pluginInfo.RequiredVersionAsString);
                         if (pluginInfo.EditMode.HasValue) {
-                            pluginKey.SetValue(PIPELINE_PLUGIN_EDIT_MODE_VALUE_NAME, pluginInfo.EditMode.Value.ToString());
-                        } else if (pluginKey.GetValue(PIPELINE_PLUGIN_EDIT_MODE_VALUE_NAME) != null) {
-                            pluginKey.DeleteValue(PIPELINE_PLUGIN_EDIT_MODE_VALUE_NAME);
+                            pluginKey.SetValue(PipelinePluginEditModeValueName, pluginInfo.EditMode.Value.ToString());
+                        } else if (pluginKey.GetValue(PipelinePluginEditModeValueName) != null) {
+                            pluginKey.DeleteValue(PipelinePluginEditModeValueName);
                         }
                         pluginKey.SetValue(null, pluginInfo.EncodedElements);
                     }
@@ -1055,7 +1068,7 @@ namespace PathCopyCopy.Settings.Core
             if (removeObsolete) {
                 Debug.Assert(existingPlugins != null);
                 foreach (string existingPlugin in existingPlugins) {
-                    if (!pipelinePlugins.Exists(plugin => plugin.Id.ToString("B").Equals(existingPlugin))) {
+                    if (!pipelinePlugins.Exists(plugin => plugin.Id.ToString("B", CultureInfo.InvariantCulture).Equals(existingPlugin, StringComparison.InvariantCulture))) {
                         // 3a.
                         regKey.DeleteSubKeyTree(existingPlugin);
                     }
@@ -1088,10 +1101,10 @@ namespace PathCopyCopy.Settings.Core
                     // encoded elements, icon file and required version.
                     string description, encodedElements, iconFile, minVersionAsString, editModeAsString;
                     using (RegistryKey subKey = regKey.OpenSubKey(idAsString, false)) {
-                        description = (string) subKey.GetValue(PIPELINE_PLUGIN_DESCRIPTION_VALUE_NAME);
-                        iconFile = (string) subKey.GetValue(PIPELINE_PLUGIN_ICON_VALUE_NAME);
-                        minVersionAsString = (string) subKey.GetValue(PIPELINE_PLUGIN_REQUIRED_VERSION_VALUE_NAME);
-                        editModeAsString = (string) subKey.GetValue(PIPELINE_PLUGIN_EDIT_MODE_VALUE_NAME);
+                        description = (string) subKey.GetValue(PipelinePluginDescriptionValueName);
+                        iconFile = (string) subKey.GetValue(PipelinePluginIconValueName);
+                        minVersionAsString = (string) subKey.GetValue(PipelinePluginRequiredVersionValueName);
+                        editModeAsString = (string) subKey.GetValue(PipelinePluginEditModeValueName);
                         encodedElements = (string) subKey.GetValue(null);
                     }
 
@@ -1113,7 +1126,7 @@ namespace PathCopyCopy.Settings.Core
 
                     // If we don't have last edit mode, auto-detect.
                     PipelinePluginEditMode? editMode = null;
-                    if (!String.IsNullOrEmpty(editModeAsString)) {
+                    if (!string.IsNullOrEmpty(editModeAsString)) {
                         editMode = (PipelinePluginEditMode) Enum.Parse(typeof(PipelinePluginEditMode), editModeAsString);
                     }
 
@@ -1178,7 +1191,7 @@ namespace PathCopyCopy.Settings.Core
         /// or -1 if no information is available for this form value.</returns>
         private int GetFormValue(RegistryKey formKey, string valueName)
         {
-            int value = FORMS_POS_SIZE_DEFAULT_VALUE;
+            int value = FormsPosSizeDefaultValue;
             if (formKey != null) {
                 object valueObj = formKey.GetValue(valueName);
                 if (valueObj != null) {

@@ -177,7 +177,7 @@ namespace PathCopyCopy.Settings.UI.Forms
             }
 
             // Populate our controls.
-            NameTxt.Text = oldPluginInfo?.Description ?? String.Empty;
+            NameTxt.Text = oldPluginInfo?.Description ?? string.Empty;
             ElementsLst.DataSource = elements;
 
             // Update initial controls.
@@ -196,14 +196,15 @@ namespace PathCopyCopy.Settings.UI.Forms
             // Create new pipeline and copy elements back from the binding list.
             Pipeline pipeline = new Pipeline();
             pipeline.Elements.AddRange(elements);
-            
+
             // Create new plugin info and save encoded elements.
-            PipelinePluginInfo pluginInfo = new PipelinePluginInfo();
-            pluginInfo.Id = pluginId;
-            pluginInfo.Description = NameTxt.Text;
-            pluginInfo.EncodedElements = pipeline.Encode();
-            pluginInfo.RequiredVersion = pipeline.RequiredVersion;
-            pluginInfo.EditMode = PipelinePluginEditMode.Expert;
+            PipelinePluginInfo pluginInfo = new PipelinePluginInfo {
+                Id = pluginId,
+                Description = NameTxt.Text,
+                EncodedElements = pipeline.Encode(),
+                RequiredVersion = pipeline.RequiredVersion,
+                EditMode = PipelinePluginEditMode.Expert,
+            };
             Debug.Assert(!pluginInfo.Global);
 
             // Save plugin info and pipeline, then update preview.
@@ -221,16 +222,16 @@ namespace PathCopyCopy.Settings.UI.Forms
         private void AdvancedPipelinePluginForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             // If user chose to press OK or switch to Simple Mode, save plugin info.
-            if (this.DialogResult == DialogResult.OK || this.DialogResult == DialogResult.Retry) {
+            if (DialogResult == DialogResult.OK || DialogResult == DialogResult.Retry) {
                 // Make sure user has entered a name (unless we're switching to Simple Mode).
-                if (!String.IsNullOrEmpty(NameTxt.Text) || this.DialogResult == DialogResult.Retry) {
+                if (!string.IsNullOrEmpty(NameTxt.Text) || DialogResult == DialogResult.Retry) {
                     // Update plugin info so that we have a pipeline.
                     UpdatePluginInfo();
 
                     // If pipeline is too complex, user might lose customization by switching
                     // to simple mode. Warn in this case.
                     Debug.Assert(newPipeline != null);
-                    if (this.DialogResult == DialogResult.Retry && !PipelinePluginEditor.IsPipelineSimple(newPipeline)) {
+                    if (DialogResult == DialogResult.Retry && !PipelinePluginEditor.IsPipelineSimple(newPipeline)) {
                         DialogResult subDialogRes = MessageBox.Show(Resources.PipelinePluginForm_PipelineTooComplexForSimpleMode,
                             Resources.PipelinePluginForm_MsgTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                         if (subDialogRes == DialogResult.No) {
@@ -259,7 +260,7 @@ namespace PathCopyCopy.Settings.UI.Forms
             Func<PipelineElement> creator)
         {
             ToolStripItem newItem = NewElementContextMenuStrip.Items.Add(description);
-            if (!String.IsNullOrEmpty(helpText)) {
+            if (!string.IsNullOrEmpty(helpText)) {
                 newItem.AutoToolTip = false;
                 newItem.ToolTipText = helpText;
             }
@@ -342,8 +343,7 @@ namespace PathCopyCopy.Settings.UI.Forms
         private void NewElementMenuItem_Click(object sender, EventArgs e)
         {
             // A function to create the new element is stored in the item's Tag.
-            Func<PipelineElement> creator = ((ToolStripMenuItem) sender).Tag as Func<PipelineElement>;
-            if (creator != null) {
+            if (((ToolStripMenuItem)sender).Tag is Func<PipelineElement> creator) {
                 // Instanciate element and add it to the end of the pipeline.
                 elements.Add(creator());
 

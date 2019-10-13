@@ -77,8 +77,12 @@ namespace PathCopyCopy.Settings.UI.Forms
         public bool SelectPlugins(IWin32Window owner, ref PipelinePluginCollection pluginCollection,
             ref ImportedPipelinePluginOverwrites pluginOverwrites)
         {
-            Debug.Assert(pluginCollection != null);
-            Debug.Assert(pluginOverwrites != null);
+            if (pluginCollection == null) {
+                throw new ArgumentNullException(nameof(pluginCollection));
+            }
+            if (pluginOverwrites == null) {
+                throw new ArgumentNullException(nameof(pluginOverwrites));
+            }
 
             PipelinePluginsLst.BeginUpdate();
             try {
@@ -243,18 +247,9 @@ namespace PathCopyCopy.Settings.UI.Forms
         private void ImportPipelinePluginsForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             // Dispose of brushes before leaving.
-            if (listItemRegularBrush != null) {
-                listItemRegularBrush.Dispose();
-                listItemRegularBrush = null;
-            }
-            if (listItemDisabledBrush != null) {
-                listItemDisabledBrush.Dispose();
-                listItemDisabledBrush = null;
-            }
-            if (listItemSelectedBrush != null) {
-                listItemSelectedBrush.Dispose();
-                listItemSelectedBrush = null;
-            }
+            listItemRegularBrush?.Dispose();
+            listItemDisabledBrush?.Dispose();
+            listItemSelectedBrush?.Dispose();
         }
         
         /// <summary>
@@ -299,7 +294,7 @@ namespace PathCopyCopy.Settings.UI.Forms
             /// <returns>Textual representation of <see cref="PluginInfo"/>.</returns>
             public override string ToString()
             {
-                return (PluginInfo != null) ? PluginInfo.ToString() : String.Empty;
+                return PluginInfo?.ToString() ?? string.Empty;
             }
         }
     }
