@@ -250,7 +250,7 @@ namespace PathCopyCopy.Settings.UI.Forms
                 }
             } else {
                 // Copy non-standard value we had earlier
-                Debug.Assert(!String.IsNullOrEmpty(oldPathsSeparator));
+                Debug.Assert(!string.IsNullOrEmpty(oldPathsSeparator));
                 pipeline.Elements.Add(new PathsSeparatorPipelineElement(oldPathsSeparator));
             }
             if (BasePluginLst.SelectedIndex != -1) {
@@ -289,12 +289,13 @@ namespace PathCopyCopy.Settings.UI.Forms
             }
 
             // Create new plugin info and save encoded elements.
-            PipelinePluginInfo pluginInfo = new PipelinePluginInfo();
-            pluginInfo.Id = pluginId;
-            pluginInfo.Description = NameTxt.Text;
-            pluginInfo.EncodedElements = pipeline.Encode();
-            pluginInfo.RequiredVersion = pipeline.RequiredVersion;
-            pluginInfo.EditMode = PipelinePluginEditMode.Simple;
+            PipelinePluginInfo pluginInfo = new PipelinePluginInfo {
+                Id = pluginId,
+                Description = NameTxt.Text,
+                EncodedElements = pipeline.Encode(),
+                RequiredVersion = pipeline.RequiredVersion,
+                EditMode = PipelinePluginEditMode.Simple,
+            };
             Debug.Assert(!pluginInfo.Global);
 
             // Save plugin info in newPluginInfo and update preview.
@@ -311,15 +312,16 @@ namespace PathCopyCopy.Settings.UI.Forms
         private void PipelinePluginForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             // If user chose to press OK or switch to Expert Mode, save plugin info.
-            if (this.DialogResult == DialogResult.OK || this.DialogResult == DialogResult.Retry) {
+            if (DialogResult == DialogResult.OK || DialogResult == DialogResult.Retry) {
                 // Make sure user has entered a name (unless we're switching to Expert Mode).
-                if (!String.IsNullOrEmpty(NameTxt.Text) || this.DialogResult == DialogResult.Retry) {
+                if (!string.IsNullOrEmpty(NameTxt.Text) || DialogResult == DialogResult.Retry) {
                     // Update plugin info in case it's out-of-date, so that EditPlugin can return it.
                     UpdatePluginInfo();
                 } else {
                     // Warn user that we need a non-empty name.
-                    MessageBox.Show(Resources.PipelinePluginForm_EmptyName, Resources.PipelinePluginForm_MsgTitle,
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(Resources.PipelinePluginForm_EmptyName,
+                        Resources.PipelinePluginForm_MsgTitle, MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
                     NameTxt.Focus();
                     e.Cancel = true;
                 }
@@ -431,7 +433,7 @@ namespace PathCopyCopy.Settings.UI.Forms
             try {
                 ChooseExecutableOpenDlg.InitialDirectory = Path.GetDirectoryName(ExecutableTxt.Text);
                 ChooseExecutableOpenDlg.FileName = Path.GetFileName(ExecutableTxt.Text);
-            } catch {
+            } catch (ArgumentException) {
                 // Bad format or something, simply don't use.
             }
             if (ChooseExecutableOpenDlg.ShowDialog(this) == DialogResult.OK) {

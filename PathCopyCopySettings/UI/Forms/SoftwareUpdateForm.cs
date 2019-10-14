@@ -21,6 +21,7 @@
 
 using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.Text;
 using System.Windows.Forms;
 using PathCopyCopy.Settings.Core;
@@ -33,7 +34,7 @@ namespace PathCopyCopy.Settings.UI.Forms
     public partial class SoftwareUpdateForm : Form
     {
         /// Format string used to paste HTML release notes in the web browser.
-        private const string RELEASE_NOTES_HTML_FORMAT = @"<html><head><title></title></head><body>{0}</body></html>";
+        private const string ReleaseNotesHTMLFormat = @"<html><head><title></title></head><body>{0}</body></html>";
 
         /// URL to follow when the update link is clicked.
         private string updateUrl;
@@ -57,11 +58,13 @@ namespace PathCopyCopy.Settings.UI.Forms
         /// <returns><c>true</c> if the the user asked to ignore this update.</returns>
         public bool ShowUpdate(SoftwareUpdateInfo updateInfo, IWin32Window owner)
         {
-            Debug.Assert(updateInfo != null);
+            if (updateInfo == null) {
+                throw new ArgumentNullException(nameof(updateInfo));
+            }
 
             // Initialize our controls.
             if (owner == null) {
-                this.StartPosition = FormStartPosition.CenterScreen;
+                StartPosition = FormStartPosition.CenterScreen;
             }
             SoftwareUpdateTitleLbl.Text = updateInfo.Name;
             updateUrl = updateInfo.Url;
@@ -79,7 +82,8 @@ namespace PathCopyCopy.Settings.UI.Forms
                     htmlBuilder.Append("</ul>");
                     innerHtml = htmlBuilder.ToString();
                 }
-                ReleaseNotesWebBrowser.DocumentText = String.Format(RELEASE_NOTES_HTML_FORMAT, innerHtml);
+                ReleaseNotesWebBrowser.DocumentText = string.Format(CultureInfo.InvariantCulture,
+                    ReleaseNotesHTMLFormat, innerHtml);
             }
 
             // Display the form.

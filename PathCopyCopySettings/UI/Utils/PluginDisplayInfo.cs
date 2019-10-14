@@ -19,7 +19,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System;
 using System.Diagnostics;
 using PathCopyCopy.Settings.Core.Plugins;
 
@@ -77,10 +76,10 @@ namespace PathCopyCopy.Settings.UI.Utils
         public string ShowInMainMenuStr
         {
             get {
-                return this.ShowInMainMenu ? "1" : String.Empty;
+                return ShowInMainMenu ? "1" : string.Empty;
             }
             set {
-                this.ShowInMainMenu = value.Length != 0;
+                ShowInMainMenu = !string.IsNullOrEmpty(value);
             }
         }
 
@@ -93,10 +92,10 @@ namespace PathCopyCopy.Settings.UI.Utils
         public string ShowInSubmenuStr
         {
             get {
-                return this.ShowInSubmenu ? "1" : String.Empty;
+                return ShowInSubmenu ? "1" : string.Empty;
             }
             set {
-                this.ShowInSubmenu = value.Length != 0;
+                ShowInSubmenu = !string.IsNullOrEmpty(value);
             }
         }
         
@@ -108,7 +107,7 @@ namespace PathCopyCopy.Settings.UI.Utils
         {
             Debug.Assert(plugin != null);
 
-            this.Plugin = plugin;
+            Plugin = plugin;
         }
     }
 }

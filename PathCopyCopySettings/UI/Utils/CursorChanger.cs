@@ -20,7 +20,6 @@
 // THE SOFTWARE.
 
 using System;
-using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace PathCopyCopy.Settings.UI.Utils
@@ -38,10 +37,10 @@ namespace PathCopyCopy.Settings.UI.Utils
     public sealed class CursorChanger : IDisposable
     {
         /// Control whose cursor we change.
-        private Control control;
+        private readonly Control control;
 
         /// The control's former cursor.
-        private Cursor oldCursor;
+        private readonly Cursor oldCursor;
         
         /// <summary>
         /// Constructor. Saves a control's current cursor and optionally changes it.
@@ -51,14 +50,12 @@ namespace PathCopyCopy.Settings.UI.Utils
         /// <param name="newCursor">New cursor to assign. Can be <c>null</c>.</param>
         public CursorChanger(Control control, Cursor newCursor)
         {
-            Debug.Assert(control != null);
-
             // Save data.
             this.control = control;
-            this.oldCursor = this.control.Cursor;
+            oldCursor = this.control?.Cursor;
 
             // Optionally change cursor.
-            if (newCursor != null) {
+            if (this.control != null && newCursor != null) {
                 this.control.Cursor = newCursor;
             }
         }
@@ -70,7 +67,9 @@ namespace PathCopyCopy.Settings.UI.Utils
         /// </summary>
         public void Dispose()
         {
-            control.Cursor = oldCursor;
+            if (control != null) {
+                control.Cursor = oldCursor;
+            }
         }
 
         #endregion

@@ -55,9 +55,9 @@ namespace PathCopyCopy.Settings.UI.Utils
         public PositionPersistedForm()
             : base()
         {
-            this.Load += PositionPersistedForm_Load;
-            this.LocationChanged += PositionPersistedForm_LocationChanged;
-            this.SizeChanged += PositionPersistedForm_SizeChanged;
+            Load += PositionPersistedForm_Load;
+            LocationChanged += PositionPersistedForm_LocationChanged;
+            SizeChanged += PositionPersistedForm_SizeChanged;
         }
 
         /// <summary>
@@ -72,11 +72,11 @@ namespace PathCopyCopy.Settings.UI.Utils
             // Load form information if we have some.
             Settings.GetFormInformation(FormInfoName, out Point position, out Size size);
             if (position.X != -1 && position.Y != -1) {
-                this.StartPosition = FormStartPosition.Manual;
-                this.Location = position;
+                StartPosition = FormStartPosition.Manual;
+                Location = position;
             }
             if (size.Width != -1 && size.Height != -1) {
-                this.Size = size;
+                Size = size;
             }
 
             // Set flag telling listeners that from now on, any change is size/position
@@ -93,7 +93,7 @@ namespace PathCopyCopy.Settings.UI.Utils
         private void PositionPersistedForm_LocationChanged(object sender, EventArgs e)
         {
             if (canSaveFormInfo) {
-                Settings.SetFormInformation(FormInfoName, this.Location, null);
+                Settings.SetFormInformation(FormInfoName, Location, null);
             }
         }
 
@@ -106,7 +106,7 @@ namespace PathCopyCopy.Settings.UI.Utils
         private void PositionPersistedForm_SizeChanged(object sender, EventArgs e)
         {
             if (canSaveFormInfo) {
-                Settings.SetFormInformation(FormInfoName, null, this.Size);
+                Settings.SetFormInformation(FormInfoName, null, Size);
             }
         }
     }

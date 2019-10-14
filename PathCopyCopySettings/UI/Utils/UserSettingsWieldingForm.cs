@@ -46,7 +46,7 @@ namespace PathCopyCopy.Settings.UI.Utils
             : base()
         {
             Settings = new UserSettings();
-            this.FormClosed += UserSettingsWieldingForm_FormClosed;
+            FormClosed += UserSettingsWieldingForm_FormClosed;
         }
 
         /// <summary>

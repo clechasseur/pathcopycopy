@@ -279,6 +279,24 @@ namespace PathCopyCopy.Settings.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=LM5B9WNTH4KN4&amp;lc=CA&amp;item_name=Charles%20Lechasseur&amp;item_number=PathCopyCopy&amp;currency_code=CAD&amp;bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted.
+        /// </summary>
+        internal static string MainForm_About_DonationsPageURI {
+            get {
+                return ResourceManager.GetString("MainForm_About_DonationsPageURI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://github.com/clechasseur/pathcopycopy/blob/master/LICENSE.
+        /// </summary>
+        internal static string MainForm_About_LicensePageURI {
+            get {
+                return ResourceManager.GetString("MainForm_About_LicensePageURI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit.
         /// </summary>
         internal static string MainForm_Confirm_EditMsgTitle {

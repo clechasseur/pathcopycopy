@@ -297,7 +297,8 @@ namespace PathCopyCopy.Settings.Core.Plugins
         {
             // Use path to this executable as preview. It will most likely contain
             // spaces and long names, which is perfect to showcase short paths.
-            string pathToThisExe = new Uri(Assembly.GetEntryAssembly().CodeBase).LocalPath;
+            string pathToThisExe = new Uri(
+                (Assembly.GetEntryAssembly() ?? Assembly.GetCallingAssembly()).CodeBase).LocalPath;
             return Path.ChangeExtension(pathToThisExe,
                 Path.GetExtension(pathToThisExe).ToLower(CultureInfo.CurrentCulture));
         }
@@ -310,16 +311,16 @@ namespace PathCopyCopy.Settings.Core.Plugins
     public sealed class SeparatorPlugin : Plugin
     {
         /// Unique ID of the separator plugin.
-        private static readonly Guid PLUGIN_SEPARATOR_ID = new Guid("{AFA4D1E1-BA73-4330-A6AB-E574FF39ECC3}");
+        private static readonly Guid SeparatorPluginID = new Guid("{AFA4D1E1-BA73-4330-A6AB-E574FF39ECC3}");
 
         /// Description used for the separator plugin.
-        private const string PLUGIN_SEPARATOR_DESCRIPTION = "-----------------------------------------";
+        private const string SeparatorPluginDescription = "-----------------------------------------";
         
         /// <summary>
         /// Creates a separator plugin bean.
         /// </summary>
         public SeparatorPlugin()
-            : base(PLUGIN_SEPARATOR_ID, PLUGIN_SEPARATOR_DESCRIPTION)
+            : base(SeparatorPluginID, SeparatorPluginDescription)
         {
         }
         

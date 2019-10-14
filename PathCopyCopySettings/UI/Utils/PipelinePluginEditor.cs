@@ -39,13 +39,13 @@ namespace PathCopyCopy.Settings.UI.Utils
         internal const string PATHS_SEPARATOR_ON_SAME_LINE = " ";
 
         /// Owner of any form we create.
-        private IWin32Window owner;
+        private readonly IWin32Window owner;
 
         /// Plugin info for the plugin we're editing.
-        private PipelinePluginInfo pluginInfo;
+        private readonly PipelinePluginInfo pluginInfo;
 
         /// Pipeline of the plugin info, if we have one.
-        private Pipeline pipeline;
+        private readonly Pipeline pipeline;
 
         /// <summary>
         /// Edits a new or existing pipeline plugin.
@@ -70,7 +70,9 @@ namespace PathCopyCopy.Settings.UI.Utils
         /// simple form.</returns>
         internal static bool IsPipelineSimple(Pipeline pipeline)
         {
-            Debug.Assert(pipeline != null);
+            if (pipeline == null) {
+                throw new ArgumentNullException(nameof(pipeline));
+            }
 
             // All elements must be of different types, and pipeline must contain
             // an ApplyPlugin element.
@@ -149,8 +151,12 @@ namespace PathCopyCopy.Settings.UI.Utils
             /// class type as <paramref name="y"/>.</returns>
             public bool Equals(PipelineElement x, PipelineElement y)
             {
-                Debug.Assert(x != null);
-                Debug.Assert(y != null);
+                if (x == null) {
+                    throw new ArgumentNullException(nameof(x));
+                }
+                if (y == null) {
+                    throw new ArgumentNullException(nameof(y));
+                }
 
                 return GetElementType(x).Equals(GetElementType(y));
             }
@@ -162,7 +168,9 @@ namespace PathCopyCopy.Settings.UI.Utils
             /// <returns>Hash code.</returns>
             public int GetHashCode(PipelineElement obj)
             {
-                Debug.Assert(obj != null);
+                if (obj == null) {
+                    throw new ArgumentNullException(nameof(obj));
+                }
 
                 return GetElementType(obj).GetHashCode();
             }
@@ -175,6 +183,8 @@ namespace PathCopyCopy.Settings.UI.Utils
             /// <returns><see cref="Type"/> of <paramref name="obj"/>.</returns>
             private Type GetElementType(PipelineElement obj)
             {
+                Debug.Assert(obj != null);
+
                 // Some elements are mutually exclusive, so we'll consider them
                 // the same type so that using Distinct can detect duplicates.
                 Type type = obj.GetType();

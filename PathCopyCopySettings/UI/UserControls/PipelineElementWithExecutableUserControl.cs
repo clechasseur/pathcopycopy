@@ -82,7 +82,7 @@ namespace PathCopyCopy.Settings.UI.UserControls
             try {
                 ChooseExecutableOpenDlg.InitialDirectory = Path.GetDirectoryName(ExecutableTxt.Text);
                 ChooseExecutableOpenDlg.FileName = Path.GetFileName(ExecutableTxt.Text);
-            } catch {
+            } catch (ArgumentException) {
                 // Bad format or something, simply don't use.
             }
             if (ChooseExecutableOpenDlg.ShowDialog(this) == DialogResult.OK) {

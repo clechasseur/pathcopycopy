@@ -30,10 +30,10 @@ namespace PathCopyCopy.Settings.UI.Forms
 {
     /// <summary>
     /// Form used to test regular expressions using the same syntax as that
-    /// used by the <see cref="T:RegexPipelineElement"/>. To use, create an
+    /// used by the <see cref="RegexPipelineElement"/>. To use, create an
     /// instance and call the <see cref="TestRegex"/> method.
     /// </summary>
-    /// <seealso cref="T:RegexTester"/>
+    /// <seealso cref="RegexTester"/>
     public partial class RegexTesterForm : PositionPersistedForm
     {
         /// <summary>
