@@ -239,20 +239,6 @@ namespace PathCopyCopy.Settings.UI.Forms
         }
         
         /// <summary>
-        /// Called when the form is closed and is about to be released. We perform
-        /// final cleanup here.
-        /// </summary>
-        /// <param name="sender">Event sender.</param>
-        /// <param name="e">Event arguments.</param>
-        private void ImportPipelinePluginsForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            // Dispose of brushes before leaving.
-            listItemRegularBrush?.Dispose();
-            listItemDisabledBrush?.Dispose();
-            listItemSelectedBrush?.Dispose();
-        }
-        
-        /// <summary>
         /// Simple wrapper used to display pipeline plugin infos in the list. Holds
         /// extra info to know if plugins are importable or not.
         /// </summary>

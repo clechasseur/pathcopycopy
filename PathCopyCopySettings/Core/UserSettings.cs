@@ -953,7 +953,7 @@ namespace PathCopyCopy.Settings.Core
         /// <param name="userRegKey">User registry key containing pipeline plugins.</param>
         /// <returns>List of pipeline plugins, in the order they should be
         /// displayed.</returns>
-        private List<PipelinePluginInfo> LoadPipelinePlugins(RegistryKey globalRegKey,
+        private static List<PipelinePluginInfo> LoadPipelinePlugins(RegistryKey globalRegKey,
             RegistryKey userRegKey)
         {
             Debug.Assert(userRegKey != null);
@@ -1016,7 +1016,7 @@ namespace PathCopyCopy.Settings.Core
         /// <param name="removeObsolete">Whether to remove obsolete plugins from
         /// the registry key (e.g. plugins that no longer exist). This should
         /// generally be set to <c>true</c> except for temporary pipeline plugins.</param>
-        private void SavePipelinePlugins(List<PipelinePluginInfo> pipelinePlugins,
+        private static void SavePipelinePlugins(List<PipelinePluginInfo> pipelinePlugins,
             RegistryKey regKey, bool saveDisplayOrder, bool removeObsolete)
         {
             Debug.Assert(pipelinePlugins != null);
@@ -1084,7 +1084,7 @@ namespace PathCopyCopy.Settings.Core
         /// <param name="pipelinePlugins">Where to store the pipeline plugins
         /// loaded.</param>
         /// <param name="isGlobal">Whether this is the global key we're parsing.</param>
-        private void LoadPipelinePluginsFromKey(RegistryKey regKey,
+        private static void LoadPipelinePluginsFromKey(RegistryKey regKey,
             List<PipelinePluginInfo> pipelinePlugins, bool isGlobal)
         {
             Debug.Assert(regKey != null);
@@ -1189,7 +1189,7 @@ namespace PathCopyCopy.Settings.Core
         /// <param name="valueName">Name of registry value to look for.</param>
         /// <returns>Form information for value <paramref name="valueName"/>,
         /// or -1 if no information is available for this form value.</returns>
-        private int GetFormValue(RegistryKey formKey, string valueName)
+        private static int GetFormValue(RegistryKey formKey, string valueName)
         {
             int value = FormsPosSizeDefaultValue;
             if (formKey != null) {

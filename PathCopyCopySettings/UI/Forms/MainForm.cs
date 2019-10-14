@@ -591,17 +591,6 @@ namespace PathCopyCopy.Settings.UI.Forms
         }
         
         /// <summary>
-        /// Called when the form finally closes. We need to do cleanup work here.
-        /// </summary>
-        /// <param name="sender">Event sender.</param>
-        /// <param name="e">Event arguments.</param>
-        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            // Dispose of user settings object.
-            settings?.Dispose();
-        }
-        
-        /// <summary>
         /// Called when the user clicks the "Apply" button. We'll need to save
         /// the user settings.
         /// </summary>

@@ -111,6 +111,8 @@ namespace PathCopyCopy.Settings.UI.Forms
             return dialogRes != DialogResult.Cancel ? newPluginInfo : null;
         }
 
+        
+
         /// <summary>
         /// Called when the form is loaded. We use this opportunity to load the
         /// controls necessary to edit the pipeline plugin.

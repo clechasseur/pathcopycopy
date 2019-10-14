@@ -15,6 +15,7 @@
         {
             if (disposing && (components != null)) {
                 components.Dispose();
+                settings?.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -33,6 +34,7 @@
             this.CancelBtn = new System.Windows.Forms.Button();
             this.MainTabCtrl = new System.Windows.Forms.TabControl();
             this.PluginsPage = new System.Windows.Forms.TabPage();
+            this.PreviewCtrl = new PathCopyCopy.Settings.UI.UserControls.PluginPreviewUserControl();
             this.AddSeparatorBtn = new System.Windows.Forms.Button();
             this.ImportPipelinePluginsBtn = new System.Windows.Forms.Button();
             this.ExportPipelinePluginsBtn = new System.Windows.Forms.Button();
@@ -85,7 +87,6 @@
             this.ExportUserSettingsSaveDlg = new System.Windows.Forms.SaveFileDialog();
             this.ExportUserSettingsBtn = new System.Windows.Forms.Button();
             this.MainToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.PreviewCtrl = new PathCopyCopy.Settings.UI.UserControls.PluginPreviewUserControl();
             this.MainTabCtrl.SuspendLayout();
             this.PluginsPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PluginsDataGrid)).BeginInit();
@@ -171,6 +172,16 @@
             this.PluginsPage.TabIndex = 1;
             this.PluginsPage.Text = "Commands";
             this.PluginsPage.UseVisualStyleBackColor = true;
+            // 
+            // PreviewCtrl
+            // 
+            this.PreviewCtrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.PreviewCtrl.Location = new System.Drawing.Point(9, 460);
+            this.PreviewCtrl.Name = "PreviewCtrl";
+            this.PreviewCtrl.Plugin = null;
+            this.PreviewCtrl.Size = new System.Drawing.Size(369, 53);
+            this.PreviewCtrl.TabIndex = 3;
             // 
             // AddSeparatorBtn
             // 
@@ -789,16 +800,6 @@
             this.ExportUserSettingsBtn.UseVisualStyleBackColor = true;
             this.ExportUserSettingsBtn.Click += new System.EventHandler(this.ExportUserSettingsBtn_Click);
             // 
-            // PreviewCtrl
-            // 
-            this.PreviewCtrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.PreviewCtrl.Location = new System.Drawing.Point(9, 460);
-            this.PreviewCtrl.Name = "PreviewCtrl";
-            this.PreviewCtrl.Plugin = null;
-            this.PreviewCtrl.Size = new System.Drawing.Size(369, 53);
-            this.PreviewCtrl.TabIndex = 3;
-            // 
             // MainForm
             // 
             this.AcceptButton = this.OKBtn;
@@ -822,7 +823,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Path Copy Copy";
             this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.MainForm_HelpButtonClicked);
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.LocationChanged += new System.EventHandler(this.MainForm_LocationChanged);
             this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);

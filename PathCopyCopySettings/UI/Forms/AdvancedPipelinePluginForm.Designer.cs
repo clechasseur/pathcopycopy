@@ -15,6 +15,7 @@
         {
             if (disposing && (components != null)) {
                 components.Dispose();
+                currentUserControl?.Dispose();
             }
             base.Dispose(disposing);
         }

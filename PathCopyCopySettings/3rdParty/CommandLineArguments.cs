@@ -1030,7 +1030,7 @@ namespace CommandLine
             return attribute.ShortName;
         }
         
-        private static string HelpText(ArgumentAttribute attribute, FieldInfo field)
+        private static string HelpText(ArgumentAttribute attribute, FieldInfo _)
         {
             if (attribute == null)
                 return null;
@@ -1048,7 +1048,7 @@ namespace CommandLine
             return (attribute != null && !attribute.DefaultShortName);
         }
 
-        private static object DefaultValue(ArgumentAttribute attribute, FieldInfo field)
+        private static object DefaultValue(ArgumentAttribute attribute, FieldInfo _)
         {
             return (attribute == null || !attribute.HasDefaultValue) ? null : attribute.DefaultValue;
         }
