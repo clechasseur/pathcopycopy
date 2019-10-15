@@ -31,24 +31,24 @@ namespace
 {
     // Each pipeline element type is represented using a single character
     // in the encoded string. This is a list of all possible values.
-    const wchar_t   ELEMENT_CODE_QUOTES                     = L'"';
-    const wchar_t   ELEMENT_CODE_OPTIONAL_QUOTES            = L'q';
-    const wchar_t   ELEMENT_CODE_EMAIL_LINKS                = L'<';
-    const wchar_t   ELEMENT_CODE_ENCODE_URI_WHITESPACE      = L's';
-    const wchar_t   ELEMENT_CODE_ENCODE_URI_CHARS           = L'%';
-    const wchar_t   ELEMENT_CODE_BACK_TO_FORWARD_SLASHES    = L'\\';
-    const wchar_t   ELEMENT_CODE_FORWARD_TO_BACKSLASHES     = L'/';
-    const wchar_t   ELEMENT_CODE_REMOVE_EXT                 = L'.';
-    const wchar_t   ELEMENT_CODE_FIND_REPLACE               = L'?';
-    const wchar_t   ELEMENT_CODE_REGEX                      = L'^';
-    const wchar_t   ELEMENT_CODE_APPLY_PLUGIN               = L'{';
-    const wchar_t   ELEMENT_CODE_PATHS_SEPARATOR            = L',';
-    const wchar_t   ELEMENT_CODE_EXECUTABLE                 = L'x';
-    const wchar_t   ELEMENT_CODE_EXECUTABLE_WITH_FILELIST   = L'f';
+    constexpr wchar_t   ELEMENT_CODE_QUOTES                     = L'"';
+    constexpr wchar_t   ELEMENT_CODE_OPTIONAL_QUOTES            = L'q';
+    constexpr wchar_t   ELEMENT_CODE_EMAIL_LINKS                = L'<';
+    constexpr wchar_t   ELEMENT_CODE_ENCODE_URI_WHITESPACE      = L's';
+    constexpr wchar_t   ELEMENT_CODE_ENCODE_URI_CHARS           = L'%';
+    constexpr wchar_t   ELEMENT_CODE_BACK_TO_FORWARD_SLASHES    = L'\\';
+    constexpr wchar_t   ELEMENT_CODE_FORWARD_TO_BACKSLASHES     = L'/';
+    constexpr wchar_t   ELEMENT_CODE_REMOVE_EXT                 = L'.';
+    constexpr wchar_t   ELEMENT_CODE_FIND_REPLACE               = L'?';
+    constexpr wchar_t   ELEMENT_CODE_REGEX                      = L'^';
+    constexpr wchar_t   ELEMENT_CODE_APPLY_PLUGIN               = L'{';
+    constexpr wchar_t   ELEMENT_CODE_PATHS_SEPARATOR            = L',';
+    constexpr wchar_t   ELEMENT_CODE_EXECUTABLE                 = L'x';
+    constexpr wchar_t   ELEMENT_CODE_EXECUTABLE_WITH_FILELIST   = L'f';
 
     // Version numbers used for regex elements.
-    const long      REGEX_ELEMENT_INITIAL_VERSION           = 1;
-    const long      REGEX_ELEMENT_MAX_VERSION               = REGEX_ELEMENT_INITIAL_VERSION;
+    constexpr long      REGEX_ELEMENT_INITIAL_VERSION           = 1;
+    constexpr long      REGEX_ELEMENT_MAX_VERSION               = REGEX_ELEMENT_INITIAL_VERSION;
 
 } // anonymous namespace
 

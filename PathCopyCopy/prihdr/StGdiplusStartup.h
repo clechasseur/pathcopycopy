@@ -1,4 +1,4 @@
-// StCoInitialize.h
+// StGdiplusStartup.h
 // (c) 2014-2019, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,6 +24,9 @@
 #include <windows.h>
 #include <objidl.h>
 #include <gdiplus.h>
+
+#pragma warning(push)
+#pragma warning(disable: 26812) // Enum Gdiplus::Status should be enum class
 
 
 //
@@ -99,3 +102,5 @@ private:
     const Gdiplus::Status
                         m_StartupRes;       // Result of GdiplusStartup call.
 };
+
+#pragma warning(pop)

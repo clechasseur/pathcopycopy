@@ -54,6 +54,7 @@ int wmain(int /*argc*/, wchar_t* /*argv*/[])
     try {
         // Create regex object and perform replacement. This must be similar
         // to the way this is done in RegexPipelineElement in the main project.
+#pragma warning(suppress: 26812)    // std::regex_constants::syntax_option_type should be enum class
         std::regex_constants::syntax_option_type reOptions = std::regex_constants::ECMAScript;
         if (ignoreCase == L'y') {
             reOptions |= std::regex_constants::icase;

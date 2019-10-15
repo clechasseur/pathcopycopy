@@ -90,30 +90,30 @@ namespace
     const wchar_t* const    SETTING_ENCODE_PARAM_VALUE_ALL                  = L"All";
 
     // Default values for PCC settings.
-    const bool              SETTING_USE_HIDDEN_SHARES_DEFAULT               = false;
-    const bool              SETTING_USE_FQDN_DEFAULT                        = false;
-    const bool              SETTING_ADD_QUOTES_DEFAULT                      = false;
-    const bool              SETTING_ARE_QUOTES_OPTIONAL_DEFAULT             = false;
-    const bool              SETTING_MAKE_EMAIL_LINKS_DEFAULT                = false;
+    constexpr bool          SETTING_USE_HIDDEN_SHARES_DEFAULT               = false;
+    constexpr bool          SETTING_USE_FQDN_DEFAULT                        = false;
+    constexpr bool          SETTING_ADD_QUOTES_DEFAULT                      = false;
+    constexpr bool          SETTING_ARE_QUOTES_OPTIONAL_DEFAULT             = false;
+    constexpr bool          SETTING_MAKE_EMAIL_LINKS_DEFAULT                = false;
     const wchar_t* const    SETTING_ENCODE_PARAM_DEFAULT                    = SETTING_ENCODE_PARAM_VALUE_NONE;
-    const bool              SETTING_APPEND_SEPARATOR_FOR_DIRECTORIES_DEFAULT= false;
-    const bool              SETTING_USE_ICON_FOR_DEFAULT_PLUGIN_DEFAULT     = false;
-    const bool              SETTING_USE_ICON_FOR_SUBMENU_DEFAULT            = true;
-    const bool              SETTING_USE_PREVIEW_MODE_DEFAULT                = false;
-    const bool              SETTING_USE_PREVIEW_MODE_IN_MAIN_MENU_DEFAULT   = false;
-    const bool              SETTING_DROP_REDUNDANT_WORDS_DEFAULT            = false;
-    const bool              SETTING_ALWAYS_SHOW_SUBMENU_DEFAULT             = true;
+    constexpr bool          SETTING_APPEND_SEPARATOR_FOR_DIRECTORIES_DEFAULT= false;
+    constexpr bool          SETTING_USE_ICON_FOR_DEFAULT_PLUGIN_DEFAULT     = false;
+    constexpr bool          SETTING_USE_ICON_FOR_SUBMENU_DEFAULT            = true;
+    constexpr bool          SETTING_USE_PREVIEW_MODE_DEFAULT                = false;
+    constexpr bool          SETTING_USE_PREVIEW_MODE_IN_MAIN_MENU_DEFAULT   = false;
+    constexpr bool          SETTING_DROP_REDUNDANT_WORDS_DEFAULT            = false;
+    constexpr bool          SETTING_ALWAYS_SHOW_SUBMENU_DEFAULT             = true;
     const wchar_t* const    SETTING_PATHS_SEPARATOR_DEFAULT                 = L"";
-    const double            SETTING_UPDATE_INTERVAL_DEFAULT                 = 604800.0;     // One week, in seconds.
-    const bool              SETTING_DISABLE_SOFTWARE_UPDATE_DEFAULT         = false;
+    constexpr double        SETTING_UPDATE_INTERVAL_DEFAULT                 = 604800.0;     // One week, in seconds.
+    constexpr bool          SETTING_DISABLE_SOFTWARE_UPDATE_DEFAULT         = false;
 
     // Constants used to parse data.
-    const wchar_t           PLUGINS_SEPARATOR                               = L',';
-    const wchar_t           REVISIONS_SEPARATOR                             = L',';
+    constexpr wchar_t       PLUGINS_SEPARATOR                               = L',';
+    constexpr wchar_t       REVISIONS_SEPARATOR                             = L',';
 
     // Constants used to generate plugin info for the UI.
-    const wchar_t           INFO_GROUP_INFO_SEPARATOR                       = L',';
-    const wchar_t           INFO_DESCRIPTION_SEPARATOR                      = L'|';
+    constexpr wchar_t       INFO_GROUP_INFO_SEPARATOR                       = L',';
+    constexpr wchar_t       INFO_DESCRIPTION_SEPARATOR                      = L'|';
 
     // Constants used for icons.
     const wchar_t* const    DEFAULT_ICON_MARKER_STRING                      = L"default";

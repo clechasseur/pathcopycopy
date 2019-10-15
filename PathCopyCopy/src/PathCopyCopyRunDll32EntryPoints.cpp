@@ -36,7 +36,7 @@
 namespace
 {
     // Separator used in the rundll32 command-line.
-    const wchar_t           RUNDLL32_CMDLINE_SEPARATOR  = L',';
+    constexpr wchar_t       RUNDLL32_CMDLINE_SEPARATOR  = L',';
 
     // Registry key in HKEY_CURRENT_USER where to output rundll32 results.
     const wchar_t* const    PCC_RUNDLL32_OUTPUT_KEY     = L"Software\\clechasseur\\PathCopyCopy\\Rundll32Output";

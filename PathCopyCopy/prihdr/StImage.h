@@ -64,6 +64,9 @@ public:
                         {
                         }
 
+#pragma warning(push)
+#pragma warning(disable: 26814) // Compiler thinks m_LoadResult could be constexpr, it can't
+
                         //
                         // Constructor that assumes ownership of a bitmap handle.
                         // Will be destroyed by destructor unless shared.
@@ -82,6 +85,8 @@ public:
                         {
                             assert(p_hImage != nullptr);
                         }
+
+#pragma warning(pop)
 
                         //
                         // Copying/moving not supported.

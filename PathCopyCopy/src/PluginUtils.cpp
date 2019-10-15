@@ -24,6 +24,8 @@
 #include <PathCopyCopyPluginsRegistry.h>
 #include <PathCopyCopySettings.h>
 #include <StringUtils.h>
+#include <StWSAStartup.h>
+#include <StAddrInfo.h>
 
 #include <DefaultPlugin.h>
 
@@ -36,17 +38,17 @@
 
 namespace
 {
-    const DWORD             INITIAL_BUFFER_SIZE         = 1024;     // Initial size of buffer used to fetch UNC name.
-    const DWORD             MAX_REG_KEY_NAME_SIZE       = 255;      // Max size of a registry key's name.
+    constexpr DWORD         INITIAL_BUFFER_SIZE         = 1024;     // Initial size of buffer used to fetch UNC name.
+    constexpr DWORD         MAX_REG_KEY_NAME_SIZE       = 255;      // Max size of a registry key's name.
 
     const wchar_t* const    SHARES_KEY_NAME             = L"SYSTEM\\CurrentControlSet\\Services\\Lanmanserver\\Shares"; // Name of key storing network shares
     const wchar_t* const    SHARE_PATH_VALUE            = L"Path=";     // Part of a share key's value containing the share path.
-    const wchar_t           HIDDEN_SHARE_SUFFIX         = L'$';         // Suffix used for hidden shares; we will not consider them unless specified.
+    constexpr wchar_t       HIDDEN_SHARE_SUFFIX         = L'$';         // Suffix used for hidden shares; we will not consider them unless specified.
 
     const wchar_t* const    HIDDEN_DRIVE_SHARES_REGEX   = L"^([A-Za-z])\\:((\\\\|/).*)$";   // Regex used to convert hidden drive shares.
     const wchar_t* const    HIDDEN_DRIVE_SHARES_FORMAT  = L"$1$$$2";                        // Format string used to convert hidden drive shares.
 
-    const ULONG             REG_BUFFER_CHUNK_SIZE = 512;        // Size of chunks allocated to read the registry.
+    constexpr ULONG         REG_BUFFER_CHUNK_SIZE = 512;        // Size of chunks allocated to read the registry.
 
 } // anonymous namespace
 
@@ -268,21 +270,22 @@ namespace PCC
         }
         if (!hostname.empty()) {
             // First initialize Winsock if it's not already initialized in the process.
-            WSADATA wsaData;
-            if (::WSAStartup(MAKEWORD(2, 2), &wsaData) == 0) {
+            StWSAStartup wsaStartup;
+            if (wsaStartup.Started()) {
                 // Try fetching info for the hostname
-                hostent* const pHostEnt = gethostbyname(_bstr_t(hostname.c_str()));
-                if (pHostEnt != nullptr) {
+                addrinfoW hints;
+                ::ZeroMemory(&hints, sizeof(hints));
+                hints.ai_flags = AI_CANONNAME;
+                hints.ai_family = AF_UNSPEC;
+                StAddrInfo addrinfo;
+                if (::GetAddrInfoW(hostname.c_str(), nullptr, &hints, &addrinfo)) {
                     // Rebuild the path by replacing the hostname with its FQDN
                     std::wstringstream wss;
                     wss << L"\\\\"
-                        << _bstr_t(pHostEnt->h_name)
+                        << addrinfo->ai_canonname
                         << restOfPath;
                     p_rFilePath = wss.str();
                 }
-
-                // Cleanup Winsock before returning.
-                ::WSACleanup();
             }
         }
     }

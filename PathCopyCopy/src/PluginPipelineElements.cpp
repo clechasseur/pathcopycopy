@@ -235,6 +235,7 @@ namespace PCC
             // Try creating regex. Keep null if the regex is invalid.
             try {
                 if (!m_Regex.empty()) {
+#pragma warning(suppress: 26812)    // std::regex_constants::syntax_option_type could be enum class
                     std::regex_constants::syntax_option_type reOptions = std::regex_constants::ECMAScript;
                     if (m_IgnoreCase) {
                         reOptions |= std::regex_constants::icase;

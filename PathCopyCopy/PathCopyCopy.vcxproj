@@ -426,6 +426,7 @@
     <ClInclude Include="prihdr\PluginPipelineElements.h" />
     <ClInclude Include="prihdr\PluginSeparator.h" />
     <ClInclude Include="prihdr\PluginUtils.h" />
+    <ClInclude Include="prihdr\StAddrInfo.h" />
     <ClInclude Include="prihdr\StAtlPerUserOverride.h" />
     <ClInclude Include="prihdr\StClipboard.h" />
     <ClInclude Include="prihdr\StCoInitialize.h" />
@@ -437,6 +438,7 @@
     <ClInclude Include="prihdr\StOleStr.h" />
     <ClInclude Include="prihdr\StringUtils.h" />
     <ClInclude Include="prihdr\StStgMedium.h" />
+    <ClInclude Include="prihdr\StWSAStartup.h" />
     <ClInclude Include="prihdr\targetver.h" />
     <ClInclude Include="prihdr\UserOverrideableRegKey.h" />
     <ClInclude Include="rsrc\resource.h" />
