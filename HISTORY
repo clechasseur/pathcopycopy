@@ -1,3 +1,8 @@
+Version 17.2 (20??-??-??)
+-------------------------
+- ???
+
+
 Version 17.1 (2019-09-29)
 -------------------------
 - Installer and uninstaller are now signed with a valid open-source certificate [https://github.com/clechasseur/pathcopycopy/issues/25]

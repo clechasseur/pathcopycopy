@@ -26,21 +26,21 @@
   #define MyConfiguration "Release"
   #ifdef PER_USER
     #define MyAppName "Path Copy Copy (Portable)"
-    #define MyAppVersion "17.1"
-    #define MyAppFullVersion "17.1"
-    #define MyAppVerName "Path Copy Copy (Portable) 17.1"
+    #define MyAppVersion "17.2"
+    #define MyAppFullVersion "17.2"
+    #define MyAppVerName "Path Copy Copy (Portable) 17.2"
   #else
     #define MyAppName "Path Copy Copy"
-    #define MyAppVersion "17.1"
-    #define MyAppFullVersion "17.1"
-    #define MyAppVerName "Path Copy Copy 17.1"
+    #define MyAppVersion "17.2"
+    #define MyAppFullVersion "17.2"
+    #define MyAppVerName "Path Copy Copy 17.2"
   #endif
 #else
   #define MyConfiguration "Debug"
   #define MyAppName "Path Copy Copy DEBUG"
-  #define MyAppVersion "17.1"
-  #define MyAppFullVersion "17.1"
-  #define MyAppVerName "Path Copy Copy DEBUG 17.1"
+  #define MyAppVersion "17.2"
+  #define MyAppFullVersion "17.2"
+  #define MyAppVerName "Path Copy Copy DEBUG 17.2"
 #endif
 #define MyAppPublisher "Charles Lechasseur"
 #define MyAppURL "https://pathcopycopy.github.io/"
