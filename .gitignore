@@ -12,3 +12,4 @@ ipch/
 *.VC.db
 *.VC.opendb
 Testing/mtexplorer.ini
+packages/
