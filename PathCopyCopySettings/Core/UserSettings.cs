@@ -23,6 +23,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using Microsoft.Win32;
 using PathCopyCopy.Settings.Core.Plugins;
 using PathCopyCopy.Settings.Properties;
@@ -751,25 +752,29 @@ namespace PathCopyCopy.Settings.Core
         /// </summary>
         /// <param name="fileName">File where to save the registry data.
         /// Should use the <c>.reg</c> extension to be importable later.</param>
-        /// <returns><c>true</c> if the export worked.</returns>
+        /// <returns>Export exit code. Will return 0 if successful.</returns>
         /// <remarks>
-        /// The <c>/y</c> switch is used when calling <c>reg</c>, meaning that
         /// <paramref name="fileName"/> will be overwritten without prompt.
         /// Validate that user wants to overwrite before calling this.
         /// </remarks>
-        public static bool ExportUserSettings(string fileName)
+        public static int ExportUserSettings(string fileName)
         {
             Debug.Assert(!String.IsNullOrEmpty(fileName));
 
-            ProcessStartInfo psi = new ProcessStartInfo("cmd.exe") {
-                Arguments = String.Format("/c \"reg export HKCU\\{0} \"{1}\" /y\"",
+            // Can't use the /y switch when calling reg, it's not supported on Win XP.
+            if (File.Exists(fileName)) {
+                File.Delete(fileName);
+            }
+
+            ProcessStartInfo psi = new ProcessStartInfo("reg.exe") {
+                Arguments = String.Format("export HKCU\\{0} \"{1}\"",
                     PCC_USER_SETTINGS_KEY, fileName),
                 CreateNoWindow = true,
                 UseShellExecute = false,
             };
             using (Process reg = Process.Start(psi)) {
                 reg.WaitForExit();
-                return reg.ExitCode == 0;
+                return reg.ExitCode;
             }
         }
         

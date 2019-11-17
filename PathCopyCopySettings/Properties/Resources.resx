@@ -298,7 +298,7 @@ Control-click to avoid displaying an icon for this command.</value>
     <value>In order to export settings, changes have to be applied first. Do you want to apply changes now?</value>
   </data>
   <data name="MainForm_Msg_UserSettingsNotExported" xml:space="preserve">
-    <value>An error occured while exporting settings to "{0}". Settings have not been successfully exported.</value>
+    <value>An error occured while exporting settings to "{0}". Settings have not been successfully exported. (Exit code: {1})</value>
   </data>
   <data name="MainForm_Msg_UserSettingsNotExportedMsgTitle" xml:space="preserve">
     <value>Settings Not Exported</value>
