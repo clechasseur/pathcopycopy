@@ -768,14 +768,12 @@ namespace PathCopyCopy.Settings.Core
         {
             Debug.Assert(!String.IsNullOrEmpty(fileName));
 
-            // Can't use the /y switch when calling reg, it's not supported on Win XP.
             if (File.Exists(fileName)) {
                 File.Delete(fileName);
             }
 
             ProcessStartInfo psi = new ProcessStartInfo("reg.exe") {
-                Arguments = String.Format("export HKCU\\{0} \"{1}\"",
-                    PCC_USER_SETTINGS_KEY, fileName),
+                Arguments = $"export HKCU\\{UserSettingsKeyPath} \"{fileName}\"",
                 CreateNoWindow = true,
                 UseShellExecute = false,
             };
