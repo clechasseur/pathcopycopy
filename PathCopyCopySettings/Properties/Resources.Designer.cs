@@ -387,7 +387,7 @@ namespace PathCopyCopy.Settings.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An error occured while exporting settings to &quot;{0}&quot;. Settings have not been successfully exported..
+        ///   Looks up a localized string similar to An error occured while exporting settings to &quot;{0}&quot;. Settings have not been successfully exported. (Exit code: {1}).
         /// </summary>
         internal static string MainForm_Msg_UserSettingsNotExported {
             get {

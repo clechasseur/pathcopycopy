@@ -644,20 +644,18 @@ namespace PathCopyCopy.Settings.UI.Forms
                 }
             }
             if (canExport && ExportUserSettingsSaveDlg.ShowDialog(this) == DialogResult.OK) {
-                bool worked;
+                int exitCode;
                 using (new CursorChanger(this, Cursors.WaitCursor)) {
-                    worked = UserSettings.ExportUserSettings(ExportUserSettingsSaveDlg.FileName);
+                    exitCode = UserSettings.ExportUserSettings(ExportUserSettingsSaveDlg.FileName);
                 }
-                if (worked) {
-                    MessageBox.Show(this, string.Format(CultureInfo.CurrentCulture,
-                        Resources.MainForm_Msg_UserSettingsExported, ExportUserSettingsSaveDlg.FileName),
-                        Resources.MainForm_Msg_UserSettingsExportedMsgTitle, MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
+                if (exitCode == 0) {
+                    MessageBox.Show(this, String.Format(Resources.MainForm_Msg_UserSettingsExported,
+                        ExportUserSettingsSaveDlg.FileName), Resources.MainForm_Msg_UserSettingsExportedMsgTitle,
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
                 } else {
-                    MessageBox.Show(this, string.Format(CultureInfo.CurrentCulture,
-                        Resources.MainForm_Msg_UserSettingsNotExported, ExportUserSettingsSaveDlg.FileName),
-                        Resources.MainForm_Msg_UserSettingsNotExportedMsgTitle, MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
+                    MessageBox.Show(this, String.Format(Resources.MainForm_Msg_UserSettingsNotExported,
+                        ExportUserSettingsSaveDlg.FileName, exitCode), Resources.MainForm_Msg_UserSettingsNotExportedMsgTitle,
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

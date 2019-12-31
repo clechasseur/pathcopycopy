@@ -3,6 +3,12 @@ Version ??.? (20??-??-??)
 - Now requires Windows Vista at a minimum [https://github.com/clechasseur/pathcopycopy/issues/83]
 
 
+Version 17.1.1 (2019-11-16)
+-------------------------
+- Exporting user settings now works on Windows XP [https://github.com/clechasseur/pathcopycopy/issues/96]
+- When exporting user settings fails, display more information [https://github.com/clechasseur/pathcopycopy/issues/96]
+
+
 Version 17.1 (2019-09-29)
 -------------------------
 - Installer and uninstaller are now signed with a valid open-source certificate [https://github.com/clechasseur/pathcopycopy/issues/25]
