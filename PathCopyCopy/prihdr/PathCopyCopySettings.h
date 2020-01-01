@@ -73,6 +73,7 @@ namespace PCC
         bool            GetDropRedundantWords() const;
         bool            GetAlwaysShowSubmenu() const;
         std::wstring    GetPathsSeparator() const;
+        bool            GetTrueLnkPaths() const;
         bool            GetCtrlKeyPlugin(GUID& p_rPluginId) const;
         bool            GetMainMenuPluginDisplayOrder(GUIDV& p_rvPluginIds) const;
         bool            GetSubmenuPluginDisplayOrder(GUIDV& p_rvPluginIds) const;

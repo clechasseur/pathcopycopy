@@ -66,6 +66,7 @@ namespace
     const wchar_t* const    SETTING_DROP_REDUNDANT_WORDS                    = L"DropRedundantWords";
     const wchar_t* const    SETTING_ALWAYS_SHOW_SUBMENU                     = L"AlwaysShowSubmenu";
     const wchar_t* const    SETTING_PATHS_SEPARATOR                         = L"PathsSeparator";
+    const wchar_t* const    SETTING_TRUE_LNK_PATHS                          = L"TrueLnkPaths";
     const wchar_t* const    SETTING_CTRL_KEY_PLUGIN                         = L"CtrlKeyPlugin";
     const wchar_t* const    SETTING_MAIN_MENU_PLUGIN_DISPLAY_ORDER          = L"MainMenuDisplayOrder";
     const wchar_t* const    SETTING_SUBMENU_PLUGIN_DISPLAY_ORDER            = L"SubmenuDisplayOrder";
@@ -104,6 +105,7 @@ namespace
     constexpr bool          SETTING_DROP_REDUNDANT_WORDS_DEFAULT            = false;
     constexpr bool          SETTING_ALWAYS_SHOW_SUBMENU_DEFAULT             = true;
     const wchar_t* const    SETTING_PATHS_SEPARATOR_DEFAULT                 = L"";
+    constexpr bool          SETTING_TRUE_LNK_PATHS_DEFAULT                  = false;
     constexpr double        SETTING_UPDATE_INTERVAL_DEFAULT                 = 604800.0;     // One week, in seconds.
     constexpr bool          SETTING_DISABLE_SOFTWARE_UPDATE_DEFAULT         = false;
 
@@ -497,6 +499,26 @@ namespace PCC
             pathsSeparator.clear();
         }
         return pathsSeparator;
+    }
+
+    //
+    // Returns whether we want to copy paths to the shortcut (.lnk) files
+    // instead of the path of their targets.
+    //
+    // @return true to copy the path of .lnk files themselves.
+    //
+    bool Settings::GetTrueLnkPaths() const
+    {
+        // Perform late-revising.
+        Revise();
+
+        // Check if value exists. If so, read it, otherwise use default value.
+        bool trueLnkPaths = SETTING_TRUE_LNK_PATHS_DEFAULT;
+        DWORD regTrueLnkPaths = 0;
+        if (m_UserKey.QueryDWORDValue(SETTING_TRUE_LNK_PATHS, regTrueLnkPaths) == ERROR_SUCCESS) {
+            trueLnkPaths = regTrueLnkPaths != 0;
+        }
+        return trueLnkPaths;
     }
 
     //

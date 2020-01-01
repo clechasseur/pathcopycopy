@@ -132,7 +132,6 @@ private:
                         m_spPluginProvider;         // Plugin provider object.
 
     PCC::FilesV         m_vFiles;                   // Files selected in Shell.
-    std::wstring        m_ParentPath;               // Path of the parent directory of all files selected.
 
     std::optional<UINT_PTR>
                         m_FirstCmdId;               // ID of first command menu item.
@@ -150,6 +149,8 @@ private:
     static std::mutex   s_ExtToMenusLock;           // Lock to protect the static map.
 
     PCC::Settings&      GetSettings();
+    
+    std::wstring        GetParentPath() const;
 
     HRESULT             AddPluginToMenu(const GUID& p_PluginId,
                                         HMENU const p_hMenu,

@@ -64,7 +64,6 @@ CPathCopyCopyContextMenuExt::CPathCopyCopyContextMenuExt() noexcept(false)
       m_sspAllPlugins(),
       m_spPluginProvider(),
       m_vFiles(),
-      m_ParentPath(),
       m_FirstCmdId(),
       m_SubMenuCmdId(),
       m_SettingsCmdId(),
@@ -242,15 +241,6 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::Initialize(
                             i, &*buffer.begin(), gsl::narrow<UINT>(buffer.size()));
                         m_vFiles.emplace_back(buffer.c_str());
                     }
-
-                    // Extract the parent path of the first file. We'll assume that all
-                    // files have the same parent. This might not be strictly true in all
-                    // cases (for example, in a custom shell view) but we're only using it
-                    // for validation purposes, so it's good enough.
-                    if (!m_vFiles.empty()) {
-                        m_ParentPath = m_vFiles.front();
-                        PCC::PluginUtils::ExtractFolderFromPath(m_ParentPath);
-                    }
                 } else {
                     // It's difficult to display a menu item without files to act upon.
                     hRes = E_FAIL;
@@ -262,10 +252,6 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::Initialize(
             std::wstring buffer(MAX_PATH + 1, L'\0');
             if (::SHGetPathFromIDList(p_pFolderPIDL, &*buffer.begin()) != FALSE) {
                 m_vFiles.emplace_back(buffer.c_str());
-
-                // Extract the parent path.
-                m_ParentPath = m_vFiles.front();
-                PCC::PluginUtils::ExtractFolderFromPath(m_ParentPath);
             } else {
                 // Nothing like that either, problem.
                 hRes = E_FAIL;
@@ -309,17 +295,26 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::QueryContextMenu(
             hRes = E_INVALIDARG;
         } else {
             // Make sure this menu hasn't been modified by another instance.
-            bool alreadyModified = false;
+            CPathCopyCopyContextMenuExt* pOtherInstance = nullptr;
             {
                 std::lock_guard<std::mutex> lock(s_ExtToMenusLock);
-                alreadyModified = std::any_of(s_vExtToMenus.begin(), s_vExtToMenus.end(), [&](const auto& extToMenu) {
+                auto it = std::find_if(s_vExtToMenus.begin(), s_vExtToMenus.end(), [&](const auto& extToMenu) {
                     return extToMenu.second == p_hMenu;
                 });
+                if (it != s_vExtToMenus.end()) {
+                    pOtherInstance = it->first;
+                }
             }
 
-            // Do not add items if the default action is chosen, if we have no files
-            // or if menu has been modified by another instance.
-            if (m_vFiles.empty() || (p_Flags & CMF_DEFAULTONLY) != 0 || alreadyModified) {
+            // Do not add items if the default action is chosen, if we have no files,
+            // if menu has been modified by another instance or if this is a menu for
+            // a shortcut (.lnk) file and we want to copy true .lnk paths (in such a
+            // case, another instance is coming after us to do the job).
+            bool skipBecauseOfLnk = false;
+            if ((p_Flags & CMF_VERBSONLY) != 0) {
+                skipBecauseOfLnk = GetSettings().GetTrueLnkPaths();
+            }
+            if (m_vFiles.empty() || (p_Flags & CMF_DEFAULTONLY) != 0 || pOtherInstance != nullptr || skipBecauseOfLnk) {
                 hRes = E_FAIL;
             } else {
                 UINT cmdId = p_FirstCmdId;
@@ -693,6 +688,27 @@ PCC::Settings& CPathCopyCopyContextMenuExt::GetSettings()
 }
 
 //
+// Returns the path of the parent directory of all selected files.
+//
+// @return Parent directory path.
+//
+std::wstring CPathCopyCopyContextMenuExt::GetParentPath() const
+{
+    std::wstring parentPath;
+
+    // Extract the parent path of the first file. We'll assume that all
+    // files have the same parent. This might not be strictly true in all
+    // cases (for example, in a custom shell view) but we're only using it
+    // for validation purposes, so it's good enough.
+    if (!m_vFiles.empty()) {
+        parentPath = m_vFiles.front();
+        PCC::PluginUtils::ExtractFolderFromPath(parentPath);
+    }
+
+    return parentPath;
+}
+
+//
 // Adds a new item to the given menu (either the main contextual menu or
 // our submenu can be used) and assigns the given plugin to it. This will
 // be called multiple times by the QueryContextMenu method to fill in the
@@ -770,7 +786,7 @@ HRESULT CPathCopyCopyContextMenuExt::AddPluginToMenu(const PCC::PluginSP& p_spPl
     HRESULT hRes = S_OK;
 
     // Check if plugin should be enabled.
-    const bool enabled = p_spPlugin->Enabled(m_ParentPath, m_vFiles.front());
+    const bool enabled = p_spPlugin->Enabled(GetParentPath(), m_vFiles.front());
 
     // Compile info about the menu item using the plugin object.
     std::wstring description;
