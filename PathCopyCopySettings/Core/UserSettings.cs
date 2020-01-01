@@ -116,6 +116,9 @@ namespace PathCopyCopy.Settings.Core
         /// Name of registry value specifying the separator to use between multiple copied paths.
         private const string PathsSeparatorValueName = "PathsSeparator";
 
+        /// Name of registry value specifying whether to copy paths to the .lnk files themselves.
+        private const string TrueLnkPathsValueName = "TrueLnkPaths";
+
         /// Name of registry value containing the ID of the plugin to activate when Ctrl key is held down.
         private const string CtrlKeyPluginValueName = "CtrlKeyPlugin";
 
@@ -225,6 +228,9 @@ namespace PathCopyCopy.Settings.Core
 
         /// Default value of the "paths separator" setting.
         private const string PathsSeparatorDefaultValue = "";
+
+        /// Default value of the "true .lnk paths" setting.
+        private const int TrueLnkPathsDefaultValue = 0;
 
         /// Default value of the "disable software update" setting.
         private const int DisableSoftwareUpdateDefaultValue = 0;
@@ -460,6 +466,19 @@ namespace PathCopyCopy.Settings.Core
                     // Delete the value to use default.
                     userKey.DeleteValue(PathsSeparatorValueName, false);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Whether to copy the paths of .lnk files themselves.
+        /// </summary>
+        public bool TrueLnkPaths
+        {
+            get {
+                return ((int) GetUserOrGlobalValue(TrueLnkPathsValueName, TrueLnkPathsDefaultValue)) != 0;
+            }
+            set {
+                userKey.SetValue(TrueLnkPathsValueName, value ? 1 : 0);
             }
         }
 

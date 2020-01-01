@@ -269,6 +269,7 @@ namespace PathCopyCopy.Settings.UI.Forms
                 UsePreviewModeInMainMenuChk.Checked = settings.UsePreviewModeInMainMenu;
             }
             DropRedundantWordsChk.Checked = settings.DropRedundantWords;
+            TrueLnkPathsChk.Checked = settings.TrueLnkPaths;
             EnableSoftwareUpdateChk.Checked = !settings.DisableSoftwareUpdate;
 
             // Set binding list as data source for the combo box used to pick ctrl key plugin.
@@ -426,6 +427,9 @@ namespace PathCopyCopy.Settings.UI.Forms
             }
             if (DropRedundantWordsChk.Checked != settings.DropRedundantWords) {
                 settings.DropRedundantWords = DropRedundantWordsChk.Checked;
+            }
+            if (TrueLnkPathsChk.Checked != settings.TrueLnkPaths) {
+                settings.TrueLnkPaths = TrueLnkPathsChk.Checked;
             }
             if (EnableSoftwareUpdateChk.Checked != (!settings.DisableSoftwareUpdate)) {
                 settings.DisableSoftwareUpdate = !EnableSoftwareUpdateChk.Checked;

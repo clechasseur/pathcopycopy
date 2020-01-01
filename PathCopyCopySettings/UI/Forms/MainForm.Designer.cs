@@ -87,6 +87,7 @@
             this.ExportUserSettingsSaveDlg = new System.Windows.Forms.SaveFileDialog();
             this.ExportUserSettingsBtn = new System.Windows.Forms.Button();
             this.MainToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.TrueLnkPathsChk = new System.Windows.Forms.CheckBox();
             this.MainTabCtrl.SuspendLayout();
             this.PluginsPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PluginsDataGrid)).BeginInit();
@@ -391,6 +392,7 @@
             // 
             // MiscOptionsPage
             // 
+            this.MiscOptionsPage.Controls.Add(this.TrueLnkPathsChk);
             this.MiscOptionsPage.Controls.Add(this.UsePreviewModeInMainMenuChk);
             this.MiscOptionsPage.Controls.Add(this.AppendSepForDirChk);
             this.MiscOptionsPage.Controls.Add(this.UseFQDNChk);
@@ -472,10 +474,10 @@
             this.CtrlKeyPluginCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CtrlKeyPluginCombo.Enabled = false;
             this.CtrlKeyPluginCombo.FormattingEnabled = true;
-            this.CtrlKeyPluginCombo.Location = new System.Drawing.Point(25, 351);
+            this.CtrlKeyPluginCombo.Location = new System.Drawing.Point(25, 374);
             this.CtrlKeyPluginCombo.Name = "CtrlKeyPluginCombo";
             this.CtrlKeyPluginCombo.Size = new System.Drawing.Size(399, 21);
-            this.CtrlKeyPluginCombo.TabIndex = 15;
+            this.CtrlKeyPluginCombo.TabIndex = 16;
             this.MainToolTip.SetToolTip(this.CtrlKeyPluginCombo, "Command to use automatically when user holds down the Ctrl key when Explorer\'s co" +
         "ntextual menu is shown");
             this.CtrlKeyPluginCombo.ValueMember = "Plugin";
@@ -484,10 +486,10 @@
             // CtrlKeyPluginChk
             // 
             this.CtrlKeyPluginChk.AutoSize = true;
-            this.CtrlKeyPluginChk.Location = new System.Drawing.Point(6, 328);
+            this.CtrlKeyPluginChk.Location = new System.Drawing.Point(6, 351);
             this.CtrlKeyPluginChk.Name = "CtrlKeyPluginChk";
             this.CtrlKeyPluginChk.Size = new System.Drawing.Size(418, 17);
-            this.CtrlKeyPluginChk.TabIndex = 14;
+            this.CtrlKeyPluginChk.TabIndex = 15;
             this.CtrlKeyPluginChk.Text = "When user holds down Ctrl &key when opening contextual menu, use this command:";
             this.MainToolTip.SetToolTip(this.CtrlKeyPluginChk, "Choose a command to use automatically when user holds down the Ctrl key when Expl" +
         "orer\'s contextual menu is shown");
@@ -581,10 +583,10 @@
             // EnableSoftwareUpdateChk
             // 
             this.EnableSoftwareUpdateChk.AutoSize = true;
-            this.EnableSoftwareUpdateChk.Location = new System.Drawing.Point(6, 378);
+            this.EnableSoftwareUpdateChk.Location = new System.Drawing.Point(6, 401);
             this.EnableSoftwareUpdateChk.Name = "EnableSoftwareUpdateChk";
             this.EnableSoftwareUpdateChk.Size = new System.Drawing.Size(177, 17);
-            this.EnableSoftwareUpdateChk.TabIndex = 16;
+            this.EnableSoftwareUpdateChk.TabIndex = 17;
             this.EnableSoftwareUpdateChk.Text = "Check for &updates automatically";
             this.MainToolTip.SetToolTip(this.EnableSoftwareUpdateChk, "Automatically check for new versions of Path Copy Copy and offer them when they a" +
         "re released");
@@ -800,6 +802,18 @@
             this.ExportUserSettingsBtn.UseVisualStyleBackColor = true;
             this.ExportUserSettingsBtn.Click += new System.EventHandler(this.ExportUserSettingsBtn_Click);
             // 
+            // TrueLnkPathsChk
+            // 
+            this.TrueLnkPathsChk.AutoSize = true;
+            this.TrueLnkPathsChk.Location = new System.Drawing.Point(6, 328);
+            this.TrueLnkPathsChk.Name = "TrueLnkPathsChk";
+            this.TrueLnkPathsChk.Size = new System.Drawing.Size(235, 17);
+            this.TrueLnkPathsChk.TabIndex = 14;
+            this.TrueLnkPathsChk.Text = "Copy paths of sh&ortcut (.lnk) files themselves";
+            this.MainToolTip.SetToolTip(this.TrueLnkPathsChk, "When copying path of a shortcut (.lnk) file, copy the path of the shortcut file i" +
+        "tself instead of the path of its target");
+            this.TrueLnkPathsChk.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AcceptButton = this.OKBtn;
@@ -901,6 +915,7 @@
         private System.Windows.Forms.BindingSource PluginsDataGridBindingSource;
         private System.Windows.Forms.BindingSource CtrlKeyPluginComboBindingSource;
         private UserControls.PluginPreviewUserControl PreviewCtrl;
+        private System.Windows.Forms.CheckBox TrueLnkPathsChk;
     }
 }
 
