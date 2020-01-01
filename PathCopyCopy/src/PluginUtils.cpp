@@ -26,6 +26,7 @@
 #include <StringUtils.h>
 #include <StWSAStartup.h>
 #include <StAddrInfo.h>
+#include <StHandle.h>
 
 #include <DefaultPlugin.h>
 
@@ -102,6 +103,47 @@ namespace PCC
             p_rPath.erase(lastDelimPos);
         }
         return found;
+    }
+
+    //
+    // If the provided path points to a symbolic link, follow
+    // the symlink and return the path to its target.
+    //
+    // @param p_rPath Path to follow symlink for, if required.
+    // @return true if p_rPath pointed to a symlink.
+    //
+    bool PluginUtils::FollowSymlinkIfRequired(std::wstring& p_rPath)
+    {
+        // Check if path points to a symlink.
+        const auto attributes = ::GetFileAttributesW(p_rPath.c_str());
+        const bool symlink = attributes != INVALID_FILE_ATTRIBUTES &&
+                             (attributes & FILE_ATTRIBUTE_REPARSE_POINT) != 0;
+        if (symlink) {
+            // In order to follow the symlink, we need a handle.
+            DWORD flagsAndAttributes = FILE_ATTRIBUTE_NORMAL;
+            if ((attributes & FILE_ATTRIBUTE_DIRECTORY) != 0) {
+                // Need this flag to open directory handles according to MSDN
+                flagsAndAttributes |= FILE_FLAG_BACKUP_SEMANTICS;
+            }
+            StHandle hFile = ::CreateFileW(p_rPath.c_str(),
+                                           GENERIC_READ,
+                                           FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
+                                           nullptr,
+                                           OPEN_EXISTING,
+                                           flagsAndAttributes,
+                                           nullptr);
+            if (hFile != nullptr) {
+                std::wstring finalPath(MAX_PATH + 1, L'\0');
+                const auto finalPathRes = ::GetFinalPathNameByHandleW(hFile,
+                                                                      &*finalPath.begin(),
+                                                                      MAX_PATH,
+                                                                      FILE_NAME_NORMALIZED | VOLUME_NAME_DOS);
+                if (finalPathRes != 0) {
+                    p_rPath = finalPath.c_str();
+                }
+            }
+        }
+        return symlink;
     }
 
     //

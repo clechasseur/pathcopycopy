@@ -47,6 +47,7 @@ namespace PCC
         static bool     IsDirectory(const std::wstring& p_Path) noexcept;
 
         static bool     ExtractFolderFromPath(std::wstring& p_rPath);
+        static bool     FollowSymlinkIfRequired(std::wstring& p_rPath);
 
         static bool     IsUNCPath(const std::wstring& p_FilePath) noexcept;
         static bool     GetMappedDriveFilePath(std::wstring& p_rFilePath);

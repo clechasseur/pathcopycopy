@@ -93,6 +93,26 @@ namespace PCC
     }
 
     //
+    // Returns whether to follow symbolic links paths.
+    //
+    // @return Whether to follow symlinks.
+    //
+    bool PipelineOptions::GetFollowSymlinks() const noexcept
+    {
+        return m_FollowSymlinks;
+    }
+
+    //
+    // Sets whether to follow symbolic links paths.
+    //
+    // @param p_FollowSymlinks true to follow symlinks.
+    //
+    void PipelineOptions::SetFollowSymlinks(const bool p_FollowSymlinks) noexcept
+    {
+        m_FollowSymlinks = p_FollowSymlinks;
+    }
+
+    //
     // Constructor with pre-built elements.
     //
     // @param p_vspElements List of elements in the pipeline.

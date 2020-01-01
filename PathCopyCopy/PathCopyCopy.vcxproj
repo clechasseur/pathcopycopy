@@ -439,6 +439,7 @@
     <ClInclude Include="prihdr\StGdiplusStartup.h" />
     <ClInclude Include="prihdr\StGlobalBlock.h" />
     <ClInclude Include="prihdr\StGlobalLock.h" />
+    <ClInclude Include="prihdr\StHandle.h" />
     <ClInclude Include="prihdr\StImage.h" />
     <ClInclude Include="prihdr\StOleStr.h" />
     <ClInclude Include="prihdr\StringUtils.h" />

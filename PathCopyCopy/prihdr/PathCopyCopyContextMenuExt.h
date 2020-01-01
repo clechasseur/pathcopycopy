@@ -153,22 +153,22 @@ private:
     std::wstring        GetParentPath() const;
 
     HRESULT             AddPluginToMenu(const GUID& p_PluginId,
-                                        HMENU const p_hMenu,
-                                        const bool p_UsePCCIcon,
-                                        const bool p_UsePreviewMode,
-                                        const bool p_DropRedundantWords,
-                                        const bool p_ComputeShortcut,
+                                        HMENU p_hMenu,
+                                        bool p_UsePCCIcon,
+                                        bool p_UsePreviewMode,
+                                        bool p_DropRedundantWords,
+                                        bool p_ComputeShortcut,
                                         UINT& p_rCmdId,
                                         UINT& p_rPosition);
     HRESULT             AddPluginToMenu(const PCC::PluginSP& p_spPlugin,
-                                        HMENU const p_hMenu,
-                                        const bool p_UsePCCIcon,
-                                        const bool p_UsePreviewMode,
-                                        const bool p_DropRedundantWords,
-                                        const bool p_ComputeShortcut,
+                                        HMENU p_hMenu,
+                                        bool p_UsePCCIcon,
+                                        bool p_UsePreviewMode,
+                                        bool p_DropRedundantWords,
+                                        bool p_ComputeShortcut,
                                         UINT& p_rCmdId,
                                         UINT& p_rPosition);
-    std::wstring        GetMenuCaptionWithShortcut(HMENU const p_hMenu,
+    std::wstring        GetMenuCaptionWithShortcut(HMENU p_hMenu,
                                                    const std::wstring& p_Caption) const;
 
     HBITMAP             GetPCCIcon();
@@ -177,7 +177,7 @@ private:
     HRESULT             ActOnFiles(const PCC::PluginSP& p_spPlugin,
                                    HWND p_hWnd);
     void                AddQuotes(std::wstring& p_rName,
-                                  const bool p_Optional) const;
+                                  bool p_Optional) const;
 
     void                RemoveFromExtToMenu();
     void                CheckForUpdates();

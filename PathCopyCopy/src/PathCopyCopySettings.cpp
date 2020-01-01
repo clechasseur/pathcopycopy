@@ -67,6 +67,7 @@ namespace
     const wchar_t* const    SETTING_ALWAYS_SHOW_SUBMENU                     = L"AlwaysShowSubmenu";
     const wchar_t* const    SETTING_PATHS_SEPARATOR                         = L"PathsSeparator";
     const wchar_t* const    SETTING_TRUE_LNK_PATHS                          = L"TrueLnkPaths";
+    const wchar_t* const    SETTING_FOLLOW_SYMLINKS                         = L"FollowSymlinks";
     const wchar_t* const    SETTING_CTRL_KEY_PLUGIN                         = L"CtrlKeyPlugin";
     const wchar_t* const    SETTING_MAIN_MENU_PLUGIN_DISPLAY_ORDER          = L"MainMenuDisplayOrder";
     const wchar_t* const    SETTING_SUBMENU_PLUGIN_DISPLAY_ORDER            = L"SubmenuDisplayOrder";
@@ -106,6 +107,7 @@ namespace
     constexpr bool          SETTING_ALWAYS_SHOW_SUBMENU_DEFAULT             = true;
     const wchar_t* const    SETTING_PATHS_SEPARATOR_DEFAULT                 = L"";
     constexpr bool          SETTING_TRUE_LNK_PATHS_DEFAULT                  = false;
+    constexpr bool          SETTING_FOLLOW_SYMLINKS_DEFAULT                 = false;
     constexpr double        SETTING_UPDATE_INTERVAL_DEFAULT                 = 604800.0;     // One week, in seconds.
     constexpr bool          SETTING_DISABLE_SOFTWARE_UPDATE_DEFAULT         = false;
 
@@ -519,6 +521,26 @@ namespace PCC
             trueLnkPaths = regTrueLnkPaths != 0;
         }
         return trueLnkPaths;
+    }
+
+    //
+    // Returns whether we want to follow symbolic links
+    // and copy the paths of their targets instead.
+    //
+    // @return true to follow symbolic links paths.
+    //
+    bool Settings::GetFollowSymlinks() const
+    {
+        // Perform late-revising.
+        Revise();
+
+        // Check if value exists. If so, read it, otherwise use default value.
+        bool followSymlinks = SETTING_FOLLOW_SYMLINKS_DEFAULT;
+        DWORD regFollowSymlinks = 0;
+        if (m_UserKey.QueryDWORDValue(SETTING_FOLLOW_SYMLINKS, regFollowSymlinks) == ERROR_SUCCESS) {
+            followSymlinks = regFollowSymlinks != 0;
+        }
+        return followSymlinks;
     }
 
     //

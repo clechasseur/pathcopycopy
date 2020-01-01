@@ -409,6 +409,9 @@
     <ClInclude Include="prihdr\StWSAStartup.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="prihdr\StHandle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="rsrc\PathCopyCopy.rc">

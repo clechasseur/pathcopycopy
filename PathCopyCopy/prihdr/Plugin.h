@@ -82,6 +82,7 @@ namespace PCC
                                     //
         virtual std::wstring        GetPath(const std::wstring& p_File) const = 0;
         virtual std::wstring        PathsSeparator() const;
+        virtual bool                FollowSymlinks() const noexcept(false);
 
         virtual PathActionSP        Action() const;
 

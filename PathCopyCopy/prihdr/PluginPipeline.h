@@ -48,12 +48,16 @@ namespace PCC
         void            SetExecutable(const std::wstring& p_Executable);
 
         bool            GetUseFilelist() const noexcept;
-        void            SetUseFilelist(const bool p_UseFilelist) noexcept;
+        void            SetUseFilelist(bool p_UseFilelist) noexcept;
+
+        bool            GetFollowSymlinks() const noexcept;
+        void            SetFollowSymlinks(bool p_FollowSymlinks) noexcept;
 
     private:
-        std::wstring    m_PathsSeparator;       // Separator to use between multiple paths.
-        std::wstring    m_Executable;           // Path to executable to start.
-        bool            m_UseFilelist = false;  // Whether to launch executable with filelist instead of paths directly.
+        std::wstring    m_PathsSeparator;           // Separator to use between multiple paths.
+        std::wstring    m_Executable;               // Path to executable to start.
+        bool            m_UseFilelist = false;      // Whether to launch executable with filelist instead of paths directly.
+        bool            m_FollowSymlinks = false;   // Whether to follow symlinks paths.
     };
 
     //
