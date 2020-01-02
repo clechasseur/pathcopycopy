@@ -22,6 +22,7 @@
 #include <stdafx.h>
 #include <PluginPipelineElements.h>
 #include <Plugin.h>
+#include <PluginUtils.h>
 #include <StringUtils.h>
 
 #include <algorithm>
@@ -30,6 +31,19 @@
 
 namespace PCC
 {
+    //
+    // Modifies the given path by following the symlink if it
+    // points to one.
+    //
+    // @param p_rPath Path to modify (in-place).
+    // @param p_pPluginProvider Optional object to access plugins.
+    //
+    void FollowSymlinkPipelineElement::ModifyPath(std::wstring& p_rPath,
+                                                  const PluginProvider* const /*p_pPluginProvider*/) const
+    {
+        PluginUtils::FollowSymlinkIfRequired(p_rPath);
+    }
+
     //
     // Modifies the given path by surrounding it with quotes.
     //

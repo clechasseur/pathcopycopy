@@ -74,7 +74,6 @@ namespace PCC
         bool            GetAlwaysShowSubmenu() const;
         std::wstring    GetPathsSeparator() const;
         bool            GetTrueLnkPaths() const;
-        bool            GetFollowSymlinks() const;
         bool            GetCtrlKeyPlugin(GUID& p_rPluginId) const;
         bool            GetMainMenuPluginDisplayOrder(GUIDV& p_rvPluginIds) const;
         bool            GetSubmenuPluginDisplayOrder(GUIDV& p_rvPluginIds) const;

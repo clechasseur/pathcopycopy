@@ -1045,21 +1045,17 @@ HRESULT CPathCopyCopyContextMenuExt::ActOnFiles(const PCC::PluginSP& p_spPlugin,
                 pathsSeparator = DEFAULT_PATHS_SEPARATOR;
             }
         }
-        const bool followSymlinks = p_spPlugin->FollowSymlinks() || GetSettings().GetFollowSymlinks();
         std::wstring newFiles;
         for (auto it = m_vFiles.cbegin(); it != m_vFiles.cend(); ++it) {
             // Ask plugin to compute filename using its scheme and save it.
-            std::wstring name = *it;
-            if (followSymlinks) {
-                PCC::PluginUtils::FollowSymlinkIfRequired(name);
-            }
+            const std::wstring& oldName = *it;
             if (!newFiles.empty()) {
                 newFiles += pathsSeparator;
             }
             if (makeEmailLinks) {
                 newFiles += L"<";
             }
-            std::wstring newName = p_spPlugin->GetPath(name);
+            std::wstring newName = p_spPlugin->GetPath(oldName);
             StringUtils::EncodeURICharacters(newName, encodeParam);
             if (addQuotes) {
                 AddQuotes(newName, areQuotesOptional);

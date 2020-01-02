@@ -93,18 +93,6 @@ namespace PCC
     }
 
     //
-    // Returns whether this plugin wants to follow symbolic links
-    // and copy the paths of their targets. The default value is false,
-    // which instructs PCC to use the default value from settings.
-    //
-    // @return true to follow symbolic links paths.
-    //
-    bool Plugin::FollowSymlinks() const noexcept(false)
-    {
-        return false;
-    }
-
-    //
     // Returns the action to perform on the path or paths when using this plugin.
     // By default, this returns an action copying the path or paths to the clipboard.
     //

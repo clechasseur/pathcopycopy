@@ -33,6 +33,24 @@
 namespace PCC
 {
     //
+    // FollowSymlinkPipelineElement
+    //
+    // Pipeline element that replaces paths to symlinks with the paths
+    // to their targets.
+    //
+    class FollowSymlinkPipelineElement : public PipelineElement
+    {
+    public:
+                        FollowSymlinkPipelineElement() = default;
+                        FollowSymlinkPipelineElement(const FollowSymlinkPipelineElement&) = delete;
+        FollowSymlinkPipelineElement&
+                        operator=(const FollowSymlinkPipelineElement&) = delete;
+
+        void            ModifyPath(std::wstring& p_rPath,
+                                   const PluginProvider* p_pPluginProvider) const override;
+    };
+
+    //
     // QuotesPipelineElement
     //
     // Pipeline element that adds quotes around the path.

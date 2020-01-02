@@ -31,6 +31,7 @@ namespace
 {
     // Each pipeline element type is represented using a single character
     // in the encoded string. This is a list of all possible values.
+    constexpr wchar_t   ELEMENT_CODE_FOLLOW_SYMLINK             = L'k';
     constexpr wchar_t   ELEMENT_CODE_QUOTES                     = L'"';
     constexpr wchar_t   ELEMENT_CODE_OPTIONAL_QUOTES            = L'q';
     constexpr wchar_t   ELEMENT_CODE_EMAIL_LINKS                = L'<';
@@ -90,6 +91,10 @@ namespace PCC
 
         // Look at the code and create the appropriate element.
         switch (code) {
+            case ELEMENT_CODE_FOLLOW_SYMLINK: {
+                spElement = std::make_shared<FollowSymlinkPipelineElement>();
+                break;
+            }
             case ELEMENT_CODE_QUOTES: {
                 spElement = std::make_shared<QuotesPipelineElement>();
                 break;
