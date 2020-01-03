@@ -1,4 +1,4 @@
-Version ??.? (20??-??-??)
+Version 18.0 (202?-??-??)
 -------------------------
 - Now requires Windows Vista at a minimum [https://github.com/clechasseur/pathcopycopy/issues/83]
 - New option to copy paths of shortcut (.lnk) files themselves [https://github.com/clechasseur/pathcopycopy/issues/7]
