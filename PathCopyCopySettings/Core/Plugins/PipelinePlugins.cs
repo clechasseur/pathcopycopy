@@ -921,6 +921,54 @@ namespace PathCopyCopy.Settings.Core.Plugins
 
 #pragma warning restore CA1303 // Do not pass literals as localized parameters
     }
+
+    public class FollowSymlinkPipelineElement : PipelineElement
+    {
+        /// <summary>
+        /// Code representing this pipeline element type.
+        /// </summary>
+        public const char CODE = 'k';
+
+        /// <summary>
+        /// Code representing this pipeline element type.
+        /// </summary>
+        public override char Code
+        {
+            get {
+                return CODE;
+            }
+        }
+
+        /// <summary>
+        /// Pipeline element display value for the UI.
+        /// </summary>
+        public override string DisplayValue
+        {
+            get {
+                return Resources.PipelineElement_FollowSymlink;
+            }
+        }
+
+        /// <summary>
+        /// Minimum version of Path Copy Copy required to use this pipeline element.
+        /// </summary>
+        public override Version RequiredVersion
+        {
+            get {
+                return new Version(18, 0, 0, 0);
+            }
+        }
+
+        /// <summary>
+        /// Encodes this pipeline element in a string.
+        /// </summary>
+        /// <returns>Encoded element data.</returns>
+        public override string Encode()
+        {
+            // No other data to encode.
+            return string.Empty;
+        }
+    }
     
     /// <summary>
     /// Pipeline element that instructs Path Copy Copy to add quotes around
@@ -1006,7 +1054,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         }
 
         /// <summary>
-        /// Encodes this pipeliine element in a string.
+        /// Encodes this pipeline element in a string.
         /// </summary>
         /// <returns>Encoded element data.</returns>
         public override string Encode()
@@ -1930,6 +1978,10 @@ namespace PathCopyCopy.Settings.Core.Plugins
             }
             char elementCode = encodedElements[curChar++];
             switch (elementCode) {
+                case FollowSymlinkPipelineElement.CODE: {
+                    element = new FollowSymlinkPipelineElement();
+                    break;
+                }
                 case QuotesPipelineElement.CODE: {
                     element = new QuotesPipelineElement();
                     break;

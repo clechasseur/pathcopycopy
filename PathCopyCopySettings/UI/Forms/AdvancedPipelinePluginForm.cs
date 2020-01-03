@@ -160,6 +160,10 @@ namespace PathCopyCopy.Settings.UI.Forms
                 Resources.PipelineElement_Regex_HelpText,
                 () => new RegexPipelineElement());
             AddNewElementMenuItem("-", null, null);
+            AddNewElementMenuItem(Resources.PipelineElement_FollowSymlink,
+                Resources.PipelineElement_FollowSymlink_HelpText,
+                () => new FollowSymlinkPipelineElement());
+            AddNewElementMenuItem("-", null, null);
             AddNewElementMenuItem(Resources.PipelineElement_PathsSeparator,
                 Resources.PipelineElement_PathsSeparator_HelpText,
                 () => new PathsSeparatorPipelineElement(PipelinePluginEditor.PATHS_SEPARATOR_ON_SAME_LINE));

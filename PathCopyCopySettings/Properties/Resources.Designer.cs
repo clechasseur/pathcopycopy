@@ -605,6 +605,24 @@ namespace PathCopyCopy.Settings.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Follow Symbolic Link.
+        /// </summary>
+        internal static string PipelineElement_FollowSymlink {
+            get {
+                return ResourceManager.GetString("PipelineElement_FollowSymlink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Replace the path to a symbolic link with the path to its target.
+        /// </summary>
+        internal static string PipelineElement_FollowSymlink_HelpText {
+            get {
+                return ResourceManager.GetString("PipelineElement_FollowSymlink_HelpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Turn Forward Slashes Into Backslashes.
         /// </summary>
         internal static string PipelineElement_ForwardToBackslashes {

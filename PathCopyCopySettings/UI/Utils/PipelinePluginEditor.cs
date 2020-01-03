@@ -74,10 +74,11 @@ namespace PathCopyCopy.Settings.UI.Utils
                 throw new ArgumentNullException(nameof(pipeline));
             }
 
-            // All elements must be of different types, and pipeline must contain
-            // an ApplyPlugin element.
+            // All elements must be of different types, pipeline must not contain any of
+            // the expert-only types and must contain an ApplyPlugin element.
             return pipeline.Elements.Distinct(new PipelineElementEqualityComparerByClassType()).Count() == pipeline.Elements.Count &&
-                pipeline.Elements.Find(el => el is ApplyPluginPipelineElement) != null;
+                pipeline.Elements.All(el => IsElementSimple(el)) &&
+                pipeline.Elements.Any(el => el is ApplyPluginPipelineElement);
         }
 
         /// <summary>
@@ -133,6 +134,23 @@ namespace PathCopyCopy.Settings.UI.Utils
             }
 
             return info;
+        }
+
+        /// <summary>
+        /// Checks if the given pipeline element can be edited in simply mode.
+        /// Some types of pipeline elements are "expert-only".
+        /// </summary>
+        /// <param name="element">Pipeline element to check.</param>
+        /// <returns><c>true</c> if pipeline element can be edited
+        /// in simple mode.</returns>
+        private static bool IsElementSimple(PipelineElement element)
+        {
+            if (element == null) {
+                throw new ArgumentNullException(nameof(element));
+            }
+
+            // Make sure element is not one of the "expert-only" type.
+            return !(element is FollowSymlinkPipelineElement);
         }
 
         /// <summary>
