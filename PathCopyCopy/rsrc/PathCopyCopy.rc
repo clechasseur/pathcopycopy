@@ -76,7 +76,7 @@ BEGIN
             VALUE "FileDescription", "PathCopyCopy Shell Contextual Menu Extension"
             VALUE "FileVersion", "17.1.1.0"
             VALUE "InternalName", "PathCopyCopy.dll"
-            VALUE "LegalCopyright", "(c) 2008-2019, Charles Lechasseur. See LICENSE.TXT for details."
+            VALUE "LegalCopyright", "(c) 2008-2020, Charles Lechasseur. See LICENSE.TXT for details."
             VALUE "OriginalFilename", "PathCopyCopy.dll"
             VALUE "ProductName", "PathCopyCopy"
             VALUE "ProductVersion", "17.1.1.0"

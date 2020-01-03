@@ -70,7 +70,7 @@ BEGIN
             VALUE "FileDescription", "PathCopyCopy Regular Expression Testing Tool"
             VALUE "FileVersion", "17.1.1.0"
             VALUE "InternalName", "PathCopyCopyRegexTester.exe"
-            VALUE "LegalCopyright", "(c) 2012-2019, Charles Lechasseur. See LICENSE.TXT for details."
+            VALUE "LegalCopyright", "(c) 2012-2020, Charles Lechasseur. See LICENSE.TXT for details."
             VALUE "OriginalFilename", "PathCopyCopyRegexTester.exe"
             VALUE "ProductName", "PathCopyCopy"
             VALUE "ProductVersion", "17.1.1.0"
