@@ -25,7 +25,7 @@
 #include <PathCopyCopy_i.h>
 
 #include <AtlRegKey.h>
-#include <StAtlPerUserOverride.h>
+
 
 namespace {
 
@@ -46,16 +46,16 @@ HINSTANCE g_hInstance = nullptr;
 HRESULT CPathCopyCopyModule::DllRegisterServer(BOOL p_RegisterTypeLib /*= TRUE*/) throw()
 {
     try {
-        // Setup per-user registration if needed.
-        StAtlPerUserOverride perUserOverride;
-        HRESULT hRes = perUserOverride.Succeeded() ? S_OK : E_FAIL;
+        // Check for per-user registration.
+        bool perUserRegistration = false;
+        HRESULT hRes = ATL::AtlGetPerUserRegistration(&perUserRegistration);
         if (SUCCEEDED(hRes)) {
             hRes = ATL::CAtlDllModuleT<CPathCopyCopyModule>::DllRegisterServer(p_RegisterTypeLib);
             if (SUCCEEDED(hRes)) {
                 // Register our shell extensions as "approved". We do this here so that
                 // it can work in per-user installations.
                 AtlRegKey approvedKey;
-                LONG regRes = approvedKey.Open(perUserOverride.Overridden() ? HKEY_CURRENT_USER : HKEY_LOCAL_MACHINE,
+                LONG regRes = approvedKey.Open(perUserRegistration ? HKEY_CURRENT_USER : HKEY_LOCAL_MACHINE,
                                                L"Software\\Microsoft\\Windows\\CurrentVersion\\Extensions\\Approved",
                                                true, KEY_QUERY_VALUE | KEY_SET_VALUE);
                 if (regRes == ERROR_SUCCESS) {
@@ -90,8 +90,8 @@ HRESULT CPathCopyCopyModule::DllUnregisterServer(BOOL p_UnregisterTypeLib /*= TR
 {
     try {
         // Setup per-user unregistration if needed.
-        StAtlPerUserOverride perUserOverride;
-        HRESULT hRes = perUserOverride.Succeeded() ? S_OK : E_FAIL;
+        bool perUserRegistration = false;
+        HRESULT hRes = ATL::AtlGetPerUserRegistration(&perUserRegistration);
         if (SUCCEEDED(hRes)) {
             hRes = ATL::CAtlDllModuleT<CPathCopyCopyModule>::DllUnregisterServer(p_UnregisterTypeLib);
             if (SUCCEEDED(hRes)) {
@@ -99,7 +99,7 @@ HRESULT CPathCopyCopyModule::DllUnregisterServer(BOOL p_UnregisterTypeLib /*= TR
                 // it can work in per-user installations.
                 // Note that if it doesn't exist, we consider it a success.
                 AtlRegKey approvedKey;
-                const LONG regRes = approvedKey.Open(perUserOverride.Overridden() ? HKEY_CURRENT_USER : HKEY_LOCAL_MACHINE,
+                const LONG regRes = approvedKey.Open(perUserRegistration ? HKEY_CURRENT_USER : HKEY_LOCAL_MACHINE,
                                                      L"Software\\Microsoft\\Windows\\CurrentVersion\\Extensions\\Approved",
                                                      false, KEY_QUERY_VALUE | KEY_SET_VALUE);
                 if (regRes != ERROR_SUCCESS && regRes != ERROR_FILE_NOT_FOUND) {
