@@ -1,6 +1,7 @@
 Version 18.0 (202?-??-??)
 -------------------------
 - Now requires Windows Vista at a minimum [https://github.com/clechasseur/pathcopycopy/issues/83]
+- Installer now offers to install for all users or for current user only [https://github.com/clechasseur/pathcopycopy/issues/79]
 - New option to copy paths of shortcut (.lnk) files themselves [https://github.com/clechasseur/pathcopycopy/issues/7]
 - New custom command element to follow symbolic links [https://github.com/clechasseur/pathcopycopy/issues/99]
 
