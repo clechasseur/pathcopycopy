@@ -153,6 +153,7 @@ const
 var
   GCommandsPage: TInputOptionWizardPage;
   GIsUpgrade: Boolean;
+  GSkipCommandsPage: Boolean;
   GLastUserPageID: Integer;
   
 // This function will remove one layer of quotes around the given string, if any.
@@ -302,34 +303,37 @@ procedure ConfigureDefaultSettings(const ARegKeyPath: string);
 var
   DisplayOrder: string;
 begin
-  // Here we need to build the list of plugins to display in the submenu in
-  // display order. If we do not set anything, all plugins will be used.
-  if not GCommandsPage.Values[CAllCommandsChoice] then
+  if not GSkipCommandsPage then
   begin
-    // Add all common commands.
-    DisplayOrder := '{3a42b5c6-72d6-4a8a-ba44-014fa64aa11a},' + // Long Name
-      '{afa4d1e1-ba73-4330-a6ab-e574ff39ecc3},' +               // -
-      '{331a3b60-af49-44f4-b30d-56adff6d25e8},' +               // Long Path
-      '{afa4d1e1-ba73-4330-a6ab-e574ff39ecc3},' +               // -
-      '{349939d7-780f-43fd-a98e-83d9add44e22}';                 // Long Parent
-    if GCommandsPage.Values[CNetworkCommandsChoice] then
+    // Here we need to build the list of plugins to display in the submenu in
+    // display order. If we do not set anything, all plugins will be used.
+    if not GCommandsPage.Values[CAllCommandsChoice] then
     begin
-      // Add network commands after the common ones.
-      DisplayOrder := DisplayOrder + ',' +
-        '{afa4d1e1-ba73-4330-a6ab-e574ff39ecc3},' +             // -
-        '{ea24bcc3-35f5-46b9-a2a5-a12a0aed2d28},' +             // Long UNC
-        '{afa4d1e1-ba73-4330-a6ab-e574ff39ecc3},' +             // -
-        '{e2c942ac-917c-4aee-a867-8f6ab960ba76},' +             // Long Parent UNC
-        '{afa4d1e1-ba73-4330-a6ab-e574ff39ecc3},' +             // -
-        '{8f2adccc-9693-407d-9300-fccb9a12b982},' +             // Internet
-        '{7da6a4a2-ae54-40e0-9910-ebd9ef3f017e}';               // Samba
+      // Add all common commands.
+      DisplayOrder := '{3a42b5c6-72d6-4a8a-ba44-014fa64aa11a},' + // Long Name
+        '{afa4d1e1-ba73-4330-a6ab-e574ff39ecc3},' +               // -
+        '{331a3b60-af49-44f4-b30d-56adff6d25e8},' +               // Long Path
+        '{afa4d1e1-ba73-4330-a6ab-e574ff39ecc3},' +               // -
+        '{349939d7-780f-43fd-a98e-83d9add44e22}';                 // Long Parent
+      if GCommandsPage.Values[CNetworkCommandsChoice] then
+      begin
+        // Add network commands after the common ones.
+        DisplayOrder := DisplayOrder + ',' +
+          '{afa4d1e1-ba73-4330-a6ab-e574ff39ecc3},' +             // -
+          '{ea24bcc3-35f5-46b9-a2a5-a12a0aed2d28},' +             // Long UNC
+          '{afa4d1e1-ba73-4330-a6ab-e574ff39ecc3},' +             // -
+          '{e2c942ac-917c-4aee-a867-8f6ab960ba76},' +             // Long Parent UNC
+          '{afa4d1e1-ba73-4330-a6ab-e574ff39ecc3},' +             // -
+          '{8f2adccc-9693-407d-9300-fccb9a12b982},' +             // Internet
+          '{7da6a4a2-ae54-40e0-9910-ebd9ef3f017e}';               // Samba
+      end;
+      RegWriteStringValue(HKEY_AUTO, ARegKeyPath, 'SubmenuDisplayOrder', DisplayOrder);
+        
+      // If we set the submenu display order, we also need to specify known
+      // plugins. Otherwise, if pipeline plugins are added later through
+      // command-line arguments, they won't be displayed by default.
+      RegWriteStringValue(HKEY_AUTO, ARegKeyPath, 'KnownPlugins', CKnownPlugins);
     end;
-    RegWriteStringValue(HKEY_AUTO, ARegKeyPath, 'SubmenuDisplayOrder', DisplayOrder);
-      
-    // If we set the submenu display order, we also need to specify known
-    // plugins. Otherwise, if pipeline plugins are added later through
-    // command-line arguments, they won't be displayed by default.
-    RegWriteStringValue(HKEY_AUTO, ARegKeyPath, 'KnownPlugins', CKnownPlugins);
   end;
     
   // The setting "Drop redundant words" makes a lot of sense, but we can't
@@ -346,6 +350,11 @@ begin
   // Check if this is an upgrade by checking the main DLL's AppID registry
   // entry. (We could also check the installer's AppID in the Uninstall key.)
   GIsUpgrade := RegKeyExists(HKEY_AUTO, 'Software\Classes\AppID\{44F7E5A2-1286-45F5-9A7A-A95A41B72918}');
+  
+  // Check if we must skip the commands page. We skip it for upgrades, or for
+  // non-administrative installs which already have a value for submenu display order.
+  GSkipCommandsPage := GIsUpgrade or ((not IsAdminInstallMode) and
+    RegValueExists(HKEY_AUTO, 'Software\clechasseur\PathCopyCopy', 'SubmenuDisplayOrder'));
     
   // Return True so that setup can proceed.
   Result := True;
@@ -369,8 +378,10 @@ begin
   
   // Compute the ID of the last page the user is going to see before installation.
   // Since Ready page is disabled, it depends on what pages will be visible.
-  if not GIsUpgrade then
+  if not GSkipCommandsPage then
     GLastUserPageID := GCommandsPage.ID
+  else if not GIsUpgrade then
+    GLastUserPageID := wpSelectDir
   else
     GLastUserPageID := wpLicense;
     
@@ -384,12 +395,12 @@ end;
 // Called for each wizard page. Returning True will skip that page.
 function ShouldSkipPage(PageID: Integer): Boolean;
 begin
-  // Skip our "commands" page if this is an upgrade.
-  // We do this to avoid overwriting existing settings and
-  // since it's difficult to parse the "SubmenuDisplayOrder"
-  // registry value, which can be modified by other means.
+  // Skip our "commands" page if we determined we already have commands.
+  // We do this to avoid overwriting existing settings and since it's
+  // difficult to parse the "SubmenuDisplayOrder" registry value, which
+  // can be modified by other means.
   if PageID = GCommandsPage.ID then
-    Result := GIsUpgrade
+    Result := GSkipCommandsPage
   else
     Result := False;
 end;
