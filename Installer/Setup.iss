@@ -105,12 +105,12 @@ Root: HKLM64; Subkey: Software\clechasseur\PathCopyCopy; Flags: uninsdeletekeyif
 ; A typo made previous versions of the DLL register approved extensions in the wrong key.
 Root: HKCR; Subkey: Software\Microsoft\Windows\CurrentVersion\Extensions\Approved; ValueName: {{82CB99A2-2F18-4D5D-9476-54347E3B6720}; Flags: deletevalue; Check: IsAdminInstallMode
 Root: HKCR; Subkey: Software\Microsoft\Windows\CurrentVersion\Extensions\Approved; ValueName: {{16170CA5-25CA-4e6d-928C-7A3A974F4B56}; Flags: deletevalue; Check: IsAdminInstallMode
-Root: HKCR; Subkey: Software\Microsoft\Windows\CurrentVersion\Extensions\Approved; Flags: uninsdeletekeyifempty; Check: IsAdminInstallMode
-Root: HKCR; Subkey: Software\Microsoft\Windows\CurrentVersion\Extensions; Flags: uninsdeletekeyifempty; Check: IsAdminInstallMode
-Root: HKCR; Subkey: Software\Microsoft\Windows\CurrentVersion; Flags: uninsdeletekeyifempty; Check: IsAdminInstallMode
-Root: HKCR; Subkey: Software\Microsoft\Windows; Flags: uninsdeletekeyifempty; Check: IsAdminInstallMode
-Root: HKCR; Subkey: Software\Microsoft; Flags: uninsdeletekeyifempty; Check: IsAdminInstallMode
-Root: HKCR; Subkey: Software; Flags: uninsdeletekeyifempty; Check: IsAdminInstallMode
+Root: HKCR; Subkey: Software\Microsoft\Windows\CurrentVersion\Extensions\Approved; Flags: dontcreatekey uninsdeletekeyifempty; Check: IsAdminInstallMode
+Root: HKCR; Subkey: Software\Microsoft\Windows\CurrentVersion\Extensions; Flags: dontcreatekey uninsdeletekeyifempty; Check: IsAdminInstallMode
+Root: HKCR; Subkey: Software\Microsoft\Windows\CurrentVersion; Flags: dontcreatekey uninsdeletekeyifempty; Check: IsAdminInstallMode
+Root: HKCR; Subkey: Software\Microsoft\Windows; Flags: dontcreatekey uninsdeletekeyifempty; Check: IsAdminInstallMode
+Root: HKCR; Subkey: Software\Microsoft; Flags: dontcreatekey uninsdeletekeyifempty; Check: IsAdminInstallMode
+Root: HKCR; Subkey: Software; Flags: dontcreatekey uninsdeletekeyifempty; Check: IsAdminInstallMode
 
 [InstallDelete]
 Type: files; Name: {group}\Settings.lnk
