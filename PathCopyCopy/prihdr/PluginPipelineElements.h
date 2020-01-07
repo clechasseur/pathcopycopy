@@ -252,6 +252,18 @@ namespace PCC
         void            InitRegex() const;
     };
 
+    class UnexpandEnvironmentStringsPipelineElement : public PipelineElement
+    {
+    public:
+                        UnexpandEnvironmentStringsPipelineElement() = default;
+                        UnexpandEnvironmentStringsPipelineElement(const UnexpandEnvironmentStringsPipelineElement&) = delete;
+        UnexpandEnvironmentStringsPipelineElement&
+                        operator=(const UnexpandEnvironmentStringsPipelineElement&) = delete;
+
+        void            ModifyPath(std::wstring& p_rPath,
+                                   const PluginProvider* p_pPluginProvider) const override;
+    };
+
     //
     // ApplyPluginPipelineElement
     //

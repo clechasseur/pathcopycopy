@@ -264,6 +264,23 @@ namespace PCC
     }
 
     //
+    // Modifies the given path by replacing certain parts of the
+    // path by environment variable references. See
+    // https://docs.microsoft.com/en-us/windows/win32/api/shlwapi/nf-shlwapi-pathunexpandenvstringsw
+    //
+    // @param p_rPath Path to modify (in-place).
+    // @param p_pPluginProvider Optional object to access plugins.
+    //
+    void UnexpandEnvironmentStringsPipelineElement::ModifyPath(std::wstring& p_rPath,
+                                                               const PluginProvider* const /*p_pPluginProvider*/) const
+    {
+        std::wstring unexpandedPath(MAX_PATH + 1, L'\0');
+        if (::PathUnExpandEnvStringsW(p_rPath.c_str(), &*unexpandedPath.begin(), MAX_PATH + 1)) {
+            p_rPath = unexpandedPath.c_str();
+        }
+    }
+
+    //
     // Constructor.
     //
     // @param p_PluginId ID of plugin to apply.

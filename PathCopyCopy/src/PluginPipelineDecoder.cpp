@@ -42,6 +42,7 @@ namespace
     constexpr wchar_t   ELEMENT_CODE_REMOVE_EXT                 = L'.';
     constexpr wchar_t   ELEMENT_CODE_FIND_REPLACE               = L'?';
     constexpr wchar_t   ELEMENT_CODE_REGEX                      = L'^';
+    constexpr wchar_t   ELEMENT_CODE_UNEXPAND_ENV_STRINGS       = L'e';
     constexpr wchar_t   ELEMENT_CODE_APPLY_PLUGIN               = L'{';
     constexpr wchar_t   ELEMENT_CODE_PATHS_SEPARATOR            = L',';
     constexpr wchar_t   ELEMENT_CODE_EXECUTABLE                 = L'x';
@@ -133,6 +134,10 @@ namespace PCC
             }
             case ELEMENT_CODE_REGEX: {
                 spElement = DecodeRegexElement(p_rStream);
+                break;
+            }
+            case ELEMENT_CODE_UNEXPAND_ENV_STRINGS: {
+                spElement = std::make_shared<UnexpandEnvironmentStringsPipelineElement>();
                 break;
             }
             case ELEMENT_CODE_APPLY_PLUGIN: {
