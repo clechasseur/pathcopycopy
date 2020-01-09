@@ -171,6 +171,9 @@ namespace PathCopyCopy.Settings.UI.Forms
                         ReplaceTxt.Text = ((FindReplacePipelineElement) element).NewValue;
                     }
                 }
+                if (oldPipeline.Elements.Find(el => el is UnexpandEnvironmentStringsPipelineElement) != null) {
+                    UnexpandEnvStringsChk.Checked = true;
+                }
 
                 // "Copy on same line" is a little special since it could be any string.
                 element = oldPipeline.Elements.Find(el => el is PathsSeparatorPipelineElement);
@@ -256,6 +259,9 @@ namespace PathCopyCopy.Settings.UI.Forms
             if (BasePluginLst.SelectedIndex != -1) {
                 pipeline.Elements.Add(new ApplyPluginPipelineElement(
                     ((Plugin) BasePluginLst.SelectedItem).Id));
+            }
+            if (UnexpandEnvStringsChk.Checked) {
+                pipeline.Elements.Add(new UnexpandEnvironmentStringsPipelineElement());
             }
             if (FindTxt.Text.Length > 0) {
                 if (UseRegexChk.Checked) {

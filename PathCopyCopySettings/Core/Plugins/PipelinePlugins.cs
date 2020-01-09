@@ -1578,6 +1578,54 @@ namespace PathCopyCopy.Settings.Core.Plugins
             return new RegexPipelineElementUserControl(this);
         }
     }
+
+    public class UnexpandEnvironmentStringsPipelineElement : PipelineElement
+    {
+        /// <summary>
+        /// Code representing this pipeline element type.
+        /// </summary>
+        public const char CODE = 'e';
+
+        /// <summary>
+        /// Code representing this pipeline element type.
+        /// </summary>
+        public override char Code
+        {
+            get {
+                return CODE;
+            }
+        }
+
+        /// <summary>
+        /// Pipeline element display value for the UI.
+        /// </summary>
+        public override string DisplayValue
+        {
+            get {
+                return Resources.PipelineElement_UnexpandEnvStrings;
+            }
+        }
+
+        /// <summary>
+        /// Minumum version of Path Copy Copy required to use this pipeline element.
+        /// </summary>
+        public override Version RequiredVersion
+        {
+            get {
+                return new Version(18, 0, 0, 0);
+            }
+        }
+        
+        /// <summary>
+        /// Encodes this pipeline element in a string.
+        /// </summary>
+        /// <returns>Encoded element data.</returns>
+        public override string Encode()
+        {
+            // No other data to encode.
+            return string.Empty;
+        }
+    }
     
     /// <summary>
     /// Pipeline element that applies the effect of another plugin on the path.
@@ -2020,6 +2068,10 @@ namespace PathCopyCopy.Settings.Core.Plugins
                 }
                 case RegexPipelineElement.CODE: {
                     element = DecodeRegexPipelineElement(encodedElements, ref curChar);
+                    break;
+                }
+                case UnexpandEnvironmentStringsPipelineElement.CODE: {
+                    element = new UnexpandEnvironmentStringsPipelineElement();
                     break;
                 }
                 case ApplyPluginPipelineElement.CODE: {

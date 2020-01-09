@@ -731,6 +731,24 @@ namespace PathCopyCopy.Settings.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unexpand Environment Strings.
+        /// </summary>
+        internal static string PipelineElement_UnexpandEnvStrings {
+            get {
+                return ResourceManager.GetString("PipelineElement_UnexpandEnvStrings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Replaces parts of the path with environment variable references, if possible (like %USERPROFILE%, etc.).
+        /// </summary>
+        internal static string PipelineElement_UnexpandEnvStrings_HelpText {
+            get {
+                return ResourceManager.GetString("PipelineElement_UnexpandEnvStrings_HelpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please enter a name for the custom command..
         /// </summary>
         internal static string PipelinePluginForm_EmptyName {

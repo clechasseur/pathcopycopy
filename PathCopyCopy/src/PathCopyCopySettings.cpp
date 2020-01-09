@@ -49,6 +49,7 @@ namespace
     const wchar_t* const    PCC_PLUGINS_KEY                                 = L"Software\\clechasseur\\PathCopyCopy\\Plugins";
     const wchar_t* const    PCC_PIPELINE_PLUGINS_KEY                        = L"Software\\clechasseur\\PathCopyCopy\\PipelinePlugins";
     const wchar_t* const    PCC_TEMP_PIPELINE_PLUGINS_KEY                   = L"Software\\clechasseur\\PathCopyCopy\\TempPipelinePlugins";
+    const wchar_t* const    PCC_FORMS_KEY                                   = L"Software\\clechasseur\\PathCopyCopy\\Forms";
 
     // Values used for PCC settings.
     const wchar_t* const    SETTING_REVISIONS                               = L"Revisions";
@@ -119,6 +120,10 @@ namespace
 
     // Constants used for icons.
     const wchar_t* const    DEFAULT_ICON_MARKER_STRING                      = L"default";
+
+    // Name of possible subkeys of the forms key.
+    const wchar_t* const    FORMS_SUBKEY_PIPELINE_PLUGIN_FORM               = L"PathCopyCopy.Settings.UI.Forms.PipelinePluginForm";
+
 
     //
     // Predicate used to sort pipeline plugins according to their sort order.
@@ -199,6 +204,7 @@ namespace PCC
           m_IconsKey(PCC_ICONS_KEY),
           m_PipelinePluginsKey(PCC_PIPELINE_PLUGINS_KEY),
           m_TempPipelinePluginsKey(PCC_TEMP_PIPELINE_PLUGINS_KEY),
+          m_UserFormsKey(HKEY_CURRENT_USER, PCC_FORMS_KEY, true),
           m_UserPluginsKey(),
           m_GlobalPluginsKey(),
           m_GlobalPluginsKeyReadOnly(false),
@@ -879,7 +885,7 @@ namespace PCC
         if (globalUserKey.Valid()) {
             // We got the global key, apply all revisions.
             RegCOMPluginProvider comPluginProvider(globalPluginsKey);
-            Reviser::ApplyRevisions(globalUserKey, globalPipelinePluginsKey, comPluginProvider);
+            Reviser::ApplyRevisions(globalUserKey, nullptr, globalPipelinePluginsKey, comPluginProvider);
         }
     }
 
@@ -891,7 +897,7 @@ namespace PCC
     {
         if (!m_Revised) {
             m_Revised = true;
-            Reviser::ApplyRevisions(m_UserKey, m_PipelinePluginsKey, *this);
+            Reviser::ApplyRevisions(m_UserKey, &m_UserFormsKey, m_PipelinePluginsKey, *this);
         }
     }
 
@@ -1055,10 +1061,12 @@ namespace PCC
     // CreateRevisionFuncMap to ensure the data is updated before settings are accessed.
     //
     // @param p_rUserKey Config registry key containing user settings.
+    // @param p_pFormsKey Config registry key containing forms position/size. Optional.
     // @param p_rPluginsKey p_rPipelinePluginsKey Config registry key containing pipeline plugins.
     // @param p_COMPluginProvider Object to access COM plugins.
     //
     void Settings::Reviser::ApplyRevisions(RegKey& p_rUserKey,
+                                           RegKey* const p_pFormsKey,
                                            RegKey& p_rPipelinePluginsKey,
                                            const COMPluginProvider& p_COMPluginProvider)
     {
@@ -1081,7 +1089,7 @@ namespace PCC
 #endif // _DEBUG
 
         // Create bean to store revise info.
-        const ReviseInfo reviseInfo(p_rUserKey, p_rPipelinePluginsKey, p_COMPluginProvider);
+        const ReviseInfo reviseInfo(p_rUserKey, p_pFormsKey, p_rPipelinePluginsKey, p_COMPluginProvider);
 
         // Get map of revise functions.
         RevisionFuncM mRevisions = CreateRevisionFuncMap();
@@ -1131,6 +1139,7 @@ namespace PCC
         mRevisions.emplace(201601053ul, &ApplyInitialSubmenuPluginDisplayOrder201601053);
         mRevisions.emplace(201601054ul, &ApplyInitialKnownPlugins201601054);
         mRevisions.emplace(201707061ul, &ApplyInitialUIPluginDisplayOrder201707061);
+        mRevisions.emplace(202001091ul, &ApplyNewPipelinePluginForm202001091);
 
         // Add any new revisions here.
         
@@ -1366,16 +1375,42 @@ namespace PCC
     }
 
     //
+    // Revises the config by clearing any saved position/size info for pipeline plugin form,
+    // because that form changed in a major way in version 18.0.
+    //
+    // @param p_ReviseInfo Bean containing objects to perform revision.
+    //
+    void Settings::Reviser::ApplyNewPipelinePluginForm202001091(const ReviseInfo& p_ReviseInfo)
+    {
+        if (p_ReviseInfo.m_pFormsKey != nullptr) {
+            RegKey::SubkeyInfoV vSubkeyInfos;
+            p_ReviseInfo.m_pFormsKey->GetSubKeys(vSubkeyInfos);
+            const auto isPipelinePluginsFormSubkey = [](const auto& subkeyInfo) {
+                return subkeyInfo.m_KeyName == FORMS_SUBKEY_PIPELINE_PLUGIN_FORM;
+            };
+            const auto itProperSubkeyInfo = std::find_if(vSubkeyInfos.cbegin(),
+                                                         vSubkeyInfos.cend(),
+                                                         isPipelinePluginsFormSubkey);
+            if (itProperSubkeyInfo != vSubkeyInfos.cend()) {
+                ::RegDeleteKeyW(itProperSubkeyInfo->m_hParent, itProperSubkeyInfo->m_KeyName.c_str());
+            }
+        }
+    }
+
+    //
     // Constructor.
     //
     // @param p_rUserKey Config registry key containing user settings.
+    // @param p_pFormsKey Config registry key containing forms position/size. Optional.
     // @param p_rPluginsKey p_rPipelinePluginsKey Config registry key containing pipeline plugins.
     // @param p_COMPluginProvider Object to access COM plugins.
     //
     Settings::Reviser::ReviseInfo::ReviseInfo(RegKey& p_rUserKey,
+                                              RegKey* const p_pFormsKey,
                                               RegKey& p_rPipelinePluginsKey,
                                               const COMPluginProvider& p_COMPluginProvider) noexcept
         : m_rUserKey(p_rUserKey),
+          m_pFormsKey(p_pFormsKey),
           m_rPipelinePluginsKey(p_rPipelinePluginsKey),
           m_COMPluginProvider(p_COMPluginProvider)
     {

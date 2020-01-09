@@ -429,4 +429,10 @@ Control-click to avoid displaying an icon for this command.</value>
   <data name="PipelineElement_FollowSymlink_HelpText" xml:space="preserve">
     <value>Replace the path to a symbolic link with the path to its target</value>
   </data>
+  <data name="PipelineElement_UnexpandEnvStrings" xml:space="preserve">
+    <value>Unexpand Environment Strings</value>
+  </data>
+  <data name="PipelineElement_UnexpandEnvStrings_HelpText" xml:space="preserve">
+    <value>Replaces parts of the path with environment variable references, if possible (like %USERPROFILE%, etc.)</value>
+  </data>
 </root>

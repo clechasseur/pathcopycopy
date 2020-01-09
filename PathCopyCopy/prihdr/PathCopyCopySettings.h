@@ -108,6 +108,8 @@ namespace PCC
                         m_PipelinePluginsKey;       // PCC user pipeline plugins registry key.
         UserOverrideableRegKey
                         m_TempPipelinePluginsKey;   // PCC user temporary pipeline plugins registry key.
+        mutable AtlRegKey
+                        m_UserFormsKey;             // PCC user forms registry key.
         AtlRegKey       m_UserPluginsKey;           // PCC user plugins registry key.
         AtlRegKey       m_GlobalPluginsKey;         // PCC global plugins registry key.
         bool            m_GlobalPluginsKeyReadOnly; // Whether the global plugins key is read-only.
@@ -131,18 +133,21 @@ namespace PCC
                         ~Reviser() = delete;
 
             static void ApplyRevisions(RegKey& p_rUserKey,
+                                       RegKey* p_pFormsKey,
                                        RegKey& p_rPipelinePluginsKey,
                                        const COMPluginProvider& p_COMPluginProvider);
 
         private:
             // Struct storing info passed to the revise functions.
             struct ReviseInfo {
-                RegKey& m_rUserKey;                // Reference to registry key storing user settings.
-                RegKey& m_rPipelinePluginsKey;     // Reference to registry key storing pipeline plugins.
+                RegKey& m_rUserKey;                 // Reference to registry key storing user settings.
+                RegKey* m_pFormsKey;                // Optional reference to registry key storing forms position/size.
+                RegKey& m_rPipelinePluginsKey;      // Reference to registry key storing pipeline plugins.
                 const COMPluginProvider&
                         m_COMPluginProvider;        // Reference to object to access COM plugins.
 
                         ReviseInfo(RegKey& p_rUserKey,
+                                   RegKey* p_pFormsKey,
                                    RegKey& p_rPipelinePluginsKey,
                                    const COMPluginProvider& p_COMPluginProvider) noexcept;
                         ReviseInfo(const ReviseInfo&) = delete;
@@ -164,7 +169,7 @@ namespace PCC
             static void ApplyInitialSubmenuPluginDisplayOrder201601053(const ReviseInfo& p_ReviseInfo);
             static void ApplyInitialKnownPlugins201601054(const ReviseInfo& p_ReviseInfo);
             static void ApplyInitialUIPluginDisplayOrder201707061(const ReviseInfo& p_ReviseInfo);
-
+            static void ApplyNewPipelinePluginForm202001091(const ReviseInfo& p_ReviseInfo);
         };
 
         // Implementation of ICOMPluginProvider that uses a specific registry key.

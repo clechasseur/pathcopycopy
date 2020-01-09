@@ -159,6 +159,9 @@ namespace PathCopyCopy.Settings.UI.Forms
             AddNewElementMenuItem(Resources.PipelineElement_Regex,
                 Resources.PipelineElement_Regex_HelpText,
                 () => new RegexPipelineElement());
+            AddNewElementMenuItem(Resources.PipelineElement_UnexpandEnvStrings,
+                Resources.PipelineElement_UnexpandEnvStrings_HelpText,
+                () => new UnexpandEnvironmentStringsPipelineElement());
             AddNewElementMenuItem("-", null, null);
             AddNewElementMenuItem(Resources.PipelineElement_FollowSymlink,
                 Resources.PipelineElement_FollowSymlink_HelpText,
@@ -349,7 +352,7 @@ namespace PathCopyCopy.Settings.UI.Forms
         private void NewElementMenuItem_Click(object sender, EventArgs e)
         {
             // A function to create the new element is stored in the item's Tag.
-            if (((ToolStripMenuItem)sender).Tag is Func<PipelineElement> creator) {
+            if (((ToolStripMenuItem) sender).Tag is Func<PipelineElement> creator) {
                 // Instanciate element and add it to the end of the pipeline.
                 elements.Add(creator());
 
