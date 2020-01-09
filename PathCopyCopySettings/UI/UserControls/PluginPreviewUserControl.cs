@@ -46,7 +46,7 @@ namespace PathCopyCopy.Settings.UI.UserControls
                 return plugin;
             }
             set {
-                if (plugin != value) {
+                if (!object.ReferenceEquals(plugin, value)) {
                     plugin = value;
                     UpdatePreview();
                 }
