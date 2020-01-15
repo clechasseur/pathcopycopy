@@ -252,6 +252,12 @@ namespace PCC
         void            InitRegex() const;
     };
 
+    //
+    // UnexpandEnvironmentStringsPipelineElement
+    //
+    // Pipeline element that replaces certain parts of the path
+    // by environment variable references.
+    //
     class UnexpandEnvironmentStringsPipelineElement : public PipelineElement
     {
     public:
