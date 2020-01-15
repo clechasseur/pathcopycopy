@@ -66,7 +66,11 @@ namespace PCC
             const std::wstring          m_Description;      // Plugin description.
             const std::wstring          m_IconFile;         // Plugin icon file.
             const bool                  m_UseDefaultIcon;   // Whether to use default icon for plugin.
-            PipelineSP                  m_spPipeline;       // Pipeline to execute on each path received.
+            const std::wstring          m_EncodedElements;  // Pipeline encoded elements.
+            mutable PipelineSP          m_spPipeline;       // Pipeline to execute on each path received.
+            mutable bool                m_PipelineCreated;  // Whether m_spPipeline has been created.
+
+            const Pipeline*             GetPipeline() const;
         };
 
     } // namespace Plugins

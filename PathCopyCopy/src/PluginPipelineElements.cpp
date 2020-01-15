@@ -339,6 +339,16 @@ namespace PCC
     //
     // Constructor.
     //
+    // @param p_PluginId ID of pipeline plugin to apply.
+    //
+    ApplyPipelinePluginPipelineElement::ApplyPipelinePluginPipelineElement(const GUID& p_PluginId) noexcept
+        : ApplyPluginPipelineElement(p_PluginId)
+    {
+    }
+
+    //
+    // Constructor.
+    //
     // @param p_PathsSeparator Separator to use between multiple paths.
     //
     PathsSeparatorPipelineElement::PathsSeparatorPipelineElement(const std::wstring& p_PathsSeparator)

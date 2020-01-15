@@ -44,6 +44,7 @@ namespace
     constexpr wchar_t   ELEMENT_CODE_REGEX                      = L'^';
     constexpr wchar_t   ELEMENT_CODE_UNEXPAND_ENV_STRINGS       = L'e';
     constexpr wchar_t   ELEMENT_CODE_APPLY_PLUGIN               = L'{';
+    constexpr wchar_t   ELEMENT_CODE_APPLY_PIPELINE_PLUGIN      = L'}';
     constexpr wchar_t   ELEMENT_CODE_PATHS_SEPARATOR            = L',';
     constexpr wchar_t   ELEMENT_CODE_EXECUTABLE                 = L'x';
     constexpr wchar_t   ELEMENT_CODE_EXECUTABLE_WITH_FILELIST   = L'f';
@@ -140,8 +141,9 @@ namespace PCC
                 spElement = std::make_shared<UnexpandEnvironmentStringsPipelineElement>();
                 break;
             }
-            case ELEMENT_CODE_APPLY_PLUGIN: {
-                spElement = DecodeApplyPluginElement(p_rStream);
+            case ELEMENT_CODE_APPLY_PLUGIN:
+            case ELEMENT_CODE_APPLY_PIPELINE_PLUGIN: {
+                spElement = DecodeApplyPluginElement(code, p_rStream);
                 break;
             }
             case ELEMENT_CODE_PATHS_SEPARATOR: {
@@ -207,12 +209,15 @@ namespace PCC
     }
 
     //
-    // Decodes an ApplyPluginPipelineElement found in an encoded stream.
+    // Decodes an ApplyPluginPipelineElement or ApplyPipelinePluginPipelineElement
+    // found in an encoded stream.
     //
+    // @param p_Code Element code.
     // @param p_rStream Stream containing encoded element.
     // @return Newly-created element.
     //
-    auto PipelineDecoder::DecodeApplyPluginElement(PipelineDecoder::EncodedElementsStream& p_rStream) -> PipelineElementSP
+    auto PipelineDecoder::DecodeApplyPluginElement(const wchar_t p_Code,
+                                                   PipelineDecoder::EncodedElementsStream& p_rStream) -> PipelineElementSP
     {
         // The element data is a string representation of the GUID of the plugin to apply.
         // A guid has the following format: {1B4B1405-84CF-48CC-B373-42FAD7744258}
@@ -227,7 +232,13 @@ namespace PCC
         }
 
         // We have the plugin GUID, return it.
-        return std::make_shared<ApplyPluginPipelineElement>(pluginGuid);
+        if (p_Code == ELEMENT_CODE_APPLY_PLUGIN) {
+            return std::make_shared<ApplyPluginPipelineElement>(pluginGuid);
+        } else if (p_Code == ELEMENT_CODE_APPLY_PIPELINE_PLUGIN) {
+            return std::make_shared<ApplyPipelinePluginPipelineElement>(pluginGuid);
+        } else {
+            throw InvalidPipelineException(p_rStream.GetEncodedElements());
+        }
     }
 
     //

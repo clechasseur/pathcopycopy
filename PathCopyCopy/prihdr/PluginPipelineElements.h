@@ -295,6 +295,21 @@ namespace PCC
     };
 
     //
+    // ApplyPipelinePluginPipelineElement
+    //
+    // Subclass of ApplyPluginPipelineElement that allows use
+    // of other pipeline plugins to modify the path.
+    //
+    class ApplyPipelinePluginPipelineElement : public ApplyPluginPipelineElement
+    {
+    public:
+        explicit        ApplyPipelinePluginPipelineElement(const GUID& p_PluginId) noexcept;
+                        ApplyPipelinePluginPipelineElement(const ApplyPipelinePluginPipelineElement&) = delete;
+        ApplyPipelinePluginPipelineElement&
+                        operator=(const ApplyPipelinePluginPipelineElement&) = delete;
+    };
+
+    //
     // PathsSeparatorPipelineElement
     //
     // Pipeline element that does not modify the path but changes the

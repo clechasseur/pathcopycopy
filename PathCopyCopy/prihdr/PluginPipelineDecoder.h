@@ -75,7 +75,8 @@ namespace PCC
 
         static auto     DecodeFindReplaceElement(EncodedElementsStream& p_rStream) -> PipelineElementSP;
         static auto     DecodeRegexElement(EncodedElementsStream& p_rStream) -> PipelineElementSP;
-        static auto     DecodeApplyPluginElement(EncodedElementsStream& p_rStream) -> PipelineElementSP;
+        static auto     DecodeApplyPluginElement(wchar_t p_Code,
+                                                 EncodedElementsStream& p_rStream) -> PipelineElementSP;
         static auto     DecodePathsSeparatorElement(EncodedElementsStream& p_rStream) -> PipelineElementSP;
         static auto     DecodeExecutableElement(wchar_t p_Code,
                                                 EncodedElementsStream& p_rStream) -> PipelineElementSP;

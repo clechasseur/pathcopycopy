@@ -51,15 +51,10 @@ namespace PCC
               m_Description(p_PluginDescription),
               m_IconFile(p_PluginIconFile),
               m_UseDefaultIcon(p_UseDefaultIcon),
-              m_spPipeline()
+              m_EncodedElements(p_EncodedElements),
+              m_spPipeline(),
+              m_PipelineCreated(false)
         {
-            // Try decoding the encoded pipeline. If that fails, we'll
-            // keep the plugin alive but it will be disabled.
-            try {
-                m_spPipeline = std::make_shared<Pipeline>(p_EncodedElements);
-            } catch (const InvalidPipelineException&) {
-                assert(m_spPipeline == nullptr);
-            }
         }
 
         //
@@ -114,8 +109,9 @@ namespace PCC
         bool PipelinePlugin::Enabled(const std::wstring& p_ParentPath,
                                      const std::wstring& p_File) const
         {
-            return m_spPipeline != nullptr &&
-                   m_spPipeline->ShouldBeEnabledFor(p_ParentPath, p_File, m_pPluginProvider);
+            const Pipeline* pPipeline = GetPipeline();
+            return pPipeline != nullptr &&
+                   pPipeline->ShouldBeEnabledFor(p_ParentPath, p_File, m_pPluginProvider);
         }
 
         //
@@ -127,8 +123,9 @@ namespace PCC
         std::wstring PipelinePlugin::GetPath(const std::wstring& p_File) const
         {
             std::wstring modifiedPath(p_File);
-            if (m_spPipeline != nullptr) {
-                m_spPipeline->ModifyPath(modifiedPath, m_pPluginProvider);
+            const Pipeline* pPipeline = GetPipeline();
+            if (pPipeline != nullptr) {
+                pPipeline->ModifyPath(modifiedPath, m_pPluginProvider);
             }
             return modifiedPath;
         }
@@ -144,9 +141,10 @@ namespace PCC
         {
             // This is stored in pipeline options.
             std::wstring separator;
-            if (m_spPipeline != nullptr) {
+            const Pipeline* pPipeline = GetPipeline();
+            if (pPipeline != nullptr) {
                 PipelineOptions options;
-                m_spPipeline->ModifyOptions(options);
+                pPipeline->ModifyOptions(options);
                 separator = options.GetPathsSeparator();
             }
             return separator;
@@ -162,9 +160,10 @@ namespace PCC
             // Pipeline options can modify the behavior.
             std::wstring executable;
             bool useFilelist = false;
-            if (m_spPipeline != nullptr) {
+            const Pipeline* pPipeline = GetPipeline();
+            if (pPipeline != nullptr) {
                 PipelineOptions options;
-                m_spPipeline->ModifyOptions(options);
+                pPipeline->ModifyOptions(options);
                 executable = options.GetExecutable();
                 useFilelist = options.GetUseFilelist();
             }
@@ -193,6 +192,24 @@ namespace PCC
         bool PipelinePlugin::CanDropRedundantWords() const noexcept(false)
         {
             return false;
+        }
+
+        //
+        // Returns a pointer to the pipeline we're using, initializing
+        // it on the first call.
+        //
+        // @return Pointer to pipeline, or nullptr if our pipeline is invalid.
+        //
+        const Pipeline* PipelinePlugin::GetPipeline() const
+        {
+            if (!m_PipelineCreated) {
+                try {
+                    m_spPipeline = std::make_shared<Pipeline>(m_EncodedElements);
+                } catch (const InvalidPipelineException&) {
+                }
+                m_PipelineCreated = true;
+            }
+            return m_spPipeline.get();
         }
 
     } // namespace Plugins
