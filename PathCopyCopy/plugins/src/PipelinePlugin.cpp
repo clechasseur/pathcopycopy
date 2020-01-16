@@ -58,6 +58,34 @@ namespace PCC
         }
 
         //
+        // Returns a pointer to the pipeline we're using, initializing
+        // it on the first call.
+        //
+        // @param p_psSeenPluginIds Pointer to set used to store seen plugin IDs.
+        //                          Leave nullptr on the first call; this is used
+        //                          to detect loops in pipelines.
+        // @return Pointer to pipeline, or nullptr if our pipeline is invalid.
+        //
+        const Pipeline* PipelinePlugin::GetPipeline(GUIDS* const p_psSeenPluginIds /*= nullptr*/) const
+        {
+            if (!m_PipelineCreated) {
+                try {
+                    m_spPipeline = std::make_shared<Pipeline>(m_EncodedElements);
+
+                    // Make sure pipeline is valid.
+                    GUIDS sSeenPluginIds;
+                    GUIDS& rsSeenPluginIds = p_psSeenPluginIds != nullptr ? *p_psSeenPluginIds : sSeenPluginIds;
+                    if (!rsSeenPluginIds.emplace(Id()).second || !m_spPipeline->Valid(m_pPluginProvider, rsSeenPluginIds)) {
+                        m_spPipeline = nullptr;
+                    }
+                } catch (const InvalidPipelineException&) {
+                }
+                m_PipelineCreated = true;
+            }
+            return m_spPipeline.get();
+        }
+
+        //
         // Returns the ID of the pipeline plugin, allowing it to be uniquely identified.
         //
         // @return Plugin ID.
@@ -192,24 +220,6 @@ namespace PCC
         bool PipelinePlugin::CanDropRedundantWords() const noexcept(false)
         {
             return false;
-        }
-
-        //
-        // Returns a pointer to the pipeline we're using, initializing
-        // it on the first call.
-        //
-        // @return Pointer to pipeline, or nullptr if our pipeline is invalid.
-        //
-        const Pipeline* PipelinePlugin::GetPipeline() const
-        {
-            if (!m_PipelineCreated) {
-                try {
-                    m_spPipeline = std::make_shared<Pipeline>(m_EncodedElements);
-                } catch (const InvalidPipelineException&) {
-                }
-                m_PipelineCreated = true;
-            }
-            return m_spPipeline.get();
         }
 
     } // namespace Plugins

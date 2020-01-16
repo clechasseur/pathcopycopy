@@ -21,6 +21,7 @@
 
 #include <stdafx.h>
 #include <PluginPipelineElements.h>
+#include <PipelinePlugin.h>
 #include <Plugin.h>
 #include <PluginUtils.h>
 #include <StringUtils.h>
@@ -344,6 +345,28 @@ namespace PCC
     ApplyPipelinePluginPipelineElement::ApplyPipelinePluginPipelineElement(const GUID& p_PluginId) noexcept
         : ApplyPluginPipelineElement(p_PluginId)
     {
+    }
+
+    //
+    // Validates this pipeline element. In order to be valid,
+    // it must not include a loop of pipeline elements.
+    //
+    // @param p_pPluginProvider Plugin provider used to fetch plugins.
+    // @param p_rsSeenPluginIds Set used to store seen plugin IDs. Any
+    //                          collision means a loop is detected and
+    //                          pipeline element is invalid.
+    // @return true if pipeline element is valid.
+    //
+    bool ApplyPipelinePluginPipelineElement::Valid(const PluginProvider* const p_pPluginProvider,
+                                                   GUIDS& p_rsSeenPluginIds) const
+    {
+        bool valid = false;
+        if (p_pPluginProvider != nullptr) {
+            const auto spPlugin = p_pPluginProvider->GetPlugin(m_PluginId);
+            const auto* const pPipelinePlugin = dynamic_cast<PCC::Plugins::PipelinePlugin*>(spPlugin.get());
+            valid = pPipelinePlugin != nullptr && pPipelinePlugin->GetPipeline(&p_rsSeenPluginIds) != nullptr;
+        }
+        return valid;
     }
 
     //

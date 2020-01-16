@@ -46,6 +46,8 @@ namespace PCC
                                         PipelinePlugin(const PipelinePlugin&) = delete;
             PipelinePlugin&             operator=(const PipelinePlugin&) = delete;
 
+            const Pipeline*             GetPipeline(GUIDS* p_psSeenPluginIds = nullptr) const;
+
             const GUID&                 Id() const noexcept(false) override;
 
             std::wstring                Description() const override;
@@ -69,8 +71,6 @@ namespace PCC
             const std::wstring          m_EncodedElements;  // Pipeline encoded elements.
             mutable PipelineSP          m_spPipeline;       // Pipeline to execute on each path received.
             mutable bool                m_PipelineCreated;  // Whether m_spPipeline has been created.
-
-            const Pipeline*             GetPipeline() const;
         };
 
     } // namespace Plugins

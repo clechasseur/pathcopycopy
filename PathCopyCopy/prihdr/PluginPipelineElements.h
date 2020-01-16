@@ -290,7 +290,7 @@ namespace PCC
                                            const std::wstring& p_File,
                                            const PluginProvider* p_pPluginProvider) const override;
 
-    private:
+    protected:
         const GUID      m_PluginId;     // ID of plugin to apply.
     };
 
@@ -307,6 +307,9 @@ namespace PCC
                         ApplyPipelinePluginPipelineElement(const ApplyPipelinePluginPipelineElement&) = delete;
         ApplyPipelinePluginPipelineElement&
                         operator=(const ApplyPipelinePluginPipelineElement&) = delete;
+
+        bool            Valid(const PluginProvider* p_pPluginProvider,
+                              GUIDS& p_rsSeenPluginIds) const override;
     };
 
     //

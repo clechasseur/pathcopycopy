@@ -114,6 +114,26 @@ namespace PCC
     }
 
     //
+    // Validates the pipeline. A pipeline is valid if all its elements
+    // are considered valid.
+    //
+    // @param p_pPluginProvider Optional plugin provider that can be used
+    //                          during validation.
+    // @param p_rsSeenPluginIds Set that should be used to store seen plugin IDs.
+    //                          Any collision means a loop is detected and
+    //                          pipeline should be considered invalid.
+    // @return true if the pipeline is valid.
+    //
+    bool Pipeline::Valid(const PluginProvider* const p_pPluginProvider,
+                         GUIDS& p_rsSeenPluginIds) const
+    {
+        return std::all_of(m_vspElements.cbegin(), m_vspElements.cend(), [&](const auto& spElement) {
+            return spElement->Valid(p_pPluginProvider, p_rsSeenPluginIds);
+        });
+    }
+
+
+    //
     // Modifies a given path by successively applying all pipeline
     // elements to it. Returns the final version of the path.
     //
@@ -157,6 +177,25 @@ namespace PCC
         return std::all_of(m_vspElements.cbegin(), m_vspElements.cend(), [&](const auto& spElement) {
             return spElement->ShouldBeEnabledFor(p_ParentPath, p_File, p_pPluginProvider);
         });
+    }
+
+    //
+    // Validates the pipeline element. Whether or not an element is "valid"
+    // is implementation-specific, but should be used to detect recursion
+    // in plugin usage, for instance.
+    //
+    // @param p_pPluginProvider Optional plugin provider that can be used
+    //                          during validation.
+    // @param p_rsSeenPluginIds Set that should be used to store seen plugin IDs.
+    //                          Any collision means a loop is detected and
+    //                          pipeline element should be considered invalid.
+    // @return true if pipeline element is valid.
+    //
+    bool PipelineElement::Valid(const PluginProvider* const /*p_pPluginProvider*/,
+                                GUIDS& /*p_rsSeenPluginIds*/) const noexcept(false)
+    {
+        // All pipeline elements are considered valid by default.
+        return true;
     }
 
     //

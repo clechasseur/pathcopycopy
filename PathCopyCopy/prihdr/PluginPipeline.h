@@ -70,6 +70,9 @@ namespace PCC
                         Pipeline(const Pipeline&) = delete;
         Pipeline&       operator=(const Pipeline&) = delete;
 
+        bool            Valid(const PluginProvider* p_pPluginProvider,
+                              GUIDS& p_rsSeenPluginIds) const;
+
         void            ModifyPath(std::wstring& p_rPath,
                                    const PluginProvider* p_pPluginProvider) const;
         void            ModifyOptions(PipelineOptions& p_rOptions) const;
@@ -96,6 +99,9 @@ namespace PCC
         PipelineElement& operator=(const PipelineElement&) = delete;
         PipelineElement& operator=(PipelineElement&&) = delete;
         virtual         ~PipelineElement() = default;
+
+        virtual bool    Valid(const PluginProvider* p_pPluginProvider,
+                              GUIDS& p_rsSeenPluginIds) const noexcept(false);
 
         virtual void    ModifyPath(std::wstring& p_rPath,
                                    const PluginProvider* p_pPluginProvider) const = 0;
