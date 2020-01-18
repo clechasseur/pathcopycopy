@@ -49,7 +49,7 @@ namespace PathCopyCopy.Settings.UI.Forms
         private Guid pluginId;
 
         /// Binding list that will store the pipeline elements so that we can use data binding.
-        private BindingList<PipelineElement> elements = new BindingList<PipelineElement>();
+        private readonly BindingList<PipelineElement> elements = new BindingList<PipelineElement>();
 
         /// User control to edit currently-selected pipeline element.
         private PipelineElementUserControl currentUserControl;
@@ -126,6 +126,9 @@ namespace PathCopyCopy.Settings.UI.Forms
             AddNewElementMenuItem(Resources.PipelineElement_ApplyPlugin,
                 Resources.PipelineElement_ApplyPlugin_HelpText,
                 () => new ApplyPluginPipelineElement(new Guid(Resources.LONG_PATH_PLUGIN_ID)));
+            AddNewElementMenuItem(Resources.PipelineElement_ApplyPipelinePlugin,
+                Resources.PipelineElement_ApplyPipelinePlugin_HelpText,
+                () => new ApplyPipelinePluginPipelineElement(new Guid(Resources.LONG_PATH_PLUGIN_ID)));
             AddNewElementMenuItem("-", null, null);
             AddNewElementMenuItem(Resources.PipelineElement_RemoveExt,
                 Resources.PipelineElement_RemoveExt_HelpText,

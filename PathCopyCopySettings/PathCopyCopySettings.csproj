@@ -87,12 +87,6 @@
     <Compile Include="UI\Forms\AdvancedPipelinePluginForm.Designer.cs">
       <DependentUpon>AdvancedPipelinePluginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\UserControls\ApplyPluginPipelineElementUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\UserControls\ApplyPluginPipelineElementUserControl.Designer.cs">
-      <DependentUpon>ApplyPluginPipelineElementUserControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\UserControls\ConfiglessPipelineElementUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -122,6 +116,12 @@
     </Compile>
     <Compile Include="UI\UserControls\PipelineElementWithExecutableUserControl.Designer.cs">
       <DependentUpon>PipelineElementWithExecutableUserControl.cs</DependentUpon>
+    </Compile>
+	<Compile Include="UI\UserControls\PipelineElementWithPluginIDUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UserControls\PipelineElementWithPluginIDUserControl.Designer.cs">
+      <DependentUpon>PipelineElementWithPluginIDUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\UserControls\PluginPreviewUserControl.cs">
       <SubType>UserControl</SubType>
@@ -199,9 +199,6 @@
     <EmbeddedResource Include="UI\Forms\SoftwareUpdateForm.resx">
       <DependentUpon>SoftwareUpdateForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\UserControls\ApplyPluginPipelineElementUserControl.resx">
-      <DependentUpon>ApplyPluginPipelineElementUserControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\ConfiglessPipelineElementUserControl.resx">
       <DependentUpon>ConfiglessPipelineElementUserControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -213,6 +210,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\PipelineElementWithExecutableUserControl.resx">
       <DependentUpon>PipelineElementWithExecutableUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+	<EmbeddedResource Include="UI\UserControls\PipelineElementWithPluginIDUserControl.resx">
+      <DependentUpon>PipelineElementWithPluginIDUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\PluginPreviewUserControl.resx">
       <DependentUpon>PluginPreviewUserControl.cs</DependentUpon>

@@ -1,4 +1,4 @@
-﻿// ApplyPluginPipelineElementUserControl.cs
+﻿// PipelineElementWithPluginIDUserControl.cs
 // (c) 2019-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -22,7 +22,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Windows.Forms;
 using PathCopyCopy.Settings.Core;
 using PathCopyCopy.Settings.Core.Plugins;
 using PathCopyCopy.Settings.Properties;
@@ -30,22 +29,27 @@ using PathCopyCopy.Settings.Properties;
 namespace PathCopyCopy.Settings.UI.UserControls
 {
     /// <summary>
-    /// UserControl used to configure an Apply Plugin pipeline element.
+    /// UserControl used to configure a pipeline element with plugin ID.
     /// </summary>
-    public partial class ApplyPluginPipelineElementUserControl : PipelineElementUserControl
+    public partial class PipelineElementWithPluginIDUserControl : PipelineElementUserControl
     {
         /// Element we're configuring.
-        private ApplyPluginPipelineElement element;
+        private readonly PipelineElementWithPluginID element;
+
+        /// Whether to include pipeline plugins as possible plugins for our element.
+        private readonly bool includePipelinePlugins;
 
         /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="element">Pipeline element to configure.</param>
-        public ApplyPluginPipelineElementUserControl(ApplyPluginPipelineElement element)
+        /// <param name="includePipelinePlugins">Whether to include pipeline
+        /// plugins as possible plugins for our element.</param>
+        public PipelineElementWithPluginIDUserControl(PipelineElementWithPluginID element,
+            bool includePipelinePlugins)
         {
-            Debug.Assert(element != null);
-
-            this.element = element;
+            this.element = element ?? throw new ArgumentNullException(nameof(element));
+            this.includePipelinePlugins = includePipelinePlugins;
 
             InitializeComponent();
         }
@@ -58,12 +62,10 @@ namespace PathCopyCopy.Settings.UI.UserControls
         {
             base.OnLoad(e);
 
-            // First load list of plugins to display in the listbox for the base
-            // plugin. We only load default and COM plugins for this since we
-            // don't want a pipeline plugin to be based off another (for now at least).
+            // First load list of plugins to display in the listbox for the base plugin.
             List<Plugin> plugins;
             using (UserSettings settings = new UserSettings()) {
-                plugins = PluginsRegistry.GetPluginsInDefaultOrder(settings, false);
+                plugins = PluginsRegistry.GetPluginsInDefaultOrder(settings, includePipelinePlugins);
             }
 
             // Add all plugins to the list box.

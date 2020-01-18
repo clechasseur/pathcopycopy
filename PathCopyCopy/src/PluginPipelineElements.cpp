@@ -363,8 +363,10 @@ namespace PCC
         bool valid = false;
         if (p_pPluginProvider != nullptr) {
             const auto spPlugin = p_pPluginProvider->GetPlugin(m_PluginId);
-            const auto* const pPipelinePlugin = dynamic_cast<PCC::Plugins::PipelinePlugin*>(spPlugin.get());
-            valid = pPipelinePlugin != nullptr && pPipelinePlugin->GetPipeline(&p_rsSeenPluginIds) != nullptr;
+            if (spPlugin != nullptr) {
+                const auto* const pPipelinePlugin = dynamic_cast<PCC::Plugins::PipelinePlugin*>(spPlugin.get());
+                valid = pPipelinePlugin == nullptr || pPipelinePlugin->GetPipeline(&p_rsSeenPluginIds) != nullptr;
+            }
         }
         return valid;
     }

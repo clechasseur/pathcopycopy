@@ -435,4 +435,10 @@ Control-click to avoid displaying an icon for this command.</value>
   <data name="PipelineElement_UnexpandEnvStrings_HelpText" xml:space="preserve">
     <value>Replaces parts of the path with environment variable references, if possible (like %USERPROFILE%, etc.)</value>
   </data>
+  <data name="PipelineElement_ApplyPipelinePlugin" xml:space="preserve">
+    <value>Use Base Custom Command</value>
+  </data>
+  <data name="PipelineElement_ApplyPipelinePlugin_HelpText" xml:space="preserve">
+    <value>Choose a base custom command to use to get an initial path value</value>
+  </data>
 </root>

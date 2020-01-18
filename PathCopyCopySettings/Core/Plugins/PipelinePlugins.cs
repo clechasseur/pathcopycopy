@@ -922,6 +922,10 @@ namespace PathCopyCopy.Settings.Core.Plugins
 #pragma warning restore CA1303 // Do not pass literals as localized parameters
     }
 
+    /// <summary>
+    /// Pipeline element that instructs Path Copy Copy to follow
+    /// any symlinks in the path.
+    /// </summary>
     public class FollowSymlinkPipelineElement : PipelineElement
     {
         /// <summary>
@@ -1579,6 +1583,10 @@ namespace PathCopyCopy.Settings.Core.Plugins
         }
     }
 
+    /// <summary>
+    /// Pipeline element that instructs Path Copy Copy to replace parts
+    /// of the path with environment variable references if possible.
+    /// </summary>
     public class UnexpandEnvironmentStringsPipelineElement : PipelineElement
     {
         /// <summary>
@@ -1626,11 +1634,71 @@ namespace PathCopyCopy.Settings.Core.Plugins
             return string.Empty;
         }
     }
+
+    /// <summary>
+    /// Base class for pipeline elements that store a plugin ID.
+    /// </summary>
+    abstract public class PipelineElementWithPluginID : PipelineElement
+    {
+        /// <summary>
+        /// ID of plugin to apply to the path.
+        /// </summary>
+        public Guid PluginID
+        {
+            get;
+            set;
+        }
+        
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        public PipelineElementWithPluginID()
+        {
+            PluginID = Guid.Empty;
+        }
+        
+        /// <summary>
+        /// Constructor with plugin ID.
+        /// </summary>
+        /// <param name="pluginId">ID of plugin to apply to the path.</param>
+        public PipelineElementWithPluginID(Guid pluginId)
+        {
+            PluginID = pluginId;
+        }
+        
+        /// <summary>
+        /// Encodes this pipeline element in a string.
+        /// </summary>
+        /// <returns>Encoded element data.</returns>
+        public override string Encode()
+        {
+            // We encode our guid without length info, since the C++
+            // side will know how many characters to read.
+            return PluginID.ToString("B", CultureInfo.InvariantCulture);
+        }
+
+        /// <summary>
+        /// Returns a user control to configure this pipeline element.
+        /// </summary>
+        /// <returns>User control.</returns>
+        public override PipelineElementUserControl GetEditingControl()
+        {
+            return new PipelineElementWithPluginIDUserControl(this,
+                IncludePipelineElementsInEditingControl());
+        }
+
+        /// <summary>
+        /// Determines if we accept pipeline plugins as possible plugins
+        /// for our element. Used for our editing control.
+        /// </summary>
+        /// <returns><c>true</c> to include pipeline plugins.</returns>
+        abstract protected bool IncludePipelineElementsInEditingControl();
+    }
     
     /// <summary>
     /// Pipeline element that applies the effect of another plugin on the path.
     /// </summary>
-    public class ApplyPluginPipelineElement : PipelineElement
+    public class ApplyPluginPipelineElement : PipelineElementWithPluginID
     {
         /// <summary>
         /// Code representing this pipeline element type.
@@ -1656,22 +1724,13 @@ namespace PathCopyCopy.Settings.Core.Plugins
                 return Resources.PipelineElement_ApplyPlugin;
             }
         }
-
-        /// <summary>
-        /// ID of plugin to apply to the path.
-        /// </summary>
-        public Guid PluginID
-        {
-            get;
-            set;
-        }
         
         /// <summary>
         /// Default constructor.
         /// </summary>
         public ApplyPluginPipelineElement()
+            : base()
         {
-            PluginID = Guid.Empty;
         }
         
         /// <summary>
@@ -1679,28 +1738,87 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// </summary>
         /// <param name="pluginId">ID of plugin to apply to the path.</param>
         public ApplyPluginPipelineElement(Guid pluginId)
+            : base(pluginId)
         {
-            PluginID = pluginId;
-        }
-        
-        /// <summary>
-        /// Encodes this pipeline element in a string.
-        /// </summary>
-        /// <returns>Encoded element data.</returns>
-        public override string Encode()
-        {
-            // We encode our guid without length info, since the C++
-            // side will know how many characters to read.
-            return PluginID.ToString("B", CultureInfo.InvariantCulture);
         }
 
         /// <summary>
-        /// Returns a user control to configure this pipeline element.
+        /// Determines if we accept pipeline plugins as possible plugins
+        /// for our element. Used for our editing control.
         /// </summary>
-        /// <returns>User control.</returns>
-        public override PipelineElementUserControl GetEditingControl()
+        /// <returns><c>true</c> to include pipeline plugins.</returns>
+        protected override bool IncludePipelineElementsInEditingControl()
         {
-            return new ApplyPluginPipelineElementUserControl(this);
+            return false;
+        }
+    }
+
+    /// <summary>
+    /// Pipeline element that applies the effect of another
+    /// pipeline plugin on the path.
+    /// </summary>
+    public class ApplyPipelinePluginPipelineElement : PipelineElementWithPluginID
+    {
+        /// <summary>
+        /// Code representing this pipeline element type.
+        /// </summary>
+        public const char CODE = '}';
+
+        /// <summary>
+        /// Code representing this pipeline element type.
+        /// </summary>
+        public override char Code
+        {
+            get {
+                return CODE;
+            }
+        }
+
+        /// <summary>
+        /// Pipeline element display value for the UI.
+        /// </summary>
+        public override string DisplayValue
+        {
+            get {
+                return Resources.PipelineElement_ApplyPipelinePlugin;
+            }
+        }
+
+        /// <summary>
+        /// Minumum version of Path Copy Copy required to use this pipeline element.
+        /// </summary>
+        public override Version RequiredVersion
+        {
+            get {
+                return new Version(18, 0, 0, 0);
+            }
+        }
+
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        public ApplyPipelinePluginPipelineElement()
+            : base()
+        {
+        }
+        
+        /// <summary>
+        /// Constructor with plugin ID.
+        /// </summary>
+        /// <param name="pluginId">ID of plugin to apply to the path.</param>
+        public ApplyPipelinePluginPipelineElement(Guid pluginId)
+            : base(pluginId)
+        {
+        }
+
+        /// <summary>
+        /// Determines if we accept pipeline plugins as possible plugins
+        /// for our element. Used for our editing control.
+        /// </summary>
+        /// <returns><c>true</c> to include pipeline plugins.</returns>
+        protected override bool IncludePipelineElementsInEditingControl()
+        {
+            return true;
         }
     }
 
@@ -2075,7 +2193,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
                     break;
                 }
                 case ApplyPluginPipelineElement.CODE: {
-                    element = DecodeApplyPluginElement(encodedElements, ref curChar);
+                    element = DecodeApplyPluginElement(elementCode, encodedElements, ref curChar);
                     break;
                 }
                 case PathsSeparatorPipelineElement.CODE: {
@@ -2140,15 +2258,16 @@ namespace PathCopyCopy.Settings.Core.Plugins
         }
         
         /// <summary>
-        /// Decodes an <see cref="ApplyPluginPipelineElement"/> from an encoded
-        /// element string.
+        /// Decodes an <see cref="ApplyPluginPipelineElement"/> or
+        /// <see cref="ApplyPipelinePluginPipelineElement"/> from an encoded element string.
         /// </summary>
+        /// <param name="elementCode">Element code.</param>
         /// <param name="encodedElements">String of encoded elements data.</param>
         /// <param name="curChar">Position where the element data is to be found
         /// in the string (not counting the element code). Upon return, this will
         /// point just after the element data.</param>
-        private static ApplyPluginPipelineElement DecodeApplyPluginElement(string encodedElements,
-            ref int curChar)
+        private static PipelineElement DecodeApplyPluginElement(
+            char elementCode, string encodedElements, ref int curChar)
         {
             // The element data is the ID of the plugin to apply. There's no length saved
             // for this since it's always the same length. Format is as follows:
@@ -2159,7 +2278,16 @@ namespace PathCopyCopy.Settings.Core.Plugins
             }
             Guid pluginId = new Guid(encodedElements.Substring(curChar, guidLength));
             curChar += guidLength;
-            return new ApplyPluginPipelineElement(pluginId);
+            switch (elementCode) {
+                case ApplyPluginPipelineElement.CODE: {
+                    return new ApplyPluginPipelineElement(pluginId);
+                }
+                case ApplyPipelinePluginPipelineElement.CODE: {
+                    return new ApplyPipelinePluginPipelineElement(pluginId);
+                }
+                default:
+                    throw new InvalidPipelineException();
+            }
         }
 
         /// <summary>

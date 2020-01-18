@@ -461,6 +461,24 @@ namespace PathCopyCopy.Settings.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Use Base Custom Command.
+        /// </summary>
+        internal static string PipelineElement_ApplyPipelinePlugin {
+            get {
+                return ResourceManager.GetString("PipelineElement_ApplyPipelinePlugin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose a base custom command to use to get an initial path value.
+        /// </summary>
+        internal static string PipelineElement_ApplyPipelinePlugin_HelpText {
+            get {
+                return ResourceManager.GetString("PipelineElement_ApplyPipelinePlugin_HelpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Use Base Command.
         /// </summary>
         internal static string PipelineElement_ApplyPlugin {
