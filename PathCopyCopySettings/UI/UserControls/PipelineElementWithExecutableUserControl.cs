@@ -33,7 +33,7 @@ namespace PathCopyCopy.Settings.UI.UserControls
     public partial class PipelineElementWithExecutableUserControl : PipelineElementUserControl
     {
         /// Element we're configuring.
-        private PipelineElementWithExecutable element;
+        private readonly PipelineElementWithExecutable element;
 
         /// <summary>
         /// Constructor.

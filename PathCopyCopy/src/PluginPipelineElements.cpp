@@ -362,8 +362,11 @@ namespace PCC
     {
         bool valid = false;
         if (p_pPluginProvider != nullptr) {
+            // Try finding the plugin we need.
             const auto spPlugin = p_pPluginProvider->GetPlugin(m_PluginId);
             if (spPlugin != nullptr) {
+                // To be valid, plugin either has to not be a pipeline plugin
+                // OR it needs to be one and have a valid pipeline.
                 const auto* const pPipelinePlugin = dynamic_cast<PCC::Plugins::PipelinePlugin*>(spPlugin.get());
                 valid = pPipelinePlugin == nullptr || pPipelinePlugin->GetPipeline(&p_rsSeenPluginIds) != nullptr;
             }

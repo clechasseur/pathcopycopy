@@ -33,7 +33,7 @@ namespace PathCopyCopy.Settings.UI.UserControls
     public partial class RegexPipelineElementUserControl : PipelineElementUserControl
     {
         /// Element we're configuring.
-        private RegexPipelineElement element;
+        private readonly RegexPipelineElement element;
 
         /// <summary>
         /// Constructor.

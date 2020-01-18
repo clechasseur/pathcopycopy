@@ -32,7 +32,7 @@ namespace PathCopyCopy.Settings.UI.UserControls
     public partial class PathsSeparatorPipelineElementUserControl : PipelineElementUserControl
     {
         /// Element we're configuring.
-        private PathsSeparatorPipelineElement element;
+        private  readonly PathsSeparatorPipelineElement element;
 
         /// <summary>
         /// Constructor.

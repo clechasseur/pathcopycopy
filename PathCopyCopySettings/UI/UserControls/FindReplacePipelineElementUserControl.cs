@@ -32,7 +32,7 @@ namespace PathCopyCopy.Settings.UI.UserControls
     public partial class FindReplacePipelineElementUserControl : PipelineElementUserControl
     {
         /// Element we're configuring.
-        private FindReplacePipelineElement element;
+        private readonly FindReplacePipelineElement element;
 
         /// <summary>
         /// Constructor.
