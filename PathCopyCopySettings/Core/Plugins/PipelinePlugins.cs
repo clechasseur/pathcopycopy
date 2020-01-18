@@ -1754,8 +1754,8 @@ namespace PathCopyCopy.Settings.Core.Plugins
     }
 
     /// <summary>
-    /// Pipeline element that applies the effect of another
-    /// pipeline plugin on the path.
+    /// Pipeline element that applies the effect of another plugin on the path.
+    /// This element supports pipeline plugins.
     /// </summary>
     public class ApplyPipelinePluginPipelineElement : PipelineElementWithPluginID
     {

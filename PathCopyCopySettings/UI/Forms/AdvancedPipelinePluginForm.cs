@@ -23,6 +23,7 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.Windows.Forms;
 using PathCopyCopy.Settings.Core.Plugins;
 using PathCopyCopy.Settings.Properties;
@@ -121,14 +122,18 @@ namespace PathCopyCopy.Settings.UI.Forms
         /// <param name="e">Event arguments.</param>
         private void AdvancedPipelinePluginForm_Load(object sender, EventArgs e)
         {
+            // The initial text of the MinVersionLbl control is a format string.
+            // Save it in its Tag to be able to reuse it.
+            MinVersionLbl.Tag = MinVersionLbl.Text;
+
             // Populate the context menu strip used to create new elements.
             // We do this in code to be able to reuse resources to avoid string duplication.
-            AddNewElementMenuItem(Resources.PipelineElement_ApplyPlugin,
-                Resources.PipelineElement_ApplyPlugin_HelpText,
-                () => new ApplyPluginPipelineElement(new Guid(Resources.LONG_PATH_PLUGIN_ID)));
             AddNewElementMenuItem(Resources.PipelineElement_ApplyPipelinePlugin,
                 Resources.PipelineElement_ApplyPipelinePlugin_HelpText,
                 () => new ApplyPipelinePluginPipelineElement(new Guid(Resources.LONG_PATH_PLUGIN_ID)));
+            AddNewElementMenuItem(Resources.PipelineElement_ApplyPlugin,
+                Resources.PipelineElement_ApplyPlugin_HelpText,
+                () => new ApplyPluginPipelineElement(new Guid(Resources.LONG_PATH_PLUGIN_ID)));
             AddNewElementMenuItem("-", null, null);
             AddNewElementMenuItem(Resources.PipelineElement_RemoveExt,
                 Resources.PipelineElement_RemoveExt_HelpText,
@@ -219,10 +224,21 @@ namespace PathCopyCopy.Settings.UI.Forms
             };
             Debug.Assert(!pluginInfo.Global);
 
-            // Save plugin info and pipeline, then update preview.
+            // Save plugin info and pipeline, then update preview and min version.
             newPluginInfo = pluginInfo;
             newPipeline = pipeline;
             PreviewCtrl.Plugin = newPluginInfo.ToPlugin();
+            Version requiredVersion = newPipeline.RequiredVersion;
+            int numComponents;
+            if (requiredVersion.Revision > 0) {
+                numComponents = 4;
+            } else if (requiredVersion.Build > 0) {
+                numComponents = 3;
+            } else {
+                numComponents = 2;
+            }
+            MinVersionLbl.Text = string.Format(CultureInfo.CurrentCulture,
+                MinVersionLbl.Tag as string, requiredVersion.ToString(numComponents));
         }
 
         /// <summary>

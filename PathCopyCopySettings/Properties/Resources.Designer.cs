@@ -461,7 +461,7 @@ namespace PathCopyCopy.Settings.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Use Base Custom Command.
+        ///   Looks up a localized string similar to Use Base Command.
         /// </summary>
         internal static string PipelineElement_ApplyPipelinePlugin {
             get {
@@ -470,7 +470,7 @@ namespace PathCopyCopy.Settings.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Choose a base custom command to use to get an initial path value.
+        ///   Looks up a localized string similar to Choose a base command to use to get an initial path value.
         /// </summary>
         internal static string PipelineElement_ApplyPipelinePlugin_HelpText {
             get {
@@ -479,7 +479,7 @@ namespace PathCopyCopy.Settings.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Use Base Command.
+        ///   Looks up a localized string similar to Use Base Command (No Custom Command).
         /// </summary>
         internal static string PipelineElement_ApplyPlugin {
             get {
@@ -488,7 +488,7 @@ namespace PathCopyCopy.Settings.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Choose a base command to use to get an initial path value.
+        ///   Looks up a localized string similar to Choose a base command (but not a custom command) to use to get an initial path value.
         /// </summary>
         internal static string PipelineElement_ApplyPlugin_HelpText {
             get {

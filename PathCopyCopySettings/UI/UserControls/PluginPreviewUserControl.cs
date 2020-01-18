@@ -34,10 +34,8 @@ namespace PathCopyCopy.Settings.UI.UserControls
         /// Plugin we're currently previewing.
         private Plugin plugin;
 
-#pragma warning disable IDE0044 // Add readonly modifier
         /// Object used to access user settings.
         private UserSettings settings;
-#pragma warning restore IDE0044 // Add readonly modifier
         
         /// <summary>
         /// Plugin to preview. Change this to update the preview displayed.

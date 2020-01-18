@@ -325,7 +325,7 @@ Control-click to avoid displaying an icon for this command.</value>
     <value>This custom command is now too complex to be edited in Simple Mode. If you switch, you will lose some customization. Do you really want to switch to Simple Mode?</value>
   </data>
   <data name="PipelineElement_ApplyPlugin" xml:space="preserve">
-    <value>Use Base Command</value>
+    <value>Use Base Command (No Custom Command)</value>
   </data>
   <data name="PipelineElement_BackToForwardSlashes" xml:space="preserve">
     <value>Turn Backslashes Into Forward Slashes</value>
@@ -367,7 +367,7 @@ Control-click to avoid displaying an icon for this command.</value>
     <value>Remove File Extension</value>
   </data>
   <data name="PipelineElement_ApplyPlugin_HelpText" xml:space="preserve">
-    <value>Choose a base command to use to get an initial path value</value>
+    <value>Choose a base command (but not a custom command) to use to get an initial path value</value>
   </data>
   <data name="PipelineElement_BackToForwardSlashes_HelpText" xml:space="preserve">
     <value>Replace every backslash ( \ ) in the path with a forward slash ( / )</value>
@@ -436,9 +436,9 @@ Control-click to avoid displaying an icon for this command.</value>
     <value>Replaces parts of the path with environment variable references, if possible (like %USERPROFILE%, etc.)</value>
   </data>
   <data name="PipelineElement_ApplyPipelinePlugin" xml:space="preserve">
-    <value>Use Base Custom Command</value>
+    <value>Use Base Command</value>
   </data>
   <data name="PipelineElement_ApplyPipelinePlugin_HelpText" xml:space="preserve">
-    <value>Choose a base custom command to use to get an initial path value</value>
+    <value>Choose a base command to use to get an initial path value</value>
   </data>
 </root>
