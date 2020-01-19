@@ -570,7 +570,8 @@ namespace PCC
         }
         if (!p_Settings.GetSubmenuPluginDisplayOrder(vPluginsInSubmenu)) {
             // Not specified, use default plugins in default order.
-            PluginSPV vspPlugins = PluginsRegistry::GetPluginsInDefaultOrder(&p_Settings, &p_Settings, false);
+            PluginSPV vspPlugins = PluginsRegistry::GetPluginsInDefaultOrder(
+                &p_Settings, &p_Settings, PipelinePluginsOptions::FetchPipelinePlugins);
             for (const PluginSP& spPlugin : vspPlugins) {
                 vPluginsInSubmenu.push_back(spPlugin->Id());
             }

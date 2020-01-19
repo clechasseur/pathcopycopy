@@ -1026,8 +1026,10 @@ namespace PathCopyCopy.Settings.UI.Forms
             // Ask user to create a new plugin.
             PipelinePluginInfo pluginInfo = PipelinePluginEditor.EditPlugin(this, null);
             if (pluginInfo != null) {
-                // User pressed OK. Add the new plugin to the list view
-                // and select it.
+                // User pressed OK. Add the new plugin to temp pipeline plugins.
+                tempPipelinePluginsHelper.Add(pluginInfo);
+
+                // Also add the new plugin to the list view and select it.
                 Plugin plugin = pluginInfo.ToPlugin();
                 PluginDisplayInfo displayInfo = new PluginDisplayInfo(plugin) {
                     ShowInSubmenu = true,
@@ -1038,9 +1040,6 @@ namespace PathCopyCopy.Settings.UI.Forms
                 if (!PluginsDataGrid.Rows[pluginDisplayInfos.Count - 1].Displayed) {
                     PluginsDataGrid.FirstDisplayedScrollingRowIndex = pluginDisplayInfos.Count - 1;
                 }
-
-                // Also add it to temp pipeline plugins.
-                tempPipelinePluginsHelper.Add(pluginInfo);
                     
                 // All this will enable the "Apply" button.
                 ApplyBtn.Enabled = true;
@@ -1097,6 +1096,9 @@ namespace PathCopyCopy.Settings.UI.Forms
             try {
                 PipelinePluginInfo newPluginInfo = PipelinePluginEditor.EditPlugin(this, pluginInfo);
                 if (newPluginInfo != null) {
+                    // Re-add the plugin to temp pipeline plugins so that it can be updated.
+                    tempPipelinePluginsHelper.Add(newPluginInfo);
+
                     // Replace the existing plugin object in the data grid.
                     Debug.Assert(newPluginInfo.Id == pluginInfo.Id);
                     PluginDisplayInfo newDisplayInfo = new PluginDisplayInfo(newPluginInfo.ToPlugin()) {
@@ -1112,9 +1114,6 @@ namespace PathCopyCopy.Settings.UI.Forms
                     if (!PluginsDataGrid.Rows[rowIndex].Displayed) {
                         PluginsDataGrid.FirstDisplayedScrollingRowIndex = rowIndex;
                     }
-
-                    // Re-add the plugin to temp pipeline plugins so that it can be updated.
-                    tempPipelinePluginsHelper.Add(newPluginInfo);
 
                     // All this will enable the "Apply" button.
                     ApplyBtn.Enabled = true;
@@ -1152,8 +1151,8 @@ namespace PathCopyCopy.Settings.UI.Forms
                     MessageBoxIcon.Warning); 
                 if (res == DialogResult.OK) { 
                     // Remove plugin from data grid and from temp pipeline plugins.
-                    pluginDisplayInfos.RemoveAt(rowIndex);
                     tempPipelinePluginsHelper.Remove(pluginInfo);
+                    pluginDisplayInfos.RemoveAt(rowIndex);
  
                     // All this will enable the "Apply" button. 
                     ApplyBtn.Enabled = true; 
@@ -1276,16 +1275,16 @@ namespace PathCopyCopy.Settings.UI.Forms
                                 }
                             }
 
+                            // Since temp pipeline plugins need to be refreshed,
+                            // simply assign everything and let it sort it out.
+                            tempPipelinePluginsHelper.Assign(pluginDisplayInfos.Select(info => info.Plugin));
+
                             // If we added new plugins, select the last one.
                             if (addedNewPlugins) {
                                 PluginsDataGrid.ClearSelection();
                                 PluginsDataGrid.Rows[PluginsDataGrid.RowCount - 1].Selected = true;
                                 PluginsDataGrid.FirstDisplayedScrollingRowIndex = PluginsDataGrid.RowCount - 1;
                             }
-
-                            // Since temp pipeline plugins need to be refreshed,
-                            // simply assign everything and let it sort it out.
-                            tempPipelinePluginsHelper.Assign(pluginDisplayInfos.Select(info => info.Plugin));
 
                             // All this will enable the "Apply" button.
                             ApplyBtn.Enabled = true;

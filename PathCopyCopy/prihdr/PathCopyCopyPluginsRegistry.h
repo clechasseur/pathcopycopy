@@ -34,6 +34,20 @@
 namespace PCC
 {
     //
+    // Enum specifying which pipeline plugins to load when getting
+    // plugins from the registry.
+    //
+    enum class PipelinePluginsOptions
+    {
+        FetchPipelinePlugins        = 0x1,
+        FetchTempPipelinePlugins    = 0x2,
+        FetchBoth                   = FetchPipelinePlugins | FetchTempPipelinePlugins,
+        FetchNone                   = 0x0,
+    };
+    int operator&(PipelinePluginsOptions p_Left,
+                  PipelinePluginsOptions p_Right) noexcept;
+
+    //
     // PluginsRegistry
     //
     // Static class responsible for providing all known PCC plugins.
@@ -44,14 +58,14 @@ namespace PCC
                         PluginsRegistry() = delete;
                         ~PluginsRegistry() = delete;
 
-        static PluginSPV GetPluginsInDefaultOrder(const COMPluginProvider* const p_pCOMPluginProvider,
-                                                  const PipelinePluginProvider* const p_pPipelinePluginProvider,
-                                                  const bool p_IncludeTempPipelinePlugins);
+        static PluginSPV GetPluginsInDefaultOrder(const COMPluginProvider* p_pCOMPluginProvider,
+                                                  const PipelinePluginProvider* p_pPipelinePluginProvider,
+                                                  PipelinePluginsOptions p_PipelinePluginsOptions);
 
         static PluginSPV OrderPluginsToDisplay(const PluginSPS& p_sspAllPlugins,
                                                const GUIDV& p_vPluginDisplayOrder,
-                                               const GUIDV* const p_pvKnownPlugins,
-                                               const PluginSPV* const p_pvspPluginsInDefaultOrder);
+                                               const GUIDV* p_pvKnownPlugins,
+                                               const PluginSPV* p_pvspPluginsInDefaultOrder);
 
     private:
         // Reference to a COM plugin.
@@ -75,7 +89,7 @@ namespace PCC
         static void     GetCOMPlugins(const COMPluginProvider& p_COMPluginProvider,
                                       PluginSPV& p_rvspPlugins);
         static void     GetPipelinePlugins(const PipelinePluginProvider& p_PipelinePluginProvider,
-                                           const bool p_IncludeTempPipelinePlugins,
+                                           PipelinePluginsOptions p_PipelinePluginsOptions,
                                            PluginSPV& p_rvspPlugins);
     };
 

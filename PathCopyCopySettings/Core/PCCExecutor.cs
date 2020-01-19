@@ -46,11 +46,13 @@ namespace PathCopyCopy.Settings.Core
         /// </summary>
         /// <param name="pluginId">ID of plugin to get path from.</param>
         /// <param name="path">Path to pass to the plugin.</param>
+        /// <param name="tempPipelinePlugin">Whether to call the version
+        /// of the function that supports temp pipeline plugins only.</param>
         /// <returns>Path returned by the plugin, or an empty string if
         /// the DLL failed to provide the path.</returns>
         /// <exception cref="PCCExecutorException">Thrown when execution fails
         /// for some reason.</exception>
-        public string GetPathWithPlugin(Guid pluginId, string path)
+        public string GetPathWithPlugin(Guid pluginId, string path, bool tempPipelinePlugin)
         {
             if (path == null) {
                 throw new ArgumentNullException(nameof(path));
@@ -60,7 +62,7 @@ namespace PathCopyCopy.Settings.Core
             string resultingPath;
             using (RegistryOutput output = new RegistryOutput()) {
                 // Call PCC via rundll32 for the plugin.
-                Call("RegGetPathWithPlugin",
+                Call(tempPipelinePlugin ? "RegGetPathWithTempPipelinePlugin" : "RegGetPathWithPlugin",
                     $"{pluginId.ToString("B", CultureInfo.InvariantCulture)},{output.RegistryValueName},{path}");
 
                 // Result should be in the registry.

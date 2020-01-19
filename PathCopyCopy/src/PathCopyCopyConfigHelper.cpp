@@ -111,7 +111,8 @@ void CPathCopyCopyConfigHelper::Initialize()
         // What we'll do is fetch set of all plugins, then order them as we would in the submenu.
         // We'll also include unknown plugins at the end.
         m_spSettings = std::make_shared<PCC::Settings>();
-        m_vspPluginsInDefaultOrder = PCC::PluginsRegistry::GetPluginsInDefaultOrder(m_spSettings.get(), m_spSettings.get(), true);
+        m_vspPluginsInDefaultOrder = PCC::PluginsRegistry::GetPluginsInDefaultOrder(
+            m_spSettings.get(), m_spSettings.get(), PCC::PipelinePluginsOptions::FetchBoth);
         m_sspAllPlugins.insert(m_vspPluginsInDefaultOrder.cbegin(), m_vspPluginsInDefaultOrder.cend());
         m_spPluginProvider = std::make_shared<PCC::AllPluginsProvider>(m_sspAllPlugins);
         PCC::GUIDV vKnownPlugins, vSubmenuPluginDisplayOrder;

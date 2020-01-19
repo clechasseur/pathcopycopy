@@ -34,6 +34,10 @@ extern "C"
                                         HINSTANCE p_hDllInstance,
                                         LPWSTR p_pCmdLine,
                                         int p_ShowCmd);
+    void CALLBACK RegGetPathWithTempPipelinePluginW(HWND p_hWnd,
+                                                    HINSTANCE p_hDllInstance,
+                                                    LPWSTR p_pCmdLine,
+                                                    int p_ShowCmd);
     void CALLBACK ApplyGlobalRevisionsW(HWND p_hWnd,
                                         HINSTANCE p_hDllInstance,
                                         LPWSTR p_pCmdLine,

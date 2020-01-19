@@ -324,7 +324,8 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::QueryContextMenu(
                 PCC::Settings& rSettings = GetSettings();
 
                 // Get all plugins in default order. Do not include temp pipeline plugins.
-                m_vspPluginsInDefaultOrder = PCC::PluginsRegistry::GetPluginsInDefaultOrder(&rSettings, &rSettings, false);
+                m_vspPluginsInDefaultOrder = PCC::PluginsRegistry::GetPluginsInDefaultOrder(
+                    &rSettings, &rSettings, PCC::PipelinePluginsOptions::FetchPipelinePlugins);
 
                 // Get set of all plugins from the above vector.
                 m_sspAllPlugins.insert(m_vspPluginsInDefaultOrder.cbegin(), m_vspPluginsInDefaultOrder.cend());

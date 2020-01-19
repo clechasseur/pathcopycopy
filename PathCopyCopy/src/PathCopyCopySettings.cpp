@@ -1220,7 +1220,7 @@ namespace PCC
             // Fetch all plugins in default order.
             RegPipelinePluginProvider pipelinePluginProvider(p_ReviseInfo.m_rPipelinePluginsKey);
             PluginSPV vspPlugins = PluginsRegistry::GetPluginsInDefaultOrder(
-                &p_ReviseInfo.m_COMPluginProvider, &pipelinePluginProvider, false);
+                &p_ReviseInfo.m_COMPluginProvider, &pipelinePluginProvider, PipelinePluginsOptions::FetchPipelinePlugins);
 
             // Scan plugins and keep all those that are to be included in main menu.
             // Do not keep separators (there shouldn't be any but just to be sure).
@@ -1262,7 +1262,7 @@ namespace PCC
             // Fetch all plugins in default order.
             RegPipelinePluginProvider pipelinePluginProvider(p_ReviseInfo.m_rPipelinePluginsKey);
             PluginSPV vspPlugins = PluginsRegistry::GetPluginsInDefaultOrder(
-                &p_ReviseInfo.m_COMPluginProvider, &pipelinePluginProvider, false);
+                &p_ReviseInfo.m_COMPluginProvider, &pipelinePluginProvider, PipelinePluginsOptions::FetchPipelinePlugins);
 
             // Scan plugins and keep them all EXCEPT those that should not be displayed in the submenu.
             // Also keep separators, but be careful not to double them.
@@ -1309,7 +1309,7 @@ namespace PCC
             // Get set of all plugins and convert it to vector of plugin IDs.
             RegPipelinePluginProvider pipelinePluginProvider(p_ReviseInfo.m_rPipelinePluginsKey);
             PluginSPV vspPlugins = PluginsRegistry::GetPluginsInDefaultOrder(
-                &p_ReviseInfo.m_COMPluginProvider, &pipelinePluginProvider, false);
+                &p_ReviseInfo.m_COMPluginProvider, &pipelinePluginProvider, PipelinePluginsOptions::FetchPipelinePlugins);
             PluginSPS sspAllPlugins(vspPlugins.cbegin(), vspPlugins.cend());
             GUIDV vPluginIds;
             vPluginIds.reserve(sspAllPlugins.size());
@@ -1350,7 +1350,7 @@ namespace PCC
                 // Load plugins in default order.
                 RegPipelinePluginProvider pipelinePluginProvider(p_ReviseInfo.m_rPipelinePluginsKey);
                 PluginSPV vspPlugins = PluginsRegistry::GetPluginsInDefaultOrder(
-                    &p_ReviseInfo.m_COMPluginProvider, &pipelinePluginProvider, false);
+                    &p_ReviseInfo.m_COMPluginProvider, &pipelinePluginProvider, PipelinePluginsOptions::FetchPipelinePlugins);
 
                 // Keep all plugins in default order that are not already in the list.
                 // Be careful not to double up separators.

@@ -88,7 +88,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
             // We also do not cache the preview since we could change during
             // the lifetime of the app.
             using (new TempPipelinePluginSaver(Info, userSettings)) {
-                return new PCCExecutor().GetPathWithPlugin(Id, PreviewPath);
+                return new PCCExecutor().GetPathWithPlugin(Id, PreviewPath, true);
             }
         }
     }

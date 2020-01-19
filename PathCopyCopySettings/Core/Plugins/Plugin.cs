@@ -134,7 +134,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         {
             if (preview == null) {
                 try {
-                    preview = new PCCExecutor().GetPathWithPlugin(Id, PreviewPath);
+                    preview = new PCCExecutor().GetPathWithPlugin(Id, PreviewPath, false);
                 } catch (PCCExecutorException) {
                     preview = Resources.Plugin_PreviewError;
                 }
