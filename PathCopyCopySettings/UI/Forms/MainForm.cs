@@ -66,6 +66,9 @@ namespace PathCopyCopy.Settings.UI.Forms
         /// Object used to access user settings.
         private UserSettings settings;
 
+        /// Helper that saves temp pipeline plugins to registry.
+        private TempPipelinePluginsHelper tempPipelinePluginsHelper;
+
         /// BindingList used to store all existing plugins and their display infos.
         private BindingList<PluginDisplayInfo> pluginDisplayInfos;
 
@@ -222,6 +225,11 @@ namespace PathCopyCopy.Settings.UI.Forms
             foreach (Plugin plugin in plugins) {
                 pluginDisplayInfos.Add(new PluginDisplayInfo(plugin));
             }
+
+            // Create helper to track temp pipeline plugins and assign our existing plugins
+            // so they are initially saved to registry.
+            tempPipelinePluginsHelper = new TempPipelinePluginsHelper(settings);
+            tempPipelinePluginsHelper.Assign(pluginDisplayInfos.Select(info => info.Plugin));
 
             // Scan display infos and set the ShowInMainMenu/Submenu fields
             // according to whether plugins are found in corresponding settings.
@@ -592,6 +600,19 @@ namespace PathCopyCopy.Settings.UI.Forms
 
             // Perform an initial button update.
             UpdatePluginButtons();
+        }
+
+        /// <summary>
+        /// Called when the form is closed. We perform cleanup here.
+        /// </summary>
+        /// <param name="sender">Event sender.</param>
+        /// <param name="e">Event arguments.</param>
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            // Dispose of temp pipeline plugins helper, which will
+            // remove all tracked plugins from registry.
+            tempPipelinePluginsHelper?.Dispose();
+            tempPipelinePluginsHelper = null;
         }
         
         /// <summary>

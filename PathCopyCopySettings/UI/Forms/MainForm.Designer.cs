@@ -54,6 +54,7 @@
             this.PluginsDataGridBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.PluginsExplanationLbl = new System.Windows.Forms.Label();
             this.MiscOptionsPage = new System.Windows.Forms.TabPage();
+            this.TrueLnkPathsChk = new System.Windows.Forms.CheckBox();
             this.UsePreviewModeInMainMenuChk = new System.Windows.Forms.CheckBox();
             this.AppendSepForDirChk = new System.Windows.Forms.CheckBox();
             this.UseFQDNChk = new System.Windows.Forms.CheckBox();
@@ -87,7 +88,6 @@
             this.ExportUserSettingsSaveDlg = new System.Windows.Forms.SaveFileDialog();
             this.ExportUserSettingsBtn = new System.Windows.Forms.Button();
             this.MainToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.TrueLnkPathsChk = new System.Windows.Forms.CheckBox();
             this.MainTabCtrl.SuspendLayout();
             this.PluginsPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PluginsDataGrid)).BeginInit();
@@ -417,6 +417,18 @@
             this.MiscOptionsPage.TabIndex = 0;
             this.MiscOptionsPage.Text = "Options";
             this.MiscOptionsPage.UseVisualStyleBackColor = true;
+            // 
+            // TrueLnkPathsChk
+            // 
+            this.TrueLnkPathsChk.AutoSize = true;
+            this.TrueLnkPathsChk.Location = new System.Drawing.Point(6, 328);
+            this.TrueLnkPathsChk.Name = "TrueLnkPathsChk";
+            this.TrueLnkPathsChk.Size = new System.Drawing.Size(235, 17);
+            this.TrueLnkPathsChk.TabIndex = 14;
+            this.TrueLnkPathsChk.Text = "Copy paths of sh&ortcut (.lnk) files themselves";
+            this.MainToolTip.SetToolTip(this.TrueLnkPathsChk, "When copying path of a shortcut (.lnk) file, copy the path of the shortcut file i" +
+        "tself instead of the path of its target");
+            this.TrueLnkPathsChk.UseVisualStyleBackColor = true;
             // 
             // UsePreviewModeInMainMenuChk
             // 
@@ -802,18 +814,6 @@
             this.ExportUserSettingsBtn.UseVisualStyleBackColor = true;
             this.ExportUserSettingsBtn.Click += new System.EventHandler(this.ExportUserSettingsBtn_Click);
             // 
-            // TrueLnkPathsChk
-            // 
-            this.TrueLnkPathsChk.AutoSize = true;
-            this.TrueLnkPathsChk.Location = new System.Drawing.Point(6, 328);
-            this.TrueLnkPathsChk.Name = "TrueLnkPathsChk";
-            this.TrueLnkPathsChk.Size = new System.Drawing.Size(235, 17);
-            this.TrueLnkPathsChk.TabIndex = 14;
-            this.TrueLnkPathsChk.Text = "Copy paths of sh&ortcut (.lnk) files themselves";
-            this.MainToolTip.SetToolTip(this.TrueLnkPathsChk, "When copying path of a shortcut (.lnk) file, copy the path of the shortcut file i" +
-        "tself instead of the path of its target");
-            this.TrueLnkPathsChk.UseVisualStyleBackColor = true;
-            // 
             // MainForm
             // 
             this.AcceptButton = this.OKBtn;
@@ -837,6 +837,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Path Copy Copy";
             this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.MainForm_HelpButtonClicked);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.LocationChanged += new System.EventHandler(this.MainForm_LocationChanged);
             this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);

@@ -80,6 +80,7 @@
     <Compile Include="3rdParty\CommandLineArguments.cs" />
     <Compile Include="Core\Plugins\COMPluginExecutor.cs" />
     <Compile Include="Core\Plugins\COMPlugin.cs" />
+    <Compile Include="Core\Plugins\TempPipelinePlugins.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="UI\Forms\AdvancedPipelinePluginForm.cs">
       <SubType>Form</SubType>

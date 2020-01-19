@@ -92,48 +92,6 @@ namespace PathCopyCopy.Settings.Core.Plugins
                 return new PCCExecutor().GetPathWithPlugin(tempInfo.Id, PreviewPath);
             }
         }
-        
-        /// <summary>
-        /// Class intended to be used to save a temporary <see cref="PipelinePluginInfo"/>
-        /// to <see cref="UserSettings"/>, deleting it when the object is disposed.
-        /// </summary>
-        private sealed class TempPipelinePluginSaver : IDisposable
-        {
-            /// Pipeline plugin info to save and delete.
-            private readonly PipelinePluginInfo pluginInfo;
-
-            /// Object to access user settings.
-            private readonly UserSettings settings;
-            
-            /// <summary>
-            /// Constructor.
-            /// </summary>
-            /// <param name="pluginInfo"><see cref="PipelinePluginInfo"/> to save.</param>
-            /// <param name="settings">Object to access user settings.</param>
-            public TempPipelinePluginSaver(PipelinePluginInfo pluginInfo, UserSettings settings)
-            {
-                this.pluginInfo = pluginInfo ?? throw new ArgumentNullException(nameof(pluginInfo));
-                this.settings = settings ?? throw new ArgumentNullException(nameof(settings));
-
-                this.settings.SaveTempPipelinePlugin(this.pluginInfo);
-            }
-            
-            /// <summary>
-            /// Finalizer. Deletes the temp pipeline plugin from settings if object
-            /// hasn't been properly disposed of.
-            /// </summary>
-            ~TempPipelinePluginSaver()
-            {
-                settings.DeleteTempPipelinePlugin(pluginInfo);
-            }
-            
-            /// <inheritDoc/>
-            public void Dispose()
-            {
-                settings.DeleteTempPipelinePlugin(pluginInfo);
-                GC.SuppressFinalize(this);
-            }
-        }
     }
 
     /// <summary>
