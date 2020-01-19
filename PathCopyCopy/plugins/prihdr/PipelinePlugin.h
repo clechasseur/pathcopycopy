@@ -24,6 +24,8 @@
 #include <PathCopyCopyPrivateTypes.h>
 #include <Plugin.h>
 
+#include <optional>
+
 
 namespace PCC
 {
@@ -47,6 +49,7 @@ namespace PCC
             PipelinePlugin&             operator=(const PipelinePlugin&) = delete;
 
             const Pipeline*             GetPipeline(GUIDS* p_psSeenPluginIds = nullptr) const;
+            std::string                 GetPipelineError() const;
 
             const GUID&                 Id() const noexcept(false) override;
 
@@ -69,8 +72,9 @@ namespace PCC
             const std::wstring          m_IconFile;         // Plugin icon file.
             const bool                  m_UseDefaultIcon;   // Whether to use default icon for plugin.
             const std::wstring          m_EncodedElements;  // Pipeline encoded elements.
-            mutable PipelineSP          m_spPipeline;       // Pipeline to execute on each path received.
-            mutable bool                m_PipelineCreated;  // Whether m_spPipeline has been created.
+            mutable std::optional<PipelineSP>
+                                        m_spPipeline;       // Pipeline to execute on each path received.
+            mutable std::string         m_PipelineError;    // If pipeline failed to load, can contain the error message.
         };
 
     } // namespace Plugins

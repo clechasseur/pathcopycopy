@@ -117,19 +117,20 @@ namespace PCC
     // Validates the pipeline. A pipeline is valid if all its elements
     // are considered valid.
     //
+    // When the pipeline is invalid, an InvalidPipelineException is thrown.
+    //
     // @param p_pPluginProvider Optional plugin provider that can be used
     //                          during validation.
     // @param p_rsSeenPluginIds Set that should be used to store seen plugin IDs.
     //                          Any collision means a loop is detected and
     //                          pipeline should be considered invalid.
-    // @return true if the pipeline is valid.
     //
-    bool Pipeline::Valid(const PluginProvider* const p_pPluginProvider,
-                         GUIDS& p_rsSeenPluginIds) const
+    void Pipeline::Validate(const PluginProvider* const p_pPluginProvider,
+                            GUIDS& p_rsSeenPluginIds) const
     {
-        return std::all_of(m_vspElements.cbegin(), m_vspElements.cend(), [&](const auto& spElement) {
-            return spElement->Valid(p_pPluginProvider, p_rsSeenPluginIds);
-        });
+        for (const auto& spElement : m_vspElements) {
+            spElement->Validate(p_pPluginProvider, p_rsSeenPluginIds);
+        }
     }
 
 
@@ -143,7 +144,7 @@ namespace PCC
     void Pipeline::ModifyPath(std::wstring& p_rPath,
                               const PluginProvider* const p_pPluginProvider) const
     {
-        for (const PipelineElementSP& spElement : m_vspElements) {
+        for (const auto& spElement : m_vspElements) {
             spElement->ModifyPath(p_rPath, p_pPluginProvider);
         }
     }
@@ -156,7 +157,7 @@ namespace PCC
     //
     void Pipeline::ModifyOptions(PipelineOptions& p_rOptions) const
     {
-        for (const PipelineElementSP& spElement : m_vspElements) {
+        for (const auto& spElement : m_vspElements) {
             spElement->ModifyOptions(p_rOptions);
         }
     }
@@ -184,18 +185,19 @@ namespace PCC
     // is implementation-specific, but should be used to detect recursion
     // in plugin usage, for instance.
     //
+    // When the pipeline element is invalid, an InvalidPipelineException
+    // should be thrown.
+    //
     // @param p_pPluginProvider Optional plugin provider that can be used
     //                          during validation.
     // @param p_rsSeenPluginIds Set that should be used to store seen plugin IDs.
     //                          Any collision means a loop is detected and
     //                          pipeline element should be considered invalid.
-    // @return true if pipeline element is valid.
     //
-    bool PipelineElement::Valid(const PluginProvider* const /*p_pPluginProvider*/,
-                                GUIDS& /*p_rsSeenPluginIds*/) const noexcept(false)
+    void PipelineElement::Validate(const PluginProvider* const /*p_pPluginProvider*/,
+                                   GUIDS& /*p_rsSeenPluginIds*/) const noexcept(false)
     {
         // All pipeline elements are considered valid by default.
-        return true;
     }
 
     //
@@ -222,6 +224,24 @@ namespace PCC
                                              const PluginProvider* const /*p_pPluginProvider*/) const noexcept(false)
     {
         return true;
+    }
+
+    //
+    // Default constructor.
+    //
+    InvalidPipelineException::InvalidPipelineException()
+        : std::runtime_error(ATL::CStringA(MAKEINTRESOURCEA(IDS_INVALIDPIPELINE)))
+    {
+    }
+
+    //
+    // Constructor with explanation string.
+    //
+    // @param p_pWhat Explanation string.
+    //
+    InvalidPipelineException::InvalidPipelineException(const char* const p_pWhat)
+        : std::runtime_error(p_pWhat)
+    {
     }
 
 } // namespace PCC

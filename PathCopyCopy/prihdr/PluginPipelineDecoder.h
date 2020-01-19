@@ -23,7 +23,6 @@
 
 #include "PathCopyCopyPrivateTypes.h"
 
-#include <exception>
 #include <string>
 
 
@@ -56,8 +55,6 @@ namespace PCC
             EncodedElementsStream&
                         operator=(const EncodedElementsStream&) = delete;
 
-            auto        GetEncodedElements() const noexcept -> const std::wstring&;
-
             auto        ReadData(std::wstring::size_type p_DataSize) -> std::wstring;
             auto        ReadElementCount() -> size_t;
             auto        ReadLong() -> long;
@@ -80,24 +77,6 @@ namespace PCC
         static auto     DecodePathsSeparatorElement(EncodedElementsStream& p_rStream) -> PipelineElementSP;
         static auto     DecodeExecutableElement(wchar_t p_Code,
                                                 EncodedElementsStream& p_rStream) -> PipelineElementSP;
-    };
-
-    //
-    // Exception type thrown when a encoded pipeline string is invalid.
-    //
-    class InvalidPipelineException : public std::exception
-    {
-    public:
-                        InvalidPipelineException() noexcept;
-        explicit        InvalidPipelineException(const std::wstring& p_EncodedElements);
-
-        const std::wstring&
-                        EncodedElements() const noexcept;
-
-        const char*     what() const noexcept override;
-
-    private:
-        std::wstring    m_EncodedElements;      // The pipeline's encoded string.
     };
 
 } // namespace PCC

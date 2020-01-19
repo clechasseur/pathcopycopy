@@ -193,6 +193,11 @@ BEGIN
     IDS_MSYS_PATH_PLUGIN_DESCRIPTION "Copy MS&YS/MSYS2 Path"
     IDS_MSYS_PATH_PLUGIN_HINT 
                             "Copies the path of the file/folder to the clipboard in MSYS/MSYS2 format."
+    IDS_INVALIDPIPELINE     "<< Invalid custom command >>"
+    IDS_INVALIDPIPELINE_LOOP_DETECTED 
+                            "<< Loop detected in custom command elements >>"
+    IDS_INVALIDPIPELINE_POSSIBLE_DOWNGRADE 
+                            "<< Invalid custom command element (possible downgrade) >>"
 END
 
 #endif    // English (United States) resources

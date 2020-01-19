@@ -24,6 +24,7 @@
 #include "PathCopyCopyPrivateTypes.h"
 #include "PluginProvider.h"
 
+#include <exception>
 #include <string>
 
 
@@ -70,8 +71,8 @@ namespace PCC
                         Pipeline(const Pipeline&) = delete;
         Pipeline&       operator=(const Pipeline&) = delete;
 
-        bool            Valid(const PluginProvider* p_pPluginProvider,
-                              GUIDS& p_rsSeenPluginIds) const;
+        void            Validate(const PluginProvider* p_pPluginProvider,
+                                 GUIDS& p_rsSeenPluginIds) const;
 
         void            ModifyPath(std::wstring& p_rPath,
                                    const PluginProvider* p_pPluginProvider) const;
@@ -100,8 +101,8 @@ namespace PCC
         PipelineElement& operator=(PipelineElement&&) = delete;
         virtual         ~PipelineElement() = default;
 
-        virtual bool    Valid(const PluginProvider* p_pPluginProvider,
-                              GUIDS& p_rsSeenPluginIds) const noexcept(false);
+        virtual void    Validate(const PluginProvider* p_pPluginProvider,
+                                 GUIDS& p_rsSeenPluginIds) const noexcept(false);
 
         virtual void    ModifyPath(std::wstring& p_rPath,
                                    const PluginProvider* p_pPluginProvider) const = 0;
@@ -109,6 +110,17 @@ namespace PCC
         virtual bool    ShouldBeEnabledFor(const std::wstring& p_ParentPath,
                                            const std::wstring& p_File,
                                            const PluginProvider* p_pPluginProvider) const noexcept(false);
+    };
+
+    //
+    // Exception type thrown when a pipeline is invalid.
+    //
+    class InvalidPipelineException : public std::runtime_error
+    {
+    public:
+                        [[gsl::suppress(f.6)]]
+                        InvalidPipelineException();
+        explicit        InvalidPipelineException(const char* p_pWhat);
     };
 
 } // namespace PCC

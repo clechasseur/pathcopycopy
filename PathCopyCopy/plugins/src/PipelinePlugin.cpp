@@ -53,7 +53,7 @@ namespace PCC
               m_UseDefaultIcon(p_UseDefaultIcon),
               m_EncodedElements(p_EncodedElements),
               m_spPipeline(),
-              m_PipelineCreated(false)
+              m_PipelineError()
         {
         }
 
@@ -68,21 +68,38 @@ namespace PCC
         //
         const Pipeline* PipelinePlugin::GetPipeline(GUIDS* const p_psSeenPluginIds /*= nullptr*/) const
         {
-            if (!m_PipelineCreated) {
+            if (!m_spPipeline.has_value()) {
                 try {
-                    m_spPipeline = std::make_shared<Pipeline>(m_EncodedElements);
+                    PipelineSP spPipeline = std::make_shared<Pipeline>(m_EncodedElements);
 
                     // Make sure pipeline is valid.
                     GUIDS sSeenPluginIds;
                     GUIDS& rsSeenPluginIds = p_psSeenPluginIds != nullptr ? *p_psSeenPluginIds : sSeenPluginIds;
-                    if (!rsSeenPluginIds.emplace(Id()).second || !m_spPipeline->Valid(m_pPluginProvider, rsSeenPluginIds)) {
-                        m_spPipeline = nullptr;
+                    if (!rsSeenPluginIds.emplace(Id()).second) {
+                        throw InvalidPipelineException(ATL::CStringA(MAKEINTRESOURCEA(IDS_INVALIDPIPELINE_LOOP_DETECTED)));
                     }
-                } catch (const InvalidPipelineException&) {
+                    spPipeline->Validate(m_pPluginProvider, rsSeenPluginIds);
+
+                    m_spPipeline = spPipeline;
+                    m_PipelineError.clear();
+                } catch (const std::exception& e) {
+                    m_spPipeline = std::make_optional<PipelineSP>(nullptr);
+                    m_PipelineError = e.what();
                 }
-                m_PipelineCreated = true;
             }
-            return m_spPipeline.get();
+            return m_spPipeline.value().get();
+        }
+
+        //
+        // Returns any error message retrieved when this plugin's pipeline
+        // has been loaded. Call this if GetPipeline returns nullptr to
+        // perhaps get more information.
+        //
+        // @return Error message. May be empty even if pipeline failed to load.
+        //
+        std::string PipelinePlugin::GetPipelineError() const
+        {
+            return m_PipelineError;
         }
 
         //
@@ -154,6 +171,8 @@ namespace PCC
             const Pipeline* pPipeline = GetPipeline();
             if (pPipeline != nullptr) {
                 pPipeline->ModifyPath(modifiedPath, m_pPluginProvider);
+            } else if (!m_PipelineError.empty()) {
+                modifiedPath = ATL::CStringW(m_PipelineError.c_str());
             }
             return modifiedPath;
         }

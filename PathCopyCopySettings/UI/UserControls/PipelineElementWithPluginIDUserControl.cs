@@ -22,6 +22,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using PathCopyCopy.Settings.Core;
 using PathCopyCopy.Settings.Core.Plugins;
 using PathCopyCopy.Settings.Properties;
@@ -65,7 +66,30 @@ namespace PathCopyCopy.Settings.UI.UserControls
             // First load list of plugins to display in the listbox for the base plugin.
             List<Plugin> plugins;
             using (UserSettings settings = new UserSettings()) {
-                plugins = PluginsRegistry.GetPluginsInDefaultOrder(settings, includePipelinePlugins);
+                List<Plugin> pluginsInDefaultOrder = PluginsRegistry.GetPluginsInDefaultOrder(settings, includePipelinePlugins);
+                if (!includePipelinePlugins) {
+                    // Sufficient when not using pipeline plugins.
+                    plugins = pluginsInDefaultOrder;
+                } else {
+                    // Create sorted dictionary of all plugins from the list above, to be able to perform lookups.
+                    SortedDictionary<Guid, Plugin> dictionaryOfAllPlugins = new SortedDictionary<Guid, Plugin>();
+                    foreach (Plugin plugin in pluginsInDefaultOrder) {
+                        if (!dictionaryOfAllPlugins.ContainsKey(plugin.Id)) {
+                            dictionaryOfAllPlugins.Add(plugin.Id, plugin);
+                        }
+                    }
+
+                    // Use UI display order from settings to order the plugins.
+                    // (See MainForm.LoadSettings for some more details on this process)
+                    List<Guid> uiDisplayOrder = settings.UIDisplayOrder;
+                    if (uiDisplayOrder == null) {
+                        // No display order, just use all plugins in default order
+                        uiDisplayOrder = pluginsInDefaultOrder.Select(plugin => plugin.Id).ToList();
+                    }
+                    SortedSet<Guid> uiDisplayOrderAsSet = new SortedSet<Guid>(uiDisplayOrder);
+                    plugins = PluginsRegistry.OrderPluginsToDisplay(dictionaryOfAllPlugins,
+                        uiDisplayOrder, uiDisplayOrderAsSet, pluginsInDefaultOrder);
+                }
             }
 
             // Add all plugins to the list box.

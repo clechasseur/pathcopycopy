@@ -24,6 +24,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using PathCopyCopy.Settings.Core.Plugins;
 using PathCopyCopy.Settings.Properties;
@@ -113,10 +114,27 @@ namespace PathCopyCopy.Settings.UI.Forms
         /// <param name="e">Event arguments.</param>
         private void PipelinePluginForm_Load(object sender, EventArgs e)
         {
-            // First load list of plugins to display in the listbox for the base
-            // plugin. We only load default and COM plugins for this since we
-            // don't want a pipeline plugin to be based off another (for now at least).
-            List<Plugin> plugins = PluginsRegistry.GetPluginsInDefaultOrder(Settings, false);
+            // First load list of plugins in default order for the base plugin.
+            List<Plugin> pluginsInDefaultOrder = PluginsRegistry.GetPluginsInDefaultOrder(Settings);
+
+            // Create sorted dictionary of all plugins from the list above, to be able to perform lookups.
+            SortedDictionary<Guid, Plugin> dictionaryOfAllPlugins = new SortedDictionary<Guid, Plugin>();
+            foreach (Plugin plugin in pluginsInDefaultOrder) {
+                if (!dictionaryOfAllPlugins.ContainsKey(plugin.Id)) {
+                    dictionaryOfAllPlugins.Add(plugin.Id, plugin);
+                }
+            }
+
+            // Use UI display order from settings to order the plugins.
+            // (See MainForm.LoadSettings for some more details on this process)
+            List<Guid> uiDisplayOrder = Settings.UIDisplayOrder;
+            if (uiDisplayOrder == null) {
+                // No display order, just use all plugins in default order
+                uiDisplayOrder = pluginsInDefaultOrder.Select(plugin => plugin.Id).ToList();
+            }
+            SortedSet<Guid> uiDisplayOrderAsSet = new SortedSet<Guid>(uiDisplayOrder);
+            List<Plugin> plugins = PluginsRegistry.OrderPluginsToDisplay(dictionaryOfAllPlugins,
+                uiDisplayOrder, uiDisplayOrderAsSet, pluginsInDefaultOrder);
 
             // Add all plugins to the list box.
             BasePluginLst.Items.AddRange(plugins.ToArray());
@@ -128,9 +146,9 @@ namespace PathCopyCopy.Settings.UI.Forms
 
                 // Populate our controls.
                 NameTxt.Text = oldPluginInfo.Description;
-                PipelineElement element = oldPipeline.Elements.Find(el => el is ApplyPluginPipelineElement);
+                PipelineElement element = oldPipeline.Elements.Find(el => el is PipelineElementWithPluginID);
                 if (element != null) {
-                    basePluginId = ((ApplyPluginPipelineElement) element).PluginID;
+                    basePluginId = ((PipelineElementWithPluginID) element).PluginID;
                 }
                 if (oldPipeline.Elements.Find(el => el is OptionalQuotesPipelineElement) != null) {
                     QuotesChk.Checked = true;
@@ -257,8 +275,14 @@ namespace PathCopyCopy.Settings.UI.Forms
                 pipeline.Elements.Add(new PathsSeparatorPipelineElement(oldPathsSeparator));
             }
             if (BasePluginLst.SelectedIndex != -1) {
-                pipeline.Elements.Add(new ApplyPluginPipelineElement(
-                    ((Plugin) BasePluginLst.SelectedItem).Id));
+                // If user selected a pipeline plugin, we need to use a different
+                // kind of pipeline element.
+                Plugin selectedPlugin = (Plugin) BasePluginLst.SelectedItem;
+                if (selectedPlugin is PipelinePlugin) {
+                    pipeline.Elements.Add(new ApplyPipelinePluginPipelineElement(selectedPlugin.Id));
+                } else {
+                    pipeline.Elements.Add(new ApplyPluginPipelineElement(selectedPlugin.Id));
+                }
             }
             if (UnexpandEnvStringsChk.Checked) {
                 pipeline.Elements.Add(new UnexpandEnvironmentStringsPipelineElement());

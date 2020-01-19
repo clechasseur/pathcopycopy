@@ -355,23 +355,26 @@ namespace PCC
     // @param p_rsSeenPluginIds Set used to store seen plugin IDs. Any
     //                          collision means a loop is detected and
     //                          pipeline element is invalid.
-    // @return true if pipeline element is valid.
     //
-    bool ApplyPipelinePluginPipelineElement::Valid(const PluginProvider* const p_pPluginProvider,
-                                                   GUIDS& p_rsSeenPluginIds) const
+    void ApplyPipelinePluginPipelineElement::Validate(const PluginProvider* const p_pPluginProvider,
+                                                      GUIDS& p_rsSeenPluginIds) const
     {
-        bool valid = false;
-        if (p_pPluginProvider != nullptr) {
-            // Try finding the plugin we need.
-            const auto spPlugin = p_pPluginProvider->GetPlugin(m_PluginId);
-            if (spPlugin != nullptr) {
-                // To be valid, plugin either has to not be a pipeline plugin
-                // OR it needs to be one and have a valid pipeline.
-                const auto* const pPipelinePlugin = dynamic_cast<PCC::Plugins::PipelinePlugin*>(spPlugin.get());
-                valid = pPipelinePlugin == nullptr || pPipelinePlugin->GetPipeline(&p_rsSeenPluginIds) != nullptr;
-            }
+        if (p_pPluginProvider == nullptr) {
+            throw InvalidPipelineException();
         }
-        return valid;
+
+        // Try finding the plugin we need.
+        const auto spPlugin = p_pPluginProvider->GetPlugin(m_PluginId);
+        if (spPlugin == nullptr) {
+            throw InvalidPipelineException();
+        }
+
+        // To be valid, plugin either has to not be a pipeline plugin
+        // OR it needs to be one and have a valid pipeline.
+        const auto* const pPipelinePlugin = dynamic_cast<PCC::Plugins::PipelinePlugin*>(spPlugin.get());
+        if (pPipelinePlugin != nullptr && pPipelinePlugin->GetPipeline(&p_rsSeenPluginIds) == nullptr) {
+            throw InvalidPipelineException(pPipelinePlugin->GetPipelineError().c_str());
+        }
     }
 
     //

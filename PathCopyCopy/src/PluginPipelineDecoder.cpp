@@ -158,12 +158,12 @@ namespace PCC
             default:
                 // Unknown element type, we can't add it and don't know
                 // how to skip it. Possibly due to a downgrade of PCC?
-                throw InvalidPipelineException(p_rStream.GetEncodedElements());
+                throw InvalidPipelineException(ATL::CStringA(MAKEINTRESOURCEA(IDS_INVALIDPIPELINE_POSSIBLE_DOWNGRADE)));
         }
 
         // Add new element to the pipeline.
         if (spElement == nullptr) {
-            throw InvalidPipelineException(p_rStream.GetEncodedElements());
+            throw InvalidPipelineException();
         }
         return spElement;
     }
@@ -196,7 +196,7 @@ namespace PCC
 
         // Make sure it's a version we can support.
         if (version > REGEX_ELEMENT_MAX_VERSION) {
-            throw InvalidPipelineException(p_rStream.GetEncodedElements());
+            throw InvalidPipelineException(ATL::CStringA(MAKEINTRESOURCEA(IDS_INVALIDPIPELINE_POSSIBLE_DOWNGRADE)));
         }
 
         // Initial version: regex, format string and whether we should ignore case.
@@ -228,7 +228,7 @@ namespace PCC
         CLSID pluginGuid;
         if (FAILED(::CLSIDFromString(guidString.c_str(), &pluginGuid))) {
             // Invalid GUID format.
-            throw InvalidPipelineException(p_rStream.GetEncodedElements());
+            throw InvalidPipelineException();
         }
 
         // We have the plugin GUID, return it.
@@ -237,7 +237,7 @@ namespace PCC
         } else if (p_Code == ELEMENT_CODE_APPLY_PIPELINE_PLUGIN) {
             return std::make_shared<ApplyPipelinePluginPipelineElement>(pluginGuid);
         } else {
-            throw InvalidPipelineException(p_rStream.GetEncodedElements());
+            throw InvalidPipelineException();
         }
     }
 
@@ -272,7 +272,7 @@ namespace PCC
         } else if (p_Code == ELEMENT_CODE_EXECUTABLE_WITH_FILELIST) {
             return std::make_shared<ExecutableWithFilelistPipelineElement>(executable);
         } else {
-            throw InvalidPipelineException(p_rStream.GetEncodedElements());
+            throw InvalidPipelineException();
         }
     }
 
@@ -288,16 +288,6 @@ namespace PCC
     }
 
     //
-    // Returns the string containing encoded elements backing this stream.
-    //
-    // @return String containing all encoded elements.
-    //
-    auto PipelineDecoder::EncodedElementsStream::GetEncodedElements() const noexcept -> const std::wstring&
-    {
-        return m_EncodedElements;
-    }
-
-    //
     // Reads a number of characters from the stream.
     //
     // @param p_DataSize Size of data to read, in number of characters.
@@ -306,7 +296,7 @@ namespace PCC
     auto PipelineDecoder::EncodedElementsStream::ReadData(const std::wstring::size_type p_DataSize) -> std::wstring
     {
         if (m_EncodedElements.size() - m_CurIndex < p_DataSize) {
-            throw InvalidPipelineException(m_EncodedElements);
+            throw InvalidPipelineException();
         }
         std::wstring data = m_EncodedElements.substr(m_CurIndex, p_DataSize);
         m_CurIndex += p_DataSize;
@@ -372,49 +362,9 @@ namespace PCC
         // Boolean values are merely encoded as 0 or 1.
         const wchar_t boolChar = ReadData(1).front();
         if (boolChar != L'0' && boolChar != L'1') {
-            throw InvalidPipelineException(m_EncodedElements);
+            throw InvalidPipelineException();
         }
         return boolChar == L'1';
-    }
-
-    //
-    // Default constructor. Does not set the encoded pipeline string.
-    //
-    InvalidPipelineException::InvalidPipelineException() noexcept
-        : std::exception(),
-          m_EncodedElements()
-    {
-    }
-
-    //
-    // Constructor with encoded pipeline string.
-    //
-    // @param p_EncodedElements Encoded pipeline string.
-    //
-    InvalidPipelineException::InvalidPipelineException(const std::wstring& p_EncodedElements)
-        : std::exception(),
-          m_EncodedElements(p_EncodedElements)
-    {
-    }
-
-    //
-    // Returns a reference to the encoded pipeline string.
-    //
-    // @return Encoded pipeline string reference.
-    //
-    const std::wstring& InvalidPipelineException::EncodedElements() const noexcept
-    {
-        return m_EncodedElements;
-    }
-
-    //
-    // Standardized method returning an exception description.
-    //
-    // @return Exception description.
-    //
-    const char* InvalidPipelineException::what() const noexcept
-    {
-        return "PCC::InvalidPipelineException";
     }
 
 } // namespace PCC

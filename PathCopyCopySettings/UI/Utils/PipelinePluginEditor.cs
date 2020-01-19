@@ -75,10 +75,10 @@ namespace PathCopyCopy.Settings.UI.Utils
             }
 
             // All elements must be of different types, pipeline must not contain any of
-            // the expert-only types and must contain an ApplyPlugin element.
+            // the expert-only types and must contain an ApplyPlugin element (of some kind).
             return pipeline.Elements.Distinct(new PipelineElementEqualityComparerByClassType()).Count() == pipeline.Elements.Count &&
                 pipeline.Elements.All(el => IsElementSimple(el)) &&
-                pipeline.Elements.Any(el => el is ApplyPluginPipelineElement);
+                pipeline.Elements.Any(el => el is PipelineElementWithPluginID);
         }
 
         /// <summary>
@@ -206,7 +206,9 @@ namespace PathCopyCopy.Settings.UI.Utils
                 // Some elements are mutually exclusive, so we'll consider them
                 // the same type so that using Distinct can detect duplicates.
                 Type type = obj.GetType();
-                if (obj is OptionalQuotesPipelineElement) {
+                if (obj is ApplyPipelinePluginPipelineElement) {
+                    type = typeof(ApplyPluginPipelineElement);
+                } else if (obj is OptionalQuotesPipelineElement) {
                     type = typeof(QuotesPipelineElement);
                 } else if (obj is EncodeURIWhitespacePipelineElement) {
                     type = typeof(EncodeURICharsPipelineElement);

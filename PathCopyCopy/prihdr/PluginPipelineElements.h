@@ -308,8 +308,8 @@ namespace PCC
         ApplyPipelinePluginPipelineElement&
                         operator=(const ApplyPipelinePluginPipelineElement&) = delete;
 
-        bool            Valid(const PluginProvider* p_pPluginProvider,
-                              GUIDS& p_rsSeenPluginIds) const override;
+        void            Validate(const PluginProvider* p_pPluginProvider,
+                                 GUIDS& p_rsSeenPluginIds) const override;
     };
 
     //

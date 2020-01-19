@@ -2192,7 +2192,8 @@ namespace PathCopyCopy.Settings.Core.Plugins
                     element = new UnexpandEnvironmentStringsPipelineElement();
                     break;
                 }
-                case ApplyPluginPipelineElement.CODE: {
+                case ApplyPluginPipelineElement.CODE:
+                case ApplyPipelinePluginPipelineElement.CODE: {
                     element = DecodeApplyPluginElement(elementCode, encodedElements, ref curChar);
                     break;
                 }
