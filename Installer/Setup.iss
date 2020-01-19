@@ -77,6 +77,7 @@ Source: ..\bin\Win32\Release\PathCopyCopyCOMPluginExecutor32.exe; DestDir: {app}
 Source: ..\bin\x64\Release\PathCopyCopyCOMPluginExecutor64.exe; DestDir: {app}; Flags: ignoreversion restartreplace overwritereadonly uninsrestartdelete uninsremovereadonly; Check: Is64BitInstallMode
 Source: ..\LICENSE; DestDir: {app}; Flags: overwritereadonly uninsremovereadonly; DestName: LICENSE.TXT
 Source: ..\LICENSE.CommandLineArguments; DestDir: {app}; Flags: overwritereadonly uninsremovereadonly; DestName: LICENSE.CommandLineArguments.TXT
+Source: ..\LICENSE.coveo_linq; DestDir: {app}; Flags: overwritereadonly uninsremovereadonly; DestName: LICENSE.coveo_linq.TXT
 Source: ..\LICENSE.microsoft_gsl; DestDir: {app}; Flags: overwritereadonly uninsremovereadonly; DestName: LICENSE.microsoft_gsl.TXT
 Source: ..\HISTORY; DestDir: {app}; Flags: overwritereadonly uninsremovereadonly; DestName: HISTORY.TXT
 Source: ..\Schemas\PipelinePluginCollection.xsd; DestDir: {app}\Schemas; Flags: overwritereadonly uninsremovereadonly

@@ -48,7 +48,7 @@
 #include <gdiplus.h>
 #pragma warning( pop )
 
-// Under the Windows min and max macros, since they conflict with STL
+// Undef the Windows min and max macros, since they conflict with STL
 // We can't define NOMINMAX because GDI actually needs those macros :(
 #undef min
 #undef max
@@ -74,5 +74,7 @@
 
 // Including this header allows us to suppress C++ Core Guideline warnings more easily
 #include <CppCoreCheck\warnings.h>
+
+#include <coveo/linq.h>
 
 #include <gsl/gsl>
