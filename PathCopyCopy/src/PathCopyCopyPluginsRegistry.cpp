@@ -289,7 +289,18 @@ namespace PCC
         PluginSPV vspPipelinePlugins;
         p_PipelinePluginProvider.GetPipelinePlugins(vspPipelinePlugins);
         if (p_IncludeTempPipelinePlugins) {
-            p_PipelinePluginProvider.GetTempPipelinePlugins(vspPipelinePlugins);
+            // Temp pipeline plugins can actually override existing pipeline plugins to
+            // allow the Settings UI to get previews for temp plugins.
+            PluginSPV vspTempPipelinePlugins;
+            p_PipelinePluginProvider.GetTempPipelinePlugins(vspTempPipelinePlugins);
+
+            using namespace coveo::linq;
+            auto vspUnionOfPipelinePlugins = from(vspTempPipelinePlugins)
+                                           | union_with(vspPipelinePlugins)
+                                           | to_vector();
+            
+            using std::swap;
+            swap(vspPipelinePlugins, vspUnionOfPipelinePlugins);
         }
         if (!vspPipelinePlugins.empty()) {
             if (!p_rvspPlugins.empty() && !p_rvspPlugins.back()->IsSeparator()) {

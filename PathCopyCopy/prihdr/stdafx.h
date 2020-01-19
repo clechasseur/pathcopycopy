@@ -75,6 +75,10 @@
 // Including this header allows us to suppress C++ Core Guideline warnings more easily
 #include <CppCoreCheck\warnings.h>
 
-#include <coveo/linq.h>
-
 #include <gsl/gsl>
+
+// Disable C++ Core checks warnings in coveo::linq since it seems to generate a lot
+#pragma warning(push)
+#pragma warning(disable: ALL_CPPCORECHECK_WARNINGS)
+#include <coveo/linq.h>
+#pragma warning(pop)
