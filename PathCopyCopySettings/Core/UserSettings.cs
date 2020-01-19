@@ -25,6 +25,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using Microsoft.Win32;
 using PathCopyCopy.Settings.Core.Plugins;
 using PathCopyCopy.Settings.Properties;
@@ -838,14 +839,18 @@ namespace PathCopyCopy.Settings.Core
         /// Saves a temporary pipeline plugin to the temp pipeline plugins key.
         /// </summary>
         /// <param name="pluginInfo"><see cref="PipelinePluginInfo"/> to save.</param>
-        public void SaveTempPipelinePlugin(PipelinePluginInfo pluginInfo)
+        /// <returns><c>true</c> if the temp pipeline plugin already existed.</returns>
+        public bool SaveTempPipelinePlugin(PipelinePluginInfo pluginInfo)
         {
             if (pluginInfo == null) {
                 throw new ArgumentNullException(nameof(pluginInfo));
             }
 
+            bool existed = userTempPipelinePluginsKey.GetSubKeyNames().Any(
+                keyName => keyName == pluginInfo.Id.ToString("B", CultureInfo.InvariantCulture));
             List<PipelinePluginInfo> pluginInfos = new List<PipelinePluginInfo> { pluginInfo };
             SavePipelinePlugins(pluginInfos, userTempPipelinePluginsKey, false, false);
+            return existed;
         }
         
         /// <summary>

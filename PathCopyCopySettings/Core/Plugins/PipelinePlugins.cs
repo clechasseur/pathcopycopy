@@ -83,13 +83,12 @@ namespace PathCopyCopy.Settings.Core.Plugins
             }
 
             // Since this plugin might have been modified from its official
-            // version (or it could not exist at all), we'll create a temp
-            // copy, save it to user settings and ask the PCCExecutor to use
-            // this temp copy to get the preview. We also do not cache the
-            // preview since we could change during the lifetime of the app.
-            PipelinePluginInfo tempInfo = Info.CreateTemp();
-            using (new TempPipelinePluginSaver(tempInfo, userSettings)) {
-                return new PCCExecutor().GetPathWithPlugin(tempInfo.Id, PreviewPath);
+            // version (or it could not exist at all), we'll save it as a
+            // temp pipeline plugin, which will override the real one (if any).
+            // We also do not cache the preview since we could change during
+            // the lifetime of the app.
+            using (new TempPipelinePluginSaver(Info, userSettings)) {
+                return new PCCExecutor().GetPathWithPlugin(Id, PreviewPath);
             }
         }
     }

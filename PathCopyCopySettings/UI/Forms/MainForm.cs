@@ -601,19 +601,6 @@ namespace PathCopyCopy.Settings.UI.Forms
             // Perform an initial button update.
             UpdatePluginButtons();
         }
-
-        /// <summary>
-        /// Called when the form is closed. We perform cleanup here.
-        /// </summary>
-        /// <param name="sender">Event sender.</param>
-        /// <param name="e">Event arguments.</param>
-        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            // Dispose of temp pipeline plugins helper, which will
-            // remove all tracked plugins from registry.
-            tempPipelinePluginsHelper?.Dispose();
-            tempPipelinePluginsHelper = null;
-        }
         
         /// <summary>
         /// Called when the user clicks the "Apply" button. We'll need to save
@@ -1051,6 +1038,9 @@ namespace PathCopyCopy.Settings.UI.Forms
                 if (!PluginsDataGrid.Rows[pluginDisplayInfos.Count - 1].Displayed) {
                     PluginsDataGrid.FirstDisplayedScrollingRowIndex = pluginDisplayInfos.Count - 1;
                 }
+
+                // Also add it to temp pipeline plugins.
+                tempPipelinePluginsHelper.Add(pluginInfo);
                     
                 // All this will enable the "Apply" button.
                 ApplyBtn.Enabled = true;
@@ -1123,6 +1113,9 @@ namespace PathCopyCopy.Settings.UI.Forms
                         PluginsDataGrid.FirstDisplayedScrollingRowIndex = rowIndex;
                     }
 
+                    // Re-add the plugin to temp pipeline plugins so that it can be updated.
+                    tempPipelinePluginsHelper.Add(newPluginInfo);
+
                     // All this will enable the "Apply" button.
                     ApplyBtn.Enabled = true;
                 }
@@ -1158,8 +1151,9 @@ namespace PathCopyCopy.Settings.UI.Forms
                     Resources.REMOVE_PIPELINE_PLUGIN_TITLE, MessageBoxButtons.OKCancel,
                     MessageBoxIcon.Warning); 
                 if (res == DialogResult.OK) { 
-                    // Remove plugin from data grid. 
-                    pluginDisplayInfos.RemoveAt(rowIndex); 
+                    // Remove plugin from data grid and from temp pipeline plugins.
+                    pluginDisplayInfos.RemoveAt(rowIndex);
+                    tempPipelinePluginsHelper.Remove(pluginInfo);
  
                     // All this will enable the "Apply" button. 
                     ApplyBtn.Enabled = true; 
@@ -1288,6 +1282,10 @@ namespace PathCopyCopy.Settings.UI.Forms
                                 PluginsDataGrid.Rows[PluginsDataGrid.RowCount - 1].Selected = true;
                                 PluginsDataGrid.FirstDisplayedScrollingRowIndex = PluginsDataGrid.RowCount - 1;
                             }
+
+                            // Since temp pipeline plugins need to be refreshed,
+                            // simply assign everything and let it sort it out.
+                            tempPipelinePluginsHelper.Assign(pluginDisplayInfos.Select(info => info.Plugin));
 
                             // All this will enable the "Apply" button.
                             ApplyBtn.Enabled = true;

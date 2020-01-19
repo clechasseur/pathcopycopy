@@ -34,6 +34,10 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// Object to access user settings.
         private readonly UserSettings settings;
 
+        /// Whether the temp pipeline plugin already existed when we saved it.
+        /// If so, we won't delete it as it is "owned" by someone else.
+        private readonly bool existed;
+
         /// <summary>
         /// Pipeline plugin info to save and delete.
         /// </summary>
@@ -50,10 +54,10 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// <param name="settings">Object to access user settings.</param>
         public TempPipelinePluginSaver(PipelinePluginInfo pluginInfo, UserSettings settings)
         {
-            this.PluginInfo = pluginInfo ?? throw new ArgumentNullException(nameof(pluginInfo));
+            PluginInfo = pluginInfo ?? throw new ArgumentNullException(nameof(pluginInfo));
             this.settings = settings ?? throw new ArgumentNullException(nameof(settings));
 
-            this.settings.SaveTempPipelinePlugin(this.PluginInfo);
+            existed = this.settings.SaveTempPipelinePlugin(PluginInfo);
         }
             
         /// <summary>
@@ -62,13 +66,17 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// </summary>
         ~TempPipelinePluginSaver()
         {
-            settings.DeleteTempPipelinePlugin(PluginInfo);
+            if (!existed) {
+                settings.DeleteTempPipelinePlugin(PluginInfo);
+            }
         }
             
         /// <inheritDoc/>
         public void Dispose()
         {
-            settings.DeleteTempPipelinePlugin(PluginInfo);
+            if (!existed) {
+                settings.DeleteTempPipelinePlugin(PluginInfo);
+            }
             GC.SuppressFinalize(this);
         }
     }
