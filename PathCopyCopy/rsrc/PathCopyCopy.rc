@@ -198,6 +198,7 @@ BEGIN
                             "<< Loop detected in custom command elements >>"
     IDS_INVALIDPIPELINE_POSSIBLE_DOWNGRADE 
                             "<< Invalid custom command element (possible downgrade) >>"
+    IDS_INVALIDPIPELINE_BASE_COMMAND_NOT_FOUND "<< Base command not found >>"
 END
 
 #endif    // English (United States) resources

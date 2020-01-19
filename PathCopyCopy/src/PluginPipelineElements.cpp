@@ -293,6 +293,28 @@ namespace PCC
     }
 
     //
+    // Validates this pipeline element. In order to be valid,
+    // the plugin to apply must exist.
+    //
+    // @param p_pPluginProvider Plugin provider used to fetch plugins.
+    // @param p_rsSeenPluginIds Set used to store seen plugin IDs. Any
+    //                          collision means a loop is detected and
+    //                          pipeline element is invalid.
+    //
+    void ApplyPluginPipelineElement::Validate(const PluginProvider* const p_pPluginProvider,
+                                              GUIDS& p_rsSeenPluginIds) const
+    {
+        PipelineElement::Validate(p_pPluginProvider, p_rsSeenPluginIds);
+
+        if (p_pPluginProvider == nullptr) {
+            throw InvalidPipelineException();
+        }
+        if (p_pPluginProvider->GetPlugin(m_PluginId) == nullptr) {
+            throw InvalidPipelineException(ATL::CStringA(MAKEINTRESOURCEA(IDS_INVALIDPIPELINE_BASE_COMMAND_NOT_FOUND)));
+        }
+    }
+
+    //
     // Modifies the given path by fetching a reference to the plugin we need
     // to apply and call its GetPath method on our path.
     //
@@ -356,21 +378,15 @@ namespace PCC
     //                          collision means a loop is detected and
     //                          pipeline element is invalid.
     //
+    [[gsl::suppress(f.23)]]
     void ApplyPipelinePluginPipelineElement::Validate(const PluginProvider* const p_pPluginProvider,
                                                       GUIDS& p_rsSeenPluginIds) const
     {
-        if (p_pPluginProvider == nullptr) {
-            throw InvalidPipelineException();
-        }
-
-        // Try finding the plugin we need.
-        const auto spPlugin = p_pPluginProvider->GetPlugin(m_PluginId);
-        if (spPlugin == nullptr) {
-            throw InvalidPipelineException();
-        }
+        ApplyPluginPipelineElement::Validate(p_pPluginProvider, p_rsSeenPluginIds);
 
         // To be valid, plugin either has to not be a pipeline plugin
-        // OR it needs to be one and have a valid pipeline.
+        // OR it needs to have a valid pipeline.
+        const auto spPlugin = p_pPluginProvider->GetPlugin(m_PluginId);
         const auto* const pPipelinePlugin = dynamic_cast<PCC::Plugins::PipelinePlugin*>(spPlugin.get());
         if (pPipelinePlugin != nullptr && pPipelinePlugin->GetPipeline(&p_rsSeenPluginIds) == nullptr) {
             throw InvalidPipelineException(pPipelinePlugin->GetPipelineError().c_str());

@@ -284,6 +284,9 @@ namespace PCC
         ApplyPluginPipelineElement&
                         operator=(const ApplyPluginPipelineElement&) = delete;
 
+        void            Validate(const PluginProvider* p_pPluginProvider,
+                                 GUIDS& p_rsSeenPluginIds) const override;
+
         void            ModifyPath(std::wstring& p_rPath,
                                    const PluginProvider* p_pPluginProvider) const override;
         bool            ShouldBeEnabledFor(const std::wstring& p_ParentPath,
