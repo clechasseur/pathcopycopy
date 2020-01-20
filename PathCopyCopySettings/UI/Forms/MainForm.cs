@@ -198,7 +198,8 @@ namespace PathCopyCopy.Settings.UI.Forms
             }
 
             // Load list of plugins in default order.
-            List<Plugin> pluginsInDefaultOrder = PluginsRegistry.GetPluginsInDefaultOrder(settings);
+            List<Plugin> pluginsInDefaultOrder = PluginsRegistry.GetPluginsInDefaultOrder(
+                settings, PipelinePluginsOptions.FetchPipelinePlugins);
 
             // Create sorted dictionary of all plugins from the list above, to be able to perform lookups.
             SortedDictionary<Guid, Plugin> dictionaryOfAllPlugins = new SortedDictionary<Guid, Plugin>();

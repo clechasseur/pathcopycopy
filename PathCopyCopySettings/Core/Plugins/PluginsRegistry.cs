@@ -30,6 +30,20 @@ using PathCopyCopy.Settings.Properties;
 namespace PathCopyCopy.Settings.Core.Plugins
 {
     /// <summary>
+    /// Enum used to specify what kind of pipeline plugin to load
+    /// from the registry. Akin to the <c>PipelinePluginsOptions</c>
+    /// enum in C++ code.
+    /// </summary>
+    [Flags]
+    public enum PipelinePluginsOptions
+    {
+        FetchPipelinePlugins = 0x1,
+        FetchTempPipelinePlugins = 0x2,
+        FetchBoth = FetchPipelinePlugins | FetchTempPipelinePlugins,
+        FetchNone = 0x0,
+    }
+
+    /// <summary>
     /// Registry used to fetch list of plugins and order them for display.
     /// Akin to the <c>PluginsRegistry</c> class in C++ code.
     /// </summary>
@@ -116,26 +130,11 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// </summary>
         /// <param name="settings"><see cref="UserSettings"/> object used to
         /// fetch plugin information.</param>
-        /// <returns>List of <see cref="Plugin"/>s in default order.</returns>
-        /// <remarks>
-        /// This version always returns pipeline plugins.
-        /// </remarks>
-        public static List<Plugin> GetPluginsInDefaultOrder(UserSettings settings)
-        {
-            return GetPluginsInDefaultOrder(settings, true);
-        }
-
-        /// <summary>
-        /// Returns a list containing all plugins to display in the default
-        /// order. This should be used if user did not specify a custom order.
-        /// </summary>
-        /// <param name="settings"><see cref="UserSettings"/> object used to
-        /// fetch plugin information.</param>
-        /// <param name="includePipelinePlugins">Whether to include pipeline
-        /// plugins in the returned list.</param>
+        /// <param name="pipelinePluginsOptions">What kind of pipeline plugins
+        /// to include in the returned list (if any).</param>
         /// <returns>List of <see cref="Plugin"/>s in default order.</returns>
         public static List<Plugin> GetPluginsInDefaultOrder(UserSettings settings,
-            bool includePipelinePlugins)
+            PipelinePluginsOptions pipelinePluginsOptions)
         {
             if (settings == null) {
                 throw new ArgumentNullException(nameof(settings));
@@ -152,9 +151,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
             GetCOMPlugins(plugins);
 
             // Pipeline plugins
-            if (includePipelinePlugins) {
-                GetPipelinePlugins(plugins, settings);
-            }
+            GetPipelinePlugins(plugins, settings, pipelinePluginsOptions);
 
             return plugins;
         }
@@ -423,12 +420,23 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// <param name="plugins">List where to add plugins</param>
         /// <param name="settings"><see cref="UserSettings"/> used to fetch
         /// pipeline plugins.</param>
-        private static void GetPipelinePlugins(List<Plugin> plugins, UserSettings settings)
+        /// <param name="pipelinePluginsOptions">What kind of pipeline plugins
+        /// to add to the list.</param>
+        private static void GetPipelinePlugins(List<Plugin> plugins, UserSettings settings,
+            PipelinePluginsOptions pipelinePluginsOptions)
         {
             Debug.Assert(plugins != null);
-            Debug.Assert(plugins != null);
+            Debug.Assert(settings != null);
 
-            List<PipelinePluginInfo> pluginInfos = settings.PipelinePlugins;
+            List<PipelinePluginInfo> pluginInfos = new List<PipelinePluginInfo>();
+            if ((pipelinePluginsOptions & PipelinePluginsOptions.FetchPipelinePlugins) != 0) {
+                pluginInfos.AddRange(settings.PipelinePlugins);
+            }
+            if ((pipelinePluginsOptions & PipelinePluginsOptions.FetchTempPipelinePlugins) != 0) {
+                // Temp pipeline plugins can actually override existing pipeline plugins.
+                // This mimics the code in PathCopyCopyPluginsRegistry.cpp in the C++ project.
+                pluginInfos = settings.TempPipelinePlugins.Union(pluginInfos).ToList();
+            }
             if (pluginInfos.Count > 0) {
                 if (plugins.Count > 0) {
                     plugins.Add(new SeparatorPlugin());

@@ -625,6 +625,17 @@ namespace PathCopyCopy.Settings.Core
         }
 
         /// <summary>
+        /// List of temp pipeline plugins. These can be saved using
+        /// <see cref="SaveTempPipelinePlugin(PipelinePluginInfo)"/>.
+        /// </summary>
+        public List<PipelinePluginInfo> TempPipelinePlugins
+        {
+            get {
+                return LoadPipelinePlugins(null, userTempPipelinePluginsKey);
+            }
+        }
+
+        /// <summary>
         /// Last ignored software update version. Returns <c>null</c> if no update has been ignored.
         /// </summary>
         public Version IgnoredUpdate

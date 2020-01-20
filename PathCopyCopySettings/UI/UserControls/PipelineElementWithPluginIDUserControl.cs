@@ -66,7 +66,12 @@ namespace PathCopyCopy.Settings.UI.UserControls
             // First load list of plugins to display in the listbox for the base plugin.
             List<Plugin> plugins;
             using (UserSettings settings = new UserSettings()) {
-                List<Plugin> pluginsInDefaultOrder = PluginsRegistry.GetPluginsInDefaultOrder(settings, includePipelinePlugins);
+                // If we're instructed to include pipeline plugins, we actually want *temp*
+                // pipeline plugins saved by the MainForm, in order to get the most recent
+                // snapshot of pipeline plugins.
+                var pipelinePluginsOptions = includePipelinePlugins
+                    ? PipelinePluginsOptions.FetchTempPipelinePlugins : PipelinePluginsOptions.FetchNone;
+                List<Plugin> pluginsInDefaultOrder = PluginsRegistry.GetPluginsInDefaultOrder(settings, pipelinePluginsOptions);
                 if (!includePipelinePlugins) {
                     // Sufficient when not using pipeline plugins.
                     plugins = pluginsInDefaultOrder;

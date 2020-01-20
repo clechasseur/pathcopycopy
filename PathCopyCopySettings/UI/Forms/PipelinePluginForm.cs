@@ -115,7 +115,10 @@ namespace PathCopyCopy.Settings.UI.Forms
         private void PipelinePluginForm_Load(object sender, EventArgs e)
         {
             // First load list of plugins in default order for the base plugin.
-            List<Plugin> pluginsInDefaultOrder = PluginsRegistry.GetPluginsInDefaultOrder(Settings);
+            // Note: we want *temp* pipeline plugins in order to use those saved by the MainForm,
+            // in order to get the most recent snapshot of pipeline plugins.
+            List<Plugin> pluginsInDefaultOrder = PluginsRegistry.GetPluginsInDefaultOrder(
+                Settings, PipelinePluginsOptions.FetchTempPipelinePlugins);
 
             // Create sorted dictionary of all plugins from the list above, to be able to perform lookups.
             SortedDictionary<Guid, Plugin> dictionaryOfAllPlugins = new SortedDictionary<Guid, Plugin>();
