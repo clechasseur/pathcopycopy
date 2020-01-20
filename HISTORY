@@ -5,6 +5,7 @@ Version 18.0 (202?-??-??)
 - New option to copy paths of shortcut (.lnk) files themselves [https://github.com/clechasseur/pathcopycopy/issues/7]
 - New custom command element to follow symbolic links [https://github.com/clechasseur/pathcopycopy/issues/99]
 - New custom command element to replace parts of path with environment variable references if possible [https://github.com/clechasseur/pathcopycopy/issues/65]
+- Custom commands can now be based on other custom commands [https://github.com/clechasseur/pathcopycopy/issues/92]
 
 
 Version 17.1.1 (2019-11-16)
