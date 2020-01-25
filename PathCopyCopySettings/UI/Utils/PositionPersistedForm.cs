@@ -73,13 +73,13 @@ namespace PathCopyCopy.Settings.UI.Utils
             // Don't modify registry in Design mode
             if (!DesignMode) {
                 // Load form information if we have some.
-                Settings.GetFormInformation(FormInfoName, out Point position, out Size size);
-                if (position.X != -1 && position.Y != -1) {
+                Settings.GetFormInformation(FormInfoName, out Point? position, out Size? size);
+                if (position.HasValue) {
                     StartPosition = FormStartPosition.Manual;
-                    Location = position;
+                    Location = position.Value;
                 }
-                if (size.Width != -1 && size.Height != -1) {
-                    Size = size;
+                if (size.HasValue) {
+                    Size = size.Value;
                 }
 
                 // Set flag telling listeners that from now on, any change is size/position

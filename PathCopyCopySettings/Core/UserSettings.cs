@@ -245,9 +245,6 @@ namespace PathCopyCopy.Settings.Core
         /// Separator used between pipeline plugins in the display order string.
         private const char PipelinePluginsDisplayOrderSeparator = ',';
 
-        /// Defaut value for all size and position components of a form.
-        private const int FormsPosSizeDefaultValue = -1;
-
         /// Registry key containing global settings for all users. Can be null for portable installations.
         private readonly RegistryKey globalKey;
 
@@ -886,19 +883,28 @@ namespace PathCopyCopy.Settings.Core
         /// Returns information stored in the settings for the given form.
         /// </summary>
         /// <param name="formName">Name of the form.</param>
-        /// <param name="position">Upon exit, will contain form position information.
-        /// If a component is unavailable, -1 is returned.</param>
-        /// <param name="size">Upon exit, will contain form size information.
-        /// If a component is unavailable, -1 is returned.</param>
-        public void GetFormInformation(string formName, out Point position, out Size size)
+        /// <param name="position">Upon exit, will contain form position information,
+        /// or <c>null</c> if it is unavailable.</param>
+        /// <param name="size">Upon exit, will contain form size information,
+        /// or <c>null</c> if it is unavailable.</param>
+        public void GetFormInformation(string formName, out Point? position, out Size? size)
         {
             Debug.Assert(!string.IsNullOrWhiteSpace(formName));
 
             using (RegistryKey formKey = userFormsKey.OpenSubKey(formName, false)) {
-                position = new Point(GetFormValue(formKey, FormsPosXValueName),
-                    GetFormValue(formKey, FormsPosYValueName));
-                size = new Size(GetFormValue(formKey, FormsSizeWidthValueName),
-                    GetFormValue(formKey, FormsSizeHeightValueName));
+                int? x = GetFormValue(formKey, FormsPosXValueName);
+                int? y = GetFormValue(formKey, FormsPosYValueName);
+                position = null;
+                if (x.HasValue && y.HasValue) {
+                    position = new Point(x.Value, y.Value);
+                }
+
+                int? width = GetFormValue(formKey, FormsSizeWidthValueName);
+                int? height = GetFormValue(formKey, FormsSizeHeightValueName);
+                size = null;
+                if (width.HasValue && height.HasValue) {
+                    size = new Size(width.Value, height.Value);
+                }
             }
         }
 
@@ -1227,10 +1233,10 @@ namespace PathCopyCopy.Settings.Core
         /// Can be <c>null</c> if form information is not available.</param>
         /// <param name="valueName">Name of registry value to look for.</param>
         /// <returns>Form information for value <paramref name="valueName"/>,
-        /// or -1 if no information is available for this form value.</returns>
-        private static int GetFormValue(RegistryKey formKey, string valueName)
+        /// or <c>null</c> if no information is available for this form value.</returns>
+        private static int? GetFormValue(RegistryKey formKey, string valueName)
         {
-            int value = FormsPosSizeDefaultValue;
+            int? value = null;
             if (formKey != null) {
                 object valueObj = formKey.GetValue(valueName);
                 if (valueObj != null) {
