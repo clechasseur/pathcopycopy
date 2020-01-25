@@ -20,6 +20,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -45,6 +46,7 @@ namespace PathCopyCopy.Settings.UI.Utils
         public virtual string FormInfoName
         {
             get {
+                Debug.Assert(GetType() != typeof(PositionPersistedForm));
                 return GetType().FullName;
             }
         }
