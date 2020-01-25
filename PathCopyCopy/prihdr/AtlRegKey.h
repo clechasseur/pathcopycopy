@@ -75,6 +75,9 @@ public:
                                        const wchar_t* p_pValue) noexcept(false) override;
 
     long                DeleteValue(const wchar_t* p_pValueName) noexcept(false) override;
+    
+    std::shared_ptr<RegKey>
+                        CreateSubKey(const wchar_t* p_pKeyName) override;
 
 private:
     mutable ATL::CRegKey m_Key;     // Wrapper for the registry key.

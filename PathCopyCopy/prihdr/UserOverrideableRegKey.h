@@ -70,7 +70,12 @@ public:
 
     long                DeleteValue(const wchar_t* p_pValueName) override;
 
+    std::shared_ptr<RegKey>
+                        CreateSubKey(const wchar_t* p_pKeyName) override;
+
 private:
-    AtlRegKey           m_GlobalKey;       // Wrapper for the global key in HKLM.
-    AtlRegKey           m_UserKey;         // Wrapper for user key in HKCU.
+    const std::wstring  m_KeyPath;          // Path of our registry key.
+    const std::wstring  m_UserKeyPath;      // Path to the user part of our registry key.
+    AtlRegKey           m_GlobalKey;        // Wrapper for the global key in HKLM.
+    AtlRegKey           m_UserKey;          // Wrapper for user key in HKCU.
 };

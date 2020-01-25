@@ -262,3 +262,14 @@ long AtlRegKey::DeleteValue(const wchar_t* const p_pValueName) noexcept(false)
 {
     return m_Key.DeleteValue(p_pValueName);
 }
+
+//
+// Opens or creates a subkey of this registry key.
+//
+// @param p_pKeyName Name of subkey to open or create.
+// @return Wrapper for the subkey.
+//
+std::shared_ptr<RegKey> AtlRegKey::CreateSubKey(const wchar_t* const p_pKeyName)
+{
+    return std::make_shared<AtlRegKey>(m_Key.m_hKey, p_pKeyName, true);
+}

@@ -85,6 +85,10 @@ namespace
     const wchar_t* const    OLD_SETTING_DEFAULT_PLUGIN                      = L"DefaultPlugin";
     const wchar_t* const    OLD_SETTING_PLUGINS_NOT_IN_SUBMENU              = L"PluginsNotInSubmenu";
     const wchar_t* const    OLD_SETTING_PLUGINS_IN_MAIN_MENU                = L"PluginsInMainMenu";
+    const wchar_t* const    OLD_SETTING_MAIN_FORM_POS_X                     = L"SettingsFormPosX";
+    const wchar_t* const    OLD_SETTING_MAIN_FORM_POS_Y                     = L"SettingsFormPosY";
+    const wchar_t* const    OLD_SETTING_MAIN_FORM_SIZE_WIDTH                = L"SettingsFormSizeWidth";
+    const wchar_t* const    OLD_SETTING_MAIN_FORM_SIZE_HEIGHT               = L"SettingsFormSizeHeight";
 
     // Possible values for the EncodeParam setting.
     const wchar_t* const    SETTING_ENCODE_PARAM_VALUE_NONE                 = L"None";
@@ -122,7 +126,14 @@ namespace
     const wchar_t* const    DEFAULT_ICON_MARKER_STRING                      = L"default";
 
     // Name of possible subkeys of the forms key.
+    const wchar_t* const    FORMS_SUBKEY_MAIN_FORM                          = L"PathCopyCopy.Settings.UI.Forms.MainForm";
     const wchar_t* const    FORMS_SUBKEY_PIPELINE_PLUGIN_FORM               = L"PathCopyCopy.Settings.UI.Forms.PipelinePluginForm";
+
+    // Name of values used to save data in subkeys of the forms key.
+    const wchar_t* const    SETTING_FORMS_SUBKEY_X                          = L"X";
+    const wchar_t* const    SETTING_FORMS_SUBKEY_Y                          = L"Y";
+    const wchar_t* const    SETTING_FORMS_SUBKEY_WIDTH                      = L"Width";
+    const wchar_t* const    SETTING_FORMS_SUBKEY_HEIGHT                     = L"Height";
 
 
     //
@@ -1140,6 +1151,7 @@ namespace PCC
         mRevisions.emplace(201601054ul, &ApplyInitialKnownPlugins201601054);
         mRevisions.emplace(201707061ul, &ApplyInitialUIPluginDisplayOrder201707061);
         mRevisions.emplace(202001091ul, &ApplyNewPipelinePluginForm202001091);
+        mRevisions.emplace(202001251ul, &ApplyMainFormSizeAndPositionMove202001251);
 
         // Add any new revisions here.
         
@@ -1393,6 +1405,47 @@ namespace PCC
                                                          isPipelinePluginsFormSubkey);
             if (itProperSubkeyInfo != vSubkeyInfos.cend()) {
                 ::RegDeleteKeyW(itProperSubkeyInfo->m_hParent, itProperSubkeyInfo->m_KeyName.c_str());
+            }
+        }
+    }
+
+    //
+    // Revises the config by moving the saved size and position of the Settings app's MainForm
+    // to the Forms subkey, like other forms.
+    //
+    // @param p_ReviseInfo Bean containing objects to perform revision.
+    //
+    void Settings::Reviser::ApplyMainFormSizeAndPositionMove202001251(const ReviseInfo& p_ReviseInfo)
+    {
+        // Forms' size and positions are all saved in the Forms subkey - except for MainForm which
+        // used to be saved elsewhere. Now MainForm will use the same framework, so move its save
+        // information along the others.
+        if (p_ReviseInfo.m_pFormsKey != nullptr) {
+            RegKey::SubkeyInfoV vSubkeyInfos;
+            p_ReviseInfo.m_pFormsKey->GetSubKeys(vSubkeyInfos);
+            const auto isMainFormSubkey = [](const auto& subkeyInfo) {
+                return subkeyInfo.m_KeyName == FORMS_SUBKEY_MAIN_FORM;
+            };
+            if (std::none_of(vSubkeyInfos.cbegin(), vSubkeyInfos.cend(), isMainFormSubkey)) {
+                // No size/position for the MainForm yet in the new framework, copy the values over.
+                const auto spMainFormSubkey = p_ReviseInfo.m_pFormsKey->CreateSubKey(FORMS_SUBKEY_MAIN_FORM);
+                DWORD value = 0;
+                if (p_ReviseInfo.m_rUserKey.QueryDWORDValue(OLD_SETTING_MAIN_FORM_POS_X, value) == ERROR_SUCCESS) {
+                    spMainFormSubkey->SetDWORDValue(SETTING_FORMS_SUBKEY_X, value);
+                    p_ReviseInfo.m_rUserKey.DeleteValue(OLD_SETTING_MAIN_FORM_POS_X);
+                }
+                if (p_ReviseInfo.m_rUserKey.QueryDWORDValue(OLD_SETTING_MAIN_FORM_POS_Y, value) == ERROR_SUCCESS) {
+                    spMainFormSubkey->SetDWORDValue(SETTING_FORMS_SUBKEY_Y, value);
+                    p_ReviseInfo.m_rUserKey.DeleteValue(OLD_SETTING_MAIN_FORM_POS_Y);
+                }
+                if (p_ReviseInfo.m_rUserKey.QueryDWORDValue(OLD_SETTING_MAIN_FORM_SIZE_WIDTH, value) == ERROR_SUCCESS) {
+                    spMainFormSubkey->SetDWORDValue(SETTING_FORMS_SUBKEY_WIDTH, value);
+                    p_ReviseInfo.m_rUserKey.DeleteValue(OLD_SETTING_MAIN_FORM_SIZE_WIDTH);
+                }
+                if (p_ReviseInfo.m_rUserKey.QueryDWORDValue(OLD_SETTING_MAIN_FORM_SIZE_HEIGHT, value) == ERROR_SUCCESS) {
+                    spMainFormSubkey->SetDWORDValue(SETTING_FORMS_SUBKEY_HEIGHT, value);
+                    p_ReviseInfo.m_rUserKey.DeleteValue(OLD_SETTING_MAIN_FORM_SIZE_HEIGHT);
+                }
             }
         }
     }

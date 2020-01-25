@@ -170,6 +170,7 @@ namespace PCC
             static void ApplyInitialKnownPlugins201601054(const ReviseInfo& p_ReviseInfo);
             static void ApplyInitialUIPluginDisplayOrder201707061(const ReviseInfo& p_ReviseInfo);
             static void ApplyNewPipelinePluginForm202001091(const ReviseInfo& p_ReviseInfo);
+            static void ApplyMainFormSizeAndPositionMove202001251(const ReviseInfo& p_ReviseInfo);
         };
 
         // Implementation of ICOMPluginProvider that uses a specific registry key.

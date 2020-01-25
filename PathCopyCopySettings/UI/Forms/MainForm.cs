@@ -45,7 +45,7 @@ namespace PathCopyCopy.Settings.UI.Forms
     /// it came before that. So it still uses the legacy way of
     /// doing it, with its own entries in user settings.
     /// </remarks>
-    public partial class MainForm : Form
+    public partial class MainForm : PositionPersistedForm
     {
         /// Paths separator that copies multiple paths on the same line.
         private const string PathsSeparatorOnSameLine = " ";
@@ -62,9 +62,6 @@ namespace PathCopyCopy.Settings.UI.Forms
                 { ".ecc", PipelinePluginXmlSerializerVersion.V2 },
                 { ".pccpp", PipelinePluginXmlSerializerVersion.V1 },
             };
-
-        /// Object used to access user settings.
-        private UserSettings settings;
 
         /// Helper that saves temp pipeline plugins to registry.
         private TempPipelinePluginsHelper tempPipelinePluginsHelper;
@@ -177,29 +174,9 @@ namespace PathCopyCopy.Settings.UI.Forms
         /// </summary>
         private void LoadUserSettings()
         {
-            Debug.Assert(settings != null);
-
-            // Check if we remembered form position.
-            int posX = settings.SettingsFormPosX;
-            int posY = settings.SettingsFormPosY;
-            if (posX >= 0 && posY >= 0) {
-                StartPosition = FormStartPosition.Manual;
-                Location = new Point(posX, posY);
-            }
-
-            // Check if we remembered form size.
-            int sizeWidth = settings.SettingsFormSizeWidth;
-            int sizeHeight = settings.SettingsFormSizeHeight;
-            if (sizeWidth >= MinimumSize.Width) {
-                Size = new Size(sizeWidth, Size.Height);
-            }
-            if (sizeHeight >= MinimumSize.Height) {
-                Size = new Size(Size.Width, sizeHeight);
-            }
-
             // Load list of plugins in default order.
             List<Plugin> pluginsInDefaultOrder = PluginsRegistry.GetPluginsInDefaultOrder(
-                settings, PipelinePluginsOptions.FetchPipelinePlugins);
+                Settings, PipelinePluginsOptions.FetchPipelinePlugins);
 
             // Create sorted dictionary of all plugins from the list above, to be able to perform lookups.
             SortedDictionary<Guid, Plugin> dictionaryOfAllPlugins = new SortedDictionary<Guid, Plugin>();
@@ -214,7 +191,7 @@ namespace PathCopyCopy.Settings.UI.Forms
             // "known plugins" also because we want to display any plugin not in UI display
             // order at the end, otherwise we might skip displaying known plugins that are
             // not in UI display order setting.)
-            List<Guid> uiDisplayOrder = settings.UIDisplayOrder;
+            List<Guid> uiDisplayOrder = Settings.UIDisplayOrder;
             if (uiDisplayOrder == null) {
                 // No display order, just use all plugins in default order
                 uiDisplayOrder = pluginsInDefaultOrder.Select(plugin => plugin.Id).ToList();
@@ -229,12 +206,12 @@ namespace PathCopyCopy.Settings.UI.Forms
 
             // Create helper to track temp pipeline plugins and assign our existing plugins
             // so they are initially saved to registry.
-            tempPipelinePluginsHelper = new TempPipelinePluginsHelper(settings);
+            tempPipelinePluginsHelper = new TempPipelinePluginsHelper();
             tempPipelinePluginsHelper.Assign(pluginDisplayInfos.Select(info => info.Plugin));
 
             // Scan display infos and set the ShowInMainMenu/Submenu fields
             // according to whether plugins are found in corresponding settings.
-            List<Guid> mainMenuDisplayOrder = settings.MainMenuDisplayOrder;
+            List<Guid> mainMenuDisplayOrder = Settings.MainMenuDisplayOrder;
             SortedSet<Guid> mainMenuPlugins;
             if (mainMenuDisplayOrder != null) {
                 mainMenuPlugins = new SortedSet<Guid>(mainMenuDisplayOrder);
@@ -244,7 +221,7 @@ namespace PathCopyCopy.Settings.UI.Forms
                     new Guid(Resources.LONG_PATH_PLUGIN_ID),
                 };
             }
-            List<Guid> submenuDisplayOrder = settings.SubmenuDisplayOrder;
+            List<Guid> submenuDisplayOrder = Settings.SubmenuDisplayOrder;
             SortedSet<Guid> submenuPlugins;
             if (submenuDisplayOrder != null) {
                 submenuPlugins = new SortedSet<Guid>(submenuDisplayOrder);
@@ -263,29 +240,29 @@ namespace PathCopyCopy.Settings.UI.Forms
             PluginsDataGridBindingSource.DataSource = pluginDisplayInfos;
 
             // Set options checkboxes.
-            AddQuotesChk.Checked = settings.AddQuotes;
+            AddQuotesChk.Checked = Settings.AddQuotes;
             if (AddQuotesChk.Checked) {
-                AreQuotesOptionalChk.Checked = settings.AreQuotesOptional;
+                AreQuotesOptionalChk.Checked = Settings.AreQuotesOptional;
             }
-            EmailLinksChk.Checked = settings.MakeEmailLinks;
-            AppendSepForDirChk.Checked = settings.AppendSeparatorForDirectories;
-            HiddenSharesChk.Checked = settings.UseHiddenShares;
-            UseFQDNChk.Checked = settings.UseFQDN;
-            AlwaysShowSubmenuChk.Checked = settings.AlwaysShowSubmenu;
-            UseIconForSubmenuChk.Checked = settings.UseIconForSubmenu;
-            UsePreviewModeChk.Checked = settings.UsePreviewMode;
+            EmailLinksChk.Checked = Settings.MakeEmailLinks;
+            AppendSepForDirChk.Checked = Settings.AppendSeparatorForDirectories;
+            HiddenSharesChk.Checked = Settings.UseHiddenShares;
+            UseFQDNChk.Checked = Settings.UseFQDN;
+            AlwaysShowSubmenuChk.Checked = Settings.AlwaysShowSubmenu;
+            UseIconForSubmenuChk.Checked = Settings.UseIconForSubmenu;
+            UsePreviewModeChk.Checked = Settings.UsePreviewMode;
             if (UsePreviewModeChk.Checked) {
-                UsePreviewModeInMainMenuChk.Checked = settings.UsePreviewModeInMainMenu;
+                UsePreviewModeInMainMenuChk.Checked = Settings.UsePreviewModeInMainMenu;
             }
-            DropRedundantWordsChk.Checked = settings.DropRedundantWords;
-            TrueLnkPathsChk.Checked = settings.TrueLnkPaths;
-            EnableSoftwareUpdateChk.Checked = !settings.DisableSoftwareUpdate;
+            DropRedundantWordsChk.Checked = Settings.DropRedundantWords;
+            TrueLnkPathsChk.Checked = Settings.TrueLnkPaths;
+            EnableSoftwareUpdateChk.Checked = !Settings.DisableSoftwareUpdate;
 
             // Set binding list as data source for the combo box used to pick ctrl key plugin.
             CtrlKeyPluginComboBindingSource.DataSource = pluginDisplayInfos;
 
             // Encode param is a little special since it has two checkboxes.
-            switch (settings.EncodeParam) {
+            switch (Settings.EncodeParam) {
                 case UserSettings.StringEncodeParam.None: {
                     break;
                 }
@@ -299,7 +276,7 @@ namespace PathCopyCopy.Settings.UI.Forms
                     break;
                 }
                 default: {
-                    Debug.Fail($"Unknown encode param: {settings.EncodeParam}");
+                    Debug.Fail($"Unknown encode param: {Settings.EncodeParam}");
                     EncodeURIWhitespaceChk.Enabled = false;
                     break;
                 }
@@ -307,7 +284,7 @@ namespace PathCopyCopy.Settings.UI.Forms
 
             // "Copy on same line" is a little special since it could be any string.
             Debug.Assert(!CopyOnSameLineChk.Checked);
-            string pathsSeparator = settings.PathsSeparator;
+            string pathsSeparator = Settings.PathsSeparator;
             if (pathsSeparator == PathsSeparatorOnSameLine) {
                 CopyOnSameLineChk.Checked = true;
             } else if (!string.IsNullOrEmpty(pathsSeparator)) {
@@ -315,7 +292,7 @@ namespace PathCopyCopy.Settings.UI.Forms
             }
 
             // Ctrl key plugin is a little special since there's a combo box to update.
-            Guid? ctrlKeyPluginId = settings.CtrlKeyPlugin;
+            Guid? ctrlKeyPluginId = Settings.CtrlKeyPlugin;
             if (ctrlKeyPluginId.HasValue && !ctrlKeyPluginId.Value.Equals(new SeparatorPlugin().Id)) {
                 for (int i = 0; i < pluginDisplayInfos.Count; ++i) {
                     if (pluginDisplayInfos[i].Plugin.Id == ctrlKeyPluginId.Value) {
@@ -338,7 +315,6 @@ namespace PathCopyCopy.Settings.UI.Forms
         /// </summary>
         private void SaveUserSettings()
         {
-            Debug.Assert(settings != null);
             Debug.Assert(pluginDisplayInfos != null);
 
             // Build list of plugin IDs to save in config for main menu.
@@ -353,7 +329,7 @@ namespace PathCopyCopy.Settings.UI.Forms
             if (mainMenuDisplayOrder.Count == 1 && mainMenuDisplayOrder[0] == new Guid(Resources.LONG_PATH_PLUGIN_ID)) {
                 mainMenuDisplayOrder = null;
             }
-            settings.MainMenuDisplayOrder = mainMenuDisplayOrder;
+            Settings.MainMenuDisplayOrder = mainMenuDisplayOrder;
 
             // Build list of plugin IDs to save in config for submenu.
             // This is more complicated as we need to include separators.
@@ -375,22 +351,22 @@ namespace PathCopyCopy.Settings.UI.Forms
             if (submenuDisplayOrder.Count > 0 && submenuDisplayOrder[submenuDisplayOrder.Count - 1] == separator.Id) {
                 submenuDisplayOrder.RemoveAt(submenuDisplayOrder.Count - 1);
             }
-            settings.SubmenuDisplayOrder = submenuDisplayOrder;
+            Settings.SubmenuDisplayOrder = submenuDisplayOrder;
 
             // Build list of plugin IDs to save in config for the UI.
             // This is also easy as we basically save everything.
             List<Guid> uiDisplayOrder = pluginDisplayInfos.Select(info => info.Plugin.Id).ToList();
-            settings.UIDisplayOrder = uiDisplayOrder;
+            Settings.UIDisplayOrder = uiDisplayOrder;
 
             // Build set of known plugins from the UI display order and save it in config.
             List<Guid> knownPlugins = new SortedSet<Guid>(uiDisplayOrder).ToList();
-            settings.KnownPlugins = knownPlugins;
+            Settings.KnownPlugins = knownPlugins;
 
             // Save icon files for default plugins. Icon files for pipeline plugins
             // are saved with the pipeline plugins, below.
             foreach (PluginDisplayInfo displayInfo in pluginDisplayInfos) {
                 if (displayInfo.Plugin is DefaultPlugin) {
-                    settings.SetIconFileOfPlugin(displayInfo.Plugin.Id, displayInfo.Plugin.IconFile);
+                    Settings.SetIconFileOfPlugin(displayInfo.Plugin.Id, displayInfo.Plugin.IconFile);
                 }
             }
 
@@ -401,47 +377,47 @@ namespace PathCopyCopy.Settings.UI.Forms
                                   .ToList();
 
             // Save pipeline plugins in config.
-            settings.PipelinePlugins = pipelinePluginInfos;
+            Settings.PipelinePlugins = pipelinePluginInfos;
 
             // Save options.
-            if (AddQuotesChk.Checked != settings.AddQuotes) {
-                settings.AddQuotes = AddQuotesChk.Checked;
+            if (AddQuotesChk.Checked != Settings.AddQuotes) {
+                Settings.AddQuotes = AddQuotesChk.Checked;
             }
-            if ((AreQuotesOptionalChk.Enabled && AreQuotesOptionalChk.Checked) != settings.AreQuotesOptional) {
-                settings.AreQuotesOptional = AreQuotesOptionalChk.Enabled && AreQuotesOptionalChk.Checked;
+            if ((AreQuotesOptionalChk.Enabled && AreQuotesOptionalChk.Checked) != Settings.AreQuotesOptional) {
+                Settings.AreQuotesOptional = AreQuotesOptionalChk.Enabled && AreQuotesOptionalChk.Checked;
             }
-            if (EmailLinksChk.Checked != settings.MakeEmailLinks) {
-                settings.MakeEmailLinks = EmailLinksChk.Checked;
+            if (EmailLinksChk.Checked != Settings.MakeEmailLinks) {
+                Settings.MakeEmailLinks = EmailLinksChk.Checked;
             }
-            if (AppendSepForDirChk.Checked != settings.AppendSeparatorForDirectories) {
-                settings.AppendSeparatorForDirectories = AppendSepForDirChk.Checked;
+            if (AppendSepForDirChk.Checked != Settings.AppendSeparatorForDirectories) {
+                Settings.AppendSeparatorForDirectories = AppendSepForDirChk.Checked;
             }
-            if (HiddenSharesChk.Checked != settings.UseHiddenShares) {
-                settings.UseHiddenShares = HiddenSharesChk.Checked;
+            if (HiddenSharesChk.Checked != Settings.UseHiddenShares) {
+                Settings.UseHiddenShares = HiddenSharesChk.Checked;
             }
-            if (UseFQDNChk.Checked != settings.UseFQDN) {
-                settings.UseFQDN = UseFQDNChk.Checked;
+            if (UseFQDNChk.Checked != Settings.UseFQDN) {
+                Settings.UseFQDN = UseFQDNChk.Checked;
             }
-            if (AlwaysShowSubmenuChk.Checked != settings.AlwaysShowSubmenu) {
-                settings.AlwaysShowSubmenu = AlwaysShowSubmenuChk.Checked;
+            if (AlwaysShowSubmenuChk.Checked != Settings.AlwaysShowSubmenu) {
+                Settings.AlwaysShowSubmenu = AlwaysShowSubmenuChk.Checked;
             }
-            if (UseIconForSubmenuChk.Checked != settings.UseIconForSubmenu) {
-                settings.UseIconForSubmenu = UseIconForSubmenuChk.Checked;
+            if (UseIconForSubmenuChk.Checked != Settings.UseIconForSubmenu) {
+                Settings.UseIconForSubmenu = UseIconForSubmenuChk.Checked;
             }
-            if (UsePreviewModeChk.Checked != settings.UsePreviewMode) {
-                settings.UsePreviewMode = UsePreviewModeChk.Checked;
+            if (UsePreviewModeChk.Checked != Settings.UsePreviewMode) {
+                Settings.UsePreviewMode = UsePreviewModeChk.Checked;
             }
-            if ((UsePreviewModeInMainMenuChk.Enabled && UsePreviewModeInMainMenuChk.Checked) != settings.UsePreviewModeInMainMenu) {
-                settings.UsePreviewModeInMainMenu = UsePreviewModeInMainMenuChk.Enabled && UsePreviewModeInMainMenuChk.Checked;
+            if ((UsePreviewModeInMainMenuChk.Enabled && UsePreviewModeInMainMenuChk.Checked) != Settings.UsePreviewModeInMainMenu) {
+                Settings.UsePreviewModeInMainMenu = UsePreviewModeInMainMenuChk.Enabled && UsePreviewModeInMainMenuChk.Checked;
             }
-            if (DropRedundantWordsChk.Checked != settings.DropRedundantWords) {
-                settings.DropRedundantWords = DropRedundantWordsChk.Checked;
+            if (DropRedundantWordsChk.Checked != Settings.DropRedundantWords) {
+                Settings.DropRedundantWords = DropRedundantWordsChk.Checked;
             }
-            if (TrueLnkPathsChk.Checked != settings.TrueLnkPaths) {
-                settings.TrueLnkPaths = TrueLnkPathsChk.Checked;
+            if (TrueLnkPathsChk.Checked != Settings.TrueLnkPaths) {
+                Settings.TrueLnkPaths = TrueLnkPathsChk.Checked;
             }
-            if (EnableSoftwareUpdateChk.Checked != (!settings.DisableSoftwareUpdate)) {
-                settings.DisableSoftwareUpdate = !EnableSoftwareUpdateChk.Checked;
+            if (EnableSoftwareUpdateChk.Checked != (!Settings.DisableSoftwareUpdate)) {
+                Settings.DisableSoftwareUpdate = !EnableSoftwareUpdateChk.Checked;
             }
 
             // Encode param is a little special (see above)
@@ -455,15 +431,15 @@ namespace PathCopyCopy.Settings.UI.Forms
             } else {
                 encodeParam = UserSettings.StringEncodeParam.None;
             }
-            if (encodeParam != settings.EncodeParam) {
-                settings.EncodeParam = encodeParam;
+            if (encodeParam != Settings.EncodeParam) {
+                Settings.EncodeParam = encodeParam;
             }
 
             // "Copy on same line" is a little special (see above)
             if (CopyOnSameLineChk.Enabled) {
                 string pathsSeparator = CopyOnSameLineChk.Checked ? PathsSeparatorOnSameLine : string.Empty;
-                if (pathsSeparator != settings.PathsSeparator) {
-                    settings.PathsSeparator = pathsSeparator;
+                if (pathsSeparator != Settings.PathsSeparator) {
+                    Settings.PathsSeparator = pathsSeparator;
                 }
             }
 
@@ -472,8 +448,8 @@ namespace PathCopyCopy.Settings.UI.Forms
             if (CtrlKeyPluginChk.Checked && CtrlKeyPluginCombo.SelectedIndex != -1) {
                 ctrlKeyPluginId = (CtrlKeyPluginCombo.SelectedValue as Plugin).Id;
             }
-            if (!ctrlKeyPluginId.Equals(settings.CtrlKeyPlugin)) {
-                settings.CtrlKeyPlugin = ctrlKeyPluginId;
+            if (!ctrlKeyPluginId.Equals(Settings.CtrlKeyPlugin)) {
+                Settings.CtrlKeyPlugin = ctrlKeyPluginId;
             }
 
             // Now that everything is saved, disable the "Apply button".
@@ -595,8 +571,7 @@ namespace PathCopyCopy.Settings.UI.Forms
         /// <param name="e">Event arguments.</param>
         private void MainForm_Load(object sender, EventArgs e)
         {
-            // Create user settings object and load settings in the form.
-            settings = new UserSettings();
+            // Load settings in the form.
             LoadUserSettings();
 
             // Perform an initial button update.
@@ -1301,34 +1276,6 @@ namespace PathCopyCopy.Settings.UI.Forms
                     MessageBox.Show(this, Resources.MainForm_Error_ImportPipelinePluginEmptyXML,
                         Resources.MainForm_Confirm_ImportMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            }
-        }
-
-        /// <summary>
-        /// Called when the form's location changes.
-        /// </summary>
-        /// <param name="sender">Event sender.</param>
-        /// <param name="e">Event arguments.</param>
-        private void MainForm_LocationChanged(object sender, EventArgs e)
-        {
-            if (settings != null) {
-                // Save location in settings right away; this is not saved at the end like other settings.
-                settings.SettingsFormPosX = Location.X;
-                settings.SettingsFormPosY = Location.Y;
-            }
-        }
-
-        /// <summary>
-        /// Called when the form's size changes.
-        /// </summary>
-        /// <param name="sender">Event sender.</param>
-        /// <param name="e">Event arguments.</param>
-        private void MainForm_SizeChanged(object sender, EventArgs e)
-        {
-            if (settings != null) {
-                // Save size in settings right away; this is not saved at the end like other settings.
-                settings.SettingsFormSizeWidth = Size.Width;
-                settings.SettingsFormSizeHeight = Size.Height;
             }
         }
 

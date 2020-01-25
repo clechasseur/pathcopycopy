@@ -21,6 +21,7 @@
 
 #pragma once
 
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -175,6 +176,17 @@ public:
                         // @return Result code (ERROR_SUCCESS if it worked).
                         //
     virtual long        DeleteValue(const wchar_t* p_pValueName) = 0;
+
+                        //
+                        // Creates a subkey of this registry key.
+                        //
+                        // @param p_pKeyName - Name of the subkey to create.
+                        // @return Object wrapping the new subkey.
+                        // @remarks If the key already exist, this method
+                        //          will open it and return a valid wrapper.
+                        //
+    virtual std::shared_ptr<RegKey>
+                        CreateSubKey(const wchar_t* p_pKeyName) = 0;
 
 protected:
                         RegKey() noexcept = default;

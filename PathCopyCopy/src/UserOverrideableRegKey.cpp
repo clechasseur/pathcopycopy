@@ -46,8 +46,10 @@ namespace
 UserOverrideableRegKey::UserOverrideableRegKey(const wchar_t* const p_pKeyPath,
                                                const wchar_t* const p_pUserKeyPath /*= nullptr*/)
     : RegKey(),
-      m_GlobalKey(HKEY_LOCAL_MACHINE, p_pKeyPath, false, KEY_QUERY_VALUE | KEY_ENUMERATE_SUB_KEYS),
-      m_UserKey(HKEY_CURRENT_USER, p_pUserKeyPath != nullptr ? p_pUserKeyPath : p_pKeyPath, true,
+      m_KeyPath(p_pKeyPath),
+      m_UserKeyPath(p_pUserKeyPath != nullptr ? p_pUserKeyPath : p_pKeyPath),
+      m_GlobalKey(HKEY_LOCAL_MACHINE, m_KeyPath.c_str(), false, KEY_QUERY_VALUE | KEY_ENUMERATE_SUB_KEYS),
+      m_UserKey(HKEY_CURRENT_USER, m_UserKeyPath.c_str(), true,
                 KEY_QUERY_VALUE | KEY_SET_VALUE | KEY_CREATE_SUB_KEY | KEY_ENUMERATE_SUB_KEYS)
 {
 }
@@ -359,4 +361,16 @@ long UserOverrideableRegKey::DeleteValue(const wchar_t* const p_pValueName)
         res = m_UserKey.DeleteValue(p_pValueName);
     }
     return res;
+}
+
+//
+// Opens or creates a subkey of this registry key.
+//
+// @param p_pKeyName Name of the subkey to open or create.
+// @return Wrapper for the subkey.
+//
+std::shared_ptr<RegKey> UserOverrideableRegKey::CreateSubKey(const wchar_t* const p_pKeyName)
+{
+    return std::make_shared<UserOverrideableRegKey>((m_KeyPath + L"\\" + p_pKeyName).c_str(),
+                                                    (m_UserKeyPath + L"\\" + p_pKeyName).c_str());
 }

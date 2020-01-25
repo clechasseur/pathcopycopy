@@ -91,16 +91,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         private readonly List<TempPipelinePluginSaver> tempPipelinePluginSavers = new List<TempPipelinePluginSaver>();
 
         /// Object to access user settings.
-        private readonly UserSettings settings;
-
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="userSettings">Object to access user settings.</param>
-        public TempPipelinePluginsHelper(UserSettings settings)
-        {
-            this.settings = settings ?? throw new ArgumentNullException(nameof(settings));
-        }
+        private readonly UserSettings settings = new UserSettings();
 
         /// <summary>
         /// Finalizer. Clears tracked temp pipeline plugins.
@@ -108,12 +99,14 @@ namespace PathCopyCopy.Settings.Core.Plugins
         ~TempPipelinePluginsHelper()
         {
             Clear();
+            settings.Dispose();
         }
             
         /// <inheritDoc/>
         public void Dispose()
         {
             Clear();
+            settings.Dispose();
             GC.SuppressFinalize(this);
         }
 
