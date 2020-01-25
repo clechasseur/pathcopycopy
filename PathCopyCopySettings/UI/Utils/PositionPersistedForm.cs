@@ -46,7 +46,6 @@ namespace PathCopyCopy.Settings.UI.Utils
         public virtual string FormInfoName
         {
             get {
-                Debug.Assert(GetType() != typeof(PositionPersistedForm));
                 return GetType().FullName;
             }
         }
@@ -71,19 +70,22 @@ namespace PathCopyCopy.Settings.UI.Utils
         /// <param name="e">Event arguments.</param>
         private void PositionPersistedForm_Load(object sender, EventArgs e)
         {
-            // Load form information if we have some.
-            Settings.GetFormInformation(FormInfoName, out Point position, out Size size);
-            if (position.X != -1 && position.Y != -1) {
-                StartPosition = FormStartPosition.Manual;
-                Location = position;
-            }
-            if (size.Width != -1 && size.Height != -1) {
-                Size = size;
-            }
+            // Don't modify registry in Design mode
+            if (!DesignMode) {
+                // Load form information if we have some.
+                Settings.GetFormInformation(FormInfoName, out Point position, out Size size);
+                if (position.X != -1 && position.Y != -1) {
+                    StartPosition = FormStartPosition.Manual;
+                    Location = position;
+                }
+                if (size.Width != -1 && size.Height != -1) {
+                    Size = size;
+                }
 
-            // Set flag telling listeners that from now on, any change is size/position
-            // must be persisted to user settings.
-            canSaveFormInfo = true;
+                // Set flag telling listeners that from now on, any change is size/position
+                // must be persisted to user settings.
+                canSaveFormInfo = true;
+            }
         }
 
         /// <summary>
