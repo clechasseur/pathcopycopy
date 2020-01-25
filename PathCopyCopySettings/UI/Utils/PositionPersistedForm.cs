@@ -76,7 +76,7 @@ namespace PathCopyCopy.Settings.UI.Utils
                 Settings.GetFormInformation(FormInfoName, out Point? position, out Size? size);
                 if (position.HasValue) {
                     StartPosition = FormStartPosition.Manual;
-                    Location = position.Value;
+                    Location = GetVisiblePoint(position.Value, true);
                 }
                 if (size.HasValue) {
                     Size = size.Value;
@@ -112,6 +112,44 @@ namespace PathCopyCopy.Settings.UI.Utils
             if (canSaveFormInfo) {
                 Settings.SetFormInformation(FormInfoName, null, Size);
             }
+        }
+
+        /// <summary>
+        /// Returns the given point or, if it's not visible on a monitor,
+        /// the closest visible point.
+        /// </summary>
+        /// <param name="point">Point to validate.</param>
+        /// <param name="leaveSomeRoom">If <c>true</c> we'll leave some room
+        /// at the bottom/right corner of the screen so we can see the point.
+        /// Use this for top/left window points for example.</param>
+        /// <returns>Visible point close to <paramref name="point"/>.</returns>
+        private static Point GetVisiblePoint(Point point, bool leaveSomeRoom)
+        {
+            Rectangle workingArea = Screen.GetWorkingArea(point);
+            if (leaveSomeRoom) {
+                workingArea.Width -= 10;
+                workingArea.Height -= 10;
+            }
+            if (workingArea.Contains(point)) {
+                // Point is visible in the working area of the monitor, simply return it.
+                return point;
+            }
+            int newX, newY;
+            if (point.X < workingArea.Left) {
+                newX = workingArea.Left;
+            } else if (point.X > workingArea.Right) {
+                newX = workingArea.Right;
+            } else {
+                newX = point.X;
+            }
+            if (point.Y < workingArea.Top) {
+                newY = workingArea.Top;
+            } else if (point.Y > workingArea.Bottom) {
+                newY = workingArea.Bottom;
+            } else {
+                newY = point.Y;
+            }
+            return new Point(newX, newY);
         }
     }
 }
