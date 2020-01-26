@@ -1,5 +1,5 @@
 // InternetPathPlugin.cpp
-// (c) 2010-2019, Charles Lechasseur
+// (c) 2010-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -30,14 +30,14 @@
 
 namespace
 {
-    const std::wstring  NETWORK_SHARE_PREFIX    = L"\\\\";      // Prefix of string for network share paths
-    const std::wstring  FILE_URI_PREFIX         = L"file:///";  // Prefix of file URI paths
-    const std::wstring  NETWORK_FILE_URI_PREFIX = L"file://";   // Prefix of network file URI paths
-    const std::wstring  WHITESPACE_TO_ESCAPE    = L"\t\r ";     // Whitespace to escape in internet paths
-    const std::wstring  WHITESPACE_ESCAPE_SEQ   = L"%20";       // Escape sequence to use instead of whitespace
+    const wchar_t* const NETWORK_SHARE_PREFIX       = L"\\\\";      // Prefix of string for network share paths
+    const wchar_t* const FILE_URI_PREFIX            = L"file:///";  // Prefix of file URI paths
+    const wchar_t* const NETWORK_FILE_URI_PREFIX    = L"file://";   // Prefix of network file URI paths
+    const wchar_t* const WHITESPACE_TO_ESCAPE       = L"\t\r ";     // Whitespace to escape in internet paths
+    const wchar_t* const WHITESPACE_ESCAPE_SEQ      = L"%20";       // Escape sequence to use instead of whitespace
 
     // Plugin unique ID: {8F2ADCCC-9693-407d-9300-FCCB9A12B982}
-    const GUID          INTERNET_PATH_PLUGIN_ID = { 0x8f2adccc, 0x9693, 0x407d, { 0x93, 0x0, 0xfc, 0xcb, 0x9a, 0x12, 0xb9, 0x82 } };
+    const GUID INTERNET_PATH_PLUGIN_ID = { 0x8f2adccc, 0x9693, 0x407d, { 0x93, 0x0, 0xfc, 0xcb, 0x9a, 0x12, 0xb9, 0x82 } };
 
 } // anonymous namespace
 
@@ -48,7 +48,7 @@ namespace PCC
         //
         // Constructor.
         //
-        InternetPathPlugin::InternetPathPlugin()
+        InternetPathPlugin::InternetPathPlugin() noexcept(false)
             : LongUNCPathPlugin(IDS_INTERNET_PATH_PLUGIN_DESCRIPTION, IDS_INTERNET_PATH_PLUGIN_DESCRIPTION, IDS_INTERNET_PATH_PLUGIN_HINT)
         {
         }
@@ -58,7 +58,7 @@ namespace PCC
         //
         // @return Unique identifier.
         //
-        const GUID& InternetPathPlugin::Id() const
+        const GUID& InternetPathPlugin::Id() const noexcept(false)
         {
             return INTERNET_PATH_PLUGIN_ID;
         }
@@ -74,7 +74,7 @@ namespace PCC
         // @return always true to tell PCC to enable our plugin.
         //
         bool InternetPathPlugin::Enabled(const std::wstring& /*p_ParentPath*/,
-                                         const std::wstring& /*p_File*/) const
+                                         const std::wstring& /*p_File*/) const noexcept(false)
         {
             return true;
         }
@@ -91,11 +91,11 @@ namespace PCC
             std::wstring path = LongUNCPathPlugin::GetPath(p_File);
 
             // There are two possible formats we use. For local files, we use
-            // C:\path\to\file -> file://C:/path/to/file
+            // C:\path\to\file -> file:///C:/path/to/file
             // For network shares, we use
             // \\computer\share\path\to\file -> file://computer/share/path/to/file
             if (path.find(NETWORK_SHARE_PREFIX) == 0) {
-                path = NETWORK_FILE_URI_PREFIX + path.replace(0, NETWORK_SHARE_PREFIX.size(), L"");
+                path = NETWORK_FILE_URI_PREFIX + path.replace(0, ::wcslen(NETWORK_SHARE_PREFIX), L"");
             } else {
                 path = FILE_URI_PREFIX + path;
             }
@@ -136,7 +136,7 @@ namespace PCC
         //
         // @return true to use androgynous description, false to use normal description.
         //
-        bool InternetPathPlugin::IsAndrogynous() const
+        bool InternetPathPlugin::IsAndrogynous() const noexcept(false)
         {
             return false;
         }

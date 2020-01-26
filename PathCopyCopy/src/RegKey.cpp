@@ -1,5 +1,5 @@
 // RegKey.cpp
-// (c) 2015-2019, Charles Lechasseur
+// (c) 2015-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,21 +22,6 @@
 #include <stdafx.h>
 #include <RegKey.h>
 
-//
-// Destructor.
-//
-RegKey::~RegKey()
-{
-}
-
-//
-// Default constructor.
-//
-RegKey::ValueInfo::ValueInfo()
-    : m_hKey(NULL),
-      m_ValueName()
-{
-}
 
 //
 // Parametrized constructor.
@@ -48,15 +33,6 @@ RegKey::ValueInfo::ValueInfo(HKEY const p_hKey,
                              const wchar_t* const p_pValueName)
     : m_hKey(p_hKey),
       m_ValueName(p_pValueName)
-{
-}
-
-//
-// Default constructor.
-//
-RegKey::SubkeyInfo::SubkeyInfo()
-    : m_hParent(NULL),
-      m_KeyName()
 {
 }
 

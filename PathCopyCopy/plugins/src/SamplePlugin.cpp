@@ -1,5 +1,5 @@
 // SamplePlugin.h
-// (c) 2008-2019, Charles Lechasseur
+// (c) 2008-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -38,7 +38,7 @@ namespace PCC
         //
         // Constructor.
         //
-        SamplePlugin::SamplePlugin()
+        SamplePlugin::SamplePlugin() noexcept(false)
             : InternalPlugin(IDS_SAMPLE_PLUGIN_DESCRIPTION, IDS_SAMPLE_PLUGIN_HINT)
         {
         }
@@ -48,7 +48,7 @@ namespace PCC
         //
         // @return Unique identifier.
         //
-        const GUID& SamplePlugin::Id() const
+        const GUID& SamplePlugin::Id() const noexcept(false)
         {
             return SAMPLE_PLUGIN_ID;
         }

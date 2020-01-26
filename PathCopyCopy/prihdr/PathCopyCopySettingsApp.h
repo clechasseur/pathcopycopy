@@ -1,5 +1,5 @@
 // PathCopyCopySettingsApp.h
-// (c) 2012-2019, Charles Lechasseur
+// (c) 2012-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -40,11 +40,11 @@ namespace PCC
         struct Options final {
             bool        m_UpdateCheck;  // Whether to check for updates instead of launching to edit settings. [default: false]
 
-                        Options();
-            Options&    WithUpdateCheck();
+                        Options() noexcept;
+            Options&    WithUpdateCheck() noexcept;
         };
 
-                        SettingsApp();
+                        SettingsApp() noexcept;
                         SettingsApp(const SettingsApp&) = delete;
         SettingsApp&    operator=(const SettingsApp&) = delete;
 

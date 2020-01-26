@@ -1,5 +1,5 @@
 // dllmain.cpp
-// (c) 2011-2019, Charles Lechasseur
+// (c) 2011-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -31,13 +31,15 @@
 namespace {
 
 // Keeps the global instance passed to DllMain.
-HINSTANCE g_hInstance = NULL;
+HINSTANCE g_hInstance = nullptr;
 
 } // anonymous namespace
 
+#pragma warning(suppress: ALL_CPPCORECHECK_WARNINGS)
 CTestPluginsModule _AtlModule;
 
 // Registers our COM object. Let's use the opportunity to register our plugins.
+[[gsl::suppress(c.128)]]
 HRESULT CTestPluginsModule::DllRegisterServer(BOOL bRegTypeLib /*= TRUE*/) throw()
 {
     // Create PathCopyCopy registration object and check if it supports per-user install.
@@ -61,7 +63,7 @@ HRESULT CTestPluginsModule::DllRegisterServer(BOOL bRegTypeLib /*= TRUE*/) throw
                 // the default interface. We'll have verified that this is OK before.
                 if (cpPccExt2.p != nullptr) {
                     const VARIANT_BOOL varPerUser = perUserOverride.Overridden() ? VARIANT_TRUE : VARIANT_FALSE;
-                    auto registerPlugin = [&](REFCLSID p_CLSID) {
+                    const auto registerPlugin = [&](REFCLSID p_CLSID) {
                         if (SUCCEEDED(hRes)) {
                             hRes = cpPccExt2->RegisterPlugin2(p_CLSID, varPerUser);
                         }
@@ -71,7 +73,7 @@ HRESULT CTestPluginsModule::DllRegisterServer(BOOL bRegTypeLib /*= TRUE*/) throw
                     registerPlugin(__uuidof(PathCopyCopyPlugin2a));
                     registerPlugin(__uuidof(PathCopyCopyPlugin2b));
                 } else {
-                    auto registerPlugin = [&](REFCLSID p_CLSID) {
+                    const auto registerPlugin = [&](REFCLSID p_CLSID) {
                         if (SUCCEEDED(hRes)) {
                             hRes = cpPccExt->RegisterPlugin(p_CLSID);
                         }
@@ -88,6 +90,7 @@ HRESULT CTestPluginsModule::DllRegisterServer(BOOL bRegTypeLib /*= TRUE*/) throw
 }
 
 // Unregisters our COM object. We will also remove our plugins from Path Copy Copy.
+[[gsl::suppress(c.128)]]
 HRESULT CTestPluginsModule::DllUnregisterServer(BOOL bUnRegTypeLib /*= TRUE*/) throw()
 {
     // Setup per-user unregistration.
@@ -112,7 +115,7 @@ HRESULT CTestPluginsModule::DllUnregisterServer(BOOL bUnRegTypeLib /*= TRUE*/) t
                     // the default interface. We'll have verified that this is OK before.
                     if (cpPccExt2.p != nullptr) {
                         const VARIANT_BOOL varPerUser = perUserOverride.Overridden() ? VARIANT_TRUE : VARIANT_FALSE;
-                        auto unregisterPlugin = [&](REFCLSID p_CLSID) {
+                        const auto unregisterPlugin = [&](REFCLSID p_CLSID) {
                             if (SUCCEEDED(hRes)) {
                                 hRes = cpPccExt2->UnregisterPlugin2(p_CLSID, varPerUser);
                             }
@@ -122,7 +125,7 @@ HRESULT CTestPluginsModule::DllUnregisterServer(BOOL bUnRegTypeLib /*= TRUE*/) t
                         unregisterPlugin(__uuidof(PathCopyCopyPlugin2a));
                         unregisterPlugin(__uuidof(PathCopyCopyPlugin2b));
                     } else {
-                        auto unregisterPlugin = [&](REFCLSID p_CLSID) {
+                        const auto unregisterPlugin = [&](REFCLSID p_CLSID) {
                             if (SUCCEEDED(hRes)) {
                                 hRes = cpPccExt->UnregisterPlugin(p_CLSID);
                             }
@@ -140,7 +143,7 @@ HRESULT CTestPluginsModule::DllUnregisterServer(BOOL bUnRegTypeLib /*= TRUE*/) t
 }
 
 // Returns the instance handle passed to our module's DllMain.
-HINSTANCE CTestPluginsModule::HInstance()
+HINSTANCE CTestPluginsModule::HInstance() noexcept
 {
     return g_hInstance;
 }

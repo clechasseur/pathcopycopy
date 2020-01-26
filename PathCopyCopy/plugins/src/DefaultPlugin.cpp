@@ -1,5 +1,5 @@
 // DefaultPlugin.h
-// (c) 2011-2019, Charles Lechasseur
+// (c) 2011-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -38,7 +38,7 @@ namespace PCC
         //
         // Constructor.
         //
-        DefaultPlugin::DefaultPlugin()
+        DefaultPlugin::DefaultPlugin() noexcept(false)
             : LongPathPlugin(IDS_DEFAULT_PLUGIN_DESCRIPTION, IDS_DEFAULT_PLUGIN_DESCRIPTION, IDS_LONG_PATH_PLUGIN_HINT)
         {
         }
@@ -48,7 +48,7 @@ namespace PCC
         //
         // @return Unique identifier.
         //
-        const GUID& DefaultPlugin::Id() const
+        const GUID& DefaultPlugin::Id() const noexcept(false)
         {
             return DEFAULT_PLUGIN_ID;
         }
@@ -63,7 +63,7 @@ namespace PCC
         // @return Always false to indicate PCC should not drop
         //         redundant words like "copy" from plugin's description.
         //
-        bool DefaultPlugin::CanDropRedundantWords() const
+        bool DefaultPlugin::CanDropRedundantWords() const noexcept(false)
         {
             return false;
         }
@@ -73,7 +73,7 @@ namespace PCC
         //
         // @return true to use androgynous description, false to use normal description.
         //
-        bool DefaultPlugin::IsAndrogynous() const
+        bool DefaultPlugin::IsAndrogynous() const noexcept(false)
         {
             return false;
         }

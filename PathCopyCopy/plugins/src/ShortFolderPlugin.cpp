@@ -1,5 +1,5 @@
 // ShortFolderPlugin.cpp
-// (c) 2011-2019, Charles Lechasseur
+// (c) 2011-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -39,7 +39,7 @@ namespace PCC
         //
         // Constructor.
         //
-        ShortFolderPlugin::ShortFolderPlugin()
+        ShortFolderPlugin::ShortFolderPlugin() noexcept(false)
             : ShortPathPlugin(IDS_SHORT_FOLDER_PLUGIN_DESCRIPTION, IDS_ANDROGYNOUS_FOLDER_PLUGIN_DESCRIPTION, IDS_SHORT_FOLDER_PLUGIN_HINT)
         {
         }
@@ -49,7 +49,7 @@ namespace PCC
         //
         // @return Unique identifier.
         //
-        const GUID& ShortFolderPlugin::Id() const
+        const GUID& ShortFolderPlugin::Id() const noexcept(false)
         {
             return ShortFolderPlugin::ID;
         }

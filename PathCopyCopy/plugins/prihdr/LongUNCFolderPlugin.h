@@ -1,5 +1,5 @@
 // LongUNCFolderPlugin.h
-// (c) 2011-2019, Charles Lechasseur
+// (c) 2011-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -41,26 +41,26 @@ namespace PCC
             // ID of this type of plugin.
             static const GUID       ID;
 
-                                    LongUNCFolderPlugin();
+                                    LongUNCFolderPlugin() noexcept(false);
                                     LongUNCFolderPlugin(const LongUNCFolderPlugin&) = delete;
             LongUNCFolderPlugin&    operator=(const LongUNCFolderPlugin&) = delete;
 
-            virtual const GUID&     Id() const override;
+            const GUID&             Id() const noexcept(false) override;
 
-            virtual bool            Enabled(const std::wstring& p_ParentPath,
+            bool                    Enabled(const std::wstring& p_ParentPath,
                                             const std::wstring& p_File) const override;
 
-            virtual std::wstring    GetPath(const std::wstring& p_File) const override;
+            std::wstring            GetPath(const std::wstring& p_File) const override;
 
         protected:
-                                    LongUNCFolderPlugin(const unsigned short p_DescriptionStringResourceID,
-                                                        const unsigned short p_AndrogynousDescriptionStringResourceID,
-                                                        const unsigned short p_HelpTextStringResourceID);
+                                    LongUNCFolderPlugin(unsigned short p_DescriptionStringResourceID,
+                                                        unsigned short p_AndrogynousDescriptionStringResourceID,
+                                                        unsigned short p_HelpTextStringResourceID);
 
-            virtual bool            IsAndrogynous() const override;
+            bool                    IsAndrogynous() const override;
 
             bool                    InternalGetPath(std::wstring& p_rPath,
-                                                    const bool p_ExtractFolder) const;
+                                                    bool p_ExtractFolder) const;
         };
 
     } // namespace Plugins

@@ -1,5 +1,5 @@
 // PluginSeparator.h
-// (c) 2008-2019, Charles Lechasseur
+// (c) 2008-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -35,14 +35,14 @@ namespace PCC
     class PluginSeparator final : public Plugin
     {
     public:
-                                    PluginSeparator();
+                                    PluginSeparator() = default;
                                     PluginSeparator(const PluginSeparator&) = delete;
         PluginSeparator&            operator=(const PluginSeparator&) = delete;
 
-        virtual const GUID&         Id() const override;
-        virtual std::wstring        Description() const override;
-        virtual std::wstring        GetPath(const std::wstring& p_File) const override;
-        virtual bool                IsSeparator() const override;
+        const GUID&                 Id() const noexcept(false) override;
+        std::wstring                Description() const override;
+        std::wstring                GetPath(const std::wstring& p_File) const override;
+        bool                        IsSeparator() const noexcept override;
     };
 
 } // namespace PCC

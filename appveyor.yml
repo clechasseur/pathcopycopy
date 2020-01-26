@@ -7,6 +7,10 @@ platform:
 configuration:
   - Debug
   - Release
+cache:
+  - packages -> **\packages.config
+before_build:
+  - nuget restore
 build:
   project: PathCopyCopy.sln
 test: off

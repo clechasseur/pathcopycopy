@@ -1,5 +1,5 @@
 // StringUtils.h
-// (c) 2011-2019, Charles Lechasseur
+// (c) 2011-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -46,9 +46,9 @@ public:
                                    const std::wstring& p_OldValue,
                                    const std::wstring& p_NewValue);
     static void         Split(std::wstring& p_rString,
-                              const wchar_t p_Separator,
+                              wchar_t p_Separator,
                               PCC::WStringV& p_rParts);
 
     static void         EncodeURICharacters(std::wstring& p_rString,
-                                            const EncodeParam p_EncodeParam);
+                                            EncodeParam p_EncodeParam);
 };

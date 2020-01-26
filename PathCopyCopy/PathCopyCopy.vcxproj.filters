@@ -274,9 +274,6 @@
     <ClInclude Include="prihdr\StStgMedium.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="prihdr\targetver.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="prihdr\UserOverrideableRegKey.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -402,6 +399,18 @@
     </ClInclude>
     <ClInclude Include="plugins\prihdr\MSYSPathPlugin.h">
       <Filter>Plugins\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\StAddrInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\StWSAStartup.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prihdr\StHandle.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

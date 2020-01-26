@@ -1,5 +1,5 @@
 ﻿// PCCExecutor.cs
-// (c) 2015-2019, Charles Lechasseur
+// (c) 2015-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,8 +21,10 @@
 
 using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
+using System.Runtime.Serialization;
 using Microsoft.Win32;
 using PathCopyCopy.Settings.Properties;
 
@@ -33,8 +35,10 @@ namespace PathCopyCopy.Settings.Core
     /// </summary>
     public sealed class PCCExecutor
     {
+#pragma warning disable CA1822 // Member could be static
+
         /// Name of rundll32 executable file.
-        private const string RUNDLL32_EXE_NAME = "rundll32.exe";
+        private const string RunDll32ExeName = "rundll32.exe";
         
         /// <summary>
         /// Uses the Path Copy Copy DLL to execute the GetPath function for a
@@ -42,26 +46,30 @@ namespace PathCopyCopy.Settings.Core
         /// </summary>
         /// <param name="pluginId">ID of plugin to get path from.</param>
         /// <param name="path">Path to pass to the plugin.</param>
+        /// <param name="tempPipelinePlugin">Whether to call the version
+        /// of the function that supports temp pipeline plugins only.</param>
         /// <returns>Path returned by the plugin, or an empty string if
         /// the DLL failed to provide the path.</returns>
         /// <exception cref="PCCExecutorException">Thrown when execution fails
         /// for some reason.</exception>
-        public string GetPathWithPlugin(Guid pluginId, string path)
+        public string GetPathWithPlugin(Guid pluginId, string path, bool tempPipelinePlugin)
         {
-            Debug.Assert(path != null);
+            if (path == null) {
+                throw new ArgumentNullException(nameof(path));
+            }
 
             // Create a wrapper to know which registry value to use for output.
             string resultingPath;
             using (RegistryOutput output = new RegistryOutput()) {
                 // Call PCC via rundll32 for the plugin.
-                Call("RegGetPathWithPlugin", String.Format("{0},{1},{2}",
-                    pluginId.ToString("B"), output.RegistryValueName, path));
+                Call(tempPipelinePlugin ? "RegGetPathWithTempPipelinePlugin" : "RegGetPathWithPlugin",
+                    $"{pluginId.ToString("B", CultureInfo.InvariantCulture)},{output.RegistryValueName},{path}");
 
                 // Result should be in the registry.
                 resultingPath = output.GetOutput();
             }
 
-            return resultingPath ?? String.Empty;
+            return resultingPath ?? string.Empty;
         }
         
         /// <summary>
@@ -72,7 +80,7 @@ namespace PathCopyCopy.Settings.Core
         public void ApplyUserRevisions()
         {
             // Call PCC via rundll32 to apply revisions.
-            Call("ApplyUserRevisions", String.Empty);
+            Call("ApplyUserRevisions", string.Empty);
         }
         
         /// <summary>
@@ -86,7 +94,7 @@ namespace PathCopyCopy.Settings.Core
         /// for some reason.</exception>
         private void Call(string functionName, string commandLine)
         {
-            Debug.Assert(!String.IsNullOrEmpty(functionName));
+            Debug.Assert(!string.IsNullOrEmpty(functionName));
             Debug.Assert(commandLine != null);
 
             // Find path to PCC DLL. It's right beside our own executable.
@@ -102,7 +110,7 @@ namespace PathCopyCopy.Settings.Core
                 }
             }
             if (!File.Exists(pccDllPath)) {
-                throw new PCCExecutorException("Could not find Path Copy Copy DLL at: {0}", pccDllPath);
+                throw new PCCExecutorException($"Could not find Path Copy Copy DLL at: {pccDllPath}");
             }
 
             // Execute rundll32. See documentation for rundll32 for details on the
@@ -110,8 +118,8 @@ namespace PathCopyCopy.Settings.Core
             // to execute a specific version of rundll32 (32- or 64-bit), because on
             // 64-bit OSes, the proper version is chosen automatically.
             ProcessStartInfo startInfo = new ProcessStartInfo() {
-                FileName = RUNDLL32_EXE_NAME,
-                Arguments = String.Format("\"{0}\",{1} {2}", pccDllPath, functionName, commandLine),
+                FileName = RunDll32ExeName,
+                Arguments = $"\"{pccDllPath}\",{functionName} {commandLine}",
                 CreateNoWindow = true,
                 UseShellExecute = false,
             };
@@ -134,13 +142,14 @@ namespace PathCopyCopy.Settings.Core
         private sealed class RegistryOutput : IDisposable
         {
             /// Path to registry key containing rundll32 outputs in CURRENT_USER.
-            private const string PCC_RUNDLL32_OUTPUT_KEY = @"Software\clechasseur\PathCopyCopy\Rundll32Output";
+            private const string RunDll32OutputKey = @"Software\clechasseur\PathCopyCopy\Rundll32Output";
+
+#pragma warning disable CA2213 // Should dispose of rundll32OutputKey - we do
 
             /// Registry key wrapper to access the rundll32 output.
-            private RegistryKey rundll32OutputKey = Registry.CurrentUser.CreateSubKey(PCC_RUNDLL32_OUTPUT_KEY);
+            private RegistryKey rundll32OutputKey = Registry.CurrentUser.CreateSubKey(RunDll32OutputKey);
 
-            /// Name of registry value to use for rundll32 output.
-            private string regValueName = Guid.NewGuid().ToString("B");
+#pragma warning restore CA2213
 
             /// <summary>
             /// Name of registry value where to store the rundll32 output. Pass this
@@ -148,10 +157,8 @@ namespace PathCopyCopy.Settings.Core
             /// </summary>
             public string RegistryValueName
             {
-                get {
-                    return regValueName;
-                }
-            }
+                get;
+            } = Guid.NewGuid().ToString("B", CultureInfo.InvariantCulture);
             
             /// <summary>
             /// Finalizer. Called if the object hasn't been properly disposed of.
@@ -171,7 +178,7 @@ namespace PathCopyCopy.Settings.Core
             /// written for some reason.</returns>
             public string GetOutput()
             {
-                return (string) rundll32OutputKey.GetValue(regValueName);
+                return (string) rundll32OutputKey.GetValue(RegistryValueName);
             }
             
             /// <inheritDoc/>
@@ -188,17 +195,20 @@ namespace PathCopyCopy.Settings.Core
             private void Cleanup()
             {
                 if (rundll32OutputKey != null) {
-                    rundll32OutputKey.DeleteValue(regValueName, false);
+                    rundll32OutputKey.DeleteValue(RegistryValueName, false);
                     rundll32OutputKey.Close();
                     rundll32OutputKey = null;
                 }
             }
         }
+
+#pragma warning restore CA1822 // Member could be static
     }
     
     /// <summary>
     /// Exception class used by the <see cref="PCCExecutor"/>.
     /// </summary>
+    [Serializable]
     public class PCCExecutorException : Exception
     {
         /// <summary>
@@ -219,20 +229,31 @@ namespace PathCopyCopy.Settings.Core
         }
         
         /// <summary>
-        /// Constructor with formatted exception message.
-        /// </summary>
-        /// <param name="format">Format string.</param>
-        /// <param name="args">Format arguments.</param>
-        public PCCExecutorException(string format, params object[] args)
-            : base(String.Format(format, args))
-        {
-        }
-        
-        /// <summary>
         /// Constructor with inner exception.
         /// </summary>
+        /// <param name="innerException">Inner exception.</param>
         public PCCExecutorException(Exception innerException)
-            : base(innerException.Message, innerException)
+            : base(innerException?.Message, innerException)
+        {
+        }
+
+        /// <summary>
+        /// Constructor with exception message and inner exception.
+        /// </summary>
+        /// <param name="message">Exception message.</param>
+        /// <param name="innerException">Inner exception.</param>
+        public PCCExecutorException(string message, Exception innerException)
+            : base(message, innerException)
+        {
+        }
+
+        /// <summary>
+        /// Streaming constructor.
+        /// </summary>
+        /// <param name="serializationInfo">Serialization info.</param>
+        /// <param name="streamingContext">Streaming context.</param>
+        protected PCCExecutorException(SerializationInfo serializationInfo, StreamingContext streamingContext)
+            : base(serializationInfo, streamingContext)
         {
         }
     }

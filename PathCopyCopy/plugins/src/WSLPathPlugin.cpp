@@ -1,5 +1,5 @@
 // WSLPathPlugin.cpp
-// (c) 2018-2019, Charles Lechasseur
+// (c) 2018-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -30,7 +30,7 @@
 namespace
 {
     // Strings used to build a WSL path.
-    const wchar_t MNT_PREFIX[]   = L"/mnt/";
+    const wchar_t* const MNT_PREFIX = L"/mnt/";
 
     // Plugin unique ID: {BD574871-5DF9-4B64-83D1-2AF9C0C17F66}
     const GUID WSL_PATH_PLUGIN_ID = { 0xbd574871, 0x5df9, 0x4b64, { 0x83, 0xd1, 0x2a, 0xf9, 0xc0, 0xc1, 0x7f, 0x66 } };
@@ -45,7 +45,7 @@ namespace PCC
         //
         // Constructor.
         //
-        WSLPathPlugin::WSLPathPlugin()
+        WSLPathPlugin::WSLPathPlugin() noexcept(false)
             : UnixPathPlugin(IDS_WSL_PATH_PLUGIN_DESCRIPTION, IDS_WSL_PATH_PLUGIN_HINT)
         {
         }
@@ -55,7 +55,7 @@ namespace PCC
         //
         // @return Unique identifier.
         //
-        const GUID& WSLPathPlugin::Id() const
+        const GUID& WSLPathPlugin::Id() const noexcept(false)
         {
             return WSL_PATH_PLUGIN_ID;
         }
@@ -73,11 +73,12 @@ namespace PCC
 
             // Check if the file begins with a drive letter. If so,
             // remove the drive letter and replace it with /mnt/letter.
-            if (path.size() >= 3 && path[1] == L':') {
+            [[gsl::suppress(type.4)]] // Compiler considers foo{bar} to be a C-style cast
+            if (path.size() >= 3 && path.at(1) == L':') {
                 std::wstringstream newPathSS;
-                newPathSS << MNT_PREFIX                                 // The mnt prefix
-                          << static_cast<wchar_t>(::towlower(path[0]))  // Drive letter
-                          << path.substr(2);                            // Rest of the path, including the slash after that : we had.
+                newPathSS << MNT_PREFIX                         // The mnt prefix
+                          << wchar_t{::towlower(path.front())}  // Drive letter
+                          << path.substr(2);                    // Rest of the path, including the slash after that : we had.
                 path = newPathSS.str();
             }
 

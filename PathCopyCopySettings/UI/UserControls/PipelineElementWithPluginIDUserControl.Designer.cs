@@ -1,6 +1,6 @@
 ﻿namespace PathCopyCopy.Settings.UI.UserControls
 {
-    partial class ApplyPluginPipelineElementUserControl
+    partial class PipelineElementWithPluginIDUserControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -43,12 +43,12 @@
             this.BasePluginToolTip.SetToolTip(this.BasePluginLst, "Base command to use to fetch path");
             this.BasePluginLst.SelectedIndexChanged += new System.EventHandler(this.BasePluginLst_SelectedIndexChanged);
             // 
-            // ApplyPluginPipelineElementUserControl
+            // PipelineElementWithPluginIDUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.BasePluginLst);
-            this.Name = "ApplyPluginPipelineElementUserControl";
+            this.Name = "PipelineElementWithPluginIDUserControl";
             this.Size = new System.Drawing.Size(314, 306);
             this.ResumeLayout(false);
 

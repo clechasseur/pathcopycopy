@@ -1,5 +1,5 @@
 // PathCopyCopy.cpp
-// (c) 2008-2019, Charles Lechasseur
+// (c) 2008-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,6 +24,7 @@
 #include <dllmain.h>
 #include <PathCopyCopy_i.h>
 #include <resource.h>
+#include <StAtlPerUserOverride.h>
 
 #include <string.h>
 
@@ -32,7 +33,7 @@
 STDAPI DllCanUnloadNow(void)
 {
 #ifdef _MERGE_PROXYSTUB
-    HRESULT hr = PrxDllCanUnloadNow();
+    const HRESULT hr = PrxDllCanUnloadNow();
     if (hr != S_OK)
         return hr;
 #endif
@@ -54,6 +55,12 @@ STDAPI DllGetClassObject(REFCLSID rclsid, REFIID riid, LPVOID* ppv)
 // DllRegisterServer - Adds entries to the system registry
 STDAPI DllRegisterServer(void)
 {
+    // Setup per-user registration if needed.
+    StAtlPerUserOverride perUserOverride;
+    if (!perUserOverride.Succeeded()) {
+        return E_FAIL;
+    }
+
     // registers object, typelib and all interfaces in typelib
     HRESULT hr = _AtlModule.DllRegisterServer();
 #ifdef _MERGE_PROXYSTUB
@@ -68,6 +75,12 @@ STDAPI DllRegisterServer(void)
 // DllUnregisterServer - Removes entries from the system registry
 STDAPI DllUnregisterServer(void)
 {
+    // Setup per-user unregistration if needed.
+    StAtlPerUserOverride perUserOverride;
+    if (!perUserOverride.Succeeded()) {
+        return E_FAIL;
+    }
+
 	HRESULT hr = _AtlModule.DllUnregisterServer();
 #ifdef _MERGE_PROXYSTUB
     if (FAILED(hr))
@@ -87,8 +100,9 @@ STDAPI DllInstall(BOOL bInstall, LPCWSTR pszCmdLine)
     HRESULT hr = E_FAIL;
     static const wchar_t szUserSwitch[] = _T("user");
 
-    if (pszCmdLine != NULL)
+    if (pszCmdLine != nullptr)
     {
+#pragma warning(suppress: ALL_CPPCORECHECK_WARNINGS)
     	if (_wcsnicmp(pszCmdLine, szUserSwitch, _countof(szUserSwitch)) == 0)
     	{
     		ATL::AtlSetPerUserRegistration(true);

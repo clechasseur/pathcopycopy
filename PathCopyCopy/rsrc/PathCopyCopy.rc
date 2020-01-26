@@ -57,8 +57,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 17,1,1,0
- PRODUCTVERSION 17,1,1,0
+ FILEVERSION 18,0,0,0
+ PRODUCTVERSION 18,0,0,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -74,12 +74,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "FileDescription", "PathCopyCopy Shell Contextual Menu Extension"
-            VALUE "FileVersion", "17.1.1.0"
+            VALUE "FileVersion", "18.0.0.0"
             VALUE "InternalName", "PathCopyCopy.dll"
-            VALUE "LegalCopyright", "(c) 2008-2019, Charles Lechasseur. See LICENSE.TXT for details."
+            VALUE "LegalCopyright", "(c) 2008-2020, Charles Lechasseur. See LICENSE.TXT for details."
             VALUE "OriginalFilename", "PathCopyCopy.dll"
             VALUE "ProductName", "PathCopyCopy"
-            VALUE "ProductVersion", "17.1.1.0"
+            VALUE "ProductVersion", "18.0.0.0"
         END
     END
     BLOCK "VarFileInfo"
@@ -193,6 +193,12 @@ BEGIN
     IDS_MSYS_PATH_PLUGIN_DESCRIPTION "Copy MS&YS/MSYS2 Path"
     IDS_MSYS_PATH_PLUGIN_HINT 
                             "Copies the path of the file/folder to the clipboard in MSYS/MSYS2 format."
+    IDS_INVALIDPIPELINE     "<< Invalid custom command >>"
+    IDS_INVALIDPIPELINE_LOOP_DETECTED 
+                            "<< Loop detected in custom command elements >>"
+    IDS_INVALIDPIPELINE_POSSIBLE_DOWNGRADE 
+                            "<< Invalid custom command element (possible downgrade) >>"
+    IDS_INVALIDPIPELINE_BASE_COMMAND_NOT_FOUND "<< Base command not found >>"
 END
 
 #endif    // English (United States) resources

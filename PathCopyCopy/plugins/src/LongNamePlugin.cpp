@@ -1,5 +1,5 @@
 // LongNamePlugin.cpp
-// (c) 2008-2019, Charles Lechasseur
+// (c) 2008-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -39,7 +39,7 @@ namespace PCC
         //
         // Constructor.
         //
-        LongNamePlugin::LongNamePlugin()
+        LongNamePlugin::LongNamePlugin() noexcept(false)
             : LongPathPlugin(IDS_LONG_NAME_PLUGIN_DESCRIPTION, IDS_ANDROGYNOUS_NAME_PLUGIN_DESCRIPTION, IDS_LONG_NAME_PLUGIN_HINT)
         {
         }
@@ -49,7 +49,7 @@ namespace PCC
         //
         // @return Unique identifier.
         //
-        const GUID& LongNamePlugin::Id() const
+        const GUID& LongNamePlugin::Id() const noexcept(false)
         {
             return LongNamePlugin::ID;
         }

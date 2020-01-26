@@ -1,5 +1,5 @@
 // PipelinePlugin.cpp
-// (c) 2008-2019, Charles Lechasseur
+// (c) 2008-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -51,15 +51,55 @@ namespace PCC
               m_Description(p_PluginDescription),
               m_IconFile(p_PluginIconFile),
               m_UseDefaultIcon(p_UseDefaultIcon),
-              m_spPipeline()
+              m_EncodedElements(p_EncodedElements),
+              m_spPipeline(),
+              m_PipelineError()
         {
-            // Try decoding the encoded pipeline. If that fails, we'll
-            // keep the plugin alive but it will be disabled.
-            try {
-                m_spPipeline = std::make_shared<Pipeline>(p_EncodedElements);
-            } catch (const InvalidPipelineException&) {
-                assert(m_spPipeline == nullptr);
+        }
+
+        //
+        // Returns a pointer to the pipeline we're using, initializing
+        // it on the first call.
+        //
+        // @param p_psSeenPluginIds Pointer to set used to store seen plugin IDs.
+        //                          Leave nullptr on the first call; this is used
+        //                          to detect loops in pipelines.
+        // @return Pointer to pipeline, or nullptr if our pipeline is invalid.
+        //
+        const Pipeline* PipelinePlugin::GetPipeline(GUIDS* const p_psSeenPluginIds /*= nullptr*/) const
+        {
+            if (!m_spPipeline.has_value()) {
+                try {
+                    PipelineSP spPipeline = std::make_shared<Pipeline>(m_EncodedElements);
+
+                    // Make sure pipeline is valid.
+                    GUIDS sSeenPluginIds;
+                    GUIDS& rsSeenPluginIds = p_psSeenPluginIds != nullptr ? *p_psSeenPluginIds : sSeenPluginIds;
+                    if (!rsSeenPluginIds.emplace(Id()).second) {
+                        throw InvalidPipelineException(ATL::CStringA(MAKEINTRESOURCEA(IDS_INVALIDPIPELINE_LOOP_DETECTED)));
+                    }
+                    spPipeline->Validate(m_pPluginProvider, rsSeenPluginIds);
+
+                    m_spPipeline = spPipeline;
+                    m_PipelineError.clear();
+                } catch (const std::exception& e) {
+                    m_spPipeline = std::make_optional<PipelineSP>(nullptr);
+                    m_PipelineError = e.what();
+                }
             }
+            return m_spPipeline.value().get();
+        }
+
+        //
+        // Returns any error message retrieved when this plugin's pipeline
+        // has been loaded. Call this if GetPipeline returns nullptr to
+        // perhaps get more information.
+        //
+        // @return Error message. May be empty even if pipeline failed to load.
+        //
+        std::string PipelinePlugin::GetPipelineError() const
+        {
+            return m_PipelineError;
         }
 
         //
@@ -67,7 +107,7 @@ namespace PCC
         //
         // @return Plugin ID.
         //
-        const GUID& PipelinePlugin::Id() const
+        const GUID& PipelinePlugin::Id() const noexcept(false)
         {
             return m_Id;
         }
@@ -98,7 +138,7 @@ namespace PCC
         //
         // @return true to use default icon, false otherwise.
         //
-        bool PipelinePlugin::UseDefaultIcon() const
+        bool PipelinePlugin::UseDefaultIcon() const noexcept(false)
         {
             return m_UseDefaultIcon;
         }
@@ -114,8 +154,9 @@ namespace PCC
         bool PipelinePlugin::Enabled(const std::wstring& p_ParentPath,
                                      const std::wstring& p_File) const
         {
-            return m_spPipeline != nullptr &&
-                   m_spPipeline->ShouldBeEnabledFor(p_ParentPath, p_File, m_pPluginProvider);
+            const Pipeline* pPipeline = GetPipeline();
+            return pPipeline != nullptr &&
+                   pPipeline->ShouldBeEnabledFor(p_ParentPath, p_File, m_pPluginProvider);
         }
 
         //
@@ -127,8 +168,11 @@ namespace PCC
         std::wstring PipelinePlugin::GetPath(const std::wstring& p_File) const
         {
             std::wstring modifiedPath(p_File);
-            if (m_spPipeline != nullptr) {
-                m_spPipeline->ModifyPath(modifiedPath, m_pPluginProvider);
+            const Pipeline* pPipeline = GetPipeline();
+            if (pPipeline != nullptr) {
+                pPipeline->ModifyPath(modifiedPath, m_pPluginProvider);
+            } else if (!m_PipelineError.empty()) {
+                modifiedPath = ATL::CStringW(m_PipelineError.c_str());
             }
             return modifiedPath;
         }
@@ -144,9 +188,10 @@ namespace PCC
         {
             // This is stored in pipeline options.
             std::wstring separator;
-            if (m_spPipeline != nullptr) {
+            const Pipeline* pPipeline = GetPipeline();
+            if (pPipeline != nullptr) {
                 PipelineOptions options;
-                m_spPipeline->ModifyOptions(options);
+                pPipeline->ModifyOptions(options);
                 separator = options.GetPathsSeparator();
             }
             return separator;
@@ -162,9 +207,10 @@ namespace PCC
             // Pipeline options can modify the behavior.
             std::wstring executable;
             bool useFilelist = false;
-            if (m_spPipeline != nullptr) {
+            const Pipeline* pPipeline = GetPipeline();
+            if (pPipeline != nullptr) {
                 PipelineOptions options;
-                m_spPipeline->ModifyOptions(options);
+                pPipeline->ModifyOptions(options);
                 executable = options.GetExecutable();
                 useFilelist = options.GetUseFilelist();
             }
@@ -190,7 +236,7 @@ namespace PCC
         // @return Always false to indicate PCC should not drop
         //         redundant words like "copy" from plugin's description.
         //
-        bool PipelinePlugin::CanDropRedundantWords() const
+        bool PipelinePlugin::CanDropRedundantWords() const noexcept(false)
         {
             return false;
         }

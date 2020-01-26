@@ -1,5 +1,5 @@
 // AllPluginsProvider.cpp
-// (c) 2016-2019, Charles Lechasseur
+// (c) 2016-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -31,7 +31,7 @@ namespace PCC
     // @param p_sspAllPlugins Set containing all plugins. We only store the reference to this set;
     //                        it must remain alive for the lifetime of this plugin provider.
     //
-    AllPluginsProvider::AllPluginsProvider(const PluginSPS& p_sspAllPlugins)
+    AllPluginsProvider::AllPluginsProvider(const PluginSPS& p_sspAllPlugins) noexcept
         : PluginProvider(),
           m_sspAllPlugins(p_sspAllPlugins)
     {
@@ -45,7 +45,7 @@ namespace PCC
     //
     PluginSP AllPluginsProvider::GetPlugin(const GUID& p_PluginId) const
     {
-        auto it = m_sspAllPlugins.find(p_PluginId);
+        const auto it = m_sspAllPlugins.find(p_PluginId);
         return it != m_sspAllPlugins.end() ? *it : nullptr;
     }
 

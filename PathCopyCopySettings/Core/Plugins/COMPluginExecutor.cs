@@ -1,5 +1,5 @@
 ﻿// COMPluginExecutor.cs
-// (c) 2014-2019, Charles Lechasseur
+// (c) 2014-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,8 +21,10 @@
 
 using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
+using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
 using PathCopyCopy.Settings.Properties;
 
@@ -36,18 +38,17 @@ namespace PathCopyCopy.Settings.Core.Plugins
     /// </summary>
     public sealed class COMPluginExecutor
     {
+#pragma warning disable CA1822 // Member could be static
+
         /// Regex used to extract the output of the COM plugin executor program.
-        private static readonly Regex OUTPUT_REGEX = new Regex(String.Format(@"^{0}(.*)$",
-            Resources.COM_PLUGIN_EXECUTOR_OUTPUT_PREFIX), RegexOptions.Compiled);
+        private static readonly Regex OUTPUT_REGEX = new Regex(
+            $"^{Resources.COM_PLUGIN_EXECUTOR_OUTPUT_PREFIX}(.*)$", RegexOptions.Compiled);
 
         /// Prefix of output lines from COM plugin executor that indicates an error.
         private const string EXECUTOR_ERROR_PREFIX = "ERROR";
 
         /// Output returned by the COM plugin executor for a command that returns a boolean "true" result.
         private const string EXECUTOR_TRUE_OUTPUT = "true";
-
-        /// Output returned by the COM plugin executor for a command that returns a boolean "false" result.
-        private const string EXECUTOR_FALSE_OUTPUT = "false";
         
         /// <summary>
         /// Invokes the COM plugin executor program to get the description for a
@@ -85,8 +86,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// fails for some reason.</exception>
         public int GetGroupId(Guid pluginId)
         {
-            int groupId;
-            return Int32.TryParse(Call(pluginId, "get_GroupId"), out groupId) ? groupId : 0;
+            return int.TryParse(Call(pluginId, "get_GroupId"), out int groupId) ? groupId : 0;
         }
         
         /// <summary>
@@ -99,8 +99,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// fails for some reason.</exception>
         public int GetGroupPosition(Guid pluginId)
         {
-            int groupPosition;
-            return Int32.TryParse(Call(pluginId, "get_GroupPosition"), out groupPosition) ? groupPosition : 0;
+            return int.TryParse(Call(pluginId, "get_GroupPosition"), out int groupPosition) ? groupPosition : 0;
         }
         
         /// <summary>
@@ -152,7 +151,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
             }
             string executorPath = Path.Combine(Path.GetDirectoryName(assemblyPath), executorFileName);
             if (!File.Exists(executorPath)) {
-                throw new COMPluginExecutorException("Could not find COM plugin executor program at: {0}", executorPath);
+                throw new COMPluginExecutorException($"Could not find COM plugin executor program at: {executorPath}");
             }
 
             // Launch tester program, grabbing input and output.
@@ -167,7 +166,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
                 using (Process executor = Process.Start(startInfo)) {
                     // Get standard input and enter the arguments.
                     StreamWriter cin = executor.StandardInput;
-                    cin.WriteLine(pluginId.ToString("B"));
+                    cin.WriteLine(pluginId.ToString("B", CultureInfo.InvariantCulture));
                     cin.WriteLine(command);
 
                     // Get standard output, parse lines and get command output.
@@ -179,9 +178,9 @@ namespace PathCopyCopy.Settings.Core.Plugins
                             // We got our command output.
                             output = match.Groups[1].Value;
                             break;
-                        } else if (line.StartsWith(EXECUTOR_ERROR_PREFIX)) {
+                        } else if (line.StartsWith(EXECUTOR_ERROR_PREFIX, StringComparison.InvariantCulture)) {
                             // An error occured during execution.
-                            throw new COMPluginExecutorException("COM plugin execution failed. Error: {0}", line);
+                            throw new COMPluginExecutorException($"COM plugin execution failed. Error: {line}");
                         }
 
                         // Read next line.
@@ -193,13 +192,13 @@ namespace PathCopyCopy.Settings.Core.Plugins
 
                     // Throw if the execution failed.
                     if (executor.ExitCode < 0) {
-                        throw new COMPluginExecutorException("COM plugin execution failed. Exit code: {0}.", executor.ExitCode);
+                        throw new COMPluginExecutorException($"COM plugin execution failed. Exit code: {executor.ExitCode}.");
                     }
 
                     // Make sure we found output.
                     if (output == null) {
                         throw new COMPluginExecutorException("COM plugin execution did not return expected output. " +
-                            "Exit code: {0}.", executor.ExitCode);
+                            $"Exit code: {executor.ExitCode}.");
                     }
                 }
             } catch (COMPluginExecutorException) {
@@ -212,11 +211,14 @@ namespace PathCopyCopy.Settings.Core.Plugins
             Debug.Assert(output != null);
             return output;
         }
+
+#pragma warning disable CA1822 // Member could be static
     }
     
     /// <summary>
     /// Exception class used by the <see cref="COMPluginExecutor"/>.
     /// </summary>
+    [Serializable]
     public class COMPluginExecutorException : Exception
     {
         /// <summary>
@@ -237,20 +239,31 @@ namespace PathCopyCopy.Settings.Core.Plugins
         }
         
         /// <summary>
-        /// Constructor with formatted exception message.
-        /// </summary>
-        /// <param name="format">Format string.</param>
-        /// <param name="args">Format arguments.</param>
-        public COMPluginExecutorException(string format, params object[] args)
-            : base(String.Format(format, args))
-        {
-        }
-        
-        /// <summary>
         /// Constructor with inner exception.
         /// </summary>
+        /// <param name="innerException">Inner exception.</param>
         public COMPluginExecutorException(Exception innerException)
-            : base(innerException.Message, innerException)
+            : base(innerException?.Message, innerException)
+        {
+        }
+
+        /// <summary>
+        /// Constructor with exception message and inner exception.
+        /// </summary>
+        /// <param name="message">Exception message.</param>
+        /// <param name="innerException">Inner exception.</param>
+        public COMPluginExecutorException(string message, Exception innerException)
+            : base(message, innerException)
+        {
+        }
+
+        /// <summary>
+        /// Serialization constructor.
+        /// </summary>
+        /// <param name="serializationInfo">Serialization info.</param>
+        /// <param name="streamingContext">Streaming context.</param>
+        protected COMPluginExecutorException(SerializationInfo serializationInfo, StreamingContext streamingContext)
+            : base(serializationInfo, streamingContext)
         {
         }
     }

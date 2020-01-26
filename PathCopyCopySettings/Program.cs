@@ -1,5 +1,5 @@
 ﻿// Program.cs
-// (c) 2011-2019, Charles Lechasseur
+// (c) 2011-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -36,14 +36,14 @@ namespace PathCopyCopy.Settings
     static class Program
     {
         /// Name of global mutex used for blocking multiple instances.
-        const string MUTEX_NAME = "PathCopyCopySettings.Mutex";
+        const string MutexName = "PathCopyCopySettings.Mutex";
 
         /// Name of global mutex used for blocking multiple update checks.
-        const string UPDATE_CHECK_MUTEX_NAME = "PathCopyCopySettings.UpdateCheck.Mutex";
+        const string UpdateCheckMutexName = "PathCopyCopySettings.UpdateCheck.Mutex";
 
         /// <summary>
         /// Possible bitness used when starting the program.
-        /// <see cref="Bitness.Default"/> will use the default bitness
+        /// <see cref="Default"/> will use the default bitness
         /// (64-bit on a 64-bit OS, otherwise 32-bit).
         /// </summary>
         enum Bitness
@@ -108,7 +108,7 @@ namespace PathCopyCopy.Settings
                     break;
                 }
                 default: {
-                    Debug.Fail(String.Format("Unknown Bitness value: {0}", pccArgs.bitness));
+                    Debug.Fail($"Unknown Bitness value: {pccArgs.bitness}");
                     PCCEnvironment.Is64Bit = PCCEnvironment.Is64BitOS;
                     break;
                 }
@@ -119,10 +119,9 @@ namespace PathCopyCopy.Settings
             Application.SetCompatibleTextRenderingDefault(false);
 
             // Check if we need to simply check for updates.
-            bool created;
             if (pccArgs.updatecheck) {
                 // Make sure we only do this once.
-                using (new Mutex(true, UPDATE_CHECK_MUTEX_NAME, out created)) {
+                using (new Mutex(true, UpdateCheckMutexName, out bool created)) {
                     if (!created) {
                         return;
                     }
@@ -140,7 +139,7 @@ namespace PathCopyCopy.Settings
             }
 
             // Block multiple instances.
-            using (new Mutex(true, MUTEX_NAME, out created)) {
+            using (new Mutex(true, MutexName, out bool created)) {
                 if (!created) {
                     return;
                 }
@@ -160,7 +159,9 @@ namespace PathCopyCopy.Settings
                 }
 
                 // If we reached this point, run the application.
-                Application.Run(new MainForm());
+                using (MainForm mainForm = new MainForm()) {
+                    Application.Run(mainForm);
+                }
             }
         }
     }

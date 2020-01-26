@@ -1,5 +1,5 @@
 // StGlobalLock.h
-// (c) 2008-2019, Charles Lechasseur
+// (c) 2008-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -40,8 +40,8 @@ public:
                         // @param p_Flags Flags to pass to GlobalAlloc. See MSDN for details.
                         // @param p_Size Size of memory block to allocate.
                         //
-                        StGlobalBlock(const UINT p_Flags, const SIZE_T p_Size)
-                            : m_hBlock(NULL)
+                        StGlobalBlock(const UINT p_Flags, const SIZE_T p_Size) noexcept
+                            : m_hBlock(nullptr)
                         {
                             Connect(::GlobalAlloc(p_Flags, p_Size));
                         }
@@ -53,17 +53,19 @@ public:
                         //
                         // @param p_hBlock Handle of memory block to acquire.
                         //
-    explicit            StGlobalBlock(HANDLE p_hBlock)
-                            : m_hBlock(NULL)
+    explicit            StGlobalBlock(HANDLE p_hBlock) noexcept
+                            : m_hBlock(nullptr)
                         {
                             Connect(p_hBlock);
                         }
 
                         //
-                        // Copying not supported.
+                        // Copying/moving not supported.
                         //
                         StGlobalBlock(const StGlobalBlock&) = delete;
+                        StGlobalBlock(StGlobalBlock&&) = delete;
     StGlobalBlock&      operator=(const StGlobalBlock&) = delete;
+    StGlobalBlock&      operator=(StGlobalBlock&&) = delete;
 
                         //
                         // Destructor.
@@ -79,7 +81,7 @@ public:
                         //
                         // @return Memory block handle.
                         //
-    HANDLE              Get() const
+    HANDLE              Get() const noexcept
                         {
                             return m_hBlock;
                         }
@@ -91,7 +93,7 @@ public:
                         //
                         // @param p_hBlock Handle of block to acquire.
                         //
-    void                Acquire(HANDLE p_hBlock)
+    void                Acquire(HANDLE p_hBlock) noexcept
                         {
                             Connect(p_hBlock);
                         }
@@ -103,10 +105,10 @@ public:
                         //
                         // @return Handle of memory block. Caller assumes ownership.
                         //
-    HANDLE              Release()
+    HANDLE              Release() noexcept
                         {
                             HANDLE hBlock = m_hBlock;
-                            m_hBlock = NULL;
+                            m_hBlock = nullptr;
                             return hBlock;
                         }
 
@@ -119,7 +121,7 @@ private:
                         //
                         // @param p_hBlock Block to assume ownership of.
                         //
-    void                Connect(HANDLE p_hBlock)
+    void                Connect(HANDLE p_hBlock) noexcept
                         {
                             if (p_hBlock != m_hBlock) {
                                 Disconnect();
@@ -131,11 +133,11 @@ private:
                         // Disconnects from our owned memory block, if any,
                         // by freeing it and setting it to 0.
                         //
-    void                Disconnect()
+    void                Disconnect() noexcept
                         {
-                            if (m_hBlock != NULL) {
+                            if (m_hBlock != nullptr) {
                                 ::GlobalFree(m_hBlock);
                             }
-                            m_hBlock = NULL;
+                            m_hBlock = nullptr;
                         }
 };

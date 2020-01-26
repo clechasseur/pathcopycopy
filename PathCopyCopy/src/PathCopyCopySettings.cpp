@@ -1,5 +1,5 @@
 // PathCopyCopySettings.cpp
-// (c) 2009-2019, Charles Lechasseur
+// (c) 2009-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -49,6 +49,7 @@ namespace
     const wchar_t* const    PCC_PLUGINS_KEY                                 = L"Software\\clechasseur\\PathCopyCopy\\Plugins";
     const wchar_t* const    PCC_PIPELINE_PLUGINS_KEY                        = L"Software\\clechasseur\\PathCopyCopy\\PipelinePlugins";
     const wchar_t* const    PCC_TEMP_PIPELINE_PLUGINS_KEY                   = L"Software\\clechasseur\\PathCopyCopy\\TempPipelinePlugins";
+    const wchar_t* const    PCC_FORMS_KEY                                   = L"Software\\clechasseur\\PathCopyCopy\\Forms";
 
     // Values used for PCC settings.
     const wchar_t* const    SETTING_REVISIONS                               = L"Revisions";
@@ -66,6 +67,7 @@ namespace
     const wchar_t* const    SETTING_DROP_REDUNDANT_WORDS                    = L"DropRedundantWords";
     const wchar_t* const    SETTING_ALWAYS_SHOW_SUBMENU                     = L"AlwaysShowSubmenu";
     const wchar_t* const    SETTING_PATHS_SEPARATOR                         = L"PathsSeparator";
+    const wchar_t* const    SETTING_TRUE_LNK_PATHS                          = L"TrueLnkPaths";
     const wchar_t* const    SETTING_CTRL_KEY_PLUGIN                         = L"CtrlKeyPlugin";
     const wchar_t* const    SETTING_MAIN_MENU_PLUGIN_DISPLAY_ORDER          = L"MainMenuDisplayOrder";
     const wchar_t* const    SETTING_SUBMENU_PLUGIN_DISPLAY_ORDER            = L"SubmenuDisplayOrder";
@@ -83,6 +85,10 @@ namespace
     const wchar_t* const    OLD_SETTING_DEFAULT_PLUGIN                      = L"DefaultPlugin";
     const wchar_t* const    OLD_SETTING_PLUGINS_NOT_IN_SUBMENU              = L"PluginsNotInSubmenu";
     const wchar_t* const    OLD_SETTING_PLUGINS_IN_MAIN_MENU                = L"PluginsInMainMenu";
+    const wchar_t* const    OLD_SETTING_MAIN_FORM_POS_X                     = L"SettingsFormPosX";
+    const wchar_t* const    OLD_SETTING_MAIN_FORM_POS_Y                     = L"SettingsFormPosY";
+    const wchar_t* const    OLD_SETTING_MAIN_FORM_SIZE_WIDTH                = L"SettingsFormSizeWidth";
+    const wchar_t* const    OLD_SETTING_MAIN_FORM_SIZE_HEIGHT               = L"SettingsFormSizeHeight";
 
     // Possible values for the EncodeParam setting.
     const wchar_t* const    SETTING_ENCODE_PARAM_VALUE_NONE                 = L"None";
@@ -90,33 +96,45 @@ namespace
     const wchar_t* const    SETTING_ENCODE_PARAM_VALUE_ALL                  = L"All";
 
     // Default values for PCC settings.
-    const bool              SETTING_USE_HIDDEN_SHARES_DEFAULT               = false;
-    const bool              SETTING_USE_FQDN_DEFAULT                        = false;
-    const bool              SETTING_ADD_QUOTES_DEFAULT                      = false;
-    const bool              SETTING_ARE_QUOTES_OPTIONAL_DEFAULT             = false;
-    const bool              SETTING_MAKE_EMAIL_LINKS_DEFAULT                = false;
+    constexpr bool          SETTING_USE_HIDDEN_SHARES_DEFAULT               = false;
+    constexpr bool          SETTING_USE_FQDN_DEFAULT                        = false;
+    constexpr bool          SETTING_ADD_QUOTES_DEFAULT                      = false;
+    constexpr bool          SETTING_ARE_QUOTES_OPTIONAL_DEFAULT             = false;
+    constexpr bool          SETTING_MAKE_EMAIL_LINKS_DEFAULT                = false;
     const wchar_t* const    SETTING_ENCODE_PARAM_DEFAULT                    = SETTING_ENCODE_PARAM_VALUE_NONE;
-    const bool              SETTING_APPEND_SEPARATOR_FOR_DIRECTORIES_DEFAULT= false;
-    const bool              SETTING_USE_ICON_FOR_DEFAULT_PLUGIN_DEFAULT     = false;
-    const bool              SETTING_USE_ICON_FOR_SUBMENU_DEFAULT            = true;
-    const bool              SETTING_USE_PREVIEW_MODE_DEFAULT                = false;
-    const bool              SETTING_USE_PREVIEW_MODE_IN_MAIN_MENU_DEFAULT   = false;
-    const bool              SETTING_DROP_REDUNDANT_WORDS_DEFAULT            = false;
-    const bool              SETTING_ALWAYS_SHOW_SUBMENU_DEFAULT             = true;
+    constexpr bool          SETTING_APPEND_SEPARATOR_FOR_DIRECTORIES_DEFAULT= false;
+    constexpr bool          SETTING_USE_ICON_FOR_DEFAULT_PLUGIN_DEFAULT     = false;
+    constexpr bool          SETTING_USE_ICON_FOR_SUBMENU_DEFAULT            = true;
+    constexpr bool          SETTING_USE_PREVIEW_MODE_DEFAULT                = false;
+    constexpr bool          SETTING_USE_PREVIEW_MODE_IN_MAIN_MENU_DEFAULT   = false;
+    constexpr bool          SETTING_DROP_REDUNDANT_WORDS_DEFAULT            = false;
+    constexpr bool          SETTING_ALWAYS_SHOW_SUBMENU_DEFAULT             = true;
     const wchar_t* const    SETTING_PATHS_SEPARATOR_DEFAULT                 = L"";
-    const double            SETTING_UPDATE_INTERVAL_DEFAULT                 = 604800.0;     // One week, in seconds.
-    const bool              SETTING_DISABLE_SOFTWARE_UPDATE_DEFAULT         = false;
+    constexpr bool          SETTING_TRUE_LNK_PATHS_DEFAULT                  = false;
+    constexpr double        SETTING_UPDATE_INTERVAL_DEFAULT                 = 604800.0;     // One week, in seconds.
+    constexpr bool          SETTING_DISABLE_SOFTWARE_UPDATE_DEFAULT         = false;
 
     // Constants used to parse data.
-    const wchar_t           PLUGINS_SEPARATOR                               = L',';
-    const wchar_t           REVISIONS_SEPARATOR                             = L',';
+    constexpr wchar_t       PLUGINS_SEPARATOR                               = L',';
+    constexpr wchar_t       REVISIONS_SEPARATOR                             = L',';
 
     // Constants used to generate plugin info for the UI.
-    const wchar_t           INFO_GROUP_INFO_SEPARATOR                       = L',';
-    const wchar_t           INFO_DESCRIPTION_SEPARATOR                      = L'|';
+    constexpr wchar_t       INFO_GROUP_INFO_SEPARATOR                       = L',';
+    constexpr wchar_t       INFO_DESCRIPTION_SEPARATOR                      = L'|';
 
     // Constants used for icons.
     const wchar_t* const    DEFAULT_ICON_MARKER_STRING                      = L"default";
+
+    // Name of possible subkeys of the forms key.
+    const wchar_t* const    FORMS_SUBKEY_MAIN_FORM                          = L"PathCopyCopy.Settings.UI.Forms.MainForm";
+    const wchar_t* const    FORMS_SUBKEY_PIPELINE_PLUGIN_FORM               = L"PathCopyCopy.Settings.UI.Forms.PipelinePluginForm";
+
+    // Name of values used to save data in subkeys of the forms key.
+    const wchar_t* const    SETTING_FORMS_SUBKEY_X                          = L"X";
+    const wchar_t* const    SETTING_FORMS_SUBKEY_Y                          = L"Y";
+    const wchar_t* const    SETTING_FORMS_SUBKEY_WIDTH                      = L"Width";
+    const wchar_t* const    SETTING_FORMS_SUBKEY_HEIGHT                     = L"Height";
+
 
     //
     // Predicate used to sort pipeline plugins according to their sort order.
@@ -131,7 +149,7 @@ namespace
                         //
                         // @param p_pvOrderedPluginIds Vector of ordered pipeline plugin IDs.
                         //
-        explicit        PipelinePluginLess(const PCC::GUIDV& p_vOrderedPluginIds)
+        explicit        PipelinePluginLess(const PCC::GUIDV& p_vOrderedPluginIds) noexcept
                             : m_vOrderedPluginIds(p_vOrderedPluginIds)
                         {
                         }
@@ -142,6 +160,9 @@ namespace
                         PipelinePluginLess(const PipelinePluginLess&) = default;
         PipelinePluginLess&
                         operator=(const PipelinePluginLess&) = delete;
+
+#pragma warning(push)
+#pragma warning(disable: 26415 26418)
 
                         //
                         // Comparison operator that sorts pipeline plugins according to the
@@ -158,10 +179,12 @@ namespace
                             assert(p_spPlugin2 != nullptr);
 
                             // Find each plugin ID in our ordered vector and compare the positions.
-                            auto it1 = std::find(m_vOrderedPluginIds.cbegin(), m_vOrderedPluginIds.cend(), p_spPlugin1->Id());
-                            auto it2 = std::find(m_vOrderedPluginIds.cbegin(), m_vOrderedPluginIds.cend(), p_spPlugin2->Id());
+                            const auto it1 = std::find(m_vOrderedPluginIds.cbegin(), m_vOrderedPluginIds.cend(), p_spPlugin1->Id());
+                            const auto it2 = std::find(m_vOrderedPluginIds.cbegin(), m_vOrderedPluginIds.cend(), p_spPlugin2->Id());
                             return it1 < it2;
                         }
+
+#pragma warning(pop)
 
     private:
         const PCC::GUIDV&
@@ -169,9 +192,12 @@ namespace
     };
 
 #ifdef _DEBUG
+#   pragma warning(push)
+#   pragma warning(disable: ALL_CPPCORECHECK_WARNINGS)
     // Used to detect recursive revisions
     std::mutex  g_DebugRecursiveCheckMutex;
     bool        g_DebugIsRevising = false;
+#   pragma warning(pop)
 #endif // _DEBUG
 
 } // anonymous namespace
@@ -182,13 +208,14 @@ namespace PCC
     // Constructor. Opens the user key as an overrideable key (see class for details).
     // Also opens the plugins key in read/write mode if possible, otherwise read-only.
     //
-    Settings::Settings()
+    Settings::Settings() noexcept(false)
         : COMPluginProvider(),
           PipelinePluginProvider(),
           m_UserKey(PCC_SETTINGS_KEY),
           m_IconsKey(PCC_ICONS_KEY),
           m_PipelinePluginsKey(PCC_PIPELINE_PLUGINS_KEY),
           m_TempPipelinePluginsKey(PCC_TEMP_PIPELINE_PLUGINS_KEY),
+          m_UserFormsKey(HKEY_CURRENT_USER, PCC_FORMS_KEY, true),
           m_UserPluginsKey(),
           m_GlobalPluginsKey(),
           m_GlobalPluginsKeyReadOnly(false),
@@ -492,6 +519,26 @@ namespace PCC
     }
 
     //
+    // Returns whether we want to copy paths to the shortcut (.lnk) files
+    // instead of the path of their targets.
+    //
+    // @return true to copy the path of .lnk files themselves.
+    //
+    bool Settings::GetTrueLnkPaths() const
+    {
+        // Perform late-revising.
+        Revise();
+
+        // Check if value exists. If so, read it, otherwise use default value.
+        bool trueLnkPaths = SETTING_TRUE_LNK_PATHS_DEFAULT;
+        DWORD regTrueLnkPaths = 0;
+        if (m_UserKey.QueryDWORDValue(SETTING_TRUE_LNK_PATHS, regTrueLnkPaths) == ERROR_SUCCESS) {
+            trueLnkPaths = regTrueLnkPaths != 0;
+        }
+        return trueLnkPaths;
+    }
+
+    //
     // Returns the plugin to use when user opens the contextual menu
     // while holding down the Ctrl key.
     //
@@ -531,7 +578,7 @@ namespace PCC
         Revise();
 
         std::wstring pluginsAsString;
-        bool hasValues = PluginUtils::ReadRegistryStringValue(m_UserKey, SETTING_MAIN_MENU_PLUGIN_DISPLAY_ORDER, pluginsAsString) == ERROR_SUCCESS;
+        const bool hasValues = PluginUtils::ReadRegistryStringValue(m_UserKey, SETTING_MAIN_MENU_PLUGIN_DISPLAY_ORDER, pluginsAsString) == ERROR_SUCCESS;
         if (hasValues) {
             p_rvPluginIds.clear();
             if (!pluginsAsString.empty()) {
@@ -555,7 +602,7 @@ namespace PCC
         Revise();
 
         std::wstring pluginsAsString;
-        bool hasValues = PluginUtils::ReadRegistryStringValue(m_UserKey, SETTING_SUBMENU_PLUGIN_DISPLAY_ORDER, pluginsAsString) == ERROR_SUCCESS;
+        const bool hasValues = PluginUtils::ReadRegistryStringValue(m_UserKey, SETTING_SUBMENU_PLUGIN_DISPLAY_ORDER, pluginsAsString) == ERROR_SUCCESS;
         if (hasValues) {
             p_rvPluginIds.clear();
             if (!pluginsAsString.empty()) {
@@ -580,7 +627,7 @@ namespace PCC
         Revise();
 
         std::wstring pluginsAsString;
-        bool hasValues = PluginUtils::ReadRegistryStringValue(m_UserKey, SETTING_KNOWN_PLUGINS, pluginsAsString) == ERROR_SUCCESS;
+        const bool hasValues = PluginUtils::ReadRegistryStringValue(m_UserKey, SETTING_KNOWN_PLUGINS, pluginsAsString) == ERROR_SUCCESS;
         if (hasValues) {
             p_rvPluginIds.clear();
             if (!pluginsAsString.empty()) {
@@ -610,16 +657,16 @@ namespace PCC
         }
         if (!updateDisabled) {
             // Get last time it was performed. If we don't have info on that, assume that it's been a hell of a while.
-            __time64_t lastUpdateCheck;
+            __time64_t lastUpdateCheck = 0;
             ULONGLONG storedLastUpdate = 0;
             if (m_UserKey.QueryQWORDValue(SETTING_LAST_UPDATE_CHECK, storedLastUpdate) == ERROR_SUCCESS) {
-                lastUpdateCheck = static_cast<__time64_t>(storedLastUpdate);
+                lastUpdateCheck = storedLastUpdate;
             } else {
                 lastUpdateCheck = 0;
             }
 
             // Get current time.
-            __time64_t now;
+            __time64_t now = 0;
             ::_time64(&now);
 
             // Get update interval.
@@ -645,9 +692,9 @@ namespace PCC
         // Perform late-revising.
         Revise();
 
-        __time64_t now;
+        __time64_t now = 0;
         ::_time64(&now);
-        m_UserKey.SetQWORDValue(SETTING_LAST_UPDATE_CHECK, static_cast<ULONGLONG>(now));
+        m_UserKey.SetQWORDValue(SETTING_LAST_UPDATE_CHECK, gsl::narrow<ULONGLONG>(now));
     }
 
     //
@@ -658,17 +705,17 @@ namespace PCC
     // default icon is to be used, will return an empty string. If no icon is specified
     // for this plugin, will return a value whose has_value() method returns false.
     //
-    cl::optional<std::wstring> Settings::GetIconFileForPlugin(const CLSID& p_PluginId) const
+    std::optional<std::wstring> Settings::GetIconFileForPlugin(const CLSID& p_PluginId) const
     {
         // Perform late-revising.
         Revise();
 
         // Assume there's no info for the icon.
-        cl::optional<std::wstring> resultingIconFile;
+        std::optional<std::wstring> resultingIconFile;
 
         // Convert plugin ID to string.
         StOleStr pluginIdAsString;
-        HRESULT hRes = ::StringFromCLSID(p_PluginId, &pluginIdAsString);
+        const HRESULT hRes = ::StringFromCLSID(p_PluginId, &pluginIdAsString);
         if (SUCCEEDED(hRes)) {
             // Look for a value for this plugin in the icons key.
             std::wstring iconFile;
@@ -683,7 +730,7 @@ namespace PCC
                 }
             }
         } else {
-            throw SettingsException(static_cast<LONG>(hRes));
+            throw SettingsException(hRes);
         }
 
         return resultingIconFile;
@@ -747,11 +794,11 @@ namespace PCC
 
             // Convert CLSID to string.
             StOleStr clsidAsString;
-            HRESULT hRes = ::StringFromCLSID(p_CLSID, &clsidAsString);
+            const HRESULT hRes = ::StringFromCLSID(p_CLSID, &clsidAsString);
             if (SUCCEEDED(hRes)) {
                 // Check if plugin was already registered.
                 DWORD valueType = 0;
-                if (::RegQueryValueExW(rKey.GetHKEY(), clsidAsString.Get(), 0, &valueType, 0, 0) != ERROR_SUCCESS) {
+                if (::RegQueryValueExW(rKey.GetHKEY(), clsidAsString.Get(), nullptr, &valueType, nullptr, nullptr) != ERROR_SUCCESS) {
                     // Register plugin.
                     rKey.SetStringValue(clsidAsString.Get(), GetCOMPluginInfo(p_CLSID).c_str());
 
@@ -759,7 +806,7 @@ namespace PCC
                     registered = true;
                 }
             } else {
-                throw SettingsException(static_cast<LONG>(hRes));
+                throw SettingsException(hRes);
             }
         }
 
@@ -787,12 +834,12 @@ namespace PCC
 
             // Convert CLSID to string.
             StOleStr clsidAsString;
-            HRESULT hRes = ::StringFromCLSID(p_CLSID, &clsidAsString);
+            const HRESULT hRes = ::StringFromCLSID(p_CLSID, &clsidAsString);
             if (SUCCEEDED(hRes)) {
                 // Unregister the plugin and check if it worked in one swoop.
                 unregistered = rKey.DeleteValue(clsidAsString.Get()) == ERROR_SUCCESS;
             } else {
-                throw SettingsException(static_cast<LONG>(hRes));
+                throw SettingsException(hRes);
             }
         }
 
@@ -849,7 +896,7 @@ namespace PCC
         if (globalUserKey.Valid()) {
             // We got the global key, apply all revisions.
             RegCOMPluginProvider comPluginProvider(globalPluginsKey);
-            Reviser::ApplyRevisions(globalUserKey, globalPipelinePluginsKey, comPluginProvider);
+            Reviser::ApplyRevisions(globalUserKey, nullptr, globalPipelinePluginsKey, comPluginProvider);
         }
     }
 
@@ -861,7 +908,7 @@ namespace PCC
     {
         if (!m_Revised) {
             m_Revised = true;
-            Reviser::ApplyRevisions(m_UserKey, m_PipelinePluginsKey, *this);
+            Reviser::ApplyRevisions(m_UserKey, &m_UserFormsKey, m_PipelinePluginsKey, *this);
         }
     }
 
@@ -967,7 +1014,7 @@ namespace PCC
         for (const auto& subkeyInfo : vSubkeyInfos) {
             // Convert key name into a GUID and make sure it's valid.
             GUID pluginId = { 0 };
-            if (::CLSIDFromString(const_cast<wchar_t*>(subkeyInfo.m_KeyName.c_str()), &pluginId) == S_OK) {
+            if (::CLSIDFromString(subkeyInfo.m_KeyName.c_str(), &pluginId) == S_OK) {
                 // Get values for the pipeline encoded elements as well as the plugin description
                 // and its optional icon file.
                 std::wstring encodedElements, description, iconFile;
@@ -982,7 +1029,7 @@ namespace PCC
                 }
                 if (res == ERROR_SUCCESS) {
                     // Icon file is optional. If not found, we're not displaying any icon.
-                    LONG iconRes = PluginUtils::ReadRegistryStringValue(pluginKey, SETTING_PIPELINE_ICON_FILE, iconFile);
+                    const LONG iconRes = PluginUtils::ReadRegistryStringValue(pluginKey, SETTING_PIPELINE_ICON_FILE, iconFile);
                     if (iconRes == ERROR_SUCCESS && iconFile.empty()) {
                         // This indicates that we want to use the default icon.
                         useDefaultIcon = true;
@@ -999,13 +1046,13 @@ namespace PCC
         // Get value containing the display order. If found, we'll have to reorder the
         // pipeline plugins according to this value.
         std::wstring displayOrder;
-        LONG res = PluginUtils::ReadRegistryStringValue(p_PipelinePluginsKey, SETTING_PIPELINE_DISPLAY_ORDER, displayOrder);
+        const LONG res = PluginUtils::ReadRegistryStringValue(p_PipelinePluginsKey, SETTING_PIPELINE_DISPLAY_ORDER, displayOrder);
         if (res == ERROR_SUCCESS && !displayOrder.empty()) {
             // The value contains a comma-separated list of pipeline plugin IDs.
             GUIDV vOrderedPluginIds = PluginUtils::StringToPluginIds(displayOrder, PLUGINS_SEPARATOR);
 
             // Sort plugins using our special predicate that will order them properly.
-            PipelinePluginLess lessPredicate(vOrderedPluginIds);
+            const PipelinePluginLess lessPredicate(vOrderedPluginIds);
             std::sort(vspPipelinePlugins.begin(), vspPipelinePlugins.end(), lessPredicate);
         }
 
@@ -1025,10 +1072,12 @@ namespace PCC
     // CreateRevisionFuncMap to ensure the data is updated before settings are accessed.
     //
     // @param p_rUserKey Config registry key containing user settings.
+    // @param p_pFormsKey Config registry key containing forms position/size. Optional.
     // @param p_rPluginsKey p_rPipelinePluginsKey Config registry key containing pipeline plugins.
     // @param p_COMPluginProvider Object to access COM plugins.
     //
     void Settings::Reviser::ApplyRevisions(RegKey& p_rUserKey,
+                                           RegKey* const p_pFormsKey,
                                            RegKey& p_rPipelinePluginsKey,
                                            const COMPluginProvider& p_COMPluginProvider)
     {
@@ -1041,7 +1090,8 @@ namespace PCC
             g_DebugIsRevising = true;
         }
         struct ResetIsRevising {
-            ~ResetIsRevising() {
+            [[gsl::suppress(c.21)]] // No use defining everything, this is a helper
+            ~ResetIsRevising() noexcept(false) {
                 std::lock_guard<std::mutex> debugLock(g_DebugRecursiveCheckMutex);
                 assert(g_DebugIsRevising);
                 g_DebugIsRevising = false;
@@ -1050,7 +1100,7 @@ namespace PCC
 #endif // _DEBUG
 
         // Create bean to store revise info.
-        ReviseInfo reviseInfo(p_rUserKey, p_rPipelinePluginsKey, p_COMPluginProvider);
+        const ReviseInfo reviseInfo(p_rUserKey, p_pFormsKey, p_rPipelinePluginsKey, p_COMPluginProvider);
 
         // Get map of revise functions.
         RevisionFuncM mRevisions = CreateRevisionFuncMap();
@@ -1100,6 +1150,8 @@ namespace PCC
         mRevisions.emplace(201601053ul, &ApplyInitialSubmenuPluginDisplayOrder201601053);
         mRevisions.emplace(201601054ul, &ApplyInitialKnownPlugins201601054);
         mRevisions.emplace(201707061ul, &ApplyInitialUIPluginDisplayOrder201707061);
+        mRevisions.emplace(202001091ul, &ApplyNewPipelinePluginForm202001091);
+        mRevisions.emplace(202001251ul, &ApplyMainFormSizeAndPositionMove202001251);
 
         // Add any new revisions here.
         
@@ -1127,14 +1179,14 @@ namespace PCC
         // - Copy value of "DefaultPlugin" (if there is one) to "PluginsInMainMenu"
 
         DWORD dummyValueType = 0;
-        if (p_ReviseInfo.m_rUserKey.QueryValue(OLD_SETTING_PLUGINS_NOT_IN_SUBMENU, &dummyValueType, 0, 0) == ERROR_FILE_NOT_FOUND) {
+        if (p_ReviseInfo.m_rUserKey.QueryValue(OLD_SETTING_PLUGINS_NOT_IN_SUBMENU, &dummyValueType, nullptr, nullptr) == ERROR_FILE_NOT_FOUND) {
             std::wstring disabledPluginsAsString;
             if (PluginUtils::ReadRegistryStringValue(p_ReviseInfo.m_rUserKey, OLD_SETTING_DISABLED_PLUGINS, disabledPluginsAsString) == ERROR_SUCCESS) {
                 p_ReviseInfo.m_rUserKey.SetStringValue(OLD_SETTING_PLUGINS_NOT_IN_SUBMENU, disabledPluginsAsString.c_str());
                 p_ReviseInfo.m_rUserKey.DeleteValue(OLD_SETTING_DISABLED_PLUGINS);
             }
         }
-        if (p_ReviseInfo.m_rUserKey.QueryValue(OLD_SETTING_PLUGINS_IN_MAIN_MENU, &dummyValueType, 0, 0) == ERROR_FILE_NOT_FOUND) {
+        if (p_ReviseInfo.m_rUserKey.QueryValue(OLD_SETTING_PLUGINS_IN_MAIN_MENU, &dummyValueType, nullptr, nullptr) == ERROR_FILE_NOT_FOUND) {
             std::wstring defaultPluginAsString;
             if (PluginUtils::ReadRegistryStringValue(p_ReviseInfo.m_rUserKey, OLD_SETTING_DEFAULT_PLUGIN, defaultPluginAsString) == ERROR_SUCCESS) {
                 p_ReviseInfo.m_rUserKey.SetStringValue(OLD_SETTING_PLUGINS_IN_MAIN_MENU, defaultPluginAsString.c_str());
@@ -1180,7 +1232,7 @@ namespace PCC
             // Fetch all plugins in default order.
             RegPipelinePluginProvider pipelinePluginProvider(p_ReviseInfo.m_rPipelinePluginsKey);
             PluginSPV vspPlugins = PluginsRegistry::GetPluginsInDefaultOrder(
-                &p_ReviseInfo.m_COMPluginProvider, &pipelinePluginProvider, false);
+                &p_ReviseInfo.m_COMPluginProvider, &pipelinePluginProvider, PipelinePluginsOptions::FetchPipelinePlugins);
 
             // Scan plugins and keep all those that are to be included in main menu.
             // Do not keep separators (there shouldn't be any but just to be sure).
@@ -1222,7 +1274,7 @@ namespace PCC
             // Fetch all plugins in default order.
             RegPipelinePluginProvider pipelinePluginProvider(p_ReviseInfo.m_rPipelinePluginsKey);
             PluginSPV vspPlugins = PluginsRegistry::GetPluginsInDefaultOrder(
-                &p_ReviseInfo.m_COMPluginProvider, &pipelinePluginProvider, false);
+                &p_ReviseInfo.m_COMPluginProvider, &pipelinePluginProvider, PipelinePluginsOptions::FetchPipelinePlugins);
 
             // Scan plugins and keep them all EXCEPT those that should not be displayed in the submenu.
             // Also keep separators, but be careful not to double them.
@@ -1269,7 +1321,7 @@ namespace PCC
             // Get set of all plugins and convert it to vector of plugin IDs.
             RegPipelinePluginProvider pipelinePluginProvider(p_ReviseInfo.m_rPipelinePluginsKey);
             PluginSPV vspPlugins = PluginsRegistry::GetPluginsInDefaultOrder(
-                &p_ReviseInfo.m_COMPluginProvider, &pipelinePluginProvider, false);
+                &p_ReviseInfo.m_COMPluginProvider, &pipelinePluginProvider, PipelinePluginsOptions::FetchPipelinePlugins);
             PluginSPS sspAllPlugins(vspPlugins.cbegin(), vspPlugins.cend());
             GUIDV vPluginIds;
             vPluginIds.reserve(sspAllPlugins.size());
@@ -1310,7 +1362,7 @@ namespace PCC
                 // Load plugins in default order.
                 RegPipelinePluginProvider pipelinePluginProvider(p_ReviseInfo.m_rPipelinePluginsKey);
                 PluginSPV vspPlugins = PluginsRegistry::GetPluginsInDefaultOrder(
-                    &p_ReviseInfo.m_COMPluginProvider, &pipelinePluginProvider, false);
+                    &p_ReviseInfo.m_COMPluginProvider, &pipelinePluginProvider, PipelinePluginsOptions::FetchPipelinePlugins);
 
                 // Keep all plugins in default order that are not already in the list.
                 // Be careful not to double up separators.
@@ -1335,16 +1387,83 @@ namespace PCC
     }
 
     //
+    // Revises the config by clearing any saved position/size info for pipeline plugin form,
+    // because that form changed in a major way in version 18.0.
+    //
+    // @param p_ReviseInfo Bean containing objects to perform revision.
+    //
+    void Settings::Reviser::ApplyNewPipelinePluginForm202001091(const ReviseInfo& p_ReviseInfo)
+    {
+        if (p_ReviseInfo.m_pFormsKey != nullptr) {
+            RegKey::SubkeyInfoV vSubkeyInfos;
+            p_ReviseInfo.m_pFormsKey->GetSubKeys(vSubkeyInfos);
+            const auto isPipelinePluginsFormSubkey = [](const auto& subkeyInfo) {
+                return subkeyInfo.m_KeyName == FORMS_SUBKEY_PIPELINE_PLUGIN_FORM;
+            };
+            const auto itProperSubkeyInfo = std::find_if(vSubkeyInfos.cbegin(),
+                                                         vSubkeyInfos.cend(),
+                                                         isPipelinePluginsFormSubkey);
+            if (itProperSubkeyInfo != vSubkeyInfos.cend()) {
+                ::RegDeleteKeyW(itProperSubkeyInfo->m_hParent, itProperSubkeyInfo->m_KeyName.c_str());
+            }
+        }
+    }
+
+    //
+    // Revises the config by moving the saved size and position of the Settings app's MainForm
+    // to the Forms subkey, like other forms.
+    //
+    // @param p_ReviseInfo Bean containing objects to perform revision.
+    //
+    void Settings::Reviser::ApplyMainFormSizeAndPositionMove202001251(const ReviseInfo& p_ReviseInfo)
+    {
+        // Forms' size and positions are all saved in the Forms subkey - except for MainForm which
+        // used to be saved elsewhere. Now MainForm will use the same framework, so move its save
+        // information along the others.
+        if (p_ReviseInfo.m_pFormsKey != nullptr) {
+            RegKey::SubkeyInfoV vSubkeyInfos;
+            p_ReviseInfo.m_pFormsKey->GetSubKeys(vSubkeyInfos);
+            const auto isMainFormSubkey = [](const auto& subkeyInfo) {
+                return subkeyInfo.m_KeyName == FORMS_SUBKEY_MAIN_FORM;
+            };
+            if (std::none_of(vSubkeyInfos.cbegin(), vSubkeyInfos.cend(), isMainFormSubkey)) {
+                // No size/position for the MainForm yet in the new framework, copy the values over.
+                const auto spMainFormSubkey = p_ReviseInfo.m_pFormsKey->CreateSubKey(FORMS_SUBKEY_MAIN_FORM);
+                DWORD value = 0;
+                if (p_ReviseInfo.m_rUserKey.QueryDWORDValue(OLD_SETTING_MAIN_FORM_POS_X, value) == ERROR_SUCCESS) {
+                    spMainFormSubkey->SetDWORDValue(SETTING_FORMS_SUBKEY_X, value);
+                    p_ReviseInfo.m_rUserKey.DeleteValue(OLD_SETTING_MAIN_FORM_POS_X);
+                }
+                if (p_ReviseInfo.m_rUserKey.QueryDWORDValue(OLD_SETTING_MAIN_FORM_POS_Y, value) == ERROR_SUCCESS) {
+                    spMainFormSubkey->SetDWORDValue(SETTING_FORMS_SUBKEY_Y, value);
+                    p_ReviseInfo.m_rUserKey.DeleteValue(OLD_SETTING_MAIN_FORM_POS_Y);
+                }
+                if (p_ReviseInfo.m_rUserKey.QueryDWORDValue(OLD_SETTING_MAIN_FORM_SIZE_WIDTH, value) == ERROR_SUCCESS) {
+                    spMainFormSubkey->SetDWORDValue(SETTING_FORMS_SUBKEY_WIDTH, value);
+                    p_ReviseInfo.m_rUserKey.DeleteValue(OLD_SETTING_MAIN_FORM_SIZE_WIDTH);
+                }
+                if (p_ReviseInfo.m_rUserKey.QueryDWORDValue(OLD_SETTING_MAIN_FORM_SIZE_HEIGHT, value) == ERROR_SUCCESS) {
+                    spMainFormSubkey->SetDWORDValue(SETTING_FORMS_SUBKEY_HEIGHT, value);
+                    p_ReviseInfo.m_rUserKey.DeleteValue(OLD_SETTING_MAIN_FORM_SIZE_HEIGHT);
+                }
+            }
+        }
+    }
+
+    //
     // Constructor.
     //
     // @param p_rUserKey Config registry key containing user settings.
+    // @param p_pFormsKey Config registry key containing forms position/size. Optional.
     // @param p_rPluginsKey p_rPipelinePluginsKey Config registry key containing pipeline plugins.
     // @param p_COMPluginProvider Object to access COM plugins.
     //
     Settings::Reviser::ReviseInfo::ReviseInfo(RegKey& p_rUserKey,
+                                              RegKey* const p_pFormsKey,
                                               RegKey& p_rPipelinePluginsKey,
-                                              const COMPluginProvider& p_COMPluginProvider)
+                                              const COMPluginProvider& p_COMPluginProvider) noexcept
         : m_rUserKey(p_rUserKey),
+          m_pFormsKey(p_pFormsKey),
           m_rPipelinePluginsKey(p_rPipelinePluginsKey),
           m_COMPluginProvider(p_COMPluginProvider)
     {
@@ -1355,7 +1474,7 @@ namespace PCC
     //
     // @param p_PluginsKey Registry key storing (COM) plugins.
     //
-    Settings::RegCOMPluginProvider::RegCOMPluginProvider(const RegKey& p_PluginsKey)
+    Settings::RegCOMPluginProvider::RegCOMPluginProvider(const RegKey& p_PluginsKey) noexcept
         : COMPluginProvider(),
           m_PluginsKey(p_PluginsKey)
     {
@@ -1380,7 +1499,7 @@ namespace PCC
     //
     // @param p_PipelinePluginsKey Registry key containing pipeline plugins.
     //
-    Settings::RegPipelinePluginProvider::RegPipelinePluginProvider(const RegKey& p_PipelinePluginsKey)
+    Settings::RegPipelinePluginProvider::RegPipelinePluginProvider(const RegKey& p_PipelinePluginsKey) noexcept
         : PipelinePluginProvider(),
           m_PipelinePluginsKey(p_PipelinePluginsKey)
     {
@@ -1404,7 +1523,7 @@ namespace PCC
     //
     // @param p_rvspPlugins Where to store pipeline plugins; unused.
     //
-    void Settings::RegPipelinePluginProvider::GetTempPipelinePlugins(PluginSPV& /*p_rvspPlugins*/) const
+    void Settings::RegPipelinePluginProvider::GetTempPipelinePlugins(PluginSPV& /*p_rvspPlugins*/) const noexcept(false)
     {
     }
 
@@ -1413,7 +1532,7 @@ namespace PCC
     //
     // @param p_ErrorCode The Windows error code associated with the exception.
     //
-    SettingsException::SettingsException(const LONG p_ErrorCode)
+    SettingsException::SettingsException(const LONG p_ErrorCode) noexcept
         : std::exception(),
           m_ErrorCode(p_ErrorCode)
     {
@@ -1424,7 +1543,7 @@ namespace PCC
     //
     // @return Associated error code.
     //
-    LONG SettingsException::ErrorCode() const
+    LONG SettingsException::ErrorCode() const noexcept
     {
         return m_ErrorCode;
     }
@@ -1434,7 +1553,7 @@ namespace PCC
     //
     // @return Exception description.
     //
-    const char* SettingsException::what() const
+    const char* SettingsException::what() const noexcept(false)
     {
         return "PCC::SettingsException";
     }

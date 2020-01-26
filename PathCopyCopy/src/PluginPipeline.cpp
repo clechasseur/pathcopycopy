@@ -1,5 +1,5 @@
 // PluginPipeline.cpp
-// (c) 2011-2019, Charles Lechasseur
+// (c) 2011-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -32,7 +32,7 @@ namespace PCC
     // @return Separator between multiple paths. An empty string
     //         means to use the default value.
     //
-    const std::wstring& PipelineOptions::GetPathsSeparator() const
+    const std::wstring& PipelineOptions::GetPathsSeparator() const noexcept
     {
         return m_PathsSeparator;
     }
@@ -55,7 +55,7 @@ namespace PCC
     // @return Path of executable to start. An empty string means
     //         to copy to clipboard instead.
     //
-    const std::wstring& PipelineOptions::GetExecutable() const
+    const std::wstring& PipelineOptions::GetExecutable() const noexcept
     {
         return m_Executable;
     }
@@ -77,7 +77,7 @@ namespace PCC
     //
     // @return Whether to launch executable with filelist instead of paths.
     //
-    bool PipelineOptions::GetUseFilelist() const
+    bool PipelineOptions::GetUseFilelist() const noexcept
     {
         return m_UseFilelist;
     }
@@ -87,7 +87,7 @@ namespace PCC
     //
     // @param p_UseFilelist true to launch executable with filelist instead of paths.
     //
-    void PipelineOptions::SetUseFilelist(const bool p_UseFilelist)
+    void PipelineOptions::SetUseFilelist(const bool p_UseFilelist) noexcept
     {
         m_UseFilelist = p_UseFilelist;
     }
@@ -109,23 +109,30 @@ namespace PCC
     // @param p_EncodedElements Elements encoded in a string.
     //
     Pipeline::Pipeline(const std::wstring& p_EncodedElements)
-        : m_vspElements()
+        : m_vspElements(PipelineDecoder::DecodePipeline(p_EncodedElements))
     {
-        PipelineDecoder::DecodePipeline(p_EncodedElements, m_vspElements);
     }
 
     //
-    // Modifies global pipeline options by successively applying all pipeline
-    // elements to it. Returns the final version of the pipeline options.
+    // Validates the pipeline. A pipeline is valid if all its elements
+    // are considered valid.
     //
-    // @param p_rOptions Global pipeline options to modify.
+    // When the pipeline is invalid, an InvalidPipelineException is thrown.
     //
-    void Pipeline::ModifyOptions(PipelineOptions& p_rOptions) const
+    // @param p_pPluginProvider Optional plugin provider that can be used
+    //                          during validation.
+    // @param p_rsSeenPluginIds Set that should be used to store seen plugin IDs.
+    //                          Any collision means a loop is detected and
+    //                          pipeline should be considered invalid.
+    //
+    void Pipeline::Validate(const PluginProvider* const p_pPluginProvider,
+                            GUIDS& p_rsSeenPluginIds) const
     {
-        for (const PipelineElementSP& spElement : m_vspElements) {
-            spElement->ModifyOptions(p_rOptions);
+        for (const auto& spElement : m_vspElements) {
+            spElement->Validate(p_pPluginProvider, p_rsSeenPluginIds);
         }
     }
+
 
     //
     // Modifies a given path by successively applying all pipeline
@@ -137,8 +144,21 @@ namespace PCC
     void Pipeline::ModifyPath(std::wstring& p_rPath,
                               const PluginProvider* const p_pPluginProvider) const
     {
-        for (const PipelineElementSP& spElement : m_vspElements) {
+        for (const auto& spElement : m_vspElements) {
             spElement->ModifyPath(p_rPath, p_pPluginProvider);
+        }
+    }
+
+    //
+    // Modifies global pipeline options by successively applying all pipeline
+    // elements to it. Returns the final version of the pipeline options.
+    //
+    // @param p_rOptions Global pipeline options to modify.
+    //
+    void Pipeline::ModifyOptions(PipelineOptions& p_rOptions) const
+    {
+        for (const auto& spElement : m_vspElements) {
+            spElement->ModifyOptions(p_rOptions);
         }
     }
 
@@ -155,26 +175,29 @@ namespace PCC
                                       const std::wstring& p_File,
                                       const PluginProvider* const p_pPluginProvider) const
     {
-        bool enabled = true;
-        PipelineElementSPV::const_iterator it, end = m_vspElements.cend();
-        for (it = m_vspElements.cbegin(); enabled && it != end; ++it) {
-            enabled = (*it)->ShouldBeEnabledFor(p_ParentPath, p_File, p_pPluginProvider);
-        }
-        return enabled;
+        return std::all_of(m_vspElements.cbegin(), m_vspElements.cend(), [&](const auto& spElement) {
+            return spElement->ShouldBeEnabledFor(p_ParentPath, p_File, p_pPluginProvider);
+        });
     }
 
     //
-    // Default constructor.
+    // Validates the pipeline element. Whether or not an element is "valid"
+    // is implementation-specific, but should be used to detect recursion
+    // in plugin usage, for instance.
     //
-    PipelineElement::PipelineElement()
+    // When the pipeline element is invalid, an InvalidPipelineException
+    // should be thrown.
+    //
+    // @param p_pPluginProvider Optional plugin provider that can be used
+    //                          during validation.
+    // @param p_rsSeenPluginIds Set that should be used to store seen plugin IDs.
+    //                          Any collision means a loop is detected and
+    //                          pipeline element should be considered invalid.
+    //
+    void PipelineElement::Validate(const PluginProvider* const /*p_pPluginProvider*/,
+                                   GUIDS& /*p_rsSeenPluginIds*/) const noexcept(false)
     {
-    }
-
-    //
-    // Destructor.
-    //
-    PipelineElement::~PipelineElement()
-    {
+        // All pipeline elements are considered valid by default.
     }
 
     //
@@ -183,7 +206,7 @@ namespace PCC
     //
     // @param p_rOptions Global pipeline options to modify.
     //
-    void PipelineElement::ModifyOptions(PipelineOptions& /*p_rOptions*/) const
+    void PipelineElement::ModifyOptions(PipelineOptions& /*p_rOptions*/) const noexcept(false)
     {
     }
 
@@ -198,9 +221,27 @@ namespace PCC
     //
     bool PipelineElement::ShouldBeEnabledFor(const std::wstring& /*p_ParentPath*/,
                                              const std::wstring& /*p_File*/,
-                                             const PluginProvider* const /*p_pPluginProvider*/) const
+                                             const PluginProvider* const /*p_pPluginProvider*/) const noexcept(false)
     {
         return true;
+    }
+
+    //
+    // Default constructor.
+    //
+    InvalidPipelineException::InvalidPipelineException()
+        : std::runtime_error(ATL::CStringA(MAKEINTRESOURCEA(IDS_INVALIDPIPELINE)))
+    {
+    }
+
+    //
+    // Constructor with explanation string.
+    //
+    // @param p_pWhat Explanation string.
+    //
+    InvalidPipelineException::InvalidPipelineException(const char* const p_pWhat)
+        : std::runtime_error(p_pWhat)
+    {
     }
 
 } // namespace PCC

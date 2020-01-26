@@ -1,5 +1,5 @@
 // StOleStr.h
-// (c) 2011-2019, Charles Lechasseur
+// (c) 2011-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -35,9 +35,9 @@ class StOleStr final
 public:
                         //
                         // Default constructor.
-                        // Initializes a NULL string.
+                        // Initializes a null string.
                         //
-                        StOleStr()
+                        StOleStr() noexcept
                             : m_pString(nullptr)
                         {
                         }
@@ -47,16 +47,18 @@ public:
                         //
                         // @param p_pString String pointer to acquire. Must have been created using CoTaskMemAlloc.
                         //
-                        StOleStr(LPOLESTR const p_pString)
+    explicit            StOleStr(LPOLESTR const p_pString) noexcept
                             : m_pString(p_pString)
                         {
                         }
 
                         //
-                        // Copying not supported.
+                        // Copying/moving not supported.
                         //
                         StOleStr(const StOleStr&) = delete;
+                        StOleStr(StOleStr&&) = delete;
     StOleStr&           operator=(const StOleStr&) = delete;
+    StOleStr&           operator=(StOleStr&&) = delete;
 
                         //
                         // Destructor. Frees the OLESTR if set.
@@ -71,7 +73,7 @@ public:
                         //
                         // Returns a reference to the internal OLESTR pointer.
                         //
-    LPOLESTR&           Get()
+    LPOLESTR&           Get() noexcept
                         {
                             return m_pString;
                         }
@@ -79,7 +81,7 @@ public:
                         //
                         // Returns a reference to the internal OLESTR pointer.
                         //
-                        operator LPOLESTR()
+                        operator LPOLESTR() noexcept
                         {
                             return m_pString;
                         }
@@ -91,11 +93,11 @@ public:
                         // StOleStr olestr;
                         // StringFromCLSID(clsid, &olestr);
                         //
-    LPOLESTR*           operator&()
+    LPOLESTR*           operator&() noexcept
                         {
                             return &m_pString;
                         }
 
 private:
-    LPOLESTR            m_pString;      // String content. Can be NULL.
+    LPOLESTR            m_pString;      // String content. Can be null.
 };

@@ -1,5 +1,5 @@
 // UserOverrideableRegKey.cpp
-// (c) 2011-2019, Charles Lechasseur
+// (c) 2011-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -31,7 +31,7 @@
 namespace
 {
     // Registry value that is used to lock out users of overriding a key.
-    const wchar_t   VALUE_NAME_LOCKED_OUT[]     = L"KeyLock";
+    const wchar_t* const VALUE_NAME_LOCKED_OUT  = L"KeyLock";
 
 } // anonymous namespace
 
@@ -46,8 +46,10 @@ namespace
 UserOverrideableRegKey::UserOverrideableRegKey(const wchar_t* const p_pKeyPath,
                                                const wchar_t* const p_pUserKeyPath /*= nullptr*/)
     : RegKey(),
-      m_GlobalKey(HKEY_LOCAL_MACHINE, p_pKeyPath, false, KEY_QUERY_VALUE | KEY_ENUMERATE_SUB_KEYS),
-      m_UserKey(HKEY_CURRENT_USER, p_pUserKeyPath != nullptr ? p_pUserKeyPath : p_pKeyPath, true,
+      m_KeyPath(p_pKeyPath),
+      m_UserKeyPath(p_pUserKeyPath != nullptr ? p_pUserKeyPath : p_pKeyPath),
+      m_GlobalKey(HKEY_LOCAL_MACHINE, m_KeyPath.c_str(), false, KEY_QUERY_VALUE | KEY_ENUMERATE_SUB_KEYS),
+      m_UserKey(HKEY_CURRENT_USER, m_UserKeyPath.c_str(), true,
                 KEY_QUERY_VALUE | KEY_SET_VALUE | KEY_CREATE_SUB_KEY | KEY_ENUMERATE_SUB_KEYS)
 {
 }
@@ -86,7 +88,7 @@ bool UserOverrideableRegKey::Locked() const
 // @return Reference to global key. This key might be invalid if user does not have proper
 //         access or if the key does not exist.
 //
-const RegKey& UserOverrideableRegKey::GetGlobalKey() const
+const RegKey& UserOverrideableRegKey::GetGlobalKey() const noexcept
 {
     return m_GlobalKey;
 }
@@ -96,7 +98,7 @@ const RegKey& UserOverrideableRegKey::GetGlobalKey() const
 //
 // @return Reference to user key.
 //
-const RegKey& UserOverrideableRegKey::GetUserKey() const
+const RegKey& UserOverrideableRegKey::GetUserKey() const noexcept
 {
     return m_UserKey;
 }
@@ -217,13 +219,13 @@ void UserOverrideableRegKey::GetValues(ValueInfoV& p_rvValues) const
     // Sort values in the vector according to their name using stable_sort.
     // This way, for values that appear in both keys, the value in the user
     // key will be before that of the global key.
-    auto compareValueInfos = [](const ValueInfo& p_Value1, const ValueInfo& p_Value2) {
+    const auto compareValueInfos = [](const ValueInfo& p_Value1, const ValueInfo& p_Value2) noexcept {
         return ::_wcsicmp(p_Value1.m_ValueName.c_str(), p_Value2.m_ValueName.c_str()) < 0;
     };
     std::stable_sort(vValues.begin(), vValues.end(), compareValueInfos);
 
     // Now remove duplicates, which will remove conflicting values from the global key.
-    auto valueInfosEqual = [](const ValueInfo& p_Value1, const ValueInfo& p_Value2) {
+    const auto valueInfosEqual = [](const ValueInfo& p_Value1, const ValueInfo& p_Value2) noexcept {
         return ::_wcsicmp(p_Value1.m_ValueName.c_str(), p_Value2.m_ValueName.c_str()) == 0;
     };
     vValues.erase(std::unique(vValues.begin(), vValues.end(), valueInfosEqual), vValues.end());
@@ -255,12 +257,12 @@ void UserOverrideableRegKey::GetSubKeys(SubkeyInfoV& p_rvSubkeys) const
         m_GlobalKey.GetSubKeys(vSubkeys);
     }
 
-    auto compareSubkeyInfos = [](const SubkeyInfo& p_Subkey1, const SubkeyInfo& p_Subkey2) {
+    const auto compareSubkeyInfos = [](const SubkeyInfo& p_Subkey1, const SubkeyInfo& p_Subkey2) noexcept {
         return ::_wcsicmp(p_Subkey1.m_KeyName.c_str(), p_Subkey2.m_KeyName.c_str()) < 0;
     };
     std::stable_sort(vSubkeys.begin(), vSubkeys.end(), compareSubkeyInfos);
 
-    auto subkeyInfosEqual = [](const SubkeyInfo& p_Subkey1, const SubkeyInfo& p_Subkey2) {
+    const auto subkeyInfosEqual = [](const SubkeyInfo& p_Subkey1, const SubkeyInfo& p_Subkey2) noexcept {
         return ::_wcsicmp(p_Subkey1.m_KeyName.c_str(), p_Subkey2.m_KeyName.c_str()) == 0;
     };
     vSubkeys.erase(std::unique(vSubkeys.begin(), vSubkeys.end(), subkeyInfosEqual), vSubkeys.end());
@@ -359,4 +361,16 @@ long UserOverrideableRegKey::DeleteValue(const wchar_t* const p_pValueName)
         res = m_UserKey.DeleteValue(p_pValueName);
     }
     return res;
+}
+
+//
+// Opens or creates a subkey of this registry key.
+//
+// @param p_pKeyName Name of the subkey to open or create.
+// @return Wrapper for the subkey.
+//
+std::shared_ptr<RegKey> UserOverrideableRegKey::CreateSubKey(const wchar_t* const p_pKeyName)
+{
+    return std::make_shared<UserOverrideableRegKey>((m_KeyPath + L"\\" + p_pKeyName).c_str(),
+                                                    (m_UserKeyPath + L"\\" + p_pKeyName).c_str());
 }

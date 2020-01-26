@@ -1,5 +1,5 @@
 // StGlobalLock.h
-// (c) 2008-2019, Charles Lechasseur
+// (c) 2008-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -42,17 +42,19 @@ public:
                         //
                         // @param p_hMem Handle of memory block to lock.
                         //
-    explicit            StGlobalLock(HANDLE p_hMem)
+    explicit            StGlobalLock(HANDLE const p_hMem) noexcept
                             : m_hMem(p_hMem),
                               m_pMem(::GlobalLock(m_hMem))
                         {
                         }
 
                         //
-                        // Copying not supported.
+                        // Copying/moving not supported.
                         //
                         StGlobalLock(const StGlobalLock&) = delete;
+                        StGlobalLock(StGlobalLock&&) = delete;
     StGlobalLock&       operator=(const StGlobalLock&) = delete;
+    StGlobalLock&       operator=(StGlobalLock&&) = delete;
 
                         //
                         // Destructor.
@@ -73,12 +75,12 @@ public:
                         //
                         // @return Block pointer.
                         //
-    void*               GetPtr() const
+    void*               GetPtr() const noexcept
                         {
                             return m_pMem;
                         }
 
 private:
-    HANDLE              m_hMem;     // Memory block that we locked.
-    void*               m_pMem;     // Pointer to memory block, accessible while we're locked.
+    HANDLE const        m_hMem;     // Memory block that we locked.
+    void* const         m_pMem;     // Pointer to memory block, accessible while we're locked.
 };

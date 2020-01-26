@@ -1,5 +1,5 @@
-// StCoInitialize.h
-// (c) 2014-2019, Charles Lechasseur
+// StGdiplusStartup.h
+// (c) 2014-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,6 +25,9 @@
 #include <objidl.h>
 #include <gdiplus.h>
 
+#pragma warning(push)
+#pragma warning(disable: 26812) // Enum Gdiplus::Status should be enum class
+
 
 //
 // StGdiplusStartup
@@ -46,7 +49,7 @@ public:
                         //                                 MSDN says this is unused. [default: false]
                         //
     explicit            StGdiplusStartup(Gdiplus::DebugEventProc const p_pDebugEventCallback = nullptr,
-                                         const bool p_SuppressExternalCodecs = false)
+                                         const bool p_SuppressExternalCodecs = false) noexcept(false)
                             : m_StartupInput(p_pDebugEventCallback, FALSE, p_SuppressExternalCodecs ? TRUE : FALSE),
                               m_Token(0),
                               m_StartupRes(Gdiplus::GdiplusStartup(&m_Token, &m_StartupInput, nullptr))
@@ -54,10 +57,12 @@ public:
                         }
 
                         //
-                        // Copying not supported.
+                        // Copying/moving not supported.
                         //
                         StGdiplusStartup(const StGdiplusStartup&) = delete;
+                        StGdiplusStartup(StGdiplusStartup&&) = delete;
     StGdiplusStartup&   operator=(const StGdiplusStartup&) = delete;
+    StGdiplusStartup&   operator=(StGdiplusStartup&&) = delete;
 
                         //
                         // Destructor. Shuts down the GDI+ library that was initialized
@@ -75,7 +80,7 @@ public:
                         //
                         // @return Startup result, as a GDI+ Status enum value.
                         //
-    Gdiplus::Status     StartupResult() const
+    Gdiplus::Status     StartupResult() const noexcept
                         {
                             return m_StartupRes;
                         }
@@ -85,14 +90,17 @@ public:
                         //
                         // @return true if GDI+ was started successfully.
                         //
-    bool                Started() const
+    bool                Started() const noexcept
                         {
                             return m_StartupRes == Gdiplus::Ok;
                         }
 
 private:
-    Gdiplus::GdiplusStartupInput
+    const Gdiplus::GdiplusStartupInput
                         m_StartupInput;     // Struct with info for startup proc.
     ULONG_PTR           m_Token;            // Token to pass to shutdown proc.
-    Gdiplus::Status     m_StartupRes;       // Result of GdiplusStartup call.
+    const Gdiplus::Status
+                        m_StartupRes;       // Result of GdiplusStartup call.
 };
+
+#pragma warning(pop)

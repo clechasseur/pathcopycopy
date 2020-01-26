@@ -1,5 +1,5 @@
 // PathCopyCopyRegexTester.cpp
-// (c) 2012-2019, Charles Lechasseur
+// (c) 2012-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include "stdafx.h"
+#include <stdafx.h>
 
 #include <regex>
 
@@ -31,6 +31,7 @@
 // @param argv Array of command-line arguments
 // @return Process exit code
 //
+#pragma warning(suppress: 26485) // Not sure what to do with this one, this is generated code
 int wmain(int /*argc*/, wchar_t* /*argv*/[])
 {
     // Ask user to provide sample string, regex and replacement format.
@@ -53,12 +54,13 @@ int wmain(int /*argc*/, wchar_t* /*argv*/[])
     try {
         // Create regex object and perform replacement. This must be similar
         // to the way this is done in RegexPipelineElement in the main project.
+#pragma warning(suppress: 26812)    // std::regex_constants::syntax_option_type should be enum class
         std::regex_constants::syntax_option_type reOptions = std::regex_constants::ECMAScript;
         if (ignoreCase == L'y') {
             reOptions |= std::regex_constants::icase;
         }
-        std::wregex re(regex, reOptions);
-        std::wstring modified = std::regex_replace(sample, re, format);
+        const std::wregex re(regex, reOptions);
+        const std::wstring modified = std::regex_replace(sample, re, format);
 
         // Output modified string:
         std::wcout << L"Modified string: " << modified << std::endl;

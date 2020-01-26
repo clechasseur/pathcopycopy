@@ -1,5 +1,5 @@
 // PluginProvider.h
-// (c) 2016-2019, Charles Lechasseur
+// (c) 2016-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -34,7 +34,12 @@ namespace PCC
     class PluginProvider
     {
     public:
-        virtual         ~PluginProvider();
+                        PluginProvider() = default;
+                        PluginProvider(const PluginProvider&) = delete;
+                        PluginProvider(PluginProvider&&) = delete;
+        PluginProvider& operator=(const PluginProvider&) = delete;
+        PluginProvider& operator=(PluginProvider&&) = delete;
+        virtual         ~PluginProvider() = default;
 
         virtual PluginSP GetPlugin(const GUID& p_PluginId) const = 0;
     };

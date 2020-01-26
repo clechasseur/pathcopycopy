@@ -1,5 +1,5 @@
 // TestPlugins.cpp
-// (c) 2011-2019, Charles Lechasseur
+// (c) 2011-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -29,7 +29,7 @@
 STDAPI DllCanUnloadNow(void)
 {
 #ifdef _MERGE_PROXYSTUB
-    HRESULT hr = PrxDllCanUnloadNow();
+    const HRESULT hr = PrxDllCanUnloadNow();
     if (hr != S_OK)
         return hr;
 #endif
@@ -84,8 +84,9 @@ STDAPI DllInstall(BOOL bInstall, LPCWSTR pszCmdLine)
     HRESULT hr = E_FAIL;
     static const wchar_t szUserSwitch[] = _T("user");
 
-    if (pszCmdLine != NULL)
+    if (pszCmdLine != nullptr)
     {
+#pragma warning(suppress: ALL_CPPCORECHECK_WARNINGS)
     	if (_wcsnicmp(pszCmdLine, szUserSwitch, _countof(szUserSwitch)) == 0)
     	{
     		ATL::AtlSetPerUserRegistration(true);

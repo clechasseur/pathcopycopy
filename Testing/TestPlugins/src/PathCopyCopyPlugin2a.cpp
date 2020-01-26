@@ -1,5 +1,5 @@
 // PathCopyCopyPlugin2a.cpp
-// (c) 2011-2019, Charles Lechasseur
+// (c) 2011-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,23 +26,35 @@
 // CPathCopyCopyPlugin2a
 
 // Method that must return the plugin description, displayed in the contextual menu.
+[[gsl::suppress(c.128), gsl::suppress(f.6)]]
 STDMETHODIMP CPathCopyCopyPlugin2a::get_Description(BSTR *p_ppDescription)
 {
+    if (p_ppDescription == nullptr) {
+        return E_INVALIDARG;
+    }
     *p_ppDescription = ::SysAllocString(L"PCC Test Plugin 2a");
     return S_OK;
 }
 
 // Method that can return a help text to be displayed in the status bar when the cursor is over the plugin's menu item.
 // It is legal to return NULL or an empty string if no help text can be provided.
+[[gsl::suppress(c.128), gsl::suppress(f.6)]]
 STDMETHODIMP CPathCopyCopyPlugin2a::get_HelpText(BSTR *p_ppHelpText)
 {
+    if (p_ppHelpText == nullptr) {
+        return E_INVALIDARG;
+    }
     *p_ppHelpText = ::SysAllocString(L"Path Copy Copy test plugin 2a. Will return the path, appended with 2a.");
     return S_OK;
 }
 
 // Method that must return the path, with plugin-specific alteration.
+[[gsl::suppress(c.128), gsl::suppress(f.6)]]
 STDMETHODIMP CPathCopyCopyPlugin2a::GetPath(BSTR p_pPath, BSTR *p_ppNewPath)
 {
+    if (p_pPath == nullptr || p_ppNewPath == nullptr) {
+        return E_INVALIDARG;
+    }
     std::wstring newPath(p_pPath);
     newPath += L"2a";
     *p_ppNewPath = ::SysAllocString(newPath.c_str());
@@ -52,26 +64,38 @@ STDMETHODIMP CPathCopyCopyPlugin2a::GetPath(BSTR p_pPath, BSTR *p_ppNewPath)
 // Method that must return the ID of the plugin group to which this plugin belongs.
 // All plugins in the same group will appear together in the contextual menu.
 // Different groups will be split by menu separators.
+[[gsl::suppress(c.128), gsl::suppress(f.6)]]
 STDMETHODIMP CPathCopyCopyPlugin2a::get_GroupId(ULONG *p_pGroupId)
 {
+    if (p_pGroupId == nullptr) {
+        return E_INVALIDARG;
+    }
     *p_pGroupId = 'tpg2';
     return S_OK;
 }
 
 // Method that must return the position of the plugin in the plugin group.
 // This is only important if get_GroupId returns a non-zero value.
+[[gsl::suppress(c.128), gsl::suppress(f.6)]]
 STDMETHODIMP CPathCopyCopyPlugin2a::get_GroupPosition(ULONG *p_pPosition)
 {
+    if (p_pPosition == nullptr) {
+        return E_INVALIDARG;
+    }
     *p_pPosition = 0;
     return S_OK;
 }
 
 // Method that determines whether the plugin should be enabled in the contextual menu.
 // The method must return VARIANT_TRUE otherwise it will be grayed out.
+[[gsl::suppress(c.128), gsl::suppress(f.6)]]
 STDMETHODIMP CPathCopyCopyPlugin2a::Enabled(BSTR /*p_pParentPath*/,
                                             BSTR /*p_pFile*/,
                                             VARIANT_BOOL *p_pEnabled)
 {
+    if (p_pEnabled == nullptr) {
+        return E_INVALIDARG;
+    }
     *p_pEnabled = VARIANT_FALSE;
     return S_OK;
 }

@@ -1,5 +1,5 @@
 // PluginPipelineDecoder.h
-// (c) 2011-2019, Charles Lechasseur
+// (c) 2011-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,7 +23,6 @@
 
 #include "PathCopyCopyPrivateTypes.h"
 
-#include <exception>
 #include <string>
 
 
@@ -41,57 +40,43 @@ namespace PCC
                         PipelineDecoder() = delete;
                         ~PipelineDecoder() = delete;
 
-        static void     DecodePipeline(const std::wstring& p_EncodedElements,
-                                       PipelineElementSPV& p_rvspElements);
+        static auto     DecodePipeline(const std::wstring& p_EncodedElements) -> PipelineElementSPV;
 
     private:
-        static void     DecodePipelineElement(std::wstring::const_iterator& p_rElementIt,
-                                              const std::wstring::const_iterator& p_ElementEnd,
-                                              PipelineElementSPV& p_rvspElements);
+        //
+        // Utility class that can be used to decode data from an encoded elements stream.
+        // Keeps track of how much data remains in the stream to validate data.
+        //
+        class EncodedElementsStream final
+        {
+        public:
+            explicit    EncodedElementsStream(const std::wstring& p_EncodedElements);
+                        EncodedElementsStream(const EncodedElementsStream&) = delete;
+            EncodedElementsStream&
+                        operator=(const EncodedElementsStream&) = delete;
 
-        static void     DecodeFindReplaceElement(std::wstring::const_iterator& p_rElementIt,
-                                                 const std::wstring::const_iterator& p_ElementEnd,
-                                                 PipelineElementSP& p_rspElement);
-        static void     DecodeRegexElement(std::wstring::const_iterator& p_rElementIt,
-                                           const std::wstring::const_iterator& p_ElementEnd,
-                                           PipelineElementSP& p_rspElement);
-        static void     DecodeApplyPluginElement(std::wstring::const_iterator& p_rElementIt,
-                                                 const std::wstring::const_iterator& p_ElementEnd,
-                                                 PipelineElementSP& p_rspElement);
-        static void     DecodePathsSeparatorElement(std::wstring::const_iterator& p_rElementIt,
-                                                    const std::wstring::const_iterator& p_ElementEnd,
-                                                    PipelineElementSP& p_rspElement);
-        static void     DecodeExecutableElement(const wchar_t p_Code,
-                                                std::wstring::const_iterator& p_rElementIt,
-                                                const std::wstring::const_iterator& p_ElementEnd,
-                                                PipelineElementSP& p_rspElement);
+            auto        ReadData(std::wstring::size_type p_DataSize) -> std::wstring;
+            auto        ReadElementCount() -> size_t;
+            auto        ReadLong() -> long;
+            auto        ReadString() -> std::wstring;
+            auto        ReadBool() -> bool;
 
-        static long     DecodePipelineInt(std::wstring::const_iterator& p_rElementIt,
-                                          const std::wstring::const_iterator& p_ElementEnd);
-        static void     DecodePipelineString(std::wstring::const_iterator& p_rElementIt,
-                                             const std::wstring::const_iterator& p_ElementEnd,
-                                             std::wstring& p_rString);
-        static bool     DecodePipelineBool(std::wstring::const_iterator& p_rElementIt,
-                                           const std::wstring::const_iterator& p_ElementEnd);
-    };
+        private:
+            const std::wstring
+                        m_EncodedElements;      // The pipeline's encoded string.
+            std::wstring::size_type
+                        m_CurIndex;             // Position of read marker.
+        };
 
-    //
-    // Exception type thrown when a encoded pipeline string is invalid.
-    //
-    class InvalidPipelineException : public std::exception
-    {
-    public:
-                        InvalidPipelineException();
-        explicit        InvalidPipelineException(const std::wstring& p_EncodedElements);
+        static auto     DecodePipelineElement(EncodedElementsStream& p_rStream) -> PipelineElementSP;
 
-        const std::wstring&
-                        EncodedElements() const;
-
-        virtual const char*
-                        what() const override;
-
-    private:
-        std::wstring    m_EncodedElements;      // The pipeline's encoded string.
+        static auto     DecodeFindReplaceElement(EncodedElementsStream& p_rStream) -> PipelineElementSP;
+        static auto     DecodeRegexElement(EncodedElementsStream& p_rStream) -> PipelineElementSP;
+        static auto     DecodeApplyPluginElement(wchar_t p_Code,
+                                                 EncodedElementsStream& p_rStream) -> PipelineElementSP;
+        static auto     DecodePathsSeparatorElement(EncodedElementsStream& p_rStream) -> PipelineElementSP;
+        static auto     DecodeExecutableElement(wchar_t p_Code,
+                                                EncodedElementsStream& p_rStream) -> PipelineElementSP;
     };
 
 } // namespace PCC

@@ -1,5 +1,5 @@
 // CygwinPathPlugin.h
-// (c) 2011-2019, Charles Lechasseur
+// (c) 2011-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -41,13 +41,13 @@ namespace PCC
         class CygwinPathPlugin : public UnixPathPlugin
         {
         public:
-                                    CygwinPathPlugin();
+                                    CygwinPathPlugin() noexcept(false);
                                     CygwinPathPlugin(const CygwinPathPlugin&) = delete;
             CygwinPathPlugin&       operator=(const CygwinPathPlugin&) = delete;
 
-            virtual const GUID&     Id() const override;
+            const GUID&             Id() const noexcept(false) override;
 
-            virtual std::wstring    GetPath(const std::wstring& p_File) const override;
+            std::wstring            GetPath(const std::wstring& p_File) const override;
         };
 
     } // namespace Plugins

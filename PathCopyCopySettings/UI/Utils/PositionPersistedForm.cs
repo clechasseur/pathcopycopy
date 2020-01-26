@@ -1,5 +1,5 @@
 ﻿// PositionPersistedForm.cs
-// (c) 2019, Charles Lechasseur
+// (c) 2019-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,6 +20,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -55,9 +56,9 @@ namespace PathCopyCopy.Settings.UI.Utils
         public PositionPersistedForm()
             : base()
         {
-            this.Load += PositionPersistedForm_Load;
-            this.LocationChanged += PositionPersistedForm_LocationChanged;
-            this.SizeChanged += PositionPersistedForm_SizeChanged;
+            Load += PositionPersistedForm_Load;
+            LocationChanged += PositionPersistedForm_LocationChanged;
+            SizeChanged += PositionPersistedForm_SizeChanged;
         }
 
         /// <summary>
@@ -69,19 +70,22 @@ namespace PathCopyCopy.Settings.UI.Utils
         /// <param name="e">Event arguments.</param>
         private void PositionPersistedForm_Load(object sender, EventArgs e)
         {
-            // Load form information if we have some.
-            Settings.GetFormInformation(FormInfoName, out Point position, out Size size);
-            if (position.X != -1 && position.Y != -1) {
-                this.StartPosition = FormStartPosition.Manual;
-                this.Location = position;
-            }
-            if (size.Width != -1 && size.Height != -1) {
-                this.Size = size;
-            }
+            // Don't modify registry in Design mode
+            if (!DesignMode) {
+                // Load form information if we have some.
+                Settings.GetFormInformation(FormInfoName, out Point? position, out Size? size);
+                if (position.HasValue) {
+                    StartPosition = FormStartPosition.Manual;
+                    Location = GetVisiblePoint(position.Value, true);
+                }
+                if (size.HasValue) {
+                    Size = size.Value;
+                }
 
-            // Set flag telling listeners that from now on, any change is size/position
-            // must be persisted to user settings.
-            canSaveFormInfo = true;
+                // Set flag telling listeners that from now on, any change is size/position
+                // must be persisted to user settings.
+                canSaveFormInfo = true;
+            }
         }
 
         /// <summary>
@@ -93,7 +97,7 @@ namespace PathCopyCopy.Settings.UI.Utils
         private void PositionPersistedForm_LocationChanged(object sender, EventArgs e)
         {
             if (canSaveFormInfo) {
-                Settings.SetFormInformation(FormInfoName, this.Location, null);
+                Settings.SetFormInformation(FormInfoName, Location, null);
             }
         }
 
@@ -106,8 +110,46 @@ namespace PathCopyCopy.Settings.UI.Utils
         private void PositionPersistedForm_SizeChanged(object sender, EventArgs e)
         {
             if (canSaveFormInfo) {
-                Settings.SetFormInformation(FormInfoName, null, this.Size);
+                Settings.SetFormInformation(FormInfoName, null, Size);
             }
+        }
+
+        /// <summary>
+        /// Returns the given point or, if it's not visible on a monitor,
+        /// the closest visible point.
+        /// </summary>
+        /// <param name="point">Point to validate.</param>
+        /// <param name="leaveSomeRoom">If <c>true</c> we'll leave some room
+        /// at the bottom/right corner of the screen so we can see the point.
+        /// Use this for top/left window points for example.</param>
+        /// <returns>Visible point close to <paramref name="point"/>.</returns>
+        private static Point GetVisiblePoint(Point point, bool leaveSomeRoom)
+        {
+            Rectangle workingArea = Screen.GetWorkingArea(point);
+            if (leaveSomeRoom) {
+                workingArea.Width -= 10;
+                workingArea.Height -= 10;
+            }
+            if (workingArea.Contains(point)) {
+                // Point is visible in the working area of the monitor, simply return it.
+                return point;
+            }
+            int newX, newY;
+            if (point.X < workingArea.Left) {
+                newX = workingArea.Left;
+            } else if (point.X > workingArea.Right) {
+                newX = workingArea.Right;
+            } else {
+                newX = point.X;
+            }
+            if (point.Y < workingArea.Top) {
+                newY = workingArea.Top;
+            } else if (point.Y > workingArea.Bottom) {
+                newY = workingArea.Bottom;
+            } else {
+                newY = point.Y;
+            }
+            return new Point(newX, newY);
         }
     }
 }

@@ -1,5 +1,5 @@
 // ShortUNCPathPlugin.cpp
-// (c) 2011-2019, Charles Lechasseur
+// (c) 2011-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -37,7 +37,7 @@ namespace PCC
         //
         // Constructor.
         //
-        ShortUNCPathPlugin::ShortUNCPathPlugin()
+        ShortUNCPathPlugin::ShortUNCPathPlugin() noexcept(false)
             : LongUNCPathPlugin(IDS_SHORT_UNC_PATH_PLUGIN_DESCRIPTION, IDS_ANDROGYNOUS_UNC_PATH_PLUGIN_DESCRIPTION, IDS_SHORT_UNC_PATH_PLUGIN_HINT)
         {
         }
@@ -47,7 +47,7 @@ namespace PCC
         //
         // @return Unique identifier.
         //
-        const GUID& ShortUNCPathPlugin::Id() const
+        const GUID& ShortUNCPathPlugin::Id() const noexcept(false)
         {
             return ShortUNCPathPlugin::ID;
         }
@@ -65,12 +65,9 @@ namespace PCC
 
             // Now ask for a short version and return it.
             if (!path.empty()) {
-                wchar_t shortPath[MAX_PATH + 1];
-                DWORD copied = ::GetShortPathNameW(path.c_str(),
-                                                   shortPath,
-                                                   sizeof(shortPath) / sizeof(wchar_t));
-                if (copied != 0) {
-                    path.assign(shortPath, copied);
+                std::wstring shortPath(MAX_PATH + 1, L'\0');
+                if (::GetShortPathNameW(path.c_str(), &*shortPath.begin(), gsl::narrow<DWORD>(shortPath.size())) != 0) {
+                    path = shortPath.c_str();
                 }
             }
             return path;

@@ -1,5 +1,5 @@
 // COMPluginProvider.cpp
-// (c) 2016-2019, Charles Lechasseur
+// (c) 2016-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,15 +21,3 @@
 
 #include <stdafx.h>
 #include <COMPluginProvider.h>
-
-
-namespace PCC
-{
-    //
-    // Destructor.
-    //
-    COMPluginProvider::~COMPluginProvider()
-    {
-    }
-
-} // namespace PCC

@@ -1,5 +1,5 @@
 // AtlRegKey.cpp
-// (c) 2015-2019, Charles Lechasseur
+// (c) 2015-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@
 //
 // Default constructor. Does not open the key.
 //
-AtlRegKey::AtlRegKey()
+AtlRegKey::AtlRegKey() noexcept(false)
     : RegKey(),
       m_Key()
 {
@@ -57,7 +57,7 @@ AtlRegKey::AtlRegKey(HKEY const p_hParent,
 //
 // @param p_hKey Existing key handle. We assume ownership.
 //
-AtlRegKey::AtlRegKey(HKEY const p_hKey)
+AtlRegKey::AtlRegKey(HKEY const p_hKey) noexcept(false)
     : RegKey(),
       m_Key(p_hKey)
 {
@@ -68,17 +68,17 @@ AtlRegKey::AtlRegKey(HKEY const p_hKey)
 //
 // @return true if registry key is valid.
 //
-bool AtlRegKey::Valid() const
+bool AtlRegKey::Valid() const noexcept(false)
 {
-    return m_Key.m_hKey != NULL;
+    return m_Key.m_hKey != nullptr;
 }
 
 //
 // Returns the handle of our registry key.
 //
-// @return Registry key handle. NULL if not open.
+// @return Registry key handle. null if not open.
 //
-HKEY AtlRegKey::GetHKEY() const
+HKEY AtlRegKey::GetHKEY() const noexcept
 {
     return m_Key.m_hKey;
 }
@@ -94,12 +94,12 @@ HKEY AtlRegKey::GetHKEY() const
 long AtlRegKey::Open(HKEY const p_hParent,
                      const wchar_t* const p_pKeyPath,
                      const bool p_Create,
-                     const REGSAM p_SecurityAccess /*= KEY_READ | KEY_WRITE*/)
+                     const REGSAM p_SecurityAccess /*= KEY_READ | KEY_WRITE*/) noexcept(false)
 {
-    assert(m_Key.m_hKey == NULL);
+    assert(m_Key.m_hKey == nullptr);
 
     return p_Create
-        ? m_Key.Create(p_hParent, p_pKeyPath, REG_NONE, REG_OPTION_NON_VOLATILE, p_SecurityAccess)
+        ? m_Key.Create(p_hParent, p_pKeyPath, nullptr, REG_OPTION_NON_VOLATILE, p_SecurityAccess)
         : m_Key.Open(p_hParent, p_pKeyPath, p_SecurityAccess);
 }
 
@@ -111,7 +111,7 @@ long AtlRegKey::Open(HKEY const p_hParent,
 // @return Result code (ERROR_SUCCESS if it worked).
 //
 long AtlRegKey::QueryDWORDValue(const wchar_t* const p_pValueName,
-                                DWORD& p_rValue) const
+                                DWORD& p_rValue) const noexcept(false)
 {
     return m_Key.QueryDWORDValue(p_pValueName, p_rValue);
 }
@@ -124,7 +124,7 @@ long AtlRegKey::QueryDWORDValue(const wchar_t* const p_pValueName,
 // @return Result code (ERROR_SUCCESS if it worked).
 //
 long AtlRegKey::QueryQWORDValue(const wchar_t* const p_pValueName,
-                                ULONGLONG& p_rValue) const
+                                ULONGLONG& p_rValue) const noexcept(false)
 {
     return m_Key.QueryQWORDValue(p_pValueName, p_rValue);
 }
@@ -137,7 +137,7 @@ long AtlRegKey::QueryQWORDValue(const wchar_t* const p_pValueName,
 // @return Result code (ERROR_SUCCESS if it worked).
 //
 long AtlRegKey::QueryGUIDValue(const wchar_t* const p_pValueName,
-                               GUID& p_rValue) const
+                               GUID& p_rValue) const noexcept(false)
 {
     return m_Key.QueryGUIDValue(p_pValueName, p_rValue);
 }
@@ -156,7 +156,7 @@ long AtlRegKey::QueryGUIDValue(const wchar_t* const p_pValueName,
 long AtlRegKey::QueryValue(const wchar_t* const p_pValueName,
                            DWORD* const p_pValueType,
                            void* const p_pValue,
-                           DWORD* const p_pValueSize) const
+                           DWORD* const p_pValueSize) const noexcept(false)
 {
     return m_Key.QueryValue(p_pValueName, p_pValueType, p_pValue, p_pValueSize);
 }
@@ -169,13 +169,14 @@ long AtlRegKey::QueryValue(const wchar_t* const p_pValueName,
 void AtlRegKey::GetValues(ValueInfoV& p_rvValues) const
 {
     // Scan values, starting with the first one.
-    wchar_t valueName[16384];   // See MSDN
+    std::wstring valueName(16384, L'\0');   // See MSDN
     LONG res = ERROR_SUCCESS;
     for (DWORD index = 0; res == ERROR_SUCCESS; ++index) {
-        DWORD valueNameSize = 16384;
-        res = ::RegEnumValueW(m_Key.m_hKey, index, valueName, &valueNameSize, nullptr, nullptr, nullptr, nullptr);
+        DWORD valueNameSize = gsl::narrow<DWORD>(valueName.size());
+        res = ::RegEnumValueW(m_Key.m_hKey, index, &*valueName.begin(), &valueNameSize,
+                              nullptr, nullptr, nullptr, nullptr);
         if (res == ERROR_SUCCESS) {
-            p_rvValues.emplace_back(m_Key.m_hKey, valueName);
+            p_rvValues.emplace_back(m_Key.m_hKey, valueName.c_str());
         }
     }
 }
@@ -188,13 +189,13 @@ void AtlRegKey::GetValues(ValueInfoV& p_rvValues) const
 void AtlRegKey::GetSubKeys(SubkeyInfoV& p_rvSubkeys) const
 {
     // Scan subkeys, starting with the first one.
-    wchar_t subkeyName[256];        // See MSDN's RegEnumKeyEx.
+    std::wstring subkeyName(256, L'\0');    // See MSDN's RegEnumKeyEx.
     LONG res = ERROR_SUCCESS;
     for (DWORD index = 0; res == ERROR_SUCCESS; ++index) {
-        DWORD subkeyNameSize = 256;
-        res = m_Key.EnumKey(index, subkeyName, &subkeyNameSize);
+        DWORD subkeyNameSize = gsl::narrow<DWORD>(subkeyName.size());
+        res = m_Key.EnumKey(index, &*subkeyName.begin(), &subkeyNameSize);
         if (res == ERROR_SUCCESS) {
-            p_rvSubkeys.emplace_back(m_Key.m_hKey, subkeyName);
+            p_rvSubkeys.emplace_back(m_Key.m_hKey, subkeyName.c_str());
         }
     }
 }
@@ -207,7 +208,7 @@ void AtlRegKey::GetSubKeys(SubkeyInfoV& p_rvSubkeys) const
 // @return Result code (ERROR_SUCCESS if it worked).
 //
 long AtlRegKey::SetDWORDValue(const wchar_t* const p_pValueName,
-                              const DWORD p_Value)
+                              const DWORD p_Value) noexcept(false)
 {
     return m_Key.SetDWORDValue(p_pValueName, p_Value);
 }
@@ -220,7 +221,7 @@ long AtlRegKey::SetDWORDValue(const wchar_t* const p_pValueName,
 // @return Result code (ERROR_SUCCESS if it worked).
 //
 long AtlRegKey::SetQWORDValue(const wchar_t* const p_pValueName,
-                              const ULONGLONG p_Value)
+                              const ULONGLONG p_Value) noexcept(false)
 {
     return m_Key.SetQWORDValue(p_pValueName, p_Value);
 }
@@ -233,7 +234,7 @@ long AtlRegKey::SetQWORDValue(const wchar_t* const p_pValueName,
 // @return Result code (ERROR_SUCCESS if it worked).
 //
 long AtlRegKey::SetGUIDValue(const wchar_t* const p_pValueName,
-                             const GUID& p_Value)
+                             const GUID& p_Value) noexcept(false)
 {
     return m_Key.SetGUIDValue(p_pValueName, p_Value);
 }
@@ -246,7 +247,7 @@ long AtlRegKey::SetGUIDValue(const wchar_t* const p_pValueName,
 // @return Result code (ERROR_SUCCESS if it worked).
 //
 long AtlRegKey::SetStringValue(const wchar_t* const p_pValueName,
-                               const wchar_t* const p_pValue)
+                               const wchar_t* const p_pValue) noexcept(false)
 {
     return m_Key.SetStringValue(p_pValueName, p_pValue);
 }
@@ -257,7 +258,18 @@ long AtlRegKey::SetStringValue(const wchar_t* const p_pValueName,
 // @param p_pValueName Name of value to delete.
 // @return Result code (ERROR_SUCCESS if it worked).
 //
-long AtlRegKey::DeleteValue(const wchar_t* const p_pValueName)
+long AtlRegKey::DeleteValue(const wchar_t* const p_pValueName) noexcept(false)
 {
     return m_Key.DeleteValue(p_pValueName);
+}
+
+//
+// Opens or creates a subkey of this registry key.
+//
+// @param p_pKeyName Name of subkey to open or create.
+// @return Wrapper for the subkey.
+//
+std::shared_ptr<RegKey> AtlRegKey::CreateSubKey(const wchar_t* const p_pKeyName)
+{
+    return std::make_shared<AtlRegKey>(m_Key.m_hKey, p_pKeyName, true);
 }

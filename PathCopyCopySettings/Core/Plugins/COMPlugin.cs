@@ -1,5 +1,5 @@
 ﻿// COMPlugins.cs
-// (c) 2011-2019, Charles Lechasseur
+// (c) 2011-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,7 +20,6 @@
 // THE SOFTWARE.
 
 using System;
-using System.Diagnostics;
 
 namespace PathCopyCopy.Settings.Core.Plugins
 {
@@ -30,7 +29,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
     public sealed class COMPlugin : Plugin
     {
         /// Path to icon file for plugin.
-        private string iconFile;
+        private readonly string iconFile;
 
         /// Whether this is a global plugin.
         private bool global;
@@ -41,9 +40,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
             get {
                 return iconFile;
             }
-            set {
-                Debug.Fail("COM plugins' icon files cannot be modified");
-            }
+            set => throw new InvalidOperationException();
         }
 
         /// <summary>
@@ -57,7 +54,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
             }
             set {
                 global = value;
-                CallPropertyChanged("Global");
+                CallPropertyChanged(nameof(Global));
             }
         }
         

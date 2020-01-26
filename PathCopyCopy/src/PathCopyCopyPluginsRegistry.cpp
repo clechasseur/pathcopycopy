@@ -1,5 +1,5 @@
 // PathCopyCopyPluginsRegistry.cpp
-// (c) 2008-2019, Charles Lechasseur
+// (c) 2008-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -49,6 +49,19 @@
 namespace PCC
 {
     //
+    // Performs a bitwise AND operation between two PipelinePluginsOptions values.
+    //
+    // @param p_Left Left operand.
+    // @param p_Right Right operand.
+    // @return Result of bitwise AND between p_Left and p_Right (cast as an int).
+    //
+    int operator&(const PipelinePluginsOptions p_Left,
+                  const PipelinePluginsOptions p_Right) noexcept
+    {
+        return static_cast<int>(p_Left) & static_cast<int>(p_Right);
+    }
+
+    //
     // Returns all plugins supported by PCC in the default order. This is how plugins will be
     // displayed in the submenu if the user hasn't specified something different.
     //
@@ -56,13 +69,12 @@ namespace PCC
     //                             will not be included in the returned vector.
     // @param p_pPipelinePluginProvider Optional object to access pipeline plugins. If nullptr,
     //                                  pipeline plugins will not be included in the returned vector.
-    // @param p_IncludeTempPipelinePlugins Whether to also return temporary pipeline plugins.
-    //                                     Ignored if p_pPipelinePluginProvider is nullptr.
+    // @param p_PipelinePluginsOptions Options specifying what kind of pipeline plugin to load (if any).
     // @return Vector of plugins in default order.
     //
     PluginSPV PluginsRegistry::GetPluginsInDefaultOrder(const COMPluginProvider* const p_pCOMPluginProvider,
                                                         const PipelinePluginProvider* const p_pPipelinePluginProvider,
-                                                        const bool p_IncludeTempPipelinePlugins)
+                                                        const PipelinePluginsOptions p_PipelinePluginsOptions)
     {
         PluginSPV vspPlugins;
         
@@ -76,7 +88,7 @@ namespace PCC
 
         // Pipeline plugins
         if (p_pPipelinePluginProvider != nullptr) {
-            GetPipelinePlugins(*p_pPipelinePluginProvider, p_IncludeTempPipelinePlugins, vspPlugins);
+            GetPipelinePlugins(*p_pPipelinePluginProvider, p_PipelinePluginsOptions, vspPlugins);
         }
 
         return vspPlugins;
@@ -106,7 +118,7 @@ namespace PCC
         // First generate list of plugins from display order.
         PluginSPV vspPlugins;
         for (const GUID& pluginId : p_vPluginDisplayOrder) {
-            auto it = p_sspAllPlugins.find(pluginId);
+            const auto it = p_sspAllPlugins.find(pluginId);
             if (it != p_sspAllPlugins.end()) {
                 vspPlugins.push_back(*it);
             }
@@ -143,7 +155,7 @@ namespace PCC
                     // We know how to display plugins in default order: scan that
                     // list and add all unknown plugins. This will probably help
                     // display them in correct order.
-                    auto defEnd = p_pvspPluginsInDefaultOrder->cend();
+                    const auto defEnd = p_pvspPluginsInDefaultOrder->cend();
                     for (auto defIt = p_pvspPluginsInDefaultOrder->cbegin(); defIt != defEnd; ++defIt) {
                         if (std::binary_search(vUnknownPlugins.cbegin(), vUnknownPlugins.cend(), (*defIt)->Id(), guidLess)) {
                             // This is an unknown plugin, add it.
@@ -162,7 +174,7 @@ namespace PCC
                     // No info on how to display plugins, simply add them in
                     // a possibly-random order.
                     for (const GUID& unknownPluginId : vUnknownPlugins) {
-                        auto it = p_sspAllPlugins.find(unknownPluginId);
+                        const auto it = p_sspAllPlugins.find(unknownPluginId);
                         if (it != p_sspAllPlugins.end()) {
                             vspPlugins.push_back(*it);
                         }
@@ -235,7 +247,7 @@ namespace PCC
         CLSIDV vPluginCLSIDs = p_COMPluginProvider.GetCOMPlugins();
         if (!vPluginCLSIDs.empty()) {
             // Load list of plugins by creating the COM objects and store group IDs and positions.
-            COMPluginInfoV vCOMPluginInfos;
+            COMPluginInfoV vCOMPluginInfos;            
             for (const CLSID& clsid : vPluginCLSIDs) {
                 try {
                     COMPluginInfo pluginInfo;
@@ -276,20 +288,32 @@ namespace PCC
     }
 
     //
-    // Adds all pipeline plugins to the given vector.
+    // Adds pipeline plugins to the given vector.
     //
     // @param p_PipelinePluginProvider Object to access pipeline plugins.
-    // @param p_IncludeTempPipelinePlugins Whether to also return temporary pipeline plugins.
+    // @param p_PipelinePluginsOptions Options specifying what kind of pipeline plugin
+    //                                 to add to the vector (if any).
     // @param p_rvspPlugins Vector where to store plugins.
     //
     void PluginsRegistry::GetPipelinePlugins(const PipelinePluginProvider& p_PipelinePluginProvider,
-                                             const bool p_IncludeTempPipelinePlugins,
+                                             const PipelinePluginsOptions p_PipelinePluginsOptions,
                                              PluginSPV& p_rvspPlugins)
     {
         PluginSPV vspPipelinePlugins;
-        p_PipelinePluginProvider.GetPipelinePlugins(vspPipelinePlugins);
-        if (p_IncludeTempPipelinePlugins) {
-            p_PipelinePluginProvider.GetTempPipelinePlugins(vspPipelinePlugins);
+        if ((p_PipelinePluginsOptions & PipelinePluginsOptions::FetchPipelinePlugins) != 0) {
+            p_PipelinePluginProvider.GetPipelinePlugins(vspPipelinePlugins);
+        }
+        if ((p_PipelinePluginsOptions & PipelinePluginsOptions::FetchTempPipelinePlugins) != 0) {
+            // Temp pipeline plugins can actually override existing pipeline plugins to
+            // allow the Settings UI to get previews for temp plugins.
+            PluginSPV vspTempPipelinePlugins;
+            p_PipelinePluginProvider.GetTempPipelinePlugins(vspTempPipelinePlugins);
+
+            using namespace coveo::linq;
+            auto vspUnionOfPipelinePlugins = from(vspTempPipelinePlugins)
+                                           | union_with(vspPipelinePlugins)
+                                           | to_vector();
+            vspPipelinePlugins.swap(vspUnionOfPipelinePlugins);
         }
         if (!vspPipelinePlugins.empty()) {
             if (!p_rvspPlugins.empty() && !p_rvspPlugins.back()->IsSeparator()) {
@@ -306,7 +330,7 @@ namespace PCC
     // @param p_Right Bean to compare with this one.
     // @return true if this bean is before p_Right.
     //
-    bool PluginsRegistry::COMPluginInfo::operator<(const COMPluginInfo& p_Right) const
+    bool PluginsRegistry::COMPluginInfo::operator<(const COMPluginInfo& p_Right) const noexcept
     {
         return m_GroupId < p_Right.m_GroupId ||
                (m_GroupId == p_Right.m_GroupId && m_GroupPosition < p_Right.m_GroupPosition);

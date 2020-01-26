@@ -1,5 +1,5 @@
 // dllmain.h
-// (c) 2011-2019, Charles Lechasseur
+// (c) 2011-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,12 +23,13 @@ class CTestPluginsModule final : public ATL::CAtlDllModuleT<CTestPluginsModule>
 {
 public :
 	DECLARE_LIBID(LIBID_TestPluginsLib)
+#pragma warning(suppress: ALL_CPPCORECHECK_WARNINGS)
 	DECLARE_REGISTRY_APPID_RESOURCEID(IDR_TESTPLUGINS, "{49003867-BBB5-4A7B-B03E-61586847E2B9}")
 
     HRESULT DllRegisterServer(BOOL bRegTypeLib = TRUE) throw();
     HRESULT DllUnregisterServer(BOOL bUnRegTypeLib = TRUE) throw();
 
-    static HINSTANCE HInstance();
+    static HINSTANCE HInstance() noexcept;
 };
 
 extern class CTestPluginsModule _AtlModule;

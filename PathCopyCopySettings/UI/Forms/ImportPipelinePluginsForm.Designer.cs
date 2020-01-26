@@ -15,6 +15,9 @@
         {
             if (disposing && (components != null)) {
                 components.Dispose();
+                listItemRegularBrush?.Dispose();
+                listItemDisabledBrush?.Dispose();
+                listItemSelectedBrush?.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -103,7 +106,6 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Select Custom Commands";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ImportPipelinePluginsForm_FormClosed);
             this.Load += new System.EventHandler(this.ImportPipelinePluginsForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

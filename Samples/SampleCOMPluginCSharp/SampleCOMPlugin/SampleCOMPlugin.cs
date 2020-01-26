@@ -22,8 +22,7 @@
 using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using System.Text;
-using PathCopyCopy.API;
+using PathCopyCopyLib;
 
 namespace SampleCOMPlugin.CSharp
 {
@@ -37,12 +36,11 @@ namespace SampleCOMPlugin.CSharp
         /// Function called when our class library is registered. We use this
         /// opportunity to register our plugin in Path Copy Copy.
         /// </summary>
-        /// <param name="t">Type registered; unused.</param>
         [ComRegisterFunction]
-        public static void RegisterSampleCOMPlugin(Type t)
+        public static void RegisterSampleCOMPlugin(Type _)
         {
             // We need to use the ContextMenuExt COM object for this.
-            PathCopyCopyContextMenuExtClass ext = new PathCopyCopyContextMenuExtClass();
+            PathCopyCopyContextMenuExt ext = new PathCopyCopyContextMenuExt();
             try {
                 Guid ourGuid = GetGuidForThisClass();
                 ext.RegisterPlugin(ref ourGuid);
@@ -55,12 +53,11 @@ namespace SampleCOMPlugin.CSharp
         /// Function called when our class library is unregistered. We need to
         /// remove ourselves from Path Copy Copy's list of plugins.
         /// </summary>
-        /// <param name="t">Type registered; unused.</param>
         [ComUnregisterFunction]
-        public static void UnregisterSampleCOMPlugin(Type t)
+        public static void UnregisterSampleCOMPlugin(Type _)
         {
             // We need to use the ContextMenuExt COM object for this.
-            PathCopyCopyContextMenuExtClass ext = new PathCopyCopyContextMenuExtClass();
+            PathCopyCopyContextMenuExt ext = new PathCopyCopyContextMenuExt();
             try {
                 Guid ourGuid = GetGuidForThisClass();
                 ext.UnregisterPlugin(ref ourGuid);

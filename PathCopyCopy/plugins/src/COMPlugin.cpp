@@ -1,5 +1,5 @@
 // COMPlugin.cpp
-// (c) 2008-2019, Charles Lechasseur
+// (c) 2008-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -46,7 +46,7 @@ namespace PCC
             if (FAILED(hRes)) {
                 throw COMPluginError(hRes);
             }
-            if (m_cpPlugin == NULL) {
+            if (m_cpPlugin == nullptr) {
                 throw COMPluginError(E_FAIL);
             }
 
@@ -61,10 +61,10 @@ namespace PCC
             if (FAILED(hRes)) {
                 throw COMPluginError(hRes);
             }
-            if (bstrDescription == NULL || bstrDescription.Length() == 0) {
+            if (bstrDescription == nullptr || bstrDescription.Length() == 0) {
                 throw COMPluginError(E_UNEXPECTED);
             }
-            m_Description = bstrDescription.m_str;
+            m_Description = (LPWSTR) bstrDescription;
         }
 
         //
@@ -72,7 +72,7 @@ namespace PCC
         //
         // @return Unique identifier.
         //
-        const GUID& COMPlugin::Id() const
+        const GUID& COMPlugin::Id() const noexcept(false)
         {
             return m_Id;
         }
@@ -86,9 +86,9 @@ namespace PCC
         ULONG COMPlugin::GroupId() const
         {
             ULONG groupId = 0;
-            if (m_cpPluginGroup != NULL) {
+            if (m_cpPluginGroup != nullptr) {
                 ULONG groupId2;
-                HRESULT hRes = m_cpPluginGroup->get_GroupId(&groupId2);
+                const HRESULT hRes = m_cpPluginGroup->get_GroupId(&groupId2);
                 if (SUCCEEDED(hRes)) {
                     groupId = groupId2;
                 }
@@ -105,9 +105,9 @@ namespace PCC
         ULONG COMPlugin::GroupPosition() const
         {
             ULONG groupPos = 0;
-            if (m_cpPluginGroup != NULL) {
+            if (m_cpPluginGroup != nullptr) {
                 ULONG groupPos2;
-                HRESULT hRes = m_cpPluginGroup->get_GroupPosition(&groupPos2);
+                const HRESULT hRes = m_cpPluginGroup->get_GroupPosition(&groupPos2);
                 if (SUCCEEDED(hRes)) {
                     groupPos = groupPos2;
                 }
@@ -136,9 +136,9 @@ namespace PCC
             // Get plugin help text. If it doesn't work, no worry.
             std::wstring helpText;
             ATL::CComBSTR bstrHelpText;
-            HRESULT hRes = m_cpPlugin->get_HelpText(&bstrHelpText);
-            if (SUCCEEDED(hRes) && bstrHelpText != NULL && bstrHelpText.Length() > 0) {
-                helpText = bstrHelpText.m_str;
+            const HRESULT hRes = m_cpPlugin->get_HelpText(&bstrHelpText);
+            if (SUCCEEDED(hRes) && bstrHelpText != nullptr && bstrHelpText.Length() > 0) {
+                helpText = (LPWSTR) bstrHelpText;
             }
 
             // Return help text or an empty string.
@@ -154,12 +154,12 @@ namespace PCC
         {
             // Check if plugin supports specifying an icon. Otherwise return an empty string.
             std::wstring iconFile;
-            if (m_cpPluginIcon != NULL) {
+            if (m_cpPluginIcon != nullptr) {
                 // Ask plugin for an icon file path.
                 ATL::CComBSTR bstrIconFile;
-                HRESULT hRes = m_cpPluginIcon->get_IconFile(&bstrIconFile);
-                if (SUCCEEDED(hRes) && bstrIconFile != NULL) {
-                    iconFile = bstrIconFile.m_str;
+                const HRESULT hRes = m_cpPluginIcon->get_IconFile(&bstrIconFile);
+                if (SUCCEEDED(hRes) && bstrIconFile != nullptr) {
+                    iconFile = (LPWSTR) bstrIconFile;
                 }
             }
             return iconFile;
@@ -174,10 +174,10 @@ namespace PCC
         {
             // Check if plugin supports specifying an icon. Otherwise return false.
             bool useDefault = false;
-            if (m_cpPluginIcon != NULL) {
+            if (m_cpPluginIcon != nullptr) {
                 // Ask plugin whether to use default icon.
                 VARIANT_BOOL useDefaultVar = VARIANT_FALSE;
-                HRESULT hRes = m_cpPluginIcon->get_UseDefaultIcon(&useDefaultVar);
+                const HRESULT hRes = m_cpPluginIcon->get_UseDefaultIcon(&useDefaultVar);
                 if (SUCCEEDED(hRes)) {
                     useDefault = useDefaultVar != VARIANT_FALSE;
                 }
@@ -198,13 +198,13 @@ namespace PCC
         {
             // Check if plugin supports state changes. Otherwise assume it is enabled.
             bool enabled = true;
-            if (m_cpPluginState != NULL) {
+            if (m_cpPluginState != nullptr) {
                 // Ask plugin if it should be enabled. If an error
                 // code is returned, do not enable the plugin.
                 ATL::CComBSTR bstrParentPath(p_ParentPath.c_str());
                 ATL::CComBSTR bstrFile(p_File.c_str());
                 VARIANT_BOOL bEnabled = VARIANT_FALSE;
-                HRESULT hRes = m_cpPluginState->Enabled(bstrParentPath, bstrFile, &bEnabled);
+                const HRESULT hRes = m_cpPluginState->Enabled(bstrParentPath, bstrFile, &bEnabled);
                 enabled = SUCCEEDED(hRes) && hRes != S_FALSE && bEnabled != VARIANT_FALSE;
             }
             return enabled;
@@ -222,15 +222,15 @@ namespace PCC
             // Note that it is legal for the method to return NULL or an empty string.
             ATL::CComBSTR bstrPath(p_File.c_str());
             ATL::CComBSTR bstrNewPath;
-            HRESULT hRes = m_cpPlugin->GetPath(bstrPath, &bstrNewPath);
+            const HRESULT hRes = m_cpPlugin->GetPath(bstrPath, &bstrNewPath);
             if (FAILED(hRes)) {
                 throw COMPluginError(hRes);
             }
 
             // Convert path if provided, otherwise reuse same one.
             std::wstring newPath(p_File);
-            if (bstrNewPath != NULL && bstrNewPath.Length() > 0) {
-                newPath = bstrNewPath.m_str;
+            if (bstrNewPath != nullptr && bstrNewPath.Length() > 0) {
+                newPath = (LPWSTR) bstrNewPath;
             }
             return newPath;
         }
@@ -244,7 +244,7 @@ namespace PCC
         // @return Always false to indicate PCC should not drop
         //         redundant words like "copy" from plugin's description.
         //
-        bool COMPlugin::CanDropRedundantWords() const
+        bool COMPlugin::CanDropRedundantWords() const noexcept(false)
         {
             return false;
         }
@@ -254,7 +254,7 @@ namespace PCC
         //
         // @param p_Result Result of COM call that went wrong.
         //
-        COMPluginError::COMPluginError(const HRESULT p_Result)
+        COMPluginError::COMPluginError(const HRESULT p_Result) noexcept
             : std::exception(),
               m_Result(p_Result)
         {
@@ -265,7 +265,7 @@ namespace PCC
         //
         // @return Exception textual description.
         //
-        const char* COMPluginError::what() const
+        const char* COMPluginError::what() const noexcept(false)
         {
             return "COMPluginError";
         }

@@ -1,5 +1,5 @@
 // PathCopyCopySettingsApp.cpp
-// (c) 2012-2019, Charles Lechasseur
+// (c) 2012-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -34,7 +34,7 @@ namespace PCC
     //
     // Constructor.
     //
-    SettingsApp::SettingsApp()
+    SettingsApp::SettingsApp() noexcept
     {
     }
 
@@ -47,12 +47,14 @@ namespace PCC
     {
         // Get path to our module using the ImageBase trick.
         // See http://www.codeproject.com/KB/DLL/DLLModuleFileName.aspx
-        wchar_t dllPath[MAX_PATH + 1];
-        DWORD siz = ::GetModuleFileNameW((HINSTANCE)&__ImageBase, dllPath, MAX_PATH + 1);
+        std::wstring dllPath(MAX_PATH + 1, L'\0');
+#pragma warning(suppress: 26490) // Dirty trick is dirty
+        const DWORD siz = ::GetModuleFileNameW(reinterpret_cast<HINSTANCE>(&__ImageBase),
+                                               dllPath.data(), gsl::narrow<DWORD>(dllPath.size()));
         if (siz > 0) {
             // Remove the filename and replace it with the name of the settings app.
-            std::wstring path(dllPath);
-            std::wstring::size_type delimPos = path.find_last_of(L"/\\");
+            std::wstring path(dllPath.c_str());
+            const auto delimPos = path.find_last_of(L"/\\");
             if (delimPos != std::wstring::npos) {
                 path.erase(delimPos);
             }
@@ -72,14 +74,15 @@ namespace PCC
             }
 
             // Launch the settings app and don't wait for the result.
-            SHELLEXECUTEINFOW execInfo = { 0 };
+#pragma warning(suppress: 26476) // Something about this type doesn't fit, but I can't change the Win32 API
+            SHELLEXECUTEINFOW execInfo{0};
             execInfo.cbSize = sizeof(execInfo);
             execInfo.fMask = 0;
-            execInfo.hwnd = 0;
-            execInfo.lpVerb = 0;
+            execInfo.hwnd = nullptr;
+            execInfo.lpVerb = nullptr;
             execInfo.lpFile = path.c_str();
             execInfo.lpParameters = params.c_str();
-            execInfo.lpDirectory = 0;
+            execInfo.lpDirectory = nullptr;
             execInfo.nShow = SW_SHOWNORMAL;
             ::ShellExecuteExW(&execInfo);
         }
@@ -88,7 +91,7 @@ namespace PCC
     //
     // Constructor.
     //
-    SettingsApp::Options::Options()
+    SettingsApp::Options::Options() noexcept
         : m_UpdateCheck(false)
     {
     }
@@ -98,7 +101,7 @@ namespace PCC
     //
     // @return Reference to this, for chaining.
     //
-    SettingsApp::Options& SettingsApp::Options::WithUpdateCheck()
+    SettingsApp::Options& SettingsApp::Options::WithUpdateCheck() noexcept
     {
         m_UpdateCheck = true;
         return *this;

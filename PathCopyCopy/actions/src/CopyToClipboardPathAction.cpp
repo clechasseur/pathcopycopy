@@ -1,5 +1,5 @@
 // CopyToClipboardPathAction.cpp
-// (c) 2017-2019, Charles Lechasseur
+// (c) 2017-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -42,7 +42,7 @@ namespace PCC
         // @param p_hWnd Parent window handle, if needed.
         //
         void CopyToClipboardPathAction::Act(const std::wstring& p_Paths,
-                                            const HWND          p_hWnd) const
+                                            HWND const p_hWnd) const
         {
             // Now store the copied paths in the clipboard.
             StClipboard acquireClipboard(p_hWnd);
@@ -54,7 +54,7 @@ namespace PCC
             const size_t blockNumElements = p_Paths.size() + 1;
             const size_t blockSize = blockNumElements * sizeof(wchar_t);
             StGlobalBlock memBlock(GMEM_MOVEABLE, blockSize);
-            if (memBlock.Get() == NULL) {
+            if (memBlock.Get() == nullptr) {
                 throw CopyToClipboardException();
             }
 
@@ -66,9 +66,9 @@ namespace PCC
                     throw CopyToClipboardException();
                 }
 
-                errno_t copyErr = ::wcscpy_s(static_cast<wchar_t*>(pBlock),
-                                             blockNumElements,
-                                             p_Paths.c_str());
+                const errno_t copyErr = ::wcscpy_s(static_cast<wchar_t*>(pBlock),
+                                                   blockNumElements,
+                                                   p_Paths.c_str());
                 if (copyErr != 0) {
                     // Could not copy data in block.
                     throw CopyToClipboardException();
@@ -77,7 +77,7 @@ namespace PCC
 
             // Save data in clipboard.
             HANDLE hSavedData = ::SetClipboardData(CF_UNICODETEXT, memBlock.Get());
-            if (hSavedData != NULL) {
+            if (hSavedData != nullptr) {
                 // Clipboard now owns the data, avoid freeing it.
                 memBlock.Release();
             } else {
@@ -91,7 +91,7 @@ namespace PCC
         //
         // @return Exception textual description.
         //
-        const char* CopyToClipboardException::what() const
+        const char* CopyToClipboardException::what() const noexcept(false)
         {
             return "CopyToClipboardException";
         }

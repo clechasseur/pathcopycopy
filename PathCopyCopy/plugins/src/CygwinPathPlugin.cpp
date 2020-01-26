@@ -1,5 +1,5 @@
 // CygwinPathPlugin.cpp
-// (c) 2011-2019, Charles Lechasseur
+// (c) 2011-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -29,7 +29,7 @@
 namespace
 {
     // Strings used to build a Cygwin path.
-    const wchar_t CYGDRIVE_PREFIX[]   = L"/cygdrive/";
+    const wchar_t* const CYGDRIVE_PREFIX = L"/cygdrive/";
 
     // Plugin unique ID: {CD50DCE3-9A5C-4adf-B552-1741361567D6}
     const GUID CYGWIN_PATH_PLUGIN_ID = { 0xcd50dce3, 0x9a5c, 0x4adf, { 0xb5, 0x52, 0x17, 0x41, 0x36, 0x15, 0x67, 0xd6 } };
@@ -44,7 +44,7 @@ namespace PCC
         //
         // Constructor.
         //
-        CygwinPathPlugin::CygwinPathPlugin()
+        CygwinPathPlugin::CygwinPathPlugin() noexcept(false)
             : UnixPathPlugin(IDS_CYGWIN_PATH_PLUGIN_DESCRIPTION, IDS_CYGWIN_PATH_PLUGIN_HINT)
         {
         }
@@ -54,7 +54,7 @@ namespace PCC
         //
         // @return Unique identifier.
         //
-        const GUID& CygwinPathPlugin::Id() const
+        const GUID& CygwinPathPlugin::Id() const noexcept(false)
         {
             return CYGWIN_PATH_PLUGIN_ID;
         }
@@ -72,11 +72,12 @@ namespace PCC
 
             // Check if the file begins with a drive letter. If so,
             // remove the drive letter and replace it with /cygdrive/letter.
-            if (path.size() >= 3 && path[1] == L':') {
+            [[gsl::suppress(type.4)]] // Compiler considers foo{bar} to be a C-style cast
+            if (path.size() >= 3 && path.at(1) == L':') {
                 std::wstringstream newPathSS;
-                newPathSS << CYGDRIVE_PREFIX                            // The Cygwin prefix
-                          << static_cast<wchar_t>(::towlower(path[0]))  // Drive letter
-                          << path.substr(2);                            // Rest of the path, including the slash after that : we had.
+                newPathSS << CYGDRIVE_PREFIX                    // The Cygwin prefix
+                          << wchar_t{::towlower(path.front())}  // Drive letter
+                          << path.substr(2);                    // Rest of the path, including the slash after that : we had.
                 path = newPathSS.str();
             }
 

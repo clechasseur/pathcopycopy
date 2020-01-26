@@ -1,5 +1,5 @@
 ﻿// PluginRegistry.cs
-// (c) 2016-2019, Charles Lechasseur
+// (c) 2016-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,6 +22,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Security;
 using Microsoft.Win32;
 using PathCopyCopy.Settings.Properties;
@@ -29,20 +30,34 @@ using PathCopyCopy.Settings.Properties;
 namespace PathCopyCopy.Settings.Core.Plugins
 {
     /// <summary>
+    /// Enum used to specify what kind of pipeline plugin to load
+    /// from the registry. Akin to the <c>PipelinePluginsOptions</c>
+    /// enum in C++ code.
+    /// </summary>
+    [Flags]
+    public enum PipelinePluginsOptions
+    {
+        FetchPipelinePlugins = 0x1,
+        FetchTempPipelinePlugins = 0x2,
+        FetchBoth = FetchPipelinePlugins | FetchTempPipelinePlugins,
+        FetchNone = 0x0,
+    }
+
+    /// <summary>
     /// Registry used to fetch list of plugins and order them for display.
     /// Akin to the <c>PluginsRegistry</c> class in C++ code.
     /// </summary>
     public static class PluginsRegistry
     {
         /// Path of the COM plugins key in the registry.
-        private const string PCC_COM_PLUGINS_KEY = @"Software\clechasseur\PathCopyCopy\Plugins";
+        private const string COMPluginsKey = @"Software\clechasseur\PathCopyCopy\Plugins";
 
         /// Path of the COM plugins key in the registry when running under WOW64 (global only).
-        private const string PCC_COM_PLUGINS_KEY_WOW64 = @"Software\Wow6432Node\clechasseur\PathCopyCopy\Plugins";
+        private const string COMPluginsKeyWow64 = @"Software\Wow6432Node\clechasseur\PathCopyCopy\Plugins";
 
         /// Name of the legacy value that used to store a marker to know when the plugins were last updated.
         /// We skip that if it exists.
-        private const string LEGACY_COM_PLUGINS_LAST_UPDATE_VALUE_NAME = "LastUpdate";
+        private const string LegacyCOMPluginsLastUpdateValueName = "LastUpdate";
 
         /// Bean containing info about a COM plugin.
         private sealed class COMPluginInfo
@@ -115,28 +130,15 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// </summary>
         /// <param name="settings"><see cref="UserSettings"/> object used to
         /// fetch plugin information.</param>
-        /// <returns>List of <see cref="Plugin"/>s in default order.</returns>
-        /// <remarks>
-        /// This version always returns pipeline plugins.
-        /// </remarks>
-        public static List<Plugin> GetPluginsInDefaultOrder(UserSettings settings)
-        {
-            return GetPluginsInDefaultOrder(settings, true);
-        }
-
-        /// <summary>
-        /// Returns a list containing all plugins to display in the default
-        /// order. This should be used if user did not specify a custom order.
-        /// </summary>
-        /// <param name="settings"><see cref="UserSettings"/> object used to
-        /// fetch plugin information.</param>
-        /// <param name="includePipelinePlugins">Whether to include pipeline
-        /// plugins in the returned list.</param>
+        /// <param name="pipelinePluginsOptions">What kind of pipeline plugins
+        /// to include in the returned list (if any).</param>
         /// <returns>List of <see cref="Plugin"/>s in default order.</returns>
         public static List<Plugin> GetPluginsInDefaultOrder(UserSettings settings,
-            bool includePipelinePlugins)
+            PipelinePluginsOptions pipelinePluginsOptions)
         {
-            Debug.Assert(settings != null);
+            if (settings == null) {
+                throw new ArgumentNullException(nameof(settings));
+            }
 
             List<Plugin> plugins = new List<Plugin>();
 
@@ -149,9 +151,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
             GetCOMPlugins(plugins);
 
             // Pipeline plugins
-            if (includePipelinePlugins) {
-                GetPipelinePlugins(plugins, settings);
-            }
+            GetPipelinePlugins(plugins, settings, pipelinePluginsOptions);
 
             return plugins;
         }
@@ -173,15 +173,19 @@ namespace PathCopyCopy.Settings.Core.Plugins
             IEnumerable<Guid> displayOrder, ISet<Guid> knownPlugins,
             IEnumerable<Plugin> pluginsInDefaultOrder)
         {
+            if (plugins == null) {
+                throw new ArgumentNullException(nameof(plugins));
+            }
+            if (displayOrder == null) {
+                throw new ArgumentNullException(nameof(displayOrder));
+            }
+
             // This mimics the code in PathCopyCopyPluginsRegistry.cpp in the C++ project.
-            Debug.Assert(plugins != null);
-            Debug.Assert(displayOrder != null);
             
             // First generate list of plugins from display order.
             List<Plugin> orderedPlugins = new List<Plugin>();
             foreach (Guid id in displayOrder) {
-                Plugin plugin;
-                if (plugins.TryGetValue(id, out plugin)) {
+                if (plugins.TryGetValue(id, out Plugin plugin)) {
                     orderedPlugins.Add(plugin);
                 }
             }
@@ -190,10 +194,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
             // after those specified in the display order.
             if (knownPlugins != null) {
                 // Create set of plugin IDs for all plugins.
-                SortedSet<Guid> pluginIds = new SortedSet<Guid>();
-                foreach (Plugin plugin in plugins.Values) {
-                    pluginIds.Add(plugin.Id);
-                }
+                SortedSet<Guid> pluginIds = new SortedSet<Guid>(plugins.Values.Select(plugin => plugin.Id));
 
                 // Substract known plugins from list of all plugins to find unknown plugins' IDs.
                 pluginIds.ExceptWith(knownPlugins);
@@ -231,8 +232,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
                         // No info on how to display plugins, simply add them in
                         // a possibly-random order.
                         foreach (Guid id in pluginIds) {
-                            Plugin plugin;
-                            if (plugins.TryGetValue(id, out plugin)) {
+                            if (plugins.TryGetValue(id, out Plugin plugin)) {
                                 orderedPlugins.Add(plugin);
                             }
                         }
@@ -303,16 +303,16 @@ namespace PathCopyCopy.Settings.Core.Plugins
 
             // Get path to the registry keys that contain the COM plugins.
             // If we're called by a 32-bit extension running under WOW64 we'll need to adjust.
-            List<COMPluginsRegKeyInfo> regKeyInfos = new List<COMPluginsRegKeyInfo>();
-            regKeyInfos.Add(new COMPluginsRegKeyInfo {
-                Global = true,
-                KeyPath = (!PCCEnvironment.Is64Bit && PCCEnvironment.IsWow64)
-                                ? PCC_COM_PLUGINS_KEY_WOW64 : PCC_COM_PLUGINS_KEY
-            });
-            regKeyInfos.Add(new COMPluginsRegKeyInfo {
-                Global = false,
-                KeyPath = PCC_COM_PLUGINS_KEY
-            });
+            List<COMPluginsRegKeyInfo> regKeyInfos = new List<COMPluginsRegKeyInfo> {
+                new COMPluginsRegKeyInfo {
+                    Global = true,
+                    KeyPath = (!PCCEnvironment.Is64Bit && PCCEnvironment.IsWow64) ? COMPluginsKeyWow64 : COMPluginsKey,
+                },
+                new COMPluginsRegKeyInfo {
+                    Global = false,
+                    KeyPath = COMPluginsKey,
+                },
+            };
 
             // Create executor to be able to fetch info for COM plugins.
             COMPluginExecutor executor = new COMPluginExecutor();
@@ -330,7 +330,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
                                 // in that key so if it fails, simply skip it.
                                 Guid? idAsGuid = null;
                                 try {
-                                    if (id != LEGACY_COM_PLUGINS_LAST_UPDATE_VALUE_NAME) {
+                                    if (id != LegacyCOMPluginsLastUpdateValueName) {
                                         idAsGuid = new Guid(id);
                                     }
                                 } catch (FormatException) {
@@ -350,10 +350,10 @@ namespace PathCopyCopy.Settings.Core.Plugins
                                         groupPosition = executor.GetGroupPosition(idAsGuid.Value);
 
                                         if (executor.GetUseDefaultIcon(idAsGuid.Value)) {
-                                            iconFile = String.Empty;
+                                            iconFile = string.Empty;
                                         } else {
                                             iconFile = executor.GetIconFile(idAsGuid.Value);
-                                            if (String.IsNullOrEmpty(iconFile)) {
+                                            if (string.IsNullOrEmpty(iconFile)) {
                                                 // No icon file specified, assume no icon.
                                                 iconFile = null;
                                             }
@@ -384,9 +384,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
             // Sort list of COM plugins by IDs and remove duplicates, since a plugin might be
             // registered both globally and for the current user.
             if (comPluginInfos.Count > 1) {
-                comPluginInfos.Sort(delegate (COMPluginInfo info1, COMPluginInfo info2) {
-                    return info1.Plugin.Id.CompareTo(info2.Plugin.Id);
-                });
+                comPluginInfos.Sort((info1, info2) => info1.Plugin.Id.CompareTo(info2.Plugin.Id));
                 for (int i = comPluginInfos.Count - 1; i > 0; --i) {
                     if (comPluginInfos[i].Plugin.Id.Equals(comPluginInfos[i - 1].Plugin.Id)) {
                         comPluginInfos.RemoveAt(i);
@@ -395,7 +393,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
             }
 
             // Now sort list of COM plugins first by group ID then by group position.
-            comPluginInfos.Sort(delegate (COMPluginInfo info1, COMPluginInfo info2) {
+            comPluginInfos.Sort((info1, info2) => {
                 int cmp = info1.GroupId - info2.GroupId;
                 if (cmp == 0) {
                     cmp = info1.GroupPosition - info2.GroupPosition;
@@ -405,7 +403,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
 
             // Copy all plugins to provided list. Insert a separator between groups.
             if (comPluginInfos.Count > 0) {
-                int currentGroup = Int32.MaxValue;
+                int currentGroup = int.MaxValue;
                 foreach (var info in comPluginInfos) {
                     if (plugins.Count > 0 && currentGroup != info.GroupId) {
                         plugins.Add(separator);
@@ -422,12 +420,23 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// <param name="plugins">List where to add plugins</param>
         /// <param name="settings"><see cref="UserSettings"/> used to fetch
         /// pipeline plugins.</param>
-        private static void GetPipelinePlugins(List<Plugin> plugins, UserSettings settings)
+        /// <param name="pipelinePluginsOptions">What kind of pipeline plugins
+        /// to add to the list.</param>
+        private static void GetPipelinePlugins(List<Plugin> plugins, UserSettings settings,
+            PipelinePluginsOptions pipelinePluginsOptions)
         {
             Debug.Assert(plugins != null);
-            Debug.Assert(plugins != null);
+            Debug.Assert(settings != null);
 
-            List<PipelinePluginInfo> pluginInfos = settings.PipelinePlugins;
+            List<PipelinePluginInfo> pluginInfos = new List<PipelinePluginInfo>();
+            if ((pipelinePluginsOptions & PipelinePluginsOptions.FetchPipelinePlugins) != 0) {
+                pluginInfos.AddRange(settings.PipelinePlugins);
+            }
+            if ((pipelinePluginsOptions & PipelinePluginsOptions.FetchTempPipelinePlugins) != 0) {
+                // Temp pipeline plugins can actually override existing pipeline plugins.
+                // This mimics the code in PathCopyCopyPluginsRegistry.cpp in the C++ project.
+                pluginInfos = settings.TempPipelinePlugins.Union(pluginInfos).ToList();
+            }
             if (pluginInfos.Count > 0) {
                 if (plugins.Count > 0) {
                     plugins.Add(new SeparatorPlugin());
@@ -446,8 +455,8 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// <returns>New <see cref="Plugin"/> instance.</returns>
         private static Plugin CreateDefaultPlugin(string id, string description, UserSettings settings)
         {
-            Debug.Assert(!String.IsNullOrEmpty(id));
-            Debug.Assert(!String.IsNullOrEmpty(description));
+            Debug.Assert(!string.IsNullOrEmpty(id));
+            Debug.Assert(!string.IsNullOrEmpty(description));
 
             // Fetch icon file from settings.
             string iconFile = settings?.GetIconFileForPlugin(new Guid(id));

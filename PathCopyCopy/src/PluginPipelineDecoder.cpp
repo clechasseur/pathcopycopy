@@ -1,5 +1,5 @@
 // PluginPipelineDecoder.cpp
-// (c) 2011-2019, Charles Lechasseur
+// (c) 2011-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -31,24 +31,27 @@ namespace
 {
     // Each pipeline element type is represented using a single character
     // in the encoded string. This is a list of all possible values.
-    const wchar_t   ELEMENT_CODE_QUOTES                     = L'"';
-    const wchar_t   ELEMENT_CODE_OPTIONAL_QUOTES            = L'q';
-    const wchar_t   ELEMENT_CODE_EMAIL_LINKS                = L'<';
-    const wchar_t   ELEMENT_CODE_ENCODE_URI_WHITESPACE      = L's';
-    const wchar_t   ELEMENT_CODE_ENCODE_URI_CHARS           = L'%';
-    const wchar_t   ELEMENT_CODE_BACK_TO_FORWARD_SLASHES    = L'\\';
-    const wchar_t   ELEMENT_CODE_FORWARD_TO_BACKSLASHES     = L'/';
-    const wchar_t   ELEMENT_CODE_REMOVE_EXT                 = L'.';
-    const wchar_t   ELEMENT_CODE_FIND_REPLACE               = L'?';
-    const wchar_t   ELEMENT_CODE_REGEX                      = L'^';
-    const wchar_t   ELEMENT_CODE_APPLY_PLUGIN               = L'{';
-    const wchar_t   ELEMENT_CODE_PATHS_SEPARATOR            = L',';
-    const wchar_t   ELEMENT_CODE_EXECUTABLE                 = L'x';
-    const wchar_t   ELEMENT_CODE_EXECUTABLE_WITH_FILELIST   = L'f';
+    constexpr wchar_t   ELEMENT_CODE_FOLLOW_SYMLINK             = L'k';
+    constexpr wchar_t   ELEMENT_CODE_QUOTES                     = L'"';
+    constexpr wchar_t   ELEMENT_CODE_OPTIONAL_QUOTES            = L'q';
+    constexpr wchar_t   ELEMENT_CODE_EMAIL_LINKS                = L'<';
+    constexpr wchar_t   ELEMENT_CODE_ENCODE_URI_WHITESPACE      = L's';
+    constexpr wchar_t   ELEMENT_CODE_ENCODE_URI_CHARS           = L'%';
+    constexpr wchar_t   ELEMENT_CODE_BACK_TO_FORWARD_SLASHES    = L'\\';
+    constexpr wchar_t   ELEMENT_CODE_FORWARD_TO_BACKSLASHES     = L'/';
+    constexpr wchar_t   ELEMENT_CODE_REMOVE_EXT                 = L'.';
+    constexpr wchar_t   ELEMENT_CODE_FIND_REPLACE               = L'?';
+    constexpr wchar_t   ELEMENT_CODE_REGEX                      = L'^';
+    constexpr wchar_t   ELEMENT_CODE_UNEXPAND_ENV_STRINGS       = L'e';
+    constexpr wchar_t   ELEMENT_CODE_APPLY_PLUGIN               = L'{';
+    constexpr wchar_t   ELEMENT_CODE_APPLY_PIPELINE_PLUGIN      = L'}';
+    constexpr wchar_t   ELEMENT_CODE_PATHS_SEPARATOR            = L',';
+    constexpr wchar_t   ELEMENT_CODE_EXECUTABLE                 = L'x';
+    constexpr wchar_t   ELEMENT_CODE_EXECUTABLE_WITH_FILELIST   = L'f';
 
     // Version numbers used for regex elements.
-    const long      REGEX_ELEMENT_INITIAL_VERSION           = 1;
-    const long      REGEX_ELEMENT_MAX_VERSION               = REGEX_ELEMENT_INITIAL_VERSION;
+    constexpr long      REGEX_ELEMENT_INITIAL_VERSION           = 1;
+    constexpr long      REGEX_ELEMENT_MAX_VERSION               = REGEX_ELEMENT_INITIAL_VERSION;
 
 } // anonymous namespace
 
@@ -59,63 +62,41 @@ namespace PCC
     // in a string and produces a list of corresponding pipeline element objects.
     //
     // @param p_EncodedElements Elements encoded in a string.
-    // @param p_rvspElements Where to store the resulting elements.
+    // @return Vector of resulting elements.
     //
-    void PipelineDecoder::DecodePipeline(const std::wstring& p_EncodedElements,
-                                         PipelineElementSPV& p_rvspElements)
+    auto PipelineDecoder::DecodePipeline(const std::wstring& p_EncodedElements) -> PipelineElementSPV
     {
-        try {
-            // The first two characters are a string representation of the number
-            // of elements in the pipeline (99 being the maximum number of elements
-            // there can be). Read that using a string stream.
-            if (p_EncodedElements.size() < 2) {
-                throw InvalidPipelineException();
-            }
-            std::wstring::const_iterator eIt = p_EncodedElements.begin();
-            std::wstring::const_iterator eEnd = p_EncodedElements.end();
-            size_t numElements = 0;
-            {
-                std::wstringstream wss;
-                wss << *eIt++;
-                wss << *eIt++;
-                assert(wss.tellg().seekpos() == 0);
-                wss >> numElements;
-            }
+        EncodedElementsStream stream(p_EncodedElements);
+        const size_t numElements = stream.ReadElementCount();
 
-            // Loop to read the appropriate number of elements.
-            for (size_t i = 0; i < numElements; ++i) {
-                DecodePipelineElement(eIt, eEnd, p_rvspElements);
-            }
-        } catch (const InvalidPipelineException&) {
-            // Re-throw with the pipeline string.
-            throw InvalidPipelineException(p_EncodedElements);
+        PipelineElementSPV vspPipelineElements;
+        vspPipelineElements.reserve(numElements);
+        for (size_t i = 0; i < numElements; ++i) {
+            vspPipelineElements.emplace_back(DecodePipelineElement(stream));
         }
+
+        return vspPipelineElements;
     }
 
     //
-    // Decodes a pipeline element found at the given position in an encoded string
-    // and adds it to an existing list of pipeline elements.
+    // Decodes a pipeline element found in an encoded pipeline elements stream.
     //
-    // @param p_rElementIt Iterator pointing at the beginning of the element data
-    //                     in the encoded string. After the method returns, the
-    //                     iterator points just pass the element's data.
-    // @param p_ElementEnd Iterator pointing at the end of the encoded string.
-    // @param p_rvspElements Where to store the new elements.
+    // @param p_rStream Stream containing encoded pipeline element.
+    // @return New pipeline element.
     //
-    void PipelineDecoder::DecodePipelineElement(std::wstring::const_iterator& p_rElementIt,
-                                                const std::wstring::const_iterator& p_ElementEnd,
-                                                PipelineElementSPV& p_rvspElements)
+    auto PipelineDecoder::DecodePipelineElement(PipelineDecoder::EncodedElementsStream& p_rStream) -> PipelineElementSP
     {
         PipelineElementSP spElement;
 
         // The first character represents a code telling us what element type it is.
-        if (p_rElementIt == p_ElementEnd) {
-            throw InvalidPipelineException();
-        }
-        wchar_t code = *p_rElementIt++;
+        const auto code = p_rStream.ReadData(1).front();
 
         // Look at the code and create the appropriate element.
         switch (code) {
+            case ELEMENT_CODE_FOLLOW_SYMLINK: {
+                spElement = std::make_shared<FollowSymlinkPipelineElement>();
+                break;
+            }
             case ELEMENT_CODE_QUOTES: {
                 spElement = std::make_shared<QuotesPipelineElement>();
                 break;
@@ -149,286 +130,241 @@ namespace PCC
                 break;
             }
             case ELEMENT_CODE_FIND_REPLACE: {
-                DecodeFindReplaceElement(p_rElementIt, p_ElementEnd, spElement);
+                spElement = DecodeFindReplaceElement(p_rStream);
                 break;
             }
             case ELEMENT_CODE_REGEX: {
-                DecodeRegexElement(p_rElementIt, p_ElementEnd, spElement);
+                spElement = DecodeRegexElement(p_rStream);
                 break;
             }
-            case ELEMENT_CODE_APPLY_PLUGIN: {
-                DecodeApplyPluginElement(p_rElementIt, p_ElementEnd, spElement);
+            case ELEMENT_CODE_UNEXPAND_ENV_STRINGS: {
+                spElement = std::make_shared<UnexpandEnvironmentStringsPipelineElement>();
+                break;
+            }
+            case ELEMENT_CODE_APPLY_PLUGIN:
+            case ELEMENT_CODE_APPLY_PIPELINE_PLUGIN: {
+                spElement = DecodeApplyPluginElement(code, p_rStream);
                 break;
             }
             case ELEMENT_CODE_PATHS_SEPARATOR: {
-                DecodePathsSeparatorElement(p_rElementIt, p_ElementEnd, spElement);
+                spElement = DecodePathsSeparatorElement(p_rStream);
                 break;
             }
             case ELEMENT_CODE_EXECUTABLE:
             case ELEMENT_CODE_EXECUTABLE_WITH_FILELIST: {
-                DecodeExecutableElement(code, p_rElementIt, p_ElementEnd, spElement);
+                spElement = DecodeExecutableElement(code, p_rStream);
                 break;
             }
             default:
                 // Unknown element type, we can't add it and don't know
                 // how to skip it. Possibly due to a downgrade of PCC?
-                throw InvalidPipelineException();
+                throw InvalidPipelineException(ATL::CStringA(MAKEINTRESOURCEA(IDS_INVALIDPIPELINE_POSSIBLE_DOWNGRADE)));
         }
 
         // Add new element to the pipeline.
         if (spElement == nullptr) {
             throw InvalidPipelineException();
         }
-        p_rvspElements.push_back(spElement);
+        return spElement;
     }
 
     //
-    // Decodes a FindReplacePipelineElement found in an encoded string.
+    // Decodes a FindReplacePipelineElement found in an encoded stream.
     //
-    // @param p_rElementIt Iterator pointing at the beginning of the element data in the
-    //                     encoded string. After the method returns, the iterator points
-    //                     just past the pipeline element's data.
-    // @param p_ElementEnd Iterator pointing at the end of the encoded string.
-    // @param p_rspElement Where to store the newly-created element.
+    // @param p_rStream Stream containing encoded element.
+    // @return Newly-created element.
     //
-    void PipelineDecoder::DecodeFindReplaceElement(std::wstring::const_iterator& p_rElementIt,
-                                                   const std::wstring::const_iterator& p_ElementEnd,
-                                                   PipelineElementSP& p_rspElement)
+    auto PipelineDecoder::DecodeFindReplaceElement(PipelineDecoder::EncodedElementsStream& p_rStream) -> PipelineElementSP
     {
         // This type of element contains an old and a new value.
-        std::wstring oldValue, newValue;
-        DecodePipelineString(p_rElementIt, p_ElementEnd, oldValue);
-        DecodePipelineString(p_rElementIt, p_ElementEnd, newValue);
-        p_rspElement = std::make_shared<FindReplacePipelineElement>(oldValue, newValue);
+        const auto oldValue = p_rStream.ReadString();
+        const auto newValue = p_rStream.ReadString();
+        return std::make_shared<FindReplacePipelineElement>(oldValue, newValue);
     }
 
     //
-    // Decodes a RegexPipelineElement found in an encoded string.
+    // Decodes a RegexPipelineElement found in an encoded stream.
     //
-    // @param p_rElementIt Iterator pointing at the beginning of the element data in the
-    //                     encoded string. After the method returns, the iterator points
-    //                     just past the pipeline element's data.
-    // @param p_ElementEnd Iterator pointing at the end of the encoded string.
-    // @param p_rspElement Where to store the newly-created element.
+    // @param p_rStream Stream containing encoded element.
+    // @return Newly-created element.
     //
-    void PipelineDecoder::DecodeRegexElement(std::wstring::const_iterator& p_rElementIt,
-                                             const std::wstring::const_iterator& p_ElementEnd,
-                                             PipelineElementSP& p_rspElement)
+    auto PipelineDecoder::DecodeRegexElement(PipelineDecoder::EncodedElementsStream& p_rStream) -> PipelineElementSP
     {
         // The data starts by a version number. This is used in case we need to add
         // support for extra options in the future.
-        long version = DecodePipelineInt(p_rElementIt, p_ElementEnd);
+        const auto version = p_rStream.ReadLong();
 
         // Make sure it's a version we can support.
         if (version > REGEX_ELEMENT_MAX_VERSION) {
-            throw InvalidPipelineException();
+            throw InvalidPipelineException(ATL::CStringA(MAKEINTRESOURCEA(IDS_INVALIDPIPELINE_POSSIBLE_DOWNGRADE)));
         }
 
         // Initial version: regex, format string and whether we should ignore case.
-        std::wstring regex, format;
-        DecodePipelineString(p_rElementIt, p_ElementEnd, regex);
-        DecodePipelineString(p_rElementIt, p_ElementEnd, format);
-        bool ignoreCase = DecodePipelineBool(p_rElementIt, p_ElementEnd);
+        const auto regex = p_rStream.ReadString();
+        const auto format = p_rStream.ReadString();
+        const auto ignoreCase = p_rStream.ReadBool();
 
         // Create the element and return it.
-        p_rspElement = std::make_shared<RegexPipelineElement>(regex, format, ignoreCase);
+        return std::make_shared<RegexPipelineElement>(regex, format, ignoreCase);
     }
 
     //
-    // Decodes an ApplyPluginPipelineElement found in an encoded string.
+    // Decodes an ApplyPluginPipelineElement or ApplyPipelinePluginPipelineElement
+    // found in an encoded stream.
     //
-    // @param p_rElementIt Iterator pointing at the beginning of the element data in the
-    //                     encoded string. After the method returns, the iterator points
-    //                     just past the pipeline element's data.
-    // @param p_ElementEnd Iterator pointing at the end of the encoded string.
-    // @param p_rspElement Where to store the newly-created element.
+    // @param p_Code Element code.
+    // @param p_rStream Stream containing encoded element.
+    // @return Newly-created element.
     //
-    void PipelineDecoder::DecodeApplyPluginElement(std::wstring::const_iterator& p_rElementIt,
-                                                   const std::wstring::const_iterator& p_ElementEnd,
-                                                   PipelineElementSP& p_rspElement)
+    auto PipelineDecoder::DecodeApplyPluginElement(const wchar_t p_Code,
+                                                   PipelineDecoder::EncodedElementsStream& p_rStream) -> PipelineElementSP
     {
         // The element data is a string representation of the GUID of the plugin to apply.
         // A guid has the following format: {1B4B1405-84CF-48CC-B373-42FAD7744258}
-        if (std::distance(p_rElementIt, p_ElementEnd) < (GUIDSTRING_MAX - 1)) {
-            throw InvalidPipelineException();
-        }
-        wchar_t guidString[GUIDSTRING_MAX];
-        std::copy(p_rElementIt, p_rElementIt + (GUIDSTRING_MAX - 1), guidString);
-        p_rElementIt += (GUIDSTRING_MAX - 1);
-        guidString[GUIDSTRING_MAX - 1] = L'\0';
+        // (Note: GUIDSTRING_MAX includes the terminating null)
+        const auto guidString = p_rStream.ReadData(GUIDSTRING_MAX - 1);
 
         // Now that we have the data, convert it to a GUID.
         CLSID pluginGuid;
-        if (FAILED(::CLSIDFromString(guidString, &pluginGuid))) {
+        if (FAILED(::CLSIDFromString(guidString.c_str(), &pluginGuid))) {
             // Invalid GUID format.
             throw InvalidPipelineException();
         }
 
         // We have the plugin GUID, return it.
-        p_rspElement = std::make_shared<ApplyPluginPipelineElement>(pluginGuid);
-    }
-
-    //
-    // Decodes an PathsSeparatorPipelineElement found in an encoded string.
-    //
-    // @param p_rElementIt Iterator pointing at the beginning of the element data in the
-    //                     encoded string. After the method returns, the iterator points
-    //                     just past the pipeline element's data.
-    // @param p_ElementEnd Iterator pointing at the end of the encoded string.
-    // @param p_rspElement Where to store the newly-created element.
-    //
-    void PipelineDecoder::DecodePathsSeparatorElement(std::wstring::const_iterator& p_rElementIt,
-                                                      const std::wstring::const_iterator& p_ElementEnd,
-                                                      PipelineElementSP& p_rspElement)
-    {
-        // This type of element contains only the paths separator string.
-        std::wstring pathsSeparator;
-        DecodePipelineString(p_rElementIt, p_ElementEnd, pathsSeparator);
-        p_rspElement = std::make_shared<PathsSeparatorPipelineElement>(pathsSeparator);
-    }
-
-    //
-    // Decodes an ExecutablePipelineElement or ExecutableWithFilelistPipelineElement
-    // found in an encoded string.
-    //
-    // @param p_Code Element code.
-    // @param p_rElementIt Iterator pointing at the beginning of the element data in the
-    //                     encoded string. After the method returns, the iterator points
-    //                     just past the pipeline element's data.
-    // @param p_ElementEnd Iterator pointing at the end of the encoded string.
-    // @param p_rspElement Where to store the newly-created element.
-    //
-    void PipelineDecoder::DecodeExecutableElement(const wchar_t p_Code,
-                                                  std::wstring::const_iterator& p_rElementIt,
-                                                  const std::wstring::const_iterator& p_ElementEnd,
-                                                  PipelineElementSP& p_rspElement)
-    {
-        // This type of element contains only a string containing the path to the executable.
-        std::wstring executable;
-        DecodePipelineString(p_rElementIt, p_ElementEnd, executable);
-        if (p_Code == ELEMENT_CODE_EXECUTABLE) {
-            p_rspElement = std::make_shared<ExecutablePipelineElement>(executable);
-        } else if (p_Code == ELEMENT_CODE_EXECUTABLE_WITH_FILELIST) {
-            p_rspElement = std::make_shared<ExecutableWithFilelistPipelineElement>(executable);
+        if (p_Code == ELEMENT_CODE_APPLY_PLUGIN) {
+            return std::make_shared<ApplyPluginPipelineElement>(pluginGuid);
+        } else if (p_Code == ELEMENT_CODE_APPLY_PIPELINE_PLUGIN) {
+            return std::make_shared<ApplyPipelinePluginPipelineElement>(pluginGuid);
         } else {
             throw InvalidPipelineException();
         }
     }
 
     //
-    // Standardized method to read an integer value encoded in a pipeline string.
+    // Decodes an PathsSeparatorPipelineElement found in an encoded stream.
     //
-    // @param p_rElementIt Iterator pointing at the beginning of the integer data in
-    //                     the encoded string. After the method returns, the iterator
-    //                     points just past the integer data.
-    // @param p_ElementEnd Iterator pointing at the end of the encoded string.
-    // @return The resulting integer value
+    // @param p_rStream Stream containing encoded element.
+    // @return Newly-created element.
     //
-    long PipelineDecoder::DecodePipelineInt(std::wstring::const_iterator& p_rElementIt,
-                                            const std::wstring::const_iterator& p_ElementEnd)
+    auto PipelineDecoder::DecodePathsSeparatorElement(PipelineDecoder::EncodedElementsStream& p_rStream) -> PipelineElementSP
     {
-        // Encoded as four consecutive characters corresponding the integer value.
-        if (std::distance(p_rElementIt, p_ElementEnd) < 4) {
+        // This type of element contains only the paths separator string.
+        const auto pathsSeparator = p_rStream.ReadString();
+        return std::make_shared<PathsSeparatorPipelineElement>(pathsSeparator);
+    }
+
+    //
+    // Decodes an ExecutablePipelineElement or ExecutableWithFilelistPipelineElement
+    // found in an encoded stream.
+    //
+    // @param p_Code Element code.
+    // @param p_rStream Stream containing encoded element.
+    // @return Newly-created element.
+    //
+    auto PipelineDecoder::DecodeExecutableElement(const wchar_t p_Code,
+                                                  PipelineDecoder::EncodedElementsStream& p_rStream) -> PipelineElementSP
+    {
+        // This type of element contains only a string containing the path to the executable.
+        const auto executable = p_rStream.ReadString();
+        if (p_Code == ELEMENT_CODE_EXECUTABLE) {
+            return std::make_shared<ExecutablePipelineElement>(executable);
+        } else if (p_Code == ELEMENT_CODE_EXECUTABLE_WITH_FILELIST) {
+            return std::make_shared<ExecutableWithFilelistPipelineElement>(executable);
+        } else {
             throw InvalidPipelineException();
         }
-        long intValue = 0;
-        {
-            std::wstringstream wss;
-            wss << *p_rElementIt++;
-            wss << *p_rElementIt++;
-            wss << *p_rElementIt++;
-            wss << *p_rElementIt++;
-            assert(wss.tellg().seekpos() == 0);
-            wss >> intValue;
+    }
+
+    //
+    // Constructor.
+    //
+    // @param p_EncodedElements String containing encoded pipeline elements data.
+    //
+    PipelineDecoder::EncodedElementsStream::EncodedElementsStream(const std::wstring& p_EncodedElements)
+        : m_EncodedElements(p_EncodedElements),
+          m_CurIndex(0)
+    {
+    }
+
+    //
+    // Reads a number of characters from the stream.
+    //
+    // @param p_DataSize Size of data to read, in number of characters.
+    // @return String containing the data.
+    //
+    auto PipelineDecoder::EncodedElementsStream::ReadData(const std::wstring::size_type p_DataSize) -> std::wstring
+    {
+        if (m_EncodedElements.size() - m_CurIndex < p_DataSize) {
+            throw InvalidPipelineException();
         }
+        std::wstring data = m_EncodedElements.substr(m_CurIndex, p_DataSize);
+        m_CurIndex += p_DataSize;
+        return data;
+    }
+
+    //
+    // Reads the number of elements in the pipeline. This must be called
+    // first before any other data is read to get the number of encoded
+    // elements that follow.
+    //
+    // @return Number of encoded elements in the pipeline.
+    //
+    auto PipelineDecoder::EncodedElementsStream::ReadElementCount() -> size_t
+    {
+        assert(m_CurIndex == 0);
+
+        // The first two characters are a string representation of the number
+        // of elements in the pipeline (99 being the maximum number of elements
+        // there can be).
+        std::wstringstream wss(ReadData(2));
+        size_t numElements = 0;
+        wss >> numElements;
+        return numElements;
+    }
+
+    //
+    // Reads an encoded integer from the elements stream.
+    //
+    // @return Integer value.
+    //
+    auto PipelineDecoder::EncodedElementsStream::ReadLong() -> long
+    {
+        // Encoded as four consecutive characters corresponding to the integer value.
+        std::wstringstream wss(ReadData(4));
+        long intValue = 0;
+        wss >> intValue;
         return intValue;
     }
 
     //
-    // Standardized method to read a string encoded in a pipeline string.
+    // Reads an encoded string from the elements stream.
     //
-    // @param p_rElementIt Iterator pointing at the beginning of the string data in
-    //                     the encoded string. After the method returns, the iterator
-    //                     points just past the string data.
-    // @param p_ElementEnd Iterator pointing at the end of the encoded string.
-    // @param p_rString Where to store the resulting string.
+    // @return String value.
     //
-    void PipelineDecoder::DecodePipelineString(std::wstring::const_iterator& p_rElementIt,
-                                               const std::wstring::const_iterator& p_ElementEnd,
-                                               std::wstring& p_rString)
+    auto PipelineDecoder::EncodedElementsStream::ReadString() -> std::wstring
     {
         // First is encoded string size.
-        std::wstring::size_type stringSize = static_cast<std::wstring::size_type>(DecodePipelineInt(p_rElementIt, p_ElementEnd));
+        const auto stringSize = gsl::narrow<std::wstring::size_type>(ReadLong());
 
         // Now that we know the length of the string that is encoded, we simply
         // need to copy that much characters from the encoded string.
-        if (std::distance(p_rElementIt, p_ElementEnd) < static_cast<ptrdiff_t>(stringSize)) {
-            throw InvalidPipelineException();
-        }
-        p_rString.assign(p_rElementIt, p_rElementIt + stringSize);
-        p_rElementIt += stringSize;
+        return ReadData(stringSize);
     }
 
     //
-    // Standardized method to read a boolean value encoded in a pipeline string.
+    // Reads an encoded boolean value from the elements stream.
     //
-    // @param p_rElementIt Iterator pointing at the beginning of the boolean data in
-    //                     the encoded string. After the method returns, the iterator
-    //                     points just past the boolean data.
-    // @param p_ElementEnd Iterator pointing at the end of the encoded string.
-    // @return Resulting boolean value.
+    // @return Boolean value.
     //
-    bool PipelineDecoder::DecodePipelineBool(std::wstring::const_iterator& p_rElementIt,
-                                             const std::wstring::const_iterator& p_ElementEnd)
+    auto PipelineDecoder::EncodedElementsStream::ReadBool() -> bool
     {
         // Boolean values are merely encoded as 0 or 1.
-        if (p_rElementIt == p_ElementEnd) {
+        const wchar_t boolChar = ReadData(1).front();
+        if (boolChar != L'0' && boolChar != L'1') {
             throw InvalidPipelineException();
         }
-        if (*p_rElementIt != L'0' && *p_rElementIt != L'1') {
-            throw InvalidPipelineException();
-        }
-        return (*p_rElementIt++ == L'1');
-    }
-
-    //
-    // Default constructor. Does not set the encoded pipeline string.
-    //
-    InvalidPipelineException::InvalidPipelineException()
-        : std::exception(),
-          m_EncodedElements()
-    {
-    }
-
-    //
-    // Constructor with encoded pipeline string.
-    //
-    // @param p_EncodedElements Encoded pipeline string.
-    //
-    InvalidPipelineException::InvalidPipelineException(const std::wstring& p_EncodedElements)
-        : std::exception(),
-          m_EncodedElements(p_EncodedElements)
-    {
-    }
-
-    //
-    // Returns a reference to the encoded pipeline string.
-    //
-    // @return Encoded pipeline string reference.
-    //
-    const std::wstring& InvalidPipelineException::EncodedElements() const
-    {
-        return m_EncodedElements;
-    }
-
-    //
-    // Standardized method returning an exception description.
-    //
-    // @return Exception description.
-    //
-    const char* InvalidPipelineException::what() const
-    {
-        return "PCC::InvalidPipelineException";
+        return boolChar == L'1';
     }
 
 } // namespace PCC

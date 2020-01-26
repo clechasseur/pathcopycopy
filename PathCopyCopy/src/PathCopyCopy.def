@@ -10,5 +10,6 @@ EXPORTS
 	DllInstall			PRIVATE
 	GetPathWithPluginW
 	RegGetPathWithPluginW
+	RegGetPathWithTempPipelinePluginW
 	ApplyGlobalRevisionsW
 	ApplyUserRevisionsW

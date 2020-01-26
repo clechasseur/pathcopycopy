@@ -44,6 +44,7 @@
             this.LaunchExecutableChk = new System.Windows.Forms.CheckBox();
             this.CopyOnSameLineChk = new System.Windows.Forms.CheckBox();
             this.FindReplaceGroupBox = new System.Windows.Forms.GroupBox();
+            this.UnexpandEnvStringsChk = new System.Windows.Forms.CheckBox();
             this.TestRegexBtn = new System.Windows.Forms.Button();
             this.IgnoreCaseChk = new System.Windows.Forms.CheckBox();
             this.UseRegexChk = new System.Windows.Forms.CheckBox();
@@ -92,7 +93,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.NameTxt.Location = new System.Drawing.Point(56, 12);
             this.NameTxt.Name = "NameTxt";
-            this.NameTxt.Size = new System.Drawing.Size(338, 20);
+            this.NameTxt.Size = new System.Drawing.Size(706, 20);
             this.NameTxt.TabIndex = 1;
             this.PipelinePluginToolTip.SetToolTip(this.NameTxt, "Name of this custom command");
             // 
@@ -106,7 +107,7 @@
             this.MainTabControl.Location = new System.Drawing.Point(12, 38);
             this.MainTabControl.Name = "MainTabControl";
             this.MainTabControl.SelectedIndex = 0;
-            this.MainTabControl.Size = new System.Drawing.Size(382, 534);
+            this.MainTabControl.Size = new System.Drawing.Size(750, 294);
             this.MainTabControl.TabIndex = 2;
             // 
             // BasePluginPage
@@ -117,7 +118,7 @@
             this.BasePluginPage.Location = new System.Drawing.Point(4, 22);
             this.BasePluginPage.Name = "BasePluginPage";
             this.BasePluginPage.Padding = new System.Windows.Forms.Padding(3);
-            this.BasePluginPage.Size = new System.Drawing.Size(374, 508);
+            this.BasePluginPage.Size = new System.Drawing.Size(742, 268);
             this.BasePluginPage.TabIndex = 0;
             this.BasePluginPage.Text = "Base Command";
             this.BasePluginPage.UseVisualStyleBackColor = true;
@@ -130,7 +131,7 @@
             this.BasePluginLst.FormattingEnabled = true;
             this.BasePluginLst.Location = new System.Drawing.Point(9, 32);
             this.BasePluginLst.Name = "BasePluginLst";
-            this.BasePluginLst.Size = new System.Drawing.Size(355, 459);
+            this.BasePluginLst.Size = new System.Drawing.Size(723, 225);
             this.BasePluginLst.TabIndex = 2;
             this.PipelinePluginToolTip.SetToolTip(this.BasePluginLst, "Base command to use to fetch path initially. Options will be applied afterwards");
             this.BasePluginLst.SelectedIndexChanged += new System.EventHandler(this.BasePluginLst_SelectedIndexChanged);
@@ -162,7 +163,7 @@
             this.OptionsPage.Location = new System.Drawing.Point(4, 22);
             this.OptionsPage.Name = "OptionsPage";
             this.OptionsPage.Padding = new System.Windows.Forms.Padding(3);
-            this.OptionsPage.Size = new System.Drawing.Size(374, 508);
+            this.OptionsPage.Size = new System.Drawing.Size(742, 268);
             this.OptionsPage.TabIndex = 1;
             this.OptionsPage.Text = "Options";
             this.OptionsPage.UseVisualStyleBackColor = true;
@@ -177,7 +178,7 @@
             this.OptionsGroupBox.Controls.Add(this.ExecutableLbl);
             this.OptionsGroupBox.Controls.Add(this.LaunchExecutableChk);
             this.OptionsGroupBox.Controls.Add(this.CopyOnSameLineChk);
-            this.OptionsGroupBox.Location = new System.Drawing.Point(6, 380);
+            this.OptionsGroupBox.Location = new System.Drawing.Point(374, 141);
             this.OptionsGroupBox.Name = "OptionsGroupBox";
             this.OptionsGroupBox.Size = new System.Drawing.Size(362, 122);
             this.OptionsGroupBox.TabIndex = 3;
@@ -261,6 +262,7 @@
             // 
             this.FindReplaceGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.FindReplaceGroupBox.Controls.Add(this.UnexpandEnvStringsChk);
             this.FindReplaceGroupBox.Controls.Add(this.TestRegexBtn);
             this.FindReplaceGroupBox.Controls.Add(this.IgnoreCaseChk);
             this.FindReplaceGroupBox.Controls.Add(this.UseRegexChk);
@@ -268,12 +270,25 @@
             this.FindReplaceGroupBox.Controls.Add(this.ReplaceLbl);
             this.FindReplaceGroupBox.Controls.Add(this.FindTxt);
             this.FindReplaceGroupBox.Controls.Add(this.FindLbl);
-            this.FindReplaceGroupBox.Location = new System.Drawing.Point(6, 269);
+            this.FindReplaceGroupBox.Location = new System.Drawing.Point(374, 6);
             this.FindReplaceGroupBox.Name = "FindReplaceGroupBox";
-            this.FindReplaceGroupBox.Size = new System.Drawing.Size(362, 105);
+            this.FindReplaceGroupBox.Size = new System.Drawing.Size(362, 129);
             this.FindReplaceGroupBox.TabIndex = 2;
             this.FindReplaceGroupBox.TabStop = false;
             this.FindReplaceGroupBox.Text = "Find / Replace";
+            // 
+            // UnexpandEnvStringsChk
+            // 
+            this.UnexpandEnvStringsChk.AutoSize = true;
+            this.UnexpandEnvStringsChk.Location = new System.Drawing.Point(9, 98);
+            this.UnexpandEnvStringsChk.Name = "UnexpandEnvStringsChk";
+            this.UnexpandEnvStringsChk.Size = new System.Drawing.Size(316, 17);
+            this.UnexpandEnvStringsChk.TabIndex = 7;
+            this.UnexpandEnvStringsChk.Text = "Replace parts of path(s) with e&nvironment variables if possible";
+            this.PipelinePluginToolTip.SetToolTip(this.UnexpandEnvStringsChk, "Whether to attempt to replace parts of the path with environment variable referen" +
+        "ces, like %USERPROFILE%, etc.");
+            this.UnexpandEnvStringsChk.UseVisualStyleBackColor = true;
+            this.UnexpandEnvStringsChk.CheckedChanged += new System.EventHandler(this.PipelinePluginForm_UpdatePreview);
             // 
             // TestRegexBtn
             // 
@@ -351,7 +366,7 @@
             // FindLbl
             // 
             this.FindLbl.AutoSize = true;
-            this.FindLbl.Location = new System.Drawing.Point(6, 22);
+            this.FindLbl.Location = new System.Drawing.Point(6, 23);
             this.FindLbl.Name = "FindLbl";
             this.FindLbl.Size = new System.Drawing.Size(56, 13);
             this.FindLbl.TabIndex = 0;
@@ -359,8 +374,6 @@
             // 
             // SlashesGroupBox
             // 
-            this.SlashesGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.SlashesGroupBox.Controls.Add(this.NoSlashesChangeRadio);
             this.SlashesGroupBox.Controls.Add(this.BackToForwardSlashesRadio);
             this.SlashesGroupBox.Controls.Add(this.ForwardToBackslashesRadio);
@@ -413,8 +426,6 @@
             // 
             // DecorationsGroupBox
             // 
-            this.DecorationsGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.DecorationsGroupBox.Controls.Add(this.RemoveExtChk);
             this.DecorationsGroupBox.Controls.Add(this.OptionalQuotesChk);
             this.DecorationsGroupBox.Controls.Add(this.EncodeURICharsChk);
@@ -507,7 +518,7 @@
             // 
             this.OKBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.OKBtn.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.OKBtn.Location = new System.Drawing.Point(238, 637);
+            this.OKBtn.Location = new System.Drawing.Point(606, 397);
             this.OKBtn.Name = "OKBtn";
             this.OKBtn.Size = new System.Drawing.Size(75, 23);
             this.OKBtn.TabIndex = 5;
@@ -519,7 +530,7 @@
             // 
             this.CancelBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.CancelBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.CancelBtn.Location = new System.Drawing.Point(319, 637);
+            this.CancelBtn.Location = new System.Drawing.Point(687, 397);
             this.CancelBtn.Name = "CancelBtn";
             this.CancelBtn.Size = new System.Drawing.Size(75, 23);
             this.CancelBtn.TabIndex = 6;
@@ -536,7 +547,7 @@
             // 
             this.SwitchBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.SwitchBtn.DialogResult = System.Windows.Forms.DialogResult.Retry;
-            this.SwitchBtn.Location = new System.Drawing.Point(12, 637);
+            this.SwitchBtn.Location = new System.Drawing.Point(12, 397);
             this.SwitchBtn.Name = "SwitchBtn";
             this.SwitchBtn.Size = new System.Drawing.Size(94, 23);
             this.SwitchBtn.TabIndex = 4;
@@ -549,10 +560,10 @@
             // 
             this.PreviewCtrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.PreviewCtrl.Location = new System.Drawing.Point(12, 578);
+            this.PreviewCtrl.Location = new System.Drawing.Point(12, 338);
             this.PreviewCtrl.Name = "PreviewCtrl";
             this.PreviewCtrl.Plugin = null;
-            this.PreviewCtrl.Size = new System.Drawing.Size(380, 53);
+            this.PreviewCtrl.Size = new System.Drawing.Size(748, 53);
             this.PreviewCtrl.TabIndex = 3;
             // 
             // PipelinePluginForm
@@ -561,7 +572,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.CancelBtn;
-            this.ClientSize = new System.Drawing.Size(406, 672);
+            this.ClientSize = new System.Drawing.Size(774, 432);
             this.Controls.Add(this.PreviewCtrl);
             this.Controls.Add(this.SwitchBtn);
             this.Controls.Add(this.CancelBtn);
@@ -572,7 +583,7 @@
             this.HelpButton = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(422, 711);
+            this.MinimumSize = new System.Drawing.Size(790, 471);
             this.Name = "PipelinePluginForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
@@ -640,5 +651,6 @@
         private System.Windows.Forms.ToolTip PipelinePluginToolTip;
         private System.Windows.Forms.Button SwitchBtn;
         private UserControls.PluginPreviewUserControl PreviewCtrl;
+        private System.Windows.Forms.CheckBox UnexpandEnvStringsChk;
     }
 }

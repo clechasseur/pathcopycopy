@@ -1,5 +1,5 @@
 // stdafx.h
-// (c) 2008-2019, Charles Lechasseur
+// (c) 2008-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -48,6 +48,11 @@
 #include <gdiplus.h>
 #pragma warning( pop )
 
+// Undef the Windows min and max macros, since they conflict with STL
+// We can't define NOMINMAX because GDI actually needs those macros :(
+#undef min
+#undef max
+
 #include <algorithm>
 #include <cstdint>
 #include <exception>
@@ -66,3 +71,14 @@
 #include "PathCopyCopyPrivateTypes.h"
 
 #include <resource.h>
+
+// Including this header allows us to suppress C++ Core Guideline warnings more easily
+#include <CppCoreCheck\warnings.h>
+
+#include <gsl/gsl>
+
+// Disable C++ Core checks warnings in coveo::linq since it seems to generate a lot
+#pragma warning(push)
+#pragma warning(disable: ALL_CPPCORECHECK_WARNINGS)
+#include <coveo/linq.h>
+#pragma warning(pop)

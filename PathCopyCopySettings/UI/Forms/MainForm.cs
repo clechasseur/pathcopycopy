@@ -1,5 +1,5 @@
 ﻿// MainForm.cs
-// (c) 2011-2019, Charles Lechasseur
+// (c) 2011-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using PathCopyCopy.Settings.Core;
@@ -43,23 +45,17 @@ namespace PathCopyCopy.Settings.UI.Forms
     /// it came before that. So it still uses the legacy way of
     /// doing it, with its own entries in user settings.
     /// </remarks>
-    public partial class MainForm : Form
+    public partial class MainForm : PositionPersistedForm
     {
         /// Paths separator that copies multiple paths on the same line.
-        private const string PATHS_SEPARATOR_ON_SAME_LINE = " ";
+        private const string PathsSeparatorOnSameLine = " ";
         
-        /// URI of the Donations page.
-        private const string DONATIONS_PAGE_URI = @"https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=LM5B9WNTH4KN4&lc=CA&item_name=Charles%20Lechasseur&item_number=PathCopyCopy&currency_code=CAD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted";
-
-        /// URI of the page specifying the Path Copy Copy license on GitHub.
-        private const string LICENSE_PAGE_URI = @"https://github.com/clechasseur/pathcopycopy/blob/master/LICENSE";
-
         /// The standard DPI values in Windows.
-        private const int STANDARD_DPI = 96;
+        private const int StandardWindowsDPI = 96;
 
         /// Map of pipeline plugins exported file extensions to the
         /// corresponding XML serializer version needed to read them.
-        private static readonly IDictionary<string, PipelinePluginXmlSerializerVersion> PIPELINE_PLUGINS_EXT_TO_SERIALIZER_VERSION =
+        private static readonly IDictionary<string, PipelinePluginXmlSerializerVersion> PipelinePluginsExtToSerializerVersion =
             new Dictionary<string, PipelinePluginXmlSerializerVersion>()
             {
                 { ".eccv3", PipelinePluginXmlSerializerVersion.V3 },
@@ -67,8 +63,8 @@ namespace PathCopyCopy.Settings.UI.Forms
                 { ".pccpp", PipelinePluginXmlSerializerVersion.V1 },
             };
 
-        /// Object used to access user settings.
-        private UserSettings settings;
+        /// Helper that saves temp pipeline plugins to registry.
+        private TempPipelinePluginsHelper tempPipelinePluginsHelper;
 
         /// BindingList used to store all existing plugins and their display infos.
         private BindingList<PluginDisplayInfo> pluginDisplayInfos;
@@ -105,7 +101,7 @@ namespace PathCopyCopy.Settings.UI.Forms
             // What we'll do is try to detect non-standard DPI and if found, we'll set
             // the property (it'll produce tall rows but at least the checkboxes will show up.)
             using (Graphics gridViewGraphics = PluginsDataGrid.CreateGraphics()) {
-                if (((int) gridViewGraphics.DpiX) != STANDARD_DPI || ((int) gridViewGraphics.DpiY) != STANDARD_DPI) {
+                if (((int) gridViewGraphics.DpiX) != StandardWindowsDPI || ((int) gridViewGraphics.DpiY) != StandardWindowsDPI) {
                     PluginsDataGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
                 }
             }
@@ -119,7 +115,7 @@ namespace PathCopyCopy.Settings.UI.Forms
             }
 
             // Init about "box" controls.
-            Assembly thisAssembly = this.GetType().Assembly;
+            Assembly thisAssembly = GetType().Assembly;
             Version version = thisAssembly.GetName().Version;
             int numComponents;
             if (version.Revision > 0) {
@@ -129,12 +125,13 @@ namespace PathCopyCopy.Settings.UI.Forms
             } else {
                 numComponents = 2;
             }
-            ProductAndVersionLbl.Text = String.Format(ProductAndVersionLbl.Text, version.ToString(numComponents));
+            ProductAndVersionLbl.Text = string.Format(CultureInfo.CurrentCulture,
+                ProductAndVersionLbl.Text, version.ToString(numComponents));
             CopyrightLbl.Text = GetAssemblyCopyrightString(thisAssembly);
             MainToolTip.SetToolTip(SiteLinkLbl, SiteLinkLbl.Text);
-            MainToolTip.SetToolTip(LicenseTxtLinkLbl, LICENSE_PAGE_URI);
-            DonationLinkLbl.Links[0].LinkData = DONATIONS_PAGE_URI;
-            MainToolTip.SetToolTip(DonationLinkLbl, DONATIONS_PAGE_URI);
+            MainToolTip.SetToolTip(LicenseTxtLinkLbl, Resources.MainForm_About_LicensePageURI);
+            DonationLinkLbl.Links[0].LinkData = Resources.MainForm_About_DonationsPageURI;
+            MainToolTip.SetToolTip(DonationLinkLbl, Resources.MainForm_About_DonationsPageURI);
         }
         
         /// <summary>
@@ -143,7 +140,7 @@ namespace PathCopyCopy.Settings.UI.Forms
         /// </summary>
         private string GetAssemblyCopyrightString(Assembly assembly)
         {
-            string copyrightString = null;
+            string copyrightString;
 
             // Look for custom attribute containing copyright string.
             object[] copyrightAttributes = assembly.GetCustomAttributes(typeof(AssemblyCopyrightAttribute), true);
@@ -162,11 +159,11 @@ namespace PathCopyCopy.Settings.UI.Forms
             } else {
                 // Use default copyright.
                 Debug.Fail("No copyright attribute on assembly?");
-                copyrightString = "(c) 2008-2019, Charles Lechasseur";
+                copyrightString = "(c) 2008-2020, Charles Lechasseur";
             }
 
             // Replace "(c)" with the copyright symbol
-            Debug.Assert(!String.IsNullOrEmpty(copyrightString));
+            Debug.Assert(!string.IsNullOrEmpty(copyrightString));
             copyrightString = copyrightString.Replace("(c)", "\u00A9");
 
             return copyrightString;
@@ -177,28 +174,9 @@ namespace PathCopyCopy.Settings.UI.Forms
         /// </summary>
         private void LoadUserSettings()
         {
-            Debug.Assert(settings != null);
-
-            // Check if we remembered form position.
-            int posX = settings.SettingsFormPosX;
-            int posY = settings.SettingsFormPosY;
-            if (posX >= 0 && posY >= 0) {
-                this.StartPosition = FormStartPosition.Manual;
-                this.Location = new Point(posX, posY);
-            }
-
-            // Check if we remembered form size.
-            int sizeWidth = settings.SettingsFormSizeWidth;
-            int sizeHeight = settings.SettingsFormSizeHeight;
-            if (sizeWidth >= this.MinimumSize.Width) {
-                this.Size = new Size(sizeWidth, this.Size.Height);
-            }
-            if (sizeHeight >= this.MinimumSize.Height) {
-                this.Size = new Size(this.Size.Width, sizeHeight);
-            }
-
             // Load list of plugins in default order.
-            List<Plugin> pluginsInDefaultOrder = PluginsRegistry.GetPluginsInDefaultOrder(settings);
+            List<Plugin> pluginsInDefaultOrder = PluginsRegistry.GetPluginsInDefaultOrder(
+                Settings, PipelinePluginsOptions.FetchPipelinePlugins);
 
             // Create sorted dictionary of all plugins from the list above, to be able to perform lookups.
             SortedDictionary<Guid, Plugin> dictionaryOfAllPlugins = new SortedDictionary<Guid, Plugin>();
@@ -213,13 +191,10 @@ namespace PathCopyCopy.Settings.UI.Forms
             // "known plugins" also because we want to display any plugin not in UI display
             // order at the end, otherwise we might skip displaying known plugins that are
             // not in UI display order setting.)
-            List<Guid> uiDisplayOrder = settings.UIDisplayOrder;
+            List<Guid> uiDisplayOrder = Settings.UIDisplayOrder;
             if (uiDisplayOrder == null) {
                 // No display order, just use all plugins in default order
-                uiDisplayOrder = new List<Guid>();
-                foreach (Plugin plugin in pluginsInDefaultOrder) {
-                    uiDisplayOrder.Add(plugin.Id);
-                }
+                uiDisplayOrder = pluginsInDefaultOrder.Select(plugin => plugin.Id).ToList();
             }
             SortedSet<Guid> uiDisplayOrderAsSet = new SortedSet<Guid>(uiDisplayOrder);
             List<Plugin> plugins = PluginsRegistry.OrderPluginsToDisplay(dictionaryOfAllPlugins,
@@ -229,27 +204,30 @@ namespace PathCopyCopy.Settings.UI.Forms
                 pluginDisplayInfos.Add(new PluginDisplayInfo(plugin));
             }
 
+            // Create helper to track temp pipeline plugins and assign our existing plugins
+            // so they are initially saved to registry.
+            tempPipelinePluginsHelper = new TempPipelinePluginsHelper();
+            tempPipelinePluginsHelper.Assign(pluginDisplayInfos.Select(info => info.Plugin));
+
             // Scan display infos and set the ShowInMainMenu/Submenu fields
             // according to whether plugins are found in corresponding settings.
-            List<Guid> mainMenuDisplayOrder = settings.MainMenuDisplayOrder;
+            List<Guid> mainMenuDisplayOrder = Settings.MainMenuDisplayOrder;
             SortedSet<Guid> mainMenuPlugins;
             if (mainMenuDisplayOrder != null) {
                 mainMenuPlugins = new SortedSet<Guid>(mainMenuDisplayOrder);
             } else {
                 // No main menu plugin specified in settings, use default.
-                mainMenuPlugins = new SortedSet<Guid>();
-                mainMenuPlugins.Add(new Guid(Resources.LONG_PATH_PLUGIN_ID));
+                mainMenuPlugins = new SortedSet<Guid> {
+                    new Guid(Resources.LONG_PATH_PLUGIN_ID),
+                };
             }
-            List<Guid> submenuDisplayOrder = settings.SubmenuDisplayOrder;
+            List<Guid> submenuDisplayOrder = Settings.SubmenuDisplayOrder;
             SortedSet<Guid> submenuPlugins;
             if (submenuDisplayOrder != null) {
                 submenuPlugins = new SortedSet<Guid>(submenuDisplayOrder);
             } else {
                 // No submenu plugins specified in settings, use all plugins in default order.
-                submenuPlugins = new SortedSet<Guid>();
-                foreach (Plugin plugin in pluginsInDefaultOrder) {
-                    submenuPlugins.Add(plugin.Id);
-                }
+                submenuPlugins = new SortedSet<Guid>(pluginsInDefaultOrder.Select(plugin => plugin.Id));
             }
             foreach (PluginDisplayInfo info in pluginDisplayInfos) {
                 if (!(info.Plugin is SeparatorPlugin)) {
@@ -262,28 +240,29 @@ namespace PathCopyCopy.Settings.UI.Forms
             PluginsDataGridBindingSource.DataSource = pluginDisplayInfos;
 
             // Set options checkboxes.
-            AddQuotesChk.Checked = settings.AddQuotes;
+            AddQuotesChk.Checked = Settings.AddQuotes;
             if (AddQuotesChk.Checked) {
-                AreQuotesOptionalChk.Checked = settings.AreQuotesOptional;
+                AreQuotesOptionalChk.Checked = Settings.AreQuotesOptional;
             }
-            EmailLinksChk.Checked = settings.MakeEmailLinks;
-            AppendSepForDirChk.Checked = settings.AppendSeparatorForDirectories;
-            HiddenSharesChk.Checked = settings.UseHiddenShares;
-            UseFQDNChk.Checked = settings.UseFQDN;
-            AlwaysShowSubmenuChk.Checked = settings.AlwaysShowSubmenu;
-            UseIconForSubmenuChk.Checked = settings.UseIconForSubmenu;
-            UsePreviewModeChk.Checked = settings.UsePreviewMode;
+            EmailLinksChk.Checked = Settings.MakeEmailLinks;
+            AppendSepForDirChk.Checked = Settings.AppendSeparatorForDirectories;
+            HiddenSharesChk.Checked = Settings.UseHiddenShares;
+            UseFQDNChk.Checked = Settings.UseFQDN;
+            AlwaysShowSubmenuChk.Checked = Settings.AlwaysShowSubmenu;
+            UseIconForSubmenuChk.Checked = Settings.UseIconForSubmenu;
+            UsePreviewModeChk.Checked = Settings.UsePreviewMode;
             if (UsePreviewModeChk.Checked) {
-                UsePreviewModeInMainMenuChk.Checked = settings.UsePreviewModeInMainMenu;
+                UsePreviewModeInMainMenuChk.Checked = Settings.UsePreviewModeInMainMenu;
             }
-            DropRedundantWordsChk.Checked = settings.DropRedundantWords;
-            EnableSoftwareUpdateChk.Checked = !settings.DisableSoftwareUpdate;
+            DropRedundantWordsChk.Checked = Settings.DropRedundantWords;
+            TrueLnkPathsChk.Checked = Settings.TrueLnkPaths;
+            EnableSoftwareUpdateChk.Checked = !Settings.DisableSoftwareUpdate;
 
             // Set binding list as data source for the combo box used to pick ctrl key plugin.
             CtrlKeyPluginComboBindingSource.DataSource = pluginDisplayInfos;
 
             // Encode param is a little special since it has two checkboxes.
-            switch (settings.EncodeParam) {
+            switch (Settings.EncodeParam) {
                 case UserSettings.StringEncodeParam.None: {
                     break;
                 }
@@ -297,7 +276,7 @@ namespace PathCopyCopy.Settings.UI.Forms
                     break;
                 }
                 default: {
-                    Debug.Fail(String.Format("Unknown encode param: {0}", settings.EncodeParam));
+                    Debug.Fail($"Unknown encode param: {Settings.EncodeParam}");
                     EncodeURIWhitespaceChk.Enabled = false;
                     break;
                 }
@@ -305,15 +284,15 @@ namespace PathCopyCopy.Settings.UI.Forms
 
             // "Copy on same line" is a little special since it could be any string.
             Debug.Assert(!CopyOnSameLineChk.Checked);
-            string pathsSeparator = settings.PathsSeparator;
-            if (pathsSeparator == PATHS_SEPARATOR_ON_SAME_LINE) {
+            string pathsSeparator = Settings.PathsSeparator;
+            if (pathsSeparator == PathsSeparatorOnSameLine) {
                 CopyOnSameLineChk.Checked = true;
-            } else if (!String.IsNullOrEmpty(pathsSeparator)) {
+            } else if (!string.IsNullOrEmpty(pathsSeparator)) {
                 CopyOnSameLineChk.Enabled = false;
             }
 
             // Ctrl key plugin is a little special since there's a combo box to update.
-            Guid? ctrlKeyPluginId = settings.CtrlKeyPlugin;
+            Guid? ctrlKeyPluginId = Settings.CtrlKeyPlugin;
             if (ctrlKeyPluginId.HasValue && !ctrlKeyPluginId.Value.Equals(new SeparatorPlugin().Id)) {
                 for (int i = 0; i < pluginDisplayInfos.Count; ++i) {
                     if (pluginDisplayInfos[i].Plugin.Id == ctrlKeyPluginId.Value) {
@@ -336,25 +315,21 @@ namespace PathCopyCopy.Settings.UI.Forms
         /// </summary>
         private void SaveUserSettings()
         {
-            Debug.Assert(settings != null);
             Debug.Assert(pluginDisplayInfos != null);
 
             // Build list of plugin IDs to save in config for main menu.
             // This is easy: we jolt down the plugins marked as display
             // in main menu without worrying about separators.
-            List<Guid> mainMenuDisplayOrder = new List<Guid>();
-            foreach (PluginDisplayInfo displayInfo in pluginDisplayInfos) {
-                if (displayInfo.ShowInMainMenu) {
-                    mainMenuDisplayOrder.Add(displayInfo.Plugin.Id);
-                }
-            }
+            List<Guid> mainMenuDisplayOrder = pluginDisplayInfos.Where(info => info.ShowInMainMenu)
+                                                                .Select(info => info.Plugin.Id)
+                                                                .ToList();
 
             // If the only plugin left to show in the main menu is our default one,
             // clear the value instead.
             if (mainMenuDisplayOrder.Count == 1 && mainMenuDisplayOrder[0] == new Guid(Resources.LONG_PATH_PLUGIN_ID)) {
                 mainMenuDisplayOrder = null;
             }
-            settings.MainMenuDisplayOrder = mainMenuDisplayOrder;
+            Settings.MainMenuDisplayOrder = mainMenuDisplayOrder;
 
             // Build list of plugin IDs to save in config for submenu.
             // This is more complicated as we need to include separators.
@@ -376,79 +351,73 @@ namespace PathCopyCopy.Settings.UI.Forms
             if (submenuDisplayOrder.Count > 0 && submenuDisplayOrder[submenuDisplayOrder.Count - 1] == separator.Id) {
                 submenuDisplayOrder.RemoveAt(submenuDisplayOrder.Count - 1);
             }
-            settings.SubmenuDisplayOrder = submenuDisplayOrder;
+            Settings.SubmenuDisplayOrder = submenuDisplayOrder;
 
             // Build list of plugin IDs to save in config for the UI.
             // This is also easy as we basically save everything.
-            List<Guid> uiDisplayOrder = new List<Guid>();
-            foreach (PluginDisplayInfo displayInfo in pluginDisplayInfos) {
-                uiDisplayOrder.Add(displayInfo.Plugin.Id);
-            }
-            settings.UIDisplayOrder = uiDisplayOrder;
+            List<Guid> uiDisplayOrder = pluginDisplayInfos.Select(info => info.Plugin.Id).ToList();
+            Settings.UIDisplayOrder = uiDisplayOrder;
 
             // Build set of known plugins from the UI display order and save it in config.
-            SortedSet<Guid> knownPluginsAsSet = new SortedSet<Guid>(uiDisplayOrder);
-            List<Guid> knownPlugins = new List<Guid>();
-            foreach (Guid pluginId in knownPluginsAsSet) {
-                knownPlugins.Add(pluginId);
-            }
-            settings.KnownPlugins = knownPlugins;
+            List<Guid> knownPlugins = new SortedSet<Guid>(uiDisplayOrder).ToList();
+            Settings.KnownPlugins = knownPlugins;
 
             // Save icon files for default plugins. Icon files for pipeline plugins
             // are saved with the pipeline plugins, below.
             foreach (PluginDisplayInfo displayInfo in pluginDisplayInfos) {
                 if (displayInfo.Plugin is DefaultPlugin) {
-                    settings.SetIconFileOfPlugin(displayInfo.Plugin.Id, displayInfo.Plugin.IconFile);
+                    Settings.SetIconFileOfPlugin(displayInfo.Plugin.Id, displayInfo.Plugin.IconFile);
                 }
             }
 
             // Build list of pipeline plugins from the list of all plugins.
-            List<PipelinePluginInfo> pipelinePluginInfos = new List<PipelinePluginInfo>();
-            foreach (PluginDisplayInfo displayInfo in pluginDisplayInfos) {
-                if (displayInfo.Plugin is PipelinePlugin) {
-                    pipelinePluginInfos.Add(((PipelinePlugin) displayInfo.Plugin).Info);
-                }
-            }
+            List<PipelinePluginInfo> pipelinePluginInfos =
+                pluginDisplayInfos.Where(info => info.Plugin is PipelinePlugin)
+                                  .Select(info => ((PipelinePlugin) info.Plugin).Info)
+                                  .ToList();
 
             // Save pipeline plugins in config.
-            settings.PipelinePlugins = pipelinePluginInfos;
+            Settings.PipelinePlugins = pipelinePluginInfos;
 
             // Save options.
-            if (AddQuotesChk.Checked != settings.AddQuotes) {
-                settings.AddQuotes = AddQuotesChk.Checked;
+            if (AddQuotesChk.Checked != Settings.AddQuotes) {
+                Settings.AddQuotes = AddQuotesChk.Checked;
             }
-            if ((AreQuotesOptionalChk.Enabled && AreQuotesOptionalChk.Checked) != settings.AreQuotesOptional) {
-                settings.AreQuotesOptional = AreQuotesOptionalChk.Enabled && AreQuotesOptionalChk.Checked;
+            if ((AreQuotesOptionalChk.Enabled && AreQuotesOptionalChk.Checked) != Settings.AreQuotesOptional) {
+                Settings.AreQuotesOptional = AreQuotesOptionalChk.Enabled && AreQuotesOptionalChk.Checked;
             }
-            if (EmailLinksChk.Checked != settings.MakeEmailLinks) {
-                settings.MakeEmailLinks = EmailLinksChk.Checked;
+            if (EmailLinksChk.Checked != Settings.MakeEmailLinks) {
+                Settings.MakeEmailLinks = EmailLinksChk.Checked;
             }
-            if (AppendSepForDirChk.Checked != settings.AppendSeparatorForDirectories) {
-                settings.AppendSeparatorForDirectories = AppendSepForDirChk.Checked;
+            if (AppendSepForDirChk.Checked != Settings.AppendSeparatorForDirectories) {
+                Settings.AppendSeparatorForDirectories = AppendSepForDirChk.Checked;
             }
-            if (HiddenSharesChk.Checked != settings.UseHiddenShares) {
-                settings.UseHiddenShares = HiddenSharesChk.Checked;
+            if (HiddenSharesChk.Checked != Settings.UseHiddenShares) {
+                Settings.UseHiddenShares = HiddenSharesChk.Checked;
             }
-            if (UseFQDNChk.Checked != settings.UseFQDN) {
-                settings.UseFQDN = UseFQDNChk.Checked;
+            if (UseFQDNChk.Checked != Settings.UseFQDN) {
+                Settings.UseFQDN = UseFQDNChk.Checked;
             }
-            if (AlwaysShowSubmenuChk.Checked != settings.AlwaysShowSubmenu) {
-                settings.AlwaysShowSubmenu = AlwaysShowSubmenuChk.Checked;
+            if (AlwaysShowSubmenuChk.Checked != Settings.AlwaysShowSubmenu) {
+                Settings.AlwaysShowSubmenu = AlwaysShowSubmenuChk.Checked;
             }
-            if (UseIconForSubmenuChk.Checked != settings.UseIconForSubmenu) {
-                settings.UseIconForSubmenu = UseIconForSubmenuChk.Checked;
+            if (UseIconForSubmenuChk.Checked != Settings.UseIconForSubmenu) {
+                Settings.UseIconForSubmenu = UseIconForSubmenuChk.Checked;
             }
-            if (UsePreviewModeChk.Checked != settings.UsePreviewMode) {
-                settings.UsePreviewMode = UsePreviewModeChk.Checked;
+            if (UsePreviewModeChk.Checked != Settings.UsePreviewMode) {
+                Settings.UsePreviewMode = UsePreviewModeChk.Checked;
             }
-            if ((UsePreviewModeInMainMenuChk.Enabled && UsePreviewModeInMainMenuChk.Checked) != settings.UsePreviewModeInMainMenu) {
-                settings.UsePreviewModeInMainMenu = UsePreviewModeInMainMenuChk.Enabled && UsePreviewModeInMainMenuChk.Checked;
+            if ((UsePreviewModeInMainMenuChk.Enabled && UsePreviewModeInMainMenuChk.Checked) != Settings.UsePreviewModeInMainMenu) {
+                Settings.UsePreviewModeInMainMenu = UsePreviewModeInMainMenuChk.Enabled && UsePreviewModeInMainMenuChk.Checked;
             }
-            if (DropRedundantWordsChk.Checked != settings.DropRedundantWords) {
-                settings.DropRedundantWords = DropRedundantWordsChk.Checked;
+            if (DropRedundantWordsChk.Checked != Settings.DropRedundantWords) {
+                Settings.DropRedundantWords = DropRedundantWordsChk.Checked;
             }
-            if (EnableSoftwareUpdateChk.Checked != (!settings.DisableSoftwareUpdate)) {
-                settings.DisableSoftwareUpdate = !EnableSoftwareUpdateChk.Checked;
+            if (TrueLnkPathsChk.Checked != Settings.TrueLnkPaths) {
+                Settings.TrueLnkPaths = TrueLnkPathsChk.Checked;
+            }
+            if (EnableSoftwareUpdateChk.Checked != (!Settings.DisableSoftwareUpdate)) {
+                Settings.DisableSoftwareUpdate = !EnableSoftwareUpdateChk.Checked;
             }
 
             // Encode param is a little special (see above)
@@ -462,16 +431,15 @@ namespace PathCopyCopy.Settings.UI.Forms
             } else {
                 encodeParam = UserSettings.StringEncodeParam.None;
             }
-            if (encodeParam != settings.EncodeParam) {
-                settings.EncodeParam = encodeParam;
+            if (encodeParam != Settings.EncodeParam) {
+                Settings.EncodeParam = encodeParam;
             }
 
             // "Copy on same line" is a little special (see above)
             if (CopyOnSameLineChk.Enabled) {
-                string pathsSeparator = CopyOnSameLineChk.Checked
-                    ? PATHS_SEPARATOR_ON_SAME_LINE : String.Empty;
-                if (pathsSeparator != settings.PathsSeparator) {
-                    settings.PathsSeparator = pathsSeparator;
+                string pathsSeparator = CopyOnSameLineChk.Checked ? PathsSeparatorOnSameLine : string.Empty;
+                if (pathsSeparator != Settings.PathsSeparator) {
+                    Settings.PathsSeparator = pathsSeparator;
                 }
             }
 
@@ -480,8 +448,8 @@ namespace PathCopyCopy.Settings.UI.Forms
             if (CtrlKeyPluginChk.Checked && CtrlKeyPluginCombo.SelectedIndex != -1) {
                 ctrlKeyPluginId = (CtrlKeyPluginCombo.SelectedValue as Plugin).Id;
             }
-            if (!ctrlKeyPluginId.Equals(settings.CtrlKeyPlugin)) {
-                settings.CtrlKeyPlugin = ctrlKeyPluginId;
+            if (!ctrlKeyPluginId.Equals(Settings.CtrlKeyPlugin)) {
+                Settings.CtrlKeyPlugin = ctrlKeyPluginId;
             }
 
             // Now that everything is saved, disable the "Apply button".
@@ -574,7 +542,7 @@ namespace PathCopyCopy.Settings.UI.Forms
                     try {
                         // Icon file to load. Check file extension for .ico,
                         // which we need to display differently.
-                        if (Path.GetExtension(iconFile).ToLower() == ".ico") {
+                        if (Path.GetExtension(iconFile).ToLower(CultureInfo.CurrentCulture) == ".ico") {
                             rowIconCell.ValueIsIcon = true;
                             rowIconCell.Value = new Icon(iconFile);
                         } else {
@@ -603,26 +571,11 @@ namespace PathCopyCopy.Settings.UI.Forms
         /// <param name="e">Event arguments.</param>
         private void MainForm_Load(object sender, EventArgs e)
         {
-            // Create user settings object and load settings in the form.
-            settings = new UserSettings();
+            // Load settings in the form.
             LoadUserSettings();
 
             // Perform an initial button update.
             UpdatePluginButtons();
-        }
-        
-        /// <summary>
-        /// Called when the form finally closes. We need to do cleanup work here.
-        /// </summary>
-        /// <param name="sender">Event sender.</param>
-        /// <param name="e">Event arguments.</param>
-        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            // Dispose of user settings object.
-            if (settings != null) {
-                settings.Dispose();
-                settings = null;
-            }
         }
         
         /// <summary>
@@ -684,12 +637,14 @@ namespace PathCopyCopy.Settings.UI.Forms
                     exitCode = UserSettings.ExportUserSettings(ExportUserSettingsSaveDlg.FileName);
                 }
                 if (exitCode == 0) {
-                    MessageBox.Show(this, String.Format(Resources.MainForm_Msg_UserSettingsExported,
-                        ExportUserSettingsSaveDlg.FileName), Resources.MainForm_Msg_UserSettingsExportedMsgTitle,
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(this, string.Format(CultureInfo.CurrentCulture,
+                        Resources.MainForm_Msg_UserSettingsExported, ExportUserSettingsSaveDlg.FileName),
+                        Resources.MainForm_Msg_UserSettingsExportedMsgTitle, MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
                 } else {
-                    MessageBox.Show(this, String.Format(Resources.MainForm_Msg_UserSettingsNotExported,
-                        ExportUserSettingsSaveDlg.FileName, exitCode), Resources.MainForm_Msg_UserSettingsNotExportedMsgTitle,
+                    MessageBox.Show(this, string.Format(CultureInfo.CurrentCulture,
+                        Resources.MainForm_Msg_UserSettingsNotExported, ExportUserSettingsSaveDlg.FileName,
+                        exitCode), Resources.MainForm_Msg_UserSettingsNotExportedMsgTitle,
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -798,7 +753,7 @@ namespace PathCopyCopy.Settings.UI.Forms
         /// <param name="e">Event arguments.</param>
         private void LicenseTxtLinkLbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start(LICENSE_PAGE_URI);
+            Process.Start(Resources.MainForm_About_LicensePageURI);
         }
         
         /// <summary>
@@ -868,7 +823,7 @@ namespace PathCopyCopy.Settings.UI.Forms
                 if (setToolTip) {
                     rowIconCell.ToolTipText = Resources.MainForm_PluginsDataGrid_IconToolTipText;
                 } else {
-                    rowIconCell.ToolTipText = String.Empty;
+                    rowIconCell.ToolTipText = string.Empty;
                     rowIconCell.ReadOnly = true;
                 }
 
@@ -890,7 +845,7 @@ namespace PathCopyCopy.Settings.UI.Forms
         private void PluginsDataGrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             // Immediately get current key modifiers to be able to determine the action to perform.
-            Keys modifierKeys = Control.ModifierKeys & Keys.Modifiers;
+            Keys modifierKeys = ModifierKeys & Keys.Modifiers;
 
             // We're only interested in clicks in icon cells; other cells are
             // data-bound so will take care of themselves.
@@ -906,8 +861,8 @@ namespace PathCopyCopy.Settings.UI.Forms
                     // Check action to perform.
                     if (modifierKeys == Keys.Shift) {
                         // Plugin must now use the default icon.
-                        rowPlugin.IconFile = String.Empty;
-                        LoadIconFileForCell(String.Empty, rowIconCell);
+                        rowPlugin.IconFile = string.Empty;
+                        LoadIconFileForCell(string.Empty, rowIconCell);
                     } else if (modifierKeys == Keys.Control) {
                         // We must clear plugin's icon file.
                         rowPlugin.IconFile = null;
@@ -915,7 +870,7 @@ namespace PathCopyCopy.Settings.UI.Forms
                     } else if (modifierKeys == Keys.None) {
                         // Ask user to provide a new icon file for this plugin. If the plugin
                         // already has an icon file, start in the same folder as the previous icon.
-                        if (!String.IsNullOrEmpty(rowPlugin.IconFile)) {
+                        if (!string.IsNullOrEmpty(rowPlugin.IconFile)) {
                             ChoosePluginIconOpenDlg.InitialDirectory = Path.GetDirectoryName(rowPlugin.IconFile);
                         }
                         if (ChoosePluginIconOpenDlg.ShowDialog(this) == DialogResult.OK) {
@@ -1029,7 +984,7 @@ namespace PathCopyCopy.Settings.UI.Forms
             PluginsDataGrid.ClearSelection();
             PluginsDataGrid.Rows[newRowIndex].Selected = true;
             while (!PluginsDataGrid.Rows[newRowIndex].Displayed) {
-                PluginsDataGrid.FirstDisplayedScrollingRowIndex = PluginsDataGrid.FirstDisplayedScrollingRowIndex + 1;
+                PluginsDataGrid.FirstDisplayedScrollingRowIndex += 1;
             }
 
             // Enable "Apply" button.
@@ -1047,11 +1002,14 @@ namespace PathCopyCopy.Settings.UI.Forms
             // Ask user to create a new plugin.
             PipelinePluginInfo pluginInfo = PipelinePluginEditor.EditPlugin(this, null);
             if (pluginInfo != null) {
-                // User pressed OK. Add the new plugin to the list view
-                // and select it.
+                // User pressed OK. Add the new plugin to temp pipeline plugins.
+                tempPipelinePluginsHelper.Add(pluginInfo);
+
+                // Also add the new plugin to the list view and select it.
                 Plugin plugin = pluginInfo.ToPlugin();
-                PluginDisplayInfo displayInfo = new PluginDisplayInfo(plugin);
-                displayInfo.ShowInSubmenu = true;
+                PluginDisplayInfo displayInfo = new PluginDisplayInfo(plugin) {
+                    ShowInSubmenu = true,
+                };
                 pluginDisplayInfos.Add(displayInfo);
                 PluginsDataGrid.ClearSelection();
                 PluginsDataGrid.Rows[pluginDisplayInfos.Count - 1].Selected = true;
@@ -1114,11 +1072,15 @@ namespace PathCopyCopy.Settings.UI.Forms
             try {
                 PipelinePluginInfo newPluginInfo = PipelinePluginEditor.EditPlugin(this, pluginInfo);
                 if (newPluginInfo != null) {
+                    // Re-add the plugin to temp pipeline plugins so that it can be updated.
+                    tempPipelinePluginsHelper.Add(newPluginInfo);
+
                     // Replace the existing plugin object in the data grid.
                     Debug.Assert(newPluginInfo.Id == pluginInfo.Id);
-                    PluginDisplayInfo newDisplayInfo = new PluginDisplayInfo(newPluginInfo.ToPlugin());
-                    newDisplayInfo.ShowInMainMenu = oldDisplayInfo.ShowInMainMenu;
-                    newDisplayInfo.ShowInSubmenu = oldDisplayInfo.ShowInSubmenu;
+                    PluginDisplayInfo newDisplayInfo = new PluginDisplayInfo(newPluginInfo.ToPlugin()) {
+                        ShowInMainMenu = oldDisplayInfo.ShowInMainMenu,
+                        ShowInSubmenu = oldDisplayInfo.ShowInSubmenu,
+                    };
                     pluginDisplayInfos.RemoveAt(rowIndex);
                     pluginDisplayInfos.Insert(rowIndex, newDisplayInfo);
 
@@ -1159,11 +1121,14 @@ namespace PathCopyCopy.Settings.UI.Forms
                 // in resources for this message and it includes a format placeholder 
                 // for the plugin description. 
                 PipelinePluginInfo pluginInfo = ((PipelinePlugin) displayInfo.Plugin).Info; 
-                DialogResult res = MessageBox.Show(this, String.Format(Resources.REMOVE_PIPELINE_PLUGIN_MESSAGE, pluginInfo.Description), 
-                    Resources.REMOVE_PIPELINE_PLUGIN_TITLE, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning); 
+                DialogResult res = MessageBox.Show(this, string.Format(CultureInfo.CurrentCulture,
+                    Resources.REMOVE_PIPELINE_PLUGIN_MESSAGE, pluginInfo.Description), 
+                    Resources.REMOVE_PIPELINE_PLUGIN_TITLE, MessageBoxButtons.OKCancel,
+                    MessageBoxIcon.Warning); 
                 if (res == DialogResult.OK) { 
-                    // Remove plugin from data grid. 
-                    pluginDisplayInfos.RemoveAt(rowIndex); 
+                    // Remove plugin from data grid and from temp pipeline plugins.
+                    tempPipelinePluginsHelper.Remove(pluginInfo);
+                    pluginDisplayInfos.RemoveAt(rowIndex);
  
                     // All this will enable the "Apply" button. 
                     ApplyBtn.Enabled = true; 
@@ -1198,8 +1163,8 @@ namespace PathCopyCopy.Settings.UI.Forms
                 // Open file where to save data and serialize collection in XML.
                 // Use file extension to determine if we should use legacy serializing.
                 using (FileStream fstream = new FileStream(ExportPipelinePluginsSaveDlg.FileName, FileMode.Create)) {
-                    collection.ToXML(fstream, PIPELINE_PLUGINS_EXT_TO_SERIALIZER_VERSION[
-                        Path.GetExtension(ExportPipelinePluginsSaveDlg.FileName).ToLower()]);
+                    collection.ToXML(fstream, PipelinePluginsExtToSerializerVersion[
+                        Path.GetExtension(ExportPipelinePluginsSaveDlg.FileName).ToLower(CultureInfo.CurrentCulture)]);
                 }
             }
         }
@@ -1221,7 +1186,7 @@ namespace PathCopyCopy.Settings.UI.Forms
                         collection = PipelinePluginCollection.FromXML(fstream);
 
                         // If this is a legacy file without required versions, compute them now.
-                        if (PIPELINE_PLUGINS_EXT_TO_SERIALIZER_VERSION[Path.GetExtension(ImportPipelinePluginsOpenDlg.FileName).ToLower()] == PipelinePluginXmlSerializerVersion.V1) {
+                        if (PipelinePluginsExtToSerializerVersion[Path.GetExtension(ImportPipelinePluginsOpenDlg.FileName).ToLower(CultureInfo.CurrentCulture)] == PipelinePluginXmlSerializerVersion.V1) {
                             foreach (PipelinePluginInfo info in collection.Plugins) {
                                 try {
                                     Pipeline pipeline = PipelineDecoder.DecodePipeline(info.EncodedElements);
@@ -1247,7 +1212,7 @@ namespace PathCopyCopy.Settings.UI.Forms
                             PipelinePluginInfo newInfo = collection.Plugins.Find(pl => pl.Equals(existingInfo));
                             if (newInfo != null) {
                                 pluginOverwrites.OverwriteInfos[newInfo] =
-                                    new ImportedPipelinePluginOverwrites.OverwriteInfo(existingInfo, i);
+                                    new ImportedPipelinePluginOverwriteInfo(existingInfo, i);
                             }
                         }
                     }
@@ -1274,17 +1239,21 @@ namespace PathCopyCopy.Settings.UI.Forms
                             bool addedNewPlugins = false;
                             foreach (var newPluginInfo in collection.Plugins) {
                                 Plugin newPlugin = newPluginInfo.ToPlugin();
-                                ImportedPipelinePluginOverwrites.OverwriteInfo overwriteInfo;
-                                if (pluginOverwrites.OverwriteInfos.TryGetValue(newPluginInfo, out overwriteInfo)) {
+                                if (pluginOverwrites.OverwriteInfos.TryGetValue(newPluginInfo, out var overwriteInfo)) {
                                     PluginDisplayInfo displayInfo = pluginDisplayInfos[overwriteInfo.OldIndex];
                                     displayInfo.Plugin = newPlugin;
                                 } else {
-                                    PluginDisplayInfo newDisplayInfo = new PluginDisplayInfo(newPlugin);
-                                    newDisplayInfo.ShowInSubmenu = true;
+                                    PluginDisplayInfo newDisplayInfo = new PluginDisplayInfo(newPlugin) {
+                                        ShowInSubmenu = true,
+                                    };
                                     pluginDisplayInfos.Add(newDisplayInfo);
                                     addedNewPlugins = true;
                                 }
                             }
+
+                            // Since temp pipeline plugins need to be refreshed,
+                            // simply assign everything and let it sort it out.
+                            tempPipelinePluginsHelper.Assign(pluginDisplayInfos.Select(info => info.Plugin));
 
                             // If we added new plugins, select the last one.
                             if (addedNewPlugins) {
@@ -1307,34 +1276,6 @@ namespace PathCopyCopy.Settings.UI.Forms
                     MessageBox.Show(this, Resources.MainForm_Error_ImportPipelinePluginEmptyXML,
                         Resources.MainForm_Confirm_ImportMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            }
-        }
-
-        /// <summary>
-        /// Called when the form's location changes.
-        /// </summary>
-        /// <param name="sender">Event sender.</param>
-        /// <param name="e">Event arguments.</param>
-        private void MainForm_LocationChanged(object sender, EventArgs e)
-        {
-            if (settings != null) {
-                // Save location in settings right away; this is not saved at the end like other settings.
-                settings.SettingsFormPosX = this.Location.X;
-                settings.SettingsFormPosY = this.Location.Y;
-            }
-        }
-
-        /// <summary>
-        /// Called when the form's size changes.
-        /// </summary>
-        /// <param name="sender">Event sender.</param>
-        /// <param name="e">Event arguments.</param>
-        private void MainForm_SizeChanged(object sender, EventArgs e)
-        {
-            if (settings != null) {
-                // Save size in settings right away; this is not saved at the end like other settings.
-                settings.SettingsFormSizeWidth = this.Size.Width;
-                settings.SettingsFormSizeHeight = this.Size.Height;
             }
         }
 

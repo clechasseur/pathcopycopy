@@ -1,5 +1,5 @@
 // AndrogynousInternalPlugin.h
-// (c) 2015-2019, Charles Lechasseur
+// (c) 2015-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -44,7 +44,7 @@ namespace PCC
             AndrogynousInternalPlugin&
                                     operator=(const AndrogynousInternalPlugin&) = delete;
 
-            virtual std::wstring    Description() const override;
+            std::wstring            Description() const override;
 
         protected:
             ATL::CStringW           m_AndrogynousDescriptionString;     // String containing plugin androgynous description.

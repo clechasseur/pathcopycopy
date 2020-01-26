@@ -279,6 +279,24 @@ namespace PathCopyCopy.Settings.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=LM5B9WNTH4KN4&amp;lc=CA&amp;item_name=Charles%20Lechasseur&amp;item_number=PathCopyCopy&amp;currency_code=CAD&amp;bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted.
+        /// </summary>
+        internal static string MainForm_About_DonationsPageURI {
+            get {
+                return ResourceManager.GetString("MainForm_About_DonationsPageURI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://github.com/clechasseur/pathcopycopy/blob/master/LICENSE.
+        /// </summary>
+        internal static string MainForm_About_LicensePageURI {
+            get {
+                return ResourceManager.GetString("MainForm_About_LicensePageURI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit.
         /// </summary>
         internal static string MainForm_Confirm_EditMsgTitle {
@@ -445,6 +463,24 @@ namespace PathCopyCopy.Settings.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Use Base Command.
         /// </summary>
+        internal static string PipelineElement_ApplyPipelinePlugin {
+            get {
+                return ResourceManager.GetString("PipelineElement_ApplyPipelinePlugin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose a base command to use to get an initial path value.
+        /// </summary>
+        internal static string PipelineElement_ApplyPipelinePlugin_HelpText {
+            get {
+                return ResourceManager.GetString("PipelineElement_ApplyPipelinePlugin_HelpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use Base Command (No Custom Command).
+        /// </summary>
         internal static string PipelineElement_ApplyPlugin {
             get {
                 return ResourceManager.GetString("PipelineElement_ApplyPlugin", resourceCulture);
@@ -452,7 +488,7 @@ namespace PathCopyCopy.Settings.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Choose a base command to use to get an initial path value.
+        ///   Looks up a localized string similar to Choose a base command (but not a custom command) to use to get an initial path value.
         /// </summary>
         internal static string PipelineElement_ApplyPlugin_HelpText {
             get {
@@ -587,6 +623,24 @@ namespace PathCopyCopy.Settings.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Follow Symbolic Link.
+        /// </summary>
+        internal static string PipelineElement_FollowSymlink {
+            get {
+                return ResourceManager.GetString("PipelineElement_FollowSymlink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Replace the path to a symbolic link with the path to its target.
+        /// </summary>
+        internal static string PipelineElement_FollowSymlink_HelpText {
+            get {
+                return ResourceManager.GetString("PipelineElement_FollowSymlink_HelpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Turn Forward Slashes Into Backslashes.
         /// </summary>
         internal static string PipelineElement_ForwardToBackslashes {
@@ -691,6 +745,24 @@ namespace PathCopyCopy.Settings.Properties {
         internal static string PipelineElement_RemoveExt_HelpText {
             get {
                 return ResourceManager.GetString("PipelineElement_RemoveExt_HelpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unexpand Environment Strings.
+        /// </summary>
+        internal static string PipelineElement_UnexpandEnvStrings {
+            get {
+                return ResourceManager.GetString("PipelineElement_UnexpandEnvStrings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Replaces parts of the path with environment variable references, if possible (like %USERPROFILE%, etc.).
+        /// </summary>
+        internal static string PipelineElement_UnexpandEnvStrings_HelpText {
+            get {
+                return ResourceManager.GetString("PipelineElement_UnexpandEnvStrings_HelpText", resourceCulture);
             }
         }
         

@@ -1,5 +1,5 @@
 ﻿// AdvancedPipelinePluginForm.cs
-// (c) 2019, Charles Lechasseur
+// (c) 2019-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,6 +23,7 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.Windows.Forms;
 using PathCopyCopy.Settings.Core.Plugins;
 using PathCopyCopy.Settings.Properties;
@@ -49,7 +50,7 @@ namespace PathCopyCopy.Settings.UI.Forms
         private Guid pluginId;
 
         /// Binding list that will store the pipeline elements so that we can use data binding.
-        private BindingList<PipelineElement> elements = new BindingList<PipelineElement>();
+        private readonly BindingList<PipelineElement> elements = new BindingList<PipelineElement>();
 
         /// User control to edit currently-selected pipeline element.
         private PipelineElementUserControl currentUserControl;
@@ -111,6 +112,8 @@ namespace PathCopyCopy.Settings.UI.Forms
             return dialogRes != DialogResult.Cancel ? newPluginInfo : null;
         }
 
+        
+
         /// <summary>
         /// Called when the form is loaded. We use this opportunity to load the
         /// controls necessary to edit the pipeline plugin.
@@ -119,8 +122,15 @@ namespace PathCopyCopy.Settings.UI.Forms
         /// <param name="e">Event arguments.</param>
         private void AdvancedPipelinePluginForm_Load(object sender, EventArgs e)
         {
+            // The initial text of the MinVersionLbl control is a format string.
+            // Save it in its Tag to be able to reuse it.
+            MinVersionLbl.Tag = MinVersionLbl.Text;
+
             // Populate the context menu strip used to create new elements.
             // We do this in code to be able to reuse resources to avoid string duplication.
+            AddNewElementMenuItem(Resources.PipelineElement_ApplyPipelinePlugin,
+                Resources.PipelineElement_ApplyPipelinePlugin_HelpText,
+                () => new ApplyPipelinePluginPipelineElement(new Guid(Resources.LONG_PATH_PLUGIN_ID)));
             AddNewElementMenuItem(Resources.PipelineElement_ApplyPlugin,
                 Resources.PipelineElement_ApplyPlugin_HelpText,
                 () => new ApplyPluginPipelineElement(new Guid(Resources.LONG_PATH_PLUGIN_ID)));
@@ -157,6 +167,13 @@ namespace PathCopyCopy.Settings.UI.Forms
             AddNewElementMenuItem(Resources.PipelineElement_Regex,
                 Resources.PipelineElement_Regex_HelpText,
                 () => new RegexPipelineElement());
+            AddNewElementMenuItem(Resources.PipelineElement_UnexpandEnvStrings,
+                Resources.PipelineElement_UnexpandEnvStrings_HelpText,
+                () => new UnexpandEnvironmentStringsPipelineElement());
+            AddNewElementMenuItem("-", null, null);
+            AddNewElementMenuItem(Resources.PipelineElement_FollowSymlink,
+                Resources.PipelineElement_FollowSymlink_HelpText,
+                () => new FollowSymlinkPipelineElement());
             AddNewElementMenuItem("-", null, null);
             AddNewElementMenuItem(Resources.PipelineElement_PathsSeparator,
                 Resources.PipelineElement_PathsSeparator_HelpText,
@@ -177,7 +194,7 @@ namespace PathCopyCopy.Settings.UI.Forms
             }
 
             // Populate our controls.
-            NameTxt.Text = oldPluginInfo?.Description ?? String.Empty;
+            NameTxt.Text = oldPluginInfo?.Description ?? string.Empty;
             ElementsLst.DataSource = elements;
 
             // Update initial controls.
@@ -196,20 +213,32 @@ namespace PathCopyCopy.Settings.UI.Forms
             // Create new pipeline and copy elements back from the binding list.
             Pipeline pipeline = new Pipeline();
             pipeline.Elements.AddRange(elements);
-            
+
             // Create new plugin info and save encoded elements.
-            PipelinePluginInfo pluginInfo = new PipelinePluginInfo();
-            pluginInfo.Id = pluginId;
-            pluginInfo.Description = NameTxt.Text;
-            pluginInfo.EncodedElements = pipeline.Encode();
-            pluginInfo.RequiredVersion = pipeline.RequiredVersion;
-            pluginInfo.EditMode = PipelinePluginEditMode.Expert;
+            PipelinePluginInfo pluginInfo = new PipelinePluginInfo {
+                Id = pluginId,
+                Description = NameTxt.Text,
+                EncodedElements = pipeline.Encode(),
+                RequiredVersion = pipeline.RequiredVersion,
+                EditMode = PipelinePluginEditMode.Expert,
+            };
             Debug.Assert(!pluginInfo.Global);
 
-            // Save plugin info and pipeline, then update preview.
+            // Save plugin info and pipeline, then update preview and min version.
             newPluginInfo = pluginInfo;
             newPipeline = pipeline;
             PreviewCtrl.Plugin = newPluginInfo.ToPlugin();
+            Version requiredVersion = newPipeline.RequiredVersion;
+            int numComponents;
+            if (requiredVersion.Revision > 0) {
+                numComponents = 4;
+            } else if (requiredVersion.Build > 0) {
+                numComponents = 3;
+            } else {
+                numComponents = 2;
+            }
+            MinVersionLbl.Text = string.Format(CultureInfo.CurrentCulture,
+                MinVersionLbl.Tag as string, requiredVersion.ToString(numComponents));
         }
 
         /// <summary>
@@ -221,16 +250,16 @@ namespace PathCopyCopy.Settings.UI.Forms
         private void AdvancedPipelinePluginForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             // If user chose to press OK or switch to Simple Mode, save plugin info.
-            if (this.DialogResult == DialogResult.OK || this.DialogResult == DialogResult.Retry) {
+            if (DialogResult == DialogResult.OK || DialogResult == DialogResult.Retry) {
                 // Make sure user has entered a name (unless we're switching to Simple Mode).
-                if (!String.IsNullOrEmpty(NameTxt.Text) || this.DialogResult == DialogResult.Retry) {
+                if (!string.IsNullOrEmpty(NameTxt.Text) || DialogResult == DialogResult.Retry) {
                     // Update plugin info so that we have a pipeline.
                     UpdatePluginInfo();
 
                     // If pipeline is too complex, user might lose customization by switching
                     // to simple mode. Warn in this case.
                     Debug.Assert(newPipeline != null);
-                    if (this.DialogResult == DialogResult.Retry && !PipelinePluginEditor.IsPipelineSimple(newPipeline)) {
+                    if (DialogResult == DialogResult.Retry && !PipelinePluginEditor.IsPipelineSimple(newPipeline)) {
                         DialogResult subDialogRes = MessageBox.Show(Resources.PipelinePluginForm_PipelineTooComplexForSimpleMode,
                             Resources.PipelinePluginForm_MsgTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                         if (subDialogRes == DialogResult.No) {
@@ -259,7 +288,7 @@ namespace PathCopyCopy.Settings.UI.Forms
             Func<PipelineElement> creator)
         {
             ToolStripItem newItem = NewElementContextMenuStrip.Items.Add(description);
-            if (!String.IsNullOrEmpty(helpText)) {
+            if (!string.IsNullOrEmpty(helpText)) {
                 newItem.AutoToolTip = false;
                 newItem.ToolTipText = helpText;
             }
@@ -342,8 +371,7 @@ namespace PathCopyCopy.Settings.UI.Forms
         private void NewElementMenuItem_Click(object sender, EventArgs e)
         {
             // A function to create the new element is stored in the item's Tag.
-            Func<PipelineElement> creator = ((ToolStripMenuItem) sender).Tag as Func<PipelineElement>;
-            if (creator != null) {
+            if (((ToolStripMenuItem) sender).Tag is Func<PipelineElement> creator) {
                 // Instanciate element and add it to the end of the pipeline.
                 elements.Add(creator());
 

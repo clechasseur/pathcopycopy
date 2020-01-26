@@ -1,5 +1,5 @@
 // StStgMedium.h
-// (c) 2008-2019, Charles Lechasseur
+// (c) 2008-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -37,17 +37,19 @@ public:
                         //
                         // Default constructor. Initializes the STGMEDIUM to empty values.
                         //
-                        StStgMedium()
+                        StStgMedium() noexcept
                             : m_StgMedium()
                         {
                             ::ZeroMemory(&m_StgMedium, sizeof(m_StgMedium));
                         }
 
                         //
-                        // Copying not supported.
+                        // Copying/moving not supported.
                         //
                         StStgMedium(const StStgMedium&) = delete;
+                        StStgMedium(StStgMedium&&) = delete;
     StStgMedium&        operator=(const StStgMedium&) = delete;
+    StStgMedium&        operator=(StStgMedium&&) = delete;
 
                         //
                         // Destructor. Releases the content of the STGMEDIUM.
@@ -61,7 +63,7 @@ public:
                         //
                         // Returns reference to internal STGMEDIUM structure.
                         //
-    STGMEDIUM&          Get()
+    STGMEDIUM&          Get() noexcept
                         {
                             return m_StgMedium;
                         }
@@ -69,7 +71,7 @@ public:
                         //
                         // Returns reference to internal STGMEDIUM structure.
                         //
-                        operator STGMEDIUM()
+                        operator STGMEDIUM() noexcept
                         {
                             return m_StgMedium;
                         }
@@ -81,7 +83,7 @@ public:
                         // StStgMedium stgmed;
                         // obj->GetData(&fmtetc, &stgmed);
                         //
-    STGMEDIUM*          operator&()
+    STGMEDIUM*          operator&() noexcept
                         {
                             return &m_StgMedium;
                         }

@@ -1,5 +1,5 @@
 // PipelinenPluginProvider.h
-// (c) 2016-2019, Charles Lechasseur
+// (c) 2016-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -35,7 +35,14 @@ namespace PCC
     class PipelinePluginProvider
     {
     public:
-        virtual         ~PipelinePluginProvider();
+                        PipelinePluginProvider() = default;
+                        PipelinePluginProvider(const PipelinePluginProvider&) = delete;
+                        PipelinePluginProvider(PipelinePluginProvider&&) = delete;
+        PipelinePluginProvider&
+                        operator=(const PipelinePluginProvider&) = delete;
+        PipelinePluginProvider&
+                        operator=(PipelinePluginProvider&&) = delete;
+        virtual         ~PipelinePluginProvider() = default;
 
         //
         // Returns a list of pipeline plugins.

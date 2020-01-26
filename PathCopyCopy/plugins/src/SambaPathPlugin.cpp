@@ -1,5 +1,5 @@
 // SambaPathPlugin.cpp
-// (c) 2018-2019, Charles Lechasseur
+// (c) 2018-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -27,8 +27,8 @@
 
 namespace
 {
-    const std::wstring  FILE_URI_PREFIX         = L"file://";   // Prefix of file URI paths
-    const std::wstring  SAMBA_URI_PREFIX        = L"smb://";    // Prefix of Samba paths
+    const wchar_t* const FILE_URI_PREFIX    = L"file://";   // Prefix of file URI paths
+    const wchar_t* const SAMBA_URI_PREFIX   = L"smb://";    // Prefix of Samba paths
 
     // Plugin unique ID: {7DA6A4A2-AE54-40E0-9910-EBD9EF3F017E}
     const GUID          SAMBA_PATH_PLUGIN_ID = { 0x7da6a4a2, 0xae54, 0x40e0, { 0x99, 0x10, 0xeb, 0xd9, 0xef, 0x3f, 0x1, 0x7e } };
@@ -43,7 +43,7 @@ namespace PCC
         //
         // Constructor.
         //
-        SambaPathPlugin::SambaPathPlugin()
+        SambaPathPlugin::SambaPathPlugin() noexcept(false)
             : InternetPathPlugin(IDS_SAMBA_PATH_PLUGIN_DESCRIPTION, IDS_SAMBA_PATH_PLUGIN_HINT)
         {
         }
@@ -53,7 +53,7 @@ namespace PCC
         //
         // @return Unique identifier.
         //
-        const GUID& SambaPathPlugin::Id() const
+        const GUID& SambaPathPlugin::Id() const noexcept(false)
         {
             return SAMBA_PATH_PLUGIN_ID;
         }
@@ -72,7 +72,7 @@ namespace PCC
             // The Internet path plugin did almost all the job for us.
             // All we have to do is replace the prefix.
             if (path.find(FILE_URI_PREFIX) == 0) {
-                path = SAMBA_URI_PREFIX + path.replace(0, FILE_URI_PREFIX.size(), L"");
+                path = SAMBA_URI_PREFIX + path.replace(0, ::wcslen(FILE_URI_PREFIX), L"");
             }
 
             return path;

@@ -1,5 +1,5 @@
-﻿// ApplyPluginPipelineElementUserControl.cs
-// (c) 2019, Charles Lechasseur
+﻿// PipelineElementWithPluginIDUserControl.cs
+// (c) 2019-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +22,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Windows.Forms;
+using System.Linq;
 using PathCopyCopy.Settings.Core;
 using PathCopyCopy.Settings.Core.Plugins;
 using PathCopyCopy.Settings.Properties;
@@ -30,22 +30,27 @@ using PathCopyCopy.Settings.Properties;
 namespace PathCopyCopy.Settings.UI.UserControls
 {
     /// <summary>
-    /// UserControl used to configure an Apply Plugin pipeline element.
+    /// UserControl used to configure a pipeline element with plugin ID.
     /// </summary>
-    public partial class ApplyPluginPipelineElementUserControl : PipelineElementUserControl
+    public partial class PipelineElementWithPluginIDUserControl : PipelineElementUserControl
     {
         /// Element we're configuring.
-        private ApplyPluginPipelineElement element;
+        private readonly PipelineElementWithPluginID element;
+
+        /// Whether to include pipeline plugins as possible plugins for our element.
+        private readonly bool includePipelinePlugins;
 
         /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="element">Pipeline element to configure.</param>
-        public ApplyPluginPipelineElementUserControl(ApplyPluginPipelineElement element)
+        /// <param name="includePipelinePlugins">Whether to include pipeline
+        /// plugins as possible plugins for our element.</param>
+        public PipelineElementWithPluginIDUserControl(PipelineElementWithPluginID element,
+            bool includePipelinePlugins)
         {
-            Debug.Assert(element != null);
-
-            this.element = element;
+            this.element = element ?? throw new ArgumentNullException(nameof(element));
+            this.includePipelinePlugins = includePipelinePlugins;
 
             InitializeComponent();
         }
@@ -58,12 +63,38 @@ namespace PathCopyCopy.Settings.UI.UserControls
         {
             base.OnLoad(e);
 
-            // First load list of plugins to display in the listbox for the base
-            // plugin. We only load default and COM plugins for this since we
-            // don't want a pipeline plugin to be based off another (for now at least).
+            // First load list of plugins to display in the listbox for the base plugin.
             List<Plugin> plugins;
             using (UserSettings settings = new UserSettings()) {
-                plugins = PluginsRegistry.GetPluginsInDefaultOrder(settings, false);
+                // If we're instructed to include pipeline plugins, we actually want *temp*
+                // pipeline plugins saved by the MainForm, in order to get the most recent
+                // snapshot of pipeline plugins.
+                var pipelinePluginsOptions = includePipelinePlugins
+                    ? PipelinePluginsOptions.FetchTempPipelinePlugins : PipelinePluginsOptions.FetchNone;
+                List<Plugin> pluginsInDefaultOrder = PluginsRegistry.GetPluginsInDefaultOrder(settings, pipelinePluginsOptions);
+                if (!includePipelinePlugins) {
+                    // Sufficient when not using pipeline plugins.
+                    plugins = pluginsInDefaultOrder;
+                } else {
+                    // Create sorted dictionary of all plugins from the list above, to be able to perform lookups.
+                    SortedDictionary<Guid, Plugin> dictionaryOfAllPlugins = new SortedDictionary<Guid, Plugin>();
+                    foreach (Plugin plugin in pluginsInDefaultOrder) {
+                        if (!dictionaryOfAllPlugins.ContainsKey(plugin.Id)) {
+                            dictionaryOfAllPlugins.Add(plugin.Id, plugin);
+                        }
+                    }
+
+                    // Use UI display order from settings to order the plugins.
+                    // (See MainForm.LoadSettings for some more details on this process)
+                    List<Guid> uiDisplayOrder = settings.UIDisplayOrder;
+                    if (uiDisplayOrder == null) {
+                        // No display order, just use all plugins in default order
+                        uiDisplayOrder = pluginsInDefaultOrder.Select(plugin => plugin.Id).ToList();
+                    }
+                    SortedSet<Guid> uiDisplayOrderAsSet = new SortedSet<Guid>(uiDisplayOrder);
+                    plugins = PluginsRegistry.OrderPluginsToDisplay(dictionaryOfAllPlugins,
+                        uiDisplayOrder, uiDisplayOrderAsSet, pluginsInDefaultOrder);
+                }
             }
 
             // Add all plugins to the list box.

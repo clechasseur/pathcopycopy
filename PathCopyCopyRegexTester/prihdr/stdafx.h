@@ -1,5 +1,5 @@
 // stdafx.h
-// (c) 2012-2019, Charles Lechasseur
+// (c) 2012-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,6 +22,11 @@
 #pragma once
 
 #include "targetver.h"
-#include "resource.h"
+#include <resource.h>
 
 #include <iostream>
+
+// Including this header allows us to suppress C++ Core Guideline warnings more easily
+#include <CppCoreCheck\warnings.h>
+
+#include <gsl/gsl>

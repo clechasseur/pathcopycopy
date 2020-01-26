@@ -1,5 +1,5 @@
 // PathCopyCopyConfigHelper.h
-// (c) 2011-2019, Charles Lechasseur
+// (c) 2011-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -43,7 +43,15 @@ class ATL_NO_VTABLE CPathCopyCopyConfigHelper :
 	public IPathCopyCopyConfigHelper
 {
 public:
-	CPathCopyCopyConfigHelper();
+	CPathCopyCopyConfigHelper() noexcept(false);
+    CPathCopyCopyConfigHelper(const CPathCopyCopyConfigHelper&) = delete;
+    CPathCopyCopyConfigHelper(CPathCopyCopyConfigHelper&&) = delete;
+    CPathCopyCopyConfigHelper& operator=(const CPathCopyCopyConfigHelper&) = delete;
+    CPathCopyCopyConfigHelper& operator=(CPathCopyCopyConfigHelper&&) = delete;
+    virtual ~CPathCopyCopyConfigHelper() = default;
+
+#pragma warning(push)
+#pragma warning(disable: ALL_CPPCORECHECK_WARNINGS)
 
     DECLARE_REGISTRY_RESOURCEID(IDR_PATHCOPYCOPYCONFIGHELPER)
 
@@ -55,12 +63,16 @@ public:
 
 	DECLARE_PROTECT_FINAL_CONSTRUCT()
 
-	HRESULT FinalConstruct()
+#pragma warning(pop)
+
+    [[gsl::suppress(c.128)]]
+	HRESULT FinalConstruct() noexcept
 	{
 		return S_OK;
 	}
 
-	void FinalRelease()
+    [[gsl::suppress(c.128)]]
+	void FinalRelease() noexcept
 	{
 	}
 
@@ -80,4 +92,5 @@ private:
     void                Initialize();
 };
 
+#pragma warning(suppress: ALL_CPPCORECHECK_WARNINGS)
 OBJECT_ENTRY_AUTO(__uuidof(PathCopyCopyConfigHelper), CPathCopyCopyConfigHelper)

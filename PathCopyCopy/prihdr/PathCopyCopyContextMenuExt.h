@@ -1,5 +1,5 @@
 // PathCopyCopyContextMenuExt.h
-// (c) 2008-2019, Charles Lechasseur
+// (c) 2008-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -27,11 +27,10 @@
 #include "resource.h"
 #include "StImage.h"
 
-#include <cl/optional.h>
-
 #include <map>
 #include <memory>
 #include <mutex>
+#include <optional>
 #include <string>
 #include <utility>
 
@@ -58,8 +57,15 @@ class ATL_NO_VTABLE CPathCopyCopyContextMenuExt :
     public IContextMenu
 {
 public:
-    CPathCopyCopyContextMenuExt();
-    ~CPathCopyCopyContextMenuExt();
+    CPathCopyCopyContextMenuExt() noexcept(false);
+    CPathCopyCopyContextMenuExt(const CPathCopyCopyContextMenuExt&) = delete;
+    CPathCopyCopyContextMenuExt(CPathCopyCopyContextMenuExt&&) = delete;
+    CPathCopyCopyContextMenuExt& operator=(const CPathCopyCopyContextMenuExt&) = delete;
+    CPathCopyCopyContextMenuExt& operator=(CPathCopyCopyContextMenuExt&&) = delete;
+    virtual ~CPathCopyCopyContextMenuExt();
+
+#pragma warning(push)
+#pragma warning(disable: ALL_CPPCORECHECK_WARNINGS)
 
     DECLARE_REGISTRY_RESOURCEID(IDR_PATHCOPYCOPYCONTEXTMENUEXT)
 
@@ -76,12 +82,16 @@ public:
 
     DECLARE_PROTECT_FINAL_CONSTRUCT()
 
-    HRESULT FinalConstruct()
+#pragma warning(pop)
+
+    [[gsl::suppress(c.128)]]
+    HRESULT FinalConstruct() noexcept
     {
         return S_OK;
     }
 
-    void FinalRelease()
+    [[gsl::suppress(c.128)]]
+    void FinalRelease() noexcept
     {
     }
 
@@ -122,13 +132,12 @@ private:
                         m_spPluginProvider;         // Plugin provider object.
 
     PCC::FilesV         m_vFiles;                   // Files selected in Shell.
-    std::wstring        m_ParentPath;               // Path of the parent directory of all files selected.
 
-    cl::optional<UINT_PTR>
+    std::optional<UINT_PTR>
                         m_FirstCmdId;               // ID of first command menu item.
-    cl::optional<UINT_PTR>
+    std::optional<UINT_PTR>
                         m_SubMenuCmdId;             // ID of the menu item that opens our submenu.
-    cl::optional<UINT_PTR>
+    std::optional<UINT_PTR>
                         m_SettingsCmdId;            // ID of the menu item that triggers the options.
     CmdIdPluginM        m_mPluginsByCmdId;          // Map storing plugins by their command IDs.
 
@@ -140,24 +149,26 @@ private:
     static std::mutex   s_ExtToMenusLock;           // Lock to protect the static map.
 
     PCC::Settings&      GetSettings();
+    
+    std::wstring        GetParentPath() const;
 
     HRESULT             AddPluginToMenu(const GUID& p_PluginId,
-                                        HMENU const p_hMenu,
-                                        const bool p_UsePCCIcon,
-                                        const bool p_UsePreviewMode,
-                                        const bool p_DropRedundantWords,
-                                        const bool p_ComputeShortcut,
+                                        HMENU p_hMenu,
+                                        bool p_UsePCCIcon,
+                                        bool p_UsePreviewMode,
+                                        bool p_DropRedundantWords,
+                                        bool p_ComputeShortcut,
                                         UINT& p_rCmdId,
                                         UINT& p_rPosition);
     HRESULT             AddPluginToMenu(const PCC::PluginSP& p_spPlugin,
-                                        HMENU const p_hMenu,
-                                        const bool p_UsePCCIcon,
-                                        const bool p_UsePreviewMode,
-                                        const bool p_DropRedundantWords,
-                                        const bool p_ComputeShortcut,
+                                        HMENU p_hMenu,
+                                        bool p_UsePCCIcon,
+                                        bool p_UsePreviewMode,
+                                        bool p_DropRedundantWords,
+                                        bool p_ComputeShortcut,
                                         UINT& p_rCmdId,
                                         UINT& p_rPosition);
-    std::wstring        GetMenuCaptionWithShortcut(HMENU const p_hMenu,
+    std::wstring        GetMenuCaptionWithShortcut(HMENU p_hMenu,
                                                    const std::wstring& p_Caption) const;
 
     HBITMAP             GetPCCIcon();
@@ -166,10 +177,11 @@ private:
     HRESULT             ActOnFiles(const PCC::PluginSP& p_spPlugin,
                                    HWND p_hWnd);
     void                AddQuotes(std::wstring& p_rName,
-                                  const bool p_Optional) const;
+                                  bool p_Optional) const;
 
     void                RemoveFromExtToMenu();
     void                CheckForUpdates();
 };
 
+#pragma warning(suppress: ALL_CPPCORECHECK_WARNINGS)
 OBJECT_ENTRY_AUTO(__uuidof(PathCopyCopyContextMenuExt), CPathCopyCopyContextMenuExt)

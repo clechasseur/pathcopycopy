@@ -1,3 +1,14 @@
+Version 18.0 (202?-??-??)
+-------------------------
+- Now requires Windows Vista at a minimum [https://github.com/clechasseur/pathcopycopy/issues/83]
+- Installer now offers to install for all users or for current user only [https://github.com/clechasseur/pathcopycopy/issues/79]
+- New option to copy paths of shortcut (.lnk) files themselves [https://github.com/clechasseur/pathcopycopy/issues/7]
+- New custom command element to follow symbolic links [https://github.com/clechasseur/pathcopycopy/issues/99]
+- New custom command element to replace parts of path with environment variable references if possible [https://github.com/clechasseur/pathcopycopy/issues/65]
+- Custom commands can now be based on other custom commands [https://github.com/clechasseur/pathcopycopy/issues/92]
+- Windows can no longer appear offscreen when their saved size/position makes no sense with the current monitor setup [https://github.com/clechasseur/pathcopycopy/issues/101]
+
+
 Version 17.1.1 (2019-11-16)
 -------------------------
 - Exporting user settings now works on Windows XP [https://github.com/clechasseur/pathcopycopy/issues/96]

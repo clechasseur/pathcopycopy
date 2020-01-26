@@ -1,5 +1,5 @@
 ﻿// ImportPipelinePluginsForm.cs
-// (c) 2012-2019, Charles Lechasseur
+// (c) 2012-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -77,8 +77,12 @@ namespace PathCopyCopy.Settings.UI.Forms
         public bool SelectPlugins(IWin32Window owner, ref PipelinePluginCollection pluginCollection,
             ref ImportedPipelinePluginOverwrites pluginOverwrites)
         {
-            Debug.Assert(pluginCollection != null);
-            Debug.Assert(pluginOverwrites != null);
+            if (pluginCollection == null) {
+                throw new ArgumentNullException(nameof(pluginCollection));
+            }
+            if (pluginOverwrites == null) {
+                throw new ArgumentNullException(nameof(pluginOverwrites));
+            }
 
             PipelinePluginsLst.BeginUpdate();
             try {
@@ -93,8 +97,7 @@ namespace PathCopyCopy.Settings.UI.Forms
                 // Disable any plugin that would overwrite a global one set by the administrator.
                 for (int i = 0; i < PipelinePluginsLst.Items.Count; ++i) {
                     PluginToImportDisplayInfo newPlugin = (PluginToImportDisplayInfo) PipelinePluginsLst.Items[i];
-                    ImportedPipelinePluginOverwrites.OverwriteInfo overwriteInfo;
-                    if (pluginOverwrites.OverwriteInfos.TryGetValue(newPlugin.PluginInfo, out overwriteInfo) && overwriteInfo.OldInfo.Global) {
+                    if (pluginOverwrites.OverwriteInfos.TryGetValue(newPlugin.PluginInfo, out var overwriteInfo) && overwriteInfo.OldInfo.Global) {
                         newPlugin.Importable = false;
                     }
                 }
@@ -130,8 +133,7 @@ namespace PathCopyCopy.Settings.UI.Forms
                 // Also rebuild the list of overwrites to only include those we included in the collection.
                 ImportedPipelinePluginOverwrites newOverwrites = new ImportedPipelinePluginOverwrites();
                 foreach (var pluginInfo in pluginCollection.Plugins) {
-                    ImportedPipelinePluginOverwrites.OverwriteInfo overwriteInfo;
-                    if (pluginOverwrites.OverwriteInfos.TryGetValue(pluginInfo, out overwriteInfo)) {
+                    if (pluginOverwrites.OverwriteInfos.TryGetValue(pluginInfo, out var overwriteInfo)) {
                         newOverwrites.OverwriteInfos.Add(pluginInfo, overwriteInfo);
                     }
                 }
@@ -237,29 +239,6 @@ namespace PathCopyCopy.Settings.UI.Forms
         }
         
         /// <summary>
-        /// Called when the form is closed and is about to be released. We perform
-        /// final cleanup here.
-        /// </summary>
-        /// <param name="sender">Event sender.</param>
-        /// <param name="e">Event arguments.</param>
-        private void ImportPipelinePluginsForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            // Dispose of brushes before leaving.
-            if (listItemRegularBrush != null) {
-                listItemRegularBrush.Dispose();
-                listItemRegularBrush = null;
-            }
-            if (listItemDisabledBrush != null) {
-                listItemDisabledBrush.Dispose();
-                listItemDisabledBrush = null;
-            }
-            if (listItemSelectedBrush != null) {
-                listItemSelectedBrush.Dispose();
-                listItemSelectedBrush = null;
-            }
-        }
-        
-        /// <summary>
         /// Simple wrapper used to display pipeline plugin infos in the list. Holds
         /// extra info to know if plugins are importable or not.
         /// </summary>
@@ -301,7 +280,7 @@ namespace PathCopyCopy.Settings.UI.Forms
             /// <returns>Textual representation of <see cref="PluginInfo"/>.</returns>
             public override string ToString()
             {
-                return (PluginInfo != null) ? PluginInfo.ToString() : String.Empty;
+                return PluginInfo?.ToString() ?? string.Empty;
             }
         }
     }

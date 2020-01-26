@@ -1,5 +1,5 @@
 // StringUtils.cpp
-// (c) 2011-2019, Charles Lechasseur
+// (c) 2011-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -38,7 +38,7 @@ void StringUtils::ReplaceAll(std::wstring& p_rString,
                              const std::wstring& p_OldValue,
                              const std::wstring& p_NewValue)
 {
-    std::wstring::size_type pos;
+    std::wstring::size_type pos = 0;
     std::wstring::size_type from = 0;
     do {
         // Look for the next instance of the old value.
@@ -66,12 +66,12 @@ void StringUtils::Split(std::wstring& p_rString,
 {
     p_rParts.clear();
     if (!p_rString.empty()) {
-        const wchar_t separators[] = { p_Separator, L'\0' };
-        wchar_t* context = 0;
-        wchar_t* pCurToken = ::wcstok_s(&*p_rString.begin(), separators, &context);
-        while (pCurToken != 0) {
+        std::wstring separators = { p_Separator, L'\0' };
+        wchar_t* context = nullptr;
+        wchar_t* pCurToken = ::wcstok_s(&*p_rString.begin(), separators.c_str(), &context);
+        while (pCurToken != nullptr) {
             p_rParts.push_back(pCurToken);
-            pCurToken = ::wcstok_s(NULL, separators, &context);
+            pCurToken = ::wcstok_s(nullptr, separators.c_str(), &context);
         }
     }
 }

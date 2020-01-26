@@ -1,5 +1,5 @@
 // SambaPathPlugin.h
-// (c) 2018-2019, Charles Lechasseur
+// (c) 2018-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -37,13 +37,13 @@ namespace PCC
         class SambaPathPlugin : public InternetPathPlugin
         {
         public:
-                                    SambaPathPlugin();
+                                    SambaPathPlugin() noexcept(false);
                                     SambaPathPlugin(const SambaPathPlugin&) = delete;
             SambaPathPlugin&        operator=(const SambaPathPlugin&) = delete;
 
-            virtual const GUID&     Id() const override;
+            const GUID&             Id() const noexcept(false) override;
 
-            virtual std::wstring    GetPath(const std::wstring& p_File) const override;
+            std::wstring            GetPath(const std::wstring& p_File) const override;
         };
 
     } // namespace Plugins

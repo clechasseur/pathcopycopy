@@ -1,5 +1,5 @@
 // PathCopyCopyPlugin2b.h
-// (c) 2011-2019, Charles Lechasseur
+// (c) 2011-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -44,32 +44,40 @@ class ATL_NO_VTABLE CPathCopyCopyPlugin2b :
     public IPathCopyCopyPluginIconInfo
 {
 public:
-	CPathCopyCopyPlugin2b()
-	{
-	}
+	CPathCopyCopyPlugin2b() noexcept(false) = default;
+    CPathCopyCopyPlugin2b(const CPathCopyCopyPlugin2b&) = delete;
+    CPathCopyCopyPlugin2b(CPathCopyCopyPlugin2b&&) = delete;
+    CPathCopyCopyPlugin2b& operator=(const CPathCopyCopyPlugin2b&) = delete;
+    CPathCopyCopyPlugin2b& operator=(CPathCopyCopyPlugin2b&&) = delete;
+    virtual ~CPathCopyCopyPlugin2b() = default;
 
-DECLARE_REGISTRY_RESOURCEID(IDR_PATHCOPYCOPYPLUGIN2B)
+#pragma warning(push)
+#pragma warning(disable: ALL_CPPCORECHECK_WARNINGS)
 
-DECLARE_NOT_AGGREGATABLE(CPathCopyCopyPlugin2b)
+    DECLARE_REGISTRY_RESOURCEID(IDR_PATHCOPYCOPYPLUGIN2B)
 
-BEGIN_COM_MAP(CPathCopyCopyPlugin2b)
-	COM_INTERFACE_ENTRY(IPathCopyCopyPlugin2b)
-    COM_INTERFACE_ENTRY(IPathCopyCopyPlugin)
-    COM_INTERFACE_ENTRY(IPathCopyCopyPluginGroupInfo)
-    COM_INTERFACE_ENTRY(IPathCopyCopyPluginStateInfo)
-    COM_INTERFACE_ENTRY(IPathCopyCopyPluginIconInfo)
-END_COM_MAP()
+    DECLARE_NOT_AGGREGATABLE(CPathCopyCopyPlugin2b)
 
-
+    BEGIN_COM_MAP(CPathCopyCopyPlugin2b)
+	    COM_INTERFACE_ENTRY(IPathCopyCopyPlugin2b)
+        COM_INTERFACE_ENTRY(IPathCopyCopyPlugin)
+        COM_INTERFACE_ENTRY(IPathCopyCopyPluginGroupInfo)
+        COM_INTERFACE_ENTRY(IPathCopyCopyPluginStateInfo)
+        COM_INTERFACE_ENTRY(IPathCopyCopyPluginIconInfo)
+    END_COM_MAP()
 
 	DECLARE_PROTECT_FINAL_CONSTRUCT()
 
-	HRESULT FinalConstruct()
+#pragma warning(pop)
+
+    [[gsl::suppress(c.128)]]
+	HRESULT FinalConstruct() noexcept
 	{
 		return S_OK;
 	}
 
-	void FinalRelease()
+    [[gsl::suppress(c.128)]]
+	void FinalRelease() noexcept
 	{
 	}
 
@@ -90,4 +98,5 @@ END_COM_MAP()
     STDMETHOD(get_UseDefaultIcon)(VARIANT_BOOL *p_pUseDefaultIcon);
 };
 
+#pragma warning(suppress: ALL_CPPCORECHECK_WARNINGS)
 OBJECT_ENTRY_AUTO(__uuidof(PathCopyCopyPlugin2b), CPathCopyCopyPlugin2b)

@@ -1,5 +1,5 @@
 // DefaultPlugin.h
-// (c) 2011-2019, Charles Lechasseur
+// (c) 2011-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -37,16 +37,16 @@ namespace PCC
         class DefaultPlugin final : public LongPathPlugin
         {
         public:
-                                    DefaultPlugin();
+                                    DefaultPlugin() noexcept(false);
                                     DefaultPlugin(const DefaultPlugin&) = delete;
             DefaultPlugin&          operator=(const DefaultPlugin&) = delete;
 
-            virtual const GUID&     Id() const override;
+            const GUID&             Id() const noexcept(false) override;
 
-            virtual bool            CanDropRedundantWords() const override;
+            bool                    CanDropRedundantWords() const noexcept(false) override;
 
         protected:
-            virtual bool            IsAndrogynous() const override;
+            bool                    IsAndrogynous() const noexcept(false) override;
         };
 
     } // namespace Plugins

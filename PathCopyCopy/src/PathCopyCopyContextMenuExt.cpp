@@ -1,5 +1,5 @@
 // PathCopyCopyContextMenuExt.cpp
-// (c) 2008-2019, Charles Lechasseur
+// (c) 2008-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -40,9 +40,12 @@
 
 #include <gdiplus.h>
 
+#pragma warning(disable: 26426) // Globals are only used by COM objects created later, so we're OK here
+#pragma warning(disable: 26490) // Need reinterpret_cast to use some weird Win32 APIs
+
 namespace {
 
-const wchar_t   DEFAULT_PATHS_SEPARATOR[]   = L"\r\n";  // Default separator used between paths when copying multiple file names.
+const wchar_t* const DEFAULT_PATHS_SEPARATOR = L"\r\n"; // Default separator used between paths when copying multiple file names.
 
 }
 
@@ -55,13 +58,12 @@ std::mutex                                  CPathCopyCopyContextMenuExt::s_ExtTo
 //
 // Constructor.
 //
-CPathCopyCopyContextMenuExt::CPathCopyCopyContextMenuExt()
+CPathCopyCopyContextMenuExt::CPathCopyCopyContextMenuExt() noexcept(false)
     : m_spSettings(),
       m_vspPluginsInDefaultOrder(),
       m_sspAllPlugins(),
       m_spPluginProvider(),
       m_vFiles(),
-      m_ParentPath(),
       m_FirstCmdId(),
       m_SubMenuCmdId(),
       m_SettingsCmdId(),
@@ -76,14 +78,18 @@ CPathCopyCopyContextMenuExt::CPathCopyCopyContextMenuExt()
 //
 CPathCopyCopyContextMenuExt::~CPathCopyCopyContextMenuExt()
 {
-    // Remove this instance from the map of instances modifying menus (if it's there).
-    RemoveFromExtToMenu();
+    try {
+        // Remove this instance from the map of instances modifying menus (if it's there).
+        RemoveFromExtToMenu();
 
-    // Check for updates, but ONLY if settings were created. Otherwise, it means
-    // that either COM object hasn't been used by the shell or it was used to register plugins.
-    // In both cases we don't want to check for updates.
-    if (m_spSettings != nullptr) {
-        CheckForUpdates();
+        // Check for updates, but ONLY if settings were created. Otherwise, it means
+        // that either COM object hasn't been used by the shell or it was used to register plugins.
+        // In both cases we don't want to check for updates.
+        if (m_spSettings != nullptr) {
+            CheckForUpdates();
+        }
+    } catch (...) {
+        // Don't throw from destructor, it could crash COM app
     }
 }
 
@@ -96,6 +102,7 @@ CPathCopyCopyContextMenuExt::~CPathCopyCopyContextMenuExt()
 // @param p_CLSID ID of plugin COM class.
 // @return S_OK if successful, S_FALSE if the plugin was already registered, otherwise an error code.
 //
+[[gsl::suppress(c.128)]]
 STDMETHODIMP CPathCopyCopyContextMenuExt::RegisterPlugin(
     REFCLSID p_CLSID)
 {
@@ -119,6 +126,7 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::RegisterPlugin(
 // @param p_pCLSID ID of plugin COM class, as a string.
 // @return S_OK if successful, S_FALSE if the component was not registered, otherwise an error code.
 //
+[[gsl::suppress(c.128)]]
 STDMETHODIMP CPathCopyCopyContextMenuExt::UnregisterPlugin(
     REFCLSID p_CLSID)
 {
@@ -147,6 +155,7 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::UnregisterPlugin(
 // @param p_User Whether to register the plugin per-user (VARIANT_TRUE) or per-machine (VARIANT_FALSE).
 // @return S_OK if successful, S_FALSE if the plugin was already registered, otherwise an error code.
 //
+[[gsl::suppress(c.128)]]
 STDMETHODIMP CPathCopyCopyContextMenuExt::RegisterPlugin2(
     REFCLSID p_CLSID,
     VARIANT_BOOL p_User)
@@ -173,6 +182,7 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::RegisterPlugin2(
 // @param p_User Whether the plugin was registered per-user (VARIANT_TRUE) or per-machine (VARIANT_FALSE).
 // @return S_OK if successful, S_FALSE if the component was not registered, otherwise an error code.
 //
+[[gsl::suppress(c.128)]]
 STDMETHODIMP CPathCopyCopyContextMenuExt::UnregisterPlugin2(
     REFCLSID p_CLSID,
     VARIANT_BOOL p_User)
@@ -202,6 +212,7 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::UnregisterPlugin2(
 // @param p_hKeyFileClass Handle to file class key; unused.
 // @return S_OK if successful, otherwise an error code.
 //
+[[gsl::suppress(c.128)]]
 STDMETHODIMP CPathCopyCopyContextMenuExt::Initialize(
     PCIDLIST_ABSOLUTE p_pFolderPIDL,
     IDataObject *p_pDataObject,
@@ -217,27 +228,18 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::Initialize(
             FORMATETC formatEtc = {CF_HDROP, nullptr, DVASPECT_CONTENT, -1, TYMED_HGLOBAL};
             if (SUCCEEDED(p_pDataObject->GetData(&formatEtc, &stgMedium))) {
                 // Get number of files included in the selection.
-                UINT fileCount = ::DragQueryFileW(
+                const UINT fileCount = ::DragQueryFileW(
                     static_cast<HDROP>(stgMedium.Get().hGlobal), 0xFFFFFFFF, 0, 0);
                 if (fileCount > 0) {
                     // Pre-allocate space in vector to store files.
                     m_vFiles.reserve(fileCount);
 
                     // Get each file in turn.
-                    wchar_t buffer[MAX_PATH + 1];
+                    std::wstring buffer(MAX_PATH + 1, L'\0');
                     for(UINT i = 0; i < fileCount; ++i) {
-                        UINT copiedCount = ::DragQueryFileW(static_cast<HDROP>(stgMedium.Get().hGlobal),
-                            i, buffer, sizeof(buffer) / sizeof(wchar_t));
-                        m_vFiles.push_back(std::wstring(buffer, copiedCount));
-                    }
-
-                    // Extract the parent path of the first file. We'll assume that all
-                    // files have the same parent. This might not be strictly true in all
-                    // cases (for example, in a custom shell view) but we're only using it
-                    // for validation purposes, so it's good enough.
-                    if (!m_vFiles.empty()) {
-                        m_ParentPath = m_vFiles.front();
-                        PCC::PluginUtils::ExtractFolderFromPath(m_ParentPath);
+                        const UINT copiedCount = ::DragQueryFileW(static_cast<HDROP>(stgMedium.Get().hGlobal),
+                            i, &*buffer.begin(), gsl::narrow<UINT>(buffer.size()));
+                        m_vFiles.emplace_back(buffer.c_str());
                     }
                 } else {
                     // It's difficult to display a menu item without files to act upon.
@@ -247,13 +249,9 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::Initialize(
         } else if (p_pFolderPIDL != nullptr) {
             // No data object, but maybe it's because user clicked on a folder's
             // background. Get the folder path from the ID list.
-            wchar_t buffer[MAX_PATH + 1];
-            if (::SHGetPathFromIDList(p_pFolderPIDL, buffer) != FALSE) {
-                m_vFiles.push_back(std::wstring(buffer));
-
-                // Extract the parent path.
-                m_ParentPath = m_vFiles.front();
-                PCC::PluginUtils::ExtractFolderFromPath(m_ParentPath);
+            std::wstring buffer(MAX_PATH + 1, L'\0');
+            if (::SHGetPathFromIDList(p_pFolderPIDL, &*buffer.begin()) != FALSE) {
+                m_vFiles.emplace_back(buffer.c_str());
             } else {
                 // Nothing like that either, problem.
                 hRes = E_FAIL;
@@ -282,6 +280,7 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::Initialize(
 // @return If successful, a success code with code value set to the largest command ID
 //         used, plus one; otherwise, an error code.
 //
+[[gsl::suppress(c.128)]]
 STDMETHODIMP CPathCopyCopyContextMenuExt::QueryContextMenu(
     HMENU p_hMenu,
     UINT p_Index,
@@ -292,26 +291,30 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::QueryContextMenu(
     HRESULT hRes = S_OK;
 
     try {
-        if (p_hMenu == NULL) {
+        if (p_hMenu == nullptr) {
             hRes = E_INVALIDARG;
         } else {
             // Make sure this menu hasn't been modified by another instance.
-            bool alreadyModified = false;
+            CPathCopyCopyContextMenuExt* pOtherInstance = nullptr;
             {
                 std::lock_guard<std::mutex> lock(s_ExtToMenusLock);
-                ExtToMenuPairV::const_iterator it, end = s_vExtToMenus.end();
-                for (it = s_vExtToMenus.begin(); it != end; ++it) {
-                    if (it->second == p_hMenu) {
-                        // Modified already, bail out.
-                        alreadyModified = true;
-                        break;
-                    }
+                auto it = std::find_if(s_vExtToMenus.begin(), s_vExtToMenus.end(), [&](const auto& extToMenu) {
+                    return extToMenu.second == p_hMenu;
+                });
+                if (it != s_vExtToMenus.end()) {
+                    pOtherInstance = it->first;
                 }
             }
 
-            // Do not add items if the default action is chosen, if we have no files
-            // or if menu has been modified by another instance.
-            if (m_vFiles.empty() || (p_Flags & CMF_DEFAULTONLY) != 0 || alreadyModified) {
+            // Do not add items if the default action is chosen, if we have no files,
+            // if menu has been modified by another instance or if this is a menu for
+            // a shortcut (.lnk) file and we want to copy true .lnk paths (in such a
+            // case, another instance is coming after us to do the job).
+            bool skipBecauseOfLnk = false;
+            if ((p_Flags & CMF_VERBSONLY) != 0) {
+                skipBecauseOfLnk = GetSettings().GetTrueLnkPaths();
+            }
+            if (m_vFiles.empty() || (p_Flags & CMF_DEFAULTONLY) != 0 || pOtherInstance != nullptr || skipBecauseOfLnk) {
                 hRes = E_FAIL;
             } else {
                 UINT cmdId = p_FirstCmdId;
@@ -321,7 +324,8 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::QueryContextMenu(
                 PCC::Settings& rSettings = GetSettings();
 
                 // Get all plugins in default order. Do not include temp pipeline plugins.
-                m_vspPluginsInDefaultOrder = PCC::PluginsRegistry::GetPluginsInDefaultOrder(&rSettings, &rSettings, false);
+                m_vspPluginsInDefaultOrder = PCC::PluginsRegistry::GetPluginsInDefaultOrder(
+                    &rSettings, &rSettings, PCC::PipelinePluginsOptions::FetchPipelinePlugins);
 
                 // Get set of all plugins from the above vector.
                 m_sspAllPlugins.insert(m_vspPluginsInDefaultOrder.cbegin(), m_vspPluginsInDefaultOrder.cend());
@@ -336,7 +340,7 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::QueryContextMenu(
                 }
 
                 // Quick helper to create a default plugin if needed later.
-                auto createDefaultPlugin = [&]() {
+                const auto createDefaultPlugin = [&]() {
                     PCC::PluginSP spDefaultPlugin = std::make_shared<PCC::Plugins::DefaultPlugin>();
                     spDefaultPlugin->SetSettings(&rSettings);
                     spDefaultPlugin->SetPluginProvider(m_spPluginProvider.get());
@@ -357,21 +361,21 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::QueryContextMenu(
                 // Check if user held down Ctrl key and we have a plugin to use when this happens.
                 if ((::GetKeyState(VK_CONTROL) & 0x8000) != 0 && pCtrlKeyPluginId != nullptr) {
                     // Find plugin to use.
-                    auto pluginIt = m_sspAllPlugins.find(*pCtrlKeyPluginId);
+                    const auto pluginIt = m_sspAllPlugins.find(*pCtrlKeyPluginId);
                     if (pluginIt != m_sspAllPlugins.end() && !(*pluginIt)->IsSeparator()) {
-                        ActOnFiles(*pluginIt, NULL);
+                        ActOnFiles(*pluginIt, nullptr);
                     }
                 }
 
                 // Add all plugins requested to the main menu.
                 PCC::GUIDV vPluginIds;
                 if (rSettings.GetMainMenuPluginDisplayOrder(vPluginIds)) {
+                    // TODO why are we not using vspPlugins here?
                     PCC::PluginSPV vspPlugins = PCC::PluginsRegistry::OrderPluginsToDisplay(
                         m_sspAllPlugins, vPluginIds, pvKnownPlugins, &m_vspPluginsInDefaultOrder);
                     if (!vPluginIds.empty()) {
                         if (vPluginIds.size() != 1 || !::IsEqualGUID(vPluginIds.front(), PCC::Plugins::LongPathPlugin::ID)) {
-                            PCC::CLSIDV::const_iterator it, end = vPluginIds.end();
-                            for (it = vPluginIds.begin(); SUCCEEDED(hRes) && it != end; ++it) {
+                            for (auto it = vPluginIds.cbegin(); SUCCEEDED(hRes) && cmdId <= p_LastCmdId && it != vPluginIds.cend(); ++it) {
                                 hRes = AddPluginToMenu(*it, p_hMenu, useIconForDefaultPlugin, usePreviewModeInMainMenu, false, true, cmdId, position);
                             }
                         } else {
@@ -406,9 +410,8 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::QueryContextMenu(
 
                         // Iterate plugins and try to add them to the submenu.
                         UINT subPosition = 0;
-                        PCC::PluginSPV::const_iterator it, end = pvspPlugins->cend();
                         bool prevWasSeparator = true;
-                        for (it = pvspPlugins->cbegin(); SUCCEEDED(hRes) && cmdId <= p_LastCmdId && it != end; ++it) {
+                        for (auto it = pvspPlugins->cbegin(); SUCCEEDED(hRes) && cmdId <= p_LastCmdId && it != pvspPlugins->cend(); ++it) {
                             // Try to insert this plugin in the menu.
                             const PCC::PluginSP& spPlugin = *it;
                             if (!spPlugin->IsSeparator()) {
@@ -419,7 +422,7 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::QueryContextMenu(
                                 // Note: there's a chance that we may double up the separators
                                 // if not all plugins are shown in the submenu. Avoid this if possible.
                                 if (!prevWasSeparator) {
-                                    if (::InsertMenuW(hSubMenu, subPosition, MF_BYPOSITION | MF_SEPARATOR, 0, 0)) {
+                                    if (::InsertMenuW(hSubMenu, subPosition, MF_BYPOSITION | MF_SEPARATOR, 0, nullptr)) {
                                         ++subPosition;
                                         // No need to increment cmdId.
                                     } else {
@@ -434,7 +437,7 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::QueryContextMenu(
                         // the settings has been locked out by the administrator.
                         if (SUCCEEDED(hRes) && cmdId <= p_LastCmdId && !rSettings.GetEditingDisabled()) {
                             if (!prevWasSeparator) {
-                                if (::InsertMenuW(hSubMenu, subPosition, MF_BYPOSITION | MF_SEPARATOR, 0, 0)) {
+                                if (::InsertMenuW(hSubMenu, subPosition, MF_BYPOSITION | MF_SEPARATOR, 0, nullptr)) {
                                     ++subPosition;
                                 } else {
                                     hRes = E_FAIL;
@@ -443,7 +446,7 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::QueryContextMenu(
                             if (SUCCEEDED(hRes)) {
                                 ATL::CStringW settingsCaption(MAKEINTRESOURCEW(IDS_PCC_SETTINGS_DESCRIPTION));
                                 if (::InsertMenuW(hSubMenu, subPosition, MF_BYPOSITION | MF_STRING, cmdId, settingsCaption)) {
-                                    m_SettingsCmdId = static_cast<UINT_PTR>(cmdId);
+                                    m_SettingsCmdId = cmdId;
                                     ++cmdId;
                                     ++subPosition;
                                 } else {
@@ -470,13 +473,13 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::QueryContextMenu(
                         if (rSettings.GetUseIconForSubmenu()) {
                             // Add an icon next to the submenu.
                             HBITMAP hIconBitmap = GetPCCIcon();
-                            if (hIconBitmap != NULL) {
+                            if (hIconBitmap != nullptr) {
                                 menuItemInfo.fMask |= MIIM_BITMAP;
                                 menuItemInfo.hbmpItem = hIconBitmap;
                             }
                         }
                         if (::InsertMenuItemW(p_hMenu, position, TRUE, &menuItemInfo)) {
-                            m_SubMenuCmdId = static_cast<UINT_PTR>(cmdId);
+                            m_SubMenuCmdId = cmdId;
                             ++cmdId;
                             ++position;
                         } else {
@@ -515,6 +518,7 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::QueryContextMenu(
 // @param p_pCommandInfo Pointer to struct containing command information.
 // @return S_OK if successful, otherwise an error code.
 //
+[[gsl::suppress(c.128)]]
 STDMETHODIMP CPathCopyCopyContextMenuExt::InvokeCommand(
     CMINVOKECOMMANDINFO* p_pCommandInfo)
 {
@@ -525,7 +529,8 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::InvokeCommand(
             hRes = E_INVALIDARG;
         } else {
             // Get offset of invoked command.
-            UINT_PTR cmdOffset = (UINT_PTR) p_pCommandInfo->lpVerb;
+#pragma warning(suppress: 26490) // No choice but to use reinterpret_cast because of Win32 API
+            const UINT_PTR cmdOffset = reinterpret_cast<UINT_PTR>(p_pCommandInfo->lpVerb);
             if ((cmdOffset & 0xFFFF0000) != 0) {
                 // We do not support verb invokation.
                 hRes = E_FAIL;
@@ -534,8 +539,8 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::InvokeCommand(
                 hRes = E_INVALIDARG;
             } else {
                 // Check which command it is that is invoked.
-                UINT_PTR cmdId = cmdOffset + *m_FirstCmdId;
-                CmdIdPluginM::const_iterator itId = m_mPluginsByCmdId.find(cmdId);
+                const UINT_PTR cmdId = cmdOffset + *m_FirstCmdId;
+                const auto itId = m_mPluginsByCmdId.find(cmdId);
                 if (itId == m_mPluginsByCmdId.end()) {
                     // This is not a recognized plugin command ID.
                     if (m_SettingsCmdId.has_value() && *m_SettingsCmdId == cmdId) {
@@ -577,6 +582,7 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::InvokeCommand(
 // @param p_BufferSize Max size of p_pBuffer, in characters.
 // @return S_OK if successful, otherwise an error code.
 //
+[[gsl::suppress(c.128)]]
 STDMETHODIMP CPathCopyCopyContextMenuExt::GetCommandString(
     UINT_PTR p_CmdId,
     UINT p_Flags,
@@ -604,15 +610,15 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::GetCommandString(
             }
         } else if (p_Flags == GCS_HELPTEXTA) {
             // Call this method to get the Unicode version.
-            std::unique_ptr<wchar_t[]> upwBuffer(new wchar_t[p_BufferSize]);
+            std::wstring buffer(p_BufferSize, L'\0');
             hRes = this->GetCommandString(p_CmdId,
                                           GCS_HELPTEXTW,
                                           p_pReserved,
-                                          reinterpret_cast<LPSTR>(upwBuffer.get()),
+                                          reinterpret_cast<LPSTR>(&*buffer.begin()),
                                           p_BufferSize);
             if (SUCCEEDED(hRes)) {
                 // Convert it to a single-byte string and return it.
-                ATL::CStringA aBuffer(upwBuffer.get());
+                ATL::CStringA aBuffer(buffer.c_str());
                 if (::strcpy_s(p_pBuffer, p_BufferSize, aBuffer) == 0) {
                     hRes = S_OK;
                 } else {
@@ -621,7 +627,7 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::GetCommandString(
             }
         } else if (p_Flags == GCS_HELPTEXTW) {
             // A Unicode help string is requested.
-            if (p_pBuffer != 0) {
+            if (p_pBuffer != nullptr) {
                 // Try finding the plugin that handles this command ID.
                 CmdIdPluginM::const_iterator it = m_mPluginsByCmdId.end();
                 if (m_FirstCmdId.has_value()) {
@@ -632,7 +638,7 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::GetCommandString(
                     std::wstring helpText = it->second->HelpText();
 
                     // Return help text.
-                    if (::wcscpy_s((LPWSTR) p_pBuffer, p_BufferSize, helpText.c_str()) != 0) {
+                    if (::wcscpy_s(reinterpret_cast<LPWSTR>(p_pBuffer), p_BufferSize, helpText.c_str()) != 0) {
                         hRes = E_FAIL;
                     }
                 } else {
@@ -640,13 +646,13 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::GetCommandString(
                     if (m_FirstCmdId.has_value() && m_SubMenuCmdId.has_value() && (*m_FirstCmdId + p_CmdId) == *m_SubMenuCmdId) {
                         // The sub-menu itself.
                         ATL::CStringW subMenuHint(MAKEINTRESOURCEW(IDS_PATH_COPY_HINT));
-                        if (::wcscpy_s((LPWSTR) p_pBuffer, p_BufferSize, subMenuHint) != 0) {
+                        if (::wcscpy_s(reinterpret_cast<LPWSTR>(p_pBuffer), p_BufferSize, subMenuHint) != 0) {
                             hRes = E_FAIL;
                         }
                     } else if (m_FirstCmdId.has_value() && m_SettingsCmdId.has_value() && (*m_FirstCmdId + p_CmdId) == *m_SettingsCmdId) {
                         // The item to open the settings application.
                         ATL::CStringW settingsHint(MAKEINTRESOURCEW(IDS_PCC_SETTINGS_HINT));
-                        if (::wcscpy_s((LPWSTR) p_pBuffer, p_BufferSize, settingsHint) != 0) {
+                        if (::wcscpy_s(reinterpret_cast<LPWSTR>(p_pBuffer), p_BufferSize, settingsHint) != 0) {
                             hRes = E_FAIL;
                         }
                     } else {
@@ -683,6 +689,27 @@ PCC::Settings& CPathCopyCopyContextMenuExt::GetSettings()
 }
 
 //
+// Returns the path of the parent directory of all selected files.
+//
+// @return Parent directory path.
+//
+std::wstring CPathCopyCopyContextMenuExt::GetParentPath() const
+{
+    std::wstring parentPath;
+
+    // Extract the parent path of the first file. We'll assume that all
+    // files have the same parent. This might not be strictly true in all
+    // cases (for example, in a custom shell view) but we're only using it
+    // for validation purposes, so it's good enough.
+    if (!m_vFiles.empty()) {
+        parentPath = m_vFiles.front();
+        PCC::PluginUtils::ExtractFolderFromPath(parentPath);
+    }
+
+    return parentPath;
+}
+
+//
 // Adds a new item to the given menu (either the main contextual menu or
 // our submenu can be used) and assigns the given plugin to it. This will
 // be called multiple times by the QueryContextMenu method to fill in the
@@ -714,7 +741,7 @@ HRESULT CPathCopyCopyContextMenuExt::AddPluginToMenu(const GUID& p_PluginId,
                                                      UINT& p_rPosition)
 {
     // Look for the plugin in the set of all plugins.
-    auto pluginIt = m_sspAllPlugins.find(p_PluginId);
+    const auto pluginIt = m_sspAllPlugins.find(p_PluginId);
 
     // If we have a plugin, continue.
     HRESULT hRes = E_INVALIDARG;
@@ -760,7 +787,7 @@ HRESULT CPathCopyCopyContextMenuExt::AddPluginToMenu(const PCC::PluginSP& p_spPl
     HRESULT hRes = S_OK;
 
     // Check if plugin should be enabled.
-    const bool enabled = p_spPlugin->Enabled(m_ParentPath, m_vFiles.front());
+    const bool enabled = p_spPlugin->Enabled(GetParentPath(), m_vFiles.front());
 
     // Compile info about the menu item using the plugin object.
     std::wstring description;
@@ -777,11 +804,11 @@ HRESULT CPathCopyCopyContextMenuExt::AddPluginToMenu(const PCC::PluginSP& p_spPl
         description = p_spPlugin->Description();
         if (p_DropRedundantWords && p_spPlugin->CanDropRedundantWords()) {
             ATL::CStringW redundantCopy(MAKEINTRESOURCEW(IDS_REDUNDANT_WORD_COPY));
-            if (description.size() >= static_cast<std::wstring::size_type>(redundantCopy.GetLength()) &&
-                ::_wcsnicmp(description.c_str(), (LPCWSTR) redundantCopy, static_cast<size_t>(redundantCopy.GetLength())) == 0) {
+            if (description.size() >= gsl::narrow_cast<std::wstring::size_type>(redundantCopy.GetLength()) &&
+                ::_wcsnicmp(description.c_str(), (LPCWSTR) redundantCopy, redundantCopy.GetLength()) == 0) {
 
                 // The description starts with "Copy ", drop it.
-                description.erase(0, static_cast<std::wstring::size_type>(redundantCopy.GetLength()));
+                description.erase(0, redundantCopy.GetLength());
             }
         }
         if (p_ComputeShortcut) {
@@ -794,8 +821,8 @@ HRESULT CPathCopyCopyContextMenuExt::AddPluginToMenu(const PCC::PluginSP& p_spPl
     menuItemInfo.fType = MFT_STRING;
     menuItemInfo.fState = enabled ? MFS_ENABLED : MFS_DISABLED;
     menuItemInfo.wID = p_rCmdId;
-    menuItemInfo.dwTypeData = const_cast<LPWSTR>(description.c_str());
-    HBITMAP hIconBitmap = NULL;
+    menuItemInfo.dwTypeData = description.data();
+    HBITMAP hIconBitmap = nullptr;
     if (p_UsePCCIcon || p_spPlugin->UseDefaultIcon()) {
         hIconBitmap = GetPCCIcon();
     } else {
@@ -813,7 +840,7 @@ HRESULT CPathCopyCopyContextMenuExt::AddPluginToMenu(const PCC::PluginSP& p_spPl
             }
         }
     }
-    if (hIconBitmap != NULL) {
+    if (hIconBitmap != nullptr) {
         menuItemInfo.fMask |= MIIM_BITMAP;
         menuItemInfo.hbmpItem = hIconBitmap;
     }
@@ -822,7 +849,7 @@ HRESULT CPathCopyCopyContextMenuExt::AddPluginToMenu(const PCC::PluginSP& p_spPl
     if (::InsertMenuItemW(p_hMenu, p_rPosition, TRUE, &menuItemInfo)) {
         m_mPluginsByCmdId[p_rCmdId] = p_spPlugin;
         if (!m_FirstCmdId.has_value()) {
-            m_FirstCmdId = static_cast<UINT_PTR>(p_rCmdId);
+            m_FirstCmdId = p_rCmdId;
         }
         ++p_rCmdId;
         ++p_rPosition;
@@ -845,27 +872,27 @@ std::wstring CPathCopyCopyContextMenuExt::GetMenuCaptionWithShortcut(HMENU const
 {
     // Scan provided menu and build a set of already-used shortcuts.
     std::set<wchar_t> shortcuts;
-    int itemsCount = ::GetMenuItemCount(p_hMenu);
+    const int itemsCount = ::GetMenuItemCount(p_hMenu);
     for (int i = 0; i < itemsCount; ++i) {
-        wchar_t buffer[1000];
+        std::wstring buffer(1000, L'\0');
         MENUITEMINFOW menuItemInfo;
         menuItemInfo.cbSize = sizeof(MENUITEMINFOW);
         menuItemInfo.fMask = MIIM_STRING | MIIM_STATE;
-        menuItemInfo.dwTypeData = buffer;
-        menuItemInfo.cch = sizeof(buffer) / sizeof(wchar_t);
+        menuItemInfo.dwTypeData = buffer.data();
+        menuItemInfo.cch = gsl::narrow<UINT>(buffer.size());
         if (::GetMenuItemInfoW(p_hMenu, i, TRUE, &menuItemInfo) && (menuItemInfo.fState & MFS_DISABLED) == 0) {
-            std::wstring menuItemCaption = menuItemInfo.dwTypeData;
-            auto shortcutCharIdx = menuItemCaption.find(L'&');
+            const std::wstring menuItemCaption = buffer.c_str();
+            const auto shortcutCharIdx = menuItemCaption.find(L'&');
             if (shortcutCharIdx != std::wstring::npos && shortcutCharIdx < (menuItemCaption.size() - 1)) {
-                shortcuts.insert(::towlower(menuItemCaption[shortcutCharIdx + 1]));
+                shortcuts.insert(::towlower(menuItemCaption.at(shortcutCharIdx + 1)));
             }
         }
     }
 
     // Check if the caption already has a shortcut. If it's available, keep it.
     std::wstring caption = p_Caption;
-    auto idx = caption.find(L'&');
-    if (idx == std::wstring::npos || idx == (caption.size() - 1) || shortcuts.find(::towlower(caption[idx + 1])) != shortcuts.end()) {
+    const auto idx = caption.find(L'&');
+    if (idx == std::wstring::npos || idx == (caption.size() - 1) || shortcuts.find(::towlower(caption.at(idx + 1))) != shortcuts.end()) {
         // No caption or can't use this caption.
         StringUtils::ReplaceAll(caption, L"&", L"");
 
@@ -893,23 +920,23 @@ HBITMAP CPathCopyCopyContextMenuExt::GetPCCIcon()
     if (m_spPCCIcon == nullptr) {
         // Load PNG resource.
         HRSRC hPngRsrcInfo = ::FindResourceW(CPathCopyCopyModule::HInstance(), MAKEINTRESOURCEW(IDB_PCCICON2), L"PNG");
-        if (hPngRsrcInfo != NULL) {
+        if (hPngRsrcInfo != nullptr) {
             HGLOBAL hPngRsrc = ::LoadResource(CPathCopyCopyModule::HInstance(), hPngRsrcInfo);
-            DWORD pngSize = ::SizeofResource(CPathCopyCopyModule::HInstance(), hPngRsrcInfo);
-            if (hPngRsrc != NULL && pngSize != 0) {
+            const DWORD pngSize = ::SizeofResource(CPathCopyCopyModule::HInstance(), hPngRsrcInfo);
+            if (hPngRsrc != nullptr && pngSize != 0) {
                 void* pPngData = ::LockResource(hPngRsrc);
                 if (pPngData != nullptr) {
                     // Store PNG data in a global block of memory.
                     StGlobalBlock globalPngData(GMEM_MOVEABLE, pngSize);
-                    if (globalPngData.Get() != NULL) {
+                    if (globalPngData.Get() != nullptr) {
                         StGlobalLock pngLock(globalPngData.Get());
                         if (pngLock.GetPtr() != nullptr) {
                             ::memcpy(pngLock.GetPtr(), pPngData, pngSize);
                         } else {
-                            globalPngData.Acquire(NULL);
+                            globalPngData.Acquire(nullptr);
                         }
                     }
-                    if (globalPngData.Get() != NULL) {
+                    if (globalPngData.Get() != nullptr) {
                         // Create IStream object on this HGLOBAL to be able to pass it to GDI+.
                         ATL::CComPtr<IStream> cpPngStream;
                         if (SUCCEEDED(::CreateStreamOnHGlobal(globalPngData.Get(), FALSE, &cpPngStream))) {
@@ -917,7 +944,7 @@ HBITMAP CPathCopyCopyContextMenuExt::GetPCCIcon()
                             StGdiplusStartup gdiPlusStartup;
                             if (gdiPlusStartup.Started()) {
                                 // Extract HBITMAP using GDI+.
-                                HBITMAP hPngBitmap = NULL;
+                                HBITMAP hPngBitmap = nullptr;
                                 Gdiplus::Bitmap pngBitmap(cpPngStream, FALSE);
                                 if (pngBitmap.GetHBITMAP(Gdiplus::Color(), &hPngBitmap) == Gdiplus::Ok) {
                                     // We have HBITMAP, save it in our member.
@@ -930,7 +957,7 @@ HBITMAP CPathCopyCopyContextMenuExt::GetPCCIcon()
             }
         }
     }
-    return (m_spPCCIcon != nullptr && m_spPCCIcon->GetLoadResult() == ERROR_SUCCESS) ? m_spPCCIcon->GetBitmap() : NULL;
+    return (m_spPCCIcon != nullptr && m_spPCCIcon->GetLoadResult() == ERROR_SUCCESS) ? m_spPCCIcon->GetBitmap() : nullptr;
 }
 
 //
@@ -943,7 +970,7 @@ HBITMAP CPathCopyCopyContextMenuExt::GetPCCIcon()
 HBITMAP CPathCopyCopyContextMenuExt::GetIconForIconFile(const std::wstring& p_IconFile)
 {
     // Assume we'll fail to locate an icon.
-    HBITMAP hIconBitmap = NULL;
+    HBITMAP hIconBitmap = nullptr;
 
     // Check if icon file was specified.
     if (!p_IconFile.empty()) {
@@ -954,8 +981,8 @@ HBITMAP CPathCopyCopyContextMenuExt::GetIconForIconFile(const std::wstring& p_Ic
         lowerIconFile.resize(p_IconFile.size());
         std::transform(p_IconFile.cbegin(), p_IconFile.cend(), lowerIconFile.begin(),
             [&](wchar_t p_Char) { return std::tolower(p_Char, ourLocale); });
-        IconFilesM::const_iterator foundIconFile = m_mspIcons.find(lowerIconFile);
-        if (foundIconFile != m_mspIcons.cend()) {
+        const auto foundIconFile = m_mspIcons.find(lowerIconFile);
+        if (foundIconFile != m_mspIcons.end()) {
             // We loaded this bitmap previously, return it again.
             const StImage& loadedImage = *foundIconFile->second;
             if (loadedImage.GetLoadResult() == ERROR_SUCCESS) {
@@ -973,15 +1000,15 @@ HBITMAP CPathCopyCopyContextMenuExt::GetIconForIconFile(const std::wstring& p_Ic
                 StGdiplusStartup gdiPlusStartup;
                 if (gdiPlusStartup.Started()) {
                     // Extract HBITMAP using GDI+.
-                    HBITMAP hFileBitmap = NULL;
+                    HBITMAP hFileBitmap = nullptr;
                     Gdiplus::Bitmap fileBitmap(cpIconFileStream, FALSE);
                     if (fileBitmap.GetHBITMAP(Gdiplus::Color(), &hFileBitmap) == Gdiplus::Ok) {
                         // We have HBITMAP, save it in the map.
-                        auto insertRes = m_mspIcons.insert(std::make_pair(lowerIconFile,
-                            StImageSP(new StImage(hFileBitmap, IMAGE_BITMAP, false))));
-                        const StImage& loadedImage = *insertRes.first->second;
-                        if (loadedImage.GetLoadResult() == ERROR_SUCCESS) {
-                            hIconBitmap = loadedImage.GetBitmap();
+#pragma warning(suppress: 26414) // spImage IS copied in emplace, but the compiler can't see it
+                        const auto spImage = std::make_shared<StImage>(hFileBitmap, IMAGE_BITMAP, false);
+                        m_mspIcons.emplace(lowerIconFile, spImage);
+                        if (spImage->GetLoadResult() == ERROR_SUCCESS) {
+                            hIconBitmap = spImage->GetBitmap();
                         }
                     }
                 }
@@ -1002,16 +1029,16 @@ HBITMAP CPathCopyCopyContextMenuExt::GetIconForIconFile(const std::wstring& p_Ic
 // @return Result code.
 //
 HRESULT CPathCopyCopyContextMenuExt::ActOnFiles(const PCC::PluginSP& p_spPlugin,
-                                                HWND p_hWnd)
+                                                HWND const p_hWnd)
 {
     HRESULT hRes = E_FAIL;
 
     if (p_spPlugin != nullptr) {
         // Loop through files and compute filenames using plugin.
-        bool addQuotes = GetSettings().GetAddQuotesAroundPaths();
-        bool areQuotesOptional = GetSettings().GetAreQuotesOptional();
-        bool makeEmailLinks = GetSettings().GetMakePathsIntoEmailLinks();
-        StringUtils::EncodeParam encodeParam = GetSettings().GetEncodeParam();
+        const bool addQuotes = GetSettings().GetAddQuotesAroundPaths();
+        const bool areQuotesOptional = GetSettings().GetAreQuotesOptional();
+        const bool makeEmailLinks = GetSettings().GetMakePathsIntoEmailLinks();
+        const StringUtils::EncodeParam encodeParam = GetSettings().GetEncodeParam();
         std::wstring pathsSeparator = p_spPlugin->PathsSeparator();
         if (pathsSeparator.empty()) {
             pathsSeparator = GetSettings().GetPathsSeparator();
@@ -1020,8 +1047,7 @@ HRESULT CPathCopyCopyContextMenuExt::ActOnFiles(const PCC::PluginSP& p_spPlugin,
             }
         }
         std::wstring newFiles;
-        PCC::FilesV::const_iterator it, end = m_vFiles.end();
-        for (it = m_vFiles.begin(); it != end; ++it) {
+        for (auto it = m_vFiles.cbegin(); it != m_vFiles.cend(); ++it) {
             // Ask plugin to compute filename using its scheme and save it.
             const std::wstring& oldName = *it;
             if (!newFiles.empty()) {
@@ -1083,13 +1109,9 @@ void CPathCopyCopyContextMenuExt::AddQuotes(std::wstring& p_rName,
 void CPathCopyCopyContextMenuExt::RemoveFromExtToMenu()
 {
     std::lock_guard<std::mutex> lock(s_ExtToMenusLock);
-    ExtToMenuPairV::iterator it, end = s_vExtToMenus.end();
-    for (it = s_vExtToMenus.begin(); it != end; ++it) {
-        if (it->first == this) {
-            s_vExtToMenus.erase(it);
-            break;
-        }
-    }
+    s_vExtToMenus.erase(std::remove_if(s_vExtToMenus.begin(), s_vExtToMenus.end(), [&](const auto& extToMenu) {
+        return extToMenu.first == this;
+    }), s_vExtToMenus.end());
 }
 
 //

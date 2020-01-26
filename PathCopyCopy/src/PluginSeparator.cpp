@@ -1,5 +1,5 @@
 // PluginSeparator.cpp
-// (c) 2008-2019, Charles Lechasseur
+// (c) 2008-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -33,19 +33,11 @@ namespace
 namespace PCC
 {
     //
-    // Constructor.
-    //
-    PluginSeparator::PluginSeparator()
-        : Plugin()
-    {
-    }
-
-    //
     // Returns the plugin's unique identifier.
     //
     // @return Unique identifier.
     //
-    const GUID& PluginSeparator::Id() const
+    const GUID& PluginSeparator::Id() const noexcept(false)
     {
         return PLUGIN_SEPARATOR_ID;
     }
@@ -77,7 +69,7 @@ namespace PCC
     //
     // @return true since we are a separator proxy.
     //
-    bool PluginSeparator::IsSeparator() const
+    bool PluginSeparator::IsSeparator() const noexcept
     {
         return true;
     }

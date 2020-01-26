@@ -1,5 +1,5 @@
 // InternetPathPlugin.h
-// (c) 2010-2019, Charles Lechasseur
+// (c) 2010-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -37,22 +37,22 @@ namespace PCC
         class InternetPathPlugin : public LongUNCPathPlugin
         {
         public:
-                                    InternetPathPlugin();
+                                    InternetPathPlugin() noexcept(false);
                                     InternetPathPlugin(const InternetPathPlugin&) = delete;
             InternetPathPlugin&     operator=(const InternetPathPlugin&) = delete;
 
-            virtual const GUID&     Id() const override;
+            const GUID&             Id() const noexcept(false) override;
 
-            virtual bool            Enabled(const std::wstring& p_ParentPath,
-                                            const std::wstring& p_File) const override;
+            bool                    Enabled(const std::wstring& p_ParentPath,
+                                            const std::wstring& p_File) const noexcept(false) override;
 
-            virtual std::wstring    GetPath(const std::wstring& p_File) const override;
+            std::wstring            GetPath(const std::wstring& p_File) const override;
 
         protected:
-                                    InternetPathPlugin(const unsigned short p_DescriptionStringResourceID,
-                                                       const unsigned short p_HelpTextStringResourceID);
+                                    InternetPathPlugin(unsigned short p_DescriptionStringResourceID,
+                                                       unsigned short p_HelpTextStringResourceID);
 
-            virtual bool            IsAndrogynous() const override;
+            bool                    IsAndrogynous() const noexcept(false) override;
         };
 
     } // namespace Plugins

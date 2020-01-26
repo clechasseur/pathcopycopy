@@ -13,8 +13,13 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null)) {
-                components.Dispose();
+            if (disposing) {
+                components?.Dispose();
+
+                // Dispose of temp pipeline plugins helper, which will
+                // remove all tracked plugins from registry.
+                tempPipelinePluginsHelper?.Dispose();
+                tempPipelinePluginsHelper = null;
             }
             base.Dispose(disposing);
         }
@@ -33,6 +38,7 @@
             this.CancelBtn = new System.Windows.Forms.Button();
             this.MainTabCtrl = new System.Windows.Forms.TabControl();
             this.PluginsPage = new System.Windows.Forms.TabPage();
+            this.PreviewCtrl = new PathCopyCopy.Settings.UI.UserControls.PluginPreviewUserControl();
             this.AddSeparatorBtn = new System.Windows.Forms.Button();
             this.ImportPipelinePluginsBtn = new System.Windows.Forms.Button();
             this.ExportPipelinePluginsBtn = new System.Windows.Forms.Button();
@@ -52,6 +58,7 @@
             this.PluginsDataGridBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.PluginsExplanationLbl = new System.Windows.Forms.Label();
             this.MiscOptionsPage = new System.Windows.Forms.TabPage();
+            this.TrueLnkPathsChk = new System.Windows.Forms.CheckBox();
             this.UsePreviewModeInMainMenuChk = new System.Windows.Forms.CheckBox();
             this.AppendSepForDirChk = new System.Windows.Forms.CheckBox();
             this.UseFQDNChk = new System.Windows.Forms.CheckBox();
@@ -85,7 +92,6 @@
             this.ExportUserSettingsSaveDlg = new System.Windows.Forms.SaveFileDialog();
             this.ExportUserSettingsBtn = new System.Windows.Forms.Button();
             this.MainToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.PreviewCtrl = new PathCopyCopy.Settings.UI.UserControls.PluginPreviewUserControl();
             this.MainTabCtrl.SuspendLayout();
             this.PluginsPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PluginsDataGrid)).BeginInit();
@@ -171,6 +177,16 @@
             this.PluginsPage.TabIndex = 1;
             this.PluginsPage.Text = "Commands";
             this.PluginsPage.UseVisualStyleBackColor = true;
+            // 
+            // PreviewCtrl
+            // 
+            this.PreviewCtrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.PreviewCtrl.Location = new System.Drawing.Point(9, 460);
+            this.PreviewCtrl.Name = "PreviewCtrl";
+            this.PreviewCtrl.Plugin = null;
+            this.PreviewCtrl.Size = new System.Drawing.Size(369, 53);
+            this.PreviewCtrl.TabIndex = 3;
             // 
             // AddSeparatorBtn
             // 
@@ -380,6 +396,7 @@
             // 
             // MiscOptionsPage
             // 
+            this.MiscOptionsPage.Controls.Add(this.TrueLnkPathsChk);
             this.MiscOptionsPage.Controls.Add(this.UsePreviewModeInMainMenuChk);
             this.MiscOptionsPage.Controls.Add(this.AppendSepForDirChk);
             this.MiscOptionsPage.Controls.Add(this.UseFQDNChk);
@@ -404,6 +421,18 @@
             this.MiscOptionsPage.TabIndex = 0;
             this.MiscOptionsPage.Text = "Options";
             this.MiscOptionsPage.UseVisualStyleBackColor = true;
+            // 
+            // TrueLnkPathsChk
+            // 
+            this.TrueLnkPathsChk.AutoSize = true;
+            this.TrueLnkPathsChk.Location = new System.Drawing.Point(6, 328);
+            this.TrueLnkPathsChk.Name = "TrueLnkPathsChk";
+            this.TrueLnkPathsChk.Size = new System.Drawing.Size(235, 17);
+            this.TrueLnkPathsChk.TabIndex = 14;
+            this.TrueLnkPathsChk.Text = "Copy paths of sh&ortcut (.lnk) files themselves";
+            this.MainToolTip.SetToolTip(this.TrueLnkPathsChk, "When copying path of a shortcut (.lnk) file, copy the path of the shortcut file i" +
+        "tself instead of the path of its target");
+            this.TrueLnkPathsChk.UseVisualStyleBackColor = true;
             // 
             // UsePreviewModeInMainMenuChk
             // 
@@ -461,10 +490,10 @@
             this.CtrlKeyPluginCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CtrlKeyPluginCombo.Enabled = false;
             this.CtrlKeyPluginCombo.FormattingEnabled = true;
-            this.CtrlKeyPluginCombo.Location = new System.Drawing.Point(25, 351);
+            this.CtrlKeyPluginCombo.Location = new System.Drawing.Point(25, 374);
             this.CtrlKeyPluginCombo.Name = "CtrlKeyPluginCombo";
             this.CtrlKeyPluginCombo.Size = new System.Drawing.Size(399, 21);
-            this.CtrlKeyPluginCombo.TabIndex = 15;
+            this.CtrlKeyPluginCombo.TabIndex = 16;
             this.MainToolTip.SetToolTip(this.CtrlKeyPluginCombo, "Command to use automatically when user holds down the Ctrl key when Explorer\'s co" +
         "ntextual menu is shown");
             this.CtrlKeyPluginCombo.ValueMember = "Plugin";
@@ -473,10 +502,10 @@
             // CtrlKeyPluginChk
             // 
             this.CtrlKeyPluginChk.AutoSize = true;
-            this.CtrlKeyPluginChk.Location = new System.Drawing.Point(6, 328);
+            this.CtrlKeyPluginChk.Location = new System.Drawing.Point(6, 351);
             this.CtrlKeyPluginChk.Name = "CtrlKeyPluginChk";
             this.CtrlKeyPluginChk.Size = new System.Drawing.Size(418, 17);
-            this.CtrlKeyPluginChk.TabIndex = 14;
+            this.CtrlKeyPluginChk.TabIndex = 15;
             this.CtrlKeyPluginChk.Text = "When user holds down Ctrl &key when opening contextual menu, use this command:";
             this.MainToolTip.SetToolTip(this.CtrlKeyPluginChk, "Choose a command to use automatically when user holds down the Ctrl key when Expl" +
         "orer\'s contextual menu is shown");
@@ -570,10 +599,10 @@
             // EnableSoftwareUpdateChk
             // 
             this.EnableSoftwareUpdateChk.AutoSize = true;
-            this.EnableSoftwareUpdateChk.Location = new System.Drawing.Point(6, 378);
+            this.EnableSoftwareUpdateChk.Location = new System.Drawing.Point(6, 401);
             this.EnableSoftwareUpdateChk.Name = "EnableSoftwareUpdateChk";
             this.EnableSoftwareUpdateChk.Size = new System.Drawing.Size(177, 17);
-            this.EnableSoftwareUpdateChk.TabIndex = 16;
+            this.EnableSoftwareUpdateChk.TabIndex = 17;
             this.EnableSoftwareUpdateChk.Text = "Check for &updates automatically";
             this.MainToolTip.SetToolTip(this.EnableSoftwareUpdateChk, "Automatically check for new versions of Path Copy Copy and offer them when they a" +
         "re released");
@@ -789,16 +818,6 @@
             this.ExportUserSettingsBtn.UseVisualStyleBackColor = true;
             this.ExportUserSettingsBtn.Click += new System.EventHandler(this.ExportUserSettingsBtn_Click);
             // 
-            // PreviewCtrl
-            // 
-            this.PreviewCtrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.PreviewCtrl.Location = new System.Drawing.Point(9, 460);
-            this.PreviewCtrl.Name = "PreviewCtrl";
-            this.PreviewCtrl.Plugin = null;
-            this.PreviewCtrl.Size = new System.Drawing.Size(369, 53);
-            this.PreviewCtrl.TabIndex = 3;
-            // 
             // MainForm
             // 
             this.AcceptButton = this.OKBtn;
@@ -822,10 +841,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Path Copy Copy";
             this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.MainForm_HelpButtonClicked);
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
-            this.LocationChanged += new System.EventHandler(this.MainForm_LocationChanged);
-            this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);
             this.MainTabCtrl.ResumeLayout(false);
             this.PluginsPage.ResumeLayout(false);
             this.PluginsPage.PerformLayout();
@@ -901,6 +917,7 @@
         private System.Windows.Forms.BindingSource PluginsDataGridBindingSource;
         private System.Windows.Forms.BindingSource CtrlKeyPluginComboBindingSource;
         private UserControls.PluginPreviewUserControl PreviewCtrl;
+        private System.Windows.Forms.CheckBox TrueLnkPathsChk;
     }
 }
 

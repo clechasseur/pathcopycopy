@@ -1,5 +1,5 @@
 // targetver.h
-// (c) 2014-2019, Charles Lechasseur
+// (c) 2014-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -28,8 +28,8 @@
 
 #include <WinSDKVer.h>
 
-// Minimum platform: Windows XP
-#define WINVER 0x0501
-#define _WIN32_WINNT 0x0501
+// Minimum platform: Windows Vista
+#define WINVER 0x0600
+#define _WIN32_WINNT 0x0600
 
 #include <SDKDDKVer.h>

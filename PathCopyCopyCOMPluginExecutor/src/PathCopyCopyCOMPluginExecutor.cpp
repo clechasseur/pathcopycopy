@@ -1,5 +1,5 @@
 // PathCopyCopyCOMPluginExecutor.cpp
-// (c) 2014-2019, Charles Lechasseur
+// (c) 2014-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include "stdafx.h"
+#include <stdafx.h>
 
 #include <StCoInitialize.h>
 #include <PathCopyCopy_i.h>
@@ -41,6 +41,7 @@ int GetUseDefaultIcon(IPathCopyCopyPlugin* p_pPlugin, std::wstring& p_rOutput);
 // @param argv Array of command-line arguments
 // @return Process exit code
 //
+#pragma warning(suppress: 26485) // Not sure what to do with this one, this is generated code
 int wmain(int /*argc*/, wchar_t* /*argv*/[])
 {
     // Assume we'll fail.
@@ -111,12 +112,13 @@ int wmain(int /*argc*/, wchar_t* /*argv*/[])
 //
 int GetDescription(IPathCopyCopyPlugin* p_pPlugin, std::wstring& p_rOutput)
 {
-    assert(p_pPlugin != nullptr);
     assert(p_rOutput.empty());
 
-    ATL::CComBSTR bstrDescription;
-    if (SUCCEEDED(p_pPlugin->get_Description(&bstrDescription)) && bstrDescription != NULL) {
-        p_rOutput = bstrDescription.m_str;
+    if (p_pPlugin != nullptr) {
+        ATL::CComBSTR bstrDescription;
+        if (SUCCEEDED(p_pPlugin->get_Description(&bstrDescription)) && bstrDescription != nullptr) {
+            p_rOutput = bstrDescription.m_str;
+        }
     }
     
     return 0;
@@ -131,12 +133,13 @@ int GetDescription(IPathCopyCopyPlugin* p_pPlugin, std::wstring& p_rOutput)
 //
 int GetHelpText(IPathCopyCopyPlugin* p_pPlugin, std::wstring& p_rOutput)
 {
-    assert(p_pPlugin != nullptr);
     assert(p_rOutput.empty());
 
-    ATL::CComBSTR bstrHelpText;
-    if (SUCCEEDED(p_pPlugin->get_HelpText(&bstrHelpText)) && bstrHelpText != NULL) {
-        p_rOutput = bstrHelpText.m_str;
+    if (p_pPlugin != nullptr) {
+        ATL::CComBSTR bstrHelpText;
+        if (SUCCEEDED(p_pPlugin->get_HelpText(&bstrHelpText)) && bstrHelpText != nullptr) {
+            p_rOutput = bstrHelpText.m_str;
+        }
     }
     
     return 0;
@@ -151,7 +154,6 @@ int GetHelpText(IPathCopyCopyPlugin* p_pPlugin, std::wstring& p_rOutput)
 //
 int GetGroupId(IPathCopyCopyPlugin* p_pPlugin, std::wstring& p_rOutput)
 {
-    assert(p_pPlugin != nullptr);
     assert(p_rOutput.empty());
 
     // Ask for the group state interface. If it's not supported or if the
@@ -178,7 +180,6 @@ int GetGroupId(IPathCopyCopyPlugin* p_pPlugin, std::wstring& p_rOutput)
 //
 int GetGroupPosition(IPathCopyCopyPlugin* p_pPlugin, std::wstring& p_rOutput)
 {
-    assert(p_pPlugin != nullptr);
     assert(p_rOutput.empty());
 
     // Ask for the group state interface. If it's not supported or if the
@@ -205,7 +206,6 @@ int GetGroupPosition(IPathCopyCopyPlugin* p_pPlugin, std::wstring& p_rOutput)
 //
 int GetIconFile(IPathCopyCopyPlugin* p_pPlugin, std::wstring& p_rOutput)
 {
-    assert(p_pPlugin != nullptr);
     assert(p_rOutput.empty());
 
     // Ask for the icon state interface. If it's not supported or if the
@@ -213,7 +213,7 @@ int GetIconFile(IPathCopyCopyPlugin* p_pPlugin, std::wstring& p_rOutput)
     ATL::CComQIPtr<IPathCopyCopyPluginIconInfo> cpPluginIconInfo(p_pPlugin);
     if (cpPluginIconInfo.p != nullptr) {
         ATL::CComBSTR bstrIconFile;
-        if (SUCCEEDED(cpPluginIconInfo->get_IconFile(&bstrIconFile)) && bstrIconFile != NULL) {
+        if (SUCCEEDED(cpPluginIconInfo->get_IconFile(&bstrIconFile)) && bstrIconFile != nullptr) {
             p_rOutput = bstrIconFile.m_str;
         }
     }
@@ -230,7 +230,6 @@ int GetIconFile(IPathCopyCopyPlugin* p_pPlugin, std::wstring& p_rOutput)
 //
 int GetUseDefaultIcon(IPathCopyCopyPlugin* p_pPlugin, std::wstring& p_rOutput)
 {
-    assert(p_pPlugin != nullptr);
     assert(p_rOutput.empty());
 
     // Ask for the icon state interface. If it's not supported or if the

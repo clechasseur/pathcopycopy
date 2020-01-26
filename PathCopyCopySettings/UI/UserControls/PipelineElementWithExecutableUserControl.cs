@@ -1,5 +1,5 @@
 ﻿// PipelineElementWithExecutableUserControl.cs
-// (c) 2019, Charles Lechasseur
+// (c) 2019-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -33,7 +33,7 @@ namespace PathCopyCopy.Settings.UI.UserControls
     public partial class PipelineElementWithExecutableUserControl : PipelineElementUserControl
     {
         /// Element we're configuring.
-        private PipelineElementWithExecutable element;
+        private readonly PipelineElementWithExecutable element;
 
         /// <summary>
         /// Constructor.
@@ -82,7 +82,7 @@ namespace PathCopyCopy.Settings.UI.UserControls
             try {
                 ChooseExecutableOpenDlg.InitialDirectory = Path.GetDirectoryName(ExecutableTxt.Text);
                 ChooseExecutableOpenDlg.FileName = Path.GetFileName(ExecutableTxt.Text);
-            } catch {
+            } catch (ArgumentException) {
                 // Bad format or something, simply don't use.
             }
             if (ChooseExecutableOpenDlg.ShowDialog(this) == DialogResult.OK) {

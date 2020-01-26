@@ -1,5 +1,5 @@
 // StImage.h
-// (c) 2013-2019, Charles Lechasseur
+// (c) 2013-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -56,13 +56,16 @@ public:
                                 const UINT p_ImageType,
                                 const int p_DesiredX,
                                 const int p_DesiredY,
-                                const UINT p_LoadFlags)
+                                const UINT p_LoadFlags) noexcept
                             : m_hImage(::LoadImage(p_hImageModule, p_pImageNameOrId, p_ImageType, p_DesiredX, p_DesiredY, p_LoadFlags)),
                               m_Type(p_ImageType),
                               m_Shared((p_LoadFlags & LR_SHARED) != 0),
-                              m_LoadResult(m_hImage != NULL ? ERROR_SUCCESS : ::GetLastError())
+                              m_LoadResult(m_hImage != nullptr ? ERROR_SUCCESS : ::GetLastError())
                         {
                         }
+
+#pragma warning(push)
+#pragma warning(disable: 26814) // Compiler thinks m_LoadResult could be constexpr, it can't
 
                         //
                         // Constructor that assumes ownership of a bitmap handle.
@@ -74,30 +77,34 @@ public:
                         //
                         StImage(HANDLE const p_hImage,
                                 const UINT p_ImageType,
-                                const bool p_Shared)
+                                const bool p_Shared) noexcept
                             : m_hImage(p_hImage),
                               m_Type(p_ImageType),
                               m_Shared(p_Shared),
                               m_LoadResult(ERROR_SUCCESS)
                         {
-                            assert(p_hImage != NULL);
+                            assert(p_hImage != nullptr);
                         }
 
+#pragma warning(pop)
+
                         //
-                        // Copying not supported.
+                        // Copying/moving not supported.
                         //
                         StImage(const StImage&) = delete;
+                        StImage(StImage&&) = delete;
     StImage&            operator=(const StImage&) = delete;
+    StImage&            operator=(StImage&&) = delete;
 
                         //
                         // Destructor. Takes care of disposing of the image handle if needed.
                         //
                         ~StImage()
                         {
-                            if (m_hImage != NULL && !m_Shared) {
+                            if (m_hImage != nullptr && !m_Shared) {
                                 switch (m_Type) {
                                     case IMAGE_BITMAP: {
-                                        ::DeleteObject(static_cast<HGDIOBJ>(m_hImage));
+                                        ::DeleteObject(m_hImage);
                                         break;
                                     }
                                     case IMAGE_CURSOR: {
@@ -119,7 +126,7 @@ public:
                         //
                         // @return Image handle.
                         //
-    HANDLE              Get() const
+    HANDLE              Get() const noexcept
                         {
                             return m_hImage;
                         }
@@ -130,7 +137,7 @@ public:
                         //
                         // @return Bitmap handle.
                         //
-    HBITMAP             GetBitmap() const
+    HBITMAP             GetBitmap() const noexcept
                         {
                             assert(m_Type == IMAGE_BITMAP);
                             return static_cast<HBITMAP>(m_hImage);
@@ -142,7 +149,7 @@ public:
                         //
                         // @return Cursor handle.
                         //
-    HCURSOR             GetCursor() const
+    HCURSOR             GetCursor() const noexcept
                         {
                             assert(m_Type == IMAGE_CURSOR);
                             return static_cast<HCURSOR>(m_hImage);
@@ -154,7 +161,7 @@ public:
                         //
                         // @return Icon handle.
                         //
-    HICON               GetIcon() const
+    HICON               GetIcon() const noexcept
                         {
                             assert(m_Type == IMAGE_ICON);
                             return static_cast<HICON>(m_hImage);
@@ -165,7 +172,7 @@ public:
                         //
                         // @return Image type. Corresponds to an IMAGE_ macro (IMAGE_BITMAP, etc.)
                         //
-    UINT                GetType() const
+    UINT                GetType() const noexcept
                         {
                             return m_Type;
                         }
@@ -176,7 +183,7 @@ public:
                         //
                         // @return true if the image handle was loaded with LR_SHARED
                         //
-    bool                IsShared() const
+    bool                IsShared() const noexcept
                         {
                             return m_Shared;
                         }
@@ -187,14 +194,14 @@ public:
                         //
                         // @return Result code.
                         //
-    DWORD               GetLoadResult() const
+    DWORD               GetLoadResult() const noexcept
                         {
                             return m_LoadResult;
                         }
 
 private:
-    HANDLE              m_hImage;       // Handle of image.
-    UINT                m_Type;         // Type of image.
-    bool                m_Shared;       // Whether image has been loader with LR_SHARED.
-    DWORD               m_LoadResult;   // Result of LoadImage call, if any.
+    HANDLE const        m_hImage;       // Handle of image.
+    const UINT          m_Type;         // Type of image.
+    const bool          m_Shared;       // Whether image has been loader with LR_SHARED.
+    const DWORD         m_LoadResult;   // Result of LoadImage call, if any.
 };

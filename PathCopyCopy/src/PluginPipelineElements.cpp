@@ -1,5 +1,5 @@
 // PluginPipelineElements.cpp
-// (c) 2011-2019, Charles Lechasseur
+// (c) 2011-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,9 @@
 
 #include <stdafx.h>
 #include <PluginPipelineElements.h>
+#include <PipelinePlugin.h>
 #include <Plugin.h>
+#include <PluginUtils.h>
 #include <StringUtils.h>
 
 #include <algorithm>
@@ -31,11 +33,16 @@
 namespace PCC
 {
     //
-    // Constructor.
+    // Modifies the given path by following the symlink if it
+    // points to one.
     //
-    QuotesPipelineElement::QuotesPipelineElement()
-        : PipelineElement()
+    // @param p_rPath Path to modify (in-place).
+    // @param p_pPluginProvider Optional object to access plugins.
+    //
+    void FollowSymlinkPipelineElement::ModifyPath(std::wstring& p_rPath,
+                                                  const PluginProvider* const /*p_pPluginProvider*/) const
     {
+        PluginUtils::FollowSymlinkIfRequired(p_rPath);
     }
 
     //
@@ -49,14 +56,6 @@ namespace PCC
     {
         p_rPath.insert(p_rPath.begin(), 1, L'\"');
         p_rPath.append(1, L'\"');
-    }
-
-    //
-    // Constructor.
-    //
-    OptionalQuotesPipelineElement::OptionalQuotesPipelineElement()
-        : PipelineElement()
-    {
     }
 
     //
@@ -76,14 +75,6 @@ namespace PCC
     }
 
     //
-    // Constructor.
-    //
-    EmailLinksPipelineElement::EmailLinksPipelineElement()
-        : PipelineElement()
-    {
-    }
-
-    //
     // Modifies the given path by turning it into an e-mail link.
     //
     // @param p_rPath Path to modify (in-place).
@@ -94,14 +85,6 @@ namespace PCC
     {
         p_rPath.insert(p_rPath.begin(), 1, L'<');
         p_rPath.append(1, L'>');
-    }
-
-    //
-    // Constructor.
-    //
-    EncodeURIWhitespacePipelineElement::EncodeURIWhitespacePipelineElement()
-        : PipelineElement()
-    {
     }
 
     //
@@ -117,14 +100,6 @@ namespace PCC
     }
 
     //
-    // Constructor.
-    //
-    EncodeURICharsPipelineElement::EncodeURICharsPipelineElement()
-        : PipelineElement()
-    {
-    }
-
-    //
     // Modifies the given path by encoding invalid URI characters.
     //
     // @param p_rPath Path to modify (in-place).
@@ -134,14 +109,6 @@ namespace PCC
                                                    const PluginProvider* const /*p_pPluginProvider*/) const
     {
         StringUtils::EncodeURICharacters(p_rPath, StringUtils::EncodeParam::All);
-    }
-
-    //
-    // Constructor.
-    //
-    BackToForwardSlashesPipelineElement::BackToForwardSlashesPipelineElement()
-        : PipelineElement()
-    {
     }
 
     //
@@ -157,14 +124,6 @@ namespace PCC
     }
 
     //
-    // Constructor.
-    //
-    ForwardToBackslashesPipelineElement::ForwardToBackslashesPipelineElement()
-        : PipelineElement()
-    {
-    }
-
-    //
     // Modifies the given path by replacing all forward slashes by backslashes.
     //
     // @param p_rPath Path to modify (in-place).
@@ -177,14 +136,6 @@ namespace PCC
     }
 
     //
-    // Constructor.
-    //
-    RemoveFileExtPipelineElement::RemoveFileExtPipelineElement()
-        : PipelineElement()
-    {
-    }
-
-    //
     // Modified our path by removing any file extension at the end of it.
     //
     // @param p_rPath Path to modify (in-place).
@@ -193,7 +144,7 @@ namespace PCC
     void RemoveFileExtPipelineElement::ModifyPath(std::wstring& p_rPath,
                                                   const PluginProvider* const /*p_pPluginProvider*/) const
     {
-        std::wregex extRegex(L"^(.*[^\\\\/])(?:\\.[^\\\\/.]+)$", std::regex_constants::ECMAScript);
+        const std::wregex extRegex(L"^(.*[^\\\\/])(?:\\.[^\\\\/.]+)$", std::regex_constants::ECMAScript);
         p_rPath = std::regex_replace(p_rPath, extRegex, L"$1");
     }
 
@@ -299,6 +250,7 @@ namespace PCC
             // Try creating regex. Keep null if the regex is invalid.
             try {
                 if (!m_Regex.empty()) {
+#pragma warning(suppress: 26812)    // std::regex_constants::syntax_option_type could be enum class
                     std::regex_constants::syntax_option_type reOptions = std::regex_constants::ECMAScript;
                     if (m_IgnoreCase) {
                         reOptions |= std::regex_constants::icase;
@@ -313,14 +265,53 @@ namespace PCC
     }
 
     //
+    // Modifies the given path by replacing certain parts of the
+    // path by environment variable references. See
+    // https://docs.microsoft.com/en-us/windows/win32/api/shlwapi/nf-shlwapi-pathunexpandenvstringsw
+    //
+    // @param p_rPath Path to modify (in-place).
+    // @param p_pPluginProvider Optional object to access plugins.
+    //
+    void UnexpandEnvironmentStringsPipelineElement::ModifyPath(std::wstring& p_rPath,
+                                                               const PluginProvider* const /*p_pPluginProvider*/) const
+    {
+        std::wstring unexpandedPath(MAX_PATH + 1, L'\0');
+        if (::PathUnExpandEnvStringsW(p_rPath.c_str(), &*unexpandedPath.begin(), MAX_PATH + 1)) {
+            p_rPath = unexpandedPath.c_str();
+        }
+    }
+
+    //
     // Constructor.
     //
     // @param p_PluginId ID of plugin to apply.
     //
-    ApplyPluginPipelineElement::ApplyPluginPipelineElement(const GUID& p_PluginId)
+    ApplyPluginPipelineElement::ApplyPluginPipelineElement(const GUID& p_PluginId) noexcept
         : PipelineElement(),
           m_PluginId(p_PluginId)
     {
+    }
+
+    //
+    // Validates this pipeline element. In order to be valid,
+    // the plugin to apply must exist.
+    //
+    // @param p_pPluginProvider Plugin provider used to fetch plugins.
+    // @param p_rsSeenPluginIds Set used to store seen plugin IDs. Any
+    //                          collision means a loop is detected and
+    //                          pipeline element is invalid.
+    //
+    void ApplyPluginPipelineElement::Validate(const PluginProvider* const p_pPluginProvider,
+                                              GUIDS& p_rsSeenPluginIds) const
+    {
+        PipelineElement::Validate(p_pPluginProvider, p_rsSeenPluginIds);
+
+        if (p_pPluginProvider == nullptr) {
+            throw InvalidPipelineException();
+        }
+        if (p_pPluginProvider->GetPlugin(m_PluginId) == nullptr) {
+            throw InvalidPipelineException(ATL::CStringA(MAKEINTRESOURCEA(IDS_INVALIDPIPELINE_BASE_COMMAND_NOT_FOUND)));
+        }
     }
 
     //
@@ -371,6 +362,40 @@ namespace PCC
     //
     // Constructor.
     //
+    // @param p_PluginId ID of pipeline plugin to apply.
+    //
+    ApplyPipelinePluginPipelineElement::ApplyPipelinePluginPipelineElement(const GUID& p_PluginId) noexcept
+        : ApplyPluginPipelineElement(p_PluginId)
+    {
+    }
+
+    //
+    // Validates this pipeline element. In order to be valid,
+    // it must not include a loop of pipeline elements.
+    //
+    // @param p_pPluginProvider Plugin provider used to fetch plugins.
+    // @param p_rsSeenPluginIds Set used to store seen plugin IDs. Any
+    //                          collision means a loop is detected and
+    //                          pipeline element is invalid.
+    //
+    [[gsl::suppress(f.23)]]
+    void ApplyPipelinePluginPipelineElement::Validate(const PluginProvider* const p_pPluginProvider,
+                                                      GUIDS& p_rsSeenPluginIds) const
+    {
+        ApplyPluginPipelineElement::Validate(p_pPluginProvider, p_rsSeenPluginIds);
+
+        // To be valid, plugin either has to not be a pipeline plugin
+        // OR it needs to have a valid pipeline.
+        const auto spPlugin = p_pPluginProvider->GetPlugin(m_PluginId);
+        const auto* const pPipelinePlugin = dynamic_cast<PCC::Plugins::PipelinePlugin*>(spPlugin.get());
+        if (pPipelinePlugin != nullptr && pPipelinePlugin->GetPipeline(&p_rsSeenPluginIds) == nullptr) {
+            throw InvalidPipelineException(pPipelinePlugin->GetPipelineError().c_str());
+        }
+    }
+
+    //
+    // Constructor.
+    //
     // @param p_PathsSeparator Separator to use between multiple paths.
     //
     PathsSeparatorPipelineElement::PathsSeparatorPipelineElement(const std::wstring& p_PathsSeparator)
@@ -386,7 +411,7 @@ namespace PCC
     // @param p_pPluginProvider Optional object to access plugins.
     //
     void PathsSeparatorPipelineElement::ModifyPath(std::wstring& /*p_rPath*/,
-                                                   const PluginProvider* const /*p_pPluginProvider*/) const
+                                                   const PluginProvider* const /*p_pPluginProvider*/) const noexcept(false)
     {
     }
 
@@ -419,7 +444,7 @@ namespace PCC
     // @param p_pPluginProvider Optional object to access plugins.
     //
     void ExecutablePipelineElement::ModifyPath(std::wstring& /*p_rPath*/,
-                                               const PluginProvider* const /*p_pPluginProvider*/) const
+                                               const PluginProvider* const /*p_pPluginProvider*/) const noexcept(false)
     {
     }
 

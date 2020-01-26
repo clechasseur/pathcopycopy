@@ -1,5 +1,5 @@
 // MSYSPathPlugin.cpp
-// (c) 2019, Charles Lechasseur
+// (c) 2019-2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -42,7 +42,7 @@ namespace PCC
         //
         // Constructor.
         //
-        MSYSPathPlugin::MSYSPathPlugin()
+        MSYSPathPlugin::MSYSPathPlugin() noexcept(false)
             : UnixPathPlugin(IDS_MSYS_PATH_PLUGIN_DESCRIPTION, IDS_MSYS_PATH_PLUGIN_HINT)
         {
         }
@@ -52,7 +52,7 @@ namespace PCC
         //
         // @return Unique identifier.
         //
-        const GUID& MSYSPathPlugin::Id() const
+        const GUID& MSYSPathPlugin::Id() const noexcept(false)
         {
             return MSYS_PATH_PLUGIN_ID;
         }
@@ -70,11 +70,12 @@ namespace PCC
 
             // Check if the file begins with a drive letter. If so,
             // remove the drive letter and replace it with /letter.
-            if (path.size() >= 3 && path[1] == L':') {
+            [[gsl::suppress(type.4)]] // Compiler considers foo{bar} to be a C-style cast
+            if (path.size() >= 3 && path.at(1) == L':') {
                 std::wstringstream newPathSS;
-                newPathSS << L"/"                                       // The prefix
-                          << static_cast<wchar_t>(::towlower(path[0]))  // Drive letter
-                          << path.substr(2);                            // Rest of the path, including the slash after that : we had.
+                newPathSS << L"/"                               // The prefix
+                          << wchar_t{::towlower(path.front())}  // Drive letter
+                          << path.substr(2);                    // Rest of the path, including the slash after that : we had.
                 path = newPathSS.str();
             }
 
