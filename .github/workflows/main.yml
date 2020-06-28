@@ -10,6 +10,13 @@ jobs:
     - uses: microsoft/setup-msbuild@v1
     - name: Restore NuGet packages
       run: nuget restore
-    - name: Build all platforms and targets
-      run: |
-        msbuild /p:Platform=Win32 /p:Configuration=Debug PathCopyCopy.sln
+    - name: Build Debug Win32
+      run: msbuild /p:Platform=Win32 /p:Configuration=Debug PathCopyCopy.sln
+    - name: Build Debug x64
+      run: msbuild /p:Platform=x64 /p:Configuration=Debug PathCopyCopy.sln
+    - name: Build Release Win32
+      run: msbuild /p:Platform=Win32 /p:Configuration=Release PathCopyCopy.sln
+    - name: Build Release x64
+      run: msbuild /p:Platform=x64 /p:Configuration=Release PathCopyCopy.sln
+    - name: Build Installer
+      run: iscc /O+ /F"PathCopyCopy$GITHUB_SHA" /DSIGNCODE=0 "Installer\Setup.iss"
