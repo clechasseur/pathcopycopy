@@ -1,0 +1,15 @@
+name: CI
+
+on: [ push, pull_request ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: microsoft/setup-msbuild@v1
+    - name: Restore NuGet packages
+      run: nuget restore
+    - name: Build all platforms and targets
+      run: |
+        msbuild /p:Platform=Win32 /p:Configuration=Debug PathCopyCopy.sln
