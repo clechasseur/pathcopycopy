@@ -27,7 +27,9 @@
 #define MyAppCopyright "(c) 2008-2020, Charles Lechasseur. See LICENSE.TXT for details."
 
 ; Set this to 0 to avoid signing the resulting executable.
+#ifndef SIGNCODE
 #define SIGNCODE 1
+#endif
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
