@@ -21,6 +21,13 @@
 
 #pragma once
 
+// Including this header allows us to suppress C++ Core Guideline warnings more easily
+#include <CppCoreCheck\warnings.h>
+
+// Disable C++ Core checks warnings in library headers since we don't control them
+#pragma warning(push)
+#pragma warning(disable: ALL_CPPCORECHECK_WARNINGS)
+
 #ifndef STRICT
 #define STRICT
 #endif
@@ -68,17 +75,12 @@
 #include <assert.h>
 #include <memory.h>
 
-#include "PathCopyCopyPrivateTypes.h"
-
 #include <resource.h>
-
-// Including this header allows us to suppress C++ Core Guideline warnings more easily
-#include <CppCoreCheck\warnings.h>
 
 #include <gsl/gsl>
 
-// Disable C++ Core checks warnings in coveo::linq since it seems to generate a lot
-#pragma warning(push)
-#pragma warning(disable: ALL_CPPCORECHECK_WARNINGS)
 #include <coveo/linq.h>
-#pragma warning(pop)
+
+#pragma warning(pop) // core checks in library headers
+
+#include "PathCopyCopyPrivateTypes.h"
