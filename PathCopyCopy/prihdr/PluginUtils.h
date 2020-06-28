@@ -30,6 +30,8 @@
 
 #include <windows.h>
 
+#include <coveo/enumerable.h>
+
 
 namespace PCC
 {
@@ -47,6 +49,8 @@ namespace PCC
         static bool     IsDirectory(const std::wstring& p_Path) noexcept;
 
         static bool     ExtractFolderFromPath(std::wstring& p_rPath);
+        static coveo::enumerable<const std::wstring>
+                        EnumerateParents(const std::wstring& p_Path);
         static bool     FollowSymlinkIfRequired(std::wstring& p_rPath);
 
         static bool     IsUNCPath(const std::wstring& p_FilePath) noexcept;

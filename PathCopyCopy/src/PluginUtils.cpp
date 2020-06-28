@@ -36,6 +36,8 @@
 #include <comutil.h>
 #include <lm.h>
 
+#include <coveo/linq.h>
+
 
 namespace
 {
@@ -106,22 +108,48 @@ namespace PCC
     }
 
     //
-    // If the provided path points to a symbolic link, follow
-    // the symlink and return the path to its target.
+    // Returns an enumerable for a path's parents, in reverse order.
+    // So if, for instance, is called with "C:\Program Files\Path Copy Copy\PCC32.dll", would return
+    //
+    // C:\Program Files\Path Copy Copy
+    // C:\Program Files
+    // C:\
+    //
+    // @param p_Path Path to enumerate the parents of.
+    // @return Enumerable for the path's parents.
+    //
+    coveo::enumerable<const std::wstring> PluginUtils::EnumerateParents(const std::wstring& p_Path)
+    {
+        return coveo::enumerable<const std::wstring>([path = p_Path]() mutable -> const std::wstring* {
+                                                        const auto prevPath = path;
+                                                        const auto hasParent = PluginUtils::ExtractFolderFromPath(path);
+                                                        return hasParent && path != prevPath ? &path : nullptr;
+                                                     });
+    }
+
+    //
+    // If the provided path or one of its parents points to a symbolic link,
+    // follow the symlink and return the path to its target.
     //
     // @param p_rPath Path to follow symlink for, if required.
-    // @return true if p_rPath pointed to a symlink.
+    // @return true if p_rPath or one of its parents pointed to a symlink.
     //
     bool PluginUtils::FollowSymlinkIfRequired(std::wstring& p_rPath)
     {
-        // Check if path points to a symlink.
-        const auto attributes = ::GetFileAttributesW(p_rPath.c_str());
-        const bool symlink = attributes != INVALID_FILE_ATTRIBUTES &&
-                             (attributes & FILE_ATTRIBUTE_REPARSE_POINT) != 0;
+        using namespace coveo::linq;
+
+        // Check if path or one of its parent points to a symlink.
+        const auto isSymlink = [](const std::wstring& path) {
+            const auto attributes = ::GetFileAttributesW(path.c_str());
+            return attributes != INVALID_FILE_ATTRIBUTES && (attributes & FILE_ATTRIBUTE_REPARSE_POINT) != 0;
+        };
+        const bool symlink = from(coveo::enumerate_one(p_rPath))
+                           | concat(EnumerateParents(p_rPath))
+                           | any(isSymlink);
         if (symlink) {
             // In order to follow the symlink, we need a handle.
             DWORD flagsAndAttributes = FILE_ATTRIBUTE_NORMAL;
-            if ((attributes & FILE_ATTRIBUTE_DIRECTORY) != 0) {
+            if ((::GetFileAttributesW(p_rPath.c_str()) & FILE_ATTRIBUTE_DIRECTORY) != 0) {
                 // Need this flag to open directory handles according to MSDN
                 flagsAndAttributes |= FILE_FLAG_BACKUP_SEMANTICS;
             }

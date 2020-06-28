@@ -1,6 +1,7 @@
 Version ??.? (20??-??-??)
 -------------------------
 - Icon selected for Copy Long Path command now shows up in main menu too [https://github.com/clechasseur/pathcopycopy/issues/110]
+- Following symbolic links work even if the symbolic link is part of the path and not its target [https://github.com/clechasseur/pathcopycopy/issues/118]
 
 
 Version 18.0 (2020-01-25)
