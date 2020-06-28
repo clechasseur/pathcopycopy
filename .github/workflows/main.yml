@@ -18,5 +18,10 @@ jobs:
       run: msbuild /p:Platform=Win32 /p:Configuration=Release PathCopyCopy.sln
     - name: Build Release x64
       run: msbuild /p:Platform=x64 /p:Configuration=Release PathCopyCopy.sln
-    - name: Build Installer
+    - name: Build installer
       run: iscc /O+ /F"PathCopyCopy$GITHUB_SHA" /DSIGNCODE=0 "Installer\Setup.iss"
+    - name: Upload installer artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: installer
+        path: Installer/Output/PathCopyCopy$GITHUB_SHA.exe
