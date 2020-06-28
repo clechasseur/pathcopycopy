@@ -1,3 +1,8 @@
+Version ??.? (20??-??-??)
+-------------------------
+- Icon selected for Copy Long Path command now shows up in main menu too [https://github.com/clechasseur/pathcopycopy/issues/110]
+
+
 Version 18.0 (2020-01-25)
 -------------------------
 - Now requires Windows Vista at a minimum [https://github.com/clechasseur/pathcopycopy/issues/83]

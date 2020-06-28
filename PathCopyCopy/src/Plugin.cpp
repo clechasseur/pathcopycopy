@@ -31,6 +31,18 @@
 namespace PCC
 {
     //
+    // Returns the ID for this plugin to use to fetch its icon.
+    // For most plugins this is the same as the plugin ID, so
+    // the default implementation is fine.
+    //
+    // @return ID to use to fetch plugin icon.
+    //
+    const GUID& Plugin::IdForIcon() const
+    {
+        return Id();
+    }
+
+    //
     // Returns the help text to show in the Windows Explorer status bar
     // when the user hovers the cursor over the plugin's menu item.
     // If not overridden, no help text will be shown.

@@ -830,7 +830,7 @@ HRESULT CPathCopyCopyContextMenuExt::AddPluginToMenu(const PCC::PluginSP& p_spPl
         if (!iconFile.empty()) {
             hIconBitmap = GetIconForIconFile(iconFile);
         } else {
-            auto possibleIconFile = GetSettings().GetIconFileForPlugin(p_spPlugin->Id());
+            auto possibleIconFile = GetSettings().GetIconFileForPlugin(p_spPlugin->IdForIcon());
             if (possibleIconFile.has_value()) {
                 if (possibleIconFile->empty()) {
                     hIconBitmap = GetPCCIcon();

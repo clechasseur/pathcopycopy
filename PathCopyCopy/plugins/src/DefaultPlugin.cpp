@@ -54,6 +54,18 @@ namespace PCC
         }
 
         //
+        // Returns the ID to use to fetch the plugin icon. In our case,
+        // since we're actually a Long Path plugin in disguise, we use
+        // that ID to fetch our icon.
+        //
+        // @return ID to use to fetch plugin icon.
+        //
+        const GUID& DefaultPlugin::IdForIcon() const noexcept(false)
+        {
+            return LongPathPlugin::ID;
+        }
+
+        //
         // Called by Path Copy Copy to know if it should honor the
         // "Drop redundant words" setting for this plugin. In our
         // case, the plugin description comes from resources and since

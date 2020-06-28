@@ -42,6 +42,7 @@ namespace PCC
             DefaultPlugin&          operator=(const DefaultPlugin&) = delete;
 
             const GUID&             Id() const noexcept(false) override;
+            const GUID&             IdForIcon() const noexcept(false) override;
 
             bool                    CanDropRedundantWords() const noexcept(false) override;
 

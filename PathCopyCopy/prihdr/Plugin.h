@@ -59,6 +59,7 @@ namespace PCC
                                     // @return Unique plugin identifier (a GUID).
                                     //
         virtual const GUID&         Id() const = 0;
+        virtual const GUID&         IdForIcon() const;
 
                                     //
                                     // Returns a description of the plugin. Used by PCC
