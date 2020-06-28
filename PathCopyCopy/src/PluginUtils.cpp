@@ -139,7 +139,7 @@ namespace PCC
         using namespace coveo::linq;
 
         // Check if path or one of its parent points to a symlink.
-        const auto isSymlink = [](const std::wstring& path) {
+        const auto isSymlink = [](const std::wstring& path) noexcept {
             const auto attributes = ::GetFileAttributesW(path.c_str());
             return attributes != INVALID_FILE_ATTRIBUTES && (attributes & FILE_ATTRIBUTE_REPARSE_POINT) != 0;
         };
