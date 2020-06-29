@@ -1,0 +1,35 @@
+name: CI
+
+on: [ push, pull_request ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: microsoft/setup-msbuild@v1
+    - name: Cache NuGet packages
+      uses: actions/cache@v2
+      with:
+        path: packages
+        key: packages-v1-${{ hashFiles('**/packages.config') }}
+        restore-keys: |
+          packages-v1-
+          packages-
+    - name: Restore NuGet packages
+      run: nuget restore
+    - name: Build Debug Win32
+      run: msbuild /p:Platform=Win32 /p:Configuration=Debug PathCopyCopy.sln
+    - name: Build Debug x64
+      run: msbuild /p:Platform=x64 /p:Configuration=Debug PathCopyCopy.sln
+    - name: Build Release Win32
+      run: msbuild /p:Platform=Win32 /p:Configuration=Release PathCopyCopy.sln
+    - name: Build Release x64
+      run: msbuild /p:Platform=x64 /p:Configuration=Release PathCopyCopy.sln
+    - name: Build installer
+      run: iscc /O+ /DSIGNCODE="no" "Installer\Setup.iss"
+    - name: Upload installer artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: installer
+        path: Installer/Output/

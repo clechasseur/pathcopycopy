@@ -26,8 +26,10 @@
 #define MyAppDescription "Path Copy Copy Shell Contextual Menu Extension"
 #define MyAppCopyright "(c) 2008-2020, Charles Lechasseur. See LICENSE.TXT for details."
 
-; Comment this to avoid signing the resulting executable.
-#define SIGNCODE
+; Set this to "no" to avoid signing the resulting executable.
+#ifndef SIGNCODE
+#define SIGNCODE "yes"
+#endif
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
@@ -61,7 +63,7 @@ MinVersion=6.0
 PrivilegesRequired=admin
 PrivilegesRequiredOverridesAllowed=dialog
 WizardStyle=modern
-#ifdef SIGNCODE
+#if "yes" == SIGNCODE
 SignTool=certum
 #endif
 
