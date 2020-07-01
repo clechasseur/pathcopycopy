@@ -92,6 +92,7 @@
             this.ExportUserSettingsSaveDlg = new System.Windows.Forms.SaveFileDialog();
             this.ExportUserSettingsBtn = new System.Windows.Forms.Button();
             this.MainToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.DuplicatePipelinePluginBtn = new System.Windows.Forms.Button();
             this.MainTabCtrl.SuspendLayout();
             this.PluginsPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PluginsDataGrid)).BeginInit();
@@ -156,6 +157,7 @@
             // 
             // PluginsPage
             // 
+            this.PluginsPage.Controls.Add(this.DuplicatePipelinePluginBtn);
             this.PluginsPage.Controls.Add(this.PreviewCtrl);
             this.PluginsPage.Controls.Add(this.AddSeparatorBtn);
             this.PluginsPage.Controls.Add(this.ImportPipelinePluginsBtn);
@@ -203,10 +205,10 @@
             // ImportPipelinePluginsBtn
             // 
             this.ImportPipelinePluginsBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ImportPipelinePluginsBtn.Location = new System.Drawing.Point(384, 263);
+            this.ImportPipelinePluginsBtn.Location = new System.Drawing.Point(384, 292);
             this.ImportPipelinePluginsBtn.Name = "ImportPipelinePluginsBtn";
             this.ImportPipelinePluginsBtn.Size = new System.Drawing.Size(75, 23);
-            this.ImportPipelinePluginsBtn.TabIndex = 13;
+            this.ImportPipelinePluginsBtn.TabIndex = 14;
             this.ImportPipelinePluginsBtn.Text = "&Import...";
             this.MainToolTip.SetToolTip(this.ImportPipelinePluginsBtn, "Import custom commands from a file on disk");
             this.ImportPipelinePluginsBtn.UseVisualStyleBackColor = true;
@@ -215,10 +217,10 @@
             // ExportPipelinePluginsBtn
             // 
             this.ExportPipelinePluginsBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ExportPipelinePluginsBtn.Location = new System.Drawing.Point(384, 234);
+            this.ExportPipelinePluginsBtn.Location = new System.Drawing.Point(384, 263);
             this.ExportPipelinePluginsBtn.Name = "ExportPipelinePluginsBtn";
             this.ExportPipelinePluginsBtn.Size = new System.Drawing.Size(75, 23);
-            this.ExportPipelinePluginsBtn.TabIndex = 12;
+            this.ExportPipelinePluginsBtn.TabIndex = 13;
             this.ExportPipelinePluginsBtn.Text = "Ex&port...";
             this.MainToolTip.SetToolTip(this.ExportPipelinePluginsBtn, "Export the selected custom commands to a file on disk");
             this.ExportPipelinePluginsBtn.UseVisualStyleBackColor = true;
@@ -228,18 +230,18 @@
             // 
             this.BevelLineLbl2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BevelLineLbl2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.BevelLineLbl2.Location = new System.Drawing.Point(384, 226);
+            this.BevelLineLbl2.Location = new System.Drawing.Point(384, 255);
             this.BevelLineLbl2.Name = "BevelLineLbl2";
             this.BevelLineLbl2.Size = new System.Drawing.Size(75, 2);
-            this.BevelLineLbl2.TabIndex = 11;
+            this.BevelLineLbl2.TabIndex = 12;
             // 
             // RemovePluginBtn
             // 
             this.RemovePluginBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.RemovePluginBtn.Location = new System.Drawing.Point(384, 197);
+            this.RemovePluginBtn.Location = new System.Drawing.Point(384, 226);
             this.RemovePluginBtn.Name = "RemovePluginBtn";
             this.RemovePluginBtn.Size = new System.Drawing.Size(75, 23);
-            this.RemovePluginBtn.TabIndex = 10;
+            this.RemovePluginBtn.TabIndex = 11;
             this.RemovePluginBtn.Text = "&Remove";
             this.MainToolTip.SetToolTip(this.RemovePluginBtn, "Delete the selected custom command or separator");
             this.RemovePluginBtn.UseVisualStyleBackColor = true;
@@ -818,6 +820,17 @@
             this.ExportUserSettingsBtn.UseVisualStyleBackColor = true;
             this.ExportUserSettingsBtn.Click += new System.EventHandler(this.ExportUserSettingsBtn_Click);
             // 
+            // DuplicatePipelinePluginBtn
+            // 
+            this.DuplicatePipelinePluginBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.DuplicatePipelinePluginBtn.Location = new System.Drawing.Point(384, 197);
+            this.DuplicatePipelinePluginBtn.Name = "DuplicatePipelinePluginBtn";
+            this.DuplicatePipelinePluginBtn.Size = new System.Drawing.Size(75, 23);
+            this.DuplicatePipelinePluginBtn.TabIndex = 10;
+            this.DuplicatePipelinePluginBtn.Text = "Dup&licate";
+            this.DuplicatePipelinePluginBtn.UseVisualStyleBackColor = true;
+            this.DuplicatePipelinePluginBtn.Click += new System.EventHandler(this.DuplicatePipelinePluginBtn_Click);
+            // 
             // MainForm
             // 
             this.AcceptButton = this.OKBtn;
@@ -918,6 +931,7 @@
         private System.Windows.Forms.BindingSource CtrlKeyPluginComboBindingSource;
         private UserControls.PluginPreviewUserControl PreviewCtrl;
         private System.Windows.Forms.CheckBox TrueLnkPathsChk;
+        private System.Windows.Forms.Button DuplicatePipelinePluginBtn;
     }
 }
 

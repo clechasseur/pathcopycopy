@@ -441,4 +441,7 @@ Control-click to avoid displaying an icon for this command.</value>
   <data name="PipelineElement_ApplyPipelinePlugin_HelpText" xml:space="preserve">
     <value>Choose a base command to use to get an initial path value</value>
   </data>
+  <data name="MainForm_PluginsDataGrid_DuplicateSuffix" xml:space="preserve">
+    <value> (Copy)</value>
+  </data>
 </root>

@@ -405,6 +405,15 @@ namespace PathCopyCopy.Settings.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to  (Copy).
+        /// </summary>
+        internal static string MainForm_PluginsDataGrid_DuplicateSuffix {
+            get {
+                return ResourceManager.GetString("MainForm_PluginsDataGrid_DuplicateSuffix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Click to choose an icon file for this command.
         ///Shift-click to have this command use the default icon.
         ///Control-click to avoid displaying an icon for this command..

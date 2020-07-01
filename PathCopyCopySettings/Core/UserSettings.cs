@@ -710,7 +710,7 @@ namespace PathCopyCopy.Settings.Core
         {
             get {
                 object keyLockValue = globalKey?.GetValue(EditingDisabledValueName);
-                return keyLockValue != null ? ((int) keyLockValue) != 0 : false;
+                return keyLockValue != null && ((int) keyLockValue) != 0;
             }
         }
 
@@ -945,9 +945,9 @@ namespace PathCopyCopy.Settings.Core
 
             // Load registry value containing the plugins.
             object pluginsValue = GetUserOrGlobalValue(valueName);
-            if (pluginsValue != null && pluginsValue is string) {
+            if (pluginsValue != null && pluginsValue is string pluginsValueAsString) {
                 // Split the values so we get individual IDs.
-                string[] pluginIds = ((string) pluginsValue).Split(PluginsValueSeparator);
+                string[] pluginIds = pluginsValueAsString.Split(PluginsValueSeparator);
 
                 // Convert each ID and add it to the list of plugins.
                 plugins = new List<Guid>();
@@ -1016,9 +1016,9 @@ namespace PathCopyCopy.Settings.Core
             if (displayOrderValue == null && globalRegKey != null) {
                 displayOrderValue = globalRegKey.GetValue(PipelinePluginsDisplayOrderValueName);
             }
-            if (displayOrderValue is string) {
+            if (displayOrderValue is string displayOrderValueAsString) {
                 // The display order is represented as a comma-separated list of pipeline plugin IDs.
-                string[] idsAsString = ((string) displayOrderValue).Split(PipelinePluginsDisplayOrderSeparator);
+                string[] idsAsString = displayOrderValueAsString.Split(PipelinePluginsDisplayOrderSeparator);
                 List<Guid> ids = new List<Guid>();
                 foreach (string idAsString in idsAsString) {
                     try {

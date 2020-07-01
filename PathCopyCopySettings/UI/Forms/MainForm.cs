@@ -512,6 +512,7 @@ namespace PathCopyCopy.Settings.UI.Forms
             AddPipelinePluginBtn.Enabled = true;
             AddSeparatorBtn.Enabled = true;
             EditPipelinePluginBtn.Enabled = PluginsDataGrid.SelectedRows.Count == 1 && AreOnlyPipelinePluginsSelected();
+            DuplicatePipelinePluginBtn.Enabled = EditPipelinePluginBtn.Enabled;
             RemovePluginBtn.Enabled = PluginsDataGrid.SelectedRows.Count == 1 && AreOnlyPipelineOrSeparatorPluginsSelected();
 
             ExportPipelinePluginsBtn.Enabled = PluginsDataGrid.SelectedRows.Count > 0 && AreOnlyPipelinePluginsSelected();
@@ -1102,6 +1103,46 @@ namespace PathCopyCopy.Settings.UI.Forms
         }
 
         /// <summary>
+        /// Called when the Duplicate button is pressed. We duplicate
+        /// the selected pipeline plugin.
+        /// </summary>
+        /// <param name="sender">Event sender.</param>
+        /// <param name="e">Event arguments.</param>
+        private void DuplicatePipelinePluginBtn_Click(object sender, EventArgs e)
+        {
+            Debug.Assert(PluginsDataGrid.SelectedRows.Count == 1);
+
+            // Get reference to the selected pipeline plugin.
+            DataGridViewRow row = PluginsDataGrid.SelectedRows[0];
+            int rowIndex = row.Index;
+            PluginDisplayInfo displayInfo = (PluginDisplayInfo) row.DataBoundItem;
+            PipelinePluginInfo pluginInfo = ((PipelinePlugin) displayInfo.Plugin).Info;
+
+            // Duplicate pipeline plugin and change its name.
+            PipelinePluginInfo newPluginInfo = pluginInfo.Duplicate();
+            newPluginInfo.Description += Resources.MainForm_PluginsDataGrid_DuplicateSuffix;
+
+            // Add the new plugin to temp pipeline plugins.
+            tempPipelinePluginsHelper.Add(newPluginInfo);
+
+            // Also add the new plugin to the list view and select it.
+            Plugin newPlugin = newPluginInfo.ToPlugin();
+            PluginDisplayInfo newDisplayInfo = new PluginDisplayInfo(newPlugin) {
+                ShowInMainMenu = displayInfo.ShowInMainMenu,
+                ShowInSubmenu = displayInfo.ShowInSubmenu,
+            };
+            pluginDisplayInfos.Insert(rowIndex + 1, newDisplayInfo);
+            PluginsDataGrid.ClearSelection();
+            PluginsDataGrid.Rows[rowIndex + 1].Selected = true;
+            if (!PluginsDataGrid.Rows[rowIndex + 1].Displayed) {
+                PluginsDataGrid.FirstDisplayedScrollingRowIndex = rowIndex + 1;
+            }
+                    
+            // All this will enable the "Apply" button.
+            ApplyBtn.Enabled = true;
+        }
+
+        /// <summary>
         /// Called when the Remove button is pressed. We remove
         /// selected plugins.
         /// </summary>
@@ -1116,11 +1157,11 @@ namespace PathCopyCopy.Settings.UI.Forms
             int rowIndex = row.Index; 
             PluginDisplayInfo displayInfo = (PluginDisplayInfo) row.DataBoundItem; 
 
-            if (displayInfo.Plugin is PipelinePlugin) {
+            if (displayInfo.Plugin is PipelinePlugin pipelinePlugin) {
                 // First confirm since this is an "irreversible" action. We have a string 
                 // in resources for this message and it includes a format placeholder 
                 // for the plugin description. 
-                PipelinePluginInfo pluginInfo = ((PipelinePlugin) displayInfo.Plugin).Info; 
+                PipelinePluginInfo pluginInfo = pipelinePlugin.Info; 
                 DialogResult res = MessageBox.Show(this, string.Format(CultureInfo.CurrentCulture,
                     Resources.REMOVE_PIPELINE_PLUGIN_MESSAGE, pluginInfo.Description), 
                     Resources.REMOVE_PIPELINE_PLUGIN_TITLE, MessageBoxButtons.OKCancel,

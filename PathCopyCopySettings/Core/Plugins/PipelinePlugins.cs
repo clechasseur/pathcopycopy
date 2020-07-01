@@ -386,16 +386,16 @@ namespace PathCopyCopy.Settings.Core.Plugins
         }
         
         /// <summary>
-        /// Creates a temporary copy of this <see cref="PipelinePluginInfo"/>.
+        /// Creates a copy of this <see cref="PipelinePluginInfo"/>.
         /// All fields will be the same as <c>this</c>, except for the
         /// <see cref="Id"/> which will be randomly-generated.
         /// </summary>
         /// <returns>New <see cref="PipelinePluginInfo"/> instance.</returns>
-        public PipelinePluginInfo CreateTemp()
+        public PipelinePluginInfo Duplicate()
         {
-            PipelinePluginInfo temp = (PipelinePluginInfo) MemberwiseClone();
-            temp.Id = Guid.NewGuid();
-            return temp;
+            PipelinePluginInfo dup = (PipelinePluginInfo) MemberwiseClone();
+            dup.Id = Guid.NewGuid();
+            return dup;
         }
         
         /// <summary>
@@ -420,7 +420,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// <paramref name="obj"/>.</returns>
         int IComparable.CompareTo(object obj)
         {
-            return obj is PipelinePluginInfo ? CompareTo((PipelinePluginInfo) obj) : 1;
+            return obj is PipelinePluginInfo info ? CompareTo(info) : 1;
         }
         
         /// <summary>
@@ -431,7 +431,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// <returns>Whether <c>this</c> is equal to <paramref name="other"/>.</returns>
         public bool Equals(PipelinePluginInfo other)
         {
-            return other is object ? Id.Equals(other.Id) : false;
+            return other is object && Id.Equals(other.Id);
         }
 
         /// <summary>
@@ -443,7 +443,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// <returns>Whether <c>this</c> is equal to <paramref name="obj"/>.</returns>
         public override bool Equals(object obj)
         {
-            return obj is PipelinePluginInfo ? Equals((PipelinePluginInfo) obj) : false;
+            return obj is PipelinePluginInfo info && Equals(info);
         }
 
         /// <summary>
