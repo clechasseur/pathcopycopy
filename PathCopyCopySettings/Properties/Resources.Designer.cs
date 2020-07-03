@@ -668,6 +668,24 @@ namespace PathCopyCopy.Settings.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Inject Drive Label.
+        /// </summary>
+        internal static string PipelineElement_InjectDriveLabel {
+            get {
+                return ResourceManager.GetString("PipelineElement_InjectDriveLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Replaces all instances of %DRIVELABEL% in the path with the drive&apos;s label..
+        /// </summary>
+        internal static string PipelineElement_InjectDriveLabel_HelpText {
+            get {
+                return ResourceManager.GetString("PipelineElement_InjectDriveLabel_HelpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add Quotes If Needed.
         /// </summary>
         internal static string PipelineElement_OptionalQuotes {

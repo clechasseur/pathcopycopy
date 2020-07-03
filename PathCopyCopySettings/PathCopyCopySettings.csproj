@@ -100,6 +100,12 @@
     <Compile Include="UI\UserControls\FindReplacePipelineElementUserControl.Designer.cs">
       <DependentUpon>FindReplacePipelineElementUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\UserControls\InjectDriveLabelPipelineElementUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UserControls\InjectDriveLabelPipelineElementUserControl.Designer.cs">
+      <DependentUpon>InjectDriveLabelPipelineElementUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\UserControls\PathsSeparatorPipelineElementUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -205,6 +211,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\FindReplacePipelineElementUserControl.resx">
       <DependentUpon>FindReplacePipelineElementUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserControls\InjectDriveLabelPipelineElementUserControl.resx">
+      <DependentUpon>InjectDriveLabelPipelineElementUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\PathsSeparatorPipelineElementUserControl.resx">
       <DependentUpon>PathsSeparatorPipelineElementUserControl.cs</DependentUpon>

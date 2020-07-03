@@ -21,7 +21,6 @@
 
 using System;
 using System.Diagnostics;
-using System.Windows.Forms;
 using PathCopyCopy.Settings.Core.Plugins;
 
 namespace PathCopyCopy.Settings.UI.UserControls

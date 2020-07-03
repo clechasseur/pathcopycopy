@@ -1593,6 +1593,67 @@ namespace PathCopyCopy.Settings.Core.Plugins
     }
 
     /// <summary>
+    /// Pipeline element that replaces all instances of %DRIVELABEL%
+    /// with the drive's label.
+    /// </summary>
+    public class InjectDriveLabelPipelineElement : PipelineElement
+    {
+        /// <summary>
+        /// Code representing this pipeline element type.
+        /// </summary>
+        public const char CODE = ':';
+
+        /// <summary>
+        /// Code representing this pipeline element type.
+        /// </summary>
+        public override char Code
+        {
+            get {
+                return CODE;
+            }
+        }
+
+        /// <summary>
+        /// Pipeline element display value for the UI.
+        /// </summary>
+        public override string DisplayValue
+        {
+            get {
+                return Resources.PipelineElement_InjectDriveLabel;
+            }
+        }
+
+        /// <summary>
+        /// Minumum version of Path Copy Copy required to use this pipeline element.
+        /// </summary>
+        public override Version RequiredVersion
+        {
+            get {
+                return new Version(19, 0, 0, 0);
+            }
+        }
+        
+        /// <summary>
+        /// Encodes this pipeline element in a string.
+        /// </summary>
+        /// <returns>Encoded element data.</returns>
+        public override string Encode()
+        {
+            // No other data to encode.
+            return string.Empty;
+        }
+
+        /// <summary>
+        /// Returns a user control to configure this pipeline element.
+        /// </summary>
+        /// <returns>User control.</returns>
+        public override PipelineElementUserControl GetEditingControl()
+        {
+            return new InjectDriveLabelPipelineElementUserControl();
+        }
+    }
+
+    /// <summary>
     /// Base class for pipeline elements that store a plugin ID.
     /// </summary>
     abstract public class PipelineElementWithPluginID : PipelineElement
@@ -2147,6 +2208,10 @@ namespace PathCopyCopy.Settings.Core.Plugins
                 }
                 case UnexpandEnvironmentStringsPipelineElement.CODE: {
                     element = new UnexpandEnvironmentStringsPipelineElement();
+                    break;
+                }
+                case InjectDriveLabelPipelineElement.CODE: {
+                    element = new InjectDriveLabelPipelineElement();
                     break;
                 }
                 case ApplyPluginPipelineElement.CODE:

@@ -1,5 +1,5 @@
-﻿// ConfiglessPipelineElementUserControl.cs
-// (c) 2019-2020, Charles Lechasseur
+﻿// InjectDriveLabelPipelineElementUserControl.cs
+// (c) 2020, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,19 +19,26 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
+
 namespace PathCopyCopy.Settings.UI.UserControls
 {
     /// <summary>
-    /// UserControl used for pipeline elements that have no additional config.
-    /// This is the default user control used unless a pipeline element
-    /// returns a custom one.
+    /// UserControl for InjectDriveLabel pipeline elements. It simply has
+    /// additional instructions, but no customization options.
     /// </summary>
-    public partial class ConfiglessPipelineElementUserControl : PipelineElementUserControl
+    public partial class InjectDriveLabelPipelineElementUserControl : PipelineElementUserControl
     {
         /// <summary>
         /// Constructor.
         /// </summary>
-        public ConfiglessPipelineElementUserControl()
+        public InjectDriveLabelPipelineElementUserControl()
         {
             InitializeComponent();
         }
