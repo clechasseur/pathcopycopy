@@ -43,6 +43,7 @@ namespace
     constexpr wchar_t   ELEMENT_CODE_FIND_REPLACE               = L'?';
     constexpr wchar_t   ELEMENT_CODE_REGEX                      = L'^';
     constexpr wchar_t   ELEMENT_CODE_UNEXPAND_ENV_STRINGS       = L'e';
+    constexpr wchar_t   ELEMENT_CODE_INJECT_DRIVE_LABEL         = L':';
     constexpr wchar_t   ELEMENT_CODE_APPLY_PLUGIN               = L'{';
     constexpr wchar_t   ELEMENT_CODE_APPLY_PIPELINE_PLUGIN      = L'}';
     constexpr wchar_t   ELEMENT_CODE_PATHS_SEPARATOR            = L',';
@@ -139,6 +140,10 @@ namespace PCC
             }
             case ELEMENT_CODE_UNEXPAND_ENV_STRINGS: {
                 spElement = std::make_shared<UnexpandEnvironmentStringsPipelineElement>();
+                break;
+            }
+            case ELEMENT_CODE_INJECT_DRIVE_LABEL: {
+                spElement = std::make_shared<InjectDriveLabelPipelineElement>();
                 break;
             }
             case ELEMENT_CODE_APPLY_PLUGIN:

@@ -271,6 +271,24 @@ namespace PCC
     };
 
     //
+    // InjectDriveLabelPipelineElement
+    //
+    // Pipeline element that replaces %DRIVELABEL% with the
+    // label of the current drive.
+    //
+    class InjectDriveLabelPipelineElement : public PipelineElement
+    {
+    public:
+                        InjectDriveLabelPipelineElement() = default;
+                        InjectDriveLabelPipelineElement(const InjectDriveLabelPipelineElement&) = delete;
+        InjectDriveLabelPipelineElement&
+                        operator=(const InjectDriveLabelPipelineElement&) = delete;
+
+        void            ModifyPath(std::wstring& p_rPath,
+                                   const PluginProvider* p_pPluginProvider) const override;
+    };
+
+    //
     // ApplyPluginPipelineElement
     //
     // Pipeline element that fetches an existing plugin via its

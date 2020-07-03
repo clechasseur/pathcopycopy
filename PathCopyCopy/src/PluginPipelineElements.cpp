@@ -29,6 +29,14 @@
 #include <algorithm>
 #include <assert.h>
 
+#include <coveo/linq.h>
+
+
+namespace
+{
+    const wchar_t* const    DRIVE_LABEL_IDENTIFIER  = L"%DRIVELABEL%";  // Identifier to replace with drive label
+
+} // anonymous namespace
 
 namespace PCC
 {
@@ -278,6 +286,45 @@ namespace PCC
         std::wstring unexpandedPath(MAX_PATH + 1, L'\0');
         if (::PathUnExpandEnvStringsW(p_rPath.c_str(), &*unexpandedPath.begin(), MAX_PATH + 1)) {
             p_rPath = unexpandedPath.c_str();
+        }
+    }
+
+    //
+    // Modifies the given path by replacing all instances of %DRIVELABEL%
+    // with the label of the current drive.
+    //
+    // @param p_rPath Path to modify (in-place).
+    // @param p_pPluginProvider Optional object to access plugins.
+    //
+    void InjectDriveLabelPipelineElement::ModifyPath(std::wstring& p_rPath,
+                                                     const PluginProvider* const /*p_pPluginProvider*/) const
+    {
+        using namespace coveo::linq;
+
+        // Get drive letter for path.
+        const auto vParents = PluginUtils::EnumerateParents(p_rPath);
+        std::wstring drive;
+        if (!vParents.empty()) {
+            drive = vParents.back();
+        }
+        if (!drive.empty()) {
+            if (drive.back() != L'\\') {
+                drive += L'\\';
+            }
+
+            // Attempt to fetch volume info for drive, including its label.
+            std::wstring volumeLabel(MAX_PATH + 1, L'\0');
+            const auto gotInfo = ::GetVolumeInformationW(drive.c_str(),
+                                                         &*volumeLabel.begin(),
+                                                         MAX_PATH + 1,
+                                                         nullptr,
+                                                         nullptr,
+                                                         nullptr,
+                                                         nullptr,
+                                                         0);
+            if (gotInfo) {
+                StringUtils::ReplaceAll(p_rPath, DRIVE_LABEL_IDENTIFIER, volumeLabel.c_str());
+            }
         }
     }
 

@@ -36,6 +36,7 @@
 #include <comutil.h>
 #include <lm.h>
 
+#include <coveo/enumerable.h>
 #include <coveo/linq.h>
 
 
@@ -108,7 +109,7 @@ namespace PCC
     }
 
     //
-    // Returns an enumerable for a path's parents, in reverse order.
+    // Returns a list of a path's parents, in reverse order.
     // So if, for instance, is called with "C:\Program Files\Path Copy Copy\PCC32.dll", would return
     //
     // C:\Program Files\Path Copy Copy
@@ -116,15 +117,20 @@ namespace PCC
     // C:\
     //
     // @param p_Path Path to enumerate the parents of.
-    // @return Enumerable for the path's parents.
+    // @return List of path's parents.
     //
-    coveo::enumerable<const std::wstring> PluginUtils::EnumerateParents(const std::wstring& p_Path)
+    std::vector<std::wstring> PluginUtils::EnumerateParents(std::wstring p_Path)
     {
-        return coveo::enumerable<const std::wstring>([path = p_Path]() mutable -> const std::wstring* {
-                                                        const auto prevPath = path;
-                                                        const auto hasParent = PluginUtils::ExtractFolderFromPath(path);
-                                                        return hasParent && path != prevPath ? &path : nullptr;
-                                                     });
+        std::vector<std::wstring> vParents;
+        for (;;) {
+            const auto prevPath = p_Path;
+            const auto hasParent = ExtractFolderFromPath(p_Path);
+            if (!hasParent || p_Path == prevPath) {
+                break;
+            }
+            vParents.emplace_back(p_Path);
+        }
+        return vParents;
     }
 
     //
