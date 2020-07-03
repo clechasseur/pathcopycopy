@@ -1,4 +1,4 @@
-Version ??.? (20??-??-??)
+Version 19.0 (20??-??-??)
 -------------------------
 - New button to duplicate a custom command [https://github.com/clechasseur/pathcopycopy/issues/114]
 - Icon selected for Copy Long Path command now shows up in main menu too [https://github.com/clechasseur/pathcopycopy/issues/110]

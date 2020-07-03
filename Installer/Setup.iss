@@ -20,7 +20,7 @@
 ; THE SOFTWARE.
 
 #define MyAppName "Path Copy Copy"
-#define MyAppVersion "18.0"
+#define MyAppVersion "19.0"
 #define MyAppPublisher "Charles Lechasseur"
 #define MyAppURL "https://pathcopycopy.github.io/"
 #define MyAppDescription "Path Copy Copy Shell Contextual Menu Extension"
