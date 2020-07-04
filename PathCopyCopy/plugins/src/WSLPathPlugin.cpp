@@ -23,14 +23,15 @@
 #include <WSLPathPlugin.h>
 #include <StringUtils.h>
 #include <resource.h>
+#include <PathCopyCopySettings.h>
 
 #include <sstream>
 
 
 namespace
 {
-    // Strings used to build a WSL path.
-    const wchar_t* const MNT_PREFIX = L"/mnt/";
+    // Default WSL path prefix.
+    const wchar_t* const DEFAULT_MNT_PREFIX = L"/mnt";
 
     // Plugin unique ID: {BD574871-5DF9-4B64-83D1-2AF9C0C17F66}
     const GUID WSL_PATH_PLUGIN_ID = { 0xbd574871, 0x5df9, 0x4b64, { 0x83, 0xd1, 0x2a, 0xf9, 0xc0, 0xc1, 0x7f, 0x66 } };
@@ -71,12 +72,18 @@ namespace PCC
             // Call parent to get Unix path.
             std::wstring path = UnixPathPlugin::GetPath(p_File);
 
+            // Get WSL path prefix, from settings if possible.
+            std::wstring wslPathPrefix = DEFAULT_MNT_PREFIX;
+            if (m_pSettings != nullptr) {
+                wslPathPrefix = m_pSettings->GetWSLPathPrefix();
+            }
+
             // Check if the file begins with a drive letter. If so,
             // remove the drive letter and replace it with /mnt/letter.
             [[gsl::suppress(type.4)]] // Compiler considers foo{bar} to be a C-style cast
             if (path.size() >= 3 && path.at(1) == L':') {
                 std::wstringstream newPathSS;
-                newPathSS << MNT_PREFIX                         // The mnt prefix
+                newPathSS << wslPathPrefix << L'/'              // The WSL path prefix
                           << wchar_t{::towlower(path.front())}  // Drive letter
                           << path.substr(2);                    // Rest of the path, including the slash after that : we had.
                 path = newPathSS.str();
