@@ -289,6 +289,28 @@ namespace PCC
     };
 
     //
+    // CopyNPathPartsPipelineElement
+    //
+    // Pipeline element that copies the N first or last parts of the path.
+    //
+    class CopyNPathPartsPipelineElement : public PipelineElement
+    {
+    public:
+                        CopyNPathPartsPipelineElement(size_t p_NumParts,
+                                                      bool p_First);
+                        CopyNPathPartsPipelineElement(const CopyNPathPartsPipelineElement&) = delete;
+        CopyNPathPartsPipelineElement&
+                        operator=(const CopyNPathPartsPipelineElement&) = delete;
+
+        void            ModifyPath(std::wstring& p_rPath,
+                                   const PluginProvider* p_pPluginProvider) const override;
+
+    private:
+        const size_t    m_NumParts;     // Number of path parts to copy.
+        const bool      m_First;        // Whether to copy the first (true) or last (false) path parts.
+    };
+
+    //
     // ApplyPluginPipelineElement
     //
     // Pipeline element that fetches an existing plugin via its

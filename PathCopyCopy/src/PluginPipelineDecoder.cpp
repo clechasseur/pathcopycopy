@@ -44,6 +44,7 @@ namespace
     constexpr wchar_t   ELEMENT_CODE_REGEX                      = L'^';
     constexpr wchar_t   ELEMENT_CODE_UNEXPAND_ENV_STRINGS       = L'e';
     constexpr wchar_t   ELEMENT_CODE_INJECT_DRIVE_LABEL         = L':';
+    constexpr wchar_t   ELEMENT_CODE_COPY_N_PATH_PARTS          = L'n';
     constexpr wchar_t   ELEMENT_CODE_APPLY_PLUGIN               = L'{';
     constexpr wchar_t   ELEMENT_CODE_APPLY_PIPELINE_PLUGIN      = L'}';
     constexpr wchar_t   ELEMENT_CODE_PATHS_SEPARATOR            = L',';
@@ -146,6 +147,10 @@ namespace PCC
                 spElement = std::make_shared<InjectDriveLabelPipelineElement>();
                 break;
             }
+            case ELEMENT_CODE_COPY_N_PATH_PARTS: {
+                spElement = DecodeCopyNPathPartsElement(p_rStream);
+                break;
+            }
             case ELEMENT_CODE_APPLY_PLUGIN:
             case ELEMENT_CODE_APPLY_PIPELINE_PLUGIN: {
                 spElement = DecodeApplyPluginElement(code, p_rStream);
@@ -211,6 +216,21 @@ namespace PCC
 
         // Create the element and return it.
         return std::make_shared<RegexPipelineElement>(regex, format, ignoreCase);
+    }
+
+    //
+    // Decodes a CopyNPathPartsPipelineElement found in an encoded stream.
+    //
+    // @param p_rStream Stream containing encoded element.
+    // @return Newly-created element.
+    //
+    auto PipelineDecoder::DecodeCopyNPathPartsElement(EncodedElementsStream& p_rStream) -> PipelineElementSP
+    {
+        // This type of element contains the number of path parts and
+        // a flag indicating whether to copy first or last parts.
+        const auto numParts = p_rStream.ReadLong();
+        const auto first = p_rStream.ReadBool();
+        return std::make_shared<CopyNPathPartsPipelineElement>(static_cast<size_t>(numParts), first);
     }
 
     //

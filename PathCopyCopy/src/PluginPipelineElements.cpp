@@ -28,6 +28,7 @@
 
 #include <algorithm>
 #include <assert.h>
+#include <sstream>
 
 #include <coveo/linq.h>
 
@@ -325,6 +326,54 @@ namespace PCC
             if (gotInfo) {
                 StringUtils::ReplaceAll(p_rPath, DRIVE_LABEL_IDENTIFIER, volumeLabel.c_str());
             }
+        }
+    }
+
+    //
+    // Constructor.
+    //
+    // @param p_NumParts Number of path parts to copy.
+    // @param p_First Whether to copy the first (true) or last (false) path parts.
+    //
+    CopyNPathPartsPipelineElement::CopyNPathPartsPipelineElement(const size_t p_NumParts,
+                                                                 const bool p_First)
+        : m_NumParts(p_NumParts),
+          m_First(p_First)
+    {
+    }
+
+    //
+    // Modifies the given path by keeping only some parts of the path.
+    //
+    // @param p_rPath Path to modify (in-place).
+    // @param p_pPluginProvider Optional object to access plugins.
+    //
+    void CopyNPathPartsPipelineElement::ModifyPath(std::wstring& p_rPath,
+                                                   const PluginProvider* const /*p_pPluginProvider*/) const
+    {
+        // First split the path into parts.
+        auto vPathParts = StringUtils::Split(p_rPath, L"\\/");
+        
+        // If we have less parts than requested just return the path unmodified.
+        if (m_NumParts < vPathParts.size()) {
+            // Try auto-detecting the separator type used in this path.
+            const auto separatorPos = p_rPath.find_first_of(L"\\/");
+            const auto separator = separatorPos != std::wstring::npos ? p_rPath[separatorPos] : L'\\';
+
+            // Keep only the required number of path parts and join them using separator.
+            if (m_First) {
+                vPathParts.erase(vPathParts.end() - (vPathParts.size() - m_NumParts), vPathParts.end());
+            } else {
+                vPathParts.erase(vPathParts.begin(), vPathParts.begin() + (vPathParts.size() - m_NumParts));
+            }
+            std::wstringstream wss;
+            for (auto&& part : vPathParts) {
+                if (wss.tellp() != 0) {
+                    wss << separator;
+                }
+                wss << part;
+            }
+            p_rPath = wss.str();
         }
     }
 
