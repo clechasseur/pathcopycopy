@@ -1654,6 +1654,101 @@ namespace PathCopyCopy.Settings.Core.Plugins
     }
 
     /// <summary>
+    /// Pipeline element that copies the N first or last parts
+    /// of the path.
+    /// </summary>
+    public class CopyNPathPartsPipelineElement : PipelineElement
+    {
+        /// <summary>
+        /// Code representing this pipeline element type.
+        /// </summary>
+        public const char CODE = 'n';
+
+        /// <summary>
+        /// Code representing this pipeline element type.
+        /// </summary>
+        public override char Code
+        {
+            get {
+                return CODE;
+            }
+        }
+
+        /// <summary>
+        /// Pipeline element display value for the UI.
+        /// </summary>
+        public override string DisplayValue
+        {
+            get {
+                return Resources.PipelineElement_CopyNPathParts;
+            }
+        }
+
+        /// <summary>
+        /// Minumum version of Path Copy Copy required to use this pipeline element.
+        /// </summary>
+        public override Version RequiredVersion
+        {
+            get {
+                return new Version(19, 0, 0, 0);
+            }
+        }
+
+        /// <summary>
+        /// Number of path parts to copy.
+        /// </summary>
+        public int NumParts
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Whether to copy the first (<c>true</c>) or last (<c>false</c>)
+        /// parts of the path.
+        /// </summary>
+        public bool First
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        public CopyNPathPartsPipelineElement()
+        {
+            NumParts = 1;
+            First = false;
+        }
+
+        public CopyNPathPartsPipelineElement(int numParts, bool first)
+        {
+            NumParts = numParts;
+            First = first;
+        }
+        
+        /// <summary>
+        /// Encodes this pipeline element in a string.
+        /// </summary>
+        /// <returns>Encoded element data.</returns>
+        public override string Encode()
+        {
+            // Encode number of path parts and first flag.
+            return EncodeInt(NumParts) + EncodeBool(First);
+        }
+
+        /// <summary>
+        /// Returns a user control to configure this pipeline element.
+        /// </summary>
+        /// <returns>User control.</returns>
+        public override PipelineElementUserControl GetEditingControl()
+        {
+            return new CopyNPathPartsPipelineElementUserControl(this);
+        }
+    }
+
+    /// <summary>
     /// Base class for pipeline elements that store a plugin ID.
     /// </summary>
     abstract public class PipelineElementWithPluginID : PipelineElement
@@ -2214,6 +2309,10 @@ namespace PathCopyCopy.Settings.Core.Plugins
                     element = new InjectDriveLabelPipelineElement();
                     break;
                 }
+                case CopyNPathPartsPipelineElement.CODE: {
+                    element = DecodeCopyNPathPartsPipelineElement(encodedElements, ref curChar);
+                    break;
+                }
                 case ApplyPluginPipelineElement.CODE:
                 case ApplyPipelinePluginPipelineElement.CODE: {
                     element = DecodeApplyPluginElement(elementCode, encodedElements, ref curChar);
@@ -2278,6 +2377,23 @@ namespace PathCopyCopy.Settings.Core.Plugins
 
             // Create and return element object.
             return new RegexPipelineElement(regex, format, ignoreCase);
+        }
+
+        /// <summary>
+        /// Decodes a <see cref="CopyNPathPartsPipelineElement"/> from an
+        /// encoded element string.
+        /// </summary>
+        /// <param name="encodedElements">String of encoded elements data.</param>
+        /// <param name="curChar">Position where the element data is to be found
+        /// in the string (not counting the element code). Upon return, this will
+        /// point just after the element data.</param>
+        private static CopyNPathPartsPipelineElement DecodeCopyNPathPartsPipelineElement(
+            string encodedElements, ref int curChar)
+        {
+            // The element data contains the number of parts and copy direction flag.
+            int numParts = DecodeInt(encodedElements, ref curChar);
+            bool first = DecodeBool(encodedElements, ref curChar);
+            return new CopyNPathPartsPipelineElement(numParts, first);
         }
         
         /// <summary>

@@ -94,6 +94,12 @@
     <Compile Include="UI\UserControls\ConfiglessPipelineElementUserControl.Designer.cs">
       <DependentUpon>ConfiglessPipelineElementUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\UserControls\CopyNPathPartsPipelineElementUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UserControls\CopyNPathPartsPipelineElementUserControl.Designer.cs">
+      <DependentUpon>CopyNPathPartsPipelineElementUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\UserControls\FindReplacePipelineElementUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -208,6 +214,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\ConfiglessPipelineElementUserControl.resx">
       <DependentUpon>ConfiglessPipelineElementUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserControls\CopyNPathPartsPipelineElementUserControl.resx">
+      <DependentUpon>CopyNPathPartsPipelineElementUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\FindReplacePipelineElementUserControl.resx">
       <DependentUpon>FindReplacePipelineElementUserControl.cs</DependentUpon>

@@ -151,7 +151,8 @@ namespace PathCopyCopy.Settings.UI.Utils
 
             // Make sure element is not one of the "expert-only" type.
             return !(element is FollowSymlinkPipelineElement ||
-                element is InjectDriveLabelPipelineElement);
+                element is InjectDriveLabelPipelineElement ||
+                element is CopyNPathPartsPipelineElement);
         }
 
         /// <summary>

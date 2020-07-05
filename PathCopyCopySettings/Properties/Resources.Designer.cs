@@ -524,6 +524,24 @@ namespace PathCopyCopy.Settings.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copy # path parts (from beginning or end).
+        /// </summary>
+        internal static string PipelineElement_CopyNPathParts {
+            get {
+                return ResourceManager.GetString("PipelineElement_CopyNPathParts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Keeps only a certain number of path parts from the path, either from the beginning or the end..
+        /// </summary>
+        internal static string PipelineElement_CopyNPathParts_HelpText {
+            get {
+                return ResourceManager.GetString("PipelineElement_CopyNPathParts_HelpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create Email Links.
         /// </summary>
         internal static string PipelineElement_EmailLinks {

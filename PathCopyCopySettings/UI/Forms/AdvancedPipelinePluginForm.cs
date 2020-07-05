@@ -173,6 +173,9 @@ namespace PathCopyCopy.Settings.UI.Forms
             AddNewElementMenuItem(Resources.PipelineElement_InjectDriveLabel,
                 Resources.PipelineElement_InjectDriveLabel_HelpText,
                 () => new InjectDriveLabelPipelineElement());
+            AddNewElementMenuItem(Resources.PipelineElement_CopyNPathParts,
+                Resources.PipelineElement_CopyNPathParts_HelpText,
+                () => new CopyNPathPartsPipelineElement());
             AddNewElementMenuItem("-", null, null);
             AddNewElementMenuItem(Resources.PipelineElement_FollowSymlink,
                 Resources.PipelineElement_FollowSymlink_HelpText,
