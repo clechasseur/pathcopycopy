@@ -2,6 +2,7 @@ Version 19.0 (20??-??-??)
 -------------------------
 - New button to duplicate a custom command [https://github.com/clechasseur/pathcopycopy/issues/114]
 - New custom command element to inject drive's label into path (expert only) [https://github.com/clechasseur/pathcopycopy/issues/108]
+- New custom command to copy the first or last N parts of the path (expert only) [https://github.com/clechasseur/pathcopycopy/issues/84]
 - Registry value (WSLPathPrefix) to configure the prefix for WSL paths [https://github.com/clechasseur/pathcopycopy/issues/117]
 - Icon selected for Copy Long Path command now shows up in main menu too [https://github.com/clechasseur/pathcopycopy/issues/110]
 - Following symbolic links work even if the symbolic link is part of the path and not its target [https://github.com/clechasseur/pathcopycopy/issues/118]
