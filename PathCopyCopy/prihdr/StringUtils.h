@@ -45,9 +45,10 @@ public:
     static void         ReplaceAll(std::wstring& p_rString,
                                    const std::wstring& p_OldValue,
                                    const std::wstring& p_NewValue);
-    static void         Split(std::wstring& p_rString,
-                              wchar_t p_Separator,
-                              PCC::WStringV& p_rParts);
+    static PCC::WStringV Split(std::wstring p_String,
+                               const std::wstring& p_Separators);
+    static PCC::WStringV Split(std::wstring p_String,
+                               wchar_t p_Separator);
 
     static void         EncodeURICharacters(std::wstring& p_rString,
                                             EncodeParam p_EncodeParam);

@@ -68,9 +68,9 @@ namespace PCC
         static std::wstring
                         GetMultiStringLineBeginningWith(const std::wstring& p_MultiStringValue,
                                                         const std::wstring& p_Prefix);
-        static GUIDV    StringToPluginIds(std::wstring& p_rPluginIdsAsString,
+        static GUIDV    StringToPluginIds(std::wstring p_PluginIdsAsString,
                                           wchar_t p_Separator);
-        static UInt32V  StringToUInt32s(std::wstring& p_rUInt32sAsString,
+        static UInt32V  StringToUInt32s(std::wstring p_UInt32sAsString,
                                         wchar_t p_Separator);
         static std::wstring
                         PluginIdsToString(const GUIDV& p_vPluginIds,

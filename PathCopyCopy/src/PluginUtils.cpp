@@ -470,20 +470,18 @@ namespace PCC
     // Converts a string containing a list of plugin unique identifiers
     // to a vector of GUID structs.
     //
-    // @param p_rPluginIdsAsString String containing the plugin IDs. Upon return,
-    //                             this string is unusable.
+    // @param p_PluginIdsAsString String containing the plugin IDs.
     // @param p_Separator Character used to separate the plugin IDs in the string.
     // @return Vector of plugin IDs as GUID structs.
     //
-    GUIDV PluginUtils::StringToPluginIds(std::wstring& p_rPluginIdsAsString,
+    GUIDV PluginUtils::StringToPluginIds(std::wstring p_PluginIdsAsString,
                                          const wchar_t p_Separator)
     {
         // Assume there are no plugin IDs.
         GUIDV vPluginIds;
 
         // First split the string.
-        WStringV vStringParts;
-        StringUtils::Split(p_rPluginIdsAsString, p_Separator, vStringParts);
+        WStringV vStringParts = StringUtils::Split(std::move(p_PluginIdsAsString), p_Separator);
 
         // Scan parts and convert to GUIDs.
         GUID onePluginId = { 0 };
@@ -499,20 +497,18 @@ namespace PCC
     //
     // Converts a string containing a list of unsigned integers to a vector.
     //
-    // @param p_rUInt32sAsString String containing the integers. Upon return,
-    //                           this string is unusable.
+    // @param p_UInt32sAsString String containing the integers.
     // @param p_Separator Character used to separate the integers in the string.
     // @return Vector of unsigned integers.
     //
-    UInt32V PluginUtils::StringToUInt32s(std::wstring& p_rUInt32sAsString,
+    UInt32V PluginUtils::StringToUInt32s(std::wstring p_UInt32sAsString,
                                          const wchar_t p_Separator)
     {
         // Assume there are no integers.
         UInt32V vUInt32s;
 
         // First split the string.
-        WStringV vStringParts;
-        StringUtils::Split(p_rUInt32sAsString, p_Separator, vStringParts);
+        WStringV vStringParts = StringUtils::Split(std::move(p_UInt32sAsString), p_Separator);
 
         // Scan parts and convert to integers.
         for (const std::wstring& stringPart : vStringParts) {

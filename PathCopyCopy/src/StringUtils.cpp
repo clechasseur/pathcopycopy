@@ -54,26 +54,38 @@ void StringUtils::ReplaceAll(std::wstring& p_rString,
 }
 
 //
-// Splits the given string using the given separator into parts.
+// Splits the given string using the given separators into parts.
 //
-// @param p_String String to split. Upon return, this string is unusable.
-// @param p_Separator Separator to use for splitting.
-// @param p_rParts Where to store the string parts.
+// @param p_String String to split.
+// @param p_Separators Separators to use for splitting.
+// @return String parts.
 //
-void StringUtils::Split(std::wstring& p_rString,
-                        const wchar_t p_Separator,
-                        PCC::WStringV& p_rParts)
+PCC::WStringV StringUtils::Split(std::wstring p_String,
+                                 const std::wstring& p_Separators)
 {
-    p_rParts.clear();
-    if (!p_rString.empty()) {
-        std::wstring separators = { p_Separator, L'\0' };
+    PCC::WStringV vParts;
+    if (!p_String.empty()) {
         wchar_t* context = nullptr;
-        wchar_t* pCurToken = ::wcstok_s(&*p_rString.begin(), separators.c_str(), &context);
+        wchar_t* pCurToken = ::wcstok_s(&*p_String.begin(), p_Separators.c_str(), &context);
         while (pCurToken != nullptr) {
-            p_rParts.push_back(pCurToken);
-            pCurToken = ::wcstok_s(nullptr, separators.c_str(), &context);
+            vParts.emplace_back(pCurToken);
+            pCurToken = ::wcstok_s(nullptr, p_Separators.c_str(), &context);
         }
     }
+    return vParts;
+}
+
+//
+// Splits the given string using the given separator into parts.
+//
+// @param p_String String to split.
+// @param p_Separator Separator to use for splitting.
+// @return String parts.
+//
+PCC::WStringV StringUtils::Split(std::wstring p_String,
+                                 const wchar_t p_Separator)
+{
+    return Split(std::move(p_String), std::wstring(1, p_Separator));
 }
 
 //
