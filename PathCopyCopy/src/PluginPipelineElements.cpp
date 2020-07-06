@@ -490,6 +490,89 @@ namespace PCC
     }
 
     //
+    // Default constructor. The element will push the entire path
+    // to the stack.
+    //
+    PushToStackPipelineElement::PushToStackPipelineElement()
+        : m_Method(PushToStackMethod::Entire)
+    {
+    }
+
+    //
+    // Constructor for element that pushes a range in the path to
+    // the stack, as defined by beginning and end indexes.
+    //
+    // @param p_Begin Index of start of range to push to the stack (inclusive).
+    // @param p_End Index of end of range to push to the stack (exclusive).
+    //
+    PushToStackPipelineElement::PushToStackPipelineElement(const size_t p_Begin,
+                                                           const size_t p_End)
+        : m_Method(PushToStackMethod::Range),
+          m_Begin(p_Begin),
+          m_End(p_End)
+    {
+    }
+
+    //
+    // Constructor for element that uses a regex to find the part
+    // of the path to push to the stack.
+    //
+    // @param p_Regex Regex to use to locate the part of the path to push to the stack.
+    // @param p_IgnoreCase Whether to use case-sensitive regex or not.
+    // @param p_Group Index of group to push to the stack. Use 0 for entire match.
+    //
+    PushToStackPipelineElement::PushToStackPipelineElement(const std::wstring& p_Regex,
+                                                           const bool p_IgnoreCase,
+                                                           const size_t p_Group)
+        : m_Method(PushToStackMethod::Regex),
+          m_Regex(p_Regex),
+          m_IgnoreCase(p_IgnoreCase),
+          m_Group(p_Group)
+    {
+    }
+
+    //
+    // Locates the part of the path requested and pushes it to the stack.
+    // If nothing is found, an empty string will be pushed.
+    //
+    // @param p_rPath Path to modify (in-place). Not actually modified.
+    // @param p_rStack Stack where to push part of the path.
+    // @param p_pPluginProvider Optional object to access plugins; unused.
+    //
+    void PushToStackPipelineElement::ModifyPath(std::wstring& p_rPath,
+                                                std::stack<std::wstring>& p_rStack,
+                                                const PluginProvider* const /*p_pPluginProvider*/) const
+    {
+        p_rStack.emplace(PartToPush(p_rPath));
+    }
+
+    //
+    // Given a path, returns the part to push to the stack.
+    //
+    // @param p_Path Path to locate part of.
+    // @return Part of p_Path to push to the stack.
+    //
+    std::wstring PushToStackPipelineElement::PartToPush(const std::wstring& p_Path) const
+    {
+        std::wstring part;
+        
+        switch (m_Method) {
+            case PushToStackMethod::Entire: {
+                // Push the entire path.
+                part = p_Path;
+                break;
+            }
+
+            default: {
+                // TODO
+                break;
+            }
+        }
+
+        return part;
+    }
+
+    //
     // Constructor.
     //
     // @param p_PathsSeparator Separator to use between multiple paths.

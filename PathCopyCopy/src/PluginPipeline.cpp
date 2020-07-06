@@ -201,6 +201,35 @@ namespace PCC
     }
 
     //
+    // Modifies the given path using element-specific logic.
+    //
+    // @param p_rPath Path to modify (in-place).
+    // @param p_rStack Stack that can be used to execute operations.
+    // @param p_pPluginProvider Optional object to access plugins.
+    //
+    void PipelineElement::ModifyPath(std::wstring& p_rPath,
+                                     std::stack<std::wstring>& /*p_rStack*/,
+                                     const PluginProvider* const p_pPluginProvider) const noexcept(false)
+    {
+        // Most elements don't need the stack so just call the non-stack version.
+        ModifyPath(p_rPath, p_pPluginProvider);
+    }
+
+    //
+    // Modifies the given path using element-specific logic. This version does not
+    // use the stack; the default implementation calls this, so elements that do
+    // not interact with the stack can simply override this version.
+    //
+    // @param p_rPath Path to modify (in-place).
+    // @param p_pPluginProvider Optional object to access plugins.
+    //
+    void PipelineElement::ModifyPath(std::wstring& /*p_rPath*/,
+                                     const PluginProvider* const /*p_pPluginProvider*/) const noexcept(false)
+    {
+        // Subclasses can override.
+    }
+
+    //
     // Modifies global pipeline options. Each element has the opportunity
     // to modify them when a path is modified.
     //

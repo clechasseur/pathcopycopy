@@ -33,6 +33,19 @@
 namespace PCC
 {
     //
+    // PushToStackMethod
+    //
+    // Enum of the various ways PushToStackPipelineElement
+    // can find the part of the path to push to the stack.
+    //
+    enum class PushToStackMethod : long
+    {
+        Entire = 1,     // Push the entire path
+        Range = 2,      // Push a range as defined by bounds
+        Regex = 3,      // Push the first part that matches a given regex
+    };
+
+    //
     // FollowSymlinkPipelineElement
     //
     // Pipeline element that replaces paths to symlinks with the paths
@@ -353,6 +366,43 @@ namespace PCC
 
         void            Validate(const PluginProvider* p_pPluginProvider,
                                  GUIDS& p_rsSeenPluginIds) const override;
+    };
+
+    //
+    // PushToStackPipelineElement
+    //
+    // Pipeline element that pushes part of the path (possibly the entire thing)
+    // to the stack. Can use different methods to identify the part of the path
+    // to push to the stack, like regex.
+    //
+    class PushToStackPipelineElement : public PipelineElement
+    {
+    public:
+                        PushToStackPipelineElement();
+                        PushToStackPipelineElement(size_t p_Begin,
+                                                   size_t p_End);
+                        PushToStackPipelineElement(const std::wstring& p_Regex,
+                                                   bool p_IgnoreCase,
+                                                   size_t p_Group);
+                        PushToStackPipelineElement(const PushToStackPipelineElement&) = delete;
+        PushToStackPipelineElement&
+                        operator=(const PushToStackPipelineElement&) = delete;
+
+        void            ModifyPath(std::wstring& p_rPath,
+                                   std::stack<std::wstring>& p_rStack,
+                                   const PluginProvider* p_pPluginProvider) const override;
+
+    private:
+        const PushToStackMethod
+                        m_Method;               // How to find the part of the path to push.
+        const size_t    m_Begin = 0;            // Start of the range to push to the stack (if m_Method is Range).
+        const size_t    m_End = 0;              // End of the range to push to the stack (if m_Method is Range).
+        const std::wstring
+                        m_Regex{};              // Regex to use to find the part of the path to push (if m_Method is Regex).
+        const bool      m_IgnoreCase = false;   // Whether to ignore case in regex (if m_Method is Regex).
+        const size_t    m_Group = 0;            // Index of regex group to push to the stack (if m_Method is Regex).
+
+        std::wstring    PartToPush(const std::wstring& p_Path) const;
     };
 
     //

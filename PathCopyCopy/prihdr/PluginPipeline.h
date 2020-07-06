@@ -25,6 +25,7 @@
 #include "PluginProvider.h"
 
 #include <exception>
+#include <stack>
 #include <string>
 
 
@@ -105,7 +106,10 @@ namespace PCC
                                  GUIDS& p_rsSeenPluginIds) const noexcept(false);
 
         virtual void    ModifyPath(std::wstring& p_rPath,
-                                   const PluginProvider* p_pPluginProvider) const = 0;
+                                   std::stack<std::wstring>& p_rStack,
+                                   const PluginProvider* p_pPluginProvider) const noexcept(false);
+        virtual void    ModifyPath(std::wstring& p_rPath,
+                                   const PluginProvider* p_pPluginProvider) const noexcept(false);
         virtual void    ModifyOptions(PipelineOptions& p_rOptions) const noexcept(false);
         virtual bool    ShouldBeEnabledFor(const std::wstring& p_ParentPath,
                                            const std::wstring& p_File,
