@@ -47,6 +47,10 @@ namespace
     constexpr wchar_t   ELEMENT_CODE_COPY_N_PATH_PARTS          = L'n';
     constexpr wchar_t   ELEMENT_CODE_APPLY_PLUGIN               = L'{';
     constexpr wchar_t   ELEMENT_CODE_APPLY_PIPELINE_PLUGIN      = L'}';
+    constexpr wchar_t   ELEMENT_CODE_PUSH_TO_STACK              = L'u';
+    constexpr wchar_t   ELEMENT_CODE_POP_FROM_STACK             = L'o';
+    constexpr wchar_t   ELEMENT_CODE_SWAP_STACK_VALUES          = L'w';
+    constexpr wchar_t   ELEMENT_CODE_DUPLICATE_STACK_VALUE      = L'd';
     constexpr wchar_t   ELEMENT_CODE_PATHS_SEPARATOR            = L',';
     constexpr wchar_t   ELEMENT_CODE_EXECUTABLE                 = L'x';
     constexpr wchar_t   ELEMENT_CODE_EXECUTABLE_WITH_FILELIST   = L'f';
@@ -156,6 +160,21 @@ namespace PCC
                 spElement = DecodeApplyPluginElement(code, p_rStream);
                 break;
             }
+            case ELEMENT_CODE_PUSH_TO_STACK: {
+                spElement = DecodePushToStackElement(p_rStream);
+                break;
+            }
+            case ELEMENT_CODE_POP_FROM_STACK: {
+                spElement = DecodePopFromStackElement(p_rStream);
+                break;
+            }
+            case ELEMENT_CODE_SWAP_STACK_VALUES: {
+                spElement = std::make_shared<SwapStackValuesPipelineElement>();
+                break;
+            }
+            case ELEMENT_CODE_DUPLICATE_STACK_VALUE: {
+                spElement = std::make_shared<DuplicateStackValuePipelineElement>();
+            }
             case ELEMENT_CODE_PATHS_SEPARATOR: {
                 spElement = DecodePathsSeparatorElement(p_rStream);
                 break;
@@ -264,6 +283,57 @@ namespace PCC
         } else {
             throw InvalidPipelineException();
         }
+    }
+
+    //
+    // Decodes a PushToStackPipelineElement found in an encoded stream.
+    //
+    // @param p_rStream Stream containing encoded element.
+    // @return Newly-created element.
+    //
+    auto PipelineDecoder::DecodePushToStackElement(EncodedElementsStream& p_rStream) -> PipelineElementSP
+    {
+        PipelineElementSP spElement;
+
+        // First read the push method.
+        switch (static_cast<PushToStackMethod>(p_rStream.ReadLong())) {
+            case PushToStackMethod::Entire: {
+                // No more data in encoded stream.
+                spElement = std::make_shared<PushToStackPipelineElement>();
+                break;
+            }
+            case PushToStackMethod::Range: {
+                // Encoded stream contains begin and end of range.
+                const auto begin = static_cast<size_t>(p_rStream.ReadLong());
+                const auto end = static_cast<size_t>(p_rStream.ReadLong());
+                spElement = std::make_shared<PushToStackPipelineElement>(begin, end);
+                break;
+            }
+            case PushToStackMethod::Regex: {
+                // Encoded stream contains the regex, ignore case flag and group number.
+                const auto regex = p_rStream.ReadString();
+                const auto ignoreCase = p_rStream.ReadBool();
+                const auto group = static_cast<size_t>(p_rStream.ReadLong());
+                spElement = std::make_shared<PushToStackPipelineElement>(regex, ignoreCase, group);
+                break;
+            }
+            default:
+                throw InvalidPipelineException();
+        }
+
+        return spElement;
+    }
+
+    //
+    // Decodes a PopFromStackPipelineElement found in an encoded stream.
+    //
+    // @param p_rStream Stream containing encoded element.
+    // @return Newly-created element.
+    //
+    auto PipelineDecoder::DecodePopFromStackElement(EncodedElementsStream& /*p_rStream*/) -> PipelineElementSP
+    {
+        // TODO
+        return nullptr;
     }
 
     //
