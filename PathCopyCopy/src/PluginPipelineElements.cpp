@@ -564,7 +564,7 @@ namespace PCC
             }
             case PushToStackMethod::Range: {
                 // Push a range in the path.
-                if (m_Begin < p_Path.size()) {
+                if (m_Begin < p_Path.size() && m_Begin < m_End) {
                     part = p_Path.substr(m_Begin, m_End - m_Begin);
                 }
                 break;
@@ -589,13 +589,122 @@ namespace PCC
                 }
                 break;
             }
-            default: {
+            default:
                 assert(false);
-                break;
-            }
         }
 
         return part;
+    }
+
+    //
+    // Default constructor. The element will replace the entire
+    // path with the popped value.
+    //
+    PopFromStackPipelineElement::PopFromStackPipelineElement()
+        : m_Location(PopFromStackLocation::Entire)
+    {
+    }
+
+    //
+    // Constructor for an element that replaces a range in the path
+    // with the popped value.
+    //
+    // @param p_Begin Start of range to replace with the popped value.
+    // @param p_End End of range to replace with the popped value.
+    //
+    PopFromStackPipelineElement::PopFromStackPipelineElement(const size_t p_Begin,
+                                                             const size_t p_End)
+        : m_Location(PopFromStackLocation::Range),
+          m_Begin(p_Begin),
+          m_End(p_End)
+    {
+    }
+
+    //
+    // Constructor for an element that uses a regex to replace
+    // part of the path with the popped value.
+    //
+    // @param p_Regex Regex to use to find the part to replace.
+    // @param p_IgnoreCase Whether to ignore case when using the regex.
+    //
+    PopFromStackPipelineElement::PopFromStackPipelineElement(const std::wstring& p_Regex,
+                                                             const bool p_IgnoreCase)
+        : m_Location(PopFromStackLocation::Regex),
+          m_Regex(p_Regex),
+          m_IgnoreCase(p_IgnoreCase)
+    {
+    }
+
+    //
+    // Constructor for an element that simply pops a value from
+    // the stack and drops it.
+    //
+    PopFromStackPipelineElement::PopFromStackPipelineElement(std::nullptr_t)
+        : m_Location(PopFromStackLocation::Nowhere)
+    {
+    }
+
+    //
+    // Attempts to pop a value from the stack. If it works, optionally stores
+    // it in the path by replacing the entire path or part of it with the
+    // popped value.
+    //
+    // @param p_rPath Path to modify (in-place).
+    // @param p_rStack Stack from which to pop the value.
+    // @param p_pPluginProvider Optional object to access plugins; unused.
+    //
+    void PopFromStackPipelineElement::ModifyPath(std::wstring& p_rPath,
+                                                 std::stack<std::wstring>& p_rStack,
+                                                 const PluginProvider* const /*p_pPluginProvider*/) const
+    {
+        if (!p_rStack.empty()) {
+            const auto value = p_rStack.top();
+            p_rStack.pop();
+
+            switch (m_Location) {
+                case PopFromStackLocation::Entire: {
+                    // Replace the entire path with the value.
+                    p_rPath = value;
+                    break;
+                }
+                case PopFromStackLocation::Range: {
+                    // Replace a range in the path with the value.
+                    if (m_Begin < p_rPath.size() && m_Begin <= m_End) {
+                        p_rPath.replace(m_Begin, m_End - m_Begin, value);
+                    }
+                    break;
+                }
+                case PopFromStackLocation::Regex: {
+                    // Replace regex match with the value.
+                    try {
+                        if (!m_Regex.empty()) {
+#pragma warning(suppress: 26812)    // std::regex_constants::syntax_option_type could be enum class
+                            std::regex_constants::syntax_option_type reOptions = std::regex_constants::ECMAScript;
+                            if (m_IgnoreCase) {
+                                reOptions |= std::regex_constants::icase;
+                            }
+                            std::wregex regex(m_Regex, reOptions);
+
+                            // We can't use std::regex_replace because if the value contains
+                            // special characters it will get weird. So use regex_search and
+                            // do the replacement by hand.
+                            std::wsmatch match;
+                            if (std::regex_search(p_rPath, match, regex)) {
+                                p_rPath = match.prefix().str() + value + match.suffix().str();
+                            }
+                        }
+                    } catch (const std::regex_error&) {
+                    }
+                    break;
+                }
+                case PopFromStackLocation::Nowhere: {
+                    // Simply drop the value.
+                    break;
+                }
+                default:
+                    assert(false);
+            }
+        }
     }
 
     //

@@ -46,6 +46,20 @@ namespace PCC
     };
 
     //
+    // PopFromStackLocation
+    //
+    // Enum of the possible locations where to store a value
+    // popped from the stack by PopFromStackPipelineElement.
+    //
+    enum class PopFromStackLocation : long
+    {
+        Entire = 1,     // Replace entire path with the popped value
+        Range = 2,      // Replace a range in the path with the popped value
+        Regex = 3,      // Replace a regex match with the popped value
+        Nowhere = 4,    // Simply pop and drop the value
+    };
+
+    //
     // FollowSymlinkPipelineElement
     //
     // Pipeline element that replaces paths to symlinks with the paths
@@ -403,6 +417,42 @@ namespace PCC
         const size_t    m_Group = 0;            // Index of regex group to push to the stack (if m_Method is Regex).
 
         std::wstring    PartToPush(const std::wstring& p_Path) const;
+    };
+
+    //
+    // PopFromStackPipelineElement
+    //
+    // Pipeline element that pops a value from the stack and stores it
+    // somewhere in the path. Can store value in different locations,
+    // including nowhere or replacing the entire path.
+    //
+    // If the stack is empty when invoked, nothing happens.
+    //
+    class PopFromStackPipelineElement : public PipelineElement
+    {
+    public:
+                        PopFromStackPipelineElement();
+                        PopFromStackPipelineElement(size_t m_Begin,
+                                                    size_t m_End);
+                        PopFromStackPipelineElement(const std::wstring& p_Regex,
+                                                    bool p_IgnoreCase);
+        explicit        PopFromStackPipelineElement(std::nullptr_t);
+                        PopFromStackPipelineElement(const PopFromStackPipelineElement&) = delete;
+        PopFromStackPipelineElement&
+                        operator=(const PopFromStackPipelineElement&) = delete;
+
+        void            ModifyPath(std::wstring& p_rPath,
+                                   std::stack<std::wstring>& p_rStack,
+                                   const PluginProvider* p_pPluginProvider) const override;
+
+    private:
+        const PopFromStackLocation
+                        m_Location;             // Where to store the popped value.
+        const size_t    m_Begin = 0;            // Start of range to replace with the popped value (if m_Location is Range).
+        const size_t    m_End = 0;              // End of range to replace with the popped value (if m_Location is Range).
+        const std::wstring
+                        m_Regex{};              // Regex to replace with the popped value (if m_Location is Regex).
+        const bool      m_IgnoreCase = false;   // Whether to ignore case in regex (if m_Location is Regex).
     };
 
     //
