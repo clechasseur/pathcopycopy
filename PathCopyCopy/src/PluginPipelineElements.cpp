@@ -708,6 +708,45 @@ namespace PCC
     }
 
     //
+    // Attempts to pop two values from the stack. If it works, pushes
+    // them back in reverse order.
+    //
+    // @param p_rPath Path to modify; unused.
+    // @param p_rStack Stack from which to pop the values.
+    // @param p_pPluginProvider Optional object to access plugins; unused.
+    //
+    void SwapStackValuesPipelineElement::ModifyPath(std::wstring& /*p_rPath*/,
+                                                    std::stack<std::wstring>& p_rStack,
+                                                    const PluginProvider* const /*p_pPluginProvider*/) const
+    {
+        if (p_rStack.size() >= 2) {
+            const auto value1 = p_rStack.top();
+            p_rStack.pop();
+            const auto value2 = p_rStack.top();
+            p_rStack.pop();
+            p_rStack.push(value1);
+            p_rStack.push(value2);
+        }
+    }
+
+    //
+    // Attempts to pop a value from the stack. If it works, pushes
+    // back two copies of the value.
+    //
+    // @param p_rPath Path to modify; unused.
+    // @param p_rStack Stack from which to pop the value.
+    // @param p_pPluginProvider Optional object to access plugins; unused.
+    //
+    void DuplicateStackValuePipelineElement::ModifyPath(std::wstring& /*p_rPath*/,
+                                                        std::stack<std::wstring>& p_rStack,
+                                                        const PluginProvider* const /*p_pPluginProvider*/) const
+    {
+        if (!p_rStack.empty()) {
+            p_rStack.push(p_rStack.top());
+        }
+    }
+
+    //
     // Constructor.
     //
     // @param p_PathsSeparator Separator to use between multiple paths.

@@ -456,6 +456,46 @@ namespace PCC
     };
 
     //
+    // SwapStackValuesPipelineElement
+    //
+    // Pipeline element that pops two values from the stack and swaps them.
+    //
+    // If the stack contains less than two values, nothing happens.
+    //
+    class SwapStackValuesPipelineElement : public PipelineElement
+    {
+    public:
+                        SwapStackValuesPipelineElement() = default;
+                        SwapStackValuesPipelineElement(const SwapStackValuesPipelineElement&) = delete;
+        SwapStackValuesPipelineElement&
+                        operator=(const SwapStackValuesPipelineElement&) = delete;
+
+        void            ModifyPath(std::wstring& p_rPath,
+                                   std::stack<std::wstring>& p_rStack,
+                                   const PluginProvider* p_pPluginProvider) const override;
+    };
+
+    //
+    // DuplicateStackValuePipelineElement
+    //
+    // Pipeline element that duplicates the top value on the stack.
+    //
+    // If the stack is empty, nothing happens.
+    //
+    class DuplicateStackValuePipelineElement : public PipelineElement
+    {
+    public:
+                        DuplicateStackValuePipelineElement() = default;
+                        DuplicateStackValuePipelineElement(const DuplicateStackValuePipelineElement&) = delete;
+        DuplicateStackValuePipelineElement&
+                        operator=(const DuplicateStackValuePipelineElement&) = delete;
+
+        void            ModifyPath(std::wstring& p_rPath,
+                                   std::stack<std::wstring>& p_rStack,
+                                   const PluginProvider* p_pPluginProvider) const override;
+    };
+
+    //
     // PathsSeparatorPipelineElement
     //
     // Pipeline element that does not modify the path but changes the
