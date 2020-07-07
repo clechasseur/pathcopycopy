@@ -562,9 +562,35 @@ namespace PCC
                 part = p_Path;
                 break;
             }
+            case PushToStackMethod::Range: {
+                // Push a range in the path.
+                if (m_Begin < p_Path.size()) {
+                    part = p_Path.substr(m_Begin, m_End - m_Begin);
+                }
+                break;
+            }
+            case PushToStackMethod::Regex: {
+                // Push the first match for a regex.
+                try {
+                    if (!m_Regex.empty()) {
+#pragma warning(suppress: 26812)    // std::regex_constants::syntax_option_type could be enum class
+                        std::regex_constants::syntax_option_type reOptions = std::regex_constants::ECMAScript;
+                        if (m_IgnoreCase) {
+                            reOptions |= std::regex_constants::icase;
+                        }
+                        std::wregex regex(m_Regex, reOptions);
 
+                        std::wsmatch match;
+                        if (std::regex_search(p_Path, match, regex)) {
+                            part = match[m_Group];
+                        }
+                    }
+                } catch (const std::regex_error&) {
+                }
+                break;
+            }
             default: {
-                // TODO
+                assert(false);
                 break;
             }
         }
