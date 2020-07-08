@@ -144,8 +144,9 @@ namespace PCC
     void Pipeline::ModifyPath(std::wstring& p_rPath,
                               const PluginProvider* const p_pPluginProvider) const
     {
+        std::stack<std::wstring> aStack;
         for (const auto& spElement : m_vspElements) {
-            spElement->ModifyPath(p_rPath, p_pPluginProvider);
+            spElement->ModifyPath(p_rPath, aStack, p_pPluginProvider);
         }
     }
 
