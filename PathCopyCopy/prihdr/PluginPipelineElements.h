@@ -57,7 +57,9 @@ namespace PCC
         Entire  = 1,    // Replace entire path with the popped value
         Range   = 2,    // Replace a range in the path with the popped value
         Regex   = 3,    // Replace a regex match with the popped value
-        Nowhere = 4,    // Simply pop and drop the value
+        Start   = 4,    // Insert popped value at start of path
+        End     = 5,    // Insert popped value at end of path
+        Nowhere = 6,    // Simply pop and drop the value
     };
 
     //
@@ -435,12 +437,11 @@ namespace PCC
     class PopFromStackPipelineElement : public PipelineElement
     {
     public:
-                        PopFromStackPipelineElement();
+        explicit        PopFromStackPipelineElement(PopFromStackLocation p_Location);
                         PopFromStackPipelineElement(size_t m_Begin,
                                                     size_t m_End);
                         PopFromStackPipelineElement(const std::wstring& p_Regex,
                                                     bool p_IgnoreCase);
-        explicit        PopFromStackPipelineElement(std::nullptr_t);
                         PopFromStackPipelineElement(const PopFromStackPipelineElement&) = delete;
         PopFromStackPipelineElement&
                         operator=(const PopFromStackPipelineElement&) = delete;

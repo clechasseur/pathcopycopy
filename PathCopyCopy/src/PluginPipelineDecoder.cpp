@@ -341,10 +341,14 @@ namespace PCC
         PipelineElementSP spElement;
 
         // First read the pop location.
-        switch (static_cast<PopFromStackLocation>(p_rStream.ReadLong())) {
-            case PopFromStackLocation::Entire: {
+        const auto location = static_cast<PopFromStackLocation>(p_rStream.ReadLong());
+        switch (location) {
+            case PopFromStackLocation::Entire:
+            case PopFromStackLocation::Start:
+            case PopFromStackLocation::End:
+            case PopFromStackLocation::Nowhere: {
                 // No more data in encoded stream.
-                spElement = std::make_shared<PopFromStackPipelineElement>();
+                spElement = std::make_shared<PopFromStackPipelineElement>(location);
                 break;
             }
             case PopFromStackLocation::Range: {
@@ -359,11 +363,6 @@ namespace PCC
                 const auto regex = p_rStream.ReadString();
                 const auto ignoreCase = p_rStream.ReadBool();
                 spElement = std::make_shared<PopFromStackPipelineElement>(regex, ignoreCase);
-                break;
-            }
-            case PopFromStackLocation::Nowhere: {
-                // No more data in encoded stream.
-                spElement = std::make_shared<PopFromStackPipelineElement>(nullptr);
                 break;
             }
             default:

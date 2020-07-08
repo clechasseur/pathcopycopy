@@ -613,11 +613,12 @@ namespace PCC
     }
 
     //
-    // Default constructor. The element will replace the entire
-    // path with the popped value.
+    // Constructor with pop location and no other information.
     //
-    PopFromStackPipelineElement::PopFromStackPipelineElement()
-        : m_Location(PopFromStackLocation::Entire)
+    // @param p_Location Location where to store popped value.
+    //
+    PopFromStackPipelineElement::PopFromStackPipelineElement(const PopFromStackLocation p_Location)
+        : m_Location(p_Location)
     {
     }
 
@@ -648,15 +649,6 @@ namespace PCC
         : m_Location(PopFromStackLocation::Regex),
           m_Regex(p_Regex),
           m_IgnoreCase(p_IgnoreCase)
-    {
-    }
-
-    //
-    // Constructor for an element that simply pops a value from
-    // the stack and drops it.
-    //
-    PopFromStackPipelineElement::PopFromStackPipelineElement(std::nullptr_t)
-        : m_Location(PopFromStackLocation::Nowhere)
     {
     }
 
@@ -711,6 +703,16 @@ namespace PCC
                         }
                     } catch (const std::regex_error&) {
                     }
+                    break;
+                }
+                case PopFromStackLocation::Start: {
+                    // Insert value at start of path.
+                    p_rPath = value + p_rPath;
+                    break;
+                }
+                case PopFromStackLocation::End: {
+                    // Insert value at end of path.
+                    p_rPath += value;
                     break;
                 }
                 case PopFromStackLocation::Nowhere: {
