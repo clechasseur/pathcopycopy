@@ -784,7 +784,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         public Version RequiredVersion
         {
             get {
-                return Elements.Max(element => element.RequiredVersion);
+                return Elements.Max(element => element.RequiredVersion) ?? PipelinePluginInfo.DefaultRequiredVersion;
             }
         }
         
