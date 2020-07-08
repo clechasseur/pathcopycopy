@@ -532,6 +532,18 @@ namespace PCC
     }
 
     //
+    // Constructor for element that pushes a fixed string to the
+    // stack instead of part of the path.
+    //
+    // @param p_FixedString Fixed string to push to the stack.
+    //
+    PushToStackPipelineElement::PushToStackPipelineElement(const std::wstring& p_FixedString)
+        : m_Method(PushToStackMethod::Fixed),
+          m_FixedString(p_FixedString)
+    {
+    }
+
+    //
     // Locates the part of the path requested and pushes it to the stack.
     // If nothing is found, an empty string will be pushed.
     //
@@ -587,6 +599,10 @@ namespace PCC
                     }
                 } catch (const std::regex_error&) {
                 }
+                break;
+            }
+            case PushToStackMethod::Fixed: {
+                part = m_FixedString;
                 break;
             }
             default:

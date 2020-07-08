@@ -40,9 +40,10 @@ namespace PCC
     //
     enum class PushToStackMethod : long
     {
-        Entire = 1,     // Push the entire path
-        Range = 2,      // Push a range as defined by bounds
-        Regex = 3,      // Push the first part that matches a given regex
+        Entire  = 1,    // Push the entire path
+        Range   = 2,    // Push a range as defined by bounds
+        Regex   = 3,    // Push the first part that matches a given regex
+        Fixed   = 4,    // Push a fixed string instead of part of the path
     };
 
     //
@@ -53,9 +54,9 @@ namespace PCC
     //
     enum class PopFromStackLocation : long
     {
-        Entire = 1,     // Replace entire path with the popped value
-        Range = 2,      // Replace a range in the path with the popped value
-        Regex = 3,      // Replace a regex match with the popped value
+        Entire  = 1,    // Replace entire path with the popped value
+        Range   = 2,    // Replace a range in the path with the popped value
+        Regex   = 3,    // Replace a regex match with the popped value
         Nowhere = 4,    // Simply pop and drop the value
     };
 
@@ -398,6 +399,7 @@ namespace PCC
                         PushToStackPipelineElement(const std::wstring& p_Regex,
                                                    bool p_IgnoreCase,
                                                    size_t p_Group);
+        explicit        PushToStackPipelineElement(const std::wstring& p_FixedString);
                         PushToStackPipelineElement(const PushToStackPipelineElement&) = delete;
         PushToStackPipelineElement&
                         operator=(const PushToStackPipelineElement&) = delete;
@@ -415,6 +417,8 @@ namespace PCC
                         m_Regex{};              // Regex to use to find the part of the path to push (if m_Method is Regex).
         const bool      m_IgnoreCase = false;   // Whether to ignore case in regex (if m_Method is Regex).
         const size_t    m_Group = 0;            // Index of regex group to push to the stack (if m_Method is Regex).
+        const std::wstring
+                        m_FixedString{};        // Fixed string to push to the stack (if m_Method is Fixed).
 
         std::wstring    PartToPush(const std::wstring& p_Path) const;
     };

@@ -317,8 +317,14 @@ namespace PCC
                 spElement = std::make_shared<PushToStackPipelineElement>(regex, ignoreCase, group);
                 break;
             }
+            case PushToStackMethod::Fixed: {
+                // Encoded stream contains the fixed string.
+                const auto fixedString = p_rStream.ReadString();
+                spElement = std::make_shared<PushToStackPipelineElement>(fixedString);
+                break;
+            }
             default:
-                throw InvalidPipelineException();
+                throw InvalidPipelineException(ATL::CStringA(MAKEINTRESOURCEA(IDS_INVALIDPIPELINE_POSSIBLE_DOWNGRADE)));
         }
 
         return spElement;
@@ -330,10 +336,41 @@ namespace PCC
     // @param p_rStream Stream containing encoded element.
     // @return Newly-created element.
     //
-    auto PipelineDecoder::DecodePopFromStackElement(EncodedElementsStream& /*p_rStream*/) -> PipelineElementSP
+    auto PipelineDecoder::DecodePopFromStackElement(EncodedElementsStream& p_rStream) -> PipelineElementSP
     {
-        // TODO
-        return nullptr;
+        PipelineElementSP spElement;
+
+        // First read the pop location.
+        switch (static_cast<PopFromStackLocation>(p_rStream.ReadLong())) {
+            case PopFromStackLocation::Entire: {
+                // No more data in encoded stream.
+                spElement = std::make_shared<PopFromStackPipelineElement>();
+                break;
+            }
+            case PopFromStackLocation::Range: {
+                // Encoded stream contains begin and end of range.
+                const auto begin = static_cast<size_t>(p_rStream.ReadLong());
+                const auto end = static_cast<size_t>(p_rStream.ReadLong());
+                spElement = std::make_shared<PopFromStackPipelineElement>(begin, end);
+                break;
+            }
+            case PopFromStackLocation::Regex: {
+                // Encoded stream contains the regex and ignore case flag.
+                const auto regex = p_rStream.ReadString();
+                const auto ignoreCase = p_rStream.ReadBool();
+                spElement = std::make_shared<PopFromStackPipelineElement>(regex, ignoreCase);
+                break;
+            }
+            case PopFromStackLocation::Nowhere: {
+                // No more data in encoded stream.
+                spElement = std::make_shared<PopFromStackPipelineElement>(nullptr);
+                break;
+            }
+            default:
+                throw InvalidPipelineException(ATL::CStringA(MAKEINTRESOURCEA(IDS_INVALIDPIPELINE_POSSIBLE_DOWNGRADE)));
+        }
+
+        return spElement;
     }
 
     //
