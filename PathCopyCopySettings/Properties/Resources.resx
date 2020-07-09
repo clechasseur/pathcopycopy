@@ -433,7 +433,7 @@ Control-click to avoid displaying an icon for this command.</value>
     <value>Unexpand Environment Strings</value>
   </data>
   <data name="PipelineElement_UnexpandEnvStrings_HelpText" xml:space="preserve">
-    <value>Replaces parts of the path with environment variable references, if possible (like %USERPROFILE%, etc.)</value>
+    <value>Replace parts of the path with environment variable references, if possible (like %USERPROFILE%, etc.)</value>
   </data>
   <data name="PipelineElement_ApplyPipelinePlugin" xml:space="preserve">
     <value>Use Base Command</value>
@@ -448,12 +448,36 @@ Control-click to avoid displaying an icon for this command.</value>
     <value>Inject Drive Label</value>
   </data>
   <data name="PipelineElement_InjectDriveLabel_HelpText" xml:space="preserve">
-    <value>Replaces all instances of %DRIVELABEL% in the path with the drive's label.</value>
+    <value>Replace all instances of %DRIVELABEL% in the path with the drive's label</value>
   </data>
   <data name="PipelineElement_CopyNPathParts" xml:space="preserve">
     <value>Copy # path parts (from beginning or end)</value>
   </data>
   <data name="PipelineElement_CopyNPathParts_HelpText" xml:space="preserve">
-    <value>Keeps only a certain number of path parts from the path, either from the beginning or the end.</value>
+    <value>Keep only a certain number of path parts from the path, either from the beginning or the end</value>
+  </data>
+  <data name="PipelineElement_DuplicateStackValue" xml:space="preserve">
+    <value>Duplicate Top Stack Value</value>
+  </data>
+  <data name="PipelineElement_DuplicateStackValue_HelpText" xml:space="preserve">
+    <value>Duplicate the top value on the stack</value>
+  </data>
+  <data name="PipelineElement_PopFromStack" xml:space="preserve">
+    <value>Pop Value from Stack</value>
+  </data>
+  <data name="PipelineElement_PopFromStack_HelpText" xml:space="preserve">
+    <value>Pop a value from the stack, possibly inserting it somewhere in the path</value>
+  </data>
+  <data name="PipelineElement_PushToStack" xml:space="preserve">
+    <value>Push Value to Stack</value>
+  </data>
+  <data name="PipelineElement_PushToStack_HelpText" xml:space="preserve">
+    <value>Push a value to the stack, possibly part of the path</value>
+  </data>
+  <data name="PipelineElement_SwapStackValues" xml:space="preserve">
+    <value>Swap Top Two Stack Values</value>
+  </data>
+  <data name="PipelineElement_SwapStackValues_HelpText" xml:space="preserve">
+    <value>Swap the top two values on the stack</value>
   </data>
 </root>

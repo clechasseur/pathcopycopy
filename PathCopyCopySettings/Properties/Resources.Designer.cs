@@ -533,11 +533,29 @@ namespace PathCopyCopy.Settings.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Keeps only a certain number of path parts from the path, either from the beginning or the end..
+        ///   Looks up a localized string similar to Keep only a certain number of path parts from the path, either from the beginning or the end.
         /// </summary>
         internal static string PipelineElement_CopyNPathParts_HelpText {
             get {
                 return ResourceManager.GetString("PipelineElement_CopyNPathParts_HelpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Duplicate Top Stack Value.
+        /// </summary>
+        internal static string PipelineElement_DuplicateStackValue {
+            get {
+                return ResourceManager.GetString("PipelineElement_DuplicateStackValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Duplicate the top value on the stack.
+        /// </summary>
+        internal static string PipelineElement_DuplicateStackValue_HelpText {
+            get {
+                return ResourceManager.GetString("PipelineElement_DuplicateStackValue_HelpText", resourceCulture);
             }
         }
         
@@ -695,7 +713,7 @@ namespace PathCopyCopy.Settings.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Replaces all instances of %DRIVELABEL% in the path with the drive&apos;s label..
+        ///   Looks up a localized string similar to Replace all instances of %DRIVELABEL% in the path with the drive&apos;s label.
         /// </summary>
         internal static string PipelineElement_InjectDriveLabel_HelpText {
             get {
@@ -736,6 +754,42 @@ namespace PathCopyCopy.Settings.Properties {
         internal static string PipelineElement_PathsSeparator_HelpText {
             get {
                 return ResourceManager.GetString("PipelineElement_PathsSeparator_HelpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pop Value from Stack.
+        /// </summary>
+        internal static string PipelineElement_PopFromStack {
+            get {
+                return ResourceManager.GetString("PipelineElement_PopFromStack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pop a value from the stack, possibly inserting it somewhere in the path.
+        /// </summary>
+        internal static string PipelineElement_PopFromStack_HelpText {
+            get {
+                return ResourceManager.GetString("PipelineElement_PopFromStack_HelpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Push Value to Stack.
+        /// </summary>
+        internal static string PipelineElement_PushToStack {
+            get {
+                return ResourceManager.GetString("PipelineElement_PushToStack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Push a value to the stack, possibly part of the path.
+        /// </summary>
+        internal static string PipelineElement_PushToStack_HelpText {
+            get {
+                return ResourceManager.GetString("PipelineElement_PushToStack_HelpText", resourceCulture);
             }
         }
         
@@ -794,6 +848,24 @@ namespace PathCopyCopy.Settings.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Swap Top Two Stack Values.
+        /// </summary>
+        internal static string PipelineElement_SwapStackValues {
+            get {
+                return ResourceManager.GetString("PipelineElement_SwapStackValues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Swap the top two values on the stack.
+        /// </summary>
+        internal static string PipelineElement_SwapStackValues_HelpText {
+            get {
+                return ResourceManager.GetString("PipelineElement_SwapStackValues_HelpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unexpand Environment Strings.
         /// </summary>
         internal static string PipelineElement_UnexpandEnvStrings {
@@ -803,7 +875,7 @@ namespace PathCopyCopy.Settings.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Replaces parts of the path with environment variable references, if possible (like %USERPROFILE%, etc.).
+        ///   Looks up a localized string similar to Replace parts of the path with environment variable references, if possible (like %USERPROFILE%, etc.).
         /// </summary>
         internal static string PipelineElement_UnexpandEnvStrings_HelpText {
             get {

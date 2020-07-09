@@ -880,6 +880,70 @@ namespace PathCopyCopy.Settings.Core.Plugins
     }
 
     /// <summary>
+    /// Method used by <see cref="PushToStackPipelineElement"/>
+    /// to push a value on the stack.
+    /// </summary>
+    public enum PushToStackMethod : int
+    {
+        /// <summary>
+        /// Push the entire path to the stack
+        /// </summary>
+        Entire = 1,
+
+        /// <summary>
+        /// Push a range in the path to the stack
+        /// </summary>
+        Range = 2,
+
+        /// <summary>
+        /// Push the first match of a regex in the path to the stack
+        /// </summary>
+        Regex = 3,
+
+        /// <summary>
+        /// Push a fixed value to the stack
+        /// </summary>
+        Fixed = 4,
+    }
+
+    /// <summary>
+    /// Possible locations where to store value popped by
+    /// <see cref="PopFromStackPipelineElement"/>.
+    /// </summary>
+    public enum PopFromStackLocation : int
+    {
+        /// <summary>
+        /// Replace the entire path with the popped value
+        /// </summary>
+        Entire = 1,
+
+        /// <summary>
+        /// Replace a range in the path with the popped value
+        /// </summary>
+        Range = 2,
+
+        /// <summary>
+        /// Replace the first match of a regex with the popped value
+        /// </summary>
+        Regex = 3,
+
+        /// <summary>
+        /// Insert the popped value at the beginning of the path
+        /// </summary>
+        Start = 4,
+
+        /// <summary>
+        /// Insert the popped value at the end of the path
+        /// </summary>
+        End = 5,
+
+        /// <summary>
+        /// Simply drop the popped value
+        /// </summary>
+        Nowhere = 6,
+    }
+
+    /// <summary>
     /// Pipeline element that instructs Path Copy Copy to follow
     /// any symlinks in the path.
     /// </summary>
@@ -1932,6 +1996,228 @@ namespace PathCopyCopy.Settings.Core.Plugins
         protected override bool IncludePipelineElementsInEditingControl()
         {
             return true;
+        }
+    }
+
+    /// <summary>
+    /// Base class for pipeline elements that deal with the stack.
+    /// Simply used to identify such elements as expert-mode-only.
+    /// </summary>
+    abstract public class StackPipelineElement : PipelineElement
+    {
+        /// <summary>
+        /// Minumum version of Path Copy Copy required to use this pipeline element.
+        /// </summary>
+        public override Version RequiredVersion
+        {
+            get {
+                return new Version(19, 0, 0, 0);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Pipeline element that pushes a value on the stack. The value
+    /// can be fixed or come from part of the path.
+    /// </summary>
+    public class PushToStackPipelineElement : StackPipelineElement
+    {
+        /// <summary>
+        /// Code representing this pipeline element type.
+        /// </summary>
+        public const char CODE = 'u';
+
+        /// <summary>
+        /// Code representing this pipeline element type.
+        /// </summary>
+        public override char Code
+        {
+            get {
+                return CODE;
+            }
+        }
+
+        /// <summary>
+        /// Pipeline element display value for the UI.
+        /// </summary>
+        public override string DisplayValue
+        {
+            get {
+                return Resources.PipelineElement_PushToStack;
+            }
+        }
+
+        /// <summary>
+        /// Method used to determine what to push on the stack.
+        /// </summary>
+        public PushToStackMethod Method
+        {
+            get;
+            set;
+        } = PushToStackMethod.Entire;
+
+        /// <summary>
+        /// If <see cref="Method"/> is <see cref="PushToStackMethod.Range"/>,
+        /// stores the beginning of the range in the path to push to the stack.
+        /// </summary>
+        public int Begin
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// If <see cref="Method"/> is <see cref="PushToStackMethod.Range"/>,
+        /// stores the end of the range in the path to push to the stack.
+        /// </summary>
+        public int End
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// If <see cref="Method"/> is <see cref="PushToStackMethod.Regex"/>,
+        /// stores the regular expression used to locate the part of the path
+        /// to push to the stack.
+        /// </summary>
+        public string Regex
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// If <see cref="Method"/> is <see cref="PushToStackMethod.Regex"/>,
+        /// stores the flag indicating whether regular expression is
+        /// case-sensitive or not.
+        /// </summary>
+        public bool IgnoreCase
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// If <see cref="Method"/> is <see cref="PushToStackMethod.Regex"/>,
+        /// stores the index of the group in the regex match to push to the
+        /// stack. 1-based, but can be set to 0 to push the entire match.
+        /// </summary>
+        public int Group
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// If <see cref="Method"/> is <see cref="PushToStackMethod.Fixed"/>,
+        /// stores the fixed string to push to the stack.
+        /// </summary>
+        public string FixedString
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Default constructor. Element will push entire path to the stack.
+        /// </summary>
+        public PushToStackPipelineElement()
+        {
+        }
+
+        /// <summary>
+        /// Constructor for an element that pushes a range in the path
+        /// to the stack.
+        /// </summary>
+        /// <param name="begin">Start of range in path to push to the stack.</param>
+        /// <param name="end">End of range in path to push to the stack.</param>
+        public PushToStackPipelineElement(int begin, int end)
+        {
+            Method = PushToStackMethod.Range;
+            Begin = begin;
+            End = end;
+        }
+
+        /// <summary>
+        /// Constructor for an element that uses a regular expression
+        /// to find the part of the path to push to the stack.
+        /// </summary>
+        /// <param name="regex">Regex used to locate the part of
+        /// the path to push to the stack.</param>
+        /// <param name="ignoreCase">Whether <paramref name="regex"/>
+        /// is a case-sensitive regex or not.</param>
+        /// <param name="group">Index of group in the regex match
+        /// to push to the stack. 1-based, but 0 can be used to
+        /// push the entire match.</param>
+        public PushToStackPipelineElement(string regex, bool ignoreCase, int group)
+        {
+            Method = PushToStackMethod.Regex;
+            Regex = regex;
+            IgnoreCase = ignoreCase;
+            Group = group;
+        }
+
+        /// <summary>
+        /// Constructor for an element that pushes a fixed value
+        /// to the stack.
+        /// </summary>
+        /// <param name="fixedString">Fixed value to push to
+        /// the stack.</param>
+        public PushToStackPipelineElement(string fixedString)
+        {
+            Method = PushToStackMethod.Fixed;
+            FixedString = fixedString;
+        }
+        
+        /// <summary>
+        /// Encodes this pipeline element in a string.
+        /// </summary>
+        /// <returns>Encoded element data.</returns>
+        public override string Encode()
+        {
+            // How we encode depend on the push method.
+            StringBuilder encoder = new StringBuilder();
+            encoder.Append(EncodeInt((int) Method));
+            switch (Method) {
+                case PushToStackMethod.Entire: {
+                    // Nothing more to encode.
+                    break;
+                }
+                case PushToStackMethod.Range: {
+                    // Encode beginning and end of range.
+                    encoder.Append(EncodeInt(Begin));
+                    encoder.Append(EncodeInt(End));
+                    break;
+                }
+                case PushToStackMethod.Regex: {
+                    // Encode regex, ignore case flag and group index.
+                    encoder.Append(EncodeString(Regex));
+                    encoder.Append(EncodeBool(IgnoreCase));
+                    encoder.Append(EncodeInt(Group));
+                    break;
+                }
+                case PushToStackMethod.Fixed: {
+                    // Encode the fixed string value.
+                    encoder.Append(EncodeString(FixedString));
+                    break;
+                }
+                default: {
+                    Debug.Fail($"Unknown push to stack method: {Method}");
+                    break;
+                }
+            }
+            return encoder.ToString();
+        }
+
+        /// <summary>
+        /// Returns a user control to configure this pipeline element.
+        /// </summary>
+        /// <returns>User control.</returns>
+        public override PipelineElementUserControl GetEditingControl()
+        {
+            // TODO-CLP replace with custom editing control
+            return base.GetEditingControl();
         }
     }
 
