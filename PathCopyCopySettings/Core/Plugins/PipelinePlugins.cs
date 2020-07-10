@@ -2050,6 +2050,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// <summary>
         /// Method used to determine what to push on the stack.
         /// </summary>
+        /// <seealso cref="PushToStackMethod"/>
         public PushToStackMethod Method
         {
             get;
@@ -2218,6 +2219,270 @@ namespace PathCopyCopy.Settings.Core.Plugins
         {
             // TODO-CLP replace with custom editing control
             return base.GetEditingControl();
+        }
+    }
+
+    /// <summary>
+    /// Pipeline element that pops a value from the stack
+    /// and optionally stores it somewhere in the path
+    /// (perhaps replacing part of it).
+    /// </summary>
+    public class PopFromStackPipelineElement : StackPipelineElement
+    {
+        /// <summary>
+        /// Code representing this pipeline element type.
+        /// </summary>
+        public const char CODE = 'o';
+
+        /// <summary>
+        /// Code representing this pipeline element type.
+        /// </summary>
+        public override char Code
+        {
+            get {
+                return CODE;
+            }
+        }
+
+        /// <summary>
+        /// Pipeline element display value for the UI.
+        /// </summary>
+        public override string DisplayValue
+        {
+            get {
+                return Resources.PipelineElement_PopFromStack;
+            }
+        }
+
+        /// <summary>
+        /// Location where to store the popped value.
+        /// </summary>
+        /// <seealso cref="PopFromStackLocation"/>
+        public PopFromStackLocation Location
+        {
+            get;
+            set;
+        } = PopFromStackLocation.Entire;
+
+        /// <summary>
+        /// If <see cref="Location"/> is <see cref="PopFromStackLocation.Range"/>,
+        /// contains the beginning of the range to replace with the popped value.
+        /// </summary>
+        public int Begin
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// If <see cref="Location"/> is <see cref="PopFromStackLocation.Range"/>,
+        /// contains the end of the range to replace with the popped value.
+        /// </summary>
+        public int End
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// If <see cref="Location"/> is <see cref="PopFromStackLocation.Regex"/>,
+        /// contains the regular expression used to locate the part of the path
+        /// to replace with the popped value.
+        /// </summary>
+        public string Regex
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// If <see cref="Location"/> is <see cref="PopFromStackLocation.Regex"/>,
+        /// contains the flag telling if <see cref="Regex"/> is case-sensitive or not.
+        /// </summary>
+        public bool IgnoreCase
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Default constructor. Element will replace the
+        /// entire path with the popped value.
+        /// </summary>
+        public PopFromStackPipelineElement()
+        {
+        }
+
+        /// <summary>
+        /// Constructor with location where to store the popped value.
+        /// Used when no other data is needed.
+        /// </summary>
+        /// <param name="location">Popped value store location.</param>
+        /// <seealso cref="PopFromStackLocation.Entire"/>
+        /// <seealso cref="PopFromStackLocation.Start"/>
+        /// <seealso cref="PopFromStackLocation.End"/>
+        /// <seealso cref="PopFromStackLocation.Nowhere"/>
+        public PopFromStackPipelineElement(PopFromStackLocation location)
+        {
+            Location = location;
+        }
+
+        /// <summary>
+        /// Constructor for an element that replaces a range in the
+        /// path with the popped value.
+        /// </summary>
+        /// <param name="begin">Beginning of range to replace with
+        /// the popped value (inclusive).</param>
+        /// <param name="end">End of range to replace with the
+        /// popped value (exclusive).</param>
+        public PopFromStackPipelineElement(int begin, int end)
+        {
+            Location = PopFromStackLocation.Range;
+            Begin = begin;
+            End = end;
+        }
+
+        /// <summary>
+        /// Constructor for an element that uses a regex to locate the
+        /// part of the path to replace with the popped value.
+        /// </summary>
+        /// <param name="regex">Regex to use to locate store location.</param>
+        /// <param name="ignoreCase">Whether <paramref name="regex"/>
+        /// is case-sensitive or not.</param>
+        public PopFromStackPipelineElement(string regex, bool ignoreCase)
+        {
+            Location = PopFromStackLocation.Regex;
+            Regex = regex;
+            IgnoreCase = ignoreCase;
+        }
+
+        /// <summary>
+        /// Encodes this pipeline element in a string.
+        /// </summary>
+        /// <returns>Encoded element data.</returns>
+        public override string Encode()
+        {
+            // How we encode depend on the store location.
+            StringBuilder encoder = new StringBuilder();
+            encoder.Append(EncodeInt((int) Location));
+            switch (Location) {
+                case PopFromStackLocation.Entire:
+                case PopFromStackLocation.Start:
+                case PopFromStackLocation.End:
+                case PopFromStackLocation.Nowhere: {
+                    // No other data to encode.
+                    break;
+                }
+                case PopFromStackLocation.Range: {
+                    // Encode begin and end of range.
+                    encoder.Append(EncodeInt(Begin));
+                    encoder.Append(EncodeInt(End));
+                    break;
+                }
+                case PopFromStackLocation.Regex: {
+                    // Encode regex and ignore case flag.
+                    encoder.Append(EncodeString(Regex));
+                    encoder.Append(EncodeBool(IgnoreCase));
+                    break;
+                }
+                default: {
+                    Debug.Fail($"Unknown pop from stack location: {Location}");
+                    break;
+                }
+            }
+            return encoder.ToString();
+        }
+
+        /// <summary>
+        /// Returns a user control to configure this pipeline element.
+        /// </summary>
+        /// <returns>User control.</returns>
+        public override PipelineElementUserControl GetEditingControl()
+        {
+            // TODO-CLP replace with custom editing control
+            return base.GetEditingControl();
+        }
+    }
+
+    /// <summary>
+    /// Pipeline element that swaps the two top values on the stack.
+    /// </summary>
+    public class SwapStackValuesPipelineElement : StackPipelineElement
+    {
+        /// <summary>
+        /// Code representing this pipeline element type.
+        /// </summary>
+        public const char CODE = 'w';
+
+        /// <summary>
+        /// Code representing this pipeline element type.
+        /// </summary>
+        public override char Code
+        {
+            get {
+                return CODE;
+            }
+        }
+
+        /// <summary>
+        /// Pipeline element display value for the UI.
+        /// </summary>
+        public override string DisplayValue
+        {
+            get {
+                return Resources.PipelineElement_SwapStackValues;
+            }
+        }
+
+        /// <summary>
+        /// Encodes this pipeline element in a string.
+        /// </summary>
+        /// <returns>Encoded element data.</returns>
+        public override string Encode()
+        {
+            // No other data to encode.
+            return string.Empty;
+        }
+    }
+
+    /// <summary>
+    /// Pipeline element that duplicates the top value on the stack.
+    /// </summary>
+    public class DuplicateStackValuePipelineElement : StackPipelineElement
+    {
+        /// <summary>
+        /// Code representing this pipeline element type.
+        /// </summary>
+        public const char CODE = 'd';
+
+        /// <summary>
+        /// Code representing this pipeline element type.
+        /// </summary>
+        public override char Code
+        {
+            get {
+                return CODE;
+            }
+        }
+
+        /// <summary>
+        /// Pipeline element display value for the UI.
+        /// </summary>
+        public override string DisplayValue
+        {
+            get {
+                return Resources.PipelineElement_DuplicateStackValue;
+            }
+        }
+
+        /// <summary>
+        /// Encodes this pipeline element in a string.
+        /// </summary>
+        /// <returns>Encoded element data.</returns>
+        public override string Encode()
+        {
+            // No other data to encode.
+            return string.Empty;
         }
     }
 
@@ -2604,6 +2869,22 @@ namespace PathCopyCopy.Settings.Core.Plugins
                     element = DecodeApplyPluginElement(elementCode, encodedElements, ref curChar);
                     break;
                 }
+                case PushToStackPipelineElement.CODE: {
+                    element = DecodePushToStackElement(encodedElements, ref curChar);
+                    break;
+                }
+                case PopFromStackPipelineElement.CODE: {
+                    element = DecodePopFromStackElement(encodedElements, ref curChar);
+                    break;
+                }
+                case SwapStackValuesPipelineElement.CODE: {
+                    element = new SwapStackValuesPipelineElement();
+                    break;
+                }
+                case DuplicateStackValuePipelineElement.CODE: {
+                    element = new DuplicateStackValuePipelineElement();
+                    break;
+                }
                 case PathsSeparatorPipelineElement.CODE: {
                     element = DecodePathsSeparatorElement(encodedElements, ref curChar);
                     break;
@@ -2709,6 +2990,84 @@ namespace PathCopyCopy.Settings.Core.Plugins
                 }
                 case ApplyPipelinePluginPipelineElement.CODE: {
                     return new ApplyPipelinePluginPipelineElement(pluginId);
+                }
+                default:
+                    throw new InvalidPipelineException();
+            }
+        }
+
+        /// <summary>
+        /// Decodes a <see cref="PushToStackPipelineElement"/> from an encoded
+        /// element string.
+        /// </summary>
+        /// <param name="encodedElements">String of encoded elements data.</param>
+        /// <param name="curChar">Position where the element data is to be found
+        /// in the string (not counting the element code). Upon return, this will
+        /// point just after the element data.</param>
+        private static PushToStackPipelineElement DecodePushToStackElement(
+            string encodedElements, ref int curChar)
+        {
+            // First read the push method.
+            switch ((PushToStackMethod) DecodeInt(encodedElements, ref curChar)) {
+                case PushToStackMethod.Entire: {
+                    // No more data in encoded string.
+                    return new PushToStackPipelineElement();
+                }
+                case PushToStackMethod.Range: {
+                    // Encoded string contains beginning and end of range.
+                    int begin = DecodeInt(encodedElements, ref curChar);
+                    int end = DecodeInt(encodedElements, ref curChar);
+                    return new PushToStackPipelineElement(begin, end);
+                }
+                case PushToStackMethod.Regex: {
+                    // Encoded string contains the regex, ignore case flag and group number.
+                    string regex = DecodeString(encodedElements, ref curChar);
+                    bool ignoreCase = DecodeBool(encodedElements, ref curChar);
+                    int group = DecodeInt(encodedElements, ref curChar);
+                    return new PushToStackPipelineElement(regex, ignoreCase, group);
+                }
+                case PushToStackMethod.Fixed: {
+                    // Encoded string contains the fixed string.
+                    string fixedString = DecodeString(encodedElements, ref curChar);
+                    return new PushToStackPipelineElement(fixedString);
+                }
+                default:
+                    throw new InvalidPipelineException();
+            }
+        }
+
+        /// <summary>
+        /// Decodes a <see cref="PopFromStackPipelineElement"/> from an encoded
+        /// element string.
+        /// </summary>
+        /// <param name="encodedElements">String of encoded elements data.</param>
+        /// <param name="curChar">Position where the element data is to be found
+        /// in the string (not counting the element code). Upon return, this will
+        /// point just after the element data.</param>
+        private static PopFromStackPipelineElement DecodePopFromStackElement(
+            string encodedElements, ref int curChar)
+        {
+            // First read pop location.
+            PopFromStackLocation location = (PopFromStackLocation) DecodeInt(encodedElements, ref curChar);
+            switch (location) {
+                case PopFromStackLocation.Entire:
+                case PopFromStackLocation.Start:
+                case PopFromStackLocation.End:
+                case PopFromStackLocation.Nowhere: {
+                    // No more data to decode.
+                    return new PopFromStackPipelineElement(location);
+                }
+                case PopFromStackLocation.Range: {
+                    // Encoded string contains beginning and end of range.
+                    int begin = DecodeInt(encodedElements, ref curChar);
+                    int end = DecodeInt(encodedElements, ref curChar);
+                    return new PopFromStackPipelineElement(begin, end);
+                }
+                case PopFromStackLocation.Regex: {
+                    // Encoded string contains regex and ignore case flag.
+                    string regex = DecodeString(encodedElements, ref curChar);
+                    bool ignoreCase = DecodeBool(encodedElements, ref curChar);
+                    return new PopFromStackPipelineElement(regex, ignoreCase);
                 }
                 default:
                     throw new InvalidPipelineException();

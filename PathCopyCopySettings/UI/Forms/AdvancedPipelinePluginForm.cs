@@ -181,6 +181,19 @@ namespace PathCopyCopy.Settings.UI.Forms
                 Resources.PipelineElement_FollowSymlink_HelpText,
                 () => new FollowSymlinkPipelineElement());
             AddNewElementMenuItem("-", null, null);
+            AddNewElementMenuItem(Resources.PipelineElement_PushToStack,
+                Resources.PipelineElement_PushToStack_HelpText,
+                () => new PushToStackPipelineElement());
+            AddNewElementMenuItem(Resources.PipelineElement_PopFromStack,
+                Resources.PipelineElement_PopFromStack_HelpText,
+                () => new PopFromStackPipelineElement());
+            AddNewElementMenuItem(Resources.PipelineElement_SwapStackValues,
+                Resources.PipelineElement_SwapStackValues_HelpText,
+                () => new SwapStackValuesPipelineElement());
+            AddNewElementMenuItem(Resources.PipelineElement_DuplicateStackValue,
+                Resources.PipelineElement_DuplicateStackValue_HelpText,
+                () => new DuplicateStackValuePipelineElement());
+            AddNewElementMenuItem("-", null, null);
             AddNewElementMenuItem(Resources.PipelineElement_PathsSeparator,
                 Resources.PipelineElement_PathsSeparator_HelpText,
                 () => new PathsSeparatorPipelineElement(PipelinePluginEditor.PATHS_SEPARATOR_ON_SAME_LINE));

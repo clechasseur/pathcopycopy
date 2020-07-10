@@ -149,10 +149,11 @@ namespace PathCopyCopy.Settings.UI.Utils
                 throw new ArgumentNullException(nameof(element));
             }
 
-            // Make sure element is not one of the "expert-only" type.
+            // Make sure element is not one of the "expert-only" types.
             return !(element is FollowSymlinkPipelineElement ||
                 element is InjectDriveLabelPipelineElement ||
-                element is CopyNPathPartsPipelineElement);
+                element is CopyNPathPartsPipelineElement ||
+                element is StackPipelineElement);
         }
 
         /// <summary>
