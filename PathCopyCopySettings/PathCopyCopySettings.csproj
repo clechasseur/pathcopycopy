@@ -142,6 +142,12 @@
     <Compile Include="UI\UserControls\PluginPreviewUserControl.Designer.cs">
       <DependentUpon>PluginPreviewUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\UserControls\PushToStackPipelineElementUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UserControls\PushToStackPipelineElementUserControl.Designer.cs">
+      <DependentUpon>PushToStackPipelineElementUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\UserControls\RegexPipelineElementUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -235,6 +241,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\PluginPreviewUserControl.resx">
       <DependentUpon>PluginPreviewUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserControls\PushToStackPipelineElementUserControl.resx">
+      <DependentUpon>PushToStackPipelineElementUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\RegexPipelineElementUserControl.resx">
       <DependentUpon>RegexPipelineElementUserControl.cs</DependentUpon>
