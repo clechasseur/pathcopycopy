@@ -20,6 +20,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace PathCopyCopy.Settings.UI.UserControls
@@ -35,6 +36,17 @@ namespace PathCopyCopy.Settings.UI.UserControls
         public event EventHandler PipelineElementChanged;
 
         /// <summary>
+        /// Whether the control is currently loading the pipeline
+        /// element. While this is <c>true</c>, <see cref="PipelineElementChanged"/>
+        /// events will not fire.
+        /// </summary>
+        public bool LoadingPipelineElement
+        {
+            get;
+            protected set;
+        }
+
+        /// <summary>
         /// Constructor.
         /// </summary>
         public PipelineElementUserControl()
@@ -43,12 +55,43 @@ namespace PathCopyCopy.Settings.UI.UserControls
         }
 
         /// <summary>
+        /// Called when the control loads. We set <see cref="LoadingPipelineElement"/>
+        /// to <c>true</c> while calling <see cref="OnPipelineElementLoad(EventArgs)"/>.
+        /// </summary>
+        /// <param name="e">Event arguments.</param>
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+
+            Debug.Assert(!LoadingPipelineElement, "Loop detected while loading pipeline elements");
+            LoadingPipelineElement = true;
+            try {
+                OnPipelineElementLoad(e);
+            } finally {
+                LoadingPipelineElement = false;
+            }
+        }
+
+        /// <summary>
+        /// Called when the control loads its pipeline element. Subclasses
+        /// can override. During the call to this method, no <see cref="PipelineElementChanged"/>
+        /// events will fire if <see cref="OnPipelineElementChanged(EventArgs)"/> is called.
+        /// </summary>
+        /// <param name="e">Event arguments.</param>
+        protected virtual void OnPipelineElementLoad(EventArgs e)
+        {
+            // Subclasses can override.
+        }
+
+        /// <summary>
         /// Fires the <see cref="PipelineElementChanged"/> event.
         /// </summary>
         /// <param name="e">Event arguments.</param>
         protected virtual void OnPipelineElementChanged(EventArgs e)
         {
-            PipelineElementChanged(this, e);
+            if (!LoadingPipelineElement) {
+                PipelineElementChanged(this, e);
+            }
         }
     }
 }

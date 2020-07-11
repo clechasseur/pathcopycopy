@@ -56,12 +56,12 @@ namespace PathCopyCopy.Settings.UI.UserControls
         }
 
         /// <summary>
-        /// Called when the control is initially loaded. We populate our controls here.
+        /// Called to load our pipeline element. We populate our controls here.
         /// </summary>
         /// <param name="e">Event arguments.</param>
-        protected override void OnLoad(EventArgs e)
+        protected override void OnPipelineElementLoad(EventArgs e)
         {
-            base.OnLoad(e);
+            base.OnPipelineElementLoad(e);
             FirstLastCombo.SelectedIndex = element.First ? IndexFirst : IndexLast;
             NumPartsTxt.Text = element.NumParts.ToString(CultureInfo.InvariantCulture);
         }

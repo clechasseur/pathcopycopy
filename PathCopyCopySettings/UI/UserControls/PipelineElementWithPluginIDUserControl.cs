@@ -56,12 +56,12 @@ namespace PathCopyCopy.Settings.UI.UserControls
         }
 
         /// <summary>
-        /// Called when the control is initially loaded. We populate our controls here.
+        /// Called to load our pipeline element. We populate our controls here.
         /// </summary>
         /// <param name="e">Event arguments.</param>
-        protected override void OnLoad(EventArgs e)
+        protected override void OnPipelineElementLoad(EventArgs e)
         {
-            base.OnLoad(e);
+            base.OnPipelineElementLoad(e);
 
             // First load list of plugins to display in the listbox for the base plugin.
             List<Plugin> plugins;
