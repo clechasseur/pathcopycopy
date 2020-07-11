@@ -2193,14 +2193,14 @@ namespace PathCopyCopy.Settings.Core.Plugins
                 }
                 case PushToStackMethod.Regex: {
                     // Encode regex, ignore case flag and group index.
-                    encoder.Append(EncodeString(Regex));
+                    encoder.Append(EncodeString(Regex ?? string.Empty));
                     encoder.Append(EncodeBool(IgnoreCase));
                     encoder.Append(EncodeInt(Group));
                     break;
                 }
                 case PushToStackMethod.Fixed: {
                     // Encode the fixed string value.
-                    encoder.Append(EncodeString(FixedString));
+                    encoder.Append(EncodeString(FixedString ?? string.Empty));
                     break;
                 }
                 default: {
@@ -2217,8 +2217,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// <returns>User control.</returns>
         public override PipelineElementUserControl GetEditingControl()
         {
-            // TODO-CLP replace with custom editing control
-            return base.GetEditingControl();
+            return new PushToStackPipelineElementUserControl(this);
         }
     }
 
@@ -2381,7 +2380,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
                 }
                 case PopFromStackLocation.Regex: {
                     // Encode regex and ignore case flag.
-                    encoder.Append(EncodeString(Regex));
+                    encoder.Append(EncodeString(Regex ?? string.Empty));
                     encoder.Append(EncodeBool(IgnoreCase));
                     break;
                 }
