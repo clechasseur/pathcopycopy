@@ -52,7 +52,8 @@ CPathCopyCopyModule::CPathCopyCopyModule()
     if (::GetModuleFileNameW(reinterpret_cast<HMODULE>(&__ImageBase), dllPath.data(), gsl::narrow<DWORD>(dllPath.size())) != 0) {
         // Replace our DLL name with that of the resource DLL.
         PCC::PluginUtils::ExtractFolderFromPath(dllPath);
-        dllPath += L"\\PathCopyCopyLocalization_en.dll";
+        dllPath += L"\\";
+        dllPath += GetResourceDllName();
 
         // Load our resource DLL and pass it to ATL so strings can be properly loaded.
         m_hResourceDll = ::LoadLibraryExW(dllPath.c_str(), nullptr, LOAD_LIBRARY_AS_DATAFILE | LOAD_LIBRARY_AS_IMAGE_RESOURCE);
@@ -168,6 +169,31 @@ HRESULT CPathCopyCopyModule::DllUnregisterServer(BOOL p_UnregisterTypeLib /*= TR
 HINSTANCE CPathCopyCopyModule::HInstance() noexcept
 {
     return g_hInstance;
+}
+
+//
+// CPathCopyCopyModule::GetResourceDllName
+//
+// Returns the name of the DLL containing our string table resource
+// that we must load. Will account for bitness and localization.
+//
+// @return Resource DLL name. Does not include its full path.
+//
+std::wstring CPathCopyCopyModule::GetResourceDllName() const
+{
+    return std::wstring{L"PathCopyCopyLocalization_"} + GetResourceDllLanguage() + L".dll";
+}
+
+//
+// CPathCopyCopyModule::GetResourceDllLanguage
+//
+// Returns the two-letter language code of the resource DLL.
+//
+// @return Language of resource DLL.
+//
+std::wstring CPathCopyCopyModule::GetResourceDllLanguage() const
+{
+    return L"en";
 }
 
 #pragma warning(suppress: ALL_CPPCORECHECK_WARNINGS)
