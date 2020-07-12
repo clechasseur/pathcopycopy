@@ -76,6 +76,7 @@
 #include <memory.h>
 
 #include <resource.h>
+#include <PathCopyCopyLocalization_en\rsrc\resource.h>
 
 #include <gsl/gsl>
 

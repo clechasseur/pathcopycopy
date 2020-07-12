@@ -22,7 +22,6 @@
 #include <stdafx.h>
 #include <MSYSPathPlugin.h>
 #include <StringUtils.h>
-#include <resource.h>
 
 #include <sstream>
 

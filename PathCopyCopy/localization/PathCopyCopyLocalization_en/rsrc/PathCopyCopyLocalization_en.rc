@@ -1,0 +1,170 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "winres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (United States) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+    IDS_PROJNAME            "PathCopyCopy"
+    IDS_PATH_COPY_MENU_ITEM "&Path Copy"
+    IDS_PATH_COPY_HINT      "Copies the path of selected file(s) to the clipboard in various formats."
+    IDS_SAMPLE_PLUGIN_DESCRIPTION "Copy Sample Path"
+    IDS_SAMPLE_PLUGIN_HINT  "Copies the path of the given file using the sample plugin."
+    IDS_SHORT_NAME_PLUGIN_DESCRIPTION "Copy Short &Name"
+    IDS_SHORT_NAME_PLUGIN_HINT 
+                            "Copies the short name of the file/folder to the clipboard (without the path)."
+    IDS_LONG_NAME_PLUGIN_DESCRIPTION "Copy Long N&ame"
+    IDS_LONG_NAME_PLUGIN_HINT 
+                            "Copies the long name of the file/folder to the clipboard (without the path)."
+    IDS_SHORT_PATH_PLUGIN_DESCRIPTION "Copy &Short Path"
+    IDS_SHORT_PATH_PLUGIN_HINT 
+                            "Copies the short path of the file/folder to the clipboard."
+    IDS_LONG_PATH_PLUGIN_DESCRIPTION "Copy &Long Path"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_LONG_PATH_PLUGIN_HINT 
+                            "Copies the long path of the file/folder to the clipboard."
+    IDS_LONG_UNC_PATH_PLUGIN_DESCRIPTION "Copy Long &UNC Path"
+    IDS_LONG_UNC_PATH_PLUGIN_HINT 
+                            "Copies the UNC (network share) path of the file/folder to the clipboard, if it has one; otherwise copies its long path."
+    IDS_SHOW_ENTIRE_MENU_MENU_ITEM "Always show &entire menu"
+    IDS_SHOW_ENTIRE_MENU_HINT 
+                            "Whether to always show the PathCopyCopy submenu. If unchecked, the submenu will only be shown when holding down the SHIFT key while right-clicking on the file/folder."
+    IDS_SHOW_ENTIRE_MENU_WARNING 
+                            "PathCopyCopy will now show a single item in the contextual menu. To get back the entire submenu, hold down the SHIFT key while right-clicking on the file/folder."
+    IDS_SHOW_ENTIRE_MENU_WARNING_TITLE "PathCopyCopy"
+    IDS_INTERNET_PATH_PLUGIN_DESCRIPTION "Copy &Internet Path"
+    IDS_INTERNET_PATH_PLUGIN_HINT 
+                            "Copies the path of the file/folder to the clipboard in file URI format."
+    IDS_UNIX_PATH_PLUGIN_DESCRIPTION "Copy Uni&x Path"
+    IDS_UNIX_PATH_PLUGIN_HINT 
+                            "Copies the path of the file/folder to the clipboard, replacing backslashes with forward slashes."
+    IDS_CYGWIN_PATH_PLUGIN_DESCRIPTION "Copy Cy&gwin Path"
+    IDS_CYGWIN_PATH_PLUGIN_HINT 
+                            "Copies the path of the file/folder to the clipboard in a format recognized by the Cygwin tools."
+    IDS_DEFAULT_PLUGIN_DESCRIPTION "Copy File/Folder &Path"
+    IDS_SHORT_UNC_PATH_PLUGIN_DESCRIPTION "Copy Short UN&C Path"
+    IDS_SHORT_UNC_PATH_PLUGIN_HINT 
+                            "Copies the short UNC (network share) path of the file/folder to the clipboard, if it has one; otherwise copies its short path."
+END
+
+STRINGTABLE
+BEGIN
+    IDS_LONG_FOLDER_PLUGIN_DESCRIPTION "Copy Long Parent &Folder Path"
+    IDS_LONG_FOLDER_PLUGIN_HINT 
+                            "Copies the long path of the file/folder's parent directory to the clipboard."
+    IDS_SHORT_FOLDER_PLUGIN_DESCRIPTION "Copy Short Parent F&older Path"
+    IDS_SHORT_FOLDER_PLUGIN_HINT 
+                            "Copies the short path of the file/folder's parent directory to the clipboard."
+    IDS_SHORT_UNC_FOLDER_PLUGIN_DESCRIPTION 
+                            "Copy Short UNC Parent Fol&der Path"
+    IDS_SHORT_UNC_FOLDER_PLUGIN_HINT 
+                            "Copies the short UNC (network share) path of the file/folder's parent directory to the clipboard, if it has one; otherwise copies the parent's short path."
+    IDS_LONG_UNC_FOLDER_PLUGIN_DESCRIPTION "Copy Long UNC Parent Fold&er Path"
+    IDS_LONG_UNC_FOLDER_PLUGIN_HINT 
+                            "Copies the long UNC (network share) path of the file/folder's parent directory to the clipboard, if it has one; otherwise copies the parent's long path."
+    IDS_PCC_SETTINGS_DESCRIPTION "Settings..."
+    IDS_PCC_SETTINGS_HINT   "Opens the Settings window to configure this add-on."
+    IDS_SETTINGS_APP_FILE_NAME "PathCopyCopySettings.exe"
+    IDS_REDUNDANT_WORD_COPY "Copy "
+    IDS_ANDROGYNOUS_NAME_PLUGIN_DESCRIPTION "Copy &Name"
+    IDS_ANDROGYNOUS_PATH_PLUGIN_DESCRIPTION "Copy &Path"
+    IDS_ANDROGYNOUS_UNC_PATH_PLUGIN_DESCRIPTION "Copy &UNC Path"
+    IDS_ANDROGYNOUS_FOLDER_PLUGIN_DESCRIPTION "Copy Parent &Folder Path"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_ANDROGYNOUS_UNC_FOLDER_PLUGIN_DESCRIPTION 
+                            "Copy UNC Parent Fol&der Path"
+    IDS_WSL_PATH_PLUGIN_DESCRIPTION "Copy &WSL Path"
+    IDS_WSL_PATH_PLUGIN_HINT 
+                            "Copies the path of the file/folder to the clipboard in WSL (Windows Subsystem for Linux) format."
+    IDS_SAMBA_PATH_PLUGIN_DESCRIPTION "Copy S&amba Path"
+    IDS_SAMBA_PATH_PLUGIN_HINT 
+                            "Copies the path of the file/folder to the clipboard in Samba format."
+    IDS_MSYS_PATH_PLUGIN_DESCRIPTION "Copy MS&YS/MSYS2 Path"
+    IDS_MSYS_PATH_PLUGIN_HINT 
+                            "Copies the path of the file/folder to the clipboard in MSYS/MSYS2 format."
+    IDS_INVALIDPIPELINE     "<< Invalid custom command >>"
+    IDS_INVALIDPIPELINE_LOOP_DETECTED 
+                            "<< Loop detected in custom command elements >>"
+    IDS_INVALIDPIPELINE_POSSIBLE_DOWNGRADE 
+                            "<< Invalid custom command element (possible downgrade) >>"
+    IDS_INVALIDPIPELINE_BASE_COMMAND_NOT_FOUND "<< Base command not found >>"
+END
+
+#endif    // English (United States) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// French (Canada) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_FRC)
+LANGUAGE LANG_FRENCH, SUBLANG_FRENCH_CANADIAN
+#pragma code_page(1252)
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""winres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+#endif    // French (Canada) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

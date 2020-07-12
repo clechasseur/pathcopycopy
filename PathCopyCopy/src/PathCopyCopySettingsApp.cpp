@@ -21,7 +21,6 @@
 
 #include <stdafx.h>
 #include <PathCopyCopySettingsApp.h>
-#include <resource.h>
 
 #include <assert.h>
 

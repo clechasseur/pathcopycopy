@@ -25,6 +25,7 @@
 #include <PathCopyCopy_i.h>
 
 #include <AtlRegKey.h>
+#include <PluginUtils.h>
 
 
 namespace {
@@ -33,6 +34,47 @@ namespace {
 HINSTANCE g_hInstance = nullptr;
 
 } // anonymous namespace
+
+// Trick to get our image base, useful to get the path to this DLL.
+EXTERN_C IMAGE_DOS_HEADER __ImageBase;
+
+//
+// CPathCopyCopyModule::CPathCopyCopyModule
+//
+// Constructor.
+//
+CPathCopyCopyModule::CPathCopyCopyModule()
+    : ATL::CAtlDllModuleT<CPathCopyCopyModule>()
+{
+    // Get path to this DLL. We need it to locate our resource DLL.
+    std::wstring dllPath(MAX_PATH + 1, L'\0');
+#pragma warning(suppress: 26490) // Dirty trick is dirty
+    if (::GetModuleFileNameW(reinterpret_cast<HMODULE>(&__ImageBase), dllPath.data(), gsl::narrow<DWORD>(dllPath.size())) != 0) {
+        // Replace our DLL name with that of the resource DLL.
+        PCC::PluginUtils::ExtractFolderFromPath(dllPath);
+        dllPath += L"\\PathCopyCopyLocalization_en.dll";
+
+        // Load our resource DLL and pass it to ATL so strings can be properly loaded.
+        m_hResourceDll = ::LoadLibraryExW(dllPath.c_str(), nullptr, LOAD_LIBRARY_AS_DATAFILE | LOAD_LIBRARY_AS_IMAGE_RESOURCE);
+        if (m_hResourceDll != nullptr) {
+            ATL::_AtlBaseModule.AddResourceInstance(m_hResourceDll);
+        }
+    }
+}
+
+//
+// CPathCopyCopyModule::~CPathCopyCopyModule
+//
+// Destructor.
+//
+CPathCopyCopyModule::~CPathCopyCopyModule()
+{
+    // If resource DLL was successfully loaded, free it here.
+    if (m_hResourceDll != nullptr) {
+        ATL::_AtlBaseModule.RemoveResourceInstance(m_hResourceDll);
+        ::FreeLibrary(m_hResourceDll);
+    }
+}
 
 //
 // CPathCopyCopyModule::DllRegisterServer
@@ -138,6 +180,6 @@ extern "C" BOOL WINAPI DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID lpRes
 	if (!PrxDllMain(hInstance, dwReason, lpReserved))
 		return FALSE;
 #endif
-	g_hInstance = hInstance;
-	return _AtlModule.DllMain(dwReason, lpReserved); 
+    g_hInstance = hInstance;
+	return _AtlModule.DllMain(dwReason, lpReserved);
 }

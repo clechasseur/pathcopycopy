@@ -21,7 +21,6 @@
 
 #include <stdafx.h>
 #include <UnixPathPlugin.h>
-#include <resource.h>
 
 #include <algorithm>
 

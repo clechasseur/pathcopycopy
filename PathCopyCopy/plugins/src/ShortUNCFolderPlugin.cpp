@@ -22,7 +22,6 @@
 #include <stdafx.h>
 #include <ShortUNCFolderPlugin.h>
 #include <PluginUtils.h>
-#include <resource.h>
 
 #include <assert.h>
 

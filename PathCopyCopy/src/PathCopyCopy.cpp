@@ -23,7 +23,6 @@
 #include <dlldatax.h>
 #include <dllmain.h>
 #include <PathCopyCopy_i.h>
-#include <resource.h>
 #include <StAtlPerUserOverride.h>
 
 #include <string.h>

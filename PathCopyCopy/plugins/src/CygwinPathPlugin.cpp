@@ -21,7 +21,6 @@
 
 #include <stdafx.h>
 #include <CygwinPathPlugin.h>
-#include <resource.h>
 
 #include <sstream>
 

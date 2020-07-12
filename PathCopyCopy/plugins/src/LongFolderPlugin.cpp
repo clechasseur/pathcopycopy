@@ -23,7 +23,6 @@
 #include <LongFolderPlugin.h>
 #include <PathCopyCopySettings.h>
 #include <PluginUtils.h>
-#include <resource.h>
 #include <ShortFolderPlugin.h>
 
 #include <assert.h>

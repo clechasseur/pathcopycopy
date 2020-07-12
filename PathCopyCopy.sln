@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.28803.202
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PathCopyCopy", "PathCopyCopy\PathCopyCopy.vcxproj", "{AA106D7B-966E-4A98-8EAD-0AE2AE0038D2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{04469FC1-4E3F-43CC-B245-1487AB1369CB} = {04469FC1-4E3F-43CC-B245-1487AB1369CB}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestPlugins", "Testing\TestPlugins\TestPlugins.vcxproj", "{529B4500-C51D-46D7-86C0-12C5209C9AC0}"
 EndProject
@@ -23,6 +26,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PathCopyCopyCOMPluginExecutor", "PathCopyCopyCOMPluginExecutor\PathCopyCopyCOMPluginExecutor.vcxproj", "{F682E1A6-ADFA-403F-8C8A-5D61F8E023A9}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PathCopyCopyLocalization_en", "PathCopyCopy\localization\PathCopyCopyLocalization_en\PathCopyCopyLocalization_en.vcxproj", "{04469FC1-4E3F-43CC-B245-1487AB1369CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -72,6 +77,14 @@ Global
 		{F682E1A6-ADFA-403F-8C8A-5D61F8E023A9}.Release|Win32.Build.0 = Release|Win32
 		{F682E1A6-ADFA-403F-8C8A-5D61F8E023A9}.Release|x64.ActiveCfg = Release|x64
 		{F682E1A6-ADFA-403F-8C8A-5D61F8E023A9}.Release|x64.Build.0 = Release|x64
+		{04469FC1-4E3F-43CC-B245-1487AB1369CB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{04469FC1-4E3F-43CC-B245-1487AB1369CB}.Debug|Win32.Build.0 = Debug|Win32
+		{04469FC1-4E3F-43CC-B245-1487AB1369CB}.Debug|x64.ActiveCfg = Debug|x64
+		{04469FC1-4E3F-43CC-B245-1487AB1369CB}.Debug|x64.Build.0 = Debug|x64
+		{04469FC1-4E3F-43CC-B245-1487AB1369CB}.Release|Win32.ActiveCfg = Release|Win32
+		{04469FC1-4E3F-43CC-B245-1487AB1369CB}.Release|Win32.Build.0 = Release|Win32
+		{04469FC1-4E3F-43CC-B245-1487AB1369CB}.Release|x64.ActiveCfg = Release|x64
+		{04469FC1-4E3F-43CC-B245-1487AB1369CB}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

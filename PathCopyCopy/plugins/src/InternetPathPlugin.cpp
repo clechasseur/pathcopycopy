@@ -22,7 +22,6 @@
 
 #include <stdafx.h>
 #include <InternetPathPlugin.h>
-#include <resource.h>
 
 #include <algorithm>
 #include <sstream>

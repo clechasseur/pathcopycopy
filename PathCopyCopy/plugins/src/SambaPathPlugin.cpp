@@ -22,7 +22,6 @@
 
 #include <stdafx.h>
 #include <SambaPathPlugin.h>
-#include <resource.h>
 
 
 namespace

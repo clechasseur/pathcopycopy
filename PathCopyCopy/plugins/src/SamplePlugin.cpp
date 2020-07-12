@@ -21,7 +21,6 @@
 
 #include <stdafx.h>
 #include <SamplePlugin.h>
-#include <resource.h>
 
 
 namespace

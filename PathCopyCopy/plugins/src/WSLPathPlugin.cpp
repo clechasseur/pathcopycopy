@@ -22,7 +22,6 @@
 #include <stdafx.h>
 #include <WSLPathPlugin.h>
 #include <StringUtils.h>
-#include <resource.h>
 #include <PathCopyCopySettings.h>
 
 #include <sstream>

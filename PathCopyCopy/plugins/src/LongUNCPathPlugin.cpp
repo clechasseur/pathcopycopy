@@ -22,7 +22,6 @@
 #include <stdafx.h>
 #include <LongUNCPathPlugin.h>
 #include <PluginUtils.h>
-#include <resource.h>
 #include <ShortUNCPathPlugin.h>
 
 #include <assert.h>
