@@ -47,7 +47,6 @@ public :
 private:
     HINSTANCE           m_hResourceDll = nullptr;   // Handle to the DLL containing our string table.
 
-    std::wstring        GetResourceDllName() const;
     std::wstring        GetResourceDllLanguage() const;
 };
 

@@ -26,6 +26,7 @@
 
 #include <AtlRegKey.h>
 #include <PluginUtils.h>
+#include <UserOverrideableRegKey.h>
 
 
 namespace {
@@ -47,18 +48,24 @@ CPathCopyCopyModule::CPathCopyCopyModule()
     : ATL::CAtlDllModuleT<CPathCopyCopyModule>()
 {
     // Get path to this DLL. We need it to locate our resource DLL.
-    std::wstring dllPath(MAX_PATH + 1, L'\0');
+    std::wstring path(MAX_PATH + 1, L'\0');
 #pragma warning(suppress: 26490) // Dirty trick is dirty
-    if (::GetModuleFileNameW(reinterpret_cast<HMODULE>(&__ImageBase), dllPath.data(), gsl::narrow<DWORD>(dllPath.size())) != 0) {
-        // Replace our DLL name with that of the resource DLL.
-        PCC::PluginUtils::ExtractFolderFromPath(dllPath);
-        dllPath += L"\\";
-        dllPath += GetResourceDllName();
+    if (::GetModuleFileNameW(reinterpret_cast<HMODULE>(&__ImageBase), path.data(), gsl::narrow<DWORD>(path.size())) != 0) {
+        // Get parent folder containing our DLL and the resource DLLs also.
+        PCC::PluginUtils::ExtractFolderFromPath(path);
 
-        // Load our resource DLL and pass it to ATL so strings can be properly loaded.
-        m_hResourceDll = ::LoadLibraryExW(dllPath.c_str(), nullptr, LOAD_LIBRARY_AS_DATAFILE | LOAD_LIBRARY_AS_IMAGE_RESOURCE);
-        if (m_hResourceDll != nullptr) {
-            ATL::_AtlBaseModule.AddResourceInstance(m_hResourceDll);
+        // First try loading the resource DLL specified in the registry.
+        // If that fails, load the default one.
+        const auto tryLoadResourceDll = [&](const std::wstring& language) {
+            const auto dllPath = path + L"\\" + L"PathCopyCopyLocalization_" + language + L".dll";
+            m_hResourceDll = ::LoadLibraryExW(dllPath.c_str(), nullptr, LOAD_LIBRARY_AS_DATAFILE | LOAD_LIBRARY_AS_IMAGE_RESOURCE);
+            if (m_hResourceDll != nullptr) {
+                ATL::_AtlBaseModule.AddResourceInstance(m_hResourceDll);
+            }
+        };
+        tryLoadResourceDll(GetResourceDllLanguage());
+        if (m_hResourceDll == nullptr) {
+            tryLoadResourceDll(L"en");
         }
     }
 }
@@ -172,19 +179,6 @@ HINSTANCE CPathCopyCopyModule::HInstance() noexcept
 }
 
 //
-// CPathCopyCopyModule::GetResourceDllName
-//
-// Returns the name of the DLL containing our string table resource
-// that we must load. Will account for bitness and localization.
-//
-// @return Resource DLL name. Does not include its full path.
-//
-std::wstring CPathCopyCopyModule::GetResourceDllName() const
-{
-    return std::wstring{L"PathCopyCopyLocalization_"} + GetResourceDllLanguage() + L".dll";
-}
-
-//
 // CPathCopyCopyModule::GetResourceDllLanguage
 //
 // Returns the two-letter language code of the resource DLL.
@@ -193,7 +187,17 @@ std::wstring CPathCopyCopyModule::GetResourceDllName() const
 //
 std::wstring CPathCopyCopyModule::GetResourceDllLanguage() const
 {
-    return L"en";
+    // By default the language is English.
+    std::wstring language = L"en";
+
+    // The resource DLL language can be overridden in the registry.
+    UserOverrideableRegKey regKey(L"Software\\clechasseur\\PathCopyCopy");
+    std::wstring regLanguage;
+    if (PCC::PluginUtils::ReadRegistryStringValue(regKey, L"Language", regLanguage) == ERROR_SUCCESS) {
+        language = regLanguage;
+    }
+
+    return language;
 }
 
 #pragma warning(suppress: ALL_CPPCORECHECK_WARNINGS)
