@@ -809,6 +809,17 @@ HRESULT CPathCopyCopyContextMenuExt::AddPluginToMenu(const PCC::PluginSP& p_spPl
 
                 // The description starts with "Copy ", drop it.
                 description.erase(0, redundantCopy.GetLength());
+
+                // In some language, this will leave the first letter in lowercase.
+                // Convert it to uppercase in that case.
+                if (!description.empty() && ::iswlower(description[0])) {
+                    description[0] = ::towupper(description[0]);
+                }
+
+                // ...or maybe the first letter is the shortcut character...
+                if (description.size() >= 2 && description[0] == L'&' && ::iswlower(description[1])) {
+                    description[1] = ::towupper(description[1]);
+                }
             }
         }
         if (p_ComputeShortcut) {

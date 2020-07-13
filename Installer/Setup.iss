@@ -74,6 +74,7 @@ Name: english; MessagesFile: compiler:Default.isl
 Source: ..\bin\Win32\Release\PathCopyCopy.dll; DestDir: {app}; Flags: ignoreversion restartreplace overwritereadonly uninsrestartdelete uninsremovereadonly; DestName: PCC32.dll; Check: (not Is64BitInstallMode) or IsAdminInstallMode
 Source: ..\bin\x64\Release\PathCopyCopy.dll; DestDir: {app}; Flags: ignoreversion restartreplace overwritereadonly uninsrestartdelete uninsremovereadonly; DestName: PCC64.dll; Check: Is64BitInstallMode
 Source: ..\bin\Win32\Release\PathCopyCopyLocalization_en.dll; DestDir: {app}; Flags: ignoreversion restartreplace overwritereadonly uninsrestartdelete uninsremovereadonly
+Source: ..\bin\Win32\Release\PathCopyCopyLocalization_fr.dll; DestDir: {app}; Flags: ignoreversion restartreplace overwritereadonly uninsrestartdelete uninsremovereadonly
 Source: ..\bin\Win32\Release\PathCopyCopySettings.exe; DestDir: {app}; Flags: ignoreversion restartreplace overwritereadonly uninsrestartdelete uninsremovereadonly
 Source: ..\bin\Win32\Release\PathCopyCopyRegexTester.exe; DestDir: {app}; Flags: ignoreversion restartreplace overwritereadonly uninsrestartdelete uninsremovereadonly
 Source: ..\bin\Win32\Release\PathCopyCopyCOMPluginExecutor32.exe; DestDir: {app}; Flags: ignoreversion restartreplace overwritereadonly uninsrestartdelete uninsremovereadonly

@@ -50,12 +50,6 @@ BEGIN
     IDS_LONG_UNC_PATH_PLUGIN_DESCRIPTION "Copy Long &UNC Path"
     IDS_LONG_UNC_PATH_PLUGIN_HINT 
                             "Copies the UNC (network share) path of the file/folder to the clipboard, if it has one; otherwise copies its long path."
-    IDS_SHOW_ENTIRE_MENU_MENU_ITEM "Always show &entire menu"
-    IDS_SHOW_ENTIRE_MENU_HINT 
-                            "Whether to always show the PathCopyCopy submenu. If unchecked, the submenu will only be shown when holding down the SHIFT key while right-clicking on the file/folder."
-    IDS_SHOW_ENTIRE_MENU_WARNING 
-                            "PathCopyCopy will now show a single item in the contextual menu. To get back the entire submenu, hold down the SHIFT key while right-clicking on the file/folder."
-    IDS_SHOW_ENTIRE_MENU_WARNING_TITLE "PathCopyCopy"
     IDS_INTERNET_PATH_PLUGIN_DESCRIPTION "Copy &Internet Path"
     IDS_INTERNET_PATH_PLUGIN_HINT 
                             "Copies the path of the file/folder to the clipboard in file URI format."
