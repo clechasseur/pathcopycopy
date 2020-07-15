@@ -21,6 +21,7 @@
 
 using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.Threading;
 using System.Windows.Forms;
 using CommandLine;
@@ -117,6 +118,15 @@ namespace PathCopyCopy.Settings
             // Setup visual styles.
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            // Set culture info to switch language if needed.
+            using (UserSettings settings = new UserSettings()) {
+                string language = settings.Language;
+                if (language != null) {
+                    Thread.CurrentThread.CurrentCulture = Thread.CurrentThread.CurrentCulture =
+                        CultureInfo.CreateSpecificCulture(language);
+                }
+            }
 
             // Check if we need to simply check for updates.
             if (pccArgs.updatecheck) {

@@ -177,6 +177,9 @@ namespace PathCopyCopy.Settings.Core
         /// Name of registry value containing a form's height.
         private const string FormsSizeHeightValueName = "Height";
 
+        /// Name of registry value containing the application's language.
+        private const string LanguageValueName = "Language";
+
         /// Name of registry value that can exist in the global key to indicate
         /// that settings editing is disabled.
         private const string EditingDisabledValueName = "KeyLock";
@@ -699,6 +702,19 @@ namespace PathCopyCopy.Settings.Core
             }
             set {
                 userKey.SetValue(SettingsFormSizeHeightValueName, value);
+            }
+        }
+
+        /// <summary>
+        /// The application's selected language.
+        /// </summary>
+        public string Language
+        {
+            get {
+                return (string) GetUserOrGlobalValue(LanguageValueName);
+            }
+            set {
+                userKey.SetValue(LanguageValueName, value);
             }
         }
 
