@@ -1,0 +1,386 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CYGWIN_PATH_PLUGIN_DESCRIPTION" xml:space="preserve">
+    <value>Copier le chemin Cygwin</value>
+  </data>
+  <data name="EDITING_DISABLED_MESSAGE" xml:space="preserve">
+    <value>Cette fonction a été désactivée par l'administrateur.</value>
+  </data>
+  <data name="EDITING_DISABLED_TITLE" xml:space="preserve">
+    <value>Édition désactivée</value>
+  </data>
+  <data name="ImportPipelinePluginsForm_CantOverwriteGlobalMsg" xml:space="preserve">
+    <value>Les commandes personnalisées qui sont grisées ne peuvent être sélectionnées car elles écraseraient celles configurées par l'administrateur.</value>
+  </data>
+  <data name="ImportPipelinePluginsForm_IncompatiblePluginsMsg" xml:space="preserve">
+    <value>Les commandes personnalisées listées avec un requis de version sont incompatibles avec cette version de Path Copy Copy. Elles peuvent quand même être importées, mais elles seront désactivées. </value>
+  </data>
+  <data name="ImportPipelinePluginsForm_MsgTitle" xml:space="preserve">
+    <value>Commandes personnalisées</value>
+  </data>
+  <data name="INTERNET_PATH_PLUGIN_DESCRIPTION" xml:space="preserve">
+    <value>Copier le chemin en format internet</value>
+  </data>
+  <data name="LONG_FOLDER_PLUGIN_DESCRIPTION" xml:space="preserve">
+    <value>Copier le chemin long du parent</value>
+  </data>
+  <data name="LONG_NAME_PLUGIN_DESCRIPTION" xml:space="preserve">
+    <value>Copier le nom long</value>
+  </data>
+  <data name="LONG_PATH_PLUGIN_DESCRIPTION" xml:space="preserve">
+    <value>Copier le chemin long</value>
+  </data>
+  <data name="LONG_UNC_FOLDER_PATH_PLUGIN_DESCRIPTION" xml:space="preserve">
+    <value>Copier le chemin UNC long du parent</value>
+  </data>
+  <data name="LONG_UNC_PATH_PLUGIN_DESCRIPTION" xml:space="preserve">
+    <value>Copier le chemin UNC long</value>
+  </data>
+  <data name="MainForm_Confirm_EditMsgTitle" xml:space="preserve">
+    <value>Édition</value>
+  </data>
+  <data name="MainForm_Confirm_ExportUserSettingsMsgTitle" xml:space="preserve">
+    <value>Exportation de la configuration</value>
+  </data>
+  <data name="MainForm_Confirm_ExportUserSettingsSaving" xml:space="preserve">
+    <value>Pour exporter la configuration, les changements doivent d'abord être appliqués. Voulez-vous appliquer les changements maintenant?</value>
+  </data>
+  <data name="MainForm_Confirm_ImportMsgTitle" xml:space="preserve">
+    <value>Import</value>
+  </data>
+  <data name="MainForm_Confirm_ImportPipelinePluginOverwrite" xml:space="preserve">
+    <value>Certaines commandes personnalisées à importer écraseront des commandes existantes. Voulez-vous les importer quand même?</value>
+  </data>
+  <data name="MainForm_Error_ImportPipelinePluginBadXMLFormat" xml:space="preserve">
+    <value>Une erreur est survenue en tentant d'importer les commandes personnalisées. Le fichier semble corrompu.</value>
+  </data>
+  <data name="MainForm_Error_ImportPipelinePluginEmptyXML" xml:space="preserve">
+    <value>Une erreur est survenue en tentant d'importer les commandes personnalisées. Le fichier semble vide.</value>
+  </data>
+  <data name="MainForm_Error_InvalidPipelinePluginEncodedElements" xml:space="preserve">
+    <value>Une erreur est survenue en tentant d'interpréter les données de cette commande personnalisée. Peut-être a-t-elle été créée par une version ultérieure de Path Copy Copy? Il sera impossible de l'éditer.</value>
+  </data>
+  <data name="MainForm_Msg_UserSettingsExported" xml:space="preserve">
+    <value>La configuration a été exportée dans "{0}". Pour l'importer à nouveau (possiblement sur une autre machine), il suffit de double-cliquer le fichier .reg dans Windows Explorer.</value>
+  </data>
+  <data name="MainForm_Msg_UserSettingsExportedMsgTitle" xml:space="preserve">
+    <value>Configuration exportée</value>
+  </data>
+  <data name="MainForm_Msg_UserSettingsNotExported" xml:space="preserve">
+    <value>Une erreur est survenue en exportant la configuration dans "{0}". La configuration n'a pas été exportée avec succès. (Code de sortie: {1})</value>
+  </data>
+  <data name="MainForm_Msg_UserSettingsNotExportedMsgTitle" xml:space="preserve">
+    <value>Échec de l'exportation de la configuration</value>
+  </data>
+  <data name="MainForm_PluginsDataGrid_DuplicateSuffix" xml:space="preserve">
+    <value> (Copie)</value>
+  </data>
+  <data name="MainForm_PluginsDataGrid_IconToolTipText" xml:space="preserve">
+    <value>Cliquez pour choisir un fichier d'icône pour cette commande.
+Shift-cliquez pour faire que cette commande utilise l'icône par défaut.
+Ctrl-cliquez pour faire que cette commande n'affiche pas d'icône.</value>
+  </data>
+  <data name="MSYS_PATH_PLUGIN_DESCRIPTION" xml:space="preserve">
+    <value>Copier le chemin MSYS/MSYS2</value>
+  </data>
+  <data name="PipelineElement_ApplyPipelinePlugin" xml:space="preserve">
+    <value>Utiliser une commande de base</value>
+  </data>
+  <data name="PipelineElement_ApplyPipelinePlugin_HelpText" xml:space="preserve">
+    <value>Choisir une commande de base pour obtenir la valeur initiale du chemin</value>
+  </data>
+  <data name="PipelineElement_ApplyPlugin" xml:space="preserve">
+    <value>Utiliser une commande de base (mais pas une commande personnalisée)</value>
+  </data>
+  <data name="PipelineElement_ApplyPlugin_HelpText" xml:space="preserve">
+    <value>Choisir une commande de base (mais pas une commande personnalisée) pour obtenir la valeur initiale du chemin</value>
+  </data>
+  <data name="PipelineElement_BackToForwardSlashes" xml:space="preserve">
+    <value>Transformer les barres obliques inverses en barres obliques</value>
+  </data>
+  <data name="PipelineElement_BackToForwardSlashes_HelpText" xml:space="preserve">
+    <value>Remplacer toutes les barres obliques inverses ( \ ) dans le chemin par des barres obliques ( / )</value>
+  </data>
+  <data name="PipelineElement_CopyNPathParts" xml:space="preserve">
+    <value>Copier # morceaux de chemin (à partir du début ou de la fin)</value>
+  </data>
+  <data name="PipelineElement_CopyNPathParts_HelpText" xml:space="preserve">
+    <value>Ne conserver qu'un certain nombre de morceaux du chemin, à partir du début ou de la fin</value>
+  </data>
+  <data name="PipelineElement_DuplicateStackValue" xml:space="preserve">
+    <value>Dupliquer la valeur du dessus de la pile</value>
+  </data>
+  <data name="PipelineElement_DuplicateStackValue_HelpText" xml:space="preserve">
+    <value>Dupliquer la valeur qui est sur le dessus de la pile</value>
+  </data>
+  <data name="PipelineElement_EmailLinks" xml:space="preserve">
+    <value>Créer des liens pour courriel</value>
+  </data>
+  <data name="PipelineElement_EmailLinks_HelpText" xml:space="preserve">
+    <value>Entourer le chemin de &lt; et &gt; afin de créer des liens pour courriels</value>
+  </data>
+  <data name="PipelineElement_EncodeURIChars" xml:space="preserve">
+    <value>Encoder les caractères URI</value>
+  </data>
+  <data name="PipelineElement_EncodeURIChars_HelpText" xml:space="preserve">
+    <value>Remplacer tous les caractères du chemin qui sont invalides dans un URI par de l'encodage en pourcentage ( %xx )</value>
+  </data>
+  <data name="PipelineElement_EncodeURIWhitespace" xml:space="preserve">
+    <value>Encoder les espaces URI</value>
+  </data>
+  <data name="PipelineElement_EncodeURIWhitespace_HelpText" xml:space="preserve">
+    <value>Remplacer tous les caractères espaces du chemin par %20</value>
+  </data>
+  <data name="PipelineElement_Executable" xml:space="preserve">
+    <value>Option: Lancer un exécutable</value>
+  </data>
+  <data name="PipelineElement_ExecutableWithFilelist" xml:space="preserve">
+    <value>Option: Lancer un exécutable avec un fichier de liste</value>
+  </data>
+  <data name="PipelineElement_ExecutableWithFilelist_HelpText" xml:space="preserve">
+    <value>Au lieu de copier les chemins dans le presse-papier, les sauvegarder dans un fichier de liste, puis lancer un exécutable sur disque en lui passant le chemin du fichier de liste en tant qu'argument</value>
+  </data>
+  <data name="PipelineElement_Executable_HelpText" xml:space="preserve">
+    <value>Au lieu de copier les chemins dans le presse-papier, lancer un exécutable sur disque en lui passant les chemins en tant qu'arguments</value>
+  </data>
+  <data name="PipelineElement_FindReplace" xml:space="preserve">
+    <value>Chercher / Remplacer</value>
+  </data>
+  <data name="PipelineElement_FindReplace_HelpText" xml:space="preserve">
+    <value>Remplacer toutes les instances d'une chaîne de caractère donnée dans le chemin par une autre</value>
+  </data>
+  <data name="PipelineElement_FollowSymlink" xml:space="preserve">
+    <value>Suivre le lien symbolique</value>
+  </data>
+  <data name="PipelineElement_FollowSymlink_HelpText" xml:space="preserve">
+    <value>Remplacer le chemin vers un lien symbolique par le chemin de sa cible</value>
+  </data>
+  <data name="PipelineElement_ForwardToBackslashes" xml:space="preserve">
+    <value>Transformer les barres obliques en barres obliques inverses</value>
+  </data>
+  <data name="PipelineElement_ForwardToBackslashes_HelpText" xml:space="preserve">
+    <value>Remplacer toutes les barres obliques ( / ) dans le chemin par des barres obliques inverses ( \ )</value>
+  </data>
+  <data name="PipelineElement_InjectDriveLabel" xml:space="preserve">
+    <value>Injecter le libellé du disque</value>
+  </data>
+  <data name="PipelineElement_InjectDriveLabel_HelpText" xml:space="preserve">
+    <value>Remplacer toutes les instances de %DRIVELABEL% dans le chemin par le libellé du disque</value>
+  </data>
+  <data name="PipelineElement_OptionalQuotes" xml:space="preserve">
+    <value>Ajouter des guillemets si nécessaire</value>
+  </data>
+  <data name="PipelineElement_OptionalQuotes_HelpText" xml:space="preserve">
+    <value>Entourer le chemin de guillemets ( " ) s'il contient des espaces</value>
+  </data>
+  <data name="PipelineElement_PathsSeparator" xml:space="preserve">
+    <value>Option: Séparateur de chemins</value>
+  </data>
+  <data name="PipelineElement_PathsSeparator_HelpText" xml:space="preserve">
+    <value>Configurer la chaîne de caractère à utiliser pour séparer plusieurs chemins copiés; si non-configurée, un retour-chariot est utilisé</value>
+  </data>
+  <data name="PipelineElement_PopFromStack" xml:space="preserve">
+    <value>Dépiler une valeur</value>
+  </data>
+  <data name="PipelineElement_PopFromStack_HelpText" xml:space="preserve">
+    <value>Dépiler une valeur de la pile en l'insérant possiblement quelque part dans le chemin</value>
+  </data>
+  <data name="PipelineElement_PushToStack" xml:space="preserve">
+    <value>Empiler une valeur</value>
+  </data>
+  <data name="PipelineElement_PushToStack_HelpText" xml:space="preserve">
+    <value>Empiler une valeur sur la pile, possiblement une partie du chemin</value>
+  </data>
+  <data name="PipelineElement_Quotes" xml:space="preserve">
+    <value>Ajouter des guillemets</value>
+  </data>
+  <data name="PipelineElement_Quotes_HelpText" xml:space="preserve">
+    <value>Entourer le chemin de guillemets ( " )</value>
+  </data>
+  <data name="PipelineElement_Regex" xml:space="preserve">
+    <value>Chercher / Remplacer à l'aide d'une expression régulière</value>
+  </data>
+  <data name="PipelineElement_Regex_HelpText" xml:space="preserve">
+    <value>Effectuer une opération de chercher / remplacer sur le chemin en utilisant une expression régulière</value>
+  </data>
+  <data name="PipelineElement_RemoveExt" xml:space="preserve">
+    <value>Enlever l'extension de fichier</value>
+  </data>
+  <data name="PipelineElement_RemoveExt_HelpText" xml:space="preserve">
+    <value>Enlever toute extension de fichier à la fin du chemin</value>
+  </data>
+  <data name="PipelineElement_SwapStackValues" xml:space="preserve">
+    <value>Échanger les deux valeurs du dessus de la pile</value>
+  </data>
+  <data name="PipelineElement_SwapStackValues_HelpText" xml:space="preserve">
+    <value>Dépiler deux valeurs de la pile et les rempiler en ordre inverse</value>
+  </data>
+  <data name="PipelineElement_UnexpandEnvStrings" xml:space="preserve">
+    <value>Insérer des variables d'environnement</value>
+  </data>
+  <data name="PipelineElement_UnexpandEnvStrings_HelpText" xml:space="preserve">
+    <value>Remplacer des parties du chemin par des références à des variables d'environnement, si possible (comme %USERPROFILE%, etc.)</value>
+  </data>
+  <data name="PipelinePluginForm_EmptyName" xml:space="preserve">
+    <value>Veuillez choisir un nom pour la commande personnalisée.</value>
+  </data>
+  <data name="PipelinePluginForm_MsgTitle" xml:space="preserve">
+    <value>Commande personnalisée</value>
+  </data>
+  <data name="PipelinePluginForm_PipelineTooComplexForSimpleMode" xml:space="preserve">
+    <value>Cette commande est maintenant trop complexe pour être éditée en mode Simple. Si vous changez de mode, vous perdrez certaines configurations. Voulez-vous vraiment changer en mode Simple?</value>
+  </data>
+  <data name="PipelinePluginInfo_DescriptionWithRequiredVersion" xml:space="preserve">
+    <value>{0} (Version requise: {1})</value>
+  </data>
+  <data name="Plugin_PreviewError" xml:space="preserve">
+    <value>#ERREUR#</value>
+  </data>
+  <data name="REMOVE_PIPELINE_PLUGIN_MESSAGE" xml:space="preserve">
+    <value>Êtes-vous certain de vouloir effacer la commande "{0}"?</value>
+  </data>
+  <data name="REMOVE_PIPELINE_PLUGIN_TITLE" xml:space="preserve">
+    <value>Effacer une commande personnalisée</value>
+  </data>
+  <data name="SAMBA_PATH_PLUGIN_DESCRIPTION" xml:space="preserve">
+    <value>Copier le chemin Samba</value>
+  </data>
+  <data name="SHORT_FOLDER_PLUGIN_DESCRIPTION" xml:space="preserve">
+    <value>Copier le chemin court du parent</value>
+  </data>
+  <data name="SHORT_NAME_PLUGIN_DESCRIPTION" xml:space="preserve">
+    <value>Copier le nom court</value>
+  </data>
+  <data name="SHORT_PATH_PLUGIN_DESCRIPTION" xml:space="preserve">
+    <value>Copier le chemin court</value>
+  </data>
+  <data name="SHORT_UNC_FOLDER_PATH_PLUGIN_DESCRIPTION" xml:space="preserve">
+    <value>Copier le chemin UNC court du parent</value>
+  </data>
+  <data name="SHORT_UNC_PATH_PLUGIN_DESCRIPTION" xml:space="preserve">
+    <value>Copier le chemin UNC court</value>
+  </data>
+  <data name="UNIX_PATH_PLUGIN_DESCRIPTION" xml:space="preserve">
+    <value>Copier le chemin Unix</value>
+  </data>
+  <data name="WSL_PATH_PLUGIN_DESCRIPTION" xml:space="preserve">
+    <value>Copier le chemin WSL</value>
+  </data>
+</root>
