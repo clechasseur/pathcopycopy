@@ -194,7 +194,9 @@ std::wstring CPathCopyCopyModule::GetResourceDllLanguage() const
     UserOverrideableRegKey regKey(L"Software\\clechasseur\\PathCopyCopy");
     std::wstring regLanguage;
     if (PCC::PluginUtils::ReadRegistryStringValue(regKey, L"Language", regLanguage) == ERROR_SUCCESS) {
-        language = regLanguage;
+        // The language in the registry is a complete culture designation, like fr-CA.
+        // We're only interested in the language part (first two letters).
+        language = regLanguage.substr(0, 2);
     }
 
     return language;

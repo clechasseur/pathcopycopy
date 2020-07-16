@@ -288,7 +288,7 @@ namespace PathCopyCopy.Settings.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://github.com/clechasseur/pathcopycopy/blob/master/LICENSE.
+        ///   Looks up a localized string similar to https://github.com/clechasseur/pathcopycopy/blob/default/LICENSE.
         /// </summary>
         internal static string MainForm_About_LicensePageURI {
             get {

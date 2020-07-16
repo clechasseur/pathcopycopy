@@ -31,6 +31,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PluginPreviewUserControl));
             this.PreviewGroupBox = new System.Windows.Forms.GroupBox();
             this.PreviewTxt = new System.Windows.Forms.TextBox();
             this.PreviewGroupBox.SuspendLayout();
@@ -38,32 +39,23 @@
             // 
             // PreviewGroupBox
             // 
+            resources.ApplyResources(this.PreviewGroupBox, "PreviewGroupBox");
             this.PreviewGroupBox.Controls.Add(this.PreviewTxt);
-            this.PreviewGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PreviewGroupBox.Location = new System.Drawing.Point(0, 0);
             this.PreviewGroupBox.Name = "PreviewGroupBox";
-            this.PreviewGroupBox.Size = new System.Drawing.Size(369, 53);
-            this.PreviewGroupBox.TabIndex = 0;
             this.PreviewGroupBox.TabStop = false;
-            this.PreviewGroupBox.Text = "Preview";
             // 
             // PreviewTxt
             // 
-            this.PreviewTxt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.PreviewTxt.Location = new System.Drawing.Point(6, 19);
+            resources.ApplyResources(this.PreviewTxt, "PreviewTxt");
             this.PreviewTxt.Name = "PreviewTxt";
             this.PreviewTxt.ReadOnly = true;
-            this.PreviewTxt.Size = new System.Drawing.Size(357, 20);
-            this.PreviewTxt.TabIndex = 0;
             // 
             // PluginPreviewUserControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.PreviewGroupBox);
             this.Name = "PluginPreviewUserControl";
-            this.Size = new System.Drawing.Size(369, 53);
             this.PreviewGroupBox.ResumeLayout(false);
             this.PreviewGroupBox.PerformLayout();
             this.ResumeLayout(false);

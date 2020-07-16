@@ -123,7 +123,7 @@ namespace PathCopyCopy.Settings
             using (UserSettings settings = new UserSettings()) {
                 string language = settings.Language;
                 if (!string.IsNullOrWhiteSpace(language)) {
-                    Thread.CurrentThread.CurrentCulture = Thread.CurrentThread.CurrentCulture =
+                    Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture =
                         CultureInfo.CreateSpecificCulture(language);
                 }
             }
