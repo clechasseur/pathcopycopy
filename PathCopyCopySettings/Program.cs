@@ -122,7 +122,7 @@ namespace PathCopyCopy.Settings
             // Set culture info to switch language if needed.
             using (UserSettings settings = new UserSettings()) {
                 string language = settings.Language;
-                if (language != null) {
+                if (!string.IsNullOrWhiteSpace(language)) {
                     Thread.CurrentThread.CurrentCulture = Thread.CurrentThread.CurrentCulture =
                         CultureInfo.CreateSpecificCulture(language);
                 }
