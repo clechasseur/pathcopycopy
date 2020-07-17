@@ -225,6 +225,9 @@
     <EmbeddedResource Include="UI\Forms\RegexTesterForm.resx">
       <DependentUpon>RegexTesterForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\SoftwareUpdateForm.fr-CA.resx">
+      <DependentUpon>SoftwareUpdateForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\SoftwareUpdateForm.resx">
       <DependentUpon>SoftwareUpdateForm.cs</DependentUpon>
     </EmbeddedResource>
