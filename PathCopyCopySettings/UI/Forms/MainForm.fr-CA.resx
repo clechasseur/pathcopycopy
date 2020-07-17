@@ -224,6 +224,42 @@
   <data name="PluginsPage.Text" xml:space="preserve">
     <value>Commandes</value>
   </data>
+  <data name="TrueLnkPathsChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>319, 17</value>
+  </data>
+  <data name="TrueLnkPathsChk.Text" xml:space="preserve">
+    <value>Copier les chemins des fichiers de raccourcis (.ln&amp;k) eux-mêmes</value>
+  </data>
+  <data name="TrueLnkPathsChk.ToolTip" xml:space="preserve">
+    <value>Lors de la copie du chemin d'un fichier de raccourci (.lnk), copier le chemin du fichier de raccourci lui-même au lieu de copier le chemin vers sa cible</value>
+  </data>
+  <data name="UsePreviewModeInMainMenuChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 17</value>
+  </data>
+  <data name="UsePreviewModeInMainMenuChk.Text" xml:space="preserve">
+    <value>...ainsi que dans le menu prin&amp;cipal</value>
+  </data>
+  <data name="UsePreviewModeInMainMenuChk.ToolTip" xml:space="preserve">
+    <value>Afficher des aperçus pour les commandes dans le menu contextuel principal également</value>
+  </data>
+  <data name="AppendSepForDirChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>256, 17</value>
+  </data>
+  <data name="AppendSepForDirChk.Text" xml:space="preserve">
+    <value>Ajouter un sépa&amp;rateur aux chemins de répertoires</value>
+  </data>
+  <data name="AppendSepForDirChk.ToolTip" xml:space="preserve">
+    <value>Quand le chemin copié pointe vers un répertoire, ajouter un séparateur (i.e. \ ou / ) à la fin du chemin</value>
+  </data>
+  <data name="UseFQDNChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>353, 17</value>
+  </data>
+  <data name="UseFQDNChk.Text" xml:space="preserve">
+    <value>Utiliser des noms de &amp;domaines complets pour copier les chemins UNC</value>
+  </data>
+  <data name="UseFQDNChk.ToolTip" xml:space="preserve">
+    <value>Utiliser des noms de domaines complets (FQDN en anglais) pour copier les chemins UNC</value>
+  </data>
   <data name="AreQuotesOptionalChk.Size" type="System.Drawing.Size, System.Drawing">
     <value>224, 17</value>
   </data>
@@ -232,6 +268,108 @@
   </data>
   <data name="AreQuotesOptionalChk.ToolTip" xml:space="preserve">
     <value>Détermine si les chemins seront entourés de guillemets uniquement s'ils contiennent des espaces</value>
+  </data>
+  <data name="CtrlKeyPluginCombo.ToolTip" xml:space="preserve">
+    <value>Commande à utiliser automatiquement quand la touche Ctrl est maintenue enfoncée à l'ouverture du menu contextuel d'Explorer</value>
+  </data>
+  <data name="CtrlKeyPluginChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>419, 17</value>
+  </data>
+  <data name="CtrlKeyPluginChk.Text" xml:space="preserve">
+    <value>Quand la touche Ctrl est en&amp;foncée lors de l'ouverture du menu, utiliser la commande</value>
+  </data>
+  <data name="CtrlKeyPluginChk.ToolTip" xml:space="preserve">
+    <value>Choisir une commande à utiliser automatiquement quand le menu contextuel d'Explorer est ouvert alors que la touche Ctrl est maintenue enfoncée</value>
+  </data>
+  <data name="EncodeURICharsChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>320, 17</value>
+  </data>
+  <data name="EncodeURICharsChk.Text" xml:space="preserve">
+    <value>...ainsi que tous les caractères in&amp;valides dans un URI (i.e. %xx)</value>
+  </data>
+  <data name="EncodeURICharsChk.ToolTip" xml:space="preserve">
+    <value>Remplacer tous les caractères dans les chemins qui sont invalides dans un URI par de l'encodage en pourcentage ( %xx )</value>
+  </data>
+  <data name="EncodeURIWhitespaceChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>344, 17</value>
+  </data>
+  <data name="EncodeURIWhitespaceChk.Text" xml:space="preserve">
+    <value>Encoder les es&amp;paces à l'aide d'encodage en pourcentage (i.e. %20)</value>
+  </data>
+  <data name="EncodeURIWhitespaceChk.ToolTip" xml:space="preserve">
+    <value>Remplacer tous les espaces dans les chemins par %20</value>
+  </data>
+  <data name="CopyOnSameLineChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>221, 17</value>
+  </data>
+  <data name="CopyOnSameLineChk.Text" xml:space="preserve">
+    <value>Copier tous les chemins sur la même &amp;ligne</value>
+  </data>
+  <data name="CopyOnSameLineChk.ToolTip" xml:space="preserve">
+    <value>Lors de la copie de plusieurs chemins, les copier tous sur la même ligne (en les séparant avec des espaces) plutôt que de les copier sur des lignes distinctes (séparées par des sauts de lignes)</value>
+  </data>
+  <data name="DropRedundantWordsChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>443, 17</value>
+  </data>
+  <data name="DropRedundantWordsChk.Text" xml:space="preserve">
+    <value>Ne pas afficher les mots red&amp;ondants comme "Copier" ou "long/court" dans le sous-menu</value>
+  </data>
+  <data name="DropRedundantWordsChk.ToolTip" xml:space="preserve">
+    <value>Laisser tomber certains mots redondants lors de l'affichage des commandes dans le sous-menu</value>
+  </data>
+  <data name="UsePreviewModeChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>408, 17</value>
+  </data>
+  <data name="UsePreviewModeChk.Text" xml:space="preserve">
+    <value>Afficher des aperç&amp;us au lieu de la description des commandes dans le sous-menu</value>
+  </data>
+  <data name="UsePreviewModeChk.ToolTip" xml:space="preserve">
+    <value>Dans le sous-menu, au lieu d'afficher les commandes normalement, plutôt afficher un aperçu de ce que les chemins copiés auraient l'air si la commande était choisie</value>
+  </data>
+  <data name="UseIconForSubmenuChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>208, 17</value>
+  </data>
+  <data name="UseIconForSubmenuChk.Text" xml:space="preserve">
+    <value>Afficher un &amp;icône à côté du sous-menu</value>
+  </data>
+  <data name="UseIconForSubmenuChk.ToolTip" xml:space="preserve">
+    <value>Afficher un icône de Path Copy Copy à côté du sous-menu dans le menu contextuel d'Explorer</value>
+  </data>
+  <data name="EmailLinksChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>346, 17</value>
+  </data>
+  <data name="EmailLinksChk.Text" xml:space="preserve">
+    <value>Entourer les chemins copiés de &lt; et &gt; (pour créer des liens courri&amp;els)</value>
+  </data>
+  <data name="EmailLinksChk.ToolTip" xml:space="preserve">
+    <value>Entourer tous les chemins copiés des caractères &lt; et &gt; (ce qui crée des liens courriels)</value>
+  </data>
+  <data name="EnableSoftwareUpdateChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 17</value>
+  </data>
+  <data name="EnableSoftwareUpdateChk.Text" xml:space="preserve">
+    <value>Vérifier les mises à &amp;jour automatiquement</value>
+  </data>
+  <data name="EnableSoftwareUpdateChk.ToolTip" xml:space="preserve">
+    <value>Vérifier automatiquement si de nouvelles versions de Path Copy Copy existent et offrir de les installer quand c'est le cas</value>
+  </data>
+  <data name="AlwaysShowSubmenuChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>170, 17</value>
+  </data>
+  <data name="AlwaysShowSubmenuChk.Text" xml:space="preserve">
+    <value>&amp;Toujours afficher le sous-menu</value>
+  </data>
+  <data name="AlwaysShowSubmenuChk.ToolTip" xml:space="preserve">
+    <value>Toujours afficher le sous-menu de Path Copy Copy dans le menu contextuel d'Explorer (sinon, il faudra maintenir Shift enfoncé pour l'afficher)</value>
+  </data>
+  <data name="HiddenSharesChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>295, 17</value>
+  </data>
+  <data name="HiddenSharesChk.Text" xml:space="preserve">
+    <value>Utiliser les partages cac&amp;hés pour copier les chemins UNC</value>
+  </data>
+  <data name="HiddenSharesChk.ToolTip" xml:space="preserve">
+    <value>Utiliser les partages cachés (ceux se terminant avec $, incluant les partages administratifs comme \\server\C$) pour copier les chemins UNC</value>
   </data>
   <data name="AddQuotesChk.Size" type="System.Drawing.Size, System.Drawing">
     <value>257, 17</value>

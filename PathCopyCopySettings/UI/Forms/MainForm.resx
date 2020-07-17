@@ -140,8 +140,8 @@
   <data name="&gt;&gt;VisitWebsiteLbl.Parent" xml:space="preserve">
     <value>AboutTableLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;UsePreviewModeInMainMenuChk.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="PluginCol.HeaderText" xml:space="preserve">
+    <value>Command</value>
   </data>
   <data name="PluginsDataGrid.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 44</value>
@@ -204,14 +204,17 @@
   <data name="ImportPipelinePluginsBtn.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
+  <data name="EmailLinksChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>289, 17</value>
+  </data>
   <data name="ApplyBtn.Location" type="System.Drawing.Point, System.Drawing">
     <value>410, 563</value>
   </data>
   <data name="&gt;&gt;LicenseExplanationLbl.Parent" xml:space="preserve">
     <value>AboutTableLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;ChoosePluginIconOpenDlg.Type" xml:space="preserve">
-    <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="PluginsExplanationLbl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>439, 13</value>
   </data>
   <data name="&gt;&gt;ExportPipelinePluginsBtn.ZOrder" xml:space="preserve">
     <value>4</value>
@@ -228,17 +231,15 @@
   <data name="EncodeURICharsChk.Location" type="System.Drawing.Point, System.Drawing">
     <value>25, 98</value>
   </data>
-  <data name="&gt;&gt;InSubmenuCol.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="DonationLinkLbl.Text" xml:space="preserve">
+    <value>If you like Path Copy Copy, don't hesitate to DONATE through PayPal!
+Donations help fund future development and provide responsive support.</value>
   </data>
-  <data name="&gt;&gt;EmailLinksChk.ZOrder" xml:space="preserve">
-    <value>13</value>
+  <data name="ExportPipelinePluginsBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>384, 263</value>
   </data>
   <data name="OKBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
-  </data>
-  <data name="&gt;&gt;AddSeparatorBtn.Name" xml:space="preserve">
-    <value>AddSeparatorBtn</value>
   </data>
   <data name="UseIconForSubmenuChk.ToolTip" xml:space="preserve">
     <value>Display a Path Copy Copy icon next to the submenu in Explorer's contextual menu</value>
@@ -255,8 +256,8 @@
   <data name="PluginsExplanationLbl.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 6</value>
   </data>
-  <data name="BevelLineLbl2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>384, 255</value>
+  <data name="ProductAndVersionLbl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
   </data>
   <data name="HiddenSharesChk.Size" type="System.Drawing.Size, System.Drawing">
     <value>238, 17</value>
@@ -282,14 +283,8 @@
   <data name="PluginsDataGrid.Size" type="System.Drawing.Size, System.Drawing">
     <value>369, 410</value>
   </data>
-  <data name="UsePreviewModeChk.Size" type="System.Drawing.Size, System.Drawing">
-    <value>312, 17</value>
-  </data>
-  <data name="LicenseExplanationLbl.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>BottomCenter</value>
-  </data>
-  <data name="&gt;&gt;DonationLinkLbl.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="AddPipelinePluginBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
   </data>
   <data name="DonationLinkLbl.ToolTip" xml:space="preserve">
     <value />
@@ -303,11 +298,14 @@
   <data name="DuplicatePipelinePluginBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
+  <data name="RemovePluginBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>384, 226</value>
+  </data>
   <data name="CtrlKeyPluginChk.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="TrueLnkPathsChk.Size" type="System.Drawing.Size, System.Drawing">
-    <value>235, 17</value>
+  <data name="AlwaysShowSubmenuChk.ToolTip" xml:space="preserve">
+    <value>Always display the Path Copy Copy submenu in the Explorer contextual menu (otherwise, only display it when the Shift key is held down)</value>
   </data>
   <data name="&gt;&gt;InMainMenuCol.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -315,11 +313,14 @@
   <data name="&gt;&gt;HiddenSharesChk.Parent" xml:space="preserve">
     <value>MiscOptionsPage</value>
   </data>
+  <data name="&gt;&gt;HiddenSharesChk.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
   <data name="&gt;&gt;EncodeURIWhitespaceChk.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="ExportPipelinePluginsBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>384, 263</value>
+  <data name="&gt;&gt;EmailLinksChk.Name" xml:space="preserve">
+    <value>EmailLinksChk</value>
   </data>
   <data name="&gt;&gt;OKBtn.Parent" xml:space="preserve">
     <value>$this</value>
@@ -339,6 +340,9 @@
   <data name="AddPipelinePluginBtn.ToolTip" xml:space="preserve">
     <value>Create a new custom command</value>
   </data>
+  <data name="&gt;&gt;UsePreviewModeInMainMenuChk.Name" xml:space="preserve">
+    <value>UsePreviewModeInMainMenuChk</value>
+  </data>
   <data name="MovePluginDownBtn.Location" type="System.Drawing.Point, System.Drawing">
     <value>384, 73</value>
   </data>
@@ -354,8 +358,8 @@
   <data name="UseIconForSubmenuChk.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 213</value>
   </data>
-  <data name="&gt;&gt;UsePreviewModeInMainMenuChk.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="VisitWebsiteLbl.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="UsePreviewModeChk.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -366,20 +370,17 @@
   <data name="EnableSoftwareUpdateChk.Text" xml:space="preserve">
     <value>Check for &amp;updates automatically</value>
   </data>
-  <data name="&gt;&gt;UsePreviewModeInMainMenuChk.Name" xml:space="preserve">
-    <value>UsePreviewModeInMainMenuChk</value>
+  <data name="&gt;&gt;DuplicatePipelinePluginBtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="CtrlKeyPluginChk.ToolTip" xml:space="preserve">
-    <value>Choose a command to use automatically when user holds down the Ctrl key when Explorer's contextual menu is shown</value>
+  <data name="EnableSoftwareUpdateChk.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="ApplyBtn.ToolTip" xml:space="preserve">
     <value>Save changes made to the settings so far, leaving the window open</value>
   </data>
   <data name="DuplicatePipelinePluginBtn.Text" xml:space="preserve">
     <value>Dup&amp;licate</value>
-  </data>
-  <data name="EncodeURICharsChk.Text" xml:space="preserve">
-    <value>...and all in&amp;valid URI characters (e.g., %xx)</value>
   </data>
   <data name="&gt;&gt;LicenseExplanationLbl.ZOrder" xml:space="preserve">
     <value>4</value>
@@ -414,8 +415,14 @@
   <data name="MainTabCtrl.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="UsePreviewModeInMainMenuChk.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="AddQuotesChk.ToolTip" xml:space="preserve">
     <value>Surround all copied paths with quotes ( " )</value>
+  </data>
+  <data name="LicenseTxtLinkLbl.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
   </data>
   <data name="&gt;&gt;CopyOnSameLineChk.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -450,9 +457,6 @@
   <data name="&gt;&gt;HiddenSharesChk.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;MainToolTip.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;UseIconForSubmenuChk.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -474,6 +478,9 @@
   <data name="AreQuotesOptionalChk.Size" type="System.Drawing.Size, System.Drawing">
     <value>166, 17</value>
   </data>
+  <data name="&gt;&gt;AlwaysShowSubmenuChk.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
   <data name="&gt;&gt;PluginsDataGridBindingSource.Name" xml:space="preserve">
     <value>PluginsDataGridBindingSource</value>
   </data>
@@ -486,14 +493,14 @@
   <data name="&gt;&gt;MainTabCtrl.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;EnableSoftwareUpdateChk.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="DropRedundantWordsChk.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;AreQuotesOptionalChk.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="EditPipelinePluginBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="LicenseExplanationLbl.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
   </data>
   <data name="&gt;&gt;MovePluginDownBtn.ZOrder" xml:space="preserve">
     <value>10</value>
@@ -510,14 +517,14 @@
   <data name="&gt;&gt;UseIconForSubmenuChk.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
-  <data name="CopyOnSameLineChk.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="&gt;&gt;AppendSepForDirChk.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="LicenseTxtLinkLbl.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="UsePreviewModeChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>312, 17</value>
   </data>
   <data name="CopyOnSameLineChk.Text" xml:space="preserve">
     <value>Copy mul&amp;tiple paths on the same line</value>
@@ -528,14 +535,8 @@
   <data name="&gt;&gt;CopyrightLbl.Parent" xml:space="preserve">
     <value>AboutTableLayoutPanel</value>
   </data>
-  <data name="CancelBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>329, 563</value>
-  </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>PathCopyCopy.Settings.UI.Utils.PositionPersistedForm, PathCopyCopySettings, Version=19.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;TrueLnkPathsChk.Name" xml:space="preserve">
-    <value>TrueLnkPathsChk</value>
   </data>
   <data name="ApplyBtn.Text" xml:space="preserve">
     <value>&amp;Apply</value>
@@ -549,9 +550,6 @@
   <data name="MainTabCtrl.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 12</value>
   </data>
-  <data name="UsePreviewModeInMainMenuChk.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
   <data name="EncodeURIWhitespaceChk.Text" xml:space="preserve">
     <value>Encode &amp;whitespace using percent-encoding (e.g., %20)</value>
   </data>
@@ -564,17 +562,11 @@
   <data name="&gt;&gt;CopyOnSameLineChk.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="EnableSoftwareUpdateChk.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="&gt;&gt;UsePreviewModeInMainMenuChk.Parent" xml:space="preserve">
     <value>MiscOptionsPage</value>
   </data>
   <data name="&gt;&gt;AppendSepForDirChk.Name" xml:space="preserve">
     <value>AppendSepForDirChk</value>
-  </data>
-  <data name="&gt;&gt;ExportPipelinePluginsBtn.Parent" xml:space="preserve">
-    <value>PluginsPage</value>
   </data>
   <data name="AddPipelinePluginBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -588,11 +580,14 @@
   <data name="&gt;&gt;MovePluginDownBtn.Name" xml:space="preserve">
     <value>MovePluginDownBtn</value>
   </data>
+  <data name="&gt;&gt;ChoosePluginIconOpenDlg.Type" xml:space="preserve">
+    <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;AboutPage.Parent" xml:space="preserve">
     <value>MainTabCtrl</value>
   </data>
-  <data name="UsePreviewModeInMainMenuChk.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;InSubmenuCol.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="EditPipelinePluginBtn.Location" type="System.Drawing.Point, System.Drawing">
     <value>384, 168</value>
@@ -612,11 +607,14 @@
   <data name="LicenseExplanationLbl.Size" type="System.Drawing.Size, System.Drawing">
     <value>453, 40</value>
   </data>
-  <data name="&gt;&gt;ApplyBtn.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;ImportPipelinePluginsBtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ProductAndVersionLbl.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 12pt</value>
+  </data>
+  <data name="CtrlKeyPluginChk.ToolTip" xml:space="preserve">
+    <value>Choose a command to use automatically when user holds down the Ctrl key when Explorer's contextual menu is shown</value>
   </data>
   <data name="&gt;&gt;PluginsDataGrid.ZOrder" xml:space="preserve">
     <value>13</value>
@@ -626,9 +624,6 @@
   </data>
   <data name="&gt;&gt;AddPipelinePluginBtn.Name" xml:space="preserve">
     <value>AddPipelinePluginBtn</value>
-  </data>
-  <data name="&gt;&gt;DuplicatePipelinePluginBtn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;UseIconForSubmenuChk.Parent" xml:space="preserve">
     <value>MiscOptionsPage</value>
@@ -650,9 +645,6 @@
   </data>
   <data name="MovePluginDownBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
-  </data>
-  <data name="&gt;&gt;EmailLinksChk.Parent" xml:space="preserve">
-    <value>MiscOptionsPage</value>
   </data>
   <data name="UseIconForSubmenuChk.Text" xml:space="preserve">
     <value>Show &amp;icon next to submenu</value>
@@ -687,20 +679,20 @@
   <data name="VisitWebsiteLbl.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="VisitWebsiteLbl.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+  <data name="LicenseTxtLinkLbl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>453, 60</value>
   </data>
-  <data name="AddPipelinePluginBtn.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+  <data name="&gt;&gt;AddSeparatorBtn.Name" xml:space="preserve">
+    <value>AddSeparatorBtn</value>
   </data>
   <data name="MovePluginUpBtn.Text" xml:space="preserve">
     <value>&amp;Up</value>
   </data>
+  <data name="SiteLinkLbl.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
   <data name="&gt;&gt;DuplicatePipelinePluginBtn.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="ApplyBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
   </data>
   <data name="&gt;&gt;EditPipelinePluginBtn.Parent" xml:space="preserve">
     <value>PluginsPage</value>
@@ -729,20 +721,14 @@
   <data name="SiteLinkLbl.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="&gt;&gt;RemovePluginBtn.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="LicenseExplanationLbl.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>BottomCenter</value>
   </data>
   <data name="TrueLnkPathsChk.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 328</value>
   </data>
-  <data name="PluginsExplanationLbl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>439, 13</value>
-  </data>
   <data name="EncodeURIWhitespaceChk.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 75</value>
-  </data>
-  <data name="CopyOnSameLineChk.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
   </data>
   <data name="&gt;&gt;EnableSoftwareUpdateChk.Parent" xml:space="preserve">
     <value>MiscOptionsPage</value>
@@ -750,8 +736,8 @@
   <data name="UseIconForSubmenuChk.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="MovePluginDownBtn.Text" xml:space="preserve">
-    <value>&amp;Down</value>
+  <data name="SiteLinkLbl.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="PluginsDataGrid.ToolTip" xml:space="preserve">
     <value />
@@ -795,11 +781,11 @@
   <data name="AboutPage.Size" type="System.Drawing.Size, System.Drawing">
     <value>465, 519</value>
   </data>
+  <data name="AboutPage.Text" xml:space="preserve">
+    <value>About</value>
+  </data>
   <data name="&gt;&gt;ExportUserSettingsSaveDlg.Name" xml:space="preserve">
     <value>ExportUserSettingsSaveDlg</value>
-  </data>
-  <data name="&gt;&gt;PreviewCtrl.Type" xml:space="preserve">
-    <value>PathCopyCopy.Settings.UI.UserControls.PluginPreviewUserControl, PathCopyCopySettings, Version=19.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="BevelLineLbl2.ToolTip" xml:space="preserve">
     <value />
@@ -810,8 +796,8 @@
   <data name="DuplicatePipelinePluginBtn.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="&gt;&gt;AlwaysShowSubmenuChk.ZOrder" xml:space="preserve">
-    <value>15</value>
+  <data name="&gt;&gt;RemovePluginBtn.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <data name="&gt;&gt;ImportPipelinePluginsOpenDlg.Type" xml:space="preserve">
     <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -834,9 +820,6 @@
   <data name="&gt;&gt;ApplyBtn.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="AlwaysShowSubmenuChk.ToolTip" xml:space="preserve">
-    <value>Always display the Path Copy Copy submenu in the Explorer contextual menu (otherwise, only display it when the Shift key is held down)</value>
-  </data>
   <data name="&gt;&gt;EncodeURIWhitespaceChk.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -845,9 +828,6 @@
   </data>
   <data name="MovePluginUpBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
-  </data>
-  <data name="ProductAndVersionLbl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 0</value>
   </data>
   <data name="&gt;&gt;OKBtn.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -939,9 +919,6 @@
   <data name="PluginsPage.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
-  <data name="LicenseTxtLinkLbl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>453, 60</value>
-  </data>
   <data name="PluginsExplanationLbl2.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 19</value>
   </data>
@@ -965,6 +942,9 @@
   </data>
   <data name="MovePluginDownBtn.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
+  </data>
+  <data name="PluginsExplanationLbl.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="ExportPipelinePluginsBtn.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -999,14 +979,17 @@
   <data name="&gt;&gt;DropRedundantWordsChk.Name" xml:space="preserve">
     <value>DropRedundantWordsChk</value>
   </data>
-  <data name="AboutPage.Text" xml:space="preserve">
-    <value>About</value>
+  <data name="&gt;&gt;TrueLnkPathsChk.Name" xml:space="preserve">
+    <value>TrueLnkPathsChk</value>
   </data>
   <data name="PreviewCtrl.Size" type="System.Drawing.Size, System.Drawing">
     <value>369, 53</value>
   </data>
   <data name="&gt;&gt;ExportUserSettingsBtn.Name" xml:space="preserve">
     <value>ExportUserSettingsBtn</value>
+  </data>
+  <data name="&gt;&gt;EmailLinksChk.ZOrder" xml:space="preserve">
+    <value>13</value>
   </data>
   <data name="&gt;&gt;ImportPipelinePluginsOpenDlg.Name" xml:space="preserve">
     <value>ImportPipelinePluginsOpenDlg</value>
@@ -1048,8 +1031,8 @@ the MIT License. For more information, please see</value>
   <data name="&gt;&gt;RemovePluginBtn.Name" xml:space="preserve">
     <value>RemovePluginBtn</value>
   </data>
-  <data name="SiteLinkLbl.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;EnableSoftwareUpdateChk.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="RemovePluginBtn.ToolTip" xml:space="preserve">
     <value>Delete the selected custom command or separator</value>
@@ -1066,8 +1049,8 @@ the MIT License. For more information, please see</value>
   <data name="&gt;&gt;ProductAndVersionLbl.Parent" xml:space="preserve">
     <value>AboutTableLayoutPanel</value>
   </data>
-  <data name="PluginsExplanationLbl.ToolTip" xml:space="preserve">
-    <value />
+  <data name="ApplyBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
   </data>
   <data name="InSubmenuCol.HeaderText" xml:space="preserve">
     <value>Submenu</value>
@@ -1089,9 +1072,6 @@ the MIT License. For more information, please see</value>
   </data>
   <data name="AreQuotesOptionalChk.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="AddQuotesChk.Text" xml:space="preserve">
-    <value>Add &amp;quotes around copied paths</value>
   </data>
   <data name="SiteLinkLbl.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 200</value>
@@ -1132,8 +1112,8 @@ the MIT License. For more information, please see</value>
   <data name="&gt;&gt;AddSeparatorBtn.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="PreviewCtrl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 460</value>
+  <data name="&gt;&gt;EmailLinksChk.Parent" xml:space="preserve">
+    <value>MiscOptionsPage</value>
   </data>
   <data name="AboutTableLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -1180,14 +1160,14 @@ the MIT License. For more information, please see</value>
   <data name="DonationLinkLbl.LinkArea" type="System.Windows.Forms.LinkArea, System.Windows.Forms">
     <value>46, 6</value>
   </data>
-  <data name="MiscOptionsPage.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
+  <data name="&gt;&gt;ExportPipelinePluginsBtn.Parent" xml:space="preserve">
+    <value>PluginsPage</value>
   </data>
   <data name="UsePreviewModeInMainMenuChk.Location" type="System.Drawing.Point, System.Drawing">
     <value>25, 259</value>
   </data>
-  <data name="&gt;&gt;ExportUserSettingsSaveDlg.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SaveFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="EncodeURICharsChk.Text" xml:space="preserve">
+    <value>...and all in&amp;valid URI characters (e.g., %xx)</value>
   </data>
   <data name="&gt;&gt;MainToolTip.Name" xml:space="preserve">
     <value>MainToolTip</value>
@@ -1207,8 +1187,8 @@ the MIT License. For more information, please see</value>
   <data name="ApplyBtn.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="PluginCol.HeaderText" xml:space="preserve">
-    <value>Command</value>
+  <data name="UsePreviewModeInMainMenuChk.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
   </data>
   <data name="&gt;&gt;AddQuotesChk.Name" xml:space="preserve">
     <value>AddQuotesChk</value>
@@ -1219,8 +1199,8 @@ the MIT License. For more information, please see</value>
   <data name="AddSeparatorBtn.Text" xml:space="preserve">
     <value>&amp;Separator</value>
   </data>
-  <data name="DropRedundantWordsChk.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="AreQuotesOptionalChk.Text" xml:space="preserve">
+    <value>...only if paths contain &amp;spaces</value>
   </data>
   <data name="SiteLinkLbl.Size" type="System.Drawing.Size, System.Drawing">
     <value>453, 60</value>
@@ -1230,6 +1210,9 @@ the MIT License. For more information, please see</value>
   </data>
   <data name="&gt;&gt;CopyOnSameLineChk.Name" xml:space="preserve">
     <value>CopyOnSameLineChk</value>
+  </data>
+  <data name="MiscOptionsPage.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
   </data>
   <data name="AppendSepForDirChk.Text" xml:space="preserve">
     <value>Append a s&amp;eparator to directory paths</value>
@@ -1242,6 +1225,9 @@ the MIT License. For more information, please see</value>
   </data>
   <data name="&gt;&gt;AddQuotesChk.Parent" xml:space="preserve">
     <value>MiscOptionsPage</value>
+  </data>
+  <data name="MovePluginDownBtn.Text" xml:space="preserve">
+    <value>&amp;Down</value>
   </data>
   <data name="CopyrightLbl.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -1258,8 +1244,8 @@ the MIT License. For more information, please see</value>
   <data name="&gt;&gt;CtrlKeyPluginCombo.Parent" xml:space="preserve">
     <value>MiscOptionsPage</value>
   </data>
-  <data name="EnableSoftwareUpdateChk.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 17</value>
+  <data name="CopyOnSameLineChk.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
   </data>
   <data name="&gt;&gt;EditPipelinePluginBtn.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1306,9 +1292,6 @@ the MIT License. For more information, please see</value>
   <data name="PluginsExplanationLbl2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;UsePreviewModeChk.Parent" xml:space="preserve">
-    <value>MiscOptionsPage</value>
-  </data>
   <data name="&gt;&gt;ExportPipelinePluginsSaveDlg.Name" xml:space="preserve">
     <value>ExportPipelinePluginsSaveDlg</value>
   </data>
@@ -1339,8 +1322,8 @@ the MIT License. For more information, please see</value>
   <data name="DropRedundantWordsChk.Text" xml:space="preserve">
     <value>Drop &amp;redundant words like "Copy" or "Long/Short" in the submenu</value>
   </data>
-  <data name="ImportPipelinePluginsOpenDlg.Filter" xml:space="preserve">
-    <value>Exported custom commands (*.eccv3;*.ecc;*.pccpp)|*.eccv3;*.ecc;*.pccpp</value>
+  <data name="AddQuotesChk.Text" xml:space="preserve">
+    <value>Add &amp;quotes around copied paths</value>
   </data>
   <data name="ExportPipelinePluginsBtn.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -1387,6 +1370,9 @@ the MIT License. For more information, please see</value>
   <data name="BevelLineLbl.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="&gt;&gt;ApplyBtn.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
   <data name="CtrlKeyPluginChk.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 351</value>
   </data>
@@ -1420,11 +1406,17 @@ the MIT License. For more information, please see</value>
   <data name="EncodeURICharsChk.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="EnableSoftwareUpdateChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 17</value>
+  </data>
   <data name="AreQuotesOptionalChk.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="&gt;&gt;IconCol.Name" xml:space="preserve">
     <value>IconCol</value>
+  </data>
+  <data name="BevelLineLbl2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>384, 255</value>
   </data>
   <data name="&gt;&gt;LicenseTxtLinkLbl.Parent" xml:space="preserve">
     <value>AboutTableLayoutPanel</value>
@@ -1441,8 +1433,8 @@ the MIT License. For more information, please see</value>
   <data name="UsePreviewModeChk.ToolTip" xml:space="preserve">
     <value>When displaying commands in the submenu, show previews of what copied paths would look like if such commands were selected</value>
   </data>
-  <data name="&gt;&gt;HiddenSharesChk.ZOrder" xml:space="preserve">
-    <value>16</value>
+  <data name="PreviewCtrl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 460</value>
   </data>
   <data name="AboutTableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>459, 513</value>
@@ -1453,8 +1445,8 @@ the MIT License. For more information, please see</value>
   <data name="&gt;&gt;ChoosePluginIconOpenDlg.Name" xml:space="preserve">
     <value>ChoosePluginIconOpenDlg</value>
   </data>
-  <data name="&gt;&gt;EmailLinksChk.Name" xml:space="preserve">
-    <value>EmailLinksChk</value>
+  <data name="&gt;&gt;UsePreviewModeInMainMenuChk.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ExportUserSettingsBtn.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 563</value>
@@ -1507,8 +1499,8 @@ the MIT License. For more information, please see</value>
   <data name="LicenseTxtLinkLbl.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;ImportPipelinePluginsBtn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="CancelBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>329, 563</value>
   </data>
   <data name="ProductAndVersionLbl.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -1527,9 +1519,6 @@ the MIT License. For more information, please see</value>
   </data>
   <data name="UsePreviewModeInMainMenuChk.Text" xml:space="preserve">
     <value>...and in mai&amp;n menu</value>
-  </data>
-  <data name="AreQuotesOptionalChk.Text" xml:space="preserve">
-    <value>...only if paths contain &amp;spaces</value>
   </data>
   <data name="CopyOnSameLineChk.Size" type="System.Drawing.Size, System.Drawing">
     <value>197, 17</value>
@@ -1573,8 +1562,8 @@ the MIT License. For more information, please see</value>
   <data name="UsePreviewModeInMainMenuChk.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;CancelBtn.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;ExportUserSettingsSaveDlg.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SaveFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>497, 598</value>
@@ -1590,6 +1579,9 @@ the MIT License. For more information, please see</value>
   </data>
   <data name="&gt;&gt;ExportUserSettingsBtn.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="PluginsExplanationLbl2.Text" xml:space="preserve">
+    <value>well as Path Copy Copy's own submenu. You can also add, remove or reorder commands.</value>
   </data>
   <data name="LicenseTxtLinkLbl.ToolTip" xml:space="preserve">
     <value />
@@ -1609,17 +1601,17 @@ the MIT License. For more information, please see</value>
   <data name="&gt;&gt;CtrlKeyPluginCombo.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="PluginsExplanationLbl2.Text" xml:space="preserve">
-    <value>well as Path Copy Copy's own submenu. You can also add, remove or reorder commands.</value>
+  <data name="&gt;&gt;UsePreviewModeChk.Parent" xml:space="preserve">
+    <value>MiscOptionsPage</value>
   </data>
-  <data name="SiteLinkLbl.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+  <data name="&gt;&gt;CtrlKeyPluginChk.Name" xml:space="preserve">
+    <value>CtrlKeyPluginChk</value>
   </data>
   <data name="UsePreviewModeChk.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 236</value>
   </data>
-  <data name="LicenseExplanationLbl.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+  <data name="ImportPipelinePluginsOpenDlg.Filter" xml:space="preserve">
+    <value>Exported custom commands (*.eccv3;*.ecc;*.pccpp)|*.eccv3;*.ecc;*.pccpp</value>
   </data>
   <data name="DonationLinkLbl.Size" type="System.Drawing.Size, System.Drawing">
     <value>453, 30</value>
@@ -1632,6 +1624,9 @@ the MIT License. For more information, please see</value>
   </data>
   <data name="ProductAndVersionLbl.Size" type="System.Drawing.Size, System.Drawing">
     <value>453, 80</value>
+  </data>
+  <data name="&gt;&gt;UsePreviewModeInMainMenuChk.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;LicenseTxtLinkLbl.Name" xml:space="preserve">
     <value>LicenseTxtLinkLbl</value>
@@ -1647,6 +1642,9 @@ the MIT License. For more information, please see</value>
   </data>
   <data name="&gt;&gt;AlwaysShowSubmenuChk.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CancelBtn.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="MainTabCtrl.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -1690,18 +1688,14 @@ the MIT License. For more information, please see</value>
   <data name="&gt;&gt;LicenseExplanationLbl.Name" xml:space="preserve">
     <value>LicenseExplanationLbl</value>
   </data>
-  <data name="&gt;&gt;CtrlKeyPluginChk.Name" xml:space="preserve">
-    <value>CtrlKeyPluginChk</value>
-  </data>
   <data name="PluginsPage.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
   <data name="AddSeparatorBtn.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="DonationLinkLbl.Text" xml:space="preserve">
-    <value>If you like Path Copy Copy, don't hesitate to DONATE through PayPal!
-Donations help fund future development and provide responsive support.</value>
+  <data name="&gt;&gt;DonationLinkLbl.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ImportPipelinePluginsBtn.ToolTip" xml:space="preserve">
     <value>Import custom commands from a file on disk</value>
@@ -1715,8 +1709,8 @@ Donations help fund future development and provide responsive support.</value>
   <data name="EncodeURICharsChk.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="TrueLnkPathsChk.ToolTip" xml:space="preserve">
-    <value>When copying path of a shortcut (.lnk) file, copy the path of the shortcut file itself instead of the path of its target</value>
+  <data name="UseFQDNChk.Text" xml:space="preserve">
+    <value>Use &amp;fully-qualified domain names when copying UNC paths</value>
   </data>
   <data name="&gt;&gt;VisitWebsiteLbl.Name" xml:space="preserve">
     <value>VisitWebsiteLbl</value>
@@ -1724,8 +1718,8 @@ Donations help fund future development and provide responsive support.</value>
   <data name="&gt;&gt;ImportPipelinePluginsBtn.Name" xml:space="preserve">
     <value>ImportPipelinePluginsBtn</value>
   </data>
-  <data name="EmailLinksChk.Size" type="System.Drawing.Size, System.Drawing">
-    <value>289, 17</value>
+  <data name="CopyOnSameLineChk.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="AlwaysShowSubmenuChk.Size" type="System.Drawing.Size, System.Drawing">
     <value>133, 17</value>
@@ -1735,6 +1729,9 @@ Donations help fund future development and provide responsive support.</value>
   </data>
   <data name="MovePluginUpBtn.Location" type="System.Drawing.Point, System.Drawing">
     <value>384, 44</value>
+  </data>
+  <data name="TrueLnkPathsChk.ToolTip" xml:space="preserve">
+    <value>When copying path of a shortcut (.lnk) file, copy the path of the shortcut file itself instead of the path of its target</value>
   </data>
   <data name="EnableSoftwareUpdateChk.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -1766,8 +1763,11 @@ Donations help fund future development and provide responsive support.</value>
   <data name="EditPipelinePluginBtn.Text" xml:space="preserve">
     <value>&amp;Edit...</value>
   </data>
-  <data name="RemovePluginBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>384, 226</value>
+  <data name="&gt;&gt;MainToolTip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="TrueLnkPathsChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>235, 17</value>
   </data>
   <data name="CtrlKeyPluginChk.Text" xml:space="preserve">
     <value>When user holds down Ctrl &amp;key when opening contextual menu, use this command:</value>
@@ -1775,11 +1775,11 @@ Donations help fund future development and provide responsive support.</value>
   <data name="&gt;&gt;EncodeURICharsChk.Name" xml:space="preserve">
     <value>EncodeURICharsChk</value>
   </data>
-  <data name="UseFQDNChk.Text" xml:space="preserve">
-    <value>Use &amp;fully-qualified domain names when copying UNC paths</value>
+  <data name="&gt;&gt;PreviewCtrl.Type" xml:space="preserve">
+    <value>PathCopyCopy.Settings.UI.UserControls.PluginPreviewUserControl, PathCopyCopySettings, Version=19.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="LicenseTxtLinkLbl.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopCenter</value>
+  <data name="EditPipelinePluginBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <metadata name="PluginsDataGridBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>15, 39</value>
@@ -1807,9 +1807,6 @@ Donations help fund future development and provide responsive support.</value>
   </metadata>
   <metadata name="IconCol.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </metadata>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>fr-CA</value>
   </metadata>
   <metadata name="ImportPipelinePluginsOpenDlg.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>210, 19</value>
