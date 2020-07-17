@@ -198,6 +198,9 @@
     <EmbeddedResource Include="UI\Forms\AdvancedPipelinePluginForm.resx">
       <DependentUpon>AdvancedPipelinePluginForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\ImportPipelinePluginsForm.fr-CA.resx">
+      <DependentUpon>ImportPipelinePluginsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\ImportPipelinePluginsForm.resx">
       <DependentUpon>ImportPipelinePluginsForm.cs</DependentUpon>
       <SubType>Designer</SubType>
