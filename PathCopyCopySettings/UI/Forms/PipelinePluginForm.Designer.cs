@@ -28,6 +28,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PipelinePluginForm));
             this.NameLbl = new System.Windows.Forms.Label();
             this.NameTxt = new System.Windows.Forms.TextBox();
             this.MainTabControl = new System.Windows.Forms.TabControl();
@@ -80,188 +81,124 @@
             // 
             // NameLbl
             // 
-            this.NameLbl.AutoSize = true;
-            this.NameLbl.Location = new System.Drawing.Point(12, 15);
+            resources.ApplyResources(this.NameLbl, "NameLbl");
             this.NameLbl.Name = "NameLbl";
-            this.NameLbl.Size = new System.Drawing.Size(38, 13);
-            this.NameLbl.TabIndex = 0;
-            this.NameLbl.Text = "&Name:";
+            this.PipelinePluginToolTip.SetToolTip(this.NameLbl, resources.GetString("NameLbl.ToolTip"));
             // 
             // NameTxt
             // 
-            this.NameTxt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.NameTxt.Location = new System.Drawing.Point(56, 12);
+            resources.ApplyResources(this.NameTxt, "NameTxt");
             this.NameTxt.Name = "NameTxt";
-            this.NameTxt.Size = new System.Drawing.Size(706, 20);
-            this.NameTxt.TabIndex = 1;
-            this.PipelinePluginToolTip.SetToolTip(this.NameTxt, "Name of this custom command");
+            this.PipelinePluginToolTip.SetToolTip(this.NameTxt, resources.GetString("NameTxt.ToolTip"));
             // 
             // MainTabControl
             // 
-            this.MainTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.MainTabControl, "MainTabControl");
             this.MainTabControl.Controls.Add(this.BasePluginPage);
             this.MainTabControl.Controls.Add(this.OptionsPage);
-            this.MainTabControl.Location = new System.Drawing.Point(12, 38);
             this.MainTabControl.Name = "MainTabControl";
             this.MainTabControl.SelectedIndex = 0;
-            this.MainTabControl.Size = new System.Drawing.Size(750, 294);
-            this.MainTabControl.TabIndex = 2;
+            this.PipelinePluginToolTip.SetToolTip(this.MainTabControl, resources.GetString("MainTabControl.ToolTip"));
             // 
             // BasePluginPage
             // 
+            resources.ApplyResources(this.BasePluginPage, "BasePluginPage");
             this.BasePluginPage.Controls.Add(this.BasePluginLst);
             this.BasePluginPage.Controls.Add(this.BaseCommandLbl2);
             this.BasePluginPage.Controls.Add(this.BaseCommandLbl);
-            this.BasePluginPage.Location = new System.Drawing.Point(4, 22);
             this.BasePluginPage.Name = "BasePluginPage";
-            this.BasePluginPage.Padding = new System.Windows.Forms.Padding(3);
-            this.BasePluginPage.Size = new System.Drawing.Size(742, 268);
-            this.BasePluginPage.TabIndex = 0;
-            this.BasePluginPage.Text = "Base Command";
+            this.PipelinePluginToolTip.SetToolTip(this.BasePluginPage, resources.GetString("BasePluginPage.ToolTip"));
             this.BasePluginPage.UseVisualStyleBackColor = true;
             // 
             // BasePluginLst
             // 
-            this.BasePluginLst.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.BasePluginLst, "BasePluginLst");
             this.BasePluginLst.FormattingEnabled = true;
-            this.BasePluginLst.Location = new System.Drawing.Point(9, 32);
             this.BasePluginLst.Name = "BasePluginLst";
-            this.BasePluginLst.Size = new System.Drawing.Size(723, 225);
-            this.BasePluginLst.TabIndex = 2;
-            this.PipelinePluginToolTip.SetToolTip(this.BasePluginLst, "Base command to use to fetch path initially. Options will be applied afterwards");
+            this.PipelinePluginToolTip.SetToolTip(this.BasePluginLst, resources.GetString("BasePluginLst.ToolTip"));
             this.BasePluginLst.SelectedIndexChanged += new System.EventHandler(this.BasePluginLst_SelectedIndexChanged);
             // 
             // BaseCommandLbl2
             // 
-            this.BaseCommandLbl2.AutoSize = true;
-            this.BaseCommandLbl2.Location = new System.Drawing.Point(6, 16);
+            resources.ApplyResources(this.BaseCommandLbl2, "BaseCommandLbl2");
             this.BaseCommandLbl2.Name = "BaseCommandLbl2";
-            this.BaseCommandLbl2.Size = new System.Drawing.Size(343, 13);
-            this.BaseCommandLbl2.TabIndex = 1;
-            this.BaseCommandLbl2.Text = "determine the path copy method to use before applying custom options.";
+            this.PipelinePluginToolTip.SetToolTip(this.BaseCommandLbl2, resources.GetString("BaseCommandLbl2.ToolTip"));
             // 
             // BaseCommandLbl
             // 
-            this.BaseCommandLbl.AutoSize = true;
-            this.BaseCommandLbl.Location = new System.Drawing.Point(6, 3);
+            resources.ApplyResources(this.BaseCommandLbl, "BaseCommandLbl");
             this.BaseCommandLbl.Name = "BaseCommandLbl";
-            this.BaseCommandLbl.Size = new System.Drawing.Size(314, 13);
-            this.BaseCommandLbl.TabIndex = 0;
-            this.BaseCommandLbl.Text = "Please choose a base command for your custom command. It will";
+            this.PipelinePluginToolTip.SetToolTip(this.BaseCommandLbl, resources.GetString("BaseCommandLbl.ToolTip"));
             // 
             // OptionsPage
             // 
+            resources.ApplyResources(this.OptionsPage, "OptionsPage");
             this.OptionsPage.Controls.Add(this.OptionsGroupBox);
             this.OptionsPage.Controls.Add(this.FindReplaceGroupBox);
             this.OptionsPage.Controls.Add(this.SlashesGroupBox);
             this.OptionsPage.Controls.Add(this.DecorationsGroupBox);
-            this.OptionsPage.Location = new System.Drawing.Point(4, 22);
             this.OptionsPage.Name = "OptionsPage";
-            this.OptionsPage.Padding = new System.Windows.Forms.Padding(3);
-            this.OptionsPage.Size = new System.Drawing.Size(742, 268);
-            this.OptionsPage.TabIndex = 1;
-            this.OptionsPage.Text = "Options";
+            this.PipelinePluginToolTip.SetToolTip(this.OptionsPage, resources.GetString("OptionsPage.ToolTip"));
             this.OptionsPage.UseVisualStyleBackColor = true;
             // 
             // OptionsGroupBox
             // 
-            this.OptionsGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.OptionsGroupBox, "OptionsGroupBox");
             this.OptionsGroupBox.Controls.Add(this.WithFilelistChk);
             this.OptionsGroupBox.Controls.Add(this.BrowserForExecutableBtn);
             this.OptionsGroupBox.Controls.Add(this.ExecutableTxt);
             this.OptionsGroupBox.Controls.Add(this.ExecutableLbl);
             this.OptionsGroupBox.Controls.Add(this.LaunchExecutableChk);
             this.OptionsGroupBox.Controls.Add(this.CopyOnSameLineChk);
-            this.OptionsGroupBox.Location = new System.Drawing.Point(374, 141);
             this.OptionsGroupBox.Name = "OptionsGroupBox";
-            this.OptionsGroupBox.Size = new System.Drawing.Size(362, 122);
-            this.OptionsGroupBox.TabIndex = 3;
             this.OptionsGroupBox.TabStop = false;
-            this.OptionsGroupBox.Text = "Options";
+            this.PipelinePluginToolTip.SetToolTip(this.OptionsGroupBox, resources.GetString("OptionsGroupBox.ToolTip"));
             // 
             // WithFilelistChk
             // 
-            this.WithFilelistChk.AutoSize = true;
-            this.WithFilelistChk.Enabled = false;
-            this.WithFilelistChk.Location = new System.Drawing.Point(25, 65);
+            resources.ApplyResources(this.WithFilelistChk, "WithFilelistChk");
             this.WithFilelistChk.Name = "WithFilelistChk";
-            this.WithFilelistChk.Size = new System.Drawing.Size(306, 17);
-            this.WithFilelistChk.TabIndex = 2;
-            this.WithFilelistChk.Text = "...and save paths in a filelist instead of passing them &directly";
-            this.PipelinePluginToolTip.SetToolTip(this.WithFilelistChk, "Instead of passing paths to the executable as arguments directly, save them in a " +
-        "filelist and pass the path to that filelist to the executable");
+            this.PipelinePluginToolTip.SetToolTip(this.WithFilelistChk, resources.GetString("WithFilelistChk.ToolTip"));
             this.WithFilelistChk.UseVisualStyleBackColor = true;
             // 
             // BrowserForExecutableBtn
             // 
-            this.BrowserForExecutableBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BrowserForExecutableBtn.Enabled = false;
-            this.BrowserForExecutableBtn.Location = new System.Drawing.Point(281, 88);
+            resources.ApplyResources(this.BrowserForExecutableBtn, "BrowserForExecutableBtn");
             this.BrowserForExecutableBtn.Name = "BrowserForExecutableBtn";
-            this.BrowserForExecutableBtn.Size = new System.Drawing.Size(75, 23);
-            this.BrowserForExecutableBtn.TabIndex = 5;
-            this.BrowserForExecutableBtn.Text = "Browse";
-            this.PipelinePluginToolTip.SetToolTip(this.BrowserForExecutableBtn, "Open a dialog to choose the executable to launch on disk");
+            this.PipelinePluginToolTip.SetToolTip(this.BrowserForExecutableBtn, resources.GetString("BrowserForExecutableBtn.ToolTip"));
             this.BrowserForExecutableBtn.UseVisualStyleBackColor = true;
             this.BrowserForExecutableBtn.Click += new System.EventHandler(this.BrowserForExecutableBtn_Click);
             // 
             // ExecutableTxt
             // 
-            this.ExecutableTxt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ExecutableTxt.Enabled = false;
-            this.ExecutableTxt.Location = new System.Drawing.Point(91, 90);
+            resources.ApplyResources(this.ExecutableTxt, "ExecutableTxt");
             this.ExecutableTxt.Name = "ExecutableTxt";
-            this.ExecutableTxt.Size = new System.Drawing.Size(184, 20);
-            this.ExecutableTxt.TabIndex = 4;
-            this.PipelinePluginToolTip.SetToolTip(this.ExecutableTxt, "Path to the executable to launch");
+            this.PipelinePluginToolTip.SetToolTip(this.ExecutableTxt, resources.GetString("ExecutableTxt.ToolTip"));
             // 
             // ExecutableLbl
             // 
-            this.ExecutableLbl.AutoSize = true;
-            this.ExecutableLbl.Enabled = false;
-            this.ExecutableLbl.Location = new System.Drawing.Point(22, 93);
+            resources.ApplyResources(this.ExecutableLbl, "ExecutableLbl");
             this.ExecutableLbl.Name = "ExecutableLbl";
-            this.ExecutableLbl.Size = new System.Drawing.Size(63, 13);
-            this.ExecutableLbl.TabIndex = 3;
-            this.ExecutableLbl.Text = "E&xecutable:";
+            this.PipelinePluginToolTip.SetToolTip(this.ExecutableLbl, resources.GetString("ExecutableLbl.ToolTip"));
             // 
             // LaunchExecutableChk
             // 
-            this.LaunchExecutableChk.AutoSize = true;
-            this.LaunchExecutableChk.Location = new System.Drawing.Point(6, 42);
+            resources.ApplyResources(this.LaunchExecutableChk, "LaunchExecutableChk");
             this.LaunchExecutableChk.Name = "LaunchExecutableChk";
-            this.LaunchExecutableChk.Size = new System.Drawing.Size(339, 17);
-            this.LaunchExecutableChk.TabIndex = 1;
-            this.LaunchExecutableChk.Text = "&Launch executable with path(s) instead of copying to the clipboard";
-            this.PipelinePluginToolTip.SetToolTip(this.LaunchExecutableChk, "Instead of copying paths to the clipboard, launch an executable on disk, passing " +
-        "the paths as arguments");
+            this.PipelinePluginToolTip.SetToolTip(this.LaunchExecutableChk, resources.GetString("LaunchExecutableChk.ToolTip"));
             this.LaunchExecutableChk.UseVisualStyleBackColor = true;
             this.LaunchExecutableChk.CheckedChanged += new System.EventHandler(this.LaunchExecutableChk_CheckedChanged);
             // 
             // CopyOnSameLineChk
             // 
-            this.CopyOnSameLineChk.AutoSize = true;
-            this.CopyOnSameLineChk.Location = new System.Drawing.Point(6, 19);
+            resources.ApplyResources(this.CopyOnSameLineChk, "CopyOnSameLineChk");
             this.CopyOnSameLineChk.Name = "CopyOnSameLineChk";
-            this.CopyOnSameLineChk.Size = new System.Drawing.Size(197, 17);
-            this.CopyOnSameLineChk.TabIndex = 0;
-            this.CopyOnSameLineChk.Text = "Cop&y multiple paths on the same line";
-            this.PipelinePluginToolTip.SetToolTip(this.CopyOnSameLineChk, "When copying paths of multiple selected files/folders, copy them all on the same " +
-        "line (separating them with whitespace) instead of copying them on different line" +
-        "s (separated with newlines)");
+            this.PipelinePluginToolTip.SetToolTip(this.CopyOnSameLineChk, resources.GetString("CopyOnSameLineChk.ToolTip"));
             this.CopyOnSameLineChk.UseVisualStyleBackColor = true;
             // 
             // FindReplaceGroupBox
             // 
-            this.FindReplaceGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.FindReplaceGroupBox, "FindReplaceGroupBox");
             this.FindReplaceGroupBox.Controls.Add(this.UnexpandEnvStringsChk);
             this.FindReplaceGroupBox.Controls.Add(this.TestRegexBtn);
             this.FindReplaceGroupBox.Controls.Add(this.IgnoreCaseChk);
@@ -270,309 +207,206 @@
             this.FindReplaceGroupBox.Controls.Add(this.ReplaceLbl);
             this.FindReplaceGroupBox.Controls.Add(this.FindTxt);
             this.FindReplaceGroupBox.Controls.Add(this.FindLbl);
-            this.FindReplaceGroupBox.Location = new System.Drawing.Point(374, 6);
             this.FindReplaceGroupBox.Name = "FindReplaceGroupBox";
-            this.FindReplaceGroupBox.Size = new System.Drawing.Size(362, 129);
-            this.FindReplaceGroupBox.TabIndex = 2;
             this.FindReplaceGroupBox.TabStop = false;
-            this.FindReplaceGroupBox.Text = "Find / Replace";
+            this.PipelinePluginToolTip.SetToolTip(this.FindReplaceGroupBox, resources.GetString("FindReplaceGroupBox.ToolTip"));
             // 
             // UnexpandEnvStringsChk
             // 
-            this.UnexpandEnvStringsChk.AutoSize = true;
-            this.UnexpandEnvStringsChk.Location = new System.Drawing.Point(9, 98);
+            resources.ApplyResources(this.UnexpandEnvStringsChk, "UnexpandEnvStringsChk");
             this.UnexpandEnvStringsChk.Name = "UnexpandEnvStringsChk";
-            this.UnexpandEnvStringsChk.Size = new System.Drawing.Size(316, 17);
-            this.UnexpandEnvStringsChk.TabIndex = 7;
-            this.UnexpandEnvStringsChk.Text = "Replace parts of path(s) with e&nvironment variables if possible";
-            this.PipelinePluginToolTip.SetToolTip(this.UnexpandEnvStringsChk, "Whether to attempt to replace parts of the path with environment variable referen" +
-        "ces, like %USERPROFILE%, etc.");
+            this.PipelinePluginToolTip.SetToolTip(this.UnexpandEnvStringsChk, resources.GetString("UnexpandEnvStringsChk.ToolTip"));
             this.UnexpandEnvStringsChk.UseVisualStyleBackColor = true;
             this.UnexpandEnvStringsChk.CheckedChanged += new System.EventHandler(this.PipelinePluginForm_UpdatePreview);
             // 
             // TestRegexBtn
             // 
-            this.TestRegexBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.TestRegexBtn.Enabled = false;
-            this.TestRegexBtn.Location = new System.Drawing.Point(281, 71);
+            resources.ApplyResources(this.TestRegexBtn, "TestRegexBtn");
             this.TestRegexBtn.Name = "TestRegexBtn";
-            this.TestRegexBtn.Size = new System.Drawing.Size(75, 23);
-            this.TestRegexBtn.TabIndex = 6;
-            this.TestRegexBtn.Text = "&Test...";
-            this.PipelinePluginToolTip.SetToolTip(this.TestRegexBtn, "Open a window to test the current regular expression/replacement expression combi" +
-        "nation");
+            this.PipelinePluginToolTip.SetToolTip(this.TestRegexBtn, resources.GetString("TestRegexBtn.ToolTip"));
             this.TestRegexBtn.UseVisualStyleBackColor = true;
             this.TestRegexBtn.Click += new System.EventHandler(this.TestRegexBtn_Click);
             // 
             // IgnoreCaseChk
             // 
-            this.IgnoreCaseChk.AutoSize = true;
-            this.IgnoreCaseChk.Enabled = false;
-            this.IgnoreCaseChk.Location = new System.Drawing.Point(153, 75);
+            resources.ApplyResources(this.IgnoreCaseChk, "IgnoreCaseChk");
             this.IgnoreCaseChk.Name = "IgnoreCaseChk";
-            this.IgnoreCaseChk.Size = new System.Drawing.Size(82, 17);
-            this.IgnoreCaseChk.TabIndex = 5;
-            this.IgnoreCaseChk.Text = "&Ignore case";
-            this.PipelinePluginToolTip.SetToolTip(this.IgnoreCaseChk, "Whether to ignore case when performing regular expression-based find/replace oper" +
-        "ations");
+            this.PipelinePluginToolTip.SetToolTip(this.IgnoreCaseChk, resources.GetString("IgnoreCaseChk.ToolTip"));
             this.IgnoreCaseChk.UseVisualStyleBackColor = true;
             this.IgnoreCaseChk.CheckedChanged += new System.EventHandler(this.PipelinePluginForm_UpdatePreview);
             // 
             // UseRegexChk
             // 
-            this.UseRegexChk.AutoSize = true;
-            this.UseRegexChk.Location = new System.Drawing.Point(9, 75);
+            resources.ApplyResources(this.UseRegexChk, "UseRegexChk");
             this.UseRegexChk.Name = "UseRegexChk";
-            this.UseRegexChk.Size = new System.Drawing.Size(138, 17);
-            this.UseRegexChk.TabIndex = 4;
-            this.UseRegexChk.Text = "Use r&egular expressions";
-            this.PipelinePluginToolTip.SetToolTip(this.UseRegexChk, "Whether to use regular expressions to perform find/replace operations");
+            this.PipelinePluginToolTip.SetToolTip(this.UseRegexChk, resources.GetString("UseRegexChk.ToolTip"));
             this.UseRegexChk.UseVisualStyleBackColor = true;
             this.UseRegexChk.CheckedChanged += new System.EventHandler(this.UseRegexChk_CheckedChanged);
             // 
             // ReplaceTxt
             // 
-            this.ReplaceTxt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ReplaceTxt.Location = new System.Drawing.Point(84, 45);
+            resources.ApplyResources(this.ReplaceTxt, "ReplaceTxt");
             this.ReplaceTxt.Name = "ReplaceTxt";
-            this.ReplaceTxt.Size = new System.Drawing.Size(272, 20);
-            this.ReplaceTxt.TabIndex = 3;
-            this.PipelinePluginToolTip.SetToolTip(this.ReplaceTxt, "Character string to replace any found element in the path with; if regular expres" +
-        "sions are used, this is a replacement expression");
+            this.PipelinePluginToolTip.SetToolTip(this.ReplaceTxt, resources.GetString("ReplaceTxt.ToolTip"));
             this.ReplaceTxt.TextChanged += new System.EventHandler(this.PipelinePluginForm_UpdatePreview);
             // 
             // ReplaceLbl
             // 
-            this.ReplaceLbl.AutoSize = true;
-            this.ReplaceLbl.Location = new System.Drawing.Point(6, 48);
+            resources.ApplyResources(this.ReplaceLbl, "ReplaceLbl");
             this.ReplaceLbl.Name = "ReplaceLbl";
-            this.ReplaceLbl.Size = new System.Drawing.Size(72, 13);
-            this.ReplaceLbl.TabIndex = 2;
-            this.ReplaceLbl.Text = "&Replace with:";
+            this.PipelinePluginToolTip.SetToolTip(this.ReplaceLbl, resources.GetString("ReplaceLbl.ToolTip"));
             // 
             // FindTxt
             // 
-            this.FindTxt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.FindTxt.Location = new System.Drawing.Point(68, 19);
+            resources.ApplyResources(this.FindTxt, "FindTxt");
             this.FindTxt.Name = "FindTxt";
-            this.FindTxt.Size = new System.Drawing.Size(288, 20);
-            this.FindTxt.TabIndex = 1;
-            this.PipelinePluginToolTip.SetToolTip(this.FindTxt, "Character string to look for and replace in the path; if regular expressions are " +
-        "used, this is a regular expression");
+            this.PipelinePluginToolTip.SetToolTip(this.FindTxt, resources.GetString("FindTxt.ToolTip"));
             this.FindTxt.TextChanged += new System.EventHandler(this.PipelinePluginForm_UpdatePreview);
             // 
             // FindLbl
             // 
-            this.FindLbl.AutoSize = true;
-            this.FindLbl.Location = new System.Drawing.Point(6, 23);
+            resources.ApplyResources(this.FindLbl, "FindLbl");
             this.FindLbl.Name = "FindLbl";
-            this.FindLbl.Size = new System.Drawing.Size(56, 13);
-            this.FindLbl.TabIndex = 0;
-            this.FindLbl.Text = "Find &what:";
+            this.PipelinePluginToolTip.SetToolTip(this.FindLbl, resources.GetString("FindLbl.ToolTip"));
             // 
             // SlashesGroupBox
             // 
+            resources.ApplyResources(this.SlashesGroupBox, "SlashesGroupBox");
             this.SlashesGroupBox.Controls.Add(this.NoSlashesChangeRadio);
             this.SlashesGroupBox.Controls.Add(this.BackToForwardSlashesRadio);
             this.SlashesGroupBox.Controls.Add(this.ForwardToBackslashesRadio);
-            this.SlashesGroupBox.Location = new System.Drawing.Point(6, 173);
             this.SlashesGroupBox.Name = "SlashesGroupBox";
-            this.SlashesGroupBox.Size = new System.Drawing.Size(362, 90);
-            this.SlashesGroupBox.TabIndex = 1;
             this.SlashesGroupBox.TabStop = false;
-            this.SlashesGroupBox.Text = "Slashes";
+            this.PipelinePluginToolTip.SetToolTip(this.SlashesGroupBox, resources.GetString("SlashesGroupBox.ToolTip"));
             // 
             // NoSlashesChangeRadio
             // 
-            this.NoSlashesChangeRadio.AutoSize = true;
+            resources.ApplyResources(this.NoSlashesChangeRadio, "NoSlashesChangeRadio");
             this.NoSlashesChangeRadio.Checked = true;
-            this.NoSlashesChangeRadio.Location = new System.Drawing.Point(6, 65);
             this.NoSlashesChangeRadio.Name = "NoSlashesChangeRadio";
-            this.NoSlashesChangeRadio.Size = new System.Drawing.Size(134, 17);
-            this.NoSlashesChangeRadio.TabIndex = 2;
             this.NoSlashesChangeRadio.TabStop = true;
-            this.NoSlashesChangeRadio.Text = "Do not change &slashes";
-            this.PipelinePluginToolTip.SetToolTip(this.NoSlashesChangeRadio, "Do not change slash characters in the path");
+            this.PipelinePluginToolTip.SetToolTip(this.NoSlashesChangeRadio, resources.GetString("NoSlashesChangeRadio.ToolTip"));
             this.NoSlashesChangeRadio.UseVisualStyleBackColor = true;
             this.NoSlashesChangeRadio.CheckedChanged += new System.EventHandler(this.PipelinePluginForm_UpdatePreview);
             // 
             // BackToForwardSlashesRadio
             // 
-            this.BackToForwardSlashesRadio.AutoSize = true;
-            this.BackToForwardSlashesRadio.Location = new System.Drawing.Point(6, 42);
+            resources.ApplyResources(this.BackToForwardSlashesRadio, "BackToForwardSlashesRadio");
             this.BackToForwardSlashesRadio.Name = "BackToForwardSlashesRadio";
-            this.BackToForwardSlashesRadio.Size = new System.Drawing.Size(225, 17);
-            this.BackToForwardSlashesRadio.TabIndex = 1;
-            this.BackToForwardSlashesRadio.Text = "Change all backslashes to &forward slashes";
-            this.PipelinePluginToolTip.SetToolTip(this.BackToForwardSlashesRadio, "Replace all backslash characters ( \\ ) in the path with forward slash characters " +
-        "( / )");
+            this.PipelinePluginToolTip.SetToolTip(this.BackToForwardSlashesRadio, resources.GetString("BackToForwardSlashesRadio.ToolTip"));
             this.BackToForwardSlashesRadio.UseVisualStyleBackColor = true;
             this.BackToForwardSlashesRadio.CheckedChanged += new System.EventHandler(this.PipelinePluginForm_UpdatePreview);
             // 
             // ForwardToBackslashesRadio
             // 
-            this.ForwardToBackslashesRadio.AutoSize = true;
-            this.ForwardToBackslashesRadio.Location = new System.Drawing.Point(6, 19);
+            resources.ApplyResources(this.ForwardToBackslashesRadio, "ForwardToBackslashesRadio");
             this.ForwardToBackslashesRadio.Name = "ForwardToBackslashesRadio";
-            this.ForwardToBackslashesRadio.Size = new System.Drawing.Size(265, 17);
-            this.ForwardToBackslashesRadio.TabIndex = 0;
-            this.ForwardToBackslashesRadio.Text = "Change all forward slashes ( / ) to &backslashes ( \\ )";
-            this.PipelinePluginToolTip.SetToolTip(this.ForwardToBackslashesRadio, "Replace all forward slash characters ( / ) in the path with backslash characters " +
-        "( \\ )");
+            this.PipelinePluginToolTip.SetToolTip(this.ForwardToBackslashesRadio, resources.GetString("ForwardToBackslashesRadio.ToolTip"));
             this.ForwardToBackslashesRadio.UseVisualStyleBackColor = true;
             this.ForwardToBackslashesRadio.CheckedChanged += new System.EventHandler(this.PipelinePluginForm_UpdatePreview);
             // 
             // DecorationsGroupBox
             // 
+            resources.ApplyResources(this.DecorationsGroupBox, "DecorationsGroupBox");
             this.DecorationsGroupBox.Controls.Add(this.RemoveExtChk);
             this.DecorationsGroupBox.Controls.Add(this.OptionalQuotesChk);
             this.DecorationsGroupBox.Controls.Add(this.EncodeURICharsChk);
             this.DecorationsGroupBox.Controls.Add(this.EncodeURIWhitespaceChk);
             this.DecorationsGroupBox.Controls.Add(this.EmailLinksChk);
             this.DecorationsGroupBox.Controls.Add(this.QuotesChk);
-            this.DecorationsGroupBox.Location = new System.Drawing.Point(6, 6);
             this.DecorationsGroupBox.Name = "DecorationsGroupBox";
-            this.DecorationsGroupBox.Size = new System.Drawing.Size(362, 161);
-            this.DecorationsGroupBox.TabIndex = 0;
             this.DecorationsGroupBox.TabStop = false;
-            this.DecorationsGroupBox.Text = "Decorations";
+            this.PipelinePluginToolTip.SetToolTip(this.DecorationsGroupBox, resources.GetString("DecorationsGroupBox.ToolTip"));
             // 
             // RemoveExtChk
             // 
-            this.RemoveExtChk.AutoSize = true;
-            this.RemoveExtChk.Location = new System.Drawing.Point(6, 19);
+            resources.ApplyResources(this.RemoveExtChk, "RemoveExtChk");
             this.RemoveExtChk.Name = "RemoveExtChk";
-            this.RemoveExtChk.Size = new System.Drawing.Size(130, 17);
-            this.RemoveExtChk.TabIndex = 0;
-            this.RemoveExtChk.Text = "Remove file extensi&on";
-            this.PipelinePluginToolTip.SetToolTip(this.RemoveExtChk, "Remove any extension from the file at the end of the path");
+            this.PipelinePluginToolTip.SetToolTip(this.RemoveExtChk, resources.GetString("RemoveExtChk.ToolTip"));
             this.RemoveExtChk.UseVisualStyleBackColor = true;
             this.RemoveExtChk.CheckedChanged += new System.EventHandler(this.PipelinePluginForm_UpdatePreview);
             // 
             // OptionalQuotesChk
             // 
-            this.OptionalQuotesChk.AutoSize = true;
-            this.OptionalQuotesChk.Enabled = false;
-            this.OptionalQuotesChk.Location = new System.Drawing.Point(25, 65);
+            resources.ApplyResources(this.OptionalQuotesChk, "OptionalQuotesChk");
             this.OptionalQuotesChk.Name = "OptionalQuotesChk";
-            this.OptionalQuotesChk.Size = new System.Drawing.Size(150, 17);
-            this.OptionalQuotesChk.TabIndex = 2;
-            this.OptionalQuotesChk.Text = "...only if it contains s&paces";
-            this.PipelinePluginToolTip.SetToolTip(this.OptionalQuotesChk, "Whether to only surround path with quotes if the path contains spaces");
+            this.PipelinePluginToolTip.SetToolTip(this.OptionalQuotesChk, resources.GetString("OptionalQuotesChk.ToolTip"));
             this.OptionalQuotesChk.UseVisualStyleBackColor = true;
             this.OptionalQuotesChk.CheckedChanged += new System.EventHandler(this.PipelinePluginForm_UpdatePreview);
             // 
             // EncodeURICharsChk
             // 
-            this.EncodeURICharsChk.AutoSize = true;
-            this.EncodeURICharsChk.Enabled = false;
-            this.EncodeURICharsChk.Location = new System.Drawing.Point(25, 134);
+            resources.ApplyResources(this.EncodeURICharsChk, "EncodeURICharsChk");
             this.EncodeURICharsChk.Name = "EncodeURICharsChk";
-            this.EncodeURICharsChk.Size = new System.Drawing.Size(225, 17);
-            this.EncodeURICharsChk.TabIndex = 5;
-            this.EncodeURICharsChk.Text = "...and all in&valid URI characters (e.g., %xx)";
-            this.PipelinePluginToolTip.SetToolTip(this.EncodeURICharsChk, "Replace all characters in path that are invalid in a URI by percent-encoding ( %x" +
-        "x )");
+            this.PipelinePluginToolTip.SetToolTip(this.EncodeURICharsChk, resources.GetString("EncodeURICharsChk.ToolTip"));
             this.EncodeURICharsChk.UseVisualStyleBackColor = true;
             this.EncodeURICharsChk.CheckedChanged += new System.EventHandler(this.PipelinePluginForm_UpdatePreview);
             // 
             // EncodeURIWhitespaceChk
             // 
-            this.EncodeURIWhitespaceChk.AutoSize = true;
-            this.EncodeURIWhitespaceChk.Location = new System.Drawing.Point(6, 111);
+            resources.ApplyResources(this.EncodeURIWhitespaceChk, "EncodeURIWhitespaceChk");
             this.EncodeURIWhitespaceChk.Name = "EncodeURIWhitespaceChk";
-            this.EncodeURIWhitespaceChk.Size = new System.Drawing.Size(287, 17);
-            this.EncodeURIWhitespaceChk.TabIndex = 4;
-            this.EncodeURIWhitespaceChk.Text = "Encode w&hitespace using percent-encoding (e.g., %20)";
-            this.PipelinePluginToolTip.SetToolTip(this.EncodeURIWhitespaceChk, "Replace all whitespace characters in path with %20");
+            this.PipelinePluginToolTip.SetToolTip(this.EncodeURIWhitespaceChk, resources.GetString("EncodeURIWhitespaceChk.ToolTip"));
             this.EncodeURIWhitespaceChk.UseVisualStyleBackColor = true;
             this.EncodeURIWhitespaceChk.CheckedChanged += new System.EventHandler(this.EncodeURIWhitespaceChk_CheckedChanged);
             // 
             // EmailLinksChk
             // 
-            this.EmailLinksChk.AutoSize = true;
-            this.EmailLinksChk.Location = new System.Drawing.Point(6, 88);
+            resources.ApplyResources(this.EmailLinksChk, "EmailLinksChk");
             this.EmailLinksChk.Name = "EmailLinksChk";
-            this.EmailLinksChk.Size = new System.Drawing.Size(243, 17);
-            this.EmailLinksChk.TabIndex = 3;
-            this.EmailLinksChk.Text = "Enclose path in < and > (to create e-&mail links)";
-            this.PipelinePluginToolTip.SetToolTip(this.EmailLinksChk, "Surround path with < and > characters (this creates e-mail links)");
+            this.PipelinePluginToolTip.SetToolTip(this.EmailLinksChk, resources.GetString("EmailLinksChk.ToolTip"));
             this.EmailLinksChk.UseVisualStyleBackColor = true;
             this.EmailLinksChk.CheckedChanged += new System.EventHandler(this.PipelinePluginForm_UpdatePreview);
             // 
             // QuotesChk
             // 
-            this.QuotesChk.AutoSize = true;
-            this.QuotesChk.Location = new System.Drawing.Point(6, 42);
+            resources.ApplyResources(this.QuotesChk, "QuotesChk");
             this.QuotesChk.Name = "QuotesChk";
-            this.QuotesChk.Size = new System.Drawing.Size(177, 17);
-            this.QuotesChk.TabIndex = 1;
-            this.QuotesChk.Text = "Enclose path in &quotation marks";
-            this.PipelinePluginToolTip.SetToolTip(this.QuotesChk, "Surround path with quotes ( \" )");
+            this.PipelinePluginToolTip.SetToolTip(this.QuotesChk, resources.GetString("QuotesChk.ToolTip"));
             this.QuotesChk.UseVisualStyleBackColor = true;
             this.QuotesChk.CheckedChanged += new System.EventHandler(this.QuotesChk_CheckedChanged);
             // 
             // OKBtn
             // 
-            this.OKBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.OKBtn, "OKBtn");
             this.OKBtn.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.OKBtn.Location = new System.Drawing.Point(606, 397);
             this.OKBtn.Name = "OKBtn";
-            this.OKBtn.Size = new System.Drawing.Size(75, 23);
-            this.OKBtn.TabIndex = 5;
-            this.OKBtn.Text = "OK";
-            this.PipelinePluginToolTip.SetToolTip(this.OKBtn, "Save this custom command and close the window");
+            this.PipelinePluginToolTip.SetToolTip(this.OKBtn, resources.GetString("OKBtn.ToolTip"));
             this.OKBtn.UseVisualStyleBackColor = true;
             // 
             // CancelBtn
             // 
-            this.CancelBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.CancelBtn, "CancelBtn");
             this.CancelBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.CancelBtn.Location = new System.Drawing.Point(687, 397);
             this.CancelBtn.Name = "CancelBtn";
-            this.CancelBtn.Size = new System.Drawing.Size(75, 23);
-            this.CancelBtn.TabIndex = 6;
-            this.CancelBtn.Text = "Cancel";
-            this.PipelinePluginToolTip.SetToolTip(this.CancelBtn, "Do not save this custom command and close the window");
+            this.PipelinePluginToolTip.SetToolTip(this.CancelBtn, resources.GetString("CancelBtn.ToolTip"));
             this.CancelBtn.UseVisualStyleBackColor = true;
             // 
             // ChooseExecutableOpenDlg
             // 
-            this.ChooseExecutableOpenDlg.Filter = "Executable files (*.exe;*.com;*.bat;*.cmd)|*.exe;*.com;*.bat;*.cmd|All files (*.*" +
-    ")|*.*";
+            resources.ApplyResources(this.ChooseExecutableOpenDlg, "ChooseExecutableOpenDlg");
             // 
             // SwitchBtn
             // 
-            this.SwitchBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            resources.ApplyResources(this.SwitchBtn, "SwitchBtn");
             this.SwitchBtn.DialogResult = System.Windows.Forms.DialogResult.Retry;
-            this.SwitchBtn.Location = new System.Drawing.Point(12, 397);
             this.SwitchBtn.Name = "SwitchBtn";
-            this.SwitchBtn.Size = new System.Drawing.Size(94, 23);
-            this.SwitchBtn.TabIndex = 4;
-            this.SwitchBtn.Text = "Expert Mode";
-            this.PipelinePluginToolTip.SetToolTip(this.SwitchBtn, "Switch to Expert Mode, which allows more customization options but is more comple" +
-        "x to use");
+            this.PipelinePluginToolTip.SetToolTip(this.SwitchBtn, resources.GetString("SwitchBtn.ToolTip"));
             this.SwitchBtn.UseVisualStyleBackColor = true;
             // 
             // PreviewCtrl
             // 
-            this.PreviewCtrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.PreviewCtrl.Location = new System.Drawing.Point(12, 338);
+            resources.ApplyResources(this.PreviewCtrl, "PreviewCtrl");
             this.PreviewCtrl.Name = "PreviewCtrl";
             this.PreviewCtrl.Plugin = null;
-            this.PreviewCtrl.Size = new System.Drawing.Size(748, 53);
-            this.PreviewCtrl.TabIndex = 3;
+            this.PipelinePluginToolTip.SetToolTip(this.PreviewCtrl, resources.GetString("PreviewCtrl.ToolTip"));
             // 
             // PipelinePluginForm
             // 
             this.AcceptButton = this.OKBtn;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.CancelBtn;
-            this.ClientSize = new System.Drawing.Size(774, 432);
             this.Controls.Add(this.PreviewCtrl);
             this.Controls.Add(this.SwitchBtn);
             this.Controls.Add(this.CancelBtn);
@@ -583,12 +417,10 @@
             this.HelpButton = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(790, 471);
             this.Name = "PipelinePluginForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Custom Command";
+            this.PipelinePluginToolTip.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.PipelinePluginForm_HelpButtonClicked);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PipelinePluginForm_FormClosing);
             this.Load += new System.EventHandler(this.PipelinePluginForm_Load);

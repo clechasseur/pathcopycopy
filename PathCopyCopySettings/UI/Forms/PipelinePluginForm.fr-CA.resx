@@ -1,0 +1,380 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="NameLbl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>32, 13</value>
+  </data>
+  <data name="NameLbl.Text" xml:space="preserve">
+    <value>&amp;Nom:</value>
+  </data>
+  <data name="NameTxt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>50, 12</value>
+  </data>
+  <data name="NameTxt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>712, 20</value>
+  </data>
+  <data name="NameTxt.ToolTip" xml:space="preserve">
+    <value>Nom de cette commande personnalisée</value>
+  </data>
+  <data name="BasePluginPage.Text" xml:space="preserve">
+    <value>Commande de base</value>
+  </data>
+  <data name="BasePluginLst.ToolTip" xml:space="preserve">
+    <value>Commande de base à utiliser pour copier le chemin. Les options additionnelles seront appliquées après</value>
+  </data>
+  <data name="BaseCommandLbl2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>449, 13</value>
+  </data>
+  <data name="BaseCommandLbl2.Text" xml:space="preserve">
+    <value>Celle-ci déterminera le type de chemin à copier avant d'appliquer des options supplémentaires.</value>
+  </data>
+  <data name="BaseCommandLbl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>370, 13</value>
+  </data>
+  <data name="BaseCommandLbl.Text" xml:space="preserve">
+    <value>Veuillez choisir une commande de base pour votre commande personnalisée.</value>
+  </data>
+  <data name="OptionsPage.Text" xml:space="preserve">
+    <value>Options additionnelles</value>
+  </data>
+  <data name="OptionsGroupBox.Text" xml:space="preserve">
+    <value>Divers</value>
+  </data>
+  <data name="WithFilelistChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>336, 17</value>
+  </data>
+  <data name="WithFilelistChk.Text" xml:space="preserve">
+    <value>...et utiliser un fichier de chemins au lieu de les passer &amp;directement</value>
+  </data>
+  <data name="WithFilelistChk.ToolTip" xml:space="preserve">
+    <value>Au lieu de passer les chemins à l'exécutable en tant qu'arguments directement, les sauvegarder dans un fichier sur disque et passer le chemin de ce fichier à l'exécutable</value>
+  </data>
+  <data name="BrowserForExecutableBtn.Text" xml:space="preserve">
+    <value>Parcourir...</value>
+  </data>
+  <data name="BrowserForExecutableBtn.ToolTip" xml:space="preserve">
+    <value>Ouvrir un dialogue permettant de choisir l'exécutable à lancer</value>
+  </data>
+  <data name="ExecutableTxt.ToolTip" xml:space="preserve">
+    <value>Exécutable à lancer</value>
+  </data>
+  <data name="ExecutableLbl.Text" xml:space="preserve">
+    <value>E&amp;xécutable:</value>
+  </data>
+  <data name="LaunchExecutableChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>313, 17</value>
+  </data>
+  <data name="LaunchExecutableChk.Text" xml:space="preserve">
+    <value>Lancer un exé&amp;cutable au lieu de copier dans le presse-papier
+</value>
+  </data>
+  <data name="LaunchExecutableChk.ToolTip" xml:space="preserve">
+    <value>Au lieu de copier les chemins dans le presse-papier, lancer un exécutable sur disque en lui passant les chemins en tant qu'arguments</value>
+  </data>
+  <data name="CopyOnSameLineChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>255, 17</value>
+  </data>
+  <data name="CopyOnSameLineChk.Text" xml:space="preserve">
+    <value>Copier des chemins mu&amp;ltiples sur une même ligne</value>
+  </data>
+  <data name="CopyOnSameLineChk.ToolTip" xml:space="preserve">
+    <value>Quand plusieurs fichiers/dossiers sont sélectionnés, copier leurs chemins sur la même ligne (en les séparant à l'aide d'un espace) plutôt que sur des lignes séparées (en les séparant par un saut de ligne)</value>
+  </data>
+  <data name="FindReplaceGroupBox.Text" xml:space="preserve">
+    <value>Chercher / Remplacer</value>
+  </data>
+  <data name="UnexpandEnvStringsChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>328, 17</value>
+  </data>
+  <data name="UnexpandEnvStringsChk.Text" xml:space="preserve">
+    <value>Utiliser des variables d'environne&amp;ment dans le chemin si possible</value>
+  </data>
+  <data name="UnexpandEnvStringsChk.ToolTip" xml:space="preserve">
+    <value>Détermine si les parties du chemin qui correspondent aux valeurs de variables d'environnement comme %USERPROFILE%, etc. seront remplacées par des références à ces variables</value>
+  </data>
+  <data name="TestRegexBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>301, 71</value>
+  </data>
+  <data name="TestRegexBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 23</value>
+  </data>
+  <data name="TestRegexBtn.Text" xml:space="preserve">
+    <value>&amp;Tester...</value>
+  </data>
+  <data name="TestRegexBtn.ToolTip" xml:space="preserve">
+    <value>Ouvre une fenêtre permettant de tester les expressions régulière et de remplacement présentement utilisées</value>
+  </data>
+  <data name="IgnoreCaseChk.Location" type="System.Drawing.Point, System.Drawing">
+    <value>194, 75</value>
+  </data>
+  <data name="IgnoreCaseChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 17</value>
+  </data>
+  <data name="IgnoreCaseChk.Text" xml:space="preserve">
+    <value>Ignorer la c&amp;asse</value>
+  </data>
+  <data name="IgnoreCaseChk.ToolTip" xml:space="preserve">
+    <value>Détermine si la casse a de l'importance quand on effectue des opérations de chercher/remplacer à l'aide d'expressions régulières</value>
+  </data>
+  <data name="UseRegexChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>179, 17</value>
+  </data>
+  <data name="UseRegexChk.Text" xml:space="preserve">
+    <value>Utiliser les expressions rég&amp;ulières</value>
+  </data>
+  <data name="UseRegexChk.ToolTip" xml:space="preserve">
+    <value>Détermine si les expressions régulières sont utilisées pour effectuer les opérations de chercher/remplacer</value>
+  </data>
+  <data name="ReplaceTxt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>91, 45</value>
+  </data>
+  <data name="ReplaceTxt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>265, 20</value>
+  </data>
+  <data name="ReplaceTxt.ToolTip" xml:space="preserve">
+    <value>Chaîne de caractères à utiliser pour remplacer tout élément trouvé dans le chemin; si les expressions régulières sont utilisées, ceci est une expression de remplacement</value>
+  </data>
+  <data name="ReplaceLbl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>79, 13</value>
+  </data>
+  <data name="ReplaceLbl.Text" xml:space="preserve">
+    <value>&amp;Remplacer par:</value>
+  </data>
+  <data name="FindTxt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>65, 19</value>
+  </data>
+  <data name="FindTxt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>291, 20</value>
+  </data>
+  <data name="FindTxt.ToolTip" xml:space="preserve">
+    <value>Chaîne de caractères à rechercher dans le chemin; si les expressions régulières sont utilisées, ceci est une expression régulière</value>
+  </data>
+  <data name="FindLbl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 13</value>
+  </data>
+  <data name="FindLbl.Text" xml:space="preserve">
+    <value>C&amp;hercher:</value>
+  </data>
+  <data name="SlashesGroupBox.Text" xml:space="preserve">
+    <value>Barres obliques</value>
+  </data>
+  <data name="NoSlashesChangeRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>192, 17</value>
+  </data>
+  <data name="NoSlashesChangeRadio.Text" xml:space="preserve">
+    <value>Ne pas toucher aux &amp;barres obliques</value>
+  </data>
+  <data name="NoSlashesChangeRadio.ToolTip" xml:space="preserve">
+    <value>Ne pas changer les barres obliques dans le chemin</value>
+  </data>
+  <data name="BackToForwardSlashesRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>318, 17</value>
+  </data>
+  <data name="BackToForwardSlashesRadio.Text" xml:space="preserve">
+    <value>Changer toutes les barres obliques inverses en barres &amp;obliques</value>
+  </data>
+  <data name="BackToForwardSlashesRadio.ToolTip" xml:space="preserve">
+    <value>Remplacer toutes les barres obliques inverses ( \ ) dans le chemin par des barres obliques ( / )</value>
+  </data>
+  <data name="ForwardToBackslashesRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>358, 17</value>
+  </data>
+  <data name="ForwardToBackslashesRadio.Text" xml:space="preserve">
+    <value>Changer toutes les barres obliques ( / ) en barres obliques &amp;inverses ( \ )</value>
+  </data>
+  <data name="ForwardToBackslashesRadio.ToolTip" xml:space="preserve">
+    <value>Remplacer toutes les barres obliques ( / ) dans le chemin par des barres obliques inverses ( \ )</value>
+  </data>
+  <data name="DecorationsGroupBox.Text" xml:space="preserve">
+    <value>Décorations</value>
+  </data>
+  <data name="RemoveExtChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 17</value>
+  </data>
+  <data name="RemoveExtChk.Text" xml:space="preserve">
+    <value>Enlever l'extension de &amp;fichier</value>
+  </data>
+  <data name="RemoveExtChk.ToolTip" xml:space="preserve">
+    <value>Enlever toute extension du fichier qui est à la fin du chemin</value>
+  </data>
+  <data name="OptionalQuotesChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>201, 17</value>
+  </data>
+  <data name="OptionalQuotesChk.Text" xml:space="preserve">
+    <value>...seulement s'il contient des e&amp;spaces</value>
+  </data>
+  <data name="OptionalQuotesChk.ToolTip" xml:space="preserve">
+    <value>Détermine si le chemin sera entouré de guillemets uniquement s'il contient des espaces</value>
+  </data>
+  <data name="EncodeURICharsChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>320, 17</value>
+  </data>
+  <data name="EncodeURICharsChk.Text" xml:space="preserve">
+    <value>...ainsi que tous les caractères in&amp;valides dans un URI (i.e. %xx)</value>
+  </data>
+  <data name="EncodeURICharsChk.ToolTip" xml:space="preserve">
+    <value>Remplacer tous les caractères dans le chemin qui sont invalides dans un URI par de l'encodage en pourcentage ( %xx )</value>
+  </data>
+  <data name="EncodeURIWhitespaceChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>344, 17</value>
+  </data>
+  <data name="EncodeURIWhitespaceChk.Text" xml:space="preserve">
+    <value>Encoder les es&amp;paces à l'aide d'encodage en pourcentage (i.e. %20)</value>
+  </data>
+  <data name="EncodeURIWhitespaceChk.ToolTip" xml:space="preserve">
+    <value>Remplacer tous les espaces dans le chemin par %20</value>
+  </data>
+  <data name="EmailLinksChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>287, 17</value>
+  </data>
+  <data name="EmailLinksChk.Text" xml:space="preserve">
+    <value>Entourer le chemin de &lt; et &gt; (pour créer un lien courri&amp;el)</value>
+  </data>
+  <data name="EmailLinksChk.ToolTip" xml:space="preserve">
+    <value>Entourer le chemin de &lt; et &gt; (ce qui crée un lien courriel)</value>
+  </data>
+  <data name="QuotesChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>178, 17</value>
+  </data>
+  <data name="QuotesChk.Text" xml:space="preserve">
+    <value>Entourer le chemin de &amp;guillemets</value>
+  </data>
+  <data name="QuotesChk.ToolTip" xml:space="preserve">
+    <value>Entourer le chemin de guillemets ( " )</value>
+  </data>
+  <data name="OKBtn.ToolTip" xml:space="preserve">
+    <value>Sauvegarder cette commande personnalisée et fermer cette fenêtre</value>
+  </data>
+  <data name="CancelBtn.ToolTip" xml:space="preserve">
+    <value>Ne pas sauvegarder cette commande personnalisée et fermer cette fenêtre</value>
+  </data>
+  <data name="ChooseExecutableOpenDlg.Filter" xml:space="preserve">
+    <value>Fichiers exécutables (*.exe;*.com;*.bat;*.cmd)|*.exe;*.com;*.bat;*.cmd|Tous les fichiers (*.*)|*.*</value>
+  </data>
+  <data name="SwitchBtn.Text" xml:space="preserve">
+    <value>Mode Expert</value>
+  </data>
+  <data name="SwitchBtn.ToolTip" xml:space="preserve">
+    <value>Passer en mode Expert, qui permet plus de flexibilité dans la configuration en contrepartie d'une plus grande complexité</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Commande personnalisée</value>
+  </data>
+</root>

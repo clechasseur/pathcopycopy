@@ -212,6 +212,9 @@
       <DependentUpon>MainForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\PipelinePluginForm.fr-CA.resx">
+      <DependentUpon>PipelinePluginForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\PipelinePluginForm.resx">
       <DependentUpon>PipelinePluginForm.cs</DependentUpon>
     </EmbeddedResource>

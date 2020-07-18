@@ -117,6 +117,1218 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="EncodeURIWhitespaceChk.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
+  <data name="&gt;&gt;NoSlashesChangeRadio.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="FindReplaceGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>374, 6</value>
+  </data>
+  <data name="&gt;&gt;BasePluginPage.Parent" xml:space="preserve">
+    <value>MainTabControl</value>
+  </data>
+  <data name="EncodeURIWhitespaceChk.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="BaseCommandLbl2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 16</value>
+  </data>
+  <data name="NameTxt.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;QuotesChk.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ForwardToBackslashesRadio.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="RemoveExtChk.ToolTip" xml:space="preserve">
+    <value>Remove any extension from the file at the end of the path</value>
+  </data>
+  <data name="&gt;&gt;SlashesGroupBox.Parent" xml:space="preserve">
+    <value>OptionsPage</value>
+  </data>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="WithFilelistChk.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="UseRegexChk.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>774, 432</value>
+  </data>
+  <data name="QuotesChk.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;BackToForwardSlashesRadio.Parent" xml:space="preserve">
+    <value>SlashesGroupBox</value>
+  </data>
+  <data name="FindLbl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 13</value>
+  </data>
+  <data name="&gt;&gt;NameTxt.Name" xml:space="preserve">
+    <value>NameTxt</value>
+  </data>
+  <data name="&gt;&gt;OptionsGroupBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ReplaceLbl.Text" xml:space="preserve">
+    <value>&amp;Replace with:</value>
+  </data>
+  <data name="DecorationsGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>362, 161</value>
+  </data>
+  <data name="OptionalQuotesChk.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 65</value>
+  </data>
+  <data name="BaseCommandLbl2.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="OptionsPage.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ForwardToBackslashesRadio.Text" xml:space="preserve">
+    <value>Change all forward slashes ( / ) to &amp;backslashes ( \ )</value>
+  </data>
+  <data name="EncodeURICharsChk.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 134</value>
+  </data>
+  <data name="&gt;&gt;EmailLinksChk.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;ReplaceTxt.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ReplaceLbl.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="SwitchBtn.Text" xml:space="preserve">
+    <value>Expert Mode</value>
+  </data>
+  <data name="&gt;&gt;BrowserForExecutableBtn.Parent" xml:space="preserve">
+    <value>OptionsGroupBox</value>
+  </data>
+  <data name="WithFilelistChk.ToolTip" xml:space="preserve">
+    <value>Instead of passing paths to the executable as arguments directly, save them in a filelist and pass the path to that filelist to the executable</value>
+  </data>
+  <data name="&gt;&gt;OptionsPage.Parent" xml:space="preserve">
+    <value>MainTabControl</value>
+  </data>
+  <data name="ExecutableLbl.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;ExecutableLbl.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;EmailLinksChk.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="DecorationsGroupBox.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="MainTabControl.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="RemoveExtChk.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;CopyOnSameLineChk.Parent" xml:space="preserve">
+    <value>OptionsGroupBox</value>
+  </data>
+  <data name="CancelBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="&gt;&gt;EncodeURICharsChk.Parent" xml:space="preserve">
+    <value>DecorationsGroupBox</value>
+  </data>
+  <data name="FindTxt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>288, 20</value>
+  </data>
+  <data name="&gt;&gt;ExecutableLbl.Parent" xml:space="preserve">
+    <value>OptionsGroupBox</value>
+  </data>
+  <data name="&gt;&gt;BaseCommandLbl.Parent" xml:space="preserve">
+    <value>BasePluginPage</value>
+  </data>
+  <data name="&gt;&gt;MainTabControl.Name" xml:space="preserve">
+    <value>MainTabControl</value>
+  </data>
+  <data name="NameLbl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 15</value>
+  </data>
+  <data name="NoSlashesChangeRadio.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="ExecutableTxt.ToolTip" xml:space="preserve">
+    <value>Path to the executable to launch</value>
+  </data>
+  <data name="&gt;&gt;EncodeURIWhitespaceChk.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="BrowserForExecutableBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>281, 88</value>
+  </data>
+  <data name="&gt;&gt;OKBtn.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="BrowserForExecutableBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ExecutableTxt.Name" xml:space="preserve">
+    <value>ExecutableTxt</value>
+  </data>
+  <data name="&gt;&gt;BrowserForExecutableBtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;FindReplaceGroupBox.Name" xml:space="preserve">
+    <value>FindReplaceGroupBox</value>
+  </data>
+  <data name="BackToForwardSlashesRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>225, 17</value>
+  </data>
+  <data name="&gt;&gt;ReplaceTxt.Parent" xml:space="preserve">
+    <value>FindReplaceGroupBox</value>
+  </data>
+  <data name="NameTxt.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="SlashesGroupBox.Text" xml:space="preserve">
+    <value>Slashes</value>
+  </data>
+  <data name="&gt;&gt;ReplaceTxt.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ExecutableTxt.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="RemoveExtChk.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 19</value>
+  </data>
+  <data name="NameLbl.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="QuotesChk.ToolTip" xml:space="preserve">
+    <value>Surround path with quotes ( " )</value>
+  </data>
+  <data name="IgnoreCaseChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>82, 17</value>
+  </data>
+  <data name="UseRegexChk.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 75</value>
+  </data>
+  <data name="BaseCommandLbl2.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;DecorationsGroupBox.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="BrowserForExecutableBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="&gt;&gt;BasePluginLst.Name" xml:space="preserve">
+    <value>BasePluginLst</value>
+  </data>
+  <data name="&gt;&gt;UnexpandEnvStringsChk.Name" xml:space="preserve">
+    <value>UnexpandEnvStringsChk</value>
+  </data>
+  <data name="OptionalQuotesChk.Text" xml:space="preserve">
+    <value>...only if it contains s&amp;paces</value>
+  </data>
+  <data name="&gt;&gt;SwitchBtn.Name" xml:space="preserve">
+    <value>SwitchBtn</value>
+  </data>
+  <data name="&gt;&gt;NameLbl.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LaunchExecutableChk.Name" xml:space="preserve">
+    <value>LaunchExecutableChk</value>
+  </data>
+  <data name="&gt;&gt;SwitchBtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="FindLbl.Text" xml:space="preserve">
+    <value>Find &amp;what:</value>
+  </data>
+  <data name="&gt;&gt;OptionalQuotesChk.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;BasePluginPage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ForwardToBackslashesRadio.Name" xml:space="preserve">
+    <value>ForwardToBackslashesRadio</value>
+  </data>
+  <data name="&gt;&gt;CopyOnSameLineChk.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;OptionalQuotesChk.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="BasePluginPage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="OptionsPage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="ReplaceTxt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>84, 45</value>
+  </data>
+  <data name="&gt;&gt;OKBtn.Name" xml:space="preserve">
+    <value>OKBtn</value>
+  </data>
+  <data name="OptionsGroupBox.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="EncodeURICharsChk.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ExecutableLbl.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ExecutableLbl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>22, 93</value>
+  </data>
+  <data name="BaseCommandLbl.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;SlashesGroupBox.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="NameTxt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>706, 20</value>
+  </data>
+  <data name="&gt;&gt;NameLbl.Name" xml:space="preserve">
+    <value>NameLbl</value>
+  </data>
+  <data name="&gt;&gt;WithFilelistChk.Name" xml:space="preserve">
+    <value>WithFilelistChk</value>
+  </data>
+  <data name="WithFilelistChk.Text" xml:space="preserve">
+    <value>...and save paths in a filelist instead of passing them &amp;directly</value>
+  </data>
+  <data name="BaseCommandLbl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>314, 13</value>
+  </data>
+  <data name="&gt;&gt;BaseCommandLbl2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="LaunchExecutableChk.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 42</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="BackToForwardSlashesRadio.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="ReplaceTxt.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;QuotesChk.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ChooseExecutableOpenDlg.Filter" xml:space="preserve">
+    <value>Executable files (*.exe;*.com;*.bat;*.cmd)|*.exe;*.com;*.bat;*.cmd|All files (*.*)|*.*</value>
+  </data>
+  <data name="LaunchExecutableChk.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;FindReplaceGroupBox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ForwardToBackslashesRadio.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="BrowserForExecutableBtn.Text" xml:space="preserve">
+    <value>Browse...</value>
+  </data>
+  <data name="EncodeURIWhitespaceChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>287, 17</value>
+  </data>
+  <data name="&gt;&gt;ReplaceLbl.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;BasePluginLst.Parent" xml:space="preserve">
+    <value>BasePluginPage</value>
+  </data>
+  <data name="&gt;&gt;BasePluginPage.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ForwardToBackslashesRadio.Parent" xml:space="preserve">
+    <value>SlashesGroupBox</value>
+  </data>
+  <data name="CopyOnSameLineChk.Text" xml:space="preserve">
+    <value>Cop&amp;y multiple paths on the same line</value>
+  </data>
+  <data name="SwitchBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 23</value>
+  </data>
+  <data name="&gt;&gt;FindReplaceGroupBox.Parent" xml:space="preserve">
+    <value>OptionsPage</value>
+  </data>
+  <data name="TestRegexBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="&gt;&gt;UnexpandEnvStringsChk.Parent" xml:space="preserve">
+    <value>FindReplaceGroupBox</value>
+  </data>
+  <data name="OptionsGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="OptionalQuotesChk.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;WithFilelistChk.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;RemoveExtChk.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="EncodeURIWhitespaceChk.Text" xml:space="preserve">
+    <value>Encode w&amp;hitespace using percent-encoding (e.g., %20)</value>
+  </data>
+  <data name="&gt;&gt;NameLbl.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;PipelinePluginToolTip.Name" xml:space="preserve">
+    <value>PipelinePluginToolTip</value>
+  </data>
+  <data name="EncodeURIWhitespaceChk.ToolTip" xml:space="preserve">
+    <value>Replace all whitespace characters in path with %20</value>
+  </data>
+  <data name="FindLbl.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="UnexpandEnvStringsChk.ToolTip" xml:space="preserve">
+    <value>Whether to attempt to replace parts of the path with environment variable references, like %USERPROFILE%, etc.</value>
+  </data>
+  <data name="OptionsGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>374, 141</value>
+  </data>
+  <data name="&gt;&gt;ExecutableLbl.Name" xml:space="preserve">
+    <value>ExecutableLbl</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>PathCopyCopy.Settings.UI.Utils.PositionPersistedForm, PathCopyCopySettings, Version=19.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;BaseCommandLbl.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="OptionsGroupBox.Text" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="FindTxt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>68, 19</value>
+  </data>
+  <data name="BackToForwardSlashesRadio.ToolTip" xml:space="preserve">
+    <value>Replace all backslash characters ( \ ) in the path with forward slash characters ( / )</value>
+  </data>
+  <data name="OptionalQuotesChk.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;UseRegexChk.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;WithFilelistChk.Parent" xml:space="preserve">
+    <value>OptionsGroupBox</value>
+  </data>
+  <data name="ForwardToBackslashesRadio.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 19</value>
+  </data>
+  <data name="BasePluginPage.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;WithFilelistChk.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;NameTxt.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="BaseCommandLbl.Text" xml:space="preserve">
+    <value>Please choose a base command for your custom command. It will</value>
+  </data>
+  <data name="OKBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="UseRegexChk.Text" xml:space="preserve">
+    <value>Use r&amp;egular expressions</value>
+  </data>
+  <data name="NameTxt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>56, 12</value>
+  </data>
+  <data name="&gt;&gt;NameLbl.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="OptionsGroupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="CopyOnSameLineChk.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="TestRegexBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;OptionsGroupBox.Name" xml:space="preserve">
+    <value>OptionsGroupBox</value>
+  </data>
+  <data name="WithFilelistChk.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 65</value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>790, 471</value>
+  </data>
+  <data name="PreviewCtrl.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="NoSlashesChangeRadio.Text" xml:space="preserve">
+    <value>Do not change &amp;slashes</value>
+  </data>
+  <data name="CopyOnSameLineChk.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 19</value>
+  </data>
+  <data name="PreviewCtrl.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
+  <data name="MainTabControl.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="ReplaceTxt.ToolTip" xml:space="preserve">
+    <value>Character string to replace any found element in the path with; if regular expressions are used, this is a replacement expression</value>
+  </data>
+  <data name="SlashesGroupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="IgnoreCaseChk.Location" type="System.Drawing.Point, System.Drawing">
+    <value>153, 75</value>
+  </data>
+  <data name="RemoveExtChk.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;FindLbl.Name" xml:space="preserve">
+    <value>FindLbl</value>
+  </data>
+  <data name="&gt;&gt;DecorationsGroupBox.Name" xml:space="preserve">
+    <value>DecorationsGroupBox</value>
+  </data>
+  <data name="BasePluginPage.Text" xml:space="preserve">
+    <value>Base Command</value>
+  </data>
+  <data name="&gt;&gt;EncodeURICharsChk.Name" xml:space="preserve">
+    <value>EncodeURICharsChk</value>
+  </data>
+  <data name="FindTxt.ToolTip" xml:space="preserve">
+    <value>Character string to look for and replace in the path; if regular expressions are used, this is a regular expression</value>
+  </data>
+  <data name="&gt;&gt;PreviewCtrl.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="WithFilelistChk.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="PreviewCtrl.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ExecutableLbl.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="FindLbl.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="ForwardToBackslashesRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>265, 17</value>
+  </data>
+  <data name="&gt;&gt;UnexpandEnvStringsChk.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="FindLbl.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="EncodeURICharsChk.ToolTip" xml:space="preserve">
+    <value>Replace all characters in path that are invalid in a URI by percent-encoding ( %xx )</value>
+  </data>
+  <data name="&gt;&gt;BasePluginLst.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="OptionsPage.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="ExecutableLbl.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="CancelBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;BrowserForExecutableBtn.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ReplaceTxt.Name" xml:space="preserve">
+    <value>ReplaceTxt</value>
+  </data>
+  <data name="&gt;&gt;ChooseExecutableOpenDlg.Name" xml:space="preserve">
+    <value>ChooseExecutableOpenDlg</value>
+  </data>
+  <data name="BrowserForExecutableBtn.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="EncodeURIWhitespaceChk.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 111</value>
+  </data>
+  <data name="ExecutableLbl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 13</value>
+  </data>
+  <data name="ReplaceLbl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 48</value>
+  </data>
+  <data name="IgnoreCaseChk.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;PreviewCtrl.Name" xml:space="preserve">
+    <value>PreviewCtrl</value>
+  </data>
+  <data name="&gt;&gt;EncodeURIWhitespaceChk.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ReplaceLbl.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="FindTxt.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;BaseCommandLbl2.Name" xml:space="preserve">
+    <value>BaseCommandLbl2</value>
+  </data>
+  <data name="&gt;&gt;FindTxt.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="FindReplaceGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;OKBtn.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;OptionsGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;EncodeURICharsChk.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="SwitchBtn.ToolTip" xml:space="preserve">
+    <value>Switch to Expert Mode, which allows more customization options but is more complex to use</value>
+  </data>
+  <data name="SwitchBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="NoSlashesChangeRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 17</value>
+  </data>
+  <data name="&gt;&gt;FindLbl.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;CopyOnSameLineChk.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="EncodeURICharsChk.Text" xml:space="preserve">
+    <value>...and all in&amp;valid URI characters (e.g., %xx)</value>
+  </data>
+  <data name="&gt;&gt;MainTabControl.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="QuotesChk.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 42</value>
+  </data>
+  <data name="EmailLinksChk.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 88</value>
+  </data>
+  <data name="BasePluginLst.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;BackToForwardSlashesRadio.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="MainTabControl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>750, 294</value>
+  </data>
+  <data name="FindLbl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 23</value>
+  </data>
+  <data name="MainTabControl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 38</value>
+  </data>
+  <data name="&gt;&gt;EncodeURIWhitespaceChk.Parent" xml:space="preserve">
+    <value>DecorationsGroupBox</value>
+  </data>
+  <data name="CancelBtn.ToolTip" xml:space="preserve">
+    <value>Do not save this custom command and close the window</value>
+  </data>
+  <data name="&gt;&gt;BrowserForExecutableBtn.Name" xml:space="preserve">
+    <value>BrowserForExecutableBtn</value>
+  </data>
+  <data name="SlashesGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 173</value>
+  </data>
+  <data name="TestRegexBtn.Text" xml:space="preserve">
+    <value>&amp;Test...</value>
+  </data>
+  <data name="&gt;&gt;OptionsPage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IgnoreCaseChk.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TestRegexBtn.Name" xml:space="preserve">
+    <value>TestRegexBtn</value>
+  </data>
+  <data name="NoSlashesChangeRadio.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 65</value>
+  </data>
+  <data name="ForwardToBackslashesRadio.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;RemoveExtChk.Name" xml:space="preserve">
+    <value>RemoveExtChk</value>
+  </data>
+  <data name="BasePluginPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>742, 268</value>
+  </data>
+  <data name="&gt;&gt;QuotesChk.Name" xml:space="preserve">
+    <value>QuotesChk</value>
+  </data>
+  <data name="NameLbl.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="IgnoreCaseChk.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;OptionalQuotesChk.Parent" xml:space="preserve">
+    <value>DecorationsGroupBox</value>
+  </data>
+  <data name="EncodeURICharsChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>225, 17</value>
+  </data>
+  <data name="EncodeURICharsChk.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="CancelBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="OptionalQuotesChk.ToolTip" xml:space="preserve">
+    <value>Whether to only surround path with quotes if the path contains spaces</value>
+  </data>
+  <data name="PreviewCtrl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>748, 53</value>
+  </data>
+  <data name="UnexpandEnvStringsChk.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;BasePluginPage.Name" xml:space="preserve">
+    <value>BasePluginPage</value>
+  </data>
+  <data name="&gt;&gt;PipelinePluginToolTip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TestRegexBtn.Parent" xml:space="preserve">
+    <value>FindReplaceGroupBox</value>
+  </data>
+  <data name="IgnoreCaseChk.Text" xml:space="preserve">
+    <value>&amp;Ignore case</value>
+  </data>
+  <data name="&gt;&gt;BaseCommandLbl.Name" xml:space="preserve">
+    <value>BaseCommandLbl</value>
+  </data>
+  <data name="&gt;&gt;OptionalQuotesChk.Name" xml:space="preserve">
+    <value>OptionalQuotesChk</value>
+  </data>
+  <data name="LaunchExecutableChk.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="OptionsPage.Text" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="CancelBtn.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="BackToForwardSlashesRadio.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="OKBtn.Text" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="IgnoreCaseChk.ToolTip" xml:space="preserve">
+    <value>Whether to ignore case when performing regular expression-based find/replace operations</value>
+  </data>
+  <data name="&gt;&gt;NoSlashesChangeRadio.Parent" xml:space="preserve">
+    <value>SlashesGroupBox</value>
+  </data>
+  <data name="&gt;&gt;IgnoreCaseChk.Parent" xml:space="preserve">
+    <value>FindReplaceGroupBox</value>
+  </data>
+  <data name="&gt;&gt;QuotesChk.Parent" xml:space="preserve">
+    <value>DecorationsGroupBox</value>
+  </data>
+  <data name="LaunchExecutableChk.ToolTip" xml:space="preserve">
+    <value>Instead of copying paths to the clipboard, launch an executable on disk, passing the paths as arguments</value>
+  </data>
+  <data name="&gt;&gt;LaunchExecutableChk.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LaunchExecutableChk.Parent" xml:space="preserve">
+    <value>OptionsGroupBox</value>
+  </data>
+  <data name="OptionsPage.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="FindReplaceGroupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="ReplaceTxt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>272, 20</value>
+  </data>
+  <data name="&gt;&gt;EmailLinksChk.Parent" xml:space="preserve">
+    <value>DecorationsGroupBox</value>
+  </data>
+  <data name="BrowserForExecutableBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="&gt;&gt;CancelBtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="BaseCommandLbl2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>343, 13</value>
+  </data>
+  <data name="BasePluginLst.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;CancelBtn.Name" xml:space="preserve">
+    <value>CancelBtn</value>
+  </data>
+  <data name="&gt;&gt;IgnoreCaseChk.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ForwardToBackslashesRadio.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>PipelinePluginForm</value>
+  </data>
+  <data name="UseRegexChk.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="OptionsGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>362, 122</value>
+  </data>
+  <data name="ExecutableTxt.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="RemoveExtChk.Text" xml:space="preserve">
+    <value>Remove file extensi&amp;on</value>
+  </data>
+  <data name="DecorationsGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
+  </data>
+  <data name="&gt;&gt;DecorationsGroupBox.Parent" xml:space="preserve">
+    <value>OptionsPage</value>
+  </data>
+  <data name="FindReplaceGroupBox.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LaunchExecutableChk.Text" xml:space="preserve">
+    <value>&amp;Launch executable with path(s) instead of copying to the clipboard</value>
+  </data>
+  <data name="RemoveExtChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>130, 17</value>
+  </data>
+  <data name="UseRegexChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>138, 17</value>
+  </data>
+  <data name="ExecutableLbl.Text" xml:space="preserve">
+    <value>E&amp;xecutable:</value>
+  </data>
+  <data name="&gt;&gt;CopyOnSameLineChk.Name" xml:space="preserve">
+    <value>CopyOnSameLineChk</value>
+  </data>
+  <data name="OKBtn.ToolTip" xml:space="preserve">
+    <value>Save this custom command and close the window</value>
+  </data>
+  <data name="&gt;&gt;SwitchBtn.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="SwitchBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="BaseCommandLbl2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;FindTxt.Parent" xml:space="preserve">
+    <value>FindReplaceGroupBox</value>
+  </data>
+  <data name="&gt;&gt;UseRegexChk.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ReplaceTxt.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="ExecutableTxt.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="FindReplaceGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>362, 129</value>
+  </data>
+  <data name="MainTabControl.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="BackToForwardSlashesRadio.Text" xml:space="preserve">
+    <value>Change all backslashes to &amp;forward slashes</value>
+  </data>
+  <data name="&gt;&gt;OKBtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="NameLbl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>38, 13</value>
+  </data>
+  <data name="BasePluginLst.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 32</value>
+  </data>
+  <data name="TestRegexBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="&gt;&gt;BackToForwardSlashesRadio.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ReplaceLbl.Name" xml:space="preserve">
+    <value>ReplaceLbl</value>
+  </data>
+  <data name="&gt;&gt;ExecutableTxt.Parent" xml:space="preserve">
+    <value>OptionsGroupBox</value>
+  </data>
+  <data name="&gt;&gt;NoSlashesChangeRadio.Name" xml:space="preserve">
+    <value>NoSlashesChangeRadio</value>
+  </data>
+  <data name="ExecutableTxt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>91, 90</value>
+  </data>
+  <data name="&gt;&gt;UseRegexChk.Name" xml:space="preserve">
+    <value>UseRegexChk</value>
+  </data>
+  <data name="&gt;&gt;NoSlashesChangeRadio.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="NoSlashesChangeRadio.ToolTip" xml:space="preserve">
+    <value>Do not change slash characters in the path</value>
+  </data>
+  <data name="QuotesChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 17</value>
+  </data>
+  <data name="ReplaceLbl.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CopyOnSameLineChk.ToolTip" xml:space="preserve">
+    <value>When copying paths of multiple selected files/folders, copy them all on the same line (separating them with whitespace) instead of copying them on different lines (separated with newlines)</value>
+  </data>
+  <data name="OKBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="&gt;&gt;PreviewCtrl.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ExecutableTxt.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="BaseCommandLbl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 3</value>
+  </data>
+  <data name="DecorationsGroupBox.Text" xml:space="preserve">
+    <value>Decorations</value>
+  </data>
+  <data name="QuotesChk.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="BrowserForExecutableBtn.ToolTip" xml:space="preserve">
+    <value>Open a dialog to choose the executable to launch on disk</value>
+  </data>
+  <data name="&gt;&gt;ReplaceLbl.Parent" xml:space="preserve">
+    <value>FindReplaceGroupBox</value>
+  </data>
+  <data name="BackToForwardSlashesRadio.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 42</value>
+  </data>
+  <data name="&gt;&gt;EncodeURIWhitespaceChk.Name" xml:space="preserve">
+    <value>EncodeURIWhitespaceChk</value>
+  </data>
+  <data name="&gt;&gt;FindTxt.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="QuotesChk.Text" xml:space="preserve">
+    <value>Enclose path in &amp;quotation marks</value>
+  </data>
+  <data name="&gt;&gt;NameTxt.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;UseRegexChk.Parent" xml:space="preserve">
+    <value>FindReplaceGroupBox</value>
+  </data>
+  <data name="&gt;&gt;BaseCommandLbl2.Parent" xml:space="preserve">
+    <value>BasePluginPage</value>
+  </data>
+  <data name="BaseCommandLbl.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="EmailLinksChk.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="NameLbl.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;OptionsPage.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="PreviewCtrl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 338</value>
+  </data>
+  <data name="&gt;&gt;TestRegexBtn.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="NameTxt.ToolTip" xml:space="preserve">
+    <value>Name of this custom command</value>
+  </data>
+  <data name="TestRegexBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>281, 71</value>
+  </data>
+  <data name="&gt;&gt;UnexpandEnvStringsChk.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;EmailLinksChk.Name" xml:space="preserve">
+    <value>EmailLinksChk</value>
+  </data>
+  <data name="IgnoreCaseChk.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="OKBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="ReplaceLbl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>72, 13</value>
+  </data>
+  <data name="&gt;&gt;CancelBtn.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;SlashesGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="BasePluginLst.Size" type="System.Drawing.Size, System.Drawing">
+    <value>723, 225</value>
+  </data>
+  <data name="CancelBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>687, 397</value>
+  </data>
+  <data name="BasePluginLst.ToolTip" xml:space="preserve">
+    <value>Base command to use to fetch path initially. Options will be applied afterwards</value>
+  </data>
+  <data name="&gt;&gt;NameTxt.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;FindTxt.Name" xml:space="preserve">
+    <value>FindTxt</value>
+  </data>
+  <data name="&gt;&gt;BaseCommandLbl.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="OptionsPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>742, 268</value>
+  </data>
+  <data name="TestRegexBtn.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="CopyOnSameLineChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>197, 17</value>
+  </data>
+  <data name="&gt;&gt;RemoveExtChk.Parent" xml:space="preserve">
+    <value>DecorationsGroupBox</value>
+  </data>
+  <data name="WithFilelistChk.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="FindReplaceGroupBox.Text" xml:space="preserve">
+    <value>Find / Replace</value>
+  </data>
+  <data name="&gt;&gt;BackToForwardSlashesRadio.Name" xml:space="preserve">
+    <value>BackToForwardSlashesRadio</value>
+  </data>
+  <data name="&gt;&gt;BasePluginLst.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="FindTxt.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="ForwardToBackslashesRadio.ToolTip" xml:space="preserve">
+    <value>Replace all forward slash characters ( / ) in the path with backslash characters ( \ )</value>
+  </data>
+  <data name="ReplaceLbl.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="SlashesGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>362, 90</value>
+  </data>
+  <data name="UnexpandEnvStringsChk.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 98</value>
+  </data>
+  <data name="&gt;&gt;EncodeURICharsChk.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;LaunchExecutableChk.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;ChooseExecutableOpenDlg.Type" xml:space="preserve">
+    <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="BaseCommandLbl2.Text" xml:space="preserve">
+    <value>determine the path copy method to use before applying custom options.</value>
+  </data>
+  <data name="TestRegexBtn.ToolTip" xml:space="preserve">
+    <value>Open a window to test the current regular expression/replacement expression combination</value>
+  </data>
+  <data name="EmailLinksChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>243, 17</value>
+  </data>
+  <data name="OKBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>606, 397</value>
+  </data>
+  <data name="&gt;&gt;FindReplaceGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Custom Command</value>
+  </data>
+  <data name="SwitchBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 397</value>
+  </data>
+  <data name="NoSlashesChangeRadio.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;BaseCommandLbl2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UseRegexChk.ToolTip" xml:space="preserve">
+    <value>Whether to use regular expressions to perform find/replace operations</value>
+  </data>
+  <data name="BasePluginPage.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="BasePluginPage.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="&gt;&gt;SlashesGroupBox.Name" xml:space="preserve">
+    <value>SlashesGroupBox</value>
+  </data>
+  <data name="EmailLinksChk.Text" xml:space="preserve">
+    <value>Enclose path in &lt; and &gt; (to create e-&amp;mail links)</value>
+  </data>
+  <data name="&gt;&gt;CancelBtn.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;MainTabControl.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;MainTabControl.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UnexpandEnvStringsChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>316, 17</value>
+  </data>
+  <data name="DecorationsGroupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="EmailLinksChk.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;DecorationsGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IgnoreCaseChk.Name" xml:space="preserve">
+    <value>IgnoreCaseChk</value>
+  </data>
+  <data name="&gt;&gt;SwitchBtn.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ExecutableLbl.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="BaseCommandLbl.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="NameLbl.Text" xml:space="preserve">
+    <value>&amp;Name:</value>
+  </data>
+  <data name="&gt;&gt;TestRegexBtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UnexpandEnvStringsChk.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LaunchExecutableChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>339, 17</value>
+  </data>
+  <data name="WithFilelistChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>306, 17</value>
+  </data>
+  <data name="OptionalQuotesChk.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="EncodeURICharsChk.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="CopyOnSameLineChk.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="OptionalQuotesChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 17</value>
+  </data>
+  <data name="UnexpandEnvStringsChk.Text" xml:space="preserve">
+    <value>Replace parts of path(s) with e&amp;nvironment variables if possible</value>
+  </data>
+  <data name="ExecutableTxt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 20</value>
+  </data>
+  <data name="&gt;&gt;FindLbl.Parent" xml:space="preserve">
+    <value>FindReplaceGroupBox</value>
+  </data>
+  <data name="&gt;&gt;OptionsPage.Name" xml:space="preserve">
+    <value>OptionsPage</value>
+  </data>
+  <data name="SlashesGroupBox.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;FindLbl.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;OptionsGroupBox.Parent" xml:space="preserve">
+    <value>OptionsPage</value>
+  </data>
+  <data name="ExecutableTxt.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;PreviewCtrl.Type" xml:space="preserve">
+    <value>PathCopyCopy.Settings.UI.UserControls.PluginPreviewUserControl, PathCopyCopySettings, Version=19.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="EmailLinksChk.ToolTip" xml:space="preserve">
+    <value>Surround path with &lt; and &gt; characters (this creates e-mail links)</value>
+  </data>
+  <data name="&gt;&gt;RemoveExtChk.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <metadata name="PipelinePluginToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>217, 17</value>
   </metadata>
