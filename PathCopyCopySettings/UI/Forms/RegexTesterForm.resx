@@ -117,10 +117,652 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="TestBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>335, 93</value>
+  </data>
+  <data name="ReplacementTxt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>138, 45</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ParamsGroupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ResultTxt.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="ReplacementLbl.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;TestBtn.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;RegexTxt.Name" xml:space="preserve">
+    <value>RegexTxt</value>
+  </data>
+  <data name="TestBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="RegexSyntaxHelpLbl2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>267, 13</value>
+  </data>
+  <data name="OKBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="RegexTxt.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="InvalidNoticeLbl.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="CancelBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="InvalidNoticeLbl.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="RegexSyntaxHelpLinkLbl1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="RegexLbl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 13</value>
+  </data>
+  <data name="&gt;&gt;RegexSyntaxHelpLbl2.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;SampleTxt.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ReplacementTxt.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="ExecutionExplanationLbl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>368, 13</value>
+  </data>
+  <data name="ReplacementLbl.Text" xml:space="preserve">
+    <value>&amp;Replacement expression:</value>
+  </data>
+  <data name="RegexSyntaxHelpLinkLbl1.Text" xml:space="preserve">
+    <value>http://www.regular-expressions.info/reference.html</value>
+  </data>
+  <data name="RegexSyntaxHelpLbl1.Text" xml:space="preserve">
+    <value>Path Copy Copy uses the JavaScript/ECMAScript regular expression syntax.</value>
+  </data>
+  <data name="RegexSyntaxHelpLbl1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;ResultTxt.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;RegexLbl.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="InvalidNoticeLbl.Text" xml:space="preserve">
+    <value>Invalid regular expression</value>
+  </data>
+  <data name="&gt;&gt;InvalidNoticeLbl.Name" xml:space="preserve">
+    <value>InvalidNoticeLbl</value>
+  </data>
+  <data name="IgnoreCaseChk.Text" xml:space="preserve">
+    <value>&amp;Ignore case</value>
+  </data>
+  <data name="ParamsGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="OKBtn.ToolTip" xml:space="preserve">
+    <value>Copy changes to the regular and replacement expression back to the parent dialog and close this window</value>
+  </data>
+  <data name="ReplacementLbl.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="RegexSyntaxHelpLinkLbl2.ToolTip" xml:space="preserve">
+    <value>http://www.regular-expressions.info/javascript.html</value>
+  </data>
+  <data name="RegexSyntaxHelpLbl1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 255</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Regular Expression Testing</value>
+  </data>
+  <data name="&gt;&gt;ReplacementLbl.Parent" xml:space="preserve">
+    <value>ParamsGroupBox</value>
+  </data>
+  <data name="IgnoreCaseChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>82, 17</value>
+  </data>
+  <data name="IgnoreCaseChk.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 71</value>
+  </data>
+  <data name="ExecutionGroupBox.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="RegexSyntaxHelpLinkLbl2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 295</value>
+  </data>
+  <data name="&gt;&gt;ReplacementLbl.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ReplacementLbl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 13</value>
+  </data>
+  <data name="&gt;&gt;ExecutionGroupBox.Name" xml:space="preserve">
+    <value>ExecutionGroupBox</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>446, 325</value>
+  </data>
+  <data name="&gt;&gt;InvalidNoticeLbl.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="RegexSyntaxHelpLbl1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ResultTxt.ToolTip" xml:space="preserve">
+    <value>Result of the find/replace operation</value>
+  </data>
+  <data name="&gt;&gt;ExecutionExplanationLbl.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="ParamsGroupBox.Text" xml:space="preserve">
+    <value>Parameters</value>
+  </data>
+  <data name="RegexSyntaxHelpLinkLbl2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;CancelBtn.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="SampleLbl.Text" xml:space="preserve">
+    <value>&amp;Sample:</value>
+  </data>
+  <data name="InvalidNoticeLbl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 13</value>
+  </data>
+  <data name="&gt;&gt;ReplacementTxt.Name" xml:space="preserve">
+    <value>ReplacementTxt</value>
+  </data>
+  <data name="&gt;&gt;IgnoreCaseChk.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ResultLbl.Name" xml:space="preserve">
+    <value>ResultLbl</value>
+  </data>
+  <data name="&gt;&gt;ReplacementLbl.Name" xml:space="preserve">
+    <value>ReplacementLbl</value>
+  </data>
+  <data name="SampleLbl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 44</value>
+  </data>
+  <data name="SampleLbl.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="ExecutionExplanationLbl.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="ResultLbl.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="SampleTxt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>353, 20</value>
+  </data>
+  <data name="TestBtn.ToolTip" xml:space="preserve">
+    <value>Execute a find/replace operation with the provided regular and replacement expressions, applying them to the provided sample string</value>
+  </data>
+  <data name="&gt;&gt;RegexSyntaxHelpLbl2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="RegexSyntaxHelpLbl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>365, 13</value>
+  </data>
+  <data name="&gt;&gt;SampleTxt.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;RegexSyntaxHelpLinkLbl1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ReplacementTxt.ToolTip" xml:space="preserve">
+    <value>The replacement expression used to perform find/replace operations</value>
+  </data>
+  <data name="ExecutionGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 114</value>
+  </data>
+  <data name="ExecutionGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>422, 129</value>
+  </data>
+  <data name="ExecutionExplanationLbl.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="IgnoreCaseChk.ToolTip" xml:space="preserve">
+    <value>Whether to ignore case when performing find/replace operations</value>
+  </data>
+  <data name="&gt;&gt;RegexToolTip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ExecutionExplanationLbl.Text" xml:space="preserve">
+    <value>To test your regular expression, enter a sample string below and click "Test".</value>
+  </data>
+  <data name="&gt;&gt;SampleLbl.Name" xml:space="preserve">
+    <value>SampleLbl</value>
+  </data>
+  <data name="RegexSyntaxHelpLinkLbl1.ToolTip" xml:space="preserve">
+    <value>http://www.regular-expressions.info/reference.html</value>
+  </data>
+  <data name="&gt;&gt;ExecutionExplanationLbl.Parent" xml:space="preserve">
+    <value>ExecutionGroupBox</value>
+  </data>
+  <data name="RegexSyntaxHelpLbl2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="&gt;&gt;ParamsGroupBox.Name" xml:space="preserve">
+    <value>ParamsGroupBox</value>
+  </data>
+  <data name="ResultLbl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 13</value>
+  </data>
+  <data name="SampleTxt.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="RegexSyntaxHelpLinkLbl1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 281</value>
+  </data>
+  <data name="RegexSyntaxHelpLinkLbl2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="&gt;&gt;RegexSyntaxHelpLinkLbl2.Name" xml:space="preserve">
+    <value>RegexSyntaxHelpLinkLbl2</value>
+  </data>
+  <data name="SampleTxt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>57, 41</value>
+  </data>
+  <data name="TestBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="RegexSyntaxHelpLbl2.Text" xml:space="preserve">
+    <value>Good regular expression references can be found here:</value>
+  </data>
+  <data name="RegexSyntaxHelpLbl1.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="ExecutionExplanationLbl.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;TestBtn.Parent" xml:space="preserve">
+    <value>ExecutionGroupBox</value>
+  </data>
+  <data name="&gt;&gt;RegexSyntaxHelpLbl2.Name" xml:space="preserve">
+    <value>RegexSyntaxHelpLbl2</value>
+  </data>
+  <data name="&gt;&gt;RegexSyntaxHelpLinkLbl1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>462, 364</value>
+  </data>
+  <data name="ResultLbl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 70</value>
+  </data>
+  <data name="RegexSyntaxHelpLbl1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="&gt;&gt;RegexTxt.Parent" xml:space="preserve">
+    <value>ParamsGroupBox</value>
+  </data>
+  <data name="SampleTxt.ToolTip" xml:space="preserve">
+    <value>Sample text on which the regular and replacement expressions will be applied</value>
+  </data>
+  <data name="&gt;&gt;RegexToolTip.Name" xml:space="preserve">
+    <value>RegexToolTip</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
+  <data name="&gt;&gt;ExecutionGroupBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="ExecutionGroupBox.Text" xml:space="preserve">
+    <value>Execution</value>
+  </data>
+  <data name="ResultLbl.Text" xml:space="preserve">
+    <value>Result:</value>
+  </data>
+  <data name="&gt;&gt;ExecutionGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IgnoreCaseChk.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;RegexTxt.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;SampleTxt.Parent" xml:space="preserve">
+    <value>ExecutionGroupBox</value>
+  </data>
+  <data name="&gt;&gt;RegexSyntaxHelpLinkLbl1.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ParamsGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TestBtn.Name" xml:space="preserve">
+    <value>TestBtn</value>
+  </data>
+  <data name="ExecutionGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="RegexLbl.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;ResultTxt.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;TestBtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="RegexLbl.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CancelBtn.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="InvalidNoticeLbl.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="&gt;&gt;RegexSyntaxHelpLinkLbl2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="InvalidNoticeLbl.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="SampleTxt.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="ParamsGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
+  </data>
+  <data name="RegexSyntaxHelpLbl2.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;OKBtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ReplacementTxt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>272, 20</value>
+  </data>
+  <data name="&gt;&gt;CancelBtn.Name" xml:space="preserve">
+    <value>CancelBtn</value>
+  </data>
+  <data name="&gt;&gt;ReplacementTxt.Parent" xml:space="preserve">
+    <value>ParamsGroupBox</value>
+  </data>
+  <data name="ResultTxt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>52, 67</value>
+  </data>
+  <data name="ResultLbl.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="RegexTxt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>298, 20</value>
+  </data>
+  <data name="OKBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;RegexSyntaxHelpLbl1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="RegexSyntaxHelpLinkLbl1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;OKBtn.Name" xml:space="preserve">
+    <value>OKBtn</value>
+  </data>
+  <data name="OKBtn.Text" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="&gt;&gt;SampleLbl.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>RegexTesterForm</value>
+  </data>
+  <data name="RegexSyntaxHelpLinkLbl2.Text" xml:space="preserve">
+    <value>http://www.regular-expressions.info/javascript.html</value>
+  </data>
+  <data name="&gt;&gt;RegexSyntaxHelpLbl1.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="IgnoreCaseChk.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="CancelBtn.ToolTip" xml:space="preserve">
+    <value>Go back to the parent dialog without changing regular or replacement expression</value>
+  </data>
+  <data name="&gt;&gt;OKBtn.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="ParamsGroupBox.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;ReplacementTxt.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ExecutionGroupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="SampleTxt.Text" xml:space="preserve">
+    <value>C:\Program Files\Internet Explorer\iexplore.exe</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>PathCopyCopy.Settings.UI.Utils.PositionPersistedForm, PathCopyCopySettings, Version=19.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ParamsGroupBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;RegexLbl.Name" xml:space="preserve">
+    <value>RegexLbl</value>
+  </data>
+  <data name="&gt;&gt;SampleTxt.Name" xml:space="preserve">
+    <value>SampleTxt</value>
+  </data>
+  <data name="&gt;&gt;ResultTxt.Name" xml:space="preserve">
+    <value>ResultTxt</value>
+  </data>
+  <data name="&gt;&gt;ExecutionGroupBox.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;RegexSyntaxHelpLbl2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ParamsGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>422, 96</value>
+  </data>
+  <data name="ReplacementTxt.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="CancelBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>359, 290</value>
+  </data>
+  <data name="&gt;&gt;ResultTxt.Parent" xml:space="preserve">
+    <value>ExecutionGroupBox</value>
+  </data>
+  <data name="&gt;&gt;ExecutionExplanationLbl.Name" xml:space="preserve">
+    <value>ExecutionExplanationLbl</value>
+  </data>
+  <data name="OKBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="TestBtn.Text" xml:space="preserve">
+    <value>&amp;Test</value>
+  </data>
+  <data name="InvalidNoticeLbl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 98</value>
+  </data>
+  <data name="RegexLbl.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;IgnoreCaseChk.Name" xml:space="preserve">
+    <value>IgnoreCaseChk</value>
+  </data>
+  <data name="&gt;&gt;RegexLbl.Parent" xml:space="preserve">
+    <value>ParamsGroupBox</value>
+  </data>
+  <data name="ReplacementLbl.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="RegexSyntaxHelpLinkLbl2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>247, 13</value>
+  </data>
+  <data name="&gt;&gt;RegexSyntaxHelpLinkLbl2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;RegexSyntaxHelpLinkLbl1.Name" xml:space="preserve">
+    <value>RegexSyntaxHelpLinkLbl1</value>
+  </data>
+  <data name="ResultLbl.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="RegexSyntaxHelpLinkLbl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>247, 13</value>
+  </data>
+  <data name="&gt;&gt;RegexLbl.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ParamsGroupBox.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="IgnoreCaseChk.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="SampleLbl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 13</value>
+  </data>
+  <data name="RegexSyntaxHelpLinkLbl1.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;RegexTxt.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="SampleLbl.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="ExecutionExplanationLbl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 22</value>
+  </data>
+  <data name="RegexSyntaxHelpLinkLbl2.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="SampleLbl.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;ReplacementTxt.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="OKBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>278, 290</value>
+  </data>
+  <data name="CancelBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;ResultLbl.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="RegexSyntaxHelpLbl2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 268</value>
+  </data>
+  <data name="&gt;&gt;SampleLbl.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ResultTxt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>358, 20</value>
+  </data>
+  <data name="&gt;&gt;InvalidNoticeLbl.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;OKBtn.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;IgnoreCaseChk.Parent" xml:space="preserve">
+    <value>ParamsGroupBox</value>
+  </data>
+  <data name="CancelBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="RegexLbl.Text" xml:space="preserve">
+    <value>Regular e&amp;xpression:</value>
+  </data>
+  <data name="InvalidNoticeLbl.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;RegexSyntaxHelpLbl1.Name" xml:space="preserve">
+    <value>RegexSyntaxHelpLbl1</value>
+  </data>
+  <data name="RegexLbl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 22</value>
+  </data>
+  <data name="&gt;&gt;CancelBtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ResultTxt.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="RegexSyntaxHelpLbl2.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;RegexSyntaxHelpLbl1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="RegexTxt.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;InvalidNoticeLbl.Parent" xml:space="preserve">
+    <value>ExecutionGroupBox</value>
+  </data>
+  <data name="RegexSyntaxHelpLbl2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;ResultLbl.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="RegexTxt.ToolTip" xml:space="preserve">
+    <value>The regular expression used to perform find/replace operations</value>
+  </data>
+  <data name="RegexTxt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>112, 19</value>
+  </data>
+  <data name="&gt;&gt;SampleLbl.Parent" xml:space="preserve">
+    <value>ExecutionGroupBox</value>
+  </data>
+  <data name="&gt;&gt;RegexSyntaxHelpLinkLbl2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="TestBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="&gt;&gt;ResultLbl.Parent" xml:space="preserve">
+    <value>ExecutionGroupBox</value>
+  </data>
+  <data name="ReplacementLbl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 48</value>
+  </data>
+  <data name="&gt;&gt;CancelBtn.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ExecutionExplanationLbl.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ReplacementLbl.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <metadata name="RegexToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="RegexToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
   </metadata>
 </root>

@@ -228,6 +228,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UI\Forms\RegexTesterForm.fr-CA.resx">
+      <DependentUpon>RegexTesterForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\RegexTesterForm.resx">
       <DependentUpon>RegexTesterForm.cs</DependentUpon>
     </EmbeddedResource>

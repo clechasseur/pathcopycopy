@@ -28,6 +28,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegexTesterForm));
             this.ParamsGroupBox = new System.Windows.Forms.GroupBox();
             this.IgnoreCaseChk = new System.Windows.Forms.CheckBox();
             this.ReplacementTxt = new System.Windows.Forms.TextBox();
@@ -55,73 +56,50 @@
             // 
             // ParamsGroupBox
             // 
-            this.ParamsGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.ParamsGroupBox, "ParamsGroupBox");
             this.ParamsGroupBox.Controls.Add(this.IgnoreCaseChk);
             this.ParamsGroupBox.Controls.Add(this.ReplacementTxt);
             this.ParamsGroupBox.Controls.Add(this.RegexTxt);
             this.ParamsGroupBox.Controls.Add(this.ReplacementLbl);
             this.ParamsGroupBox.Controls.Add(this.RegexLbl);
-            this.ParamsGroupBox.Location = new System.Drawing.Point(12, 12);
             this.ParamsGroupBox.Name = "ParamsGroupBox";
-            this.ParamsGroupBox.Size = new System.Drawing.Size(422, 96);
-            this.ParamsGroupBox.TabIndex = 0;
             this.ParamsGroupBox.TabStop = false;
-            this.ParamsGroupBox.Text = "Parameters";
+            this.RegexToolTip.SetToolTip(this.ParamsGroupBox, resources.GetString("ParamsGroupBox.ToolTip"));
             // 
             // IgnoreCaseChk
             // 
-            this.IgnoreCaseChk.AutoSize = true;
-            this.IgnoreCaseChk.Location = new System.Drawing.Point(9, 71);
+            resources.ApplyResources(this.IgnoreCaseChk, "IgnoreCaseChk");
             this.IgnoreCaseChk.Name = "IgnoreCaseChk";
-            this.IgnoreCaseChk.Size = new System.Drawing.Size(82, 17);
-            this.IgnoreCaseChk.TabIndex = 4;
-            this.IgnoreCaseChk.Text = "&Ignore case";
-            this.RegexToolTip.SetToolTip(this.IgnoreCaseChk, "Whether to ignore case when performing find/replace operations");
+            this.RegexToolTip.SetToolTip(this.IgnoreCaseChk, resources.GetString("IgnoreCaseChk.ToolTip"));
             this.IgnoreCaseChk.UseVisualStyleBackColor = true;
             // 
             // ReplacementTxt
             // 
-            this.ReplacementTxt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ReplacementTxt.Location = new System.Drawing.Point(138, 45);
+            resources.ApplyResources(this.ReplacementTxt, "ReplacementTxt");
             this.ReplacementTxt.Name = "ReplacementTxt";
-            this.ReplacementTxt.Size = new System.Drawing.Size(272, 20);
-            this.ReplacementTxt.TabIndex = 3;
-            this.RegexToolTip.SetToolTip(this.ReplacementTxt, "The replacement expression used to perform find/replace operations");
+            this.RegexToolTip.SetToolTip(this.ReplacementTxt, resources.GetString("ReplacementTxt.ToolTip"));
             // 
             // RegexTxt
             // 
-            this.RegexTxt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.RegexTxt.Location = new System.Drawing.Point(112, 19);
+            resources.ApplyResources(this.RegexTxt, "RegexTxt");
             this.RegexTxt.Name = "RegexTxt";
-            this.RegexTxt.Size = new System.Drawing.Size(298, 20);
-            this.RegexTxt.TabIndex = 1;
-            this.RegexToolTip.SetToolTip(this.RegexTxt, "The regular expression used to perform find/replace operations");
+            this.RegexToolTip.SetToolTip(this.RegexTxt, resources.GetString("RegexTxt.ToolTip"));
             // 
             // ReplacementLbl
             // 
-            this.ReplacementLbl.AutoSize = true;
-            this.ReplacementLbl.Location = new System.Drawing.Point(6, 48);
+            resources.ApplyResources(this.ReplacementLbl, "ReplacementLbl");
             this.ReplacementLbl.Name = "ReplacementLbl";
-            this.ReplacementLbl.Size = new System.Drawing.Size(126, 13);
-            this.ReplacementLbl.TabIndex = 2;
-            this.ReplacementLbl.Text = "&Replacement expression:";
+            this.RegexToolTip.SetToolTip(this.ReplacementLbl, resources.GetString("ReplacementLbl.ToolTip"));
             // 
             // RegexLbl
             // 
-            this.RegexLbl.AutoSize = true;
-            this.RegexLbl.Location = new System.Drawing.Point(6, 22);
+            resources.ApplyResources(this.RegexLbl, "RegexLbl");
             this.RegexLbl.Name = "RegexLbl";
-            this.RegexLbl.Size = new System.Drawing.Size(100, 13);
-            this.RegexLbl.TabIndex = 0;
-            this.RegexLbl.Text = "Regular e&xpression:";
+            this.RegexToolTip.SetToolTip(this.RegexLbl, resources.GetString("RegexLbl.ToolTip"));
             // 
             // ExecutionGroupBox
             // 
-            this.ExecutionGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.ExecutionGroupBox, "ExecutionGroupBox");
             this.ExecutionGroupBox.Controls.Add(this.InvalidNoticeLbl);
             this.ExecutionGroupBox.Controls.Add(this.TestBtn);
             this.ExecutionGroupBox.Controls.Add(this.ResultLbl);
@@ -129,165 +107,106 @@
             this.ExecutionGroupBox.Controls.Add(this.SampleTxt);
             this.ExecutionGroupBox.Controls.Add(this.SampleLbl);
             this.ExecutionGroupBox.Controls.Add(this.ExecutionExplanationLbl);
-            this.ExecutionGroupBox.Location = new System.Drawing.Point(12, 114);
             this.ExecutionGroupBox.Name = "ExecutionGroupBox";
-            this.ExecutionGroupBox.Size = new System.Drawing.Size(422, 129);
-            this.ExecutionGroupBox.TabIndex = 1;
             this.ExecutionGroupBox.TabStop = false;
-            this.ExecutionGroupBox.Text = "Execution";
+            this.RegexToolTip.SetToolTip(this.ExecutionGroupBox, resources.GetString("ExecutionGroupBox.ToolTip"));
             // 
             // InvalidNoticeLbl
             // 
-            this.InvalidNoticeLbl.AutoSize = true;
-            this.InvalidNoticeLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            resources.ApplyResources(this.InvalidNoticeLbl, "InvalidNoticeLbl");
             this.InvalidNoticeLbl.ForeColor = System.Drawing.Color.Red;
-            this.InvalidNoticeLbl.Location = new System.Drawing.Point(6, 98);
             this.InvalidNoticeLbl.Name = "InvalidNoticeLbl";
-            this.InvalidNoticeLbl.Size = new System.Drawing.Size(152, 13);
-            this.InvalidNoticeLbl.TabIndex = 5;
-            this.InvalidNoticeLbl.Text = "Invalid regular expression";
-            this.InvalidNoticeLbl.Visible = false;
+            this.RegexToolTip.SetToolTip(this.InvalidNoticeLbl, resources.GetString("InvalidNoticeLbl.ToolTip"));
             // 
             // TestBtn
             // 
-            this.TestBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.TestBtn.Location = new System.Drawing.Point(335, 93);
+            resources.ApplyResources(this.TestBtn, "TestBtn");
             this.TestBtn.Name = "TestBtn";
-            this.TestBtn.Size = new System.Drawing.Size(75, 23);
-            this.TestBtn.TabIndex = 6;
-            this.TestBtn.Text = "&Test";
-            this.RegexToolTip.SetToolTip(this.TestBtn, "Execute a find/replace operation with the provided regular and replacement expres" +
-        "sions, applying them to the provided sample string");
+            this.RegexToolTip.SetToolTip(this.TestBtn, resources.GetString("TestBtn.ToolTip"));
             this.TestBtn.UseVisualStyleBackColor = true;
             this.TestBtn.Click += new System.EventHandler(this.TestBtn_Click);
             // 
             // ResultLbl
             // 
-            this.ResultLbl.AutoSize = true;
-            this.ResultLbl.Location = new System.Drawing.Point(6, 70);
+            resources.ApplyResources(this.ResultLbl, "ResultLbl");
             this.ResultLbl.Name = "ResultLbl";
-            this.ResultLbl.Size = new System.Drawing.Size(40, 13);
-            this.ResultLbl.TabIndex = 3;
-            this.ResultLbl.Text = "Result:";
+            this.RegexToolTip.SetToolTip(this.ResultLbl, resources.GetString("ResultLbl.ToolTip"));
             // 
             // ResultTxt
             // 
-            this.ResultTxt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ResultTxt.Location = new System.Drawing.Point(52, 67);
+            resources.ApplyResources(this.ResultTxt, "ResultTxt");
             this.ResultTxt.Name = "ResultTxt";
             this.ResultTxt.ReadOnly = true;
-            this.ResultTxt.Size = new System.Drawing.Size(358, 20);
-            this.ResultTxt.TabIndex = 4;
-            this.RegexToolTip.SetToolTip(this.ResultTxt, "Result of the find/replace operation");
+            this.RegexToolTip.SetToolTip(this.ResultTxt, resources.GetString("ResultTxt.ToolTip"));
             // 
             // SampleTxt
             // 
-            this.SampleTxt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.SampleTxt.Location = new System.Drawing.Point(57, 41);
+            resources.ApplyResources(this.SampleTxt, "SampleTxt");
             this.SampleTxt.Name = "SampleTxt";
-            this.SampleTxt.Size = new System.Drawing.Size(353, 20);
-            this.SampleTxt.TabIndex = 2;
-            this.SampleTxt.Text = "C:\\Program Files\\Internet Explorer\\iexplore.exe";
-            this.RegexToolTip.SetToolTip(this.SampleTxt, "Sample text on which the regular and replacement expressions will be applied");
+            this.RegexToolTip.SetToolTip(this.SampleTxt, resources.GetString("SampleTxt.ToolTip"));
             // 
             // SampleLbl
             // 
-            this.SampleLbl.AutoSize = true;
-            this.SampleLbl.Location = new System.Drawing.Point(6, 44);
+            resources.ApplyResources(this.SampleLbl, "SampleLbl");
             this.SampleLbl.Name = "SampleLbl";
-            this.SampleLbl.Size = new System.Drawing.Size(45, 13);
-            this.SampleLbl.TabIndex = 1;
-            this.SampleLbl.Text = "&Sample:";
+            this.RegexToolTip.SetToolTip(this.SampleLbl, resources.GetString("SampleLbl.ToolTip"));
             // 
             // ExecutionExplanationLbl
             // 
-            this.ExecutionExplanationLbl.AutoSize = true;
-            this.ExecutionExplanationLbl.Location = new System.Drawing.Point(6, 22);
+            resources.ApplyResources(this.ExecutionExplanationLbl, "ExecutionExplanationLbl");
             this.ExecutionExplanationLbl.Name = "ExecutionExplanationLbl";
-            this.ExecutionExplanationLbl.Size = new System.Drawing.Size(368, 13);
-            this.ExecutionExplanationLbl.TabIndex = 0;
-            this.ExecutionExplanationLbl.Text = "To test your regular expression, enter a sample string below and click \"Test\".";
+            this.RegexToolTip.SetToolTip(this.ExecutionExplanationLbl, resources.GetString("ExecutionExplanationLbl.ToolTip"));
             // 
             // RegexSyntaxHelpLbl1
             // 
-            this.RegexSyntaxHelpLbl1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.RegexSyntaxHelpLbl1.AutoSize = true;
-            this.RegexSyntaxHelpLbl1.Location = new System.Drawing.Point(18, 255);
+            resources.ApplyResources(this.RegexSyntaxHelpLbl1, "RegexSyntaxHelpLbl1");
             this.RegexSyntaxHelpLbl1.Name = "RegexSyntaxHelpLbl1";
-            this.RegexSyntaxHelpLbl1.Size = new System.Drawing.Size(365, 13);
-            this.RegexSyntaxHelpLbl1.TabIndex = 2;
-            this.RegexSyntaxHelpLbl1.Text = "Path Copy Copy uses the JavaScript/ECMAScript regular expression syntax.";
+            this.RegexToolTip.SetToolTip(this.RegexSyntaxHelpLbl1, resources.GetString("RegexSyntaxHelpLbl1.ToolTip"));
             // 
             // RegexSyntaxHelpLbl2
             // 
-            this.RegexSyntaxHelpLbl2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.RegexSyntaxHelpLbl2.AutoSize = true;
-            this.RegexSyntaxHelpLbl2.Location = new System.Drawing.Point(18, 268);
+            resources.ApplyResources(this.RegexSyntaxHelpLbl2, "RegexSyntaxHelpLbl2");
             this.RegexSyntaxHelpLbl2.Name = "RegexSyntaxHelpLbl2";
-            this.RegexSyntaxHelpLbl2.Size = new System.Drawing.Size(267, 13);
-            this.RegexSyntaxHelpLbl2.TabIndex = 3;
-            this.RegexSyntaxHelpLbl2.Text = "Good regular expression references can be found here:";
+            this.RegexToolTip.SetToolTip(this.RegexSyntaxHelpLbl2, resources.GetString("RegexSyntaxHelpLbl2.ToolTip"));
             // 
             // RegexSyntaxHelpLinkLbl1
             // 
-            this.RegexSyntaxHelpLinkLbl1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.RegexSyntaxHelpLinkLbl1.AutoSize = true;
-            this.RegexSyntaxHelpLinkLbl1.Location = new System.Drawing.Point(18, 281);
+            resources.ApplyResources(this.RegexSyntaxHelpLinkLbl1, "RegexSyntaxHelpLinkLbl1");
             this.RegexSyntaxHelpLinkLbl1.Name = "RegexSyntaxHelpLinkLbl1";
-            this.RegexSyntaxHelpLinkLbl1.Size = new System.Drawing.Size(247, 13);
-            this.RegexSyntaxHelpLinkLbl1.TabIndex = 4;
             this.RegexSyntaxHelpLinkLbl1.TabStop = true;
-            this.RegexSyntaxHelpLinkLbl1.Text = "http://www.regular-expressions.info/reference.html";
-            this.RegexToolTip.SetToolTip(this.RegexSyntaxHelpLinkLbl1, "http://www.regular-expressions.info/reference.html");
+            this.RegexToolTip.SetToolTip(this.RegexSyntaxHelpLinkLbl1, resources.GetString("RegexSyntaxHelpLinkLbl1.ToolTip"));
             this.RegexSyntaxHelpLinkLbl1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.RegexSyntaxHelpLinkLbl_LinkClicked);
             // 
             // CancelBtn
             // 
-            this.CancelBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.CancelBtn, "CancelBtn");
             this.CancelBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.CancelBtn.Location = new System.Drawing.Point(359, 290);
             this.CancelBtn.Name = "CancelBtn";
-            this.CancelBtn.Size = new System.Drawing.Size(75, 23);
-            this.CancelBtn.TabIndex = 7;
-            this.CancelBtn.Text = "Cancel";
-            this.RegexToolTip.SetToolTip(this.CancelBtn, "Go back to the parent dialog without changing regular or replacement expression");
+            this.RegexToolTip.SetToolTip(this.CancelBtn, resources.GetString("CancelBtn.ToolTip"));
             this.CancelBtn.UseVisualStyleBackColor = true;
             // 
             // OKBtn
             // 
-            this.OKBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.OKBtn, "OKBtn");
             this.OKBtn.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.OKBtn.Location = new System.Drawing.Point(278, 290);
             this.OKBtn.Name = "OKBtn";
-            this.OKBtn.Size = new System.Drawing.Size(75, 23);
-            this.OKBtn.TabIndex = 6;
-            this.OKBtn.Text = "OK";
-            this.RegexToolTip.SetToolTip(this.OKBtn, "Copy changes to the regular and replacement expression back to the parent dialog " +
-        "and close this window");
+            this.RegexToolTip.SetToolTip(this.OKBtn, resources.GetString("OKBtn.ToolTip"));
             this.OKBtn.UseVisualStyleBackColor = true;
             // 
             // RegexSyntaxHelpLinkLbl2
             // 
-            this.RegexSyntaxHelpLinkLbl2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.RegexSyntaxHelpLinkLbl2.AutoSize = true;
-            this.RegexSyntaxHelpLinkLbl2.Location = new System.Drawing.Point(18, 295);
+            resources.ApplyResources(this.RegexSyntaxHelpLinkLbl2, "RegexSyntaxHelpLinkLbl2");
             this.RegexSyntaxHelpLinkLbl2.Name = "RegexSyntaxHelpLinkLbl2";
-            this.RegexSyntaxHelpLinkLbl2.Size = new System.Drawing.Size(247, 13);
-            this.RegexSyntaxHelpLinkLbl2.TabIndex = 5;
             this.RegexSyntaxHelpLinkLbl2.TabStop = true;
-            this.RegexSyntaxHelpLinkLbl2.Text = "http://www.regular-expressions.info/javascript.html";
-            this.RegexToolTip.SetToolTip(this.RegexSyntaxHelpLinkLbl2, "http://www.regular-expressions.info/javascript.html");
+            this.RegexToolTip.SetToolTip(this.RegexSyntaxHelpLinkLbl2, resources.GetString("RegexSyntaxHelpLinkLbl2.ToolTip"));
             this.RegexSyntaxHelpLinkLbl2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.RegexSyntaxHelpLinkLbl_LinkClicked);
             // 
             // RegexTesterForm
             // 
             this.AcceptButton = this.OKBtn;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.CancelBtn;
-            this.ClientSize = new System.Drawing.Size(446, 325);
             this.Controls.Add(this.RegexSyntaxHelpLinkLbl2);
             this.Controls.Add(this.OKBtn);
             this.Controls.Add(this.CancelBtn);
@@ -299,12 +218,10 @@
             this.HelpButton = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(462, 364);
             this.Name = "RegexTesterForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Regular Expression Testing";
+            this.RegexToolTip.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.RegexTesterForm_HelpButtonClicked);
             this.ParamsGroupBox.ResumeLayout(false);
             this.ParamsGroupBox.PerformLayout();
