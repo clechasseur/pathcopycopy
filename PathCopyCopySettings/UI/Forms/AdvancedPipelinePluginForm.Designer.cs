@@ -52,72 +52,49 @@
             // 
             // CancelBtn
             // 
-            this.CancelBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.CancelBtn, "CancelBtn");
             this.CancelBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.CancelBtn.Location = new System.Drawing.Point(551, 395);
             this.CancelBtn.Name = "CancelBtn";
-            this.CancelBtn.Size = new System.Drawing.Size(75, 23);
-            this.CancelBtn.TabIndex = 14;
-            this.CancelBtn.Text = "Cancel";
-            this.AdvancedPipelinePluginToolTip.SetToolTip(this.CancelBtn, "Do not save this custom command and close the window");
+            this.AdvancedPipelinePluginToolTip.SetToolTip(this.CancelBtn, resources.GetString("CancelBtn.ToolTip"));
             this.CancelBtn.UseVisualStyleBackColor = true;
             // 
             // OKBtn
             // 
-            this.OKBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.OKBtn, "OKBtn");
             this.OKBtn.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.OKBtn.Location = new System.Drawing.Point(470, 395);
             this.OKBtn.Name = "OKBtn";
-            this.OKBtn.Size = new System.Drawing.Size(75, 23);
-            this.OKBtn.TabIndex = 13;
-            this.OKBtn.Text = "OK";
-            this.AdvancedPipelinePluginToolTip.SetToolTip(this.OKBtn, "Save this custom command and close the window");
+            this.AdvancedPipelinePluginToolTip.SetToolTip(this.OKBtn, resources.GetString("OKBtn.ToolTip"));
             this.OKBtn.UseVisualStyleBackColor = true;
             // 
             // SwitchBtn
             // 
-            this.SwitchBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            resources.ApplyResources(this.SwitchBtn, "SwitchBtn");
             this.SwitchBtn.DialogResult = System.Windows.Forms.DialogResult.Retry;
-            this.SwitchBtn.Location = new System.Drawing.Point(12, 395);
             this.SwitchBtn.Name = "SwitchBtn";
-            this.SwitchBtn.Size = new System.Drawing.Size(94, 23);
-            this.SwitchBtn.TabIndex = 12;
-            this.SwitchBtn.Text = "Simple Mode";
-            this.AdvancedPipelinePluginToolTip.SetToolTip(this.SwitchBtn, "Switch to Simple Mode, which is easier to use but has less customzation options");
+            this.AdvancedPipelinePluginToolTip.SetToolTip(this.SwitchBtn, resources.GetString("SwitchBtn.ToolTip"));
             this.SwitchBtn.UseVisualStyleBackColor = true;
             // 
             // NameTxt
             // 
-            this.NameTxt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.NameTxt.Location = new System.Drawing.Point(56, 12);
+            resources.ApplyResources(this.NameTxt, "NameTxt");
             this.NameTxt.Name = "NameTxt";
-            this.NameTxt.Size = new System.Drawing.Size(570, 20);
-            this.NameTxt.TabIndex = 1;
-            this.AdvancedPipelinePluginToolTip.SetToolTip(this.NameTxt, "Name of this custom command");
+            this.AdvancedPipelinePluginToolTip.SetToolTip(this.NameTxt, resources.GetString("NameTxt.ToolTip"));
             // 
             // ElementsLst
             // 
-            this.ElementsLst.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            resources.ApplyResources(this.ElementsLst, "ElementsLst");
             this.ElementsLst.DisplayMember = "DisplayValue";
             this.ElementsLst.FormattingEnabled = true;
-            this.ElementsLst.Location = new System.Drawing.Point(12, 67);
             this.ElementsLst.Name = "ElementsLst";
-            this.ElementsLst.Size = new System.Drawing.Size(238, 316);
-            this.ElementsLst.TabIndex = 3;
-            this.AdvancedPipelinePluginToolTip.SetToolTip(this.ElementsLst, "List of elements in this custom command");
+            this.AdvancedPipelinePluginToolTip.SetToolTip(this.ElementsLst, resources.GetString("ElementsLst.ToolTip"));
             this.ElementsLst.SelectedIndexChanged += new System.EventHandler(this.ElementsLst_SelectedIndexChanged);
             // 
             // NewElementBtn
             // 
-            this.NewElementBtn.ImageIndex = 0;
+            resources.ApplyResources(this.NewElementBtn, "NewElementBtn");
             this.NewElementBtn.ImageList = this.ElementsImageList;
-            this.NewElementBtn.Location = new System.Drawing.Point(140, 38);
             this.NewElementBtn.Name = "NewElementBtn";
-            this.NewElementBtn.Size = new System.Drawing.Size(23, 23);
-            this.NewElementBtn.TabIndex = 4;
-            this.AdvancedPipelinePluginToolTip.SetToolTip(this.NewElementBtn, "Add a new element to this custom command");
+            this.AdvancedPipelinePluginToolTip.SetToolTip(this.NewElementBtn, resources.GetString("NewElementBtn.ToolTip"));
             this.NewElementBtn.UseVisualStyleBackColor = true;
             this.NewElementBtn.Click += new System.EventHandler(this.NewElementBtn_Click);
             // 
@@ -132,112 +109,80 @@
             // 
             // DeleteElementBtn
             // 
-            this.DeleteElementBtn.Enabled = false;
-            this.DeleteElementBtn.ImageIndex = 1;
+            resources.ApplyResources(this.DeleteElementBtn, "DeleteElementBtn");
             this.DeleteElementBtn.ImageList = this.ElementsImageList;
-            this.DeleteElementBtn.Location = new System.Drawing.Point(169, 38);
             this.DeleteElementBtn.Name = "DeleteElementBtn";
-            this.DeleteElementBtn.Size = new System.Drawing.Size(23, 23);
-            this.DeleteElementBtn.TabIndex = 5;
-            this.AdvancedPipelinePluginToolTip.SetToolTip(this.DeleteElementBtn, "Remove the selected element from this custom command");
+            this.AdvancedPipelinePluginToolTip.SetToolTip(this.DeleteElementBtn, resources.GetString("DeleteElementBtn.ToolTip"));
             this.DeleteElementBtn.UseVisualStyleBackColor = true;
             this.DeleteElementBtn.Click += new System.EventHandler(this.DeleteElementBtn_Click);
             // 
             // MoveElementUpBtn
             // 
-            this.MoveElementUpBtn.Enabled = false;
-            this.MoveElementUpBtn.ImageIndex = 2;
+            resources.ApplyResources(this.MoveElementUpBtn, "MoveElementUpBtn");
             this.MoveElementUpBtn.ImageList = this.ElementsImageList;
-            this.MoveElementUpBtn.Location = new System.Drawing.Point(198, 38);
             this.MoveElementUpBtn.Name = "MoveElementUpBtn";
-            this.MoveElementUpBtn.Size = new System.Drawing.Size(23, 23);
-            this.MoveElementUpBtn.TabIndex = 6;
-            this.AdvancedPipelinePluginToolTip.SetToolTip(this.MoveElementUpBtn, "Move the selected element up one position");
+            this.AdvancedPipelinePluginToolTip.SetToolTip(this.MoveElementUpBtn, resources.GetString("MoveElementUpBtn.ToolTip"));
             this.MoveElementUpBtn.UseVisualStyleBackColor = true;
             this.MoveElementUpBtn.Click += new System.EventHandler(this.MoveElementUpBtn_Click);
             // 
             // MoveElementDownBtn
             // 
-            this.MoveElementDownBtn.Enabled = false;
-            this.MoveElementDownBtn.ImageIndex = 3;
+            resources.ApplyResources(this.MoveElementDownBtn, "MoveElementDownBtn");
             this.MoveElementDownBtn.ImageList = this.ElementsImageList;
-            this.MoveElementDownBtn.Location = new System.Drawing.Point(227, 38);
             this.MoveElementDownBtn.Name = "MoveElementDownBtn";
-            this.MoveElementDownBtn.Size = new System.Drawing.Size(23, 23);
-            this.MoveElementDownBtn.TabIndex = 7;
-            this.AdvancedPipelinePluginToolTip.SetToolTip(this.MoveElementDownBtn, "Move the selected element down one position");
+            this.AdvancedPipelinePluginToolTip.SetToolTip(this.MoveElementDownBtn, resources.GetString("MoveElementDownBtn.ToolTip"));
             this.MoveElementDownBtn.UseVisualStyleBackColor = true;
             this.MoveElementDownBtn.Click += new System.EventHandler(this.MoveElementDownBtn_Click);
             // 
             // NameLbl
             // 
-            this.NameLbl.AutoSize = true;
-            this.NameLbl.Location = new System.Drawing.Point(12, 15);
+            resources.ApplyResources(this.NameLbl, "NameLbl");
             this.NameLbl.Name = "NameLbl";
-            this.NameLbl.Size = new System.Drawing.Size(38, 13);
-            this.NameLbl.TabIndex = 0;
-            this.NameLbl.Text = "&Name:";
+            this.AdvancedPipelinePluginToolTip.SetToolTip(this.NameLbl, resources.GetString("NameLbl.ToolTip"));
             // 
             // ElementsLbl
             // 
-            this.ElementsLbl.AutoSize = true;
-            this.ElementsLbl.Location = new System.Drawing.Point(12, 48);
+            resources.ApplyResources(this.ElementsLbl, "ElementsLbl");
             this.ElementsLbl.Name = "ElementsLbl";
-            this.ElementsLbl.Size = new System.Drawing.Size(53, 13);
-            this.ElementsLbl.TabIndex = 2;
-            this.ElementsLbl.Text = "&Elements:";
+            this.AdvancedPipelinePluginToolTip.SetToolTip(this.ElementsLbl, resources.GetString("ElementsLbl.ToolTip"));
             // 
             // SelectElementLbl
             // 
-            this.SelectElementLbl.AutoSize = true;
-            this.SelectElementLbl.Location = new System.Drawing.Point(256, 67);
+            resources.ApplyResources(this.SelectElementLbl, "SelectElementLbl");
             this.SelectElementLbl.Name = "SelectElementLbl";
-            this.SelectElementLbl.Size = new System.Drawing.Size(266, 13);
-            this.SelectElementLbl.TabIndex = 9;
-            this.SelectElementLbl.Text = "Please select an element in the list to edit its properties.";
+            this.AdvancedPipelinePluginToolTip.SetToolTip(this.SelectElementLbl, resources.GetString("SelectElementLbl.ToolTip"));
             // 
             // NewElementContextMenuStrip
             // 
+            resources.ApplyResources(this.NewElementContextMenuStrip, "NewElementContextMenuStrip");
             this.NewElementContextMenuStrip.Name = "NewElementContextMenuStrip";
-            this.NewElementContextMenuStrip.Size = new System.Drawing.Size(61, 4);
+            this.AdvancedPipelinePluginToolTip.SetToolTip(this.NewElementContextMenuStrip, resources.GetString("NewElementContextMenuStrip.ToolTip"));
             // 
             // PreviewCtrl
             // 
-            this.PreviewCtrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.PreviewCtrl.Location = new System.Drawing.Point(256, 330);
+            resources.ApplyResources(this.PreviewCtrl, "PreviewCtrl");
             this.PreviewCtrl.Name = "PreviewCtrl";
             this.PreviewCtrl.Plugin = null;
-            this.PreviewCtrl.Size = new System.Drawing.Size(370, 53);
-            this.PreviewCtrl.TabIndex = 11;
+            this.AdvancedPipelinePluginToolTip.SetToolTip(this.PreviewCtrl, resources.GetString("PreviewCtrl.ToolTip"));
             // 
             // UserControlPlacementPanel
             // 
-            this.UserControlPlacementPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.UserControlPlacementPanel.Location = new System.Drawing.Point(256, 67);
+            resources.ApplyResources(this.UserControlPlacementPanel, "UserControlPlacementPanel");
             this.UserControlPlacementPanel.Name = "UserControlPlacementPanel";
-            this.UserControlPlacementPanel.Size = new System.Drawing.Size(370, 257);
-            this.UserControlPlacementPanel.TabIndex = 10;
-            this.UserControlPlacementPanel.Visible = false;
+            this.AdvancedPipelinePluginToolTip.SetToolTip(this.UserControlPlacementPanel, resources.GetString("UserControlPlacementPanel.ToolTip"));
             // 
             // MinVersionLbl
             // 
-            this.MinVersionLbl.AutoSize = true;
-            this.MinVersionLbl.Location = new System.Drawing.Point(256, 43);
+            resources.ApplyResources(this.MinVersionLbl, "MinVersionLbl");
             this.MinVersionLbl.Name = "MinVersionLbl";
-            this.MinVersionLbl.Size = new System.Drawing.Size(304, 13);
-            this.MinVersionLbl.TabIndex = 8;
-            this.MinVersionLbl.Text = "Minimum Path Copy Copy version needed to use command: {0}";
+            this.AdvancedPipelinePluginToolTip.SetToolTip(this.MinVersionLbl, resources.GetString("MinVersionLbl.ToolTip"));
             // 
             // AdvancedPipelinePluginForm
             // 
             this.AcceptButton = this.OKBtn;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.CancelBtn;
-            this.ClientSize = new System.Drawing.Size(638, 430);
             this.Controls.Add(this.MinVersionLbl);
             this.Controls.Add(this.PreviewCtrl);
             this.Controls.Add(this.SelectElementLbl);
@@ -256,12 +201,10 @@
             this.HelpButton = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(654, 469);
             this.Name = "AdvancedPipelinePluginForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Custom Command (Expert Mode)";
+            this.AdvancedPipelinePluginToolTip.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.AdvancedPipelinePluginForm_HelpButtonClicked);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AdvancedPipelinePluginForm_FormClosing);
             this.Load += new System.EventHandler(this.AdvancedPipelinePluginForm_Load);

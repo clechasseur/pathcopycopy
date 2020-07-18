@@ -195,6 +195,9 @@
       <SubType>Form</SubType>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.fr-CA.resx" />
+    <EmbeddedResource Include="UI\Forms\AdvancedPipelinePluginForm.fr-CA.resx">
+      <DependentUpon>AdvancedPipelinePluginForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\AdvancedPipelinePluginForm.resx">
       <DependentUpon>AdvancedPipelinePluginForm.cs</DependentUpon>
     </EmbeddedResource>
