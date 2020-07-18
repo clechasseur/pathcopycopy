@@ -27,25 +27,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfiglessPipelineElementUserControl));
             this.ConfiglessLbl = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // ConfiglessLbl
             // 
-            this.ConfiglessLbl.AutoSize = true;
-            this.ConfiglessLbl.Location = new System.Drawing.Point(-3, 0);
+            resources.ApplyResources(this.ConfiglessLbl, "ConfiglessLbl");
             this.ConfiglessLbl.Name = "ConfiglessLbl";
-            this.ConfiglessLbl.Size = new System.Drawing.Size(177, 13);
-            this.ConfiglessLbl.TabIndex = 0;
-            this.ConfiglessLbl.Text = "No additional configuration required.";
             // 
             // ConfiglessPipelineElementUserControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.ConfiglessLbl);
             this.Name = "ConfiglessPipelineElementUserControl";
-            this.Size = new System.Drawing.Size(173, 15);
             this.ResumeLayout(false);
             this.PerformLayout();
 

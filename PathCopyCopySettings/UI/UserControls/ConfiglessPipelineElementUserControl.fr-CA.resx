@@ -118,47 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="ConfiglessLbl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>-3, 0</value>
-  </data>
-  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 15</value>
-  </data>
   <data name="ConfiglessLbl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 13</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>PathCopyCopy.Settings.UI.UserControls.PipelineElementUserControl, PathCopyCopySettings, Version=19.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ConfiglessLbl.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ConfiglessLbl.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ConfiglessLbl.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;ConfiglessLbl.Name" xml:space="preserve">
-    <value>ConfiglessLbl</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>ConfiglessPipelineElementUserControl</value>
+    <value>235, 13</value>
   </data>
   <data name="ConfiglessLbl.Text" xml:space="preserve">
-    <value>No additional configuration required.</value>
+    <value>Aucune configuration additionnelle n'est requise.</value>
   </data>
-  <data name="ConfiglessLbl.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>235, 17</value>
   </data>
-  <data name="&gt;&gt;ConfiglessLbl.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
 </root>
