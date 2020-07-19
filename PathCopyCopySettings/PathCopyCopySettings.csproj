@@ -297,6 +297,9 @@
     <EmbeddedResource Include="UI\UserControls\PopFromStackPipelineElementUserControl.resx">
       <DependentUpon>PopFromStackPipelineElementUserControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserControls\PushToStackPipelineElementUserControl.fr-CA.resx">
+      <DependentUpon>PushToStackPipelineElementUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\PushToStackPipelineElementUserControl.resx">
       <DependentUpon>PushToStackPipelineElementUserControl.cs</DependentUpon>
     </EmbeddedResource>

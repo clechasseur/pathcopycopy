@@ -27,6 +27,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PushToStackPipelineElementUserControl));
             this.PushToStackLbl = new System.Windows.Forms.Label();
             this.EntirePathRadio = new System.Windows.Forms.RadioButton();
             this.RangeRadio = new System.Windows.Forms.RadioButton();
@@ -42,174 +44,126 @@
             this.UseGroupLbl2 = new System.Windows.Forms.Label();
             this.FixedStringRadio = new System.Windows.Forms.RadioButton();
             this.FixedStringTxt = new System.Windows.Forms.TextBox();
+            this.PushToStackToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // PushToStackLbl
             // 
-            this.PushToStackLbl.AutoSize = true;
-            this.PushToStackLbl.Location = new System.Drawing.Point(-3, 0);
+            resources.ApplyResources(this.PushToStackLbl, "PushToStackLbl");
             this.PushToStackLbl.Name = "PushToStackLbl";
-            this.PushToStackLbl.Size = new System.Drawing.Size(155, 13);
-            this.PushToStackLbl.TabIndex = 0;
-            this.PushToStackLbl.Text = "Push the following to the stack:";
             // 
             // EntirePathRadio
             // 
-            this.EntirePathRadio.AutoSize = true;
-            this.EntirePathRadio.Location = new System.Drawing.Point(0, 16);
+            resources.ApplyResources(this.EntirePathRadio, "EntirePathRadio");
             this.EntirePathRadio.Name = "EntirePathRadio";
-            this.EntirePathRadio.Size = new System.Drawing.Size(97, 17);
-            this.EntirePathRadio.TabIndex = 1;
             this.EntirePathRadio.TabStop = true;
             this.EntirePathRadio.Tag = "1";
-            this.EntirePathRadio.Text = "The &entire path";
+            this.PushToStackToolTip.SetToolTip(this.EntirePathRadio, resources.GetString("EntirePathRadio.ToolTip"));
             this.EntirePathRadio.UseVisualStyleBackColor = true;
             this.EntirePathRadio.CheckedChanged += new System.EventHandler(this.MethodRadio_CheckedChanged);
             // 
             // RangeRadio
             // 
-            this.RangeRadio.AutoSize = true;
-            this.RangeRadio.Location = new System.Drawing.Point(0, 39);
+            resources.ApplyResources(this.RangeRadio, "RangeRadio");
             this.RangeRadio.Name = "RangeRadio";
-            this.RangeRadio.Size = new System.Drawing.Size(216, 17);
-            this.RangeRadio.TabIndex = 2;
             this.RangeRadio.TabStop = true;
             this.RangeRadio.Tag = "2";
-            this.RangeRadio.Text = "Everything in the path between &positions";
+            this.PushToStackToolTip.SetToolTip(this.RangeRadio, resources.GetString("RangeRadio.ToolTip"));
             this.RangeRadio.UseVisualStyleBackColor = true;
             this.RangeRadio.CheckedChanged += new System.EventHandler(this.MethodRadio_CheckedChanged);
             // 
             // RangeBeginTxt
             // 
-            this.RangeBeginTxt.Location = new System.Drawing.Point(222, 38);
-            this.RangeBeginTxt.MaxLength = 3;
+            resources.ApplyResources(this.RangeBeginTxt, "RangeBeginTxt");
             this.RangeBeginTxt.Name = "RangeBeginTxt";
-            this.RangeBeginTxt.Size = new System.Drawing.Size(27, 20);
-            this.RangeBeginTxt.TabIndex = 5;
-            this.RangeBeginTxt.Text = "0";
+            this.PushToStackToolTip.SetToolTip(this.RangeBeginTxt, resources.GetString("RangeBeginTxt.ToolTip"));
             this.RangeBeginTxt.TextChanged += new System.EventHandler(this.RangeBeginTxt_TextChanged);
             this.RangeBeginTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumericTxt_KeyPress);
             // 
             // BeginAndEndLbl
             // 
-            this.BeginAndEndLbl.AutoSize = true;
-            this.BeginAndEndLbl.Location = new System.Drawing.Point(255, 43);
+            resources.ApplyResources(this.BeginAndEndLbl, "BeginAndEndLbl");
             this.BeginAndEndLbl.Name = "BeginAndEndLbl";
-            this.BeginAndEndLbl.Size = new System.Drawing.Size(25, 13);
-            this.BeginAndEndLbl.TabIndex = 6;
-            this.BeginAndEndLbl.Text = "and";
             // 
             // RangeEndTxt
             // 
-            this.RangeEndTxt.Location = new System.Drawing.Point(286, 38);
-            this.RangeEndTxt.MaxLength = 3;
+            resources.ApplyResources(this.RangeEndTxt, "RangeEndTxt");
             this.RangeEndTxt.Name = "RangeEndTxt";
-            this.RangeEndTxt.Size = new System.Drawing.Size(27, 20);
-            this.RangeEndTxt.TabIndex = 7;
-            this.RangeEndTxt.Text = "0";
+            this.PushToStackToolTip.SetToolTip(this.RangeEndTxt, resources.GetString("RangeEndTxt.ToolTip"));
             this.RangeEndTxt.TextChanged += new System.EventHandler(this.RangeEndTxt_TextChanged);
             this.RangeEndTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumericTxt_KeyPress);
             // 
             // RegexRadio
             // 
-            this.RegexRadio.AutoSize = true;
-            this.RegexRadio.Location = new System.Drawing.Point(0, 62);
+            resources.ApplyResources(this.RegexRadio, "RegexRadio");
             this.RegexRadio.Name = "RegexRadio";
-            this.RegexRadio.Size = new System.Drawing.Size(195, 17);
-            this.RegexRadio.TabIndex = 3;
             this.RegexRadio.TabStop = true;
             this.RegexRadio.Tag = "3";
-            this.RegexRadio.Text = "The first match of &regular expression";
+            this.PushToStackToolTip.SetToolTip(this.RegexRadio, resources.GetString("RegexRadio.ToolTip"));
             this.RegexRadio.UseVisualStyleBackColor = true;
             this.RegexRadio.CheckedChanged += new System.EventHandler(this.MethodRadio_CheckedChanged);
             // 
             // RegexTxt
             // 
-            this.RegexTxt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.RegexTxt.Location = new System.Drawing.Point(201, 61);
+            resources.ApplyResources(this.RegexTxt, "RegexTxt");
             this.RegexTxt.Name = "RegexTxt";
-            this.RegexTxt.Size = new System.Drawing.Size(169, 20);
-            this.RegexTxt.TabIndex = 8;
+            this.PushToStackToolTip.SetToolTip(this.RegexTxt, resources.GetString("RegexTxt.ToolTip"));
             this.RegexTxt.TextChanged += new System.EventHandler(this.RegexTxt_TextChanged);
             // 
             // IgnoreCaseChk
             // 
-            this.IgnoreCaseChk.AutoSize = true;
-            this.IgnoreCaseChk.Location = new System.Drawing.Point(201, 91);
+            resources.ApplyResources(this.IgnoreCaseChk, "IgnoreCaseChk");
             this.IgnoreCaseChk.Name = "IgnoreCaseChk";
-            this.IgnoreCaseChk.Size = new System.Drawing.Size(82, 17);
-            this.IgnoreCaseChk.TabIndex = 12;
-            this.IgnoreCaseChk.Text = "&Ignore case";
+            this.PushToStackToolTip.SetToolTip(this.IgnoreCaseChk, resources.GetString("IgnoreCaseChk.ToolTip"));
             this.IgnoreCaseChk.UseVisualStyleBackColor = true;
             this.IgnoreCaseChk.CheckedChanged += new System.EventHandler(this.IgnoreCaseChk_CheckedChanged);
             // 
             // TestRegexBtn
             // 
-            this.TestRegexBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.TestRegexBtn.Location = new System.Drawing.Point(295, 87);
+            resources.ApplyResources(this.TestRegexBtn, "TestRegexBtn");
             this.TestRegexBtn.Name = "TestRegexBtn";
-            this.TestRegexBtn.Size = new System.Drawing.Size(75, 23);
-            this.TestRegexBtn.TabIndex = 13;
-            this.TestRegexBtn.Text = "&Test...";
+            this.PushToStackToolTip.SetToolTip(this.TestRegexBtn, resources.GetString("TestRegexBtn.ToolTip"));
             this.TestRegexBtn.UseVisualStyleBackColor = true;
             this.TestRegexBtn.Click += new System.EventHandler(this.TestRegexBtn_Click);
             // 
             // UseGroupLbl1
             // 
-            this.UseGroupLbl1.AutoSize = true;
-            this.UseGroupLbl1.Location = new System.Drawing.Point(19, 92);
+            resources.ApplyResources(this.UseGroupLbl1, "UseGroupLbl1");
             this.UseGroupLbl1.Name = "UseGroupLbl1";
-            this.UseGroupLbl1.Size = new System.Drawing.Size(59, 13);
-            this.UseGroupLbl1.TabIndex = 9;
-            this.UseGroupLbl1.Text = "(Use group";
             // 
             // RegexGroupTxt
             // 
-            this.RegexGroupTxt.Location = new System.Drawing.Point(84, 89);
-            this.RegexGroupTxt.MaxLength = 3;
+            resources.ApplyResources(this.RegexGroupTxt, "RegexGroupTxt");
             this.RegexGroupTxt.Name = "RegexGroupTxt";
-            this.RegexGroupTxt.Size = new System.Drawing.Size(27, 20);
-            this.RegexGroupTxt.TabIndex = 10;
-            this.RegexGroupTxt.Text = "0";
+            this.PushToStackToolTip.SetToolTip(this.RegexGroupTxt, resources.GetString("RegexGroupTxt.ToolTip"));
             this.RegexGroupTxt.TextChanged += new System.EventHandler(this.RegexGroupTxt_TextChanged);
             this.RegexGroupTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumericTxt_KeyPress);
             // 
             // UseGroupLbl2
             // 
-            this.UseGroupLbl2.AutoSize = true;
-            this.UseGroupLbl2.Location = new System.Drawing.Point(117, 92);
+            resources.ApplyResources(this.UseGroupLbl2, "UseGroupLbl2");
             this.UseGroupLbl2.Name = "UseGroupLbl2";
-            this.UseGroupLbl2.Size = new System.Drawing.Size(10, 13);
-            this.UseGroupLbl2.TabIndex = 11;
-            this.UseGroupLbl2.Text = ")";
             // 
             // FixedStringRadio
             // 
-            this.FixedStringRadio.AutoSize = true;
-            this.FixedStringRadio.Location = new System.Drawing.Point(0, 115);
+            resources.ApplyResources(this.FixedStringRadio, "FixedStringRadio");
             this.FixedStringRadio.Name = "FixedStringRadio";
-            this.FixedStringRadio.Size = new System.Drawing.Size(73, 17);
-            this.FixedStringRadio.TabIndex = 4;
             this.FixedStringRadio.TabStop = true;
             this.FixedStringRadio.Tag = "4";
-            this.FixedStringRadio.Text = "The value";
+            this.PushToStackToolTip.SetToolTip(this.FixedStringRadio, resources.GetString("FixedStringRadio.ToolTip"));
             this.FixedStringRadio.UseVisualStyleBackColor = true;
             this.FixedStringRadio.CheckedChanged += new System.EventHandler(this.MethodRadio_CheckedChanged);
             // 
             // FixedStringTxt
             // 
-            this.FixedStringTxt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.FixedStringTxt.Location = new System.Drawing.Point(79, 114);
+            resources.ApplyResources(this.FixedStringTxt, "FixedStringTxt");
             this.FixedStringTxt.Name = "FixedStringTxt";
-            this.FixedStringTxt.Size = new System.Drawing.Size(291, 20);
-            this.FixedStringTxt.TabIndex = 14;
+            this.PushToStackToolTip.SetToolTip(this.FixedStringTxt, resources.GetString("FixedStringTxt.ToolTip"));
             this.FixedStringTxt.TextChanged += new System.EventHandler(this.FixedStringTxt_TextChanged);
             // 
             // PushToStackPipelineElementUserControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.Controls.Add(this.FixedStringTxt);
             this.Controls.Add(this.FixedStringRadio);
             this.Controls.Add(this.UseGroupLbl2);
@@ -226,7 +180,6 @@
             this.Controls.Add(this.EntirePathRadio);
             this.Controls.Add(this.PushToStackLbl);
             this.Name = "PushToStackPipelineElementUserControl";
-            this.Size = new System.Drawing.Size(370, 138);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -249,5 +202,6 @@
         private System.Windows.Forms.Label UseGroupLbl2;
         private System.Windows.Forms.RadioButton FixedStringRadio;
         private System.Windows.Forms.TextBox FixedStringTxt;
+        private System.Windows.Forms.ToolTip PushToStackToolTip;
     }
 }

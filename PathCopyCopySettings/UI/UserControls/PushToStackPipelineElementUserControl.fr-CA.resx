@@ -118,41 +118,38 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="PopValueAndLbl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 13</value>
+  <data name="PushToStackLbl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 13</value>
   </data>
-  <data name="PopValueAndLbl.Text" xml:space="preserve">
-    <value>Dépiler une valeur et:</value>
+  <data name="PushToStackLbl.Text" xml:space="preserve">
+    <value>Empiler:</value>
   </data>
-  <data name="PopValueAndLbl.ToolTip" xml:space="preserve">
-    <value />
+  <data name="EntirePathRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>118, 17</value>
   </data>
-  <data name="EntireRadio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 17</value>
+  <data name="EntirePathRadio.Text" xml:space="preserve">
+    <value>Le chemin en &amp;entier</value>
   </data>
-  <data name="EntireRadio.Text" xml:space="preserve">
-    <value>Remplacer le chemin en &amp;entier</value>
-  </data>
-  <data name="EntireRadio.ToolTip" xml:space="preserve">
-    <value>Remplacer le chemin en entier par la valeur dépilée</value>
+  <data name="EntirePathRadio.ToolTip" xml:space="preserve">
+    <value>Empiler le chemin complet</value>
   </data>
   <data name="RangeRadio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>268, 17</value>
+    <value>218, 17</value>
   </data>
   <data name="RangeRadio.Text" xml:space="preserve">
-    <value>Remplacer le contenu du chemin entre les &amp;positions</value>
+    <value>Le contenu du chemin entre les &amp;positions</value>
   </data>
   <data name="RangeRadio.ToolTip" xml:space="preserve">
-    <value>Remplacer tous les caractères dans le chemin qui sont situés dans un intervalle donné par la valeur dépilée</value>
+    <value>Empiler une partie du chemin définie par un intervalle</value>
   </data>
   <data name="RangeBeginTxt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>274, 38</value>
+    <value>224, 38</value>
   </data>
   <data name="RangeBeginTxt.ToolTip" xml:space="preserve">
-    <value>Début de l'intervalle à remplacer par la valeur dépilée</value>
+    <value>Début de l'intervalle à empiler</value>
   </data>
   <data name="BeginAndEndLbl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>307, 41</value>
+    <value>257, 41</value>
   </data>
   <data name="BeginAndEndLbl.Size" type="System.Drawing.Size, System.Drawing">
     <value>16, 13</value>
@@ -160,79 +157,67 @@
   <data name="BeginAndEndLbl.Text" xml:space="preserve">
     <value>et</value>
   </data>
-  <data name="BeginAndEndLbl.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="RangeEndTxt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>329, 38</value>
+    <value>279, 38</value>
   </data>
   <data name="RangeEndTxt.ToolTip" xml:space="preserve">
-    <value>Fin de l'intervalle à remplacer par la valeur dépilée</value>
+    <value>Fin de l'intervalle à empiler</value>
   </data>
   <data name="RegexRadio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>245, 17</value>
+    <value>192, 17</value>
   </data>
   <data name="RegexRadio.Text" xml:space="preserve">
-    <value>Remplacer ce que trouve l'expression &amp;régulière</value>
+    <value>Ce que trouve l'expression &amp;régulière</value>
   </data>
   <data name="RegexRadio.ToolTip" xml:space="preserve">
-    <value>Remplacer tous les caractères dans ce qui est trouvé par une expression régulière par la valeur dépilée</value>
+    <value>Empiler ce qui est trouvé par une expression régulière</value>
   </data>
   <data name="RegexTxt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>251, 61</value>
+    <value>198, 61</value>
   </data>
   <data name="RegexTxt.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 20</value>
+    <value>172, 20</value>
   </data>
   <data name="RegexTxt.ToolTip" xml:space="preserve">
-    <value>Expression régulière utilisée pour localiser la portion du chemin à remplacer par la valeur dépilée</value>
-  </data>
-  <data name="IgnoreCaseChk.Location" type="System.Drawing.Point, System.Drawing">
-    <value>188, 91</value>
-  </data>
-  <data name="IgnoreCaseChk.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 17</value>
-  </data>
-  <data name="IgnoreCaseChk.Text" xml:space="preserve">
-    <value>&amp;Ignorer la casse</value>
+    <value>Expression régulière utilisée pour trouver la partie du chemin à empiler</value>
   </data>
   <data name="IgnoreCaseChk.ToolTip" xml:space="preserve">
-    <value>Détermine si la casse a de l'importance lors de l'utilisation de l'expression régulière pour localiser la portion du chemin à remplacer par la valeur dépilée</value>
-  </data>
-  <data name="TestRegexBtn.Text" xml:space="preserve">
-    <value>&amp;Tester...</value>
+    <value>Détermine si la casse est importante lors de l'utilisation de l'expression régulière pour trouver la partie du chemin à empiler</value>
   </data>
   <data name="TestRegexBtn.ToolTip" xml:space="preserve">
     <value>Ouvre un dialogue permettant de tester l'expression régulière</value>
   </data>
-  <data name="StartRadio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>197, 17</value>
+  <data name="UseGroupLbl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 13</value>
   </data>
-  <data name="StartRadio.Text" xml:space="preserve">
-    <value>Insérer la valeur au dé&amp;but du chemin</value>
+  <data name="UseGroupLbl1.Text" xml:space="preserve">
+    <value>(Utiliser le &amp;groupe</value>
   </data>
-  <data name="StartRadio.ToolTip" xml:space="preserve">
-    <value>Insérer la valeur dépilée au début du chemin</value>
+  <data name="RegexGroupTxt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>113, 89</value>
   </data>
-  <data name="EndRadio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 17</value>
+  <data name="RegexGroupTxt.ToolTip" xml:space="preserve">
+    <value>Le groupe trouvé par l'expression régulière à empiler</value>
   </data>
-  <data name="EndRadio.Text" xml:space="preserve">
-    <value>Insérer la valeur à la &amp;fin du chemin</value>
+  <data name="UseGroupLbl2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>146, 92</value>
   </data>
-  <data name="EndRadio.ToolTip" xml:space="preserve">
-    <value>Insérer la valeur dépilée à la fin du chemin</value>
+  <data name="FixedStringRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>69, 17</value>
   </data>
-  <data name="NowhereRadio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 17</value>
+  <data name="FixedStringRadio.Text" xml:space="preserve">
+    <value>La &amp;valeur</value>
   </data>
-  <data name="NowhereRadio.Text" xml:space="preserve">
-    <value>Simplement ne rien f&amp;aire avec la valeur</value>
+  <data name="FixedStringRadio.ToolTip" xml:space="preserve">
+    <value>Empiler une valeur fixe</value>
   </data>
-  <data name="NowhereRadio.ToolTip" xml:space="preserve">
-    <value>Ne rien faire avec la valeur dépilée (simplement l'ignorer)</value>
+  <data name="FixedStringTxt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>75, 114</value>
   </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
+  <data name="FixedStringTxt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>295, 20</value>
+  </data>
+  <data name="FixedStringTxt.ToolTip" xml:space="preserve">
+    <value>Valeur à empiler</value>
   </data>
 </root>
