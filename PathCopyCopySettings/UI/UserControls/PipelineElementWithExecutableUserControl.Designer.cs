@@ -28,6 +28,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PipelineElementWithExecutableUserControl));
             this.ExecutableLbl = new System.Windows.Forms.Label();
             this.ExecutableTxt = new System.Windows.Forms.TextBox();
             this.BrowseForExecutableBtn = new System.Windows.Forms.Button();
@@ -37,50 +38,36 @@
             // 
             // ExecutableLbl
             // 
-            this.ExecutableLbl.AutoSize = true;
-            this.ExecutableLbl.Location = new System.Drawing.Point(-3, 5);
+            resources.ApplyResources(this.ExecutableLbl, "ExecutableLbl");
             this.ExecutableLbl.Name = "ExecutableLbl";
-            this.ExecutableLbl.Size = new System.Drawing.Size(63, 13);
-            this.ExecutableLbl.TabIndex = 0;
-            this.ExecutableLbl.Text = "E&xecutable:";
             // 
             // ExecutableTxt
             // 
-            this.ExecutableTxt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ExecutableTxt.Location = new System.Drawing.Point(67, 2);
+            resources.ApplyResources(this.ExecutableTxt, "ExecutableTxt");
             this.ExecutableTxt.Name = "ExecutableTxt";
-            this.ExecutableTxt.Size = new System.Drawing.Size(165, 20);
-            this.ExecutableTxt.TabIndex = 1;
-            this.ExecutableToolTip.SetToolTip(this.ExecutableTxt, "Path to the executable to launch");
+            this.ExecutableToolTip.SetToolTip(this.ExecutableTxt, resources.GetString("ExecutableTxt.ToolTip"));
             this.ExecutableTxt.TextChanged += new System.EventHandler(this.ExecutableTxt_TextChanged);
             // 
             // BrowseForExecutableBtn
             // 
-            this.BrowseForExecutableBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BrowseForExecutableBtn.Location = new System.Drawing.Point(238, 0);
+            resources.ApplyResources(this.BrowseForExecutableBtn, "BrowseForExecutableBtn");
             this.BrowseForExecutableBtn.Name = "BrowseForExecutableBtn";
-            this.BrowseForExecutableBtn.Size = new System.Drawing.Size(80, 23);
-            this.BrowseForExecutableBtn.TabIndex = 2;
-            this.BrowseForExecutableBtn.Text = "&Browse";
-            this.ExecutableToolTip.SetToolTip(this.BrowseForExecutableBtn, "Open a dialog to choose the executable to launch on disk");
+            this.ExecutableToolTip.SetToolTip(this.BrowseForExecutableBtn, resources.GetString("BrowseForExecutableBtn.ToolTip"));
             this.BrowseForExecutableBtn.UseVisualStyleBackColor = true;
             this.BrowseForExecutableBtn.Click += new System.EventHandler(this.BrowseForExecutableBtn_Click);
             // 
             // ChooseExecutableOpenDlg
             // 
-            this.ChooseExecutableOpenDlg.Filter = "Executable files (*.exe;*.com;*.bat;*.cmd)|*.exe;*.com;*.bat;*.cmd|All files (*.*" +
-    ")|*.*";
+            resources.ApplyResources(this.ChooseExecutableOpenDlg, "ChooseExecutableOpenDlg");
             // 
             // PipelineElementWithExecutableUserControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.BrowseForExecutableBtn);
             this.Controls.Add(this.ExecutableTxt);
             this.Controls.Add(this.ExecutableLbl);
             this.Name = "PipelineElementWithExecutableUserControl";
-            this.Size = new System.Drawing.Size(318, 24);
             this.ResumeLayout(false);
             this.PerformLayout();
 

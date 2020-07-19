@@ -273,6 +273,9 @@
     <EmbeddedResource Include="UI\UserControls\PathsSeparatorPipelineElementUserControl.resx">
       <DependentUpon>PathsSeparatorPipelineElementUserControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserControls\PipelineElementWithExecutableUserControl.fr-CA.resx">
+      <DependentUpon>PipelineElementWithExecutableUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\PipelineElementWithExecutableUserControl.resx">
       <DependentUpon>PipelineElementWithExecutableUserControl.cs</DependentUpon>
     </EmbeddedResource>

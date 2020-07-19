@@ -117,127 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ExecutableLbl.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="ExecutableLbl.Text" xml:space="preserve">
+    <value>E&amp;xécutable:</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="ExecutableLbl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>-3, 5</value>
-  </data>
-  <data name="ExecutableLbl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 13</value>
-  </data>
-  <data name="ExecutableLbl.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="ExecutableLbl.Text" xml:space="preserve">
-    <value>E&amp;xecutable:</value>
-  </data>
-  <data name="&gt;&gt;ExecutableLbl.Name" xml:space="preserve">
-    <value>ExecutableLbl</value>
-  </data>
-  <data name="&gt;&gt;ExecutableLbl.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ExecutableLbl.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ExecutableLbl.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ExecutableTxt.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
   <data name="ExecutableTxt.Location" type="System.Drawing.Point, System.Drawing">
     <value>66, 2</value>
   </data>
   <data name="ExecutableTxt.Size" type="System.Drawing.Size, System.Drawing">
     <value>166, 20</value>
   </data>
-  <data name="ExecutableTxt.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <metadata name="ExecutableToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>217, 17</value>
-  </metadata>
   <data name="ExecutableTxt.ToolTip" xml:space="preserve">
-    <value>Path to the executable to launch</value>
-  </data>
-  <data name="&gt;&gt;ExecutableTxt.Name" xml:space="preserve">
-    <value>ExecutableTxt</value>
-  </data>
-  <data name="&gt;&gt;ExecutableTxt.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ExecutableTxt.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ExecutableTxt.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="BrowseForExecutableBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="BrowseForExecutableBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 0</value>
-  </data>
-  <data name="BrowseForExecutableBtn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 23</value>
-  </data>
-  <data name="BrowseForExecutableBtn.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>Exécutable à lancer</value>
   </data>
   <data name="BrowseForExecutableBtn.Text" xml:space="preserve">
-    <value>&amp;Browse...</value>
+    <value>&amp;Parcourir...</value>
   </data>
   <data name="BrowseForExecutableBtn.ToolTip" xml:space="preserve">
-    <value>Open a dialog to choose the executable to launch on disk</value>
+    <value>Ouvrir un dialogue permettant de choisir l'exécutable à lancer</value>
   </data>
-  <data name="&gt;&gt;BrowseForExecutableBtn.Name" xml:space="preserve">
-    <value>BrowseForExecutableBtn</value>
-  </data>
-  <data name="&gt;&gt;BrowseForExecutableBtn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;BrowseForExecutableBtn.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;BrowseForExecutableBtn.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <metadata name="ChooseExecutableOpenDlg.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <data name="ChooseExecutableOpenDlg.Filter" xml:space="preserve">
-    <value>Executable files (*.exe;*.com;*.bat;*.cmd)|*.exe;*.com;*.bat;*.cmd|All files (*.*)|*.*</value>
-  </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 24</value>
-  </data>
-  <data name="&gt;&gt;ChooseExecutableOpenDlg.Name" xml:space="preserve">
-    <value>ChooseExecutableOpenDlg</value>
-  </data>
-  <data name="&gt;&gt;ChooseExecutableOpenDlg.Type" xml:space="preserve">
-    <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ExecutableToolTip.Name" xml:space="preserve">
-    <value>ExecutableToolTip</value>
-  </data>
-  <data name="&gt;&gt;ExecutableToolTip.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>PipelineElementWithExecutableUserControl</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>PathCopyCopy.Settings.UI.UserControls.PipelineElementUserControl, PathCopyCopySettings, Version=19.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>Fichiers exécutables (*.exe;*.com;*.bat;*.cmd)|*.exe;*.com;*.bat;*.cmd|Tous les fichiers (*.*)|*.*</value>
   </data>
 </root>
