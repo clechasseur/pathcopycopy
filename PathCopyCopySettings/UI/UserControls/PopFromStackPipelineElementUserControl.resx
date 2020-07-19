@@ -117,4 +117,421 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="&gt;&gt;IgnoreCaseChk.Name" xml:space="preserve">
+    <value>IgnoreCaseChk</value>
+  </data>
+  <data name="EntireRadio.Text" xml:space="preserve">
+    <value>Replace the the &amp;entire path with it</value>
+  </data>
+  <data name="&gt;&gt;StartRadio.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;RangeBeginTxt.Name" xml:space="preserve">
+    <value>RangeBeginTxt</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="EntireRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 17</value>
+  </data>
+  <data name="RangeBeginTxt.ToolTip" xml:space="preserve">
+    <value>Start of range to replace with the popped value</value>
+  </data>
+  <data name="BeginAndEndLbl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>297, 41</value>
+  </data>
+  <data name="&gt;&gt;RangeRadio.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="IgnoreCaseChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>82, 17</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="RangeRadio.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;BeginAndEndLbl.Name" xml:space="preserve">
+    <value>BeginAndEndLbl</value>
+  </data>
+  <data name="BeginAndEndLbl.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="RegexRadio.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="PopValueAndLbl.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;EndRadio.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="EndRadio.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;RegexTxt.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;RangeRadio.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="NowhereRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>166, 17</value>
+  </data>
+  <data name="&gt;&gt;NowhereRadio.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="IgnoreCaseChk.ToolTip" xml:space="preserve">
+    <value>Whether to ignore case when using the regular expression to locate the portion of the path to replace with the popped value</value>
+  </data>
+  <data name="StartRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>231, 17</value>
+  </data>
+  <data name="RangeBeginTxt.MaxLength" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="IgnoreCaseChk.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="RegexRadio.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 62</value>
+  </data>
+  <data name="&gt;&gt;TestRegexBtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;RegexRadio.Name" xml:space="preserve">
+    <value>RegexRadio</value>
+  </data>
+  <data name="IgnoreCaseChk.Location" type="System.Drawing.Point, System.Drawing">
+    <value>207, 91</value>
+  </data>
+  <data name="RangeBeginTxt.Text" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;RangeEndTxt.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="RegexRadio.ToolTip" xml:space="preserve">
+    <value>Replace a part of the path with the popped value, as defined by the first match of a regular expression</value>
+  </data>
+  <data name="EntireRadio.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 16</value>
+  </data>
+  <data name="NowhereRadio.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="BeginAndEndLbl.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;PopValueAndLbl.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="PopValueAndLbl.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="PopValueAndLbl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>158, 13</value>
+  </data>
+  <data name="NowhereRadio.Text" xml:space="preserve">
+    <value>Simply drop it &amp;without storing it</value>
+  </data>
+  <data name="RangeEndTxt.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="TestRegexBtn.ToolTip" xml:space="preserve">
+    <value>Open a dialog and test the regular expression</value>
+  </data>
+  <data name="&gt;&gt;TestRegexBtn.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="RangeBeginTxt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>27, 20</value>
+  </data>
+  <data name="StartRadio.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;RangeEndTxt.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="TestRegexBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="RegexTxt.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="EndRadio.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 137</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>PopFromStackPipelineElementUserControl</value>
+  </data>
+  <data name="BeginAndEndLbl.Text" xml:space="preserve">
+    <value>and</value>
+  </data>
+  <data name="&gt;&gt;RangeEndTxt.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="RegexTxt.ToolTip" xml:space="preserve">
+    <value>Regular expression to use to locate the portion of the path to replace with the popped value</value>
+  </data>
+  <data name="&gt;&gt;RegexRadio.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="RegexRadio.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="RangeRadio.Text" xml:space="preserve">
+    <value>Replace everything in the path between &amp;positions</value>
+  </data>
+  <data name="RangeBeginTxt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>264, 38</value>
+  </data>
+  <data name="&gt;&gt;TestRegexBtn.Name" xml:space="preserve">
+    <value>TestRegexBtn</value>
+  </data>
+  <data name="&gt;&gt;EndRadio.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="EndRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>203, 17</value>
+  </data>
+  <data name="StartRadio.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="RegexRadio.Text" xml:space="preserve">
+    <value>Replace the first match of &amp;regular expression</value>
+  </data>
+  <data name="&gt;&gt;BeginAndEndLbl.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="RangeBeginTxt.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;IgnoreCaseChk.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;RegexTxt.Name" xml:space="preserve">
+    <value>RegexTxt</value>
+  </data>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="RangeRadio.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;NowhereRadio.Name" xml:space="preserve">
+    <value>NowhereRadio</value>
+  </data>
+  <data name="&gt;&gt;RegexRadio.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="EndRadio.Text" xml:space="preserve">
+    <value>Insert the value at the e&amp;nd of the path</value>
+  </data>
+  <data name="PopValueAndLbl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>-3, 0</value>
+  </data>
+  <data name="NowhereRadio.ToolTip" xml:space="preserve">
+    <value>Do nothing with the popped value (dropping it)</value>
+  </data>
+  <data name="EntireRadio.ToolTip" xml:space="preserve">
+    <value>Replace the entire path with the popped value</value>
+  </data>
+  <data name="&gt;&gt;TestRegexBtn.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="IgnoreCaseChk.Text" xml:space="preserve">
+    <value>&amp;Ignore case</value>
+  </data>
+  <data name="StartRadio.ToolTip" xml:space="preserve">
+    <value>Insert the popped value at the beginning of the path</value>
+  </data>
+  <data name="&gt;&gt;RangeBeginTxt.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="IgnoreCaseChk.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;IgnoreCaseChk.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="RegexTxt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>240, 61</value>
+  </data>
+  <data name="&gt;&gt;PopValueAndLbl.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="StartRadio.Text" xml:space="preserve">
+    <value>Insert the value at the &amp;beginning of the path</value>
+  </data>
+  <data name="EntireRadio.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;StartRadio.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;RangeEndTxt.Name" xml:space="preserve">
+    <value>RangeEndTxt</value>
+  </data>
+  <data name="RegexTxt.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;RangeBeginTxt.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="TestRegexBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>295, 87</value>
+  </data>
+  <data name="&gt;&gt;EndRadio.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;StartRadio.Name" xml:space="preserve">
+    <value>StartRadio</value>
+  </data>
+  <data name="EndRadio.ToolTip" xml:space="preserve">
+    <value>Insert the popped value at the end of the path</value>
+  </data>
+  <data name="PopValueAndLbl.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;RangeBeginTxt.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="RangeEndTxt.ToolTip" xml:space="preserve">
+    <value>End of range to replace with the popped value</value>
+  </data>
+  <data name="StartRadio.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 114</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>PathCopyCopy.Settings.UI.UserControls.PipelineElementUserControl, PathCopyCopySettings, Version=19.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="RegexRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>234, 17</value>
+  </data>
+  <data name="&gt;&gt;RegexRadio.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;EntireRadio.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;StartRadio.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>370, 180</value>
+  </data>
+  <data name="RangeEndTxt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>328, 38</value>
+  </data>
+  <data name="PopValueAndLbl.Text" xml:space="preserve">
+    <value>Pop a value from the stack and:</value>
+  </data>
+  <data name="&gt;&gt;EndRadio.Name" xml:space="preserve">
+    <value>EndRadio</value>
+  </data>
+  <data name="&gt;&gt;RegexTxt.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="NowhereRadio.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 160</value>
+  </data>
+  <data name="&gt;&gt;EntireRadio.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;EntireRadio.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="RangeEndTxt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>27, 20</value>
+  </data>
+  <data name="&gt;&gt;RegexTxt.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;PopValueAndLbl.Name" xml:space="preserve">
+    <value>PopValueAndLbl</value>
+  </data>
+  <data name="EntireRadio.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="BeginAndEndLbl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>25, 13</value>
+  </data>
+  <data name="RangeRadio.ToolTip" xml:space="preserve">
+    <value>Replace a portion of the path with the popped value, as defined by a character range</value>
+  </data>
+  <data name="TestRegexBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="BeginAndEndLbl.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="RangeRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>258, 17</value>
+  </data>
+  <data name="RegexTxt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>130, 20</value>
+  </data>
+  <data name="TestRegexBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="EndRadio.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="RangeEndTxt.MaxLength" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;EntireRadio.Name" xml:space="preserve">
+    <value>EntireRadio</value>
+  </data>
+  <data name="NowhereRadio.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;PopFromStackToolTip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PopValueAndLbl.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;NowhereRadio.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;RangeRadio.Name" xml:space="preserve">
+    <value>RangeRadio</value>
+  </data>
+  <data name="TestRegexBtn.Text" xml:space="preserve">
+    <value>&amp;Test...</value>
+  </data>
+  <data name="&gt;&gt;NowhereRadio.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;IgnoreCaseChk.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;BeginAndEndLbl.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;BeginAndEndLbl.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PopFromStackToolTip.Name" xml:space="preserve">
+    <value>PopFromStackToolTip</value>
+  </data>
+  <data name="RangeRadio.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 39</value>
+  </data>
+  <data name="RangeEndTxt.Text" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;RangeRadio.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="PopFromStackToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>

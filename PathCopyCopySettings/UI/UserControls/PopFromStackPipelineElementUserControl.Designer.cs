@@ -27,6 +27,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PopFromStackPipelineElementUserControl));
             this.PopValueAndLbl = new System.Windows.Forms.Label();
             this.EntireRadio = new System.Windows.Forms.RadioButton();
             this.RangeRadio = new System.Windows.Forms.RadioButton();
@@ -40,161 +42,123 @@
             this.StartRadio = new System.Windows.Forms.RadioButton();
             this.EndRadio = new System.Windows.Forms.RadioButton();
             this.NowhereRadio = new System.Windows.Forms.RadioButton();
+            this.PopFromStackToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // PopValueAndLbl
             // 
-            this.PopValueAndLbl.AutoSize = true;
-            this.PopValueAndLbl.Location = new System.Drawing.Point(-3, 0);
+            resources.ApplyResources(this.PopValueAndLbl, "PopValueAndLbl");
             this.PopValueAndLbl.Name = "PopValueAndLbl";
-            this.PopValueAndLbl.Size = new System.Drawing.Size(158, 13);
-            this.PopValueAndLbl.TabIndex = 0;
-            this.PopValueAndLbl.Text = "Pop a value from the stack and:";
+            this.PopFromStackToolTip.SetToolTip(this.PopValueAndLbl, resources.GetString("PopValueAndLbl.ToolTip"));
             // 
             // EntireRadio
             // 
-            this.EntireRadio.AutoSize = true;
-            this.EntireRadio.Location = new System.Drawing.Point(0, 16);
+            resources.ApplyResources(this.EntireRadio, "EntireRadio");
             this.EntireRadio.Name = "EntireRadio";
-            this.EntireRadio.Size = new System.Drawing.Size(184, 17);
-            this.EntireRadio.TabIndex = 1;
             this.EntireRadio.TabStop = true;
             this.EntireRadio.Tag = "1";
-            this.EntireRadio.Text = "Replace the the &entire path with it";
+            this.PopFromStackToolTip.SetToolTip(this.EntireRadio, resources.GetString("EntireRadio.ToolTip"));
             this.EntireRadio.UseVisualStyleBackColor = true;
             this.EntireRadio.CheckedChanged += new System.EventHandler(this.LocationRadio_CheckedChanged);
             // 
             // RangeRadio
             // 
-            this.RangeRadio.AutoSize = true;
-            this.RangeRadio.Location = new System.Drawing.Point(0, 39);
+            resources.ApplyResources(this.RangeRadio, "RangeRadio");
             this.RangeRadio.Name = "RangeRadio";
-            this.RangeRadio.Size = new System.Drawing.Size(258, 17);
-            this.RangeRadio.TabIndex = 2;
             this.RangeRadio.TabStop = true;
             this.RangeRadio.Tag = "2";
-            this.RangeRadio.Text = "Replace everything in the path between &positions";
+            this.PopFromStackToolTip.SetToolTip(this.RangeRadio, resources.GetString("RangeRadio.ToolTip"));
             this.RangeRadio.UseVisualStyleBackColor = true;
             this.RangeRadio.CheckedChanged += new System.EventHandler(this.LocationRadio_CheckedChanged);
             // 
             // RangeBeginTxt
             // 
-            this.RangeBeginTxt.Location = new System.Drawing.Point(264, 38);
-            this.RangeBeginTxt.MaxLength = 3;
+            resources.ApplyResources(this.RangeBeginTxt, "RangeBeginTxt");
             this.RangeBeginTxt.Name = "RangeBeginTxt";
-            this.RangeBeginTxt.Size = new System.Drawing.Size(27, 20);
-            this.RangeBeginTxt.TabIndex = 7;
-            this.RangeBeginTxt.Text = "0";
+            this.PopFromStackToolTip.SetToolTip(this.RangeBeginTxt, resources.GetString("RangeBeginTxt.ToolTip"));
             this.RangeBeginTxt.TextChanged += new System.EventHandler(this.RangeBeginTxt_TextChanged);
             this.RangeBeginTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumericTxt_KeyPress);
             // 
             // BeginAndEndLbl
             // 
-            this.BeginAndEndLbl.AutoSize = true;
-            this.BeginAndEndLbl.Location = new System.Drawing.Point(297, 41);
+            resources.ApplyResources(this.BeginAndEndLbl, "BeginAndEndLbl");
             this.BeginAndEndLbl.Name = "BeginAndEndLbl";
-            this.BeginAndEndLbl.Size = new System.Drawing.Size(25, 13);
-            this.BeginAndEndLbl.TabIndex = 8;
-            this.BeginAndEndLbl.Text = "and";
+            this.PopFromStackToolTip.SetToolTip(this.BeginAndEndLbl, resources.GetString("BeginAndEndLbl.ToolTip"));
             // 
             // RangeEndTxt
             // 
-            this.RangeEndTxt.Location = new System.Drawing.Point(328, 38);
-            this.RangeEndTxt.MaxLength = 3;
+            resources.ApplyResources(this.RangeEndTxt, "RangeEndTxt");
             this.RangeEndTxt.Name = "RangeEndTxt";
-            this.RangeEndTxt.Size = new System.Drawing.Size(27, 20);
-            this.RangeEndTxt.TabIndex = 9;
-            this.RangeEndTxt.Text = "0";
+            this.PopFromStackToolTip.SetToolTip(this.RangeEndTxt, resources.GetString("RangeEndTxt.ToolTip"));
             this.RangeEndTxt.TextChanged += new System.EventHandler(this.RangeEndTxt_TextChanged);
             this.RangeEndTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumericTxt_KeyPress);
             // 
             // RegexRadio
             // 
-            this.RegexRadio.AutoSize = true;
-            this.RegexRadio.Location = new System.Drawing.Point(0, 62);
+            resources.ApplyResources(this.RegexRadio, "RegexRadio");
             this.RegexRadio.Name = "RegexRadio";
-            this.RegexRadio.Size = new System.Drawing.Size(234, 17);
-            this.RegexRadio.TabIndex = 3;
             this.RegexRadio.TabStop = true;
             this.RegexRadio.Tag = "3";
-            this.RegexRadio.Text = "Replace the first match of &regular expression";
+            this.PopFromStackToolTip.SetToolTip(this.RegexRadio, resources.GetString("RegexRadio.ToolTip"));
             this.RegexRadio.UseVisualStyleBackColor = true;
             this.RegexRadio.CheckedChanged += new System.EventHandler(this.LocationRadio_CheckedChanged);
             // 
             // RegexTxt
             // 
-            this.RegexTxt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.RegexTxt.Location = new System.Drawing.Point(240, 61);
+            resources.ApplyResources(this.RegexTxt, "RegexTxt");
             this.RegexTxt.Name = "RegexTxt";
-            this.RegexTxt.Size = new System.Drawing.Size(130, 20);
-            this.RegexTxt.TabIndex = 10;
+            this.PopFromStackToolTip.SetToolTip(this.RegexTxt, resources.GetString("RegexTxt.ToolTip"));
             this.RegexTxt.TextChanged += new System.EventHandler(this.RegexTxt_TextChanged);
             // 
             // IgnoreCaseChk
             // 
-            this.IgnoreCaseChk.AutoSize = true;
-            this.IgnoreCaseChk.Location = new System.Drawing.Point(207, 91);
+            resources.ApplyResources(this.IgnoreCaseChk, "IgnoreCaseChk");
             this.IgnoreCaseChk.Name = "IgnoreCaseChk";
-            this.IgnoreCaseChk.Size = new System.Drawing.Size(82, 17);
-            this.IgnoreCaseChk.TabIndex = 11;
-            this.IgnoreCaseChk.Text = "&Ignore case";
+            this.PopFromStackToolTip.SetToolTip(this.IgnoreCaseChk, resources.GetString("IgnoreCaseChk.ToolTip"));
             this.IgnoreCaseChk.UseVisualStyleBackColor = true;
             this.IgnoreCaseChk.CheckedChanged += new System.EventHandler(this.IgnoreCaseChk_CheckedChanged);
             // 
             // TestRegexBtn
             // 
-            this.TestRegexBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.TestRegexBtn.Location = new System.Drawing.Point(295, 87);
+            resources.ApplyResources(this.TestRegexBtn, "TestRegexBtn");
             this.TestRegexBtn.Name = "TestRegexBtn";
-            this.TestRegexBtn.Size = new System.Drawing.Size(75, 23);
-            this.TestRegexBtn.TabIndex = 12;
-            this.TestRegexBtn.Text = "&Test...";
+            this.PopFromStackToolTip.SetToolTip(this.TestRegexBtn, resources.GetString("TestRegexBtn.ToolTip"));
             this.TestRegexBtn.UseVisualStyleBackColor = true;
             this.TestRegexBtn.Click += new System.EventHandler(this.TestRegexBtn_Click);
             // 
             // StartRadio
             // 
-            this.StartRadio.AutoSize = true;
-            this.StartRadio.Location = new System.Drawing.Point(0, 114);
+            resources.ApplyResources(this.StartRadio, "StartRadio");
             this.StartRadio.Name = "StartRadio";
-            this.StartRadio.Size = new System.Drawing.Size(231, 17);
-            this.StartRadio.TabIndex = 4;
             this.StartRadio.TabStop = true;
             this.StartRadio.Tag = "4";
-            this.StartRadio.Text = "Insert the value at the &beginning of the path";
+            this.PopFromStackToolTip.SetToolTip(this.StartRadio, resources.GetString("StartRadio.ToolTip"));
             this.StartRadio.UseVisualStyleBackColor = true;
             this.StartRadio.CheckedChanged += new System.EventHandler(this.LocationRadio_CheckedChanged);
             // 
             // EndRadio
             // 
-            this.EndRadio.AutoSize = true;
-            this.EndRadio.Location = new System.Drawing.Point(0, 137);
+            resources.ApplyResources(this.EndRadio, "EndRadio");
             this.EndRadio.Name = "EndRadio";
-            this.EndRadio.Size = new System.Drawing.Size(203, 17);
-            this.EndRadio.TabIndex = 5;
             this.EndRadio.TabStop = true;
             this.EndRadio.Tag = "5";
-            this.EndRadio.Text = "Insert the value at the e&nd of the path";
+            this.PopFromStackToolTip.SetToolTip(this.EndRadio, resources.GetString("EndRadio.ToolTip"));
             this.EndRadio.UseVisualStyleBackColor = true;
             this.EndRadio.CheckedChanged += new System.EventHandler(this.LocationRadio_CheckedChanged);
             // 
             // NowhereRadio
             // 
-            this.NowhereRadio.AutoSize = true;
-            this.NowhereRadio.Location = new System.Drawing.Point(0, 160);
+            resources.ApplyResources(this.NowhereRadio, "NowhereRadio");
             this.NowhereRadio.Name = "NowhereRadio";
-            this.NowhereRadio.Size = new System.Drawing.Size(166, 17);
-            this.NowhereRadio.TabIndex = 6;
             this.NowhereRadio.TabStop = true;
             this.NowhereRadio.Tag = "6";
-            this.NowhereRadio.Text = "Simply drop it &without storing it";
+            this.PopFromStackToolTip.SetToolTip(this.NowhereRadio, resources.GetString("NowhereRadio.ToolTip"));
             this.NowhereRadio.UseVisualStyleBackColor = true;
             this.NowhereRadio.CheckedChanged += new System.EventHandler(this.LocationRadio_CheckedChanged);
             // 
             // PopFromStackPipelineElementUserControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.Controls.Add(this.NowhereRadio);
             this.Controls.Add(this.EndRadio);
             this.Controls.Add(this.StartRadio);
@@ -209,7 +173,7 @@
             this.Controls.Add(this.EntireRadio);
             this.Controls.Add(this.PopValueAndLbl);
             this.Name = "PopFromStackPipelineElementUserControl";
-            this.Size = new System.Drawing.Size(370, 180);
+            this.PopFromStackToolTip.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -230,5 +194,6 @@
         private System.Windows.Forms.RadioButton StartRadio;
         private System.Windows.Forms.RadioButton EndRadio;
         private System.Windows.Forms.RadioButton NowhereRadio;
+        private System.Windows.Forms.ToolTip PopFromStackToolTip;
     }
 }

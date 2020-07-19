@@ -291,6 +291,9 @@
     <EmbeddedResource Include="UI\UserControls\PluginPreviewUserControl.resx">
       <DependentUpon>PluginPreviewUserControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserControls\PopFromStackPipelineElementUserControl.fr-CA.resx">
+      <DependentUpon>PopFromStackPipelineElementUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\PopFromStackPipelineElementUserControl.resx">
       <DependentUpon>PopFromStackPipelineElementUserControl.cs</DependentUpon>
     </EmbeddedResource>
