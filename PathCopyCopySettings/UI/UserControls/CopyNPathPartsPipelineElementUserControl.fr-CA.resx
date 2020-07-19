@@ -117,129 +117,38 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="&gt;&gt;PathPartsLbl.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="NumPartsTxt.MaxLength" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="FirstLastCombo.Items" xml:space="preserve">
-    <value>first</value>
-  </data>
-  <data name="&gt;&gt;CopyTheNLbl.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="PathPartsLbl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>144, 3</value>
-  </data>
-  <data name="&gt;&gt;CopyTheNLbl.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="FirstLastCombo.Items1" xml:space="preserve">
-    <value>last</value>
-  </data>
   <data name="NumPartsTxt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>100, 0</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>PathCopyCopy.Settings.UI.UserControls.PipelineElementUserControl, PathCopyCopySettings, Version=19.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="PathPartsLbl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 13</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>CopyNPathPartsPipelineElementUserControl</value>
-  </data>
-  <data name="&gt;&gt;FirstLastCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;CopyTheNLbl.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;NumPartsTxt.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="FirstLastCombo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 21</value>
-  </data>
-  <data name="CopyTheNLbl.Text" xml:space="preserve">
-    <value>&amp;Copy the</value>
-  </data>
-  <data name="PathPartsLbl.Text" xml:space="preserve">
-    <value>part(s) of the path</value>
-  </data>
-  <data name="FirstLastCombo.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="NumPartsTxt.Size" type="System.Drawing.Size, System.Drawing">
-    <value>38, 20</value>
-  </data>
-  <data name="&gt;&gt;PathPartsLbl.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;PathPartsLbl.Name" xml:space="preserve">
-    <value>PathPartsLbl</value>
-  </data>
-  <data name="&gt;&gt;NumPartsTxt.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;PathPartsLbl.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;FirstLastCombo.Name" xml:space="preserve">
-    <value>FirstLastCombo</value>
-  </data>
-  <data name="&gt;&gt;FirstLastCombo.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;NumPartsTxt.Name" xml:space="preserve">
-    <value>NumPartsTxt</value>
-  </data>
-  <data name="PathPartsLbl.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="NumPartsTxt.Text" xml:space="preserve">
-    <value>0000</value>
-  </data>
-  <data name="&gt;&gt;NumPartsTxt.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>70, 0</value>
   </data>
   <data name="CopyTheNLbl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 13</value>
+    <value>67, 13</value>
   </data>
-  <data name="NumPartsTxt.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="CopyTheNLbl.Text" xml:space="preserve">
+    <value>&amp;Copier la(les)</value>
   </data>
-  <data name="CopyTheNLbl.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="FirstLastCombo.Items" xml:space="preserve">
+    <value>première(s)</value>
+  </data>
+  <data name="FirstLastCombo.Items1" xml:space="preserve">
+    <value>dernière(s)</value>
   </data>
   <data name="FirstLastCombo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>52, 0</value>
+    <value>114, 0</value>
   </data>
-  <data name="PathPartsLbl.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="FirstLastCombo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 21</value>
   </data>
-  <data name="&gt;&gt;CopyTheNLbl.Name" xml:space="preserve">
-    <value>CopyTheNLbl</value>
+  <data name="PathPartsLbl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>195, 3</value>
   </data>
-  <data name="&gt;&gt;FirstLastCombo.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="PathPartsLbl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>96, 13</value>
   </data>
-  <data name="CopyTheNLbl.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="CopyTheNLbl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>-3, 3</value>
+  <data name="PathPartsLbl.Text" xml:space="preserve">
+    <value>partie(s) du chemin</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 23</value>
+    <value>294, 25</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
 </root>

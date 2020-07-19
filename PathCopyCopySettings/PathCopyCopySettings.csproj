@@ -249,6 +249,9 @@
     <EmbeddedResource Include="UI\UserControls\ConfiglessPipelineElementUserControl.resx">
       <DependentUpon>ConfiglessPipelineElementUserControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserControls\CopyNPathPartsPipelineElementUserControl.fr-CA.resx">
+      <DependentUpon>CopyNPathPartsPipelineElementUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\CopyNPathPartsPipelineElementUserControl.resx">
       <DependentUpon>CopyNPathPartsPipelineElementUserControl.cs</DependentUpon>
     </EmbeddedResource>
