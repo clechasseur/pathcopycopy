@@ -136,10 +136,16 @@
   <data name="ReplaceTxt.Size" type="System.Drawing.Size, System.Drawing">
     <value>147, 20</value>
   </data>
+  <data name="ReplaceTxt.ToolTip" xml:space="preserve">
+    <value>Chaîne de caractères à utiliser pour remplacer tout élément trouvé dans le chemin</value>
+  </data>
   <data name="FindTxt.Location" type="System.Drawing.Point, System.Drawing">
     <value>56, 0</value>
   </data>
   <data name="FindTxt.Size" type="System.Drawing.Size, System.Drawing">
     <value>173, 20</value>
+  </data>
+  <data name="FindTxt.ToolTip" xml:space="preserve">
+    <value>Chaîne de caractères à rechercher dans le chemin</value>
   </data>
 </root>
