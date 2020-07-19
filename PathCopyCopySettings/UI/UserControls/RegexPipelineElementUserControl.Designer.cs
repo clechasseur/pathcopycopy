@@ -28,6 +28,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegexPipelineElementUserControl));
             this.FindLbl = new System.Windows.Forms.Label();
             this.ReplaceLbl = new System.Windows.Forms.Label();
             this.ReplaceTxt = new System.Windows.Forms.TextBox();
@@ -39,72 +40,49 @@
             // 
             // FindLbl
             // 
-            this.FindLbl.AutoSize = true;
-            this.FindLbl.Location = new System.Drawing.Point(-3, 3);
+            resources.ApplyResources(this.FindLbl, "FindLbl");
             this.FindLbl.Name = "FindLbl";
-            this.FindLbl.Size = new System.Drawing.Size(100, 13);
-            this.FindLbl.TabIndex = 0;
-            this.FindLbl.Text = "Regular e&xpression:";
+            this.RegexToolTip.SetToolTip(this.FindLbl, resources.GetString("FindLbl.ToolTip"));
             // 
             // ReplaceLbl
             // 
-            this.ReplaceLbl.AutoSize = true;
-            this.ReplaceLbl.Location = new System.Drawing.Point(-3, 29);
+            resources.ApplyResources(this.ReplaceLbl, "ReplaceLbl");
             this.ReplaceLbl.Name = "ReplaceLbl";
-            this.ReplaceLbl.Size = new System.Drawing.Size(126, 13);
-            this.ReplaceLbl.TabIndex = 2;
-            this.ReplaceLbl.Text = "&Replacement expression:";
+            this.RegexToolTip.SetToolTip(this.ReplaceLbl, resources.GetString("ReplaceLbl.ToolTip"));
             // 
             // ReplaceTxt
             // 
-            this.ReplaceTxt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ReplaceTxt.Location = new System.Drawing.Point(129, 26);
+            resources.ApplyResources(this.ReplaceTxt, "ReplaceTxt");
             this.ReplaceTxt.Name = "ReplaceTxt";
-            this.ReplaceTxt.Size = new System.Drawing.Size(161, 20);
-            this.ReplaceTxt.TabIndex = 3;
-            this.RegexToolTip.SetToolTip(this.ReplaceTxt, "Expression used to perform replacement in conjunction with the regular expression" +
-        "");
+            this.RegexToolTip.SetToolTip(this.ReplaceTxt, resources.GetString("ReplaceTxt.ToolTip"));
             this.ReplaceTxt.TextChanged += new System.EventHandler(this.ReplaceTxt_TextChanged);
             // 
             // FindTxt
             // 
-            this.FindTxt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.FindTxt.Location = new System.Drawing.Point(103, 0);
+            resources.ApplyResources(this.FindTxt, "FindTxt");
             this.FindTxt.Name = "FindTxt";
-            this.FindTxt.Size = new System.Drawing.Size(187, 20);
-            this.FindTxt.TabIndex = 1;
-            this.RegexToolTip.SetToolTip(this.FindTxt, "Regular expression to match against the path");
+            this.RegexToolTip.SetToolTip(this.FindTxt, resources.GetString("FindTxt.ToolTip"));
             this.FindTxt.TextChanged += new System.EventHandler(this.FindTxt_TextChanged);
             // 
             // IgnoreCaseChk
             // 
-            this.IgnoreCaseChk.AutoSize = true;
-            this.IgnoreCaseChk.Location = new System.Drawing.Point(0, 56);
+            resources.ApplyResources(this.IgnoreCaseChk, "IgnoreCaseChk");
             this.IgnoreCaseChk.Name = "IgnoreCaseChk";
-            this.IgnoreCaseChk.Size = new System.Drawing.Size(82, 17);
-            this.IgnoreCaseChk.TabIndex = 4;
-            this.IgnoreCaseChk.Text = "&Ignore case";
-            this.RegexToolTip.SetToolTip(this.IgnoreCaseChk, "Whether to ignore case when performing find/replace operations");
+            this.RegexToolTip.SetToolTip(this.IgnoreCaseChk, resources.GetString("IgnoreCaseChk.ToolTip"));
             this.IgnoreCaseChk.UseVisualStyleBackColor = true;
             this.IgnoreCaseChk.CheckedChanged += new System.EventHandler(this.IgnoreCaseChk_CheckedChanged);
             // 
             // TestBtn
             // 
-            this.TestBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.TestBtn.Location = new System.Drawing.Point(215, 52);
+            resources.ApplyResources(this.TestBtn, "TestBtn");
             this.TestBtn.Name = "TestBtn";
-            this.TestBtn.Size = new System.Drawing.Size(75, 23);
-            this.TestBtn.TabIndex = 5;
-            this.TestBtn.Text = "&Test...";
-            this.RegexToolTip.SetToolTip(this.TestBtn, "Open a window to test the current regular/replacement expressions");
+            this.RegexToolTip.SetToolTip(this.TestBtn, resources.GetString("TestBtn.ToolTip"));
             this.TestBtn.UseVisualStyleBackColor = true;
             this.TestBtn.Click += new System.EventHandler(this.TestBtn_Click);
             // 
             // RegexPipelineElementUserControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.TestBtn);
             this.Controls.Add(this.IgnoreCaseChk);
@@ -113,7 +91,7 @@
             this.Controls.Add(this.ReplaceLbl);
             this.Controls.Add(this.FindLbl);
             this.Name = "RegexPipelineElementUserControl";
-            this.Size = new System.Drawing.Size(290, 76);
+            this.RegexToolTip.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.ResumeLayout(false);
             this.PerformLayout();
 

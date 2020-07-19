@@ -303,6 +303,9 @@
     <EmbeddedResource Include="UI\UserControls\PushToStackPipelineElementUserControl.resx">
       <DependentUpon>PushToStackPipelineElementUserControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserControls\RegexPipelineElementUserControl.fr-CA.resx">
+      <DependentUpon>RegexPipelineElementUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\RegexPipelineElementUserControl.resx">
       <DependentUpon>RegexPipelineElementUserControl.cs</DependentUpon>
     </EmbeddedResource>
