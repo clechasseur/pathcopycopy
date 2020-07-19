@@ -121,6 +121,9 @@
   <data name="NumPartsTxt.Location" type="System.Drawing.Point, System.Drawing">
     <value>70, 0</value>
   </data>
+  <data name="NumPartsTxt.ToolTip" xml:space="preserve">
+    <value>Le nombre de parties du chemin à copier</value>
+  </data>
   <data name="CopyTheNLbl.Size" type="System.Drawing.Size, System.Drawing">
     <value>67, 13</value>
   </data>
@@ -138,6 +141,9 @@
   </data>
   <data name="FirstLastCombo.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 21</value>
+  </data>
+  <data name="FirstLastCombo.ToolTip" xml:space="preserve">
+    <value>Détermine si les premières ou les dernières parties du chemin doivent être copiées</value>
   </data>
   <data name="PathPartsLbl.Location" type="System.Drawing.Point, System.Drawing">
     <value>195, 3</value>

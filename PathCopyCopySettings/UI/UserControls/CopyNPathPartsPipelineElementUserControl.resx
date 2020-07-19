@@ -128,14 +128,20 @@
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
+  <data name="&gt;&gt;NumPartsTxt.Name" xml:space="preserve">
+    <value>NumPartsTxt</value>
+  </data>
   <data name="FirstLastCombo.Items" xml:space="preserve">
     <value>first</value>
   </data>
   <data name="&gt;&gt;CopyTheNLbl.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="PathPartsLbl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>144, 3</value>
+  <data name="PathPartsLbl.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CopyTheNLbl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>-3, 3</value>
   </data>
   <data name="&gt;&gt;CopyTheNLbl.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -152,11 +158,17 @@
   <data name="PathPartsLbl.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 13</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>CopyNPathPartsPipelineElementUserControl</value>
+  <data name="FirstLastCombo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>42, 21</value>
+  </data>
+  <data name="&gt;&gt;PathPartsLbl.Name" xml:space="preserve">
+    <value>PathPartsLbl</value>
   </data>
   <data name="&gt;&gt;FirstLastCombo.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CopyNPathPartsToolTip.Name" xml:space="preserve">
+    <value>CopyNPathPartsToolTip</value>
   </data>
   <data name="&gt;&gt;CopyTheNLbl.Parent" xml:space="preserve">
     <value>$this</value>
@@ -164,8 +176,8 @@
   <data name="&gt;&gt;NumPartsTxt.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="FirstLastCombo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 21</value>
+  <data name="NumPartsTxt.ToolTip" xml:space="preserve">
+    <value>How many parts of the path to copy</value>
   </data>
   <data name="CopyTheNLbl.Text" xml:space="preserve">
     <value>&amp;Copy the</value>
@@ -182,26 +194,26 @@
   <data name="&gt;&gt;PathPartsLbl.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;PathPartsLbl.Name" xml:space="preserve">
-    <value>PathPartsLbl</value>
-  </data>
-  <data name="&gt;&gt;NumPartsTxt.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;PathPartsLbl.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;CopyNPathPartsToolTip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;FirstLastCombo.Name" xml:space="preserve">
     <value>FirstLastCombo</value>
   </data>
+  <data name="PathPartsLbl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>144, 3</value>
+  </data>
   <data name="&gt;&gt;FirstLastCombo.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;NumPartsTxt.Name" xml:space="preserve">
-    <value>NumPartsTxt</value>
+  <data name="&gt;&gt;NumPartsTxt.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="PathPartsLbl.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="CopyTheNLbl.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FirstLastCombo.ToolTip" xml:space="preserve">
+    <value>Whether to copy the first or last parts of the path</value>
   </data>
   <data name="NumPartsTxt.Text" xml:space="preserve">
     <value>0000</value>
@@ -227,19 +239,31 @@
   <data name="&gt;&gt;CopyTheNLbl.Name" xml:space="preserve">
     <value>CopyTheNLbl</value>
   </data>
+  <data name="&gt;&gt;PathPartsLbl.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="&gt;&gt;FirstLastCombo.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="CopyTheNLbl.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="CopyTheNLbl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>-3, 3</value>
+  <data name="PathPartsLbl.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>242, 23</value>
   </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>CopyNPathPartsPipelineElementUserControl</value>
+  </data>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
+  </metadata>
+  <metadata name="CopyNPathPartsToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
   </metadata>
 </root>

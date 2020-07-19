@@ -27,17 +27,20 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CopyNPathPartsPipelineElementUserControl));
             this.NumPartsTxt = new System.Windows.Forms.TextBox();
             this.CopyTheNLbl = new System.Windows.Forms.Label();
             this.FirstLastCombo = new System.Windows.Forms.ComboBox();
             this.PathPartsLbl = new System.Windows.Forms.Label();
+            this.CopyNPathPartsToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // NumPartsTxt
             // 
             resources.ApplyResources(this.NumPartsTxt, "NumPartsTxt");
             this.NumPartsTxt.Name = "NumPartsTxt";
+            this.CopyNPathPartsToolTip.SetToolTip(this.NumPartsTxt, resources.GetString("NumPartsTxt.ToolTip"));
             this.NumPartsTxt.TextChanged += new System.EventHandler(this.NumPartsTxt_TextChanged);
             this.NumPartsTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumPartsTxt_KeyPress);
             // 
@@ -45,6 +48,7 @@
             // 
             resources.ApplyResources(this.CopyTheNLbl, "CopyTheNLbl");
             this.CopyTheNLbl.Name = "CopyTheNLbl";
+            this.CopyNPathPartsToolTip.SetToolTip(this.CopyTheNLbl, resources.GetString("CopyTheNLbl.ToolTip"));
             // 
             // FirstLastCombo
             // 
@@ -55,12 +59,14 @@
             resources.GetString("FirstLastCombo.Items"),
             resources.GetString("FirstLastCombo.Items1")});
             this.FirstLastCombo.Name = "FirstLastCombo";
+            this.CopyNPathPartsToolTip.SetToolTip(this.FirstLastCombo, resources.GetString("FirstLastCombo.ToolTip"));
             this.FirstLastCombo.SelectedIndexChanged += new System.EventHandler(this.FirstLastCombo_SelectedIndexChanged);
             // 
             // PathPartsLbl
             // 
             resources.ApplyResources(this.PathPartsLbl, "PathPartsLbl");
             this.PathPartsLbl.Name = "PathPartsLbl";
+            this.CopyNPathPartsToolTip.SetToolTip(this.PathPartsLbl, resources.GetString("PathPartsLbl.ToolTip"));
             // 
             // CopyNPathPartsPipelineElementUserControl
             // 
@@ -70,6 +76,7 @@
             this.Controls.Add(this.CopyTheNLbl);
             this.Controls.Add(this.NumPartsTxt);
             this.Name = "CopyNPathPartsPipelineElementUserControl";
+            this.CopyNPathPartsToolTip.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -81,5 +88,6 @@
         private System.Windows.Forms.Label CopyTheNLbl;
         private System.Windows.Forms.ComboBox FirstLastCombo;
         private System.Windows.Forms.Label PathPartsLbl;
+        private System.Windows.Forms.ToolTip CopyNPathPartsToolTip;
     }
 }
