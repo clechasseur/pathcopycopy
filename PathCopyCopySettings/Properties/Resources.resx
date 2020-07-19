@@ -480,4 +480,22 @@ Control-click to avoid displaying an icon for this command.</value>
   <data name="PipelineElement_SwapStackValues_HelpText" xml:space="preserve">
     <value>Swap the top two values on the stack</value>
   </data>
+  <data name="Language_English_DisplayName" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="Language_English_Name" xml:space="preserve">
+    <value>en-CA</value>
+  </data>
+  <data name="Language_French_DisplayName" xml:space="preserve">
+    <value>French</value>
+  </data>
+  <data name="Language_French_Name" xml:space="preserve">
+    <value>fr-CA</value>
+  </data>
+  <data name="MainForm_Msg_LanguageSwitched" xml:space="preserve">
+    <value>Changing the application's language requires a logoff/logon in order to be applied.</value>
+  </data>
+  <data name="MainForm_Msg_LanguageSwitchedMsgTitle" xml:space="preserve">
+    <value>Language Changed</value>
+  </data>
 </root>

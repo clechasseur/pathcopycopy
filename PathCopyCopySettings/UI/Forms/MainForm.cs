@@ -76,6 +76,13 @@ namespace PathCopyCopy.Settings.UI.Forms
         /// Will track SelectedIndexChanged calls to avoid recursion issues.
         private bool inCtrlKeyPluginComboBoxSelectedIndexChanged = false;
 
+        /// BindingList used to store all languages for the application.
+        private BindingList<LanguageDisplayInfo> languageDisplayInfos;
+
+        /// Whether we've shown the warning to the user that switching languages
+        /// requires logoff/logon to work.
+        private bool languageSwitchWarningShown = false;
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -304,6 +311,44 @@ namespace PathCopyCopy.Settings.UI.Forms
                 }
             }
 
+            // Load list of all supported languages.
+            languageDisplayInfos = new BindingList<LanguageDisplayInfo> {
+                new LanguageDisplayInfo {
+                    Name = Resources.Language_English_Name,
+                    DisplayName = Resources.Language_English_DisplayName,
+                },
+                new LanguageDisplayInfo {
+                    Name = Resources.Language_French_Name,
+                    DisplayName = Resources.Language_French_DisplayName,
+                },
+            };
+
+            // If the language chosen in the settings is not known, add an entry so it can be selected.
+            string language = Settings.Language;
+            if (language != null && !languageDisplayInfos.Any(ldi => ldi.Name == language)) {
+                languageDisplayInfos.Add(new LanguageDisplayInfo {
+                    Name = language,
+                    DisplayName = language,
+                });
+            }
+
+            // Set binding list as data source for the language combo box binding source.
+            LanguageComboBindingSource.DataSource = languageDisplayInfos;
+
+            // Select language in the dropdown.
+            if (language != null) {
+                for (int i = 0; i < languageDisplayInfos.Count; i++) {
+                    if (language == languageDisplayInfos[i].Name) {
+                        LanguageCombo.SelectedIndex = i;
+                        break;
+                    }
+                }
+            }
+            // If no language is selected, choose default.
+            if (LanguageCombo.SelectedIndex == -1) {
+                LanguageCombo.SelectedIndex = 0;
+            }
+
             // All those changes probably enabled the "Apply" button so disable it again here.
             ApplyBtn.Enabled = false;
 
@@ -450,6 +495,19 @@ namespace PathCopyCopy.Settings.UI.Forms
             }
             if (!ctrlKeyPluginId.Equals(Settings.CtrlKeyPlugin)) {
                 Settings.CtrlKeyPlugin = ctrlKeyPluginId;
+            }
+
+            // Language is a little special since the combo box contains objects.
+            string language = (LanguageCombo.SelectedItem as LanguageDisplayInfo)?.Name;
+            if (language != Settings.Language) {
+                // Warn user that switching language requires a logoff/logon (only once).
+                if (!languageSwitchWarningShown) {
+                    MessageBox.Show(this, Resources.MainForm_Msg_LanguageSwitched,
+                        Resources.MainForm_Msg_LanguageSwitchedMsgTitle, MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                    languageSwitchWarningShown = true;
+                }
+                Settings.Language = language;
             }
 
             // Now that everything is saved, disable the "Apply button".
@@ -734,6 +792,17 @@ namespace PathCopyCopy.Settings.UI.Forms
                     inCtrlKeyPluginComboBoxSelectedIndexChanged = false;
                 }
             }
+        }
+
+        /// <summary>
+        /// Called when the user switches the selected language. We enable the Apply
+        /// button here (since switching languages requires an app restart to work).
+        /// </summary>
+        /// <param name="sender">Event sender.</param>
+        /// <param name="e">Event arguments.</param>
+        private void LanguageCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ApplyBtn.Enabled = true;
         }
         
         /// <summary>

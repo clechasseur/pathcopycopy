@@ -138,6 +138,12 @@
   <data name="INTERNET_PATH_PLUGIN_DESCRIPTION" xml:space="preserve">
     <value>Copier le chemin en format internet</value>
   </data>
+  <data name="Language_English_DisplayName" xml:space="preserve">
+    <value>Anglais</value>
+  </data>
+  <data name="Language_French_DisplayName" xml:space="preserve">
+    <value>Français</value>
+  </data>
   <data name="LONG_FOLDER_PLUGIN_DESCRIPTION" xml:space="preserve">
     <value>Copier le chemin long du parent</value>
   </data>
@@ -176,6 +182,12 @@
   </data>
   <data name="MainForm_Error_InvalidPipelinePluginEncodedElements" xml:space="preserve">
     <value>Une erreur est survenue en tentant d'interpréter les données de cette commande personnalisée. Peut-être a-t-elle été créée par une version ultérieure de Path Copy Copy? Il sera impossible de l'éditer.</value>
+  </data>
+  <data name="MainForm_Msg_LanguageSwitched" xml:space="preserve">
+    <value>Changer la langue de l'application demande de fermer sa session et de se réauthentifier pour être appliquée.</value>
+  </data>
+  <data name="MainForm_Msg_LanguageSwitchedMsgTitle" xml:space="preserve">
+    <value>Changement de langue</value>
   </data>
   <data name="MainForm_Msg_UserSettingsExported" xml:space="preserve">
     <value>La configuration a été exportée dans "{0}". Pour l'importer à nouveau (possiblement sur une autre machine), il suffit de double-cliquer le fichier .reg dans Windows Explorer.</value>

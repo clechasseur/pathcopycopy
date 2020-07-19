@@ -132,14 +132,14 @@
   <data name="CancelBtn.ToolTip" xml:space="preserve">
     <value>Annuler les changements effectués jusqu'à maintenant et fermer cette fenêtre</value>
   </data>
+  <data name="PluginsPage.Text" xml:space="preserve">
+    <value>Commandes</value>
+  </data>
   <data name="DuplicatePipelinePluginBtn.Text" xml:space="preserve">
     <value>Dup&amp;liquer</value>
   </data>
   <data name="DuplicatePipelinePluginBtn.ToolTip" xml:space="preserve">
     <value>Créer une copie de la commande personnalisée sélectionnée</value>
-  </data>
-  <data name="PreviewCtrl.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="AddSeparatorBtn.Text" xml:space="preserve">
     <value>&amp;Séparateur</value>
@@ -159,9 +159,6 @@
   <data name="ExportPipelinePluginsBtn.ToolTip" xml:space="preserve">
     <value>Exporter les commandes personnalisées sélectionnées dans un fichier sur disque</value>
   </data>
-  <data name="BevelLineLbl2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="RemovePluginBtn.Text" xml:space="preserve">
     <value>E&amp;ffacer</value>
   </data>
@@ -179,9 +176,6 @@
   </data>
   <data name="AddPipelinePluginBtn.ToolTip" xml:space="preserve">
     <value>Créer une nouvelle commande personnalisée</value>
-  </data>
-  <data name="BevelLineLbl.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="MovePluginDownBtn.Text" xml:space="preserve">
     <value>&amp;Descendre</value>
@@ -201,9 +195,6 @@
   </data>
   <data name="PluginsExplanationLbl2.Text" xml:space="preserve">
     <value>ainsi que dans notre sous-menu, ainsi qu'ajouter, enlever ou réordonner les commandes.</value>
-  </data>
-  <data name="PluginsExplanationLbl2.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="IconCol.HeaderText" xml:space="preserve">
     <value>Icône</value>
@@ -227,23 +218,29 @@
   <data name="InSubmenuCol.Width" type="System.Int32, mscorlib">
     <value>66</value>
   </data>
-  <data name="PluginsDataGrid.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="PluginsExplanationLbl.Size" type="System.Drawing.Size, System.Drawing">
     <value>450, 13</value>
   </data>
   <data name="PluginsExplanationLbl.Text" xml:space="preserve">
     <value>Ici, vous pouvez choisir quelles commandes sont affichées dans le menu contextuel d'Explorer</value>
   </data>
-  <data name="PluginsExplanationLbl.ToolTip" xml:space="preserve">
-    <value />
+  <data name="MiscOptionsPage.Text" xml:space="preserve">
+    <value>Paramètres</value>
   </data>
-  <data name="PluginsPage.Text" xml:space="preserve">
-    <value>Commandes</value>
+  <data name="LanguageCombo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>58, 492</value>
   </data>
-  <data name="PluginsPage.ToolTip" xml:space="preserve">
-    <value />
+  <data name="LanguageCombo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>366, 21</value>
+  </data>
+  <data name="LanguageCombo.ToolTip" xml:space="preserve">
+    <value>Langue de l'application</value>
+  </data>
+  <data name="LanguageLbl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 13</value>
+  </data>
+  <data name="LanguageLbl.Text" xml:space="preserve">
+    <value>Lan&amp;gue:</value>
   </data>
   <data name="TrueLnkPathsChk.Size" type="System.Drawing.Size, System.Drawing">
     <value>319, 17</value>
@@ -401,36 +398,15 @@
   <data name="AddQuotesChk.ToolTip" xml:space="preserve">
     <value>Entourer tous les chemins copiés de guillemets ( " )</value>
   </data>
-  <data name="MiscOptionsPage.Text" xml:space="preserve">
-    <value>Paramètres</value>
-  </data>
-  <data name="MiscOptionsPage.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="ProductAndVersionLbl.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="CopyrightLbl.ToolTip" xml:space="preserve">
-    <value />
+  <data name="AboutPage.Text" xml:space="preserve">
+    <value>À propos</value>
   </data>
   <data name="VisitWebsiteLbl.Text" xml:space="preserve">
     <value>Visitez notre site web:</value>
   </data>
-  <data name="VisitWebsiteLbl.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="SiteLinkLbl.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="LicenseExplanationLbl.Text" xml:space="preserve">
     <value>Path Copy Copy est un logiciel libre distribué sous
 la MIT License. Pour plus d'informations, voir</value>
-  </data>
-  <data name="LicenseExplanationLbl.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="LicenseTxtLinkLbl.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="DonationLinkLbl.LinkArea" type="System.Windows.Forms.LinkArea, System.Windows.Forms">
@@ -439,21 +415,6 @@ la MIT License. Pour plus d'informations, voir</value>
   <data name="DonationLinkLbl.Text" xml:space="preserve">
     <value>Si vous aimez Path Copy Copy, n'hésitez pas à CONTRIBUER via PayPal!
 Les dons aident à financer le développement et à fournir du support.</value>
-  </data>
-  <data name="DonationLinkLbl.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="AboutTableLayoutPanel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="AboutPage.Text" xml:space="preserve">
-    <value>À propos</value>
-  </data>
-  <data name="AboutPage.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="MainTabCtrl.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="ExportPipelinePluginsSaveDlg.Filter" xml:space="preserve">
     <value>Commandes personnalisées exportées (*.eccv3)|*.eccv3|Commandes personnalisées exportées (pré-17.1) (*.ecc)|*.ecc|Commandes personnalisées exportées (pré-12.0) (*.pccpp)|*.pccpp</value>
@@ -475,8 +436,5 @@ Les dons aident à financer le développement et à fournir du support.</value>
   </data>
   <data name="ExportUserSettingsBtn.ToolTip" xml:space="preserve">
     <value>Exporter la configuration dans un fichier sur disque</value>
-  </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
   </data>
 </root>

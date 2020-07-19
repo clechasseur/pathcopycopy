@@ -711,10 +711,15 @@ namespace PathCopyCopy.Settings.Core
         public string Language
         {
             get {
-                return (string) GetUserOrGlobalValue(LanguageValueName);
+                string language = (string) GetUserOrGlobalValue(LanguageValueName);
+                return !string.IsNullOrEmpty(language) ? language : null;
             }
             set {
-                userKey.SetValue(LanguageValueName, value);
+                if (!string.IsNullOrEmpty(value)) {
+                    userKey.SetValue(LanguageValueName, value);
+                } else {
+                    userKey.DeleteValue(LanguageValueName);
+                }
             }
         }
 

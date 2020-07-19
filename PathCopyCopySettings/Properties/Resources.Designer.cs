@@ -189,6 +189,42 @@ namespace PathCopyCopy.Settings.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to English.
+        /// </summary>
+        internal static string Language_English_DisplayName {
+            get {
+                return ResourceManager.GetString("Language_English_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to en-CA.
+        /// </summary>
+        internal static string Language_English_Name {
+            get {
+                return ResourceManager.GetString("Language_English_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to French.
+        /// </summary>
+        internal static string Language_French_DisplayName {
+            get {
+                return ResourceManager.GetString("Language_French_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to fr-CA.
+        /// </summary>
+        internal static string Language_French_Name {
+            get {
+                return ResourceManager.GetString("Language_French_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Copy Long Parent Folder Path.
         /// </summary>
         internal static string LONG_FOLDER_PLUGIN_DESCRIPTION {
@@ -365,6 +401,24 @@ namespace PathCopyCopy.Settings.Properties {
         internal static string MainForm_Error_InvalidPipelinePluginEncodedElements {
             get {
                 return ResourceManager.GetString("MainForm_Error_InvalidPipelinePluginEncodedElements", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Changing the application&apos;s language requires a logoff/logon in order to be applied..
+        /// </summary>
+        internal static string MainForm_Msg_LanguageSwitched {
+            get {
+                return ResourceManager.GetString("MainForm_Msg_LanguageSwitched", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language Changed.
+        /// </summary>
+        internal static string MainForm_Msg_LanguageSwitchedMsgTitle {
+            get {
+                return ResourceManager.GetString("MainForm_Msg_LanguageSwitchedMsgTitle", resourceCulture);
             }
         }
         
