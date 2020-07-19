@@ -117,148 +117,29 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="FindLbl.Text" xml:space="preserve">
-    <value>Find &amp;what:</value>
-  </data>
-  <data name="&gt;&gt;FindTxt.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;FindReplaceToolTip.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ReplaceLbl.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;FindLbl.Name" xml:space="preserve">
-    <value>FindLbl</value>
-  </data>
-  <data name="ReplaceTxt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>75, 26</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="FindTxt.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="&gt;&gt;FindReplaceToolTip.Name" xml:space="preserve">
-    <value>FindReplaceToolTip</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>PathCopyCopy.Settings.UI.UserControls.PipelineElementUserControl, PathCopyCopySettings, Version=19.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="ReplaceLbl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>-3, 29</value>
-  </data>
   <data name="FindLbl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 13</value>
+    <value>53, 13</value>
   </data>
-  <data name="FindTxt.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 20</value>
-  </data>
-  <data name="&gt;&gt;FindLbl.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ReplaceLbl.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="FindLbl.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="FindTxt.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="ReplaceLbl.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="FindLbl.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="ReplaceTxt.Size" type="System.Drawing.Size, System.Drawing">
-    <value>154, 20</value>
-  </data>
-  <data name="&gt;&gt;FindLbl.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="ReplaceTxt.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="FindLbl.Text" xml:space="preserve">
+    <value>C&amp;hercher:</value>
   </data>
   <data name="ReplaceLbl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 13</value>
+    <value>79, 13</value>
   </data>
   <data name="ReplaceLbl.Text" xml:space="preserve">
-    <value>&amp;Replace with:</value>
+    <value>&amp;Remplacer par:</value>
   </data>
-  <data name="&gt;&gt;FindTxt.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="ReplaceTxt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>82, 26</value>
+  </data>
+  <data name="ReplaceTxt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>147, 20</value>
   </data>
   <data name="FindTxt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>59, 0</value>
+    <value>56, 0</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>FindReplacePipelineElementUserControl</value>
+  <data name="FindTxt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>173, 20</value>
   </data>
-  <data name="ReplaceLbl.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="FindTxt.ToolTip" xml:space="preserve">
-    <value>Character string to look for and replace in the path</value>
-  </data>
-  <data name="&gt;&gt;FindTxt.Name" xml:space="preserve">
-    <value>FindTxt</value>
-  </data>
-  <data name="&gt;&gt;ReplaceTxt.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ReplaceLbl.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="FindLbl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>-3, 3</value>
-  </data>
-  <data name="&gt;&gt;ReplaceTxt.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ReplaceTxt.Name" xml:space="preserve">
-    <value>ReplaceTxt</value>
-  </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="FindLbl.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;ReplaceLbl.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="ReplaceTxt.ToolTip" xml:space="preserve">
-    <value>Character string to replace any found element in the path with</value>
-  </data>
-  <data name="ReplaceTxt.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;FindLbl.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;FindTxt.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ReplaceLbl.Name" xml:space="preserve">
-    <value>ReplaceLbl</value>
-  </data>
-  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 47</value>
-  </data>
-  <data name="&gt;&gt;ReplaceTxt.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="FindReplaceToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
 </root>

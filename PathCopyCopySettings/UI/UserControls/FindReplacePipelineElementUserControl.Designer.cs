@@ -28,6 +28,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FindReplacePipelineElementUserControl));
             this.FindLbl = new System.Windows.Forms.Label();
             this.ReplaceLbl = new System.Windows.Forms.Label();
             this.ReplaceTxt = new System.Windows.Forms.TextBox();
@@ -37,54 +38,40 @@
             // 
             // FindLbl
             // 
-            this.FindLbl.AutoSize = true;
-            this.FindLbl.Location = new System.Drawing.Point(-3, 3);
+            resources.ApplyResources(this.FindLbl, "FindLbl");
             this.FindLbl.Name = "FindLbl";
-            this.FindLbl.Size = new System.Drawing.Size(56, 13);
-            this.FindLbl.TabIndex = 0;
-            this.FindLbl.Text = "Find &what:";
+            this.FindReplaceToolTip.SetToolTip(this.FindLbl, resources.GetString("FindLbl.ToolTip"));
             // 
             // ReplaceLbl
             // 
-            this.ReplaceLbl.AutoSize = true;
-            this.ReplaceLbl.Location = new System.Drawing.Point(-3, 29);
+            resources.ApplyResources(this.ReplaceLbl, "ReplaceLbl");
             this.ReplaceLbl.Name = "ReplaceLbl";
-            this.ReplaceLbl.Size = new System.Drawing.Size(72, 13);
-            this.ReplaceLbl.TabIndex = 2;
-            this.ReplaceLbl.Text = "&Replace with:";
+            this.FindReplaceToolTip.SetToolTip(this.ReplaceLbl, resources.GetString("ReplaceLbl.ToolTip"));
             // 
             // ReplaceTxt
             // 
-            this.ReplaceTxt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ReplaceTxt.Location = new System.Drawing.Point(75, 26);
+            resources.ApplyResources(this.ReplaceTxt, "ReplaceTxt");
             this.ReplaceTxt.Name = "ReplaceTxt";
-            this.ReplaceTxt.Size = new System.Drawing.Size(154, 20);
-            this.ReplaceTxt.TabIndex = 3;
-            this.FindReplaceToolTip.SetToolTip(this.ReplaceTxt, "Character string to replace any found element in the path with");
+            this.FindReplaceToolTip.SetToolTip(this.ReplaceTxt, resources.GetString("ReplaceTxt.ToolTip"));
             this.ReplaceTxt.TextChanged += new System.EventHandler(this.ReplaceTxt_TextChanged);
             // 
             // FindTxt
             // 
-            this.FindTxt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.FindTxt.Location = new System.Drawing.Point(59, 0);
+            resources.ApplyResources(this.FindTxt, "FindTxt");
             this.FindTxt.Name = "FindTxt";
-            this.FindTxt.Size = new System.Drawing.Size(170, 20);
-            this.FindTxt.TabIndex = 1;
-            this.FindReplaceToolTip.SetToolTip(this.FindTxt, "Character string to look for and replace in the path");
+            this.FindReplaceToolTip.SetToolTip(this.FindTxt, resources.GetString("FindTxt.ToolTip"));
             this.FindTxt.TextChanged += new System.EventHandler(this.FindTxt_TextChanged);
             // 
             // FindReplacePipelineElementUserControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.FindTxt);
             this.Controls.Add(this.ReplaceTxt);
             this.Controls.Add(this.ReplaceLbl);
             this.Controls.Add(this.FindLbl);
             this.Name = "FindReplacePipelineElementUserControl";
-            this.Size = new System.Drawing.Size(229, 47);
+            this.FindReplaceToolTip.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.ResumeLayout(false);
             this.PerformLayout();
 
