@@ -27,24 +27,20 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InjectDriveLabelPipelineElementUserControl));
             this.InjectDriveLabelInstructionsLbl = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // InjectDriveLabelInstructionsLbl
             // 
-            this.InjectDriveLabelInstructionsLbl.AutoSize = true;
-            this.InjectDriveLabelInstructionsLbl.Location = new System.Drawing.Point(-3, 0);
+            resources.ApplyResources(this.InjectDriveLabelInstructionsLbl, "InjectDriveLabelInstructionsLbl");
             this.InjectDriveLabelInstructionsLbl.Name = "InjectDriveLabelInstructionsLbl";
-            this.InjectDriveLabelInstructionsLbl.Size = new System.Drawing.Size(340, 13);
-            this.InjectDriveLabelInstructionsLbl.TabIndex = 0;
-            this.InjectDriveLabelInstructionsLbl.Text = "All instances of %DRIVELABEL% will be replaced with the drive\'s label.";
             // 
             // InjectDriveLabelPipelineElementUserControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.Controls.Add(this.InjectDriveLabelInstructionsLbl);
             this.Name = "InjectDriveLabelPipelineElementUserControl";
-            this.Size = new System.Drawing.Size(339, 16);
             this.ResumeLayout(false);
             this.PerformLayout();
 

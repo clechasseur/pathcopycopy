@@ -261,6 +261,9 @@
     <EmbeddedResource Include="UI\UserControls\FindReplacePipelineElementUserControl.resx">
       <DependentUpon>FindReplacePipelineElementUserControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserControls\InjectDriveLabelPipelineElementUserControl.fr-CA.resx">
+      <DependentUpon>InjectDriveLabelPipelineElementUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\InjectDriveLabelPipelineElementUserControl.resx">
       <DependentUpon>InjectDriveLabelPipelineElementUserControl.cs</DependentUpon>
     </EmbeddedResource>
