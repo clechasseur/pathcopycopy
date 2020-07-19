@@ -28,6 +28,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PathsSeparatorPipelineElementUserControl));
             this.SeparatorLbl = new System.Windows.Forms.Label();
             this.SeparatorTxt = new System.Windows.Forms.TextBox();
             this.SeparatorToolTip = new System.Windows.Forms.ToolTip(this.components);
@@ -35,33 +36,25 @@
             // 
             // SeparatorLbl
             // 
-            this.SeparatorLbl.AutoSize = true;
-            this.SeparatorLbl.Location = new System.Drawing.Point(-3, 3);
+            resources.ApplyResources(this.SeparatorLbl, "SeparatorLbl");
             this.SeparatorLbl.Name = "SeparatorLbl";
-            this.SeparatorLbl.Size = new System.Drawing.Size(56, 13);
-            this.SeparatorLbl.TabIndex = 0;
-            this.SeparatorLbl.Text = "&Separator:";
+            this.SeparatorToolTip.SetToolTip(this.SeparatorLbl, resources.GetString("SeparatorLbl.ToolTip"));
             // 
             // SeparatorTxt
             // 
-            this.SeparatorTxt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.SeparatorTxt.Location = new System.Drawing.Point(59, 0);
+            resources.ApplyResources(this.SeparatorTxt, "SeparatorTxt");
             this.SeparatorTxt.Name = "SeparatorTxt";
-            this.SeparatorTxt.Size = new System.Drawing.Size(172, 20);
-            this.SeparatorTxt.TabIndex = 1;
-            this.SeparatorToolTip.SetToolTip(this.SeparatorTxt, "Character string used to separate multiple copied paths; the default value (when " +
-        "this option is not present) is a carriage return");
+            this.SeparatorToolTip.SetToolTip(this.SeparatorTxt, resources.GetString("SeparatorTxt.ToolTip"));
             this.SeparatorTxt.TextChanged += new System.EventHandler(this.SeparatorTxt_TextChanged);
             // 
             // PathsSeparatorPipelineElementUserControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.SeparatorTxt);
             this.Controls.Add(this.SeparatorLbl);
             this.Name = "PathsSeparatorPipelineElementUserControl";
-            this.Size = new System.Drawing.Size(231, 20);
+            this.SeparatorToolTip.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.ResumeLayout(false);
             this.PerformLayout();
 

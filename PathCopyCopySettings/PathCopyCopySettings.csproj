@@ -267,6 +267,9 @@
     <EmbeddedResource Include="UI\UserControls\InjectDriveLabelPipelineElementUserControl.resx">
       <DependentUpon>InjectDriveLabelPipelineElementUserControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserControls\PathsSeparatorPipelineElementUserControl.fr-CA.resx">
+      <DependentUpon>PathsSeparatorPipelineElementUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\PathsSeparatorPipelineElementUserControl.resx">
       <DependentUpon>PathsSeparatorPipelineElementUserControl.cs</DependentUpon>
     </EmbeddedResource>
