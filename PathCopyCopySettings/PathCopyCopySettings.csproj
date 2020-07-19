@@ -279,6 +279,9 @@
     <EmbeddedResource Include="UI\UserControls\PipelineElementWithExecutableUserControl.resx">
       <DependentUpon>PipelineElementWithExecutableUserControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserControls\PipelineElementWithPluginIDUserControl.fr-CA.resx">
+      <DependentUpon>PipelineElementWithPluginIDUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\PipelineElementWithPluginIDUserControl.resx">
       <DependentUpon>PipelineElementWithPluginIDUserControl.cs</DependentUpon>
     </EmbeddedResource>
