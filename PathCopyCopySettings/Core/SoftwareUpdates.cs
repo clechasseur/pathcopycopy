@@ -286,7 +286,8 @@ namespace PathCopyCopy.Settings.Core
                             if (ignoredVersion != null && ignoredVersion.CompareTo(thisVersion) > 0) {
                                 thisVersion = ignoredVersion;
                             }
-                            hasUpdate = latestVersion != null && latestVersion.CompareTo(thisVersion) > 0;
+                            hasUpdate = latestVersion != null && (latestVersion.CompareTo(thisVersion) > 0 ||
+                                (userSettings.DevBuild && latestVersion.CompareTo(thisVersion) >= 0));
 
                             // If there is a software update, show the modal form.
                             bool ignoreUpdate = false;

@@ -120,6 +120,9 @@
   <data name="CYGWIN_PATH_PLUGIN_DESCRIPTION" xml:space="preserve">
     <value>Copier le chemin Cygwin</value>
   </data>
+  <data name="DEV_BUILD" xml:space="preserve">
+    <value> (version de développement)</value>
+  </data>
   <data name="EDITING_DISABLED_MESSAGE" xml:space="preserve">
     <value>Cette fonction a été désactivée par l'administrateur.</value>
   </data>

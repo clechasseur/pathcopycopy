@@ -188,6 +188,12 @@ namespace PathCopyCopy.Settings.Core
         /// the URL of the software update file to check.
         private const string UpdateChannelValueName = "UpdateChannel";
 
+#if !DEBUG
+        /// Name of registry value that indicates whether this is a dev build.
+        /// This will be true for Debug builds as well as builds done by CI.
+        private const string DevBuildValueName = "DevBuild";
+#endif
+
         /// Separator used between plugins in the registry values.
         private const char PluginsValueSeparator = ',';
 
@@ -244,6 +250,11 @@ namespace PathCopyCopy.Settings.Core
 
         /// Default value for all size and position components of Settings form.
         private const int SettingsFormPosSizeDefaultValue = -1;
+
+#if !DEBUG
+        /// Default value of the "dev build" setting.
+        private const int DevBuildDefaultValue = 0;
+#endif
 
         /// Separator used between pipeline plugins in the display order string.
         private const char PipelinePluginsDisplayOrderSeparator = ',';
@@ -746,8 +757,26 @@ namespace PathCopyCopy.Settings.Core
             }
         }
 
+#pragma warning disable CA1822 // DevBuild could be static in Debug builds
+
+        /// <summary>
+        /// Whether this is a development build. This will be true of all
+        /// Debug builds as well as builds made by CI.
+        /// </summary>
+        public bool DevBuild
+        {
+            get {
+#if DEBUG
+                return true;
+#else
+                return ((int) GetUserOrGlobalValue(DevBuildValueName, DevBuildDefaultValue)) != 0;
+#endif
+            }
+        }
+
+#pragma warning restore CA1822 // DevBuild could be static in Debug builds
 #pragma warning restore CA2227 // Collection properties should be read only
-        
+
         /// <summary>
         /// Constructor. Creates the registry key right away to read the settings,
         /// both global and user-specific.

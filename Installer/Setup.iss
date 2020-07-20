@@ -31,6 +31,17 @@
 #define SIGNCODE "yes"
 #endif
 
+; Set this to "yes" to produce a dev build (e.g. from CI).
+#ifndef DEVBUILD
+#define DEVBUILD "no"
+#endif
+
+#if "yes" == DEVBUILD
+#define DevBuildValue 1
+#else
+#define DevBuildValue 0
+#endif
+
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
@@ -98,6 +109,7 @@ Source: ..\Samples\SampleCOMPluginCSharp\SampleCOMPlugin\Properties\*; DestDir: 
 Name: {group}\Path Copy Copy Settings; Filename: {app}\PathCopyCopySettings.exe; Flags: excludefromshowinnewinstall
 
 [Registry]
+Root: HKA; Subkey: Software\clechasseur\PathCopyCopy; ValueType: dword; ValueName: DevBuild; ValueData: {#DevBuildValue}; Flags: uninsdeletevalue
 Root: HKA; Subkey: Software\clechasseur\PathCopyCopy; ValueType: string; ValueName: InstallSource; ValueData: Inno; Flags: uninsdeletevalue
 Root: HKLM32; Subkey: Software\clechasseur\PathCopyCopy; ValueType: string; ValueName: InstallSource; ValueData: Inno; Flags: uninsdeletevalue; Check: Is64BitInstallMode and IsAdminInstallMode
 Root: HKLM32; Subkey: Software\clechasseur\PathCopyCopy\PipelinePlugins; Flags: uninsdeletekeyifempty; Check: IsAdminInstallMode 

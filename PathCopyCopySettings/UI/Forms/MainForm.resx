@@ -219,6 +219,24 @@
   <data name="MainTabCtrl.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
+  <data name="DuplicatePipelinePluginBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="DuplicatePipelinePluginBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>384, 197</value>
+  </data>
+  <data name="DuplicatePipelinePluginBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="DuplicatePipelinePluginBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="DuplicatePipelinePluginBtn.Text" xml:space="preserve">
+    <value>Dup&amp;licate</value>
+  </data>
+  <data name="DuplicatePipelinePluginBtn.ToolTip" xml:space="preserve">
+    <value>Create a copy of the selected custom command</value>
+  </data>
   <data name="&gt;&gt;DuplicatePipelinePluginBtn.Name" xml:space="preserve">
     <value>DuplicatePipelinePluginBtn</value>
   </data>
@@ -230,6 +248,18 @@
   </data>
   <data name="&gt;&gt;DuplicatePipelinePluginBtn.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="PreviewCtrl.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
+  <data name="PreviewCtrl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 460</value>
+  </data>
+  <data name="PreviewCtrl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>369, 53</value>
+  </data>
+  <data name="PreviewCtrl.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
   <data name="&gt;&gt;PreviewCtrl.Name" xml:space="preserve">
     <value>PreviewCtrl</value>
@@ -243,6 +273,24 @@
   <data name="&gt;&gt;PreviewCtrl.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="AddSeparatorBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="AddSeparatorBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>384, 139</value>
+  </data>
+  <data name="AddSeparatorBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="AddSeparatorBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="AddSeparatorBtn.Text" xml:space="preserve">
+    <value>&amp;Separator</value>
+  </data>
+  <data name="AddSeparatorBtn.ToolTip" xml:space="preserve">
+    <value>Insert a separator after the currently selected command</value>
+  </data>
   <data name="&gt;&gt;AddSeparatorBtn.Name" xml:space="preserve">
     <value>AddSeparatorBtn</value>
   </data>
@@ -254,6 +302,24 @@
   </data>
   <data name="&gt;&gt;AddSeparatorBtn.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="ImportPipelinePluginsBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="ImportPipelinePluginsBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>384, 292</value>
+  </data>
+  <data name="ImportPipelinePluginsBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="ImportPipelinePluginsBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="ImportPipelinePluginsBtn.Text" xml:space="preserve">
+    <value>&amp;Import...</value>
+  </data>
+  <data name="ImportPipelinePluginsBtn.ToolTip" xml:space="preserve">
+    <value>Import custom commands from a file on disk</value>
   </data>
   <data name="&gt;&gt;ImportPipelinePluginsBtn.Name" xml:space="preserve">
     <value>ImportPipelinePluginsBtn</value>
@@ -267,6 +333,24 @@
   <data name="&gt;&gt;ImportPipelinePluginsBtn.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="ExportPipelinePluginsBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="ExportPipelinePluginsBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>384, 263</value>
+  </data>
+  <data name="ExportPipelinePluginsBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="ExportPipelinePluginsBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="ExportPipelinePluginsBtn.Text" xml:space="preserve">
+    <value>Ex&amp;port...</value>
+  </data>
+  <data name="ExportPipelinePluginsBtn.ToolTip" xml:space="preserve">
+    <value>Export the selected custom commands to a file on disk</value>
+  </data>
   <data name="&gt;&gt;ExportPipelinePluginsBtn.Name" xml:space="preserve">
     <value>ExportPipelinePluginsBtn</value>
   </data>
@@ -278,6 +362,18 @@
   </data>
   <data name="&gt;&gt;ExportPipelinePluginsBtn.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="BevelLineLbl2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="BevelLineLbl2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>384, 255</value>
+  </data>
+  <data name="BevelLineLbl2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 2</value>
+  </data>
+  <data name="BevelLineLbl2.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
   </data>
   <data name="&gt;&gt;BevelLineLbl2.Name" xml:space="preserve">
     <value>BevelLineLbl2</value>
@@ -291,6 +387,24 @@
   <data name="&gt;&gt;BevelLineLbl2.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="RemovePluginBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="RemovePluginBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>384, 226</value>
+  </data>
+  <data name="RemovePluginBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="RemovePluginBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="RemovePluginBtn.Text" xml:space="preserve">
+    <value>&amp;Remove</value>
+  </data>
+  <data name="RemovePluginBtn.ToolTip" xml:space="preserve">
+    <value>Delete the selected custom command or separator</value>
+  </data>
   <data name="&gt;&gt;RemovePluginBtn.Name" xml:space="preserve">
     <value>RemovePluginBtn</value>
   </data>
@@ -302,6 +416,24 @@
   </data>
   <data name="&gt;&gt;RemovePluginBtn.ZOrder" xml:space="preserve">
     <value>6</value>
+  </data>
+  <data name="EditPipelinePluginBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="EditPipelinePluginBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>384, 168</value>
+  </data>
+  <data name="EditPipelinePluginBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="EditPipelinePluginBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="EditPipelinePluginBtn.Text" xml:space="preserve">
+    <value>&amp;Edit...</value>
+  </data>
+  <data name="EditPipelinePluginBtn.ToolTip" xml:space="preserve">
+    <value>Modify the selected custom command</value>
   </data>
   <data name="&gt;&gt;EditPipelinePluginBtn.Name" xml:space="preserve">
     <value>EditPipelinePluginBtn</value>
@@ -315,6 +447,24 @@
   <data name="&gt;&gt;EditPipelinePluginBtn.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="AddPipelinePluginBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="AddPipelinePluginBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>384, 110</value>
+  </data>
+  <data name="AddPipelinePluginBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="AddPipelinePluginBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="AddPipelinePluginBtn.Text" xml:space="preserve">
+    <value>&amp;New...</value>
+  </data>
+  <data name="AddPipelinePluginBtn.ToolTip" xml:space="preserve">
+    <value>Create a new custom command</value>
+  </data>
   <data name="&gt;&gt;AddPipelinePluginBtn.Name" xml:space="preserve">
     <value>AddPipelinePluginBtn</value>
   </data>
@@ -326,6 +476,18 @@
   </data>
   <data name="&gt;&gt;AddPipelinePluginBtn.ZOrder" xml:space="preserve">
     <value>8</value>
+  </data>
+  <data name="BevelLineLbl.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="BevelLineLbl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>384, 102</value>
+  </data>
+  <data name="BevelLineLbl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 2</value>
+  </data>
+  <data name="BevelLineLbl.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
   <data name="&gt;&gt;BevelLineLbl.Name" xml:space="preserve">
     <value>BevelLineLbl</value>
@@ -339,6 +501,24 @@
   <data name="&gt;&gt;BevelLineLbl.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
+  <data name="MovePluginDownBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="MovePluginDownBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>384, 73</value>
+  </data>
+  <data name="MovePluginDownBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="MovePluginDownBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="MovePluginDownBtn.Text" xml:space="preserve">
+    <value>&amp;Down</value>
+  </data>
+  <data name="MovePluginDownBtn.ToolTip" xml:space="preserve">
+    <value>Move the selected command down one position</value>
+  </data>
   <data name="&gt;&gt;MovePluginDownBtn.Name" xml:space="preserve">
     <value>MovePluginDownBtn</value>
   </data>
@@ -350,6 +530,24 @@
   </data>
   <data name="&gt;&gt;MovePluginDownBtn.ZOrder" xml:space="preserve">
     <value>10</value>
+  </data>
+  <data name="MovePluginUpBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="MovePluginUpBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>384, 44</value>
+  </data>
+  <data name="MovePluginUpBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="MovePluginUpBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="MovePluginUpBtn.Text" xml:space="preserve">
+    <value>&amp;Up</value>
+  </data>
+  <data name="MovePluginUpBtn.ToolTip" xml:space="preserve">
+    <value>Move the selected command up one position</value>
   </data>
   <data name="&gt;&gt;MovePluginUpBtn.Name" xml:space="preserve">
     <value>MovePluginUpBtn</value>
@@ -363,6 +561,21 @@
   <data name="&gt;&gt;MovePluginUpBtn.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
+  <data name="PluginsExplanationLbl2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="PluginsExplanationLbl2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 19</value>
+  </data>
+  <data name="PluginsExplanationLbl2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>429, 13</value>
+  </data>
+  <data name="PluginsExplanationLbl2.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="PluginsExplanationLbl2.Text" xml:space="preserve">
+    <value>well as Path Copy Copy's own submenu. You can also add, remove or reorder commands.</value>
+  </data>
   <data name="&gt;&gt;PluginsExplanationLbl2.Name" xml:space="preserve">
     <value>PluginsExplanationLbl2</value>
   </data>
@@ -375,6 +588,57 @@
   <data name="&gt;&gt;PluginsExplanationLbl2.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
+  <data name="PluginsDataGrid.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <metadata name="IconCol.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="IconCol.HeaderText" xml:space="preserve">
+    <value>Icon</value>
+  </data>
+  <data name="IconCol.MinimumWidth" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="IconCol.Width" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
+  <metadata name="PluginCol.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="PluginCol.HeaderText" xml:space="preserve">
+    <value>Command</value>
+  </data>
+  <metadata name="InMainMenuCol.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="InMainMenuCol.HeaderText" xml:space="preserve">
+    <value>Main menu</value>
+  </data>
+  <data name="InMainMenuCol.Width" type="System.Int32, mscorlib">
+    <value>65</value>
+  </data>
+  <metadata name="InSubmenuCol.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="InSubmenuCol.HeaderText" xml:space="preserve">
+    <value>Submenu</value>
+  </data>
+  <data name="InSubmenuCol.Width" type="System.Int32, mscorlib">
+    <value>58</value>
+  </data>
+  <metadata name="PluginsDataGridBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>15, 39</value>
+  </metadata>
+  <data name="PluginsDataGrid.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 44</value>
+  </data>
+  <data name="PluginsDataGrid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>369, 410</value>
+  </data>
+  <data name="PluginsDataGrid.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
   <data name="&gt;&gt;PluginsDataGrid.Name" xml:space="preserve">
     <value>PluginsDataGrid</value>
   </data>
@@ -386,6 +650,21 @@
   </data>
   <data name="&gt;&gt;PluginsDataGrid.ZOrder" xml:space="preserve">
     <value>13</value>
+  </data>
+  <data name="PluginsExplanationLbl.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="PluginsExplanationLbl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
+  </data>
+  <data name="PluginsExplanationLbl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>439, 13</value>
+  </data>
+  <data name="PluginsExplanationLbl.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="PluginsExplanationLbl.Text" xml:space="preserve">
+    <value>Here, you can choose which commands are shown in the main Explorer contextual menu as</value>
   </data>
   <data name="&gt;&gt;PluginsExplanationLbl.Name" xml:space="preserve">
     <value>PluginsExplanationLbl</value>
@@ -642,12 +921,12 @@
   <data name="&gt;&gt;AreQuotesOptionalChk.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <metadata name="CtrlKeyPluginComboBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>209, 40</value>
-  </metadata>
   <data name="CtrlKeyPluginCombo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
+  <metadata name="CtrlKeyPluginComboBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>209, 40</value>
+  </metadata>
   <data name="CtrlKeyPluginCombo.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -1065,662 +1344,8 @@
   <data name="&gt;&gt;MiscOptionsPage.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;AboutTableLayoutPanel.Name" xml:space="preserve">
-    <value>AboutTableLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;AboutTableLayoutPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;AboutTableLayoutPanel.Parent" xml:space="preserve">
-    <value>AboutPage</value>
-  </data>
-  <data name="&gt;&gt;AboutTableLayoutPanel.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="AboutTableLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="ProductAndVersionLbl" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="CopyrightLbl" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="VisitWebsiteLbl" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="SiteLinkLbl" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="LicenseExplanationLbl" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="LicenseTxtLinkLbl" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="DonationLinkLbl" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Absolute,80,Absolute,80,Absolute,40,Absolute,60,Absolute,40,Absolute,60,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
-  </data>
-  <data name="AboutPage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="AboutPage.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="AboutPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>465, 519</value>
-  </data>
-  <data name="AboutPage.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="AboutPage.Text" xml:space="preserve">
-    <value>About</value>
-  </data>
-  <data name="&gt;&gt;AboutPage.Name" xml:space="preserve">
-    <value>AboutPage</value>
-  </data>
-  <data name="&gt;&gt;AboutPage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;AboutPage.Parent" xml:space="preserve">
-    <value>MainTabCtrl</value>
-  </data>
-  <data name="&gt;&gt;AboutPage.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="MainTabCtrl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 12</value>
-  </data>
-  <data name="MainTabCtrl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>473, 545</value>
-  </data>
-  <data name="MainTabCtrl.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;MainTabCtrl.Name" xml:space="preserve">
-    <value>MainTabCtrl</value>
-  </data>
-  <data name="&gt;&gt;MainTabCtrl.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;MainTabCtrl.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;MainTabCtrl.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="DuplicatePipelinePluginBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="DuplicatePipelinePluginBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>384, 197</value>
-  </data>
-  <data name="DuplicatePipelinePluginBtn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="DuplicatePipelinePluginBtn.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="DuplicatePipelinePluginBtn.Text" xml:space="preserve">
-    <value>Dup&amp;licate</value>
-  </data>
-  <data name="DuplicatePipelinePluginBtn.ToolTip" xml:space="preserve">
-    <value>Create a copy of the selected custom command</value>
-  </data>
-  <data name="&gt;&gt;DuplicatePipelinePluginBtn.Name" xml:space="preserve">
-    <value>DuplicatePipelinePluginBtn</value>
-  </data>
-  <data name="&gt;&gt;DuplicatePipelinePluginBtn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;DuplicatePipelinePluginBtn.Parent" xml:space="preserve">
-    <value>PluginsPage</value>
-  </data>
-  <data name="&gt;&gt;DuplicatePipelinePluginBtn.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="PreviewCtrl.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left, Right</value>
-  </data>
-  <data name="PreviewCtrl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 460</value>
-  </data>
-  <data name="PreviewCtrl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>369, 53</value>
-  </data>
-  <data name="PreviewCtrl.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;PreviewCtrl.Name" xml:space="preserve">
-    <value>PreviewCtrl</value>
-  </data>
-  <data name="&gt;&gt;PreviewCtrl.Type" xml:space="preserve">
-    <value>PathCopyCopy.Settings.UI.UserControls.PluginPreviewUserControl, PathCopyCopySettings, Version=19.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;PreviewCtrl.Parent" xml:space="preserve">
-    <value>PluginsPage</value>
-  </data>
-  <data name="&gt;&gt;PreviewCtrl.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="AddSeparatorBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="AddSeparatorBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>384, 139</value>
-  </data>
-  <data name="AddSeparatorBtn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="AddSeparatorBtn.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="AddSeparatorBtn.Text" xml:space="preserve">
-    <value>&amp;Separator</value>
-  </data>
-  <data name="AddSeparatorBtn.ToolTip" xml:space="preserve">
-    <value>Insert a separator after the currently selected command</value>
-  </data>
-  <data name="&gt;&gt;AddSeparatorBtn.Name" xml:space="preserve">
-    <value>AddSeparatorBtn</value>
-  </data>
-  <data name="&gt;&gt;AddSeparatorBtn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;AddSeparatorBtn.Parent" xml:space="preserve">
-    <value>PluginsPage</value>
-  </data>
-  <data name="&gt;&gt;AddSeparatorBtn.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="ImportPipelinePluginsBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="ImportPipelinePluginsBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>384, 292</value>
-  </data>
-  <data name="ImportPipelinePluginsBtn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="ImportPipelinePluginsBtn.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="ImportPipelinePluginsBtn.Text" xml:space="preserve">
-    <value>&amp;Import...</value>
-  </data>
-  <data name="ImportPipelinePluginsBtn.ToolTip" xml:space="preserve">
-    <value>Import custom commands from a file on disk</value>
-  </data>
-  <data name="&gt;&gt;ImportPipelinePluginsBtn.Name" xml:space="preserve">
-    <value>ImportPipelinePluginsBtn</value>
-  </data>
-  <data name="&gt;&gt;ImportPipelinePluginsBtn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ImportPipelinePluginsBtn.Parent" xml:space="preserve">
-    <value>PluginsPage</value>
-  </data>
-  <data name="&gt;&gt;ImportPipelinePluginsBtn.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="ExportPipelinePluginsBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="ExportPipelinePluginsBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>384, 263</value>
-  </data>
-  <data name="ExportPipelinePluginsBtn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="ExportPipelinePluginsBtn.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="ExportPipelinePluginsBtn.Text" xml:space="preserve">
-    <value>Ex&amp;port...</value>
-  </data>
-  <data name="ExportPipelinePluginsBtn.ToolTip" xml:space="preserve">
-    <value>Export the selected custom commands to a file on disk</value>
-  </data>
-  <data name="&gt;&gt;ExportPipelinePluginsBtn.Name" xml:space="preserve">
-    <value>ExportPipelinePluginsBtn</value>
-  </data>
-  <data name="&gt;&gt;ExportPipelinePluginsBtn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ExportPipelinePluginsBtn.Parent" xml:space="preserve">
-    <value>PluginsPage</value>
-  </data>
-  <data name="&gt;&gt;ExportPipelinePluginsBtn.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="BevelLineLbl2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="BevelLineLbl2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>384, 255</value>
-  </data>
-  <data name="BevelLineLbl2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 2</value>
-  </data>
-  <data name="BevelLineLbl2.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;BevelLineLbl2.Name" xml:space="preserve">
-    <value>BevelLineLbl2</value>
-  </data>
-  <data name="&gt;&gt;BevelLineLbl2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;BevelLineLbl2.Parent" xml:space="preserve">
-    <value>PluginsPage</value>
-  </data>
-  <data name="&gt;&gt;BevelLineLbl2.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="RemovePluginBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="RemovePluginBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>384, 226</value>
-  </data>
-  <data name="RemovePluginBtn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="RemovePluginBtn.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="RemovePluginBtn.Text" xml:space="preserve">
-    <value>&amp;Remove</value>
-  </data>
-  <data name="RemovePluginBtn.ToolTip" xml:space="preserve">
-    <value>Delete the selected custom command or separator</value>
-  </data>
-  <data name="&gt;&gt;RemovePluginBtn.Name" xml:space="preserve">
-    <value>RemovePluginBtn</value>
-  </data>
-  <data name="&gt;&gt;RemovePluginBtn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;RemovePluginBtn.Parent" xml:space="preserve">
-    <value>PluginsPage</value>
-  </data>
-  <data name="&gt;&gt;RemovePluginBtn.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="EditPipelinePluginBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="EditPipelinePluginBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>384, 168</value>
-  </data>
-  <data name="EditPipelinePluginBtn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="EditPipelinePluginBtn.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="EditPipelinePluginBtn.Text" xml:space="preserve">
-    <value>&amp;Edit...</value>
-  </data>
-  <data name="EditPipelinePluginBtn.ToolTip" xml:space="preserve">
-    <value>Modify the selected custom command</value>
-  </data>
-  <data name="&gt;&gt;EditPipelinePluginBtn.Name" xml:space="preserve">
-    <value>EditPipelinePluginBtn</value>
-  </data>
-  <data name="&gt;&gt;EditPipelinePluginBtn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;EditPipelinePluginBtn.Parent" xml:space="preserve">
-    <value>PluginsPage</value>
-  </data>
-  <data name="&gt;&gt;EditPipelinePluginBtn.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="AddPipelinePluginBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="AddPipelinePluginBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>384, 110</value>
-  </data>
-  <data name="AddPipelinePluginBtn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="AddPipelinePluginBtn.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="AddPipelinePluginBtn.Text" xml:space="preserve">
-    <value>&amp;New...</value>
-  </data>
-  <data name="AddPipelinePluginBtn.ToolTip" xml:space="preserve">
-    <value>Create a new custom command</value>
-  </data>
-  <data name="&gt;&gt;AddPipelinePluginBtn.Name" xml:space="preserve">
-    <value>AddPipelinePluginBtn</value>
-  </data>
-  <data name="&gt;&gt;AddPipelinePluginBtn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;AddPipelinePluginBtn.Parent" xml:space="preserve">
-    <value>PluginsPage</value>
-  </data>
-  <data name="&gt;&gt;AddPipelinePluginBtn.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="BevelLineLbl.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="BevelLineLbl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>384, 102</value>
-  </data>
-  <data name="BevelLineLbl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 2</value>
-  </data>
-  <data name="BevelLineLbl.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;BevelLineLbl.Name" xml:space="preserve">
-    <value>BevelLineLbl</value>
-  </data>
-  <data name="&gt;&gt;BevelLineLbl.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;BevelLineLbl.Parent" xml:space="preserve">
-    <value>PluginsPage</value>
-  </data>
-  <data name="&gt;&gt;BevelLineLbl.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="MovePluginDownBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="MovePluginDownBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>384, 73</value>
-  </data>
-  <data name="MovePluginDownBtn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="MovePluginDownBtn.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="MovePluginDownBtn.Text" xml:space="preserve">
-    <value>&amp;Down</value>
-  </data>
-  <data name="MovePluginDownBtn.ToolTip" xml:space="preserve">
-    <value>Move the selected command down one position</value>
-  </data>
-  <data name="&gt;&gt;MovePluginDownBtn.Name" xml:space="preserve">
-    <value>MovePluginDownBtn</value>
-  </data>
-  <data name="&gt;&gt;MovePluginDownBtn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;MovePluginDownBtn.Parent" xml:space="preserve">
-    <value>PluginsPage</value>
-  </data>
-  <data name="&gt;&gt;MovePluginDownBtn.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="MovePluginUpBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="MovePluginUpBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>384, 44</value>
-  </data>
-  <data name="MovePluginUpBtn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="MovePluginUpBtn.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="MovePluginUpBtn.Text" xml:space="preserve">
-    <value>&amp;Up</value>
-  </data>
-  <data name="MovePluginUpBtn.ToolTip" xml:space="preserve">
-    <value>Move the selected command up one position</value>
-  </data>
-  <data name="&gt;&gt;MovePluginUpBtn.Name" xml:space="preserve">
-    <value>MovePluginUpBtn</value>
-  </data>
-  <data name="&gt;&gt;MovePluginUpBtn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;MovePluginUpBtn.Parent" xml:space="preserve">
-    <value>PluginsPage</value>
-  </data>
-  <data name="&gt;&gt;MovePluginUpBtn.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="PluginsExplanationLbl2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="PluginsExplanationLbl2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 19</value>
-  </data>
-  <data name="PluginsExplanationLbl2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>429, 13</value>
-  </data>
-  <data name="PluginsExplanationLbl2.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="PluginsExplanationLbl2.Text" xml:space="preserve">
-    <value>well as Path Copy Copy's own submenu. You can also add, remove or reorder commands.</value>
-  </data>
-  <data name="&gt;&gt;PluginsExplanationLbl2.Name" xml:space="preserve">
-    <value>PluginsExplanationLbl2</value>
-  </data>
-  <data name="&gt;&gt;PluginsExplanationLbl2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PluginsExplanationLbl2.Parent" xml:space="preserve">
-    <value>PluginsPage</value>
-  </data>
-  <data name="&gt;&gt;PluginsExplanationLbl2.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <metadata name="IconCol.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="PluginCol.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="InMainMenuCol.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="InSubmenuCol.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="PluginsDataGridBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>15, 39</value>
-  </metadata>
-  <data name="PluginsDataGrid.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="PluginsDataGrid.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 44</value>
-  </data>
-  <data name="PluginsDataGrid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>369, 410</value>
-  </data>
-  <data name="PluginsDataGrid.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;PluginsDataGrid.Name" xml:space="preserve">
-    <value>PluginsDataGrid</value>
-  </data>
-  <data name="&gt;&gt;PluginsDataGrid.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PluginsDataGrid.Parent" xml:space="preserve">
-    <value>PluginsPage</value>
-  </data>
-  <data name="&gt;&gt;PluginsDataGrid.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <metadata name="IconCol.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="IconCol.HeaderText" xml:space="preserve">
-    <value>Icon</value>
-  </data>
-  <data name="IconCol.MinimumWidth" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="IconCol.Width" type="System.Int32, mscorlib">
-    <value>34</value>
-  </data>
-  <metadata name="PluginCol.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="PluginCol.HeaderText" xml:space="preserve">
-    <value>Command</value>
-  </data>
-  <metadata name="InMainMenuCol.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="InMainMenuCol.HeaderText" xml:space="preserve">
-    <value>Main menu</value>
-  </data>
-  <data name="InMainMenuCol.Width" type="System.Int32, mscorlib">
-    <value>65</value>
-  </data>
-  <metadata name="InSubmenuCol.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="InSubmenuCol.HeaderText" xml:space="preserve">
-    <value>Submenu</value>
-  </data>
-  <data name="InSubmenuCol.Width" type="System.Int32, mscorlib">
-    <value>58</value>
-  </data>
-  <metadata name="PluginsDataGridBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>15, 39</value>
-  </metadata>
-  <data name="PluginsExplanationLbl.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="PluginsExplanationLbl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 6</value>
-  </data>
-  <data name="PluginsExplanationLbl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>439, 13</value>
-  </data>
-  <data name="PluginsExplanationLbl.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="PluginsExplanationLbl.Text" xml:space="preserve">
-    <value>Here, you can choose which commands are shown in the main Explorer contextual menu as</value>
-  </data>
-  <data name="&gt;&gt;PluginsExplanationLbl.Name" xml:space="preserve">
-    <value>PluginsExplanationLbl</value>
-  </data>
-  <data name="&gt;&gt;PluginsExplanationLbl.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PluginsExplanationLbl.Parent" xml:space="preserve">
-    <value>PluginsPage</value>
-  </data>
-  <data name="&gt;&gt;PluginsExplanationLbl.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <metadata name="CtrlKeyPluginComboBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>209, 40</value>
-  </metadata>
   <data name="AboutTableLayoutPanel.ColumnCount" type="System.Int32, mscorlib">
     <value>1</value>
-  </data>
-  <data name="&gt;&gt;ProductAndVersionLbl.Name" xml:space="preserve">
-    <value>ProductAndVersionLbl</value>
-  </data>
-  <data name="&gt;&gt;ProductAndVersionLbl.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ProductAndVersionLbl.Parent" xml:space="preserve">
-    <value>AboutTableLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;ProductAndVersionLbl.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;CopyrightLbl.Name" xml:space="preserve">
-    <value>CopyrightLbl</value>
-  </data>
-  <data name="&gt;&gt;CopyrightLbl.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;CopyrightLbl.Parent" xml:space="preserve">
-    <value>AboutTableLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;CopyrightLbl.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;VisitWebsiteLbl.Name" xml:space="preserve">
-    <value>VisitWebsiteLbl</value>
-  </data>
-  <data name="&gt;&gt;VisitWebsiteLbl.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;VisitWebsiteLbl.Parent" xml:space="preserve">
-    <value>AboutTableLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;VisitWebsiteLbl.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;SiteLinkLbl.Name" xml:space="preserve">
-    <value>SiteLinkLbl</value>
-  </data>
-  <data name="&gt;&gt;SiteLinkLbl.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SiteLinkLbl.Parent" xml:space="preserve">
-    <value>AboutTableLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;SiteLinkLbl.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;LicenseExplanationLbl.Name" xml:space="preserve">
-    <value>LicenseExplanationLbl</value>
-  </data>
-  <data name="&gt;&gt;LicenseExplanationLbl.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LicenseExplanationLbl.Parent" xml:space="preserve">
-    <value>AboutTableLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;LicenseExplanationLbl.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;LicenseTxtLinkLbl.Name" xml:space="preserve">
-    <value>LicenseTxtLinkLbl</value>
-  </data>
-  <data name="&gt;&gt;LicenseTxtLinkLbl.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LicenseTxtLinkLbl.Parent" xml:space="preserve">
-    <value>AboutTableLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;LicenseTxtLinkLbl.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;DonationLinkLbl.Name" xml:space="preserve">
-    <value>DonationLinkLbl</value>
-  </data>
-  <data name="&gt;&gt;DonationLinkLbl.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;DonationLinkLbl.Parent" xml:space="preserve">
-    <value>AboutTableLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;DonationLinkLbl.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="AboutTableLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="AboutTableLayoutPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="AboutTableLayoutPanel.RowCount" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="AboutTableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>459, 513</value>
-  </data>
-  <data name="AboutTableLayoutPanel.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;AboutTableLayoutPanel.Name" xml:space="preserve">
-    <value>AboutTableLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;AboutTableLayoutPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;AboutTableLayoutPanel.Parent" xml:space="preserve">
-    <value>AboutPage</value>
-  </data>
-  <data name="&gt;&gt;AboutTableLayoutPanel.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="AboutTableLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="ProductAndVersionLbl" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="CopyrightLbl" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="VisitWebsiteLbl" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="SiteLinkLbl" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="LicenseExplanationLbl" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="LicenseTxtLinkLbl" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="DonationLinkLbl" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Absolute,80,Absolute,80,Absolute,40,Absolute,60,Absolute,40,Absolute,60,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="ProductAndVersionLbl.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -1741,7 +1366,7 @@
     <value>0</value>
   </data>
   <data name="ProductAndVersionLbl.Text" xml:space="preserve">
-    <value>Path Copy Copy {0}</value>
+    <value>Path Copy Copy {0}{1}</value>
   </data>
   <data name="ProductAndVersionLbl.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
@@ -1969,6 +1594,84 @@ Donations help fund future development and provide responsive support.</value>
   </data>
   <data name="&gt;&gt;DonationLinkLbl.ZOrder" xml:space="preserve">
     <value>6</value>
+  </data>
+  <data name="AboutTableLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="AboutTableLayoutPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="AboutTableLayoutPanel.RowCount" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="AboutTableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>459, 513</value>
+  </data>
+  <data name="AboutTableLayoutPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;AboutTableLayoutPanel.Name" xml:space="preserve">
+    <value>AboutTableLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;AboutTableLayoutPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;AboutTableLayoutPanel.Parent" xml:space="preserve">
+    <value>AboutPage</value>
+  </data>
+  <data name="&gt;&gt;AboutTableLayoutPanel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="AboutTableLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="ProductAndVersionLbl" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="CopyrightLbl" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="VisitWebsiteLbl" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="SiteLinkLbl" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="LicenseExplanationLbl" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="LicenseTxtLinkLbl" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="DonationLinkLbl" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Absolute,80,Absolute,80,Absolute,40,Absolute,60,Absolute,40,Absolute,60,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="AboutPage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="AboutPage.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="AboutPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>465, 519</value>
+  </data>
+  <data name="AboutPage.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="AboutPage.Text" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="&gt;&gt;AboutPage.Name" xml:space="preserve">
+    <value>AboutPage</value>
+  </data>
+  <data name="&gt;&gt;AboutPage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;AboutPage.Parent" xml:space="preserve">
+    <value>MainTabCtrl</value>
+  </data>
+  <data name="&gt;&gt;AboutPage.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="MainTabCtrl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
+  </data>
+  <data name="MainTabCtrl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>473, 545</value>
+  </data>
+  <data name="MainTabCtrl.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;MainTabCtrl.Name" xml:space="preserve">
+    <value>MainTabCtrl</value>
+  </data>
+  <data name="&gt;&gt;MainTabCtrl.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;MainTabCtrl.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;MainTabCtrl.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <metadata name="ExportPipelinePluginsSaveDlg.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>

@@ -133,7 +133,8 @@ namespace PathCopyCopy.Settings.UI.Forms
                 numComponents = 2;
             }
             ProductAndVersionLbl.Text = string.Format(CultureInfo.CurrentCulture,
-                ProductAndVersionLbl.Text, version.ToString(numComponents));
+                ProductAndVersionLbl.Text, version.ToString(numComponents),
+                Settings.DevBuild ? Resources.DEV_BUILD : string.Empty);
             CopyrightLbl.Text = GetAssemblyCopyrightString(thisAssembly);
             MainToolTip.SetToolTip(SiteLinkLbl, SiteLinkLbl.Text);
             MainToolTip.SetToolTip(LicenseTxtLinkLbl, Resources.MainForm_About_LicensePageURI);

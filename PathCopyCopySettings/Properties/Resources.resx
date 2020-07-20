@@ -498,4 +498,7 @@ Control-click to avoid displaying an icon for this command.</value>
   <data name="MainForm_Msg_LanguageSwitchedMsgTitle" xml:space="preserve">
     <value>Language Changed</value>
   </data>
+  <data name="DEV_BUILD" xml:space="preserve">
+    <value> (Dev Build)</value>
+  </data>
 </root>

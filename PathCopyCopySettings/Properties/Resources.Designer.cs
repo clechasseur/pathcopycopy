@@ -126,6 +126,15 @@ namespace PathCopyCopy.Settings.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to  (Dev Build).
+        /// </summary>
+        internal static string DEV_BUILD {
+            get {
+                return ResourceManager.GetString("DEV_BUILD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This function has been disabled by the administrator..
         /// </summary>
         internal static string EDITING_DISABLED_MESSAGE {
