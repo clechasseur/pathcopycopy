@@ -113,7 +113,7 @@ namespace
     const wchar_t* const    SETTING_PATHS_SEPARATOR_DEFAULT                 = L"";
     constexpr bool          SETTING_TRUE_LNK_PATHS_DEFAULT                  = false;
     const wchar_t* const    SETTING_WSL_PATH_PREFIX_DEFAULT                 = L"/mnt";
-    constexpr double        SETTING_UPDATE_INTERVAL_DEFAULT                 = 604800.0;     // One week, in seconds.
+    constexpr double        SETTING_UPDATE_INTERVAL_DEFAULT                 = 86400.0;      // One day, in seconds.
     constexpr bool          SETTING_DISABLE_SOFTWARE_UPDATE_DEFAULT         = false;
 
     // Constants used to parse data.
