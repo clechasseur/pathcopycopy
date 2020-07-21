@@ -79,7 +79,22 @@ SignTool=certum
 #endif
 
 [Languages]
-Name: english; MessagesFile: compiler:Default.isl
+Name: en_CA; MessagesFile: compiler:Default.isl
+Name: fr_CA; MessagesFile: compiler:Languages\French.isl
+
+[CustomMessages]
+CommandsPageCaption=Configuration
+CommandsPageDescription=Pre-configure commands
+CommandsPageSubCaption=Path Copy Copy ships with multiple commands used to copy paths (long path, network path, etc.) Please choose which ones to include by default. This can be changed later via Settings.
+CommandsPageCommonCommandsChoice=Commonly-used commands only
+CommandsPageNetworkCommandsChoice=Common commands and commands for network environments
+CommandsPageAllCommandsChoice=All commands, including power-user commands
+fr_CA.CommandsPageCaption=Configuration
+fr_CA.CommandsPageDescription=Configuration initiale des commandes
+fr_CA.CommandsPageSubCaption=Path Copy Copy vient avec plusieurs commandes permettant de copier des chemins (chemin long, chemin réseau, etc.) Veuillez choisir quelles commandes afficher par défaut. Ceci peut être changé plus tard via Paramètres.
+fr_CA.CommandsPageCommonCommandsChoice=Seules les commandes les plus utilisées
+fr_CA.CommandsPageNetworkCommandsChoice=Les commandes de base et celles utilisées dans les environnements réseaux
+fr_CA.CommandsPageAllCommandsChoice=Toutes les commandes, incluant celles plus avancées
 
 [Files]
 Source: ..\bin\Win32\Release\PathCopyCopy.dll; DestDir: {app}; Flags: ignoreversion restartreplace overwritereadonly uninsrestartdelete uninsremovereadonly; DestName: PCC32.dll; Check: (not Is64BitInstallMode) or IsAdminInstallMode
@@ -87,6 +102,7 @@ Source: ..\bin\x64\Release\PathCopyCopy.dll; DestDir: {app}; Flags: ignoreversio
 Source: ..\bin\Win32\Release\PathCopyCopyLocalization_en.dll; DestDir: {app}; Flags: ignoreversion restartreplace overwritereadonly uninsrestartdelete uninsremovereadonly
 Source: ..\bin\Win32\Release\PathCopyCopyLocalization_fr.dll; DestDir: {app}; Flags: ignoreversion restartreplace overwritereadonly uninsrestartdelete uninsremovereadonly
 Source: ..\bin\Win32\Release\PathCopyCopySettings.exe; DestDir: {app}; Flags: ignoreversion restartreplace overwritereadonly uninsrestartdelete uninsremovereadonly
+Source: ..\bin\Win32\Release\fr-CA\*; DestDir: {app}\fr-CA; Flags: ignoreversion restartreplace overwritereadonly uninsrestartdelete uninsremovereadonly
 Source: ..\bin\Win32\Release\PathCopyCopyRegexTester.exe; DestDir: {app}; Flags: ignoreversion restartreplace overwritereadonly uninsrestartdelete uninsremovereadonly
 Source: ..\bin\Win32\Release\PathCopyCopyCOMPluginExecutor32.exe; DestDir: {app}; Flags: ignoreversion restartreplace overwritereadonly uninsrestartdelete uninsremovereadonly
 Source: ..\bin\x64\Release\PathCopyCopyCOMPluginExecutor64.exe; DestDir: {app}; Flags: ignoreversion restartreplace overwritereadonly uninsrestartdelete uninsremovereadonly; Check: Is64BitInstallMode
@@ -109,8 +125,11 @@ Source: ..\Samples\SampleCOMPluginCSharp\SampleCOMPlugin\Properties\*; DestDir: 
 Name: {group}\Path Copy Copy Settings; Filename: {app}\PathCopyCopySettings.exe; Flags: excludefromshowinnewinstall
 
 [Registry]
+Root: HKA; Subkey: Software\clechasseur\PathCopyCopy; ValueType: string; ValueName: Language; ValueData: {code:LanguageValue}; Flags: uninsdeletevalue
 Root: HKA; Subkey: Software\clechasseur\PathCopyCopy; ValueType: dword; ValueName: DevBuild; ValueData: {#DevBuildValue}; Flags: uninsdeletevalue
 Root: HKA; Subkey: Software\clechasseur\PathCopyCopy; ValueType: string; ValueName: InstallSource; ValueData: Inno; Flags: uninsdeletevalue
+Root: HKLM32; Subkey: Software\clechasseur\PathCopyCopy; ValueType: string; ValueName: Language; ValueData: {code:LanguageValue}; Flags: uninsdeletevalue; Check: Is64BitInstallMode and IsAdminInstallMode
+Root: HKLM32; Subkey: Software\clechasseur\PathCopyCopy; ValueType: dword; ValueName: DevBuild; ValueData: {#DevBuildValue}; Flags: uninsdeletevalue; Check: Is64BitInstallMode and IsAdminInstallMode
 Root: HKLM32; Subkey: Software\clechasseur\PathCopyCopy; ValueType: string; ValueName: InstallSource; ValueData: Inno; Flags: uninsdeletevalue; Check: Is64BitInstallMode and IsAdminInstallMode
 Root: HKLM32; Subkey: Software\clechasseur\PathCopyCopy\PipelinePlugins; Flags: uninsdeletekeyifempty; Check: IsAdminInstallMode 
 Root: HKLM32; Subkey: Software\clechasseur\PathCopyCopy\Plugins; Flags: uninsdeletekeyifempty; Check: IsAdminInstallMode
@@ -224,6 +243,15 @@ begin
   // outside range, use the default value.
   if (Result < CCommonCommandsChoice) or (Result > CAllCommandsChoice) then
     Result := CCommonCommandsChoice;
+end;
+
+// Called to get the value to store in the Language registry value.
+function LanguageValue(Params: string): string;
+begin
+  // Language names in Inno Setup can't contain hyphens, so they
+  // were replaced by underscores.
+  Result := ExpandConstant('{language}');
+  StringChangeEx(Result, '_', '-', True);
 end;
 
 // Called to get the parameters to pass to regsvr32 to register/unregister
@@ -384,13 +412,11 @@ begin
   // Create a page to allow the user to select which commands
   // to include in the submenu by default.
   GCommandsPage := CreateInputOptionPage(wpSelectTasks,
-    'Configuration', 'Pre-configure commands',
-    'Path Copy Copy ships with multiple commands used to copy paths ' +
-    '(long path, network path, etc.) Please choose which ones to include ' +
-    'by default. This can be changed later via Settings.', True, False);
-  GCommandsPage.Add('Commonly-used commands only');
-  GCommandsPage.Add('Common commands and commands for network environments');
-  GCommandsPage.Add('All commands, including power-user commands');
+    CustomMessage('CommandsPageCaption'), CustomMessage('CommandsPageDescription'),
+    CustomMessage('CommandsPageSubCaption'), True, False);
+  GCommandsPage.Add(CustomMessage('CommandsPageCommonCommandsChoice'));
+  GCommandsPage.Add(CustomMessage('CommandsPageNetworkCommandsChoice'));
+  GCommandsPage.Add(CustomMessage('CommandsPageAllCommandsChoice'));
   GCommandsPage.SelectedValueIndex := InitialCommandsChoice;
   
   // Compute the ID of the last page the user is going to see before installation.

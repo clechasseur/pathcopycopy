@@ -381,7 +381,11 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>mkdir "$(SolutionDir)bin\x64\$(ConfigurationName)"
+    <PostBuildEvent>mkdir "$(TargetDir)fr-CA"
+mkdir "$(SolutionDir)bin\x64\$(ConfigurationName)"
+mkdir "$(SolutionDir)bin\x64\$(ConfigurationName)\fr-CA"
+copy /Y "$(SolutionDir)obj\Win32\$(ConfigurationName)\$(ProjectName)\fr-CA\*.*" "$(TargetDir)fr-CA\"
+copy /Y "$(SolutionDir)obj\Win32\$(ConfigurationName)\$(ProjectName)\fr-CA\*.*" "$(SolutionDir)bin\x64\$(ConfigurationName)\fr-CA\"
 copy /Y "$(TargetDir)$(TargetName).*" "$(SolutionDir)bin\x64\$(ConfigurationName)\"
 mkdir "$(SolutionDir)Schemas"
 "$(SDK40ToolsPath)xsd.exe" "$(TargetPath)" /outputdir:"$(SolutionDir)Schemas" /type:PathCopyCopy.Settings.Core.Plugins.PipelinePluginCollection
