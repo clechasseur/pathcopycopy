@@ -2843,8 +2843,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// <returns>User control.</returns>
         public override PipelineElementUserControl GetEditingControl()
         {
-            // TODO
-            return base.GetEditingControl();
+            return new CommandLinePipelineElementUserControl(this);
         }
     }
 

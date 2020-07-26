@@ -73,10 +73,12 @@ namespace PCC
                 }
 
                 // Generate temp file for the paths
-                std::wstring tempFilePath(MAX_PATH + 1, L'\0');
-                if (::GetTempFileNameW(tempDirPath.c_str(), L"pcc", 0, &*tempFilePath.begin()) == 0) {
+                std::wstring tempFilePathBuffer(MAX_PATH + 1, L'\0');
+                if (::GetTempFileNameW(tempDirPath.c_str(), L"pcc", 0, &*tempFilePathBuffer.begin()) == 0) {
                     throw LaunchExecutableException();
                 }
+                const std::wstring tempFilePath = tempFilePathBuffer.c_str();
+                
 
                 // Convert paths to single-byte string
                 const ATL::CStringA mbPaths(p_Paths.c_str());
@@ -85,6 +87,12 @@ namespace PCC
                 std::ofstream of(tempFilePath, std::ios::out | std::ios::binary);
                 of.write((LPCSTR) mbPaths, mbPaths.GetLength());
                 files = tempFilePath;
+
+                // If temp file path contains spaces, add quotes around the path to make sure
+                // it is passed correctly to the executable.
+                if (files.find(L" ") != std::wstring::npos) {
+                    files = L"\"" + files + L"\"";
+                }
             }
 
             // Look for files placeholder in arguments. If it's not there, append the files.

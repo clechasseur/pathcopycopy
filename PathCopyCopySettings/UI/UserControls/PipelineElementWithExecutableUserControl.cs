@@ -75,8 +75,8 @@ namespace PathCopyCopy.Settings.UI.UserControls
         {
             if (element != null) {
                 element.Executable = ExecutableTxt.Text;
+                OnPipelineElementChanged(EventArgs.Empty);
             }
-            OnPipelineElementChanged(EventArgs.Empty);
         }
 
         /// <summary>

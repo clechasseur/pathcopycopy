@@ -20,13 +20,7 @@
 // THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
 using PathCopyCopy.Settings.Core.Plugins;
 
 namespace PathCopyCopy.Settings.UI.UserControls
@@ -51,6 +45,41 @@ namespace PathCopyCopy.Settings.UI.UserControls
             this.element = element;
 
             InitializeComponent();
+        }
+
+        /// <summary>
+        /// Called to load our pipeline element. We populate our controls here.
+        /// </summary>
+        /// <param name="e">Event arguments.</param>
+        protected override void OnPipelineElementLoad(EventArgs e)
+        {
+            base.OnPipelineElementLoad(e);
+            ArgumentsTxt.Text = element.Arguments;
+            UseFilelistChk.Checked = element.UseFilelist;
+        }
+
+        /// <summary>
+        /// Called when the text of the Arguments textbox changes. We update
+        /// our associated pipeline element here.
+        /// </summary>
+        /// <param name="sender">Event sender.</param>
+        /// <param name="e">Event arguments.</param>
+        private void ArgumentsTxt_TextChanged(object sender, EventArgs e)
+        {
+            element.Arguments = ArgumentsTxt.Text;
+            OnPipelineElementChanged(EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Called when the checked state of the Use Filelist checkbox changes.
+        /// We update our associated pipeline element here.
+        /// </summary>
+        /// <param name="sender">Event sender.</param>
+        /// <param name="e">Event arguments.</param>
+        private void UseFilelistChk_CheckedChanged(object sender, EventArgs e)
+        {
+            element.UseFilelist = UseFilelistChk.Checked;
+            OnPipelineElementChanged(EventArgs.Empty);
         }
     }
 }
