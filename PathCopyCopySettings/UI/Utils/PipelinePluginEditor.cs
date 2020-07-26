@@ -153,7 +153,8 @@ namespace PathCopyCopy.Settings.UI.Utils
             return !(element is FollowSymlinkPipelineElement ||
                 element is InjectDriveLabelPipelineElement ||
                 element is CopyNPathPartsPipelineElement ||
-                element is StackPipelineElement);
+                element is StackPipelineElement ||
+                element is CommandLinePipelineElement);
         }
 
         /// <summary>
