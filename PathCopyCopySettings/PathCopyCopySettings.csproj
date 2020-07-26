@@ -250,6 +250,9 @@
     <EmbeddedResource Include="UI\Forms\SoftwareUpdateForm.resx">
       <DependentUpon>SoftwareUpdateForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserControls\CommandLinePipelineElementUserControl.fr-CA.resx">
+      <DependentUpon>CommandLinePipelineElementUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\CommandLinePipelineElementUserControl.resx">
       <DependentUpon>CommandLinePipelineElementUserControl.cs</DependentUpon>
     </EmbeddedResource>

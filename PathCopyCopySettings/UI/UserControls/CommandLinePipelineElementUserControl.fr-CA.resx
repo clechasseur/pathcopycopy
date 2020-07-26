@@ -117,121 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ArgumentsLbl.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="ArgumentsTxt.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="ArgumentsTxt.ToolTip" xml:space="preserve">
+    <value>Arguments à passer à l'exécutable. S'ils contiennent %FILES%, sera remplacé par les chemins, sinon les chemins seront ajoutés à la fin</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="&gt;&gt;CmdLineToolTip.Name" xml:space="preserve">
-    <value>CmdLineToolTip</value>
-  </data>
-  <data name="ArgumentsLbl.Text" xml:space="preserve">
-    <value>&amp;Arguments:</value>
-  </data>
-  <data name="&gt;&gt;ArgumentsLbl.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="ArgumentsLbl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 13</value>
-  </data>
-  <data name="ArgumentsLbl.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>PathCopyCopy.Settings.UI.UserControls.PipelineElementWithExecutableUserControl, PathCopyCopySettings, Version=19.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;UseFilelistChk.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>CommandLinePipelineElementUserControl</value>
-  </data>
-  <data name="UseFilelistChk.ToolTip" xml:space="preserve">
-    <value>Whether to pass paths to executable directly (unchecked) or in a filelist.txt (checked)</value>
-  </data>
-  <data name="ArgumentsLbl.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="UseFilelistChk.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
   <data name="UseFilelistChk.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 17</value>
-  </data>
-  <data name="&gt;&gt;ArgumentsLbl.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="ArgumentsTxt.ToolTip" xml:space="preserve">
-    <value>Arguments to pass to the executable. Include %FILES% to have it replaced by the file paths, otherwise paths will be appended</value>
+    <value>139, 17</value>
   </data>
   <data name="UseFilelistChk.Text" xml:space="preserve">
-    <value>Use &amp;filelist</value>
+    <value>Utiliser un &amp;fichier de liste</value>
   </data>
-  <data name="ArgumentsLbl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>-3, 31</value>
+  <data name="UseFilelistChk.ToolTip" xml:space="preserve">
+    <value>Détermine si les chemins seront passés à l'exécutable directement (non-coché) ou via un fichier de liste (coché)</value>
   </data>
-  <data name="&gt;&gt;CmdLineToolTip.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="ArgumentsTxt.Size" type="System.Drawing.Size, System.Drawing">
-    <value>252, 20</value>
-  </data>
-  <data name="UseFilelistChk.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;ArgumentsLbl.Name" xml:space="preserve">
-    <value>ArgumentsLbl</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ArgumentsTxt.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="UseFilelistChk.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 54</value>
-  </data>
-  <data name="&gt;&gt;UseFilelistChk.Name" xml:space="preserve">
-    <value>UseFilelistChk</value>
-  </data>
-  <data name="&gt;&gt;ArgumentsTxt.Name" xml:space="preserve">
-    <value>ArgumentsTxt</value>
-  </data>
-  <data name="&gt;&gt;UseFilelistChk.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ArgumentsTxt.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;ArgumentsLbl.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;UseFilelistChk.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ArgumentsTxt.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="ArgumentsTxt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>66, 28</value>
-  </data>
-  <data name="&gt;&gt;ArgumentsTxt.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 79</value>
-  </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="CmdLineToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
 </root>
