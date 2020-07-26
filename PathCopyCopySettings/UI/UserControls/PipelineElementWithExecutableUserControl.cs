@@ -36,16 +36,23 @@ namespace PathCopyCopy.Settings.UI.UserControls
         private readonly PipelineElementWithExecutable element;
 
         /// <summary>
-        /// Constructor.
+        /// Default constructor.
+        /// </summary>
+        public PipelineElementWithExecutableUserControl()
+        {
+            InitializeComponent();
+        }
+
+        /// <summary>
+        /// Constructor with pipeline element.
         /// </summary>
         /// <param name="element">Pipeline element to configure.</param>
         public PipelineElementWithExecutableUserControl(PipelineElementWithExecutable element)
+            : this()
         {
             Debug.Assert(element != null);
 
             this.element = element;
-
-            InitializeComponent();
         }
 
         /// <summary>
@@ -55,7 +62,7 @@ namespace PathCopyCopy.Settings.UI.UserControls
         protected override void OnPipelineElementLoad(EventArgs e)
         {
             base.OnPipelineElementLoad(e);
-            ExecutableTxt.Text = element.Executable;
+            ExecutableTxt.Text = element?.Executable ?? string.Empty;
         }
         
         /// <summary>
@@ -66,7 +73,9 @@ namespace PathCopyCopy.Settings.UI.UserControls
         /// <param name="e">Event arguments.</param>
         private void ExecutableTxt_TextChanged(object sender, EventArgs e)
         {
-            element.Executable = ExecutableTxt.Text;
+            if (element != null) {
+                element.Executable = ExecutableTxt.Text;
+            }
             OnPipelineElementChanged(EventArgs.Empty);
         }
 

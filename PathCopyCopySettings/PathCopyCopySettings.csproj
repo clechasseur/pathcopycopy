@@ -88,6 +88,12 @@
     <Compile Include="UI\Forms\AdvancedPipelinePluginForm.Designer.cs">
       <DependentUpon>AdvancedPipelinePluginForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\UserControls\CommandLinePipelineElementUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UserControls\CommandLinePipelineElementUserControl.Designer.cs">
+      <DependentUpon>CommandLinePipelineElementUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\UserControls\ConfiglessPipelineElementUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
