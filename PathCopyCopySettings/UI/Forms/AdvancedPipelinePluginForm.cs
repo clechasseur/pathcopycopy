@@ -203,6 +203,9 @@ namespace PathCopyCopy.Settings.UI.Forms
             AddNewElementMenuItem(Resources.PipelineElement_ExecutableWithFilelist,
                 Resources.PipelineElement_ExecutableWithFilelist_HelpText,
                 () => new ExecutableWithFilelistPipelineElement());
+            AddNewElementMenuItem(Resources.PipelineElement_CommandLine,
+                Resources.PipelineElement_CommandLine_HelpText,
+                () => new CommandLinePipelineElement());
 
             if (oldPipeline != null) {
                 // Copy pipeline elements from the pipeline to a list that supports data binding.

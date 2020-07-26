@@ -587,6 +587,24 @@ namespace PathCopyCopy.Settings.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Options: Launch Command-Line.
+        /// </summary>
+        internal static string PipelineElement_CommandLine {
+            get {
+                return ResourceManager.GetString("PipelineElement_CommandLine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Instead of copying the paths to the clipboard, launch a command-line (executable &amp; arguments), including the paths in the arguments either directly or via a filelist.
+        /// </summary>
+        internal static string PipelineElement_CommandLine_HelpText {
+            get {
+                return ResourceManager.GetString("PipelineElement_CommandLine_HelpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Copy # path parts (from beginning or end).
         /// </summary>
         internal static string PipelineElement_CopyNPathParts {

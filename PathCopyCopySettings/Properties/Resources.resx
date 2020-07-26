@@ -501,4 +501,10 @@ Control-click to avoid displaying an icon for this command.</value>
   <data name="DEV_BUILD" xml:space="preserve">
     <value> (Dev Build)</value>
   </data>
+  <data name="PipelineElement_CommandLine" xml:space="preserve">
+    <value>Options: Launch Command-Line</value>
+  </data>
+  <data name="PipelineElement_CommandLine_HelpText" xml:space="preserve">
+    <value>Instead of copying the paths to the clipboard, launch a command-line (executable &amp; arguments), including the paths in the arguments either directly or via a filelist</value>
+  </data>
 </root>

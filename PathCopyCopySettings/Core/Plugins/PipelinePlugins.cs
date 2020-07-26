@@ -2743,6 +2743,110 @@ namespace PathCopyCopy.Settings.Core.Plugins
         {
         }
     }
+    
+    /// <summary>
+    /// Pipeline element that does not modify the path but instructs
+    /// Path Copy Copy to launch a command-line, passing the paths in
+    /// the arguments either directly or via a filelist.
+    /// </summary>
+    public class CommandLinePipelineElement : PipelineElementWithExecutable
+    {
+        /// <summary>
+        /// Code representing this pipeline element type.
+        /// </summary>
+        public const char CODE = '>';
+
+        /// <summary>
+        /// Code representing this pipeline element type.
+        /// </summary>
+        public override char Code
+        {
+            get {
+                return CODE;
+            }
+        }
+
+        /// <summary>
+        /// Pipeline element display value for the UI.
+        /// </summary>
+        public override string DisplayValue
+        {
+            get {
+                return Resources.PipelineElement_CommandLine;
+            }
+        }
+
+        /// <summary>
+        /// Minumum version of Path Copy Copy required to use this pipeline element.
+        /// </summary>
+        public override Version RequiredVersion
+        {
+            get {
+                return new Version(19, 0, 0, 0);
+            }
+        }
+
+        /// <summary>
+        /// Arguments to pass to the executable. Can include %FILES%,
+        /// which will be replaced with the paths (or the path to the
+        /// filelist if <see cref="UseFilelist"/> is <c>true</c>).
+        /// </summary>
+        public string Arguments
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Whether to use a filelist to pass the paths to the executable.
+        /// </summary>
+        public bool UseFilelist
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        public CommandLinePipelineElement()
+            : base()
+        {
+            Arguments = string.Empty;
+            UseFilelist = false;
+        }
+
+        /// <summary>
+        /// Constructor with arguments.
+        /// </summary>
+        /// <param name="executable">Path to executable.</param>
+        public CommandLinePipelineElement(string executable, string arguments, bool useFilelist)
+            : base(executable)
+        {
+            Arguments = arguments;
+            UseFilelist = useFilelist;
+        }
+
+        /// <summary>
+        /// Encodes this pipeline element in a string.
+        /// </summary>
+        /// <returns>Encoded element data.</returns>
+        public override string Encode()
+        {
+            // Encode the executable path, arguments and use filelist flag.
+            return base.Encode() + EncodeString(Arguments) + EncodeBool(UseFilelist);
+        }
+
+        /// <summary>
+        /// Returns a user control to configure this pipeline element.
+        /// </summary>
+        /// <returns>User control.</returns>
+        public override PipelineElementUserControl GetEditingControl()
+        {
+            // TODO
+            return base.GetEditingControl();
+        }
+    }
 
     /// <summary>
     /// Static class that can decode a pipeline of multiple elements from an
@@ -2890,6 +2994,10 @@ namespace PathCopyCopy.Settings.Core.Plugins
                 case ExecutablePipelineElement.CODE:
                 case ExecutableWithFilelistPipelineElement.CODE: {
                     element = DecodeExecutableElement(elementCode, encodedElements, ref curChar);
+                    break;
+                }
+                case CommandLinePipelineElement.CODE: {
+                    element = DecodeCommandLinePipelineElement(encodedElements, ref curChar);
                     break;
                 }
                 default:
@@ -3113,6 +3221,25 @@ namespace PathCopyCopy.Settings.Core.Plugins
                 default:
                     throw new InvalidPipelineException();
             }
+        }
+
+        /// <summary>
+        /// Decodes a <see cref="CommandLinePipelineElement"/> from
+        /// an encoded element string.
+        /// </summary>
+        /// <param name="encodedElements">String of encoded elements data.</param>
+        /// <param name="curChar">Position where the element data is to be found
+        /// in the string (not counting the element code). Upon return, this will
+        /// point just after the element data.</param>
+        private static CommandLinePipelineElement DecodeCommandLinePipelineElement(
+            string encodedElements, ref int curChar)
+        {
+            // The element data contains the executable path, arguments and
+            // a flag telling whether to use a filelist or not.
+            string executable = DecodeString(encodedElements, ref curChar);
+            string arguments = DecodeString(encodedElements, ref curChar);
+            bool useFilelist = DecodeBool(encodedElements, ref curChar);
+            return new CommandLinePipelineElement(executable, arguments, useFilelist);
         }
         
         /// <summary>

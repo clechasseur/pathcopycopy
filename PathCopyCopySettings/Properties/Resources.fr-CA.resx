@@ -233,6 +233,12 @@ Ctrl-cliquez pour faire que cette commande n'affiche pas d'icône.</value>
   <data name="PipelineElement_BackToForwardSlashes_HelpText" xml:space="preserve">
     <value>Remplacer toutes les barres obliques inverses ( \ ) dans le chemin par des barres obliques ( / )</value>
   </data>
+  <data name="PipelineElement_CommandLine" xml:space="preserve">
+    <value>Option: Lancer une ligne de commande</value>
+  </data>
+  <data name="PipelineElement_CommandLine_HelpText" xml:space="preserve">
+    <value>Au lieu de copier les chemins dans le presse-papier, lancer une ligne de command (exécutable et arguments) en incluant les chemins dans les arguments, soit directement soit via un fichier de liste</value>
+  </data>
   <data name="PipelineElement_CopyNPathParts" xml:space="preserve">
     <value>Copier # morceaux de chemin (à partir du début ou de la fin)</value>
   </data>
