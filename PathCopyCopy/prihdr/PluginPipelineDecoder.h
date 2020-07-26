@@ -80,6 +80,7 @@ namespace PCC
         static auto     DecodePathsSeparatorElement(EncodedElementsStream& p_rStream) -> PipelineElementSP;
         static auto     DecodeExecutableElement(wchar_t p_Code,
                                                 EncodedElementsStream& p_rStream) -> PipelineElementSP;
+        static auto     DecodeCommandLinePipelineElement(EncodedElementsStream& p_rStream) -> PipelineElementSP;
     };
 
 } // namespace PCC

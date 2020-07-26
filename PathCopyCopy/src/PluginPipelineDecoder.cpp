@@ -54,6 +54,7 @@ namespace
     constexpr wchar_t   ELEMENT_CODE_PATHS_SEPARATOR            = L',';
     constexpr wchar_t   ELEMENT_CODE_EXECUTABLE                 = L'x';
     constexpr wchar_t   ELEMENT_CODE_EXECUTABLE_WITH_FILELIST   = L'f';
+    constexpr wchar_t   ELEMENT_CODE_COMMAND_LINE               = L'>';
 
     // Version numbers used for regex elements.
     constexpr long      REGEX_ELEMENT_INITIAL_VERSION           = 1;
@@ -182,6 +183,10 @@ namespace PCC
             case ELEMENT_CODE_EXECUTABLE:
             case ELEMENT_CODE_EXECUTABLE_WITH_FILELIST: {
                 spElement = DecodeExecutableElement(code, p_rStream);
+                break;
+            }
+            case ELEMENT_CODE_COMMAND_LINE: {
+                spElement = DecodeCommandLinePipelineElement(p_rStream);
                 break;
             }
             default:
@@ -405,6 +410,22 @@ namespace PCC
         } else {
             throw InvalidPipelineException();
         }
+    }
+
+    //
+    // Decodes a CommandLinePipelineElement found in an encoded stream.
+    //
+    // @param p_rStream Stream containing encoded element.
+    // @return Newly-created element.
+    //
+    auto PipelineDecoder::DecodeCommandLinePipelineElement(PipelineDecoder::EncodedElementsStream& p_rStream) -> PipelineElementSP
+    {
+        // This type of element contains the executable path and arguments
+        // as well as a flag indicating whether to use a filelist.
+        const auto executable = p_rStream.ReadString();
+        const auto arguments = p_rStream.ReadString();
+        const auto useFilelist = p_rStream.ReadBool();
+        return std::make_shared<CommandLinePipelineElement>(executable, arguments, useFilelist);
     }
 
     //

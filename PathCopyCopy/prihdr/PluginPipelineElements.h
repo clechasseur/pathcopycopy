@@ -565,4 +565,30 @@ namespace PCC
         void            ModifyOptions(PipelineOptions& p_rOptions) const override;
     };
 
+    //
+    // CommandLinePipelineElement
+    //
+    // Pipeline element that instructs Path Copy Copy to launch an executable
+    // instead of copying paths to the clipboard, additionally providing
+    // optional arguments to pass to the executable. Can also instruct
+    // Path Copy Copy to use a filelist instead of paths directly.
+    //
+    class CommandLinePipelineElement : public ExecutablePipelineElement
+    {
+    public:
+                        CommandLinePipelineElement(const std::wstring& p_Executable,
+                                                   const std::wstring& p_Arguments,
+                                                   bool p_UseFilelist);
+                        CommandLinePipelineElement(const CommandLinePipelineElement&) = delete;
+        CommandLinePipelineElement&
+                        operator=(const CommandLinePipelineElement&) = delete;
+
+        void            ModifyOptions(PipelineOptions& p_rOptions) const override;
+
+    private:
+        const std::wstring
+                        m_Arguments;
+        const bool      m_UseFilelist;
+    };
+
 } // namespace PCC

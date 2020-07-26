@@ -205,20 +205,21 @@ namespace PCC
         PCC::PathActionSP PipelinePlugin::Action() const
         {
             // Pipeline options can modify the behavior.
-            std::wstring executable;
+            std::wstring executable, arguments;
             bool useFilelist = false;
             const Pipeline* pPipeline = GetPipeline();
             if (pPipeline != nullptr) {
                 PipelineOptions options;
                 pPipeline->ModifyOptions(options);
                 executable = options.GetExecutable();
+                arguments = options.GetArguments();
                 useFilelist = options.GetUseFilelist();
             }
             
             PCC::PathActionSP spAction;
             if (!executable.empty()) {
-                // Launch executable with paths as argument
-                spAction = std::make_shared<PCC::Actions::LaunchExecutablePathAction>(executable, useFilelist);
+                // Launch executable with paths in arguments
+                spAction = std::make_shared<PCC::Actions::LaunchExecutablePathAction>(executable, arguments, useFilelist);
             } else {
                 // Use default behavior.
                 spAction = Plugin::Action();

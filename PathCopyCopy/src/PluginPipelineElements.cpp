@@ -853,4 +853,35 @@ namespace PCC
         p_rOptions.SetUseFilelist(true);
     }
 
+    //
+    // Constructor.
+    //
+    // @param p_Executable Path to the executable to launch.
+    // @param p_Arguments Arguments to pass to the executable. Can contain the
+    //                    %FILES% placeholder to replace with the files.
+    // @param p_UseFilelist Whether to use a filelist instead of passing paths
+    //                      directly to the executable.
+    //
+    CommandLinePipelineElement::CommandLinePipelineElement(const std::wstring& p_Executable,
+                                                           const std::wstring& p_Arguments,
+                                                           const bool p_UseFilelist)
+        : ExecutablePipelineElement(p_Executable),
+          m_Arguments(p_Arguments),
+          m_UseFilelist(p_UseFilelist)
+    {
+    }
+
+    //
+    // Modifies the global pipeline options by specifying to launch
+    // an executable with optional arguments as well as use of a filelist.
+    //
+    // @param p_rOptions Global options to modify.
+    //
+    void CommandLinePipelineElement::ModifyOptions(PipelineOptions& p_rOptions) const
+    {
+        ExecutablePipelineElement::ModifyOptions(p_rOptions);
+        p_rOptions.SetArguments(m_Arguments);
+        p_rOptions.SetUseFilelist(m_UseFilelist);
+    }
+
 } // namespace PCC

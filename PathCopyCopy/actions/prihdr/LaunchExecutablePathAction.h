@@ -39,6 +39,7 @@ namespace PCC
         {
         public:
                                     LaunchExecutablePathAction(const std::wstring& p_Executable,
+                                                               const std::wstring& p_Arguments,
                                                                bool p_UseFilelist);
                                     LaunchExecutablePathAction(const LaunchExecutablePathAction&) = delete;
                                     LaunchExecutablePathAction(LaunchExecutablePathAction&&) = delete;
@@ -52,6 +53,7 @@ namespace PCC
 
         private:
             const std::wstring      m_Executable;   // Name of executable to launch.
+            const std::wstring      m_Arguments;    // Arguments to pass to the executable.
             const bool              m_UseFilelist;  // Whether to use a filelist.txt file instead of passing paths directly.
         };
 

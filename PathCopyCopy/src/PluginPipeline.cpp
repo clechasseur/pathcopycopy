@@ -70,6 +70,30 @@ namespace PCC
     void PipelineOptions::SetExecutable(const std::wstring& p_Executable)
     {
         m_Executable = p_Executable;
+        // When executable changes, reset arguments.
+        m_Arguments = {};
+    }
+
+    //
+    // Returns the arguments to pass to the executable.
+    //
+    // @return Arguments to pass to the executable. Can contain the
+    //         %FILES% placeholder to replace with the files.
+    //
+    const std::wstring& PipelineOptions::GetArguments() const noexcept
+    {
+        return m_Arguments;
+    }
+
+    //
+    // Sets the arguments to pass to the executable.
+    //
+    // @param p_Arguments Arguments to pass to the executable. Can contain the
+    //                    %FILES% placeholder to replace with the files.
+    //
+    void PipelineOptions::SetArguments(const std::wstring& p_Arguments)
+    {
+        m_Arguments = p_Arguments;
     }
 
     //
