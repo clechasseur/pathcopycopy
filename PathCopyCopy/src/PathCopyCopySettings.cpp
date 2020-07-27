@@ -66,6 +66,7 @@ namespace
     const wchar_t* const    SETTING_USE_PREVIEW_MODE_IN_MAIN_MENU           = L"UsePreviewModeInMainMenu";
     const wchar_t* const    SETTING_DROP_REDUNDANT_WORDS                    = L"DropRedundantWords";
     const wchar_t* const    SETTING_ALWAYS_SHOW_SUBMENU                     = L"AlwaysShowSubmenu";
+    const wchar_t* const    SETTING_COPY_PATHS_RECURSIVELY                  = L"CopyPathsRecursively";
     const wchar_t* const    SETTING_PATHS_SEPARATOR                         = L"PathsSeparator";
     const wchar_t* const    SETTING_TRUE_LNK_PATHS                          = L"TrueLnkPaths";
     const wchar_t* const    SETTING_WSL_PATH_PREFIX                         = L"WSLPathPrefix";
@@ -110,6 +111,7 @@ namespace
     constexpr bool          SETTING_USE_PREVIEW_MODE_IN_MAIN_MENU_DEFAULT   = false;
     constexpr bool          SETTING_DROP_REDUNDANT_WORDS_DEFAULT            = false;
     constexpr bool          SETTING_ALWAYS_SHOW_SUBMENU_DEFAULT             = true;
+    constexpr bool          SETTING_COPY_PATHS_RECURSIVELY_DEFAULT          = false;
     const wchar_t* const    SETTING_PATHS_SEPARATOR_DEFAULT                 = L"";
     constexpr bool          SETTING_TRUE_LNK_PATHS_DEFAULT                  = false;
     const wchar_t* const    SETTING_WSL_PATH_PREFIX_DEFAULT                 = L"/mnt";
@@ -500,6 +502,25 @@ namespace PCC
             alwaysShowSubmenu = regAlwaysShowSubmenu != 0;
         }
         return alwaysShowSubmenu;
+    }
+
+    //
+    // Checks whether to copy paths recursively.
+    //
+    // @return true if we need to copy paths recursively.
+    //
+    bool Settings::GetCopyPathsRecursively() const
+    {
+        // Perform late-revising.
+        Revise();
+
+        // Check if value exists. If so, read it, otherwise use default value.
+        bool copyPathsRecursively = SETTING_COPY_PATHS_RECURSIVELY_DEFAULT;
+        DWORD regCopyPathsRecursively = 0;
+        if (m_UserKey.QueryDWORDValue(SETTING_COPY_PATHS_RECURSIVELY, regCopyPathsRecursively) == ERROR_SUCCESS) {
+            copyPathsRecursively = regCopyPathsRecursively != 0;
+        }
+        return copyPathsRecursively;
     }
 
     //

@@ -1050,6 +1050,7 @@ HRESULT CPathCopyCopyContextMenuExt::ActOnFiles(const PCC::PluginSP& p_spPlugin,
         const bool areQuotesOptional = GetSettings().GetAreQuotesOptional();
         const bool makeEmailLinks = GetSettings().GetMakePathsIntoEmailLinks();
         const StringUtils::EncodeParam encodeParam = GetSettings().GetEncodeParam();
+        const bool recursively = GetSettings().GetCopyPathsRecursively();
         std::wstring pathsSeparator = p_spPlugin->PathsSeparator();
         if (pathsSeparator.empty()) {
             pathsSeparator = GetSettings().GetPathsSeparator();
@@ -1058,9 +1059,9 @@ HRESULT CPathCopyCopyContextMenuExt::ActOnFiles(const PCC::PluginSP& p_spPlugin,
             }
         }
         std::wstring newFiles;
-        for (auto it = m_vFiles.cbegin(); it != m_vFiles.cend(); ++it) {
+        auto vFiles = GetFilesToActOn(recursively);
+        for (const auto& oldName : vFiles) {
             // Ask plugin to compute filename using its scheme and save it.
-            const std::wstring& oldName = *it;
             if (!newFiles.empty()) {
                 newFiles += pathsSeparator;
             }
@@ -1111,6 +1112,49 @@ void CPathCopyCopyContextMenuExt::AddQuotes(std::wstring& p_rName,
     if (needToAddQuotes) {
         p_rName = L"\"" + p_rName + L"\"";
     }
+}
+
+//
+// Returns the files to act on. If instructed, will be fetched recursively.
+//
+// @param p_Recursively Whether to fetch filenames recursively.
+// @return List of files to act on.
+//
+PCC::FilesV CPathCopyCopyContextMenuExt::GetFilesToActOn(const bool p_Recursively) const
+{
+    auto vFiles = m_vFiles;
+
+    if (p_Recursively) {
+        auto vNewFiles(vFiles);
+        while (!vNewFiles.empty()) {
+            PCC::FilesV vFilesToScan;
+            vFilesToScan.swap(vNewFiles);
+            for (const auto& fileToScan : vFilesToScan) {
+                auto attributes = ::GetFileAttributesW(fileToScan.c_str());
+                if (attributes != INVALID_FILE_ATTRIBUTES && (attributes & FILE_ATTRIBUTE_DIRECTORY) != 0) {
+                    WIN32_FIND_DATAW findData;
+                    HANDLE hFind = ::FindFirstFileW((fileToScan + L"\\*").c_str(), &findData);
+                    if (hFind != INVALID_HANDLE_VALUE) {
+                        try {
+                            do {
+                                const std::wstring fileName = findData.cFileName;
+                                if (fileName != L"." && fileName != L"..") {
+                                    vNewFiles.emplace_back(fileToScan + L"\\" + fileName);
+                                }
+                            } while (::FindNextFileW(hFind, &findData));
+                            ::FindClose(hFind);
+                        } catch (...) {
+                            ::FindClose(hFind);
+                            throw;
+                        }
+                    }
+                }
+            }
+            vFiles.insert(vFiles.end(), vNewFiles.begin(), vNewFiles.end());
+        }
+    }
+
+    return vFiles;
 }
 
 //

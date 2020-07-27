@@ -178,6 +178,7 @@ private:
                                    HWND p_hWnd);
     void                AddQuotes(std::wstring& p_rName,
                                   bool p_Optional) const;
+    PCC::FilesV         GetFilesToActOn(bool p_Recursively) const;
 
     void                RemoveFromExtToMenu();
     void                CheckForUpdates();
