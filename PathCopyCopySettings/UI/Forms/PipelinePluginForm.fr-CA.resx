@@ -124,6 +124,9 @@
   <data name="NameLbl.Text" xml:space="preserve">
     <value>&amp;Nom:</value>
   </data>
+  <data name="NameLbl.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="NameTxt.Location" type="System.Drawing.Point, System.Drawing">
     <value>50, 12</value>
   </data>
@@ -132,9 +135,6 @@
   </data>
   <data name="NameTxt.ToolTip" xml:space="preserve">
     <value>Nom de cette commande personnalisée</value>
-  </data>
-  <data name="BasePluginPage.Text" xml:space="preserve">
-    <value>Commande de base</value>
   </data>
   <data name="BasePluginLst.ToolTip" xml:space="preserve">
     <value>Commande de base à utiliser pour copier le chemin. Les options additionnelles seront appliquées après</value>
@@ -145,17 +145,23 @@
   <data name="BaseCommandLbl2.Text" xml:space="preserve">
     <value>Celle-ci déterminera le type de chemin à copier avant d'appliquer des options supplémentaires.</value>
   </data>
+  <data name="BaseCommandLbl2.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="BaseCommandLbl.Size" type="System.Drawing.Size, System.Drawing">
     <value>370, 13</value>
   </data>
   <data name="BaseCommandLbl.Text" xml:space="preserve">
     <value>Veuillez choisir une commande de base pour votre commande personnalisée.</value>
   </data>
-  <data name="OptionsPage.Text" xml:space="preserve">
-    <value>Options additionnelles</value>
+  <data name="BaseCommandLbl.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="OptionsGroupBox.Text" xml:space="preserve">
-    <value>Divers</value>
+  <data name="BasePluginPage.Text" xml:space="preserve">
+    <value>Commande de base</value>
+  </data>
+  <data name="BasePluginPage.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="RecursiveCopyChk.Size" type="System.Drawing.Size, System.Drawing">
     <value>183, 17</value>
@@ -187,6 +193,9 @@
   <data name="ExecutableLbl.Text" xml:space="preserve">
     <value>E&amp;xécutable:</value>
   </data>
+  <data name="ExecutableLbl.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="LaunchExecutableChk.Size" type="System.Drawing.Size, System.Drawing">
     <value>313, 17</value>
   </data>
@@ -206,8 +215,11 @@
   <data name="CopyOnSameLineChk.ToolTip" xml:space="preserve">
     <value>Quand plusieurs fichiers/dossiers sont sélectionnés, copier leurs chemins sur la même ligne (en les séparant à l'aide d'un espace) plutôt que sur des lignes séparées (en les séparant par un saut de ligne)</value>
   </data>
-  <data name="FindReplaceGroupBox.Text" xml:space="preserve">
-    <value>Chercher / Remplacer</value>
+  <data name="OptionsGroupBox.Text" xml:space="preserve">
+    <value>Divers</value>
+  </data>
+  <data name="OptionsGroupBox.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="UnexpandEnvStringsChk.Size" type="System.Drawing.Size, System.Drawing">
     <value>328, 17</value>
@@ -266,6 +278,9 @@
   <data name="ReplaceLbl.Text" xml:space="preserve">
     <value>&amp;Remplacer par:</value>
   </data>
+  <data name="ReplaceLbl.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="FindTxt.Location" type="System.Drawing.Point, System.Drawing">
     <value>65, 19</value>
   </data>
@@ -281,8 +296,14 @@
   <data name="FindLbl.Text" xml:space="preserve">
     <value>C&amp;hercher:</value>
   </data>
-  <data name="SlashesGroupBox.Text" xml:space="preserve">
-    <value>Barres obliques</value>
+  <data name="FindLbl.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FindReplaceGroupBox.Text" xml:space="preserve">
+    <value>Chercher / Remplacer</value>
+  </data>
+  <data name="FindReplaceGroupBox.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="NoSlashesChangeRadio.Size" type="System.Drawing.Size, System.Drawing">
     <value>192, 17</value>
@@ -311,8 +332,11 @@
   <data name="ForwardToBackslashesRadio.ToolTip" xml:space="preserve">
     <value>Remplacer toutes les barres obliques ( / ) dans le chemin par des barres obliques inverses ( \ )</value>
   </data>
-  <data name="DecorationsGroupBox.Text" xml:space="preserve">
-    <value>Décorations</value>
+  <data name="SlashesGroupBox.Text" xml:space="preserve">
+    <value>Barres obliques</value>
+  </data>
+  <data name="SlashesGroupBox.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="RemoveExtChk.Size" type="System.Drawing.Size, System.Drawing">
     <value>160, 17</value>
@@ -368,6 +392,21 @@
   <data name="QuotesChk.ToolTip" xml:space="preserve">
     <value>Entourer le chemin de guillemets ( " )</value>
   </data>
+  <data name="DecorationsGroupBox.Text" xml:space="preserve">
+    <value>Décorations</value>
+  </data>
+  <data name="DecorationsGroupBox.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="OptionsPage.Text" xml:space="preserve">
+    <value>Options additionnelles</value>
+  </data>
+  <data name="OptionsPage.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="MainTabControl.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="OKBtn.ToolTip" xml:space="preserve">
     <value>Sauvegarder cette commande personnalisée et fermer cette fenêtre</value>
   </data>
@@ -383,7 +422,13 @@
   <data name="SwitchBtn.ToolTip" xml:space="preserve">
     <value>Passer en mode Expert, qui permet plus de flexibilité dans la configuration en contrepartie d'une plus grande complexité</value>
   </data>
+  <data name="PreviewCtrl.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Commande personnalisée</value>
+  </data>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value />
   </data>
 </root>

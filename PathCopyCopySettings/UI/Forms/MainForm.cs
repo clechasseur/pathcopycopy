@@ -263,6 +263,7 @@ namespace PathCopyCopy.Settings.UI.Forms
                 UsePreviewModeInMainMenuChk.Checked = Settings.UsePreviewModeInMainMenu;
             }
             DropRedundantWordsChk.Checked = Settings.DropRedundantWords;
+            RecursiveCopyChk.Checked = Settings.CopyPathsRecursively;
             TrueLnkPathsChk.Checked = Settings.TrueLnkPaths;
             EnableSoftwareUpdateChk.Checked = !Settings.DisableSoftwareUpdate;
 
@@ -458,6 +459,9 @@ namespace PathCopyCopy.Settings.UI.Forms
             }
             if (DropRedundantWordsChk.Checked != Settings.DropRedundantWords) {
                 Settings.DropRedundantWords = DropRedundantWordsChk.Checked;
+            }
+            if (RecursiveCopyChk.Checked != Settings.CopyPathsRecursively) {
+                Settings.CopyPathsRecursively = RecursiveCopyChk.Checked;
             }
             if (TrueLnkPathsChk.Checked != Settings.TrueLnkPaths) {
                 Settings.TrueLnkPaths = TrueLnkPathsChk.Checked;

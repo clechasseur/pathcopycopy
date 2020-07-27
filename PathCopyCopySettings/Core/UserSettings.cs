@@ -117,6 +117,9 @@ namespace PathCopyCopy.Settings.Core
         /// Name of registry value specifying the separator to use between multiple copied paths.
         private const string PathsSeparatorValueName = "PathsSeparator";
 
+        /// Name of registry value determining whether to copy paths recursively.
+        private const string CopyPathsRecursivelyValueName = "CopyPathsRecursively";
+
         /// Name of registry value specifying whether to copy paths to the .lnk files themselves.
         private const string TrueLnkPathsValueName = "TrueLnkPaths";
 
@@ -238,6 +241,9 @@ namespace PathCopyCopy.Settings.Core
 
         /// Default value of the "paths separator" setting.
         private const string PathsSeparatorDefaultValue = "";
+
+        /// Default value of the "copy paths recursively" setting.
+        private const int CopyPathsRecursivelyDefaultValue = 0;
 
         /// Default value of the "true .lnk paths" setting.
         private const int TrueLnkPathsDefaultValue = 0;
@@ -478,6 +484,19 @@ namespace PathCopyCopy.Settings.Core
                     // Delete the value to use default.
                     userKey.DeleteValue(PathsSeparatorValueName, false);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Whether paths should be copied recursively or not.
+        /// </summary>
+        public bool CopyPathsRecursively
+        {
+            get {
+                return ((int) GetUserOrGlobalValue(CopyPathsRecursivelyValueName, CopyPathsRecursivelyDefaultValue)) != 0;
+            }
+            set {
+                userKey.SetValue(CopyPathsRecursivelyValueName, value ? 1 : 0);
             }
         }
 

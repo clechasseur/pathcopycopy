@@ -60,6 +60,7 @@
             this.PluginsDataGridBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.PluginsExplanationLbl = new System.Windows.Forms.Label();
             this.MiscOptionsPage = new System.Windows.Forms.TabPage();
+            this.RecursiveCopyChk = new System.Windows.Forms.CheckBox();
             this.LanguageCombo = new System.Windows.Forms.ComboBox();
             this.LanguageComboBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.LanguageLbl = new System.Windows.Forms.Label();
@@ -141,9 +142,11 @@
             this.MainTabCtrl.Controls.Add(this.AboutPage);
             this.MainTabCtrl.Name = "MainTabCtrl";
             this.MainTabCtrl.SelectedIndex = 0;
+            this.MainToolTip.SetToolTip(this.MainTabCtrl, resources.GetString("MainTabCtrl.ToolTip"));
             // 
             // PluginsPage
             // 
+            resources.ApplyResources(this.PluginsPage, "PluginsPage");
             this.PluginsPage.Controls.Add(this.DuplicatePipelinePluginBtn);
             this.PluginsPage.Controls.Add(this.PreviewCtrl);
             this.PluginsPage.Controls.Add(this.AddSeparatorBtn);
@@ -159,8 +162,8 @@
             this.PluginsPage.Controls.Add(this.PluginsExplanationLbl2);
             this.PluginsPage.Controls.Add(this.PluginsDataGrid);
             this.PluginsPage.Controls.Add(this.PluginsExplanationLbl);
-            resources.ApplyResources(this.PluginsPage, "PluginsPage");
             this.PluginsPage.Name = "PluginsPage";
+            this.MainToolTip.SetToolTip(this.PluginsPage, resources.GetString("PluginsPage.ToolTip"));
             this.PluginsPage.UseVisualStyleBackColor = true;
             // 
             // DuplicatePipelinePluginBtn
@@ -176,6 +179,7 @@
             resources.ApplyResources(this.PreviewCtrl, "PreviewCtrl");
             this.PreviewCtrl.Name = "PreviewCtrl";
             this.PreviewCtrl.Plugin = null;
+            this.MainToolTip.SetToolTip(this.PreviewCtrl, resources.GetString("PreviewCtrl.ToolTip"));
             // 
             // AddSeparatorBtn
             // 
@@ -206,6 +210,7 @@
             resources.ApplyResources(this.BevelLineLbl2, "BevelLineLbl2");
             this.BevelLineLbl2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.BevelLineLbl2.Name = "BevelLineLbl2";
+            this.MainToolTip.SetToolTip(this.BevelLineLbl2, resources.GetString("BevelLineLbl2.ToolTip"));
             // 
             // RemovePluginBtn
             // 
@@ -236,6 +241,7 @@
             resources.ApplyResources(this.BevelLineLbl, "BevelLineLbl");
             this.BevelLineLbl.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.BevelLineLbl.Name = "BevelLineLbl";
+            this.MainToolTip.SetToolTip(this.BevelLineLbl, resources.GetString("BevelLineLbl.ToolTip"));
             // 
             // MovePluginDownBtn
             // 
@@ -257,14 +263,15 @@
             // 
             resources.ApplyResources(this.PluginsExplanationLbl2, "PluginsExplanationLbl2");
             this.PluginsExplanationLbl2.Name = "PluginsExplanationLbl2";
+            this.MainToolTip.SetToolTip(this.PluginsExplanationLbl2, resources.GetString("PluginsExplanationLbl2.ToolTip"));
             // 
             // PluginsDataGrid
             // 
+            resources.ApplyResources(this.PluginsDataGrid, "PluginsDataGrid");
             this.PluginsDataGrid.AllowUserToAddRows = false;
             this.PluginsDataGrid.AllowUserToDeleteRows = false;
             this.PluginsDataGrid.AllowUserToResizeColumns = false;
             this.PluginsDataGrid.AllowUserToResizeRows = false;
-            resources.ApplyResources(this.PluginsDataGrid, "PluginsDataGrid");
             this.PluginsDataGrid.AutoGenerateColumns = false;
             this.PluginsDataGrid.BackgroundColor = System.Drawing.SystemColors.Window;
             this.PluginsDataGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
@@ -279,6 +286,7 @@
             this.PluginsDataGrid.RowHeadersVisible = false;
             this.PluginsDataGrid.RowTemplate.Height = 18;
             this.PluginsDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.MainToolTip.SetToolTip(this.PluginsDataGrid, resources.GetString("PluginsDataGrid.ToolTip"));
             this.PluginsDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.PluginsDataGrid_CellClick);
             this.PluginsDataGrid.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.PluginsDataGrid_CellDoubleClick);
             this.PluginsDataGrid.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.PluginsDataGrid_CellMouseEnter);
@@ -325,9 +333,12 @@
             // 
             resources.ApplyResources(this.PluginsExplanationLbl, "PluginsExplanationLbl");
             this.PluginsExplanationLbl.Name = "PluginsExplanationLbl";
+            this.MainToolTip.SetToolTip(this.PluginsExplanationLbl, resources.GetString("PluginsExplanationLbl.ToolTip"));
             // 
             // MiscOptionsPage
             // 
+            resources.ApplyResources(this.MiscOptionsPage, "MiscOptionsPage");
+            this.MiscOptionsPage.Controls.Add(this.RecursiveCopyChk);
             this.MiscOptionsPage.Controls.Add(this.LanguageCombo);
             this.MiscOptionsPage.Controls.Add(this.LanguageLbl);
             this.MiscOptionsPage.Controls.Add(this.TrueLnkPathsChk);
@@ -348,9 +359,16 @@
             this.MiscOptionsPage.Controls.Add(this.AlwaysShowSubmenuChk);
             this.MiscOptionsPage.Controls.Add(this.HiddenSharesChk);
             this.MiscOptionsPage.Controls.Add(this.AddQuotesChk);
-            resources.ApplyResources(this.MiscOptionsPage, "MiscOptionsPage");
             this.MiscOptionsPage.Name = "MiscOptionsPage";
+            this.MainToolTip.SetToolTip(this.MiscOptionsPage, resources.GetString("MiscOptionsPage.ToolTip"));
             this.MiscOptionsPage.UseVisualStyleBackColor = true;
+            // 
+            // RecursiveCopyChk
+            // 
+            resources.ApplyResources(this.RecursiveCopyChk, "RecursiveCopyChk");
+            this.RecursiveCopyChk.Name = "RecursiveCopyChk";
+            this.MainToolTip.SetToolTip(this.RecursiveCopyChk, resources.GetString("RecursiveCopyChk.ToolTip"));
+            this.RecursiveCopyChk.UseVisualStyleBackColor = true;
             // 
             // LanguageCombo
             // 
@@ -366,6 +384,7 @@
             // 
             resources.ApplyResources(this.LanguageLbl, "LanguageLbl");
             this.LanguageLbl.Name = "LanguageLbl";
+            this.MainToolTip.SetToolTip(this.LanguageLbl, resources.GetString("LanguageLbl.ToolTip"));
             // 
             // TrueLnkPathsChk
             // 
@@ -504,9 +523,10 @@
             // 
             // AboutPage
             // 
-            this.AboutPage.Controls.Add(this.AboutTableLayoutPanel);
             resources.ApplyResources(this.AboutPage, "AboutPage");
+            this.AboutPage.Controls.Add(this.AboutTableLayoutPanel);
             this.AboutPage.Name = "AboutPage";
+            this.MainToolTip.SetToolTip(this.AboutPage, resources.GetString("AboutPage.ToolTip"));
             this.AboutPage.UseVisualStyleBackColor = true;
             // 
             // AboutTableLayoutPanel
@@ -520,39 +540,46 @@
             this.AboutTableLayoutPanel.Controls.Add(this.LicenseTxtLinkLbl, 0, 5);
             this.AboutTableLayoutPanel.Controls.Add(this.DonationLinkLbl, 0, 6);
             this.AboutTableLayoutPanel.Name = "AboutTableLayoutPanel";
+            this.MainToolTip.SetToolTip(this.AboutTableLayoutPanel, resources.GetString("AboutTableLayoutPanel.ToolTip"));
             // 
             // ProductAndVersionLbl
             // 
             resources.ApplyResources(this.ProductAndVersionLbl, "ProductAndVersionLbl");
             this.ProductAndVersionLbl.Name = "ProductAndVersionLbl";
+            this.MainToolTip.SetToolTip(this.ProductAndVersionLbl, resources.GetString("ProductAndVersionLbl.ToolTip"));
             // 
             // CopyrightLbl
             // 
             resources.ApplyResources(this.CopyrightLbl, "CopyrightLbl");
             this.CopyrightLbl.Name = "CopyrightLbl";
+            this.MainToolTip.SetToolTip(this.CopyrightLbl, resources.GetString("CopyrightLbl.ToolTip"));
             // 
             // VisitWebsiteLbl
             // 
             resources.ApplyResources(this.VisitWebsiteLbl, "VisitWebsiteLbl");
             this.VisitWebsiteLbl.Name = "VisitWebsiteLbl";
+            this.MainToolTip.SetToolTip(this.VisitWebsiteLbl, resources.GetString("VisitWebsiteLbl.ToolTip"));
             // 
             // SiteLinkLbl
             // 
             resources.ApplyResources(this.SiteLinkLbl, "SiteLinkLbl");
             this.SiteLinkLbl.Name = "SiteLinkLbl";
             this.SiteLinkLbl.TabStop = true;
+            this.MainToolTip.SetToolTip(this.SiteLinkLbl, resources.GetString("SiteLinkLbl.ToolTip"));
             this.SiteLinkLbl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.SiteLinkLbl_LinkClicked);
             // 
             // LicenseExplanationLbl
             // 
             resources.ApplyResources(this.LicenseExplanationLbl, "LicenseExplanationLbl");
             this.LicenseExplanationLbl.Name = "LicenseExplanationLbl";
+            this.MainToolTip.SetToolTip(this.LicenseExplanationLbl, resources.GetString("LicenseExplanationLbl.ToolTip"));
             // 
             // LicenseTxtLinkLbl
             // 
             resources.ApplyResources(this.LicenseTxtLinkLbl, "LicenseTxtLinkLbl");
             this.LicenseTxtLinkLbl.Name = "LicenseTxtLinkLbl";
             this.LicenseTxtLinkLbl.TabStop = true;
+            this.MainToolTip.SetToolTip(this.LicenseTxtLinkLbl, resources.GetString("LicenseTxtLinkLbl.ToolTip"));
             this.LicenseTxtLinkLbl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LicenseTxtLinkLbl_LinkClicked);
             // 
             // DonationLinkLbl
@@ -560,6 +587,7 @@
             resources.ApplyResources(this.DonationLinkLbl, "DonationLinkLbl");
             this.DonationLinkLbl.Name = "DonationLinkLbl";
             this.DonationLinkLbl.TabStop = true;
+            this.MainToolTip.SetToolTip(this.DonationLinkLbl, resources.GetString("DonationLinkLbl.ToolTip"));
             this.DonationLinkLbl.UseCompatibleTextRendering = true;
             this.DonationLinkLbl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.DonationLinkLbl_LinkClicked);
             // 
@@ -608,6 +636,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
+            this.MainToolTip.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.MainForm_HelpButtonClicked);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.MainTabCtrl.ResumeLayout(false);
@@ -691,6 +720,7 @@
         private System.Windows.Forms.ComboBox LanguageCombo;
         private System.Windows.Forms.Label LanguageLbl;
         private System.Windows.Forms.BindingSource LanguageComboBindingSource;
+        private System.Windows.Forms.CheckBox RecursiveCopyChk;
     }
 }
 

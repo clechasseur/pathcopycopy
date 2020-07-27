@@ -135,97 +135,15 @@
   <data name="PluginsPage.Text" xml:space="preserve">
     <value>Commandes</value>
   </data>
-  <data name="DuplicatePipelinePluginBtn.Text" xml:space="preserve">
-    <value>Dup&amp;liquer</value>
-  </data>
-  <data name="DuplicatePipelinePluginBtn.ToolTip" xml:space="preserve">
-    <value>Créer une copie de la commande personnalisée sélectionnée</value>
-  </data>
-  <data name="AddSeparatorBtn.Text" xml:space="preserve">
-    <value>&amp;Séparateur</value>
-  </data>
-  <data name="AddSeparatorBtn.ToolTip" xml:space="preserve">
-    <value>Insérer un séparateur après la commande sélectionnée</value>
-  </data>
-  <data name="ImportPipelinePluginsBtn.Text" xml:space="preserve">
-    <value>&amp;Importer...</value>
-  </data>
-  <data name="ImportPipelinePluginsBtn.ToolTip" xml:space="preserve">
-    <value>Importer des commandes personnalisées à partir d'un fichier sur disque</value>
-  </data>
-  <data name="ExportPipelinePluginsBtn.Text" xml:space="preserve">
-    <value>Ex&amp;porter...</value>
-  </data>
-  <data name="ExportPipelinePluginsBtn.ToolTip" xml:space="preserve">
-    <value>Exporter les commandes personnalisées sélectionnées dans un fichier sur disque</value>
-  </data>
-  <data name="RemovePluginBtn.Text" xml:space="preserve">
-    <value>E&amp;ffacer</value>
-  </data>
-  <data name="RemovePluginBtn.ToolTip" xml:space="preserve">
-    <value>Effacer la commande personnalisée ou le séparateur sélectionné</value>
-  </data>
-  <data name="EditPipelinePluginBtn.Text" xml:space="preserve">
-    <value>&amp;Éditer...</value>
-  </data>
-  <data name="EditPipelinePluginBtn.ToolTip" xml:space="preserve">
-    <value>Modifier la commande personnalisée sélectionnée</value>
-  </data>
-  <data name="AddPipelinePluginBtn.Text" xml:space="preserve">
-    <value>Nou&amp;veau...</value>
-  </data>
-  <data name="AddPipelinePluginBtn.ToolTip" xml:space="preserve">
-    <value>Créer une nouvelle commande personnalisée</value>
-  </data>
-  <data name="MovePluginDownBtn.Text" xml:space="preserve">
-    <value>&amp;Descendre</value>
-  </data>
-  <data name="MovePluginDownBtn.ToolTip" xml:space="preserve">
-    <value>Déplacer la commander sélectionnée d'une position vers le bas</value>
-  </data>
-  <data name="MovePluginUpBtn.Text" xml:space="preserve">
-    <value>&amp;Monter</value>
-  </data>
-  <data name="MovePluginUpBtn.ToolTip" xml:space="preserve">
-    <value>Déplacer la commande sélectionnée d'une position vers le haut</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="PluginsExplanationLbl2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>421, 13</value>
+  <data name="RecursiveCopyChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>183, 17</value>
   </data>
-  <data name="PluginsExplanationLbl2.Text" xml:space="preserve">
-    <value>ainsi que dans notre sous-menu, ainsi qu'ajouter, enlever ou réordonner les commandes.</value>
+  <data name="RecursiveCopyChk.Text" xml:space="preserve">
+    <value>Copier les che&amp;mins récursivement</value>
   </data>
-  <data name="IconCol.HeaderText" xml:space="preserve">
-    <value>Icône</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="IconCol.Width" type="System.Int32, mscorlib">
-    <value>40</value>
-  </data>
-  <data name="PluginCol.HeaderText" xml:space="preserve">
-    <value>Commande</value>
-  </data>
-  <data name="InMainMenuCol.HeaderText" xml:space="preserve">
-    <value>Menu</value>
-  </data>
-  <data name="InMainMenuCol.Width" type="System.Int32, mscorlib">
-    <value>40</value>
-  </data>
-  <data name="InSubmenuCol.HeaderText" xml:space="preserve">
-    <value>Sous-menu</value>
-  </data>
-  <data name="InSubmenuCol.Width" type="System.Int32, mscorlib">
-    <value>66</value>
-  </data>
-  <data name="PluginsExplanationLbl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>450, 13</value>
-  </data>
-  <data name="PluginsExplanationLbl.Text" xml:space="preserve">
-    <value>Ici, vous pouvez choisir quelles commandes sont affichées dans le menu contextuel d'Explorer</value>
-  </data>
-  <data name="MiscOptionsPage.Text" xml:space="preserve">
-    <value>Paramètres</value>
+  <data name="RecursiveCopyChk.ToolTip" xml:space="preserve">
+    <value>Lors de la copie des chemins, explorer récursivement les sous-dossiers</value>
   </data>
   <data name="LanguageCombo.Location" type="System.Drawing.Point, System.Drawing">
     <value>58, 492</value>
@@ -398,8 +316,99 @@
   <data name="AddQuotesChk.ToolTip" xml:space="preserve">
     <value>Entourer tous les chemins copiés de guillemets ( " )</value>
   </data>
+  <data name="MiscOptionsPage.Text" xml:space="preserve">
+    <value>Paramètres</value>
+  </data>
   <data name="AboutPage.Text" xml:space="preserve">
     <value>À propos</value>
+  </data>
+  <data name="DuplicatePipelinePluginBtn.Text" xml:space="preserve">
+    <value>Dup&amp;liquer</value>
+  </data>
+  <data name="DuplicatePipelinePluginBtn.ToolTip" xml:space="preserve">
+    <value>Créer une copie de la commande personnalisée sélectionnée</value>
+  </data>
+  <data name="AddSeparatorBtn.Text" xml:space="preserve">
+    <value>&amp;Séparateur</value>
+  </data>
+  <data name="AddSeparatorBtn.ToolTip" xml:space="preserve">
+    <value>Insérer un séparateur après la commande sélectionnée</value>
+  </data>
+  <data name="ImportPipelinePluginsBtn.Text" xml:space="preserve">
+    <value>&amp;Importer...</value>
+  </data>
+  <data name="ImportPipelinePluginsBtn.ToolTip" xml:space="preserve">
+    <value>Importer des commandes personnalisées à partir d'un fichier sur disque</value>
+  </data>
+  <data name="ExportPipelinePluginsBtn.Text" xml:space="preserve">
+    <value>Ex&amp;porter...</value>
+  </data>
+  <data name="ExportPipelinePluginsBtn.ToolTip" xml:space="preserve">
+    <value>Exporter les commandes personnalisées sélectionnées dans un fichier sur disque</value>
+  </data>
+  <data name="RemovePluginBtn.Text" xml:space="preserve">
+    <value>E&amp;ffacer</value>
+  </data>
+  <data name="RemovePluginBtn.ToolTip" xml:space="preserve">
+    <value>Effacer la commande personnalisée ou le séparateur sélectionné</value>
+  </data>
+  <data name="EditPipelinePluginBtn.Text" xml:space="preserve">
+    <value>&amp;Éditer...</value>
+  </data>
+  <data name="EditPipelinePluginBtn.ToolTip" xml:space="preserve">
+    <value>Modifier la commande personnalisée sélectionnée</value>
+  </data>
+  <data name="AddPipelinePluginBtn.Text" xml:space="preserve">
+    <value>Nou&amp;veau...</value>
+  </data>
+  <data name="AddPipelinePluginBtn.ToolTip" xml:space="preserve">
+    <value>Créer une nouvelle commande personnalisée</value>
+  </data>
+  <data name="MovePluginDownBtn.Text" xml:space="preserve">
+    <value>&amp;Descendre</value>
+  </data>
+  <data name="MovePluginDownBtn.ToolTip" xml:space="preserve">
+    <value>Déplacer la commander sélectionnée d'une position vers le bas</value>
+  </data>
+  <data name="MovePluginUpBtn.Text" xml:space="preserve">
+    <value>&amp;Monter</value>
+  </data>
+  <data name="MovePluginUpBtn.ToolTip" xml:space="preserve">
+    <value>Déplacer la commande sélectionnée d'une position vers le haut</value>
+  </data>
+  <data name="PluginsExplanationLbl2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>421, 13</value>
+  </data>
+  <data name="PluginsExplanationLbl2.Text" xml:space="preserve">
+    <value>ainsi que dans notre sous-menu, ainsi qu'ajouter, enlever ou réordonner les commandes.</value>
+  </data>
+  <data name="IconCol.HeaderText" xml:space="preserve">
+    <value>Icône</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="IconCol.Width" type="System.Int32, mscorlib">
+    <value>40</value>
+  </data>
+  <data name="PluginCol.HeaderText" xml:space="preserve">
+    <value>Commande</value>
+  </data>
+  <data name="InMainMenuCol.HeaderText" xml:space="preserve">
+    <value>Menu</value>
+  </data>
+  <data name="InMainMenuCol.Width" type="System.Int32, mscorlib">
+    <value>40</value>
+  </data>
+  <data name="InSubmenuCol.HeaderText" xml:space="preserve">
+    <value>Sous-menu</value>
+  </data>
+  <data name="InSubmenuCol.Width" type="System.Int32, mscorlib">
+    <value>66</value>
+  </data>
+  <data name="PluginsExplanationLbl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>450, 13</value>
+  </data>
+  <data name="PluginsExplanationLbl.Text" xml:space="preserve">
+    <value>Ici, vous pouvez choisir quelles commandes sont affichées dans le menu contextuel d'Explorer</value>
   </data>
   <data name="VisitWebsiteLbl.Text" xml:space="preserve">
     <value>Visitez notre site web:</value>
