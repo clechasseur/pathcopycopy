@@ -507,4 +507,10 @@ Control-click to avoid displaying an icon for this command.</value>
   <data name="PipelineElement_CommandLine_HelpText" xml:space="preserve">
     <value>Instead of copying the paths to the clipboard, launch a command-line (executable &amp; arguments), including the paths in the arguments either directly or via a filelist</value>
   </data>
+  <data name="PipelineElement_RecursiveCopy" xml:space="preserve">
+    <value>Option: Copy Paths Recursively</value>
+  </data>
+  <data name="PipelineElement_RecursiveCopy_HelpText" xml:space="preserve">
+    <value>Recurse into subdirectories when copying paths</value>
+  </data>
 </root>

@@ -893,6 +893,24 @@ namespace PathCopyCopy.Settings.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Option: Copy Paths Recursively.
+        /// </summary>
+        internal static string PipelineElement_RecursiveCopy {
+            get {
+                return ResourceManager.GetString("PipelineElement_RecursiveCopy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recurse into subdirectories when copying paths.
+        /// </summary>
+        internal static string PipelineElement_RecursiveCopy_HelpText {
+            get {
+                return ResourceManager.GetString("PipelineElement_RecursiveCopy_HelpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Find / Replace Using Regular Expressions.
         /// </summary>
         internal static string PipelineElement_Regex {

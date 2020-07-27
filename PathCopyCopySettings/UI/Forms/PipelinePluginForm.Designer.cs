@@ -38,6 +38,7 @@
             this.BaseCommandLbl = new System.Windows.Forms.Label();
             this.OptionsPage = new System.Windows.Forms.TabPage();
             this.OptionsGroupBox = new System.Windows.Forms.GroupBox();
+            this.RecursiveCopyChk = new System.Windows.Forms.CheckBox();
             this.WithFilelistChk = new System.Windows.Forms.CheckBox();
             this.BrowserForExecutableBtn = new System.Windows.Forms.Button();
             this.ExecutableTxt = new System.Windows.Forms.TextBox();
@@ -144,6 +145,7 @@
             // OptionsGroupBox
             // 
             resources.ApplyResources(this.OptionsGroupBox, "OptionsGroupBox");
+            this.OptionsGroupBox.Controls.Add(this.RecursiveCopyChk);
             this.OptionsGroupBox.Controls.Add(this.WithFilelistChk);
             this.OptionsGroupBox.Controls.Add(this.BrowserForExecutableBtn);
             this.OptionsGroupBox.Controls.Add(this.ExecutableTxt);
@@ -153,6 +155,13 @@
             this.OptionsGroupBox.Name = "OptionsGroupBox";
             this.OptionsGroupBox.TabStop = false;
             this.PipelinePluginToolTip.SetToolTip(this.OptionsGroupBox, resources.GetString("OptionsGroupBox.ToolTip"));
+            // 
+            // RecursiveCopyChk
+            // 
+            resources.ApplyResources(this.RecursiveCopyChk, "RecursiveCopyChk");
+            this.RecursiveCopyChk.Name = "RecursiveCopyChk";
+            this.PipelinePluginToolTip.SetToolTip(this.RecursiveCopyChk, resources.GetString("RecursiveCopyChk.ToolTip"));
+            this.RecursiveCopyChk.UseVisualStyleBackColor = true;
             // 
             // WithFilelistChk
             // 
@@ -484,5 +493,6 @@
         private System.Windows.Forms.Button SwitchBtn;
         private UserControls.PluginPreviewUserControl PreviewCtrl;
         private System.Windows.Forms.CheckBox UnexpandEnvStringsChk;
+        private System.Windows.Forms.CheckBox RecursiveCopyChk;
     }
 }

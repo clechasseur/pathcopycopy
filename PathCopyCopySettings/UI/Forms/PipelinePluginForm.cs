@@ -201,10 +201,11 @@ namespace PathCopyCopy.Settings.UI.Forms
                 oldPathsSeparator = (element as PathsSeparatorPipelineElement)?.PathsSeparator;
                 if (oldPathsSeparator == PipelinePluginEditor.PATHS_SEPARATOR_ON_SAME_LINE) {
                     CopyOnSameLineChk.Checked = true;
-                } else if (!String.IsNullOrEmpty(oldPathsSeparator)) {
+                } else if (!string.IsNullOrEmpty(oldPathsSeparator)) {
                     CopyOnSameLineChk.Enabled = false;
                 }
 
+                RecursiveCopyChk.Checked = oldPipeline.Elements.Find(el => el is RecursiveCopyPipelineElement) != null;
                 element = oldPipeline.Elements.Find(el => el is ExecutablePipelineElement);
                 if (element != null) {
                     LaunchExecutableChk.Checked = true;
@@ -267,6 +268,9 @@ namespace PathCopyCopy.Settings.UI.Forms
                 } else {
                     pipeline.Elements.Add(new ExecutablePipelineElement(ExecutableTxt.Text));
                 }
+            }
+            if (RecursiveCopyChk.Checked) {
+                pipeline.Elements.Add(new RecursiveCopyPipelineElement());
             }
             if (CopyOnSameLineChk.Enabled) {
                 if (CopyOnSameLineChk.Checked) {

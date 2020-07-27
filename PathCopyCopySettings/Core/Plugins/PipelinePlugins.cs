@@ -2572,6 +2572,58 @@ namespace PathCopyCopy.Settings.Core.Plugins
     }
 
     /// <summary>
+    /// Pipeline element that does not modify the path but instructs
+    /// Path Copy Copy to copy paths recursively.
+    /// </summary>
+    public class RecursiveCopyPipelineElement : PipelineElement
+    {
+        /// <summary>
+        /// Code representing this pipeline element type.
+        /// </summary>
+        public const char CODE = 'v';
+
+        /// <summary>
+        /// Code representing this pipeline element type.
+        /// </summary>
+        public override char Code
+        {
+            get {
+                return CODE;
+            }
+        }
+
+        /// <summary>
+        /// Pipeline element display value for the UI.
+        /// </summary>
+        public override string DisplayValue
+        {
+            get {
+                return Resources.PipelineElement_RecursiveCopy;
+            }
+        }
+
+        /// <summary>
+        /// Minumum version of Path Copy Copy required to use this pipeline element.
+        /// </summary>
+        public override Version RequiredVersion
+        {
+            get {
+                return new Version(19, 0, 0, 0);
+            }
+        }
+
+        /// <summary>
+        /// Encodes this pipeline element in a string.
+        /// </summary>
+        /// <returns>Encoded element data.</returns>
+        public override string Encode()
+        {
+            // No other data to encode.
+            return string.Empty;
+        }
+    }
+
+    /// <summary>
     /// Abstract subclass of <see cref="PipelineElement"/> that has a
     /// single data member: an executable path. Used to be able to edit
     /// both types of executable-based pipeline elements in a common way.
@@ -2988,6 +3040,10 @@ namespace PathCopyCopy.Settings.Core.Plugins
                 }
                 case PathsSeparatorPipelineElement.CODE: {
                     element = DecodePathsSeparatorElement(encodedElements, ref curChar);
+                    break;
+                }
+                case RecursiveCopyPipelineElement.CODE: {
+                    element = new RecursiveCopyPipelineElement();
                     break;
                 }
                 case ExecutablePipelineElement.CODE:

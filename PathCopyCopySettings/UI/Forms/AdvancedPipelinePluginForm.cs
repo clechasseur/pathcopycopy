@@ -197,6 +197,9 @@ namespace PathCopyCopy.Settings.UI.Forms
             AddNewElementMenuItem(Resources.PipelineElement_PathsSeparator,
                 Resources.PipelineElement_PathsSeparator_HelpText,
                 () => new PathsSeparatorPipelineElement(PipelinePluginEditor.PATHS_SEPARATOR_ON_SAME_LINE));
+            AddNewElementMenuItem(Resources.PipelineElement_RecursiveCopy,
+                Resources.PipelineElement_RecursiveCopy_HelpText,
+                () => new RecursiveCopyPipelineElement());
             AddNewElementMenuItem(Resources.PipelineElement_Executable,
                 Resources.PipelineElement_Executable_HelpText,
                 () => new ExecutablePipelineElement());

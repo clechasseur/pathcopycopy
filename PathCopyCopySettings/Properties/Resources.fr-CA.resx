@@ -335,6 +335,12 @@ Ctrl-cliquez pour faire que cette commande n'affiche pas d'icône.</value>
   <data name="PipelineElement_Quotes_HelpText" xml:space="preserve">
     <value>Entourer le chemin de guillemets ( " )</value>
   </data>
+  <data name="PipelineElement_RecursiveCopy" xml:space="preserve">
+    <value>Option: Copie récursive des chemins</value>
+  </data>
+  <data name="PipelineElement_RecursiveCopy_HelpText" xml:space="preserve">
+    <value>Lors de la copie des chemins, explorer récursivement les sous-dossiers</value>
+  </data>
   <data name="PipelineElement_Regex" xml:space="preserve">
     <value>Chercher / Remplacer à l'aide d'une expression régulière</value>
   </data>
