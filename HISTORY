@@ -1,6 +1,7 @@
 Version 19.0 (20??-??-??)
 -------------------------
 - Application is now localizable. Now ships with English and French versions. [https://github.com/clechasseur/pathcopycopy/issues/107]
+- Paths can now be copied recursively. Available globally or as a custom command option. [https://github.com/clechasseur/pathcopycopy/issues/2]
 - New button to duplicate a custom command [https://github.com/clechasseur/pathcopycopy/issues/114]
 - New custom command element to inject drive's label into path (expert only) [https://github.com/clechasseur/pathcopycopy/issues/108]
 - New custom command element to copy the first or last N parts of the path (expert only) [https://github.com/clechasseur/pathcopycopy/issues/84]
