@@ -50,6 +50,26 @@ namespace PCC
     }
 
     //
+    // Returns whether to copy paths recursively or not.
+    //
+    // @return Whether to copy paths recursively.
+    //
+    bool PipelineOptions::GetCopyPathsRecursively() const noexcept
+    {
+        return m_Recursively;
+    }
+
+    //
+    // Sets whether to copy path recursively or not.
+    //
+    // @param p_Recursively Whether to copy paths recursively.
+    //
+    void PipelineOptions::SetCopyPathsRecursively(const bool p_Recursively) noexcept
+    {
+        m_Recursively = p_Recursively;
+    }
+
+    //
     // Returns the executable to start with the path or paths as argument.
     //
     // @return Path of executable to start. An empty string means

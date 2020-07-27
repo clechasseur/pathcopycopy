@@ -524,6 +524,23 @@ namespace PCC
     };
 
     //
+    // RecursiveCopyPipelineElement
+    //
+    // Pipeline element that does not modify the path but instructs
+    // Path Copy Copy to copy paths recursively.
+    //
+    class RecursiveCopyPipelineElement : public PipelineElement
+    {
+    public:
+                        RecursiveCopyPipelineElement() = default;
+                        RecursiveCopyPipelineElement(const RecursiveCopyPipelineElement&) = delete;
+        RecursiveCopyPipelineElement&
+                        operator=(const RecursiveCopyPipelineElement&) = delete;
+
+        void            ModifyOptions(PipelineOptions& p_rOptions) const override;
+    };
+
+    //
     // ExecutablePipelineElement
     //
     // Pipeline element that does not modify the path but instructs

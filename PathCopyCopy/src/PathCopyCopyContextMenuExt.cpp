@@ -1050,7 +1050,7 @@ HRESULT CPathCopyCopyContextMenuExt::ActOnFiles(const PCC::PluginSP& p_spPlugin,
         const bool areQuotesOptional = GetSettings().GetAreQuotesOptional();
         const bool makeEmailLinks = GetSettings().GetMakePathsIntoEmailLinks();
         const StringUtils::EncodeParam encodeParam = GetSettings().GetEncodeParam();
-        const bool recursively = GetSettings().GetCopyPathsRecursively();
+        const bool recursively = p_spPlugin->CopyPathsRecursively() || GetSettings().GetCopyPathsRecursively();
         std::wstring pathsSeparator = p_spPlugin->PathsSeparator();
         if (pathsSeparator.empty()) {
             pathsSeparator = GetSettings().GetPathsSeparator();
@@ -1125,6 +1125,7 @@ PCC::FilesV CPathCopyCopyContextMenuExt::GetFilesToActOn(const bool p_Recursivel
     auto vFiles = m_vFiles;
 
     if (p_Recursively) {
+
         auto vNewFiles(vFiles);
         while (!vNewFiles.empty()) {
             PCC::FilesV vFilesToScan;

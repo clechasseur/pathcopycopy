@@ -45,6 +45,9 @@ namespace PCC
                         GetPathsSeparator() const noexcept;
         void            SetPathsSeparator(const std::wstring& p_PathsSeparator);
 
+        bool            GetCopyPathsRecursively() const noexcept;
+        void            SetCopyPathsRecursively(bool p_Recursively) noexcept;
+
         const std::wstring&
                         GetExecutable() const noexcept;
         void            SetExecutable(const std::wstring& p_Executable);
@@ -58,6 +61,7 @@ namespace PCC
 
     private:
         std::wstring    m_PathsSeparator;           // Separator to use between multiple paths.
+        bool            m_Recursively = false;      // Whether to copy paths recursively.
         std::wstring    m_Executable;               // Path to executable to start.
         std::wstring    m_Arguments;                // Arguments to pass to the executable.
         bool            m_UseFilelist = false;      // Whether to launch executable with filelist instead of paths directly.

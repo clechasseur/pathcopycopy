@@ -61,6 +61,7 @@ namespace PCC
 
             std::wstring                GetPath(const std::wstring& p_File) const override;
             std::wstring                PathsSeparator() const override;
+            bool                        CopyPathsRecursively() const override;
 
             PCC::PathActionSP           Action() const override;
 

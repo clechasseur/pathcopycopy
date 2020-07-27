@@ -105,6 +105,17 @@ namespace PCC
     }
 
     //
+    // Checks if this plugin wants to copy paths recursively.
+    // The default value is false.
+    //
+    // @return Whether to copy paths recursively.
+    //
+    bool Plugin::CopyPathsRecursively() const noexcept(false)
+    {
+        return false;
+    }
+
+    //
     // Returns the action to perform on the path or paths when using this plugin.
     // By default, this returns an action copying the path or paths to the clipboard.
     //

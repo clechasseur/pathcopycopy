@@ -52,6 +52,7 @@ namespace
     constexpr wchar_t   ELEMENT_CODE_SWAP_STACK_VALUES          = L'w';
     constexpr wchar_t   ELEMENT_CODE_DUPLICATE_STACK_VALUE      = L'd';
     constexpr wchar_t   ELEMENT_CODE_PATHS_SEPARATOR            = L',';
+    constexpr wchar_t   ELEMENT_CODE_RECURSIVE_COPY             = L'v';
     constexpr wchar_t   ELEMENT_CODE_EXECUTABLE                 = L'x';
     constexpr wchar_t   ELEMENT_CODE_EXECUTABLE_WITH_FILELIST   = L'f';
     constexpr wchar_t   ELEMENT_CODE_COMMAND_LINE               = L'>';
@@ -178,6 +179,10 @@ namespace PCC
             }
             case ELEMENT_CODE_PATHS_SEPARATOR: {
                 spElement = DecodePathsSeparatorElement(p_rStream);
+                break;
+            }
+            case ELEMENT_CODE_RECURSIVE_COPY: {
+                spElement = std::make_shared<RecursiveCopyPipelineElement>();
                 break;
             }
             case ELEMENT_CODE_EXECUTABLE:

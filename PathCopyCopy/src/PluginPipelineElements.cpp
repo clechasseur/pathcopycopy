@@ -798,6 +798,17 @@ namespace PCC
     }
 
     //
+    // Modify global pipeline options by specifying that paths should
+    // be copied recursively.
+    //
+    // @param p_rOptions Global options to modify (in-place).
+    //
+    void RecursiveCopyPipelineElement::ModifyOptions(PipelineOptions& p_rOptions) const
+    {
+        p_rOptions.SetCopyPathsRecursively(true);
+    }
+
+    //
     // Constructor.
     //
     // @param p_Executable Path to executable to launch.

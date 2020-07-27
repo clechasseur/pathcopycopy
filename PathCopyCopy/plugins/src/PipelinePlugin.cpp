@@ -198,6 +198,25 @@ namespace PCC
         }
 
         //
+        // Returns whether to copy paths recursively or not.
+        // The default value is false.
+        //
+        // @return Whether to copy paths recursively.
+        //
+        bool PipelinePlugin::CopyPathsRecursively() const
+        {
+            // This is stored in pipeline options.
+            bool recursively = Plugin::CopyPathsRecursively();
+            const Pipeline* pPipeline = GetPipeline();
+            if (pPipeline != nullptr) {
+                PipelineOptions options;
+                pPipeline->ModifyOptions(options);
+                recursively = options.GetCopyPathsRecursively();
+            }
+            return recursively;
+        }
+
+        //
         // Returns the action to perform on the path or paths when using this plugin.
         //
         // @return Path action instance to use.
