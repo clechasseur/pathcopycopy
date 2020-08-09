@@ -1,4 +1,4 @@
-Version 19.0 (20??-??-??)
+Version 19.0 (2020-08-08)
 -------------------------
 - Application is now localizable. Now ships with English and French versions. [https://github.com/clechasseur/pathcopycopy/issues/107]
 - Paths can now be copied recursively. Available globally or as a custom command option. [https://github.com/clechasseur/pathcopycopy/issues/2]
