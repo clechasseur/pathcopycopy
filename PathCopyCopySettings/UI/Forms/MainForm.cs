@@ -884,18 +884,12 @@ namespace PathCopyCopy.Settings.UI.Forms
                 // of images and this required setting a property of the cell that cannot
                 // be controlled through data binding. We'll display icons here.
                 DataGridViewImageCell rowIconCell = (DataGridViewImageCell) row.Cells[IconCol.Name];
-                bool setToolTip = false;
-                if (!(rowPlugin is SeparatorPlugin)) {
-                    string iconFile = rowPlugin.IconFile;
-                    if (rowPlugin is PipelinePlugin || rowPlugin is DefaultPlugin) {
-                        setToolTip = true;
-                    }
-                    LoadIconFileForCell(iconFile, rowIconCell);
-                }
+                string iconFile = rowPlugin is SeparatorPlugin ? null : rowPlugin.IconFile;
+                LoadIconFileForCell(iconFile, rowIconCell);
 
                 // If the plugin's icon file can be edited, set tooltip text.
                 // Otherwise, clear it and set the cell as read-only.
-                if (setToolTip) {
+                if (rowPlugin is PipelinePlugin || rowPlugin is DefaultPlugin) {
                     rowIconCell.ToolTipText = Resources.MainForm_PluginsDataGrid_IconToolTipText;
                 } else {
                     rowIconCell.ToolTipText = string.Empty;
