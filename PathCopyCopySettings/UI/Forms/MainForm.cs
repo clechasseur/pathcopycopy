@@ -53,6 +53,9 @@ namespace PathCopyCopy.Settings.UI.Forms
         /// The standard DPI values in Windows.
         private const int StandardWindowsDPI = 96;
 
+        /// The desired size when loading icons from icon files.
+        private static readonly Size DesiredIconSize = new Size(16, 16);
+
         /// Map of pipeline plugins exported file extensions to the
         /// corresponding XML serializer version needed to read them.
         private static readonly IDictionary<string, PipelinePluginXmlSerializerVersion> PipelinePluginsExtToSerializerVersion =
@@ -608,9 +611,11 @@ namespace PathCopyCopy.Settings.UI.Forms
                         // which we need to display differently.
                         if (Path.GetExtension(iconFile).ToLower(CultureInfo.CurrentCulture) == ".ico") {
                             rowIconCell.ValueIsIcon = true;
-                            rowIconCell.Value = new Icon(iconFile);
+                            rowIconCell.Value = new Icon(iconFile, DesiredIconSize);
                         } else {
-                            rowIconCell.Value = new Bitmap(iconFile);
+                            using (var bitmap = new Bitmap(iconFile)) {
+                                rowIconCell.Value = new Bitmap(bitmap, DesiredIconSize);
+                            }
                         }
                     } catch (Exception e) {
                         if (e is InvalidOperationException || e is ArgumentException || e is IOException) {
