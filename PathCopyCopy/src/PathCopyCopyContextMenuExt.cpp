@@ -47,6 +47,8 @@ namespace {
 
 const wchar_t* const DEFAULT_PATHS_SEPARATOR = L"\r\n"; // Default separator used between paths when copying multiple file names.
 
+const int32_t DEFAULT_ICON_SIZE = 16;                   // Default width & height for loaded icons.
+
 }
 
 // CPathCopyCopyContextMenuExt
@@ -1010,10 +1012,22 @@ HBITMAP CPathCopyCopyContextMenuExt::GetIconForIconFile(const std::wstring& p_Ic
                 // Init GDI+ to be able to use its calls, since shell doesn't do it.
                 StGdiplusStartup gdiPlusStartup;
                 if (gdiPlusStartup.Started()) {
+                    // Load original bitmap using GDI+.
+                    std::shared_ptr<Gdiplus::Bitmap> spFileBitmap(Gdiplus::Bitmap::FromStream(cpIconFileStream, FALSE));
+
+                    // If necessary, rescale bitmap to fit.
+                    auto spTempBitmap = std::make_shared<Gdiplus::Bitmap>(DEFAULT_ICON_SIZE, DEFAULT_ICON_SIZE);
+                    {
+                        Gdiplus::Graphics graphics(spTempBitmap.get());
+                        graphics.ScaleTransform(static_cast<Gdiplus::REAL>(DEFAULT_ICON_SIZE) / static_cast<Gdiplus::REAL>(spFileBitmap->GetWidth()),
+                                                static_cast<Gdiplus::REAL>(DEFAULT_ICON_SIZE) / static_cast<Gdiplus::REAL>(spFileBitmap->GetHeight()));
+                        graphics.DrawImage(spFileBitmap.get(), 0, 0);
+                    }
+                    spFileBitmap = spTempBitmap;
+
                     // Extract HBITMAP using GDI+.
                     HBITMAP hFileBitmap = nullptr;
-                    Gdiplus::Bitmap fileBitmap(cpIconFileStream, FALSE);
-                    if (fileBitmap.GetHBITMAP(Gdiplus::Color(), &hFileBitmap) == Gdiplus::Ok) {
+                    if (spFileBitmap->GetHBITMAP(Gdiplus::Color(), &hFileBitmap) == Gdiplus::Ok) {
                         // We have HBITMAP, save it in the map.
 #pragma warning(suppress: 26414) // spImage IS copied in emplace, but the compiler can't see it
                         const auto spImage = std::make_shared<StImage>(hFileBitmap, IMAGE_BITMAP, false);
