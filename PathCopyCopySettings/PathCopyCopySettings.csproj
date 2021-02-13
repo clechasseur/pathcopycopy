@@ -201,12 +201,19 @@
     <Compile Include="UI\Utils\UserSettingsWieldingForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <EmbeddedResource Include="Properties\Resources.zh-CN.resx" />
     <EmbeddedResource Include="Properties\Resources.fr-CA.resx" />
+    <EmbeddedResource Include="UI\Forms\AdvancedPipelinePluginForm.zh-CN.resx">
+      <DependentUpon>AdvancedPipelinePluginForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\AdvancedPipelinePluginForm.fr-CA.resx">
       <DependentUpon>AdvancedPipelinePluginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\AdvancedPipelinePluginForm.resx">
       <DependentUpon>AdvancedPipelinePluginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\ImportPipelinePluginsForm.zh-CN.resx">
+      <DependentUpon>ImportPipelinePluginsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\ImportPipelinePluginsForm.fr-CA.resx">
       <DependentUpon>ImportPipelinePluginsForm.cs</DependentUpon>
@@ -215,12 +222,18 @@
       <DependentUpon>ImportPipelinePluginsForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\MainForm.zh-CN.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\MainForm.fr-CA.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\PipelinePluginForm.zh-CN.resx">
+      <DependentUpon>PipelinePluginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\PipelinePluginForm.fr-CA.resx">
       <DependentUpon>PipelinePluginForm.cs</DependentUpon>
@@ -238,11 +251,17 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UI\Forms\RegexTesterForm.zh-CN.resx">
+      <DependentUpon>RegexTesterForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\RegexTesterForm.fr-CA.resx">
       <DependentUpon>RegexTesterForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\RegexTesterForm.resx">
       <DependentUpon>RegexTesterForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\SoftwareUpdateForm.zh-CN.resx">
+      <DependentUpon>SoftwareUpdateForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\SoftwareUpdateForm.fr-CA.resx">
       <DependentUpon>SoftwareUpdateForm.cs</DependentUpon>
@@ -250,11 +269,17 @@
     <EmbeddedResource Include="UI\Forms\SoftwareUpdateForm.resx">
       <DependentUpon>SoftwareUpdateForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserControls\CommandLinePipelineElementUserControl.zh-CN.resx">
+      <DependentUpon>CommandLinePipelineElementUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\CommandLinePipelineElementUserControl.fr-CA.resx">
       <DependentUpon>CommandLinePipelineElementUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\CommandLinePipelineElementUserControl.resx">
       <DependentUpon>CommandLinePipelineElementUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserControls\ConfiglessPipelineElementUserControl.zh-CN.resx">
+      <DependentUpon>ConfiglessPipelineElementUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\ConfiglessPipelineElementUserControl.fr-CA.resx">
       <DependentUpon>ConfiglessPipelineElementUserControl.cs</DependentUpon>
@@ -262,11 +287,17 @@
     <EmbeddedResource Include="UI\UserControls\ConfiglessPipelineElementUserControl.resx">
       <DependentUpon>ConfiglessPipelineElementUserControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserControls\CopyNPathPartsPipelineElementUserControl.zh-CN.resx">
+      <DependentUpon>CopyNPathPartsPipelineElementUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\CopyNPathPartsPipelineElementUserControl.fr-CA.resx">
       <DependentUpon>CopyNPathPartsPipelineElementUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\CopyNPathPartsPipelineElementUserControl.resx">
       <DependentUpon>CopyNPathPartsPipelineElementUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserControls\FindReplacePipelineElementUserControl.zh-CN.resx">
+      <DependentUpon>FindReplacePipelineElementUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\FindReplacePipelineElementUserControl.fr-CA.resx">
       <DependentUpon>FindReplacePipelineElementUserControl.cs</DependentUpon>
@@ -274,11 +305,17 @@
     <EmbeddedResource Include="UI\UserControls\FindReplacePipelineElementUserControl.resx">
       <DependentUpon>FindReplacePipelineElementUserControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserControls\InjectDriveLabelPipelineElementUserControl.zh-CN.resx">
+      <DependentUpon>InjectDriveLabelPipelineElementUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\InjectDriveLabelPipelineElementUserControl.fr-CA.resx">
       <DependentUpon>InjectDriveLabelPipelineElementUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\InjectDriveLabelPipelineElementUserControl.resx">
       <DependentUpon>InjectDriveLabelPipelineElementUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserControls\PathsSeparatorPipelineElementUserControl.zh-CN.resx">
+      <DependentUpon>PathsSeparatorPipelineElementUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\PathsSeparatorPipelineElementUserControl.fr-CA.resx">
       <DependentUpon>PathsSeparatorPipelineElementUserControl.cs</DependentUpon>
@@ -286,11 +323,17 @@
     <EmbeddedResource Include="UI\UserControls\PathsSeparatorPipelineElementUserControl.resx">
       <DependentUpon>PathsSeparatorPipelineElementUserControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserControls\PipelineElementWithExecutableUserControl.zh-CN.resx">
+      <DependentUpon>PipelineElementWithExecutableUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\PipelineElementWithExecutableUserControl.fr-CA.resx">
       <DependentUpon>PipelineElementWithExecutableUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\PipelineElementWithExecutableUserControl.resx">
       <DependentUpon>PipelineElementWithExecutableUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserControls\PipelineElementWithPluginIDUserControl.zh-CN.resx">
+      <DependentUpon>PipelineElementWithPluginIDUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\PipelineElementWithPluginIDUserControl.fr-CA.resx">
       <DependentUpon>PipelineElementWithPluginIDUserControl.cs</DependentUpon>
@@ -298,11 +341,17 @@
     <EmbeddedResource Include="UI\UserControls\PipelineElementWithPluginIDUserControl.resx">
       <DependentUpon>PipelineElementWithPluginIDUserControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserControls\PluginPreviewUserControl.zh-CN.resx">
+      <DependentUpon>PluginPreviewUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\PluginPreviewUserControl.fr-CA.resx">
       <DependentUpon>PluginPreviewUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\PluginPreviewUserControl.resx">
       <DependentUpon>PluginPreviewUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserControls\PopFromStackPipelineElementUserControl.zh-CN.resx">
+      <DependentUpon>PopFromStackPipelineElementUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\PopFromStackPipelineElementUserControl.fr-CA.resx">
       <DependentUpon>PopFromStackPipelineElementUserControl.cs</DependentUpon>
@@ -310,11 +359,17 @@
     <EmbeddedResource Include="UI\UserControls\PopFromStackPipelineElementUserControl.resx">
       <DependentUpon>PopFromStackPipelineElementUserControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserControls\PushToStackPipelineElementUserControl.zh-CN.resx">
+      <DependentUpon>PushToStackPipelineElementUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\PushToStackPipelineElementUserControl.fr-CA.resx">
       <DependentUpon>PushToStackPipelineElementUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\PushToStackPipelineElementUserControl.resx">
       <DependentUpon>PushToStackPipelineElementUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserControls\RegexPipelineElementUserControl.zh-CN.resx">
+      <DependentUpon>RegexPipelineElementUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\RegexPipelineElementUserControl.fr-CA.resx">
       <DependentUpon>RegexPipelineElementUserControl.cs</DependentUpon>

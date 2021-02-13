@@ -81,6 +81,7 @@ SignTool=certum
 [Languages]
 Name: en_CA; MessagesFile: compiler:Default.isl
 Name: fr_CA; MessagesFile: compiler:Languages\French.isl
+Name: zh-CN; MessagesFile: compiler:Languages\Chinese.isl
 
 [CustomMessages]
 CommandsPageCaption=Configuration
@@ -95,14 +96,22 @@ fr_CA.CommandsPageSubCaption=Path Copy Copy vient avec plusieurs commandes perme
 fr_CA.CommandsPageCommonCommandsChoice=Seules les commandes les plus utilisées
 fr_CA.CommandsPageNetworkCommandsChoice=Les commandes de base et celles utilisées dans les environnements réseaux
 fr_CA.CommandsPageAllCommandsChoice=Toutes les commandes, incluant celles plus avancées
+zh-CN.CommandsPageCaption=??
+zh-CN.CommandsPageDescription=?????
+zh-CN.CommandsPageSubCaption=Path Copy Copy ????????????????????????????????????????????????????????????
+zh-CN.CommandsPageCommonCommandsChoice=?????
+zh-CN.CommandsPageNetworkCommandsChoice=???????????????
+zh-CN.CommandsPageAllCommandsChoice=?????????????
 
 [Files]
 Source: ..\bin\Win32\Release\PathCopyCopy.dll; DestDir: {app}; Flags: ignoreversion restartreplace overwritereadonly uninsrestartdelete uninsremovereadonly; DestName: PCC32.dll; Check: (not Is64BitInstallMode) or IsAdminInstallMode
 Source: ..\bin\x64\Release\PathCopyCopy.dll; DestDir: {app}; Flags: ignoreversion restartreplace overwritereadonly uninsrestartdelete uninsremovereadonly; DestName: PCC64.dll; Check: Is64BitInstallMode
 Source: ..\bin\Win32\Release\PathCopyCopyLocalization_en.dll; DestDir: {app}; Flags: ignoreversion restartreplace overwritereadonly uninsrestartdelete uninsremovereadonly
 Source: ..\bin\Win32\Release\PathCopyCopyLocalization_fr.dll; DestDir: {app}; Flags: ignoreversion restartreplace overwritereadonly uninsrestartdelete uninsremovereadonly
+Source: ..\bin\Win32\Release\PathCopyCopyLocalization_zh.dll; DestDir: {app}; Flags: ignoreversion restartreplace overwritereadonly uninsrestartdelete uninsremovereadonly
 Source: ..\bin\Win32\Release\PathCopyCopySettings.exe; DestDir: {app}; Flags: ignoreversion restartreplace overwritereadonly uninsrestartdelete uninsremovereadonly
 Source: ..\bin\Win32\Release\fr-CA\*; DestDir: {app}\fr-CA; Flags: ignoreversion restartreplace overwritereadonly uninsrestartdelete uninsremovereadonly
+Source: ..\bin\Win32\Release\zh-CN\*; DestDir: {app}\zh-CN; Flags: ignoreversion restartreplace overwritereadonly uninsrestartdelete uninsremovereadonly
 Source: ..\bin\Win32\Release\PathCopyCopyRegexTester.exe; DestDir: {app}; Flags: ignoreversion restartreplace overwritereadonly uninsrestartdelete uninsremovereadonly
 Source: ..\bin\Win32\Release\PathCopyCopyCOMPluginExecutor32.exe; DestDir: {app}; Flags: ignoreversion restartreplace overwritereadonly uninsrestartdelete uninsremovereadonly
 Source: ..\bin\x64\Release\PathCopyCopyCOMPluginExecutor64.exe; DestDir: {app}; Flags: ignoreversion restartreplace overwritereadonly uninsrestartdelete uninsremovereadonly; Check: Is64BitInstallMode

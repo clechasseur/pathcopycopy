@@ -323,6 +323,10 @@ namespace PathCopyCopy.Settings.UI.Forms
                     Name = Resources.Language_French_Name,
                     DisplayName = Resources.Language_French_DisplayName,
                 },
+                new LanguageDisplayInfo {
+                    Name = Resources.Language_Chinese_Name,
+                    DisplayName = Resources.Language_Chinese_DisplayName,
+                },
             };
 
             // If the language chosen in the settings is not known, add an entry so it can be selected.

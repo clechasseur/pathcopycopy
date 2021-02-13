@@ -118,64 +118,64 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CYGWIN_PATH_PLUGIN_DESCRIPTION" xml:space="preserve">
-    <value>Copy Cygwin Path</value>
+    <value>复制 Cygwin 路径</value>
   </data>
   <data name="CYGWIN_PATH_PLUGIN_ID" xml:space="preserve">
     <value>{CD50DCE3-9A5C-4adf-B552-1741361567D6}</value>
   </data>
   <data name="EDITING_DISABLED_MESSAGE" xml:space="preserve">
-    <value>This function has been disabled by the administrator.</value>
+    <value>此功能已被管理员禁用。</value>
   </data>
   <data name="EDITING_DISABLED_TITLE" xml:space="preserve">
-    <value>Editing disabled</value>
+    <value>修改禁用</value>
   </data>
   <data name="ImportPipelinePluginsForm_CantOverwriteGlobalMsg" xml:space="preserve">
-    <value>Grayed out custom commands cannot be selected because they would overwrite those configured by your system administrator.</value>
+    <value>无法选择灰色的自定义命令，因为它们会覆盖系统管理员配置的命令。</value>
   </data>
   <data name="ImportPipelinePluginsForm_MsgTitle" xml:space="preserve">
-    <value>Custom Commands</value>
+    <value>自定义命令</value>
   </data>
   <data name="INTERNET_PATH_PLUGIN_DESCRIPTION" xml:space="preserve">
-    <value>Copy Internet Path</value>
+    <value>复制网络路径</value>
   </data>
   <data name="INTERNET_PATH_PLUGIN_ID" xml:space="preserve">
     <value>{8F2ADCCC-9693-407d-9300-FCCB9A12B982}</value>
   </data>
   <data name="LONG_FOLDER_PLUGIN_DESCRIPTION" xml:space="preserve">
-    <value>Copy Long Parent Folder Path</value>
+    <value>复制父目录长路径</value>
   </data>
   <data name="LONG_FOLDER_PLUGIN_ID" xml:space="preserve">
     <value>{349939D7-780F-43fd-A98E-83D9ADD44E22}</value>
   </data>
   <data name="LONG_NAME_PLUGIN_DESCRIPTION" xml:space="preserve">
-    <value>Copy Long Name</value>
+    <value>复制长名称</value>
   </data>
   <data name="LONG_NAME_PLUGIN_ID" xml:space="preserve">
     <value>{3A42B5C6-72D6-4a8a-BA44-014FA64AA11A}</value>
   </data>
   <data name="LONG_PATH_PLUGIN_DESCRIPTION" xml:space="preserve">
-    <value>Copy Long Path</value>
+    <value>复制长路径</value>
   </data>
   <data name="LONG_PATH_PLUGIN_ID" xml:space="preserve">
     <value>{331A3B60-AF49-44f4-B30D-56ADFF6D25E8}</value>
   </data>
   <data name="LONG_UNC_FOLDER_PATH_PLUGIN_DESCRIPTION" xml:space="preserve">
-    <value>Copy Long UNC Parent Folder Path</value>
+    <value>复制 UNC 父目录长路径</value>
   </data>
   <data name="LONG_UNC_FOLDER_PATH_PLUGIN_ID" xml:space="preserve">
     <value>{E2C942AC-917C-4aee-A867-8F6AB960BA76}</value>
   </data>
   <data name="LONG_UNC_PATH_PLUGIN_DESCRIPTION" xml:space="preserve">
-    <value>Copy Long UNC Path</value>
+    <value>复制 UNC 长路径</value>
   </data>
   <data name="LONG_UNC_PATH_PLUGIN_ID" xml:space="preserve">
     <value>{EA24BCC3-35F5-46b9-A2A5-A12A0AED2D28}</value>
   </data>
   <data name="MainForm_Confirm_ImportMsgTitle" xml:space="preserve">
-    <value>Import</value>
+    <value>导入</value>
   </data>
   <data name="MainForm_Confirm_ImportPipelinePluginOverwrite" xml:space="preserve">
-    <value>Some custom commands to be imported will overwrite existing ones. Do you want to import them anyway?</value>
+    <value>一些导入的自定义命令会覆盖现有命令。确定导入它们？</value>
   </data>
   <data name="REGEX_TESTER_EXE_NAME" xml:space="preserve">
     <value>PathCopyCopyRegexTester.exe</value>
@@ -184,73 +184,73 @@
     <value>Modified string: </value>
   </data>
   <data name="REMOVE_PIPELINE_PLUGIN_MESSAGE" xml:space="preserve">
-    <value>Are you sure you want to remove the "{0}" command?</value>
+    <value>你确定要删除 "{0}" 命令？</value>
   </data>
   <data name="REMOVE_PIPELINE_PLUGIN_TITLE" xml:space="preserve">
-    <value>Remove Custom Command</value>
+    <value>删除自定义命令</value>
   </data>
   <data name="SHORT_FOLDER_PLUGIN_DESCRIPTION" xml:space="preserve">
-    <value>Copy Short Parent Folder Path</value>
+    <value>复制父目录短路径</value>
   </data>
   <data name="SHORT_FOLDER_PLUGIN_ID" xml:space="preserve">
     <value>{0929538B-5F52-4480-9902-2BBEC9C84905}</value>
   </data>
   <data name="SHORT_NAME_PLUGIN_DESCRIPTION" xml:space="preserve">
-    <value>Copy Short Name</value>
+    <value>复制短名称</value>
   </data>
   <data name="SHORT_NAME_PLUGIN_ID" xml:space="preserve">
     <value>{C8757DCA-1BA8-48d0-8145-B93BBB9237AF}</value>
   </data>
   <data name="SHORT_PATH_PLUGIN_DESCRIPTION" xml:space="preserve">
-    <value>Copy Short Path</value>
+    <value>复制短路径</value>
   </data>
   <data name="SHORT_PATH_PLUGIN_ID" xml:space="preserve">
     <value>{93B362D1-2B13-467a-B618-6784F24F3BA1}</value>
   </data>
   <data name="SHORT_UNC_FOLDER_PATH_PLUGIN_DESCRIPTION" xml:space="preserve">
-    <value>Copy Short UNC Parent Folder Path</value>
+    <value>复制 UNC 父目录短路径</value>
   </data>
   <data name="SHORT_UNC_FOLDER_PATH_PLUGIN_ID" xml:space="preserve">
     <value>{73188FB3-8E14-409c-95EF-BA608FDC1274}</value>
   </data>
   <data name="SHORT_UNC_PATH_PLUGIN_DESCRIPTION" xml:space="preserve">
-    <value>Copy Short UNC Path</value>
+    <value>复制 UNC 短路径</value>
   </data>
   <data name="SHORT_UNC_PATH_PLUGIN_ID" xml:space="preserve">
     <value>{891F9E3E-0B70-49fd-A86C-53B21C6193C7}</value>
   </data>
   <data name="UNIX_PATH_PLUGIN_DESCRIPTION" xml:space="preserve">
-    <value>Copy Unix Path</value>
+    <value>复制 Unix 路径</value>
   </data>
   <data name="UNIX_PATH_PLUGIN_ID" xml:space="preserve">
     <value>{5B5DA5CB-3284-45a9-A1E5-4D6B03107924}</value>
   </data>
   <data name="MainForm_Error_ImportPipelinePluginBadXMLFormat" xml:space="preserve">
-    <value>An error occured while trying to import the custom commands. The file appears to be corrupted.</value>
+    <value>试图导入自定义命令时发生错误。文件似乎已损坏。</value>
   </data>
   <data name="UserSettings_DefaultUpdateChannel" xml:space="preserve">
     <value>https://raw.githubusercontent.com/clechasseur/pcc-updates/master/UpdateInfo2.xml</value>
   </data>
   <data name="MainForm_Confirm_EditMsgTitle" xml:space="preserve">
-    <value>Edit</value>
+    <value>编辑</value>
   </data>
   <data name="MainForm_Error_InvalidPipelinePluginEncodedElements" xml:space="preserve">
-    <value>An error occured while trying to interpret the data of this custom command. Perhaps it has been created by a newer version of Path Copy Copy? It will be impossible to edit it.</value>
+    <value>在试图解释这个自定义命令的数据时发生了错误。也许它是由较新版本的 Path Copy Copy 创建的？当前版本无法编辑它。</value>
   </data>
   <data name="PipelinePluginForm_EmptyName" xml:space="preserve">
-    <value>Please enter a name for the custom command.</value>
+    <value>请为自定义命令输入一个名称。</value>
   </data>
   <data name="PipelinePluginForm_MsgTitle" xml:space="preserve">
-    <value>Custom Command</value>
+    <value>自定义命令</value>
   </data>
   <data name="PipelinePluginInfo_DescriptionWithRequiredVersion" xml:space="preserve">
-    <value>{0} (Required version: {1})</value>
+    <value>{0}（需要的版本：{1}）</value>
   </data>
   <data name="MainForm_Error_ImportPipelinePluginEmptyXML" xml:space="preserve">
-    <value>An error occured while trying to import the custom commands. The file appears to be empty.</value>
+    <value>试图导入自定义命令时发生错误。该文件似乎是空的。</value>
   </data>
   <data name="ImportPipelinePluginsForm_IncompatiblePluginsMsg" xml:space="preserve">
-    <value>Custom commands with a listed version requirement are incompatible with this version of Path Copy Copy. They can still be imported, but they will be disabled.</value>
+    <value>自定义命令与当前版本的 Path Copy Copy 不兼容，所需版本已列出。这些命令仍然可以被导入，但会被禁用。</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="DefaultIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -260,9 +260,9 @@
     <value>..\Resources\BlankIcon.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="MainForm_PluginsDataGrid_IconToolTipText" xml:space="preserve">
-    <value>Click to choose an icon file for this command.
-Shift-click to have this command use the default icon.
-Control-click to avoid displaying an icon for this command.</value>
+    <value>点此选择此命令的图标文件。
+Shift + 单击，使此命令使用默认图标。
+按住 Control 键，隐藏此命令的图标。</value>
   </data>
   <data name="COM_PLUGIN_EXECUTOR_EXE_NAME_32" xml:space="preserve">
     <value>PathCopyCopyCOMPluginExecutor32.exe</value>
@@ -271,7 +271,7 @@ Control-click to avoid displaying an icon for this command.</value>
     <value>PathCopyCopyCOMPluginExecutor64.exe</value>
   </data>
   <data name="COM_PLUGIN_EXECUTOR_OUTPUT_PREFIX" xml:space="preserve">
-    <value>Output: </value>
+    <value>输出：</value>
   </data>
   <data name="PCC_EXECUTOR_DLL_NAME_32" xml:space="preserve">
     <value>PCC32.dll</value>
@@ -283,103 +283,103 @@ Control-click to avoid displaying an icon for this command.</value>
     <value>PathCopyCopy.dll</value>
   </data>
   <data name="Plugin_PreviewError" xml:space="preserve">
-    <value>#ERROR#</value>
+    <value>#错误#</value>
   </data>
   <data name="MainForm_Msg_UserSettingsExported" xml:space="preserve">
-    <value>Settings have been exported to "{0}". To import them back (possibly on another machine), simply double-click the .reg file in Windows Explorer.</value>
+    <value>设置已导出到 "{0}"。在文件资源管理器双击导出的 .reg 注册表文件即可导入。</value>
   </data>
   <data name="MainForm_Msg_UserSettingsExportedMsgTitle" xml:space="preserve">
-    <value>Settings Exported</value>
+    <value>设置已导出</value>
   </data>
   <data name="MainForm_Confirm_ExportUserSettingsMsgTitle" xml:space="preserve">
-    <value>Export Settings</value>
+    <value>到处设置</value>
   </data>
   <data name="MainForm_Confirm_ExportUserSettingsSaving" xml:space="preserve">
-    <value>In order to export settings, changes have to be applied first. Do you want to apply changes now?</value>
+    <value>要导出设置，必须先应用更改。您现在想应用更改吗？</value>
   </data>
   <data name="MainForm_Msg_UserSettingsNotExported" xml:space="preserve">
-    <value>An error occured while exporting settings to "{0}". Settings have not been successfully exported. (Exit code: {1})</value>
+    <value>导出设置到 "{0}" 时发生错误（退出代码：{1}）</value>
   </data>
   <data name="MainForm_Msg_UserSettingsNotExportedMsgTitle" xml:space="preserve">
-    <value>Settings Not Exported</value>
+    <value>导出失败</value>
   </data>
   <data name="WSL_PATH_PLUGIN_DESCRIPTION" xml:space="preserve">
-    <value>Copy WSL Path</value>
+    <value>复制 WSL 路径</value>
   </data>
   <data name="WSL_PATH_PLUGIN_ID" xml:space="preserve">
     <value>{BD574871-5DF9-4B64-83D1-2AF9C0C17F66}</value>
   </data>
   <data name="SAMBA_PATH_PLUGIN_DESCRIPTION" xml:space="preserve">
-    <value>Copy Samba Path</value>
+    <value>复制 Samba 路径</value>
   </data>
   <data name="SAMBA_PATH_PLUGIN_ID" xml:space="preserve">
     <value>{7DA6A4A2-AE54-40E0-9910-EBD9EF3F017E}</value>
   </data>
   <data name="MSYS_PATH_PLUGIN_DESCRIPTION" xml:space="preserve">
-    <value>Copy MSYS/MSYS2 Path</value>
+    <value>复制 MSYS/MSYS2 路径</value>
   </data>
   <data name="MSYS_PATH_PLUGIN_ID" xml:space="preserve">
     <value>{31022A3D-6FEE-4B36-843E-BBB4556AB35B}</value>
   </data>
   <data name="PipelinePluginForm_PipelineTooComplexForSimpleMode" xml:space="preserve">
-    <value>This custom command is now too complex to be edited in Simple Mode. If you switch, you will lose some customization. Do you really want to switch to Simple Mode?</value>
+    <value>此复杂自定义命令无法在简单模式下编辑。如果切换到简单模式，您将失去一些自定义功能。确定要切换到简单模式吗？</value>
   </data>
   <data name="PipelineElement_ApplyPlugin" xml:space="preserve">
-    <value>Use Base Command (No Custom Command)</value>
+    <value>使用基本命令（无自定义命令）</value>
   </data>
   <data name="PipelineElement_BackToForwardSlashes" xml:space="preserve">
-    <value>Turn Backslashes Into Forward Slashes</value>
+    <value>将反斜杠变成正斜杠</value>
   </data>
   <data name="PipelineElement_EmailLinks" xml:space="preserve">
-    <value>Create Email Links</value>
+    <value>创建邮件链接</value>
   </data>
   <data name="PipelineElement_EncodeURIChars" xml:space="preserve">
-    <value>Encode URI Characters</value>
+    <value>编码 URI 字符</value>
   </data>
   <data name="PipelineElement_EncodeURIWhitespace" xml:space="preserve">
-    <value>Encode URI Whitespace</value>
+    <value>编码 URI 空格</value>
   </data>
   <data name="PipelineElement_Executable" xml:space="preserve">
-    <value>Option: Launch Executable</value>
+    <value>选项：运行可执行文件</value>
   </data>
   <data name="PipelineElement_ExecutableWithFilelist" xml:space="preserve">
-    <value>Option: Launch Executable With Filelist</value>
+    <value>选项: 用文件列表启动可执行文件</value>
   </data>
   <data name="PipelineElement_FindReplace" xml:space="preserve">
-    <value>Find / Replace</value>
+    <value>查找 / 替换</value>
   </data>
   <data name="PipelineElement_ForwardToBackslashes" xml:space="preserve">
-    <value>Turn Forward Slashes Into Backslashes</value>
+    <value>将正斜杠变为反斜杠</value>
   </data>
   <data name="PipelineElement_OptionalQuotes" xml:space="preserve">
-    <value>Add Quotes If Needed</value>
+    <value>必要时添加引号</value>
   </data>
   <data name="PipelineElement_PathsSeparator" xml:space="preserve">
-    <value>Option: Paths Separator</value>
+    <value>选项：路径分隔</value>
   </data>
   <data name="PipelineElement_Quotes" xml:space="preserve">
-    <value>Add Quotes</value>
+    <value>添加引号</value>
   </data>
   <data name="PipelineElement_Regex" xml:space="preserve">
-    <value>Find / Replace Using Regular Expressions</value>
+    <value>查找 / 替换使用中的正则表达式</value>
   </data>
   <data name="PipelineElement_RemoveExt" xml:space="preserve">
-    <value>Remove File Extension</value>
+    <value>移除文件扩展名</value>
   </data>
   <data name="PipelineElement_ApplyPlugin_HelpText" xml:space="preserve">
-    <value>Choose a base command (but not a custom command) to use to get an initial path value</value>
+    <value>选择一个基本命令（非自定义命令）来获取初始路径值</value>
   </data>
   <data name="PipelineElement_BackToForwardSlashes_HelpText" xml:space="preserve">
-    <value>Replace every backslash ( \ ) in the path with a forward slash ( / )</value>
+    <value>将路径中的每一个反斜杠（ \ ）替换为正斜杠（ / ）</value>
   </data>
   <data name="PipelineElement_EmailLinks_HelpText" xml:space="preserve">
-    <value>Surround the path with &lt; and &gt; characters to create e-mail links</value>
+    <value>用 &lt; 和 &gt; 字符包围路径以创建电子邮件链接</value>
   </data>
   <data name="PipelineElement_EncodeURIChars_HelpText" xml:space="preserve">
-    <value>Replace all characters in the path that are invalid in a URI by percent-encoding ( %xx )</value>
+    <value>用百分比编码 ( %xx ) 替换路径中所有无效的字符</value>
   </data>
   <data name="PipelineElement_EncodeURIWhitespace_HelpText" xml:space="preserve">
-    <value>Replace all whitespace characters in the path with %20</value>
+    <value>用 %20 替换路径中的所有空格字符</value>
   </data>
   <data name="PipelineElement_ExecutableWithFilelist_HelpText" xml:space="preserve">
     <value>Instead of copying paths to the clipboard, save them to a filelist, then launch an executable on disk, passing the filelist as argument</value>
@@ -391,22 +391,22 @@ Control-click to avoid displaying an icon for this command.</value>
     <value>Replace every instance of a specific character string in the path with another</value>
   </data>
   <data name="PipelineElement_ForwardToBackslashes_HelpText" xml:space="preserve">
-    <value>Replace every forward slash ( / ) in the path with a backslash ( \ )</value>
+    <value>将路径中的每一个正斜杠 ( / ) 替换为反斜杠 ( / )</value>
   </data>
   <data name="PipelineElement_OptionalQuotes_HelpText" xml:space="preserve">
-    <value>Surround the path with quotes ( " ) if it contains spaces</value>
+    <value>如果路径中包含空格，则用引号 ( " ) 包围路径</value>
   </data>
   <data name="PipelineElement_PathsSeparator_HelpText" xml:space="preserve">
-    <value>Configure the character string to use to separate multiple copied paths; if not present, a newline is used</value>
+    <value>配置用于分隔多个复制路径的字符串；默认使用换行符</value>
   </data>
   <data name="PipelineElement_Quotes_HelpText" xml:space="preserve">
-    <value>Surround the path with quotes ( " )</value>
+    <value>使用引号包围路径 ( " )</value>
   </data>
   <data name="PipelineElement_Regex_HelpText" xml:space="preserve">
-    <value>Perform a find/replace operation on the path using regular expressions</value>
+    <value>使用正则表达式对路径进行查找/替换操作</value>
   </data>
   <data name="PipelineElement_RemoveExt_HelpText" xml:space="preserve">
-    <value>Remove any extension from the file at the end of the path</value>
+    <value>删除路径末尾的文件扩展名</value>
   </data>
   <data name="WikiLink_CustomCommands" xml:space="preserve">
     <value>https://github.com/clechasseur/pathcopycopy/wiki/Custom-Commands</value>
@@ -436,13 +436,13 @@ Control-click to avoid displaying an icon for this command.</value>
     <value>Replace parts of the path with environment variable references, if possible (like %USERPROFILE%, etc.)</value>
   </data>
   <data name="PipelineElement_ApplyPipelinePlugin" xml:space="preserve">
-    <value>Use Base Command</value>
+    <value>使用基本命令</value>
   </data>
   <data name="PipelineElement_ApplyPipelinePlugin_HelpText" xml:space="preserve">
-    <value>Choose a base command to use to get an initial path value</value>
+    <value>选择一个基本命令来获取初始路径值</value>
   </data>
   <data name="MainForm_PluginsDataGrid_DuplicateSuffix" xml:space="preserve">
-    <value> (Copy)</value>
+    <value>（复制）</value>
   </data>
   <data name="PipelineElement_InjectDriveLabel" xml:space="preserve">
     <value>Inject Drive Label</value>
@@ -481,13 +481,13 @@ Control-click to avoid displaying an icon for this command.</value>
     <value>Swap the top two values on the stack</value>
   </data>
   <data name="Language_English_DisplayName" xml:space="preserve">
-    <value>English</value>
+    <value>英语 (English)</value>
   </data>
   <data name="Language_English_Name" xml:space="preserve">
     <value>en-CA</value>
   </data>
   <data name="Language_French_DisplayName" xml:space="preserve">
-    <value>French</value>
+    <value>法语 (French)</value>
   </data>
   <data name="Language_French_Name" xml:space="preserve">
     <value>fr-CA</value>
@@ -499,24 +499,24 @@ Control-click to avoid displaying an icon for this command.</value>
     <value>zh-CN</value>
   </data>
   <data name="MainForm_Msg_LanguageSwitched" xml:space="preserve">
-    <value>Changing the application's language requires a logoff/logon in order to be applied.</value>
+    <value>新语言在程序重新启动后方可生效</value>
   </data>
   <data name="MainForm_Msg_LanguageSwitchedMsgTitle" xml:space="preserve">
-    <value>Language Changed</value>
+    <value>语言变更成功</value>
   </data>
   <data name="DEV_BUILD" xml:space="preserve">
     <value> (Dev Build)</value>
   </data>
   <data name="PipelineElement_CommandLine" xml:space="preserve">
-    <value>Options: Launch Command-Line</value>
+    <value>选项：启动命令行</value>
   </data>
   <data name="PipelineElement_CommandLine_HelpText" xml:space="preserve">
     <value>Instead of copying the paths to the clipboard, launch a command-line (executable &amp; arguments), including the paths in the arguments either directly or via a filelist</value>
   </data>
   <data name="PipelineElement_RecursiveCopy" xml:space="preserve">
-    <value>Option: Copy Paths Recursively</value>
+    <value>选项：递归复制路径</value>
   </data>
   <data name="PipelineElement_RecursiveCopy_HelpText" xml:space="preserve">
-    <value>Recurse into subdirectories when copying paths</value>
+    <value>复制路径时递归到子目录</value>
   </data>
 </root>
