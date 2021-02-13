@@ -54,6 +54,8 @@ namespace
 
     constexpr ULONG         REG_BUFFER_CHUNK_SIZE = 512;        // Size of chunks allocated to read the registry.
 
+    const wchar_t* const    LOCAL_DRIVE_SYMLINK_PREFIX  = L"\\\\?\\";   // Prefix for local paths when fetching symlink targets.
+    const wchar_t* const    UNC_DRIVE_SYMLINK_PREFIX    = L"?\\UNC\\";  // Prefix for UNC paths when fetching symlink targets.
 } // anonymous namespace
 
 namespace PCC
@@ -174,6 +176,11 @@ namespace PCC
                                                                       FILE_NAME_NORMALIZED | VOLUME_NAME_DOS);
                 if (finalPathRes != 0) {
                     p_rPath = finalPath.c_str();
+
+                    // Fetching symlink target probably left us with a weird path, fix it
+                    // because Explorer can't handle paths with \\?\ in them.
+                    StringUtils::ReplaceAll(p_rPath, UNC_DRIVE_SYMLINK_PREFIX, L"");
+                    StringUtils::ReplaceAll(p_rPath, LOCAL_DRIVE_SYMLINK_PREFIX, L"");
                 }
             }
         }
