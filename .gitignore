@@ -13,5 +13,6 @@ ipch/
 *.VC.opendb
 packages/
 Testing/mtexplorer.ini
+Testing/dir_symlink
 packages/
 Samples/SampleCOMPluginCpp/SampleCOMPlugin/Debug/
