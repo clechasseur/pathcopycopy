@@ -1,3 +1,11 @@
+Version ??.? (202?-??-??)
+-------------------------
+- Fixed data error when associating icons to commands in the Settings application [https://github.com/clechasseur/pathcopycopy/issues/132]
+- Fixed icon scaling when using bigger icons for commands [https://github.com/clechasseur/pathcopycopy/issues/133]
+- Fixed non-working paths copied when following symlink paths [https://github.com/clechasseur/pathcopycopy/issues/127]
+- Fixed copying of .url paths on recent Windows 10 OSes [https://github.com/clechasseur/pathcopycopy/issues/128]
+
+
 Version 19.0 (2020-08-08)
 -------------------------
 - Application is now localizable. Now ships with English and French versions. [https://github.com/clechasseur/pathcopycopy/issues/107]
