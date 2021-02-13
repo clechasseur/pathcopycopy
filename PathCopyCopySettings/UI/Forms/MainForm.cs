@@ -53,6 +53,9 @@ namespace PathCopyCopy.Settings.UI.Forms
         /// The standard DPI values in Windows.
         private const int StandardWindowsDPI = 96;
 
+        /// The desired size when loading icons from icon files.
+        private static readonly Size DesiredIconSize = new Size(16, 16);
+
         /// Map of pipeline plugins exported file extensions to the
         /// corresponding XML serializer version needed to read them.
         private static readonly IDictionary<string, PipelinePluginXmlSerializerVersion> PipelinePluginsExtToSerializerVersion =
@@ -612,9 +615,11 @@ namespace PathCopyCopy.Settings.UI.Forms
                         // which we need to display differently.
                         if (Path.GetExtension(iconFile).ToLower(CultureInfo.CurrentCulture) == ".ico") {
                             rowIconCell.ValueIsIcon = true;
-                            rowIconCell.Value = new Icon(iconFile);
+                            rowIconCell.Value = new Icon(iconFile, DesiredIconSize);
                         } else {
-                            rowIconCell.Value = new Bitmap(iconFile);
+                            using (var bitmap = new Bitmap(iconFile)) {
+                                rowIconCell.Value = new Bitmap(bitmap, DesiredIconSize);
+                            }
                         }
                     } catch (Exception e) {
                         if (e is InvalidOperationException || e is ArgumentException || e is IOException) {
@@ -888,18 +893,12 @@ namespace PathCopyCopy.Settings.UI.Forms
                 // of images and this required setting a property of the cell that cannot
                 // be controlled through data binding. We'll display icons here.
                 DataGridViewImageCell rowIconCell = (DataGridViewImageCell) row.Cells[IconCol.Name];
-                bool setToolTip = false;
-                if (!(rowPlugin is SeparatorPlugin)) {
-                    string iconFile = rowPlugin.IconFile;
-                    if (rowPlugin is PipelinePlugin || rowPlugin is DefaultPlugin) {
-                        setToolTip = true;
-                    }
-                    LoadIconFileForCell(iconFile, rowIconCell);
-                }
+                string iconFile = rowPlugin is SeparatorPlugin ? null : rowPlugin.IconFile;
+                LoadIconFileForCell(iconFile, rowIconCell);
 
                 // If the plugin's icon file can be edited, set tooltip text.
                 // Otherwise, clear it and set the cell as read-only.
-                if (setToolTip) {
+                if (rowPlugin is PipelinePlugin || rowPlugin is DefaultPlugin) {
                     rowIconCell.ToolTipText = Resources.MainForm_PluginsDataGrid_IconToolTipText;
                 } else {
                     rowIconCell.ToolTipText = string.Empty;
