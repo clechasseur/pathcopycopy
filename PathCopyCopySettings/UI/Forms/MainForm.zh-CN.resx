@@ -1150,10 +1150,10 @@
     <value>10</value>
   </data>
   <data name="UsePreviewModeChk.Text" xml:space="preserve">
-    <value>在子菜单中显示命令的&amp;预览而非描述</value>
+    <value>右键菜单直接显示命令的&amp;输出结果</value>
   </data>
   <data name="UsePreviewModeChk.ToolTip" xml:space="preserve">
-    <value>当在子菜单中显示命令时，显示最终复制路径的输出结果预览</value>
+    <value>打开右键菜单时，直接显示复制的路径，不显示命令名。</value>
   </data>
   <data name="&gt;&gt;UsePreviewModeChk.Name" xml:space="preserve">
     <value>UsePreviewModeChk</value>
@@ -1180,10 +1180,10 @@
     <value>9</value>
   </data>
   <data name="UseIconForSubmenuChk.Text" xml:space="preserve">
-    <value>在子菜单旁边显示&amp;图标</value>
+    <value>显示&amp;右键菜单子菜单的图标</value>
   </data>
   <data name="UseIconForSubmenuChk.ToolTip" xml:space="preserve">
-    <value>在右键菜单的子菜单旁边显示 Path Copy Copy 图标</value>
+    <value>在右键菜单的子菜单前添加 Path Copy Copy 图标</value>
   </data>
   <data name="&gt;&gt;UseIconForSubmenuChk.Name" xml:space="preserve">
     <value>UseIconForSubmenuChk</value>
@@ -1273,7 +1273,7 @@
     <value>总&amp;是显示子菜单</value>
   </data>
   <data name="AlwaysShowSubmenuChk.ToolTip" xml:space="preserve">
-    <value>始终在 "右键菜单" 中显示 "Path Copy Copy "子菜单(否则，只有在按住 Shift 键打开右键菜单时才显示)</value>
+    <value>始终在 "右键菜单" 中显示 "Path Copy Copy " 子菜单（否则，只有在按住 Shift 键打开右键菜单时才显示）</value>
   </data>
   <data name="&gt;&gt;AlwaysShowSubmenuChk.Name" xml:space="preserve">
     <value>AlwaysShowSubmenuChk</value>
