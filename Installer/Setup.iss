@@ -92,16 +92,16 @@ CommandsPageNetworkCommandsChoice=Common commands and commands for network envir
 CommandsPageAllCommandsChoice=All commands, including power-user commands
 fr_CA.CommandsPageCaption=Configuration
 fr_CA.CommandsPageDescription=Configuration initiale des commandes
-fr_CA.CommandsPageSubCaption=Path Copy Copy vient avec plusieurs commandes permettant de copier des chemins (chemin long, chemin r�seau, etc.) Veuillez choisir quelles commandes afficher par d�faut. Ceci peut �tre chang� plus tard via Param�tres.
-fr_CA.CommandsPageCommonCommandsChoice=Seules les commandes les plus utilis�es
-fr_CA.CommandsPageNetworkCommandsChoice=Les commandes de base et celles utilis�es dans les environnements r�seaux
-fr_CA.CommandsPageAllCommandsChoice=Toutes les commandes, incluant celles plus avanc�es
-zh-CN.CommandsPageCaption=??
-zh-CN.CommandsPageDescription=?????
-zh-CN.CommandsPageSubCaption=Path Copy Copy ????????????????????????????????????????????????????????????
-zh-CN.CommandsPageCommonCommandsChoice=?????
-zh-CN.CommandsPageNetworkCommandsChoice=???????????????
-zh-CN.CommandsPageAllCommandsChoice=?????????????
+fr_CA.CommandsPageSubCaption=Path Copy Copy vient avec plusieurs commandes permettant de copier des chemins (chemin long, chemin réseau, etc.) Veuillez choisir quelles commandes afficher par défaut. Ceci peut être changé plus tard via Paramètres.
+fr_CA.CommandsPageCommonCommandsChoice=Seules les commandes les plus utilisées
+fr_CA.CommandsPageNetworkCommandsChoice=Les commandes de base et celles utilisées dans les environnements réseaux
+fr_CA.CommandsPageAllCommandsChoice=Toutes les commandes, incluant celles plus avancées
+zh_CN.CommandsPageCaption=配置
+zh_CN.CommandsPageDescription=预配置命令
+zh_CN.CommandsPageSubCaption=Path Copy Copy 为您提供了多种路径命令（复制长路径、网络路径等）。请选择一种默认方案，您之后也可以在设置窗口中修改方案。
+zh_CN.CommandsPageCommonCommandsChoice=仅常用命令
+zh_CN.CommandsPageNetworkCommandsChoice=常用命令和网络环境命令
+zh_CN.CommandsPageAllCommandsChoice=所有命令，包含高级用户命令
 
 [Files]
 Source: ..\bin\Win32\Release\PathCopyCopy.dll; DestDir: {app}; Flags: ignoreversion restartreplace overwritereadonly uninsrestartdelete uninsremovereadonly; DestName: PCC32.dll; Check: (not Is64BitInstallMode) or IsAdminInstallMode
