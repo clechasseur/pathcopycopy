@@ -23,8 +23,25 @@
 #include <StringUtils.h>
 
 #include <assert.h>
+#include <cwctype>
 #include <functional>
 #include <sstream>
+
+
+//
+// Converts p_String to uppercase.
+//
+// @param p_String String to convert.
+// @return Uppercase version of string.
+//
+std::wstring StringUtils::ToUppercase(std::wstring p_String)
+{
+    std::transform(p_String.begin(),
+                   p_String.end(),
+                   p_String.begin(),
+                   [](auto c) { return static_cast<wchar_t>(std::towupper(static_cast<std::wint_t>(c))); });
+    return p_String;
+}
 
 
 //

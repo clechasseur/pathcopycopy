@@ -38,6 +38,8 @@
 #include <functional>
 #include <set>
 
+#include <coveo/linq.h>
+
 #include <gdiplus.h>
 
 #pragma warning(disable: 26426) // Globals are only used by COM objects created later, so we're OK here
@@ -1056,6 +1058,8 @@ HBITMAP CPathCopyCopyContextMenuExt::GetIconForIconFile(const std::wstring& p_Ic
 HRESULT CPathCopyCopyContextMenuExt::ActOnFiles(const PCC::PluginSP& p_spPlugin,
                                                 HWND const p_hWnd)
 {
+    using namespace coveo::linq;
+
     HRESULT hRes = E_FAIL;
 
     if (p_spPlugin != nullptr) {
@@ -1072,24 +1076,39 @@ HRESULT CPathCopyCopyContextMenuExt::ActOnFiles(const PCC::PluginSP& p_spPlugin,
                 pathsSeparator = DEFAULT_PATHS_SEPARATOR;
             }
         }
-        std::wstring newFiles;
-        auto vFiles = GetFilesToActOn(recursively);
+        PCC::FilesV vNewFiles;
+        PCC::FilesV vFiles = GetFilesToActOn(recursively);
         for (const auto& oldName : vFiles) {
             // Ask plugin to compute filename using its scheme and save it.
-            if (!newFiles.empty()) {
-                newFiles += pathsSeparator;
-            }
+            std::wstring newFile;
             if (makeEmailLinks) {
-                newFiles += L"<";
+                newFile += L"<";
             }
             std::wstring newName = p_spPlugin->GetPath(oldName);
             StringUtils::EncodeURICharacters(newName, encodeParam);
             if (addQuotes) {
                 AddQuotes(newName, areQuotesOptional);
             }
-            newFiles += newName;
+            newFile += newName;
             if (makeEmailLinks) {
-                newFiles += L">";
+                newFile += L">";
+            }
+            vNewFiles.emplace_back(std::move(newFile));
+        }
+
+        // Sort files alphabetically (case-insensitively).
+        vNewFiles = from(vNewFiles)
+                  | order_by([](auto&& file) { return StringUtils::ToUppercase(file); })
+                  | to_vector();
+
+        // Convert vector of filenames to a string using path separator.
+        std::wstring newFiles;
+        if (!vNewFiles.empty()) {
+            auto newFilesIt = vNewFiles.cbegin();
+            newFiles += *newFilesIt;
+            for (++newFilesIt; newFilesIt != vNewFiles.cend(); ++newFilesIt) {
+                newFiles += pathsSeparator;
+                newFiles += *newFilesIt;
             }
         }
 

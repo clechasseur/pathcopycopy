@@ -42,6 +42,8 @@ public:
                         StringUtils() = delete;
                         ~StringUtils() = delete;
 
+    static std::wstring ToUppercase(std::wstring p_String);
+
     static void         ReplaceAll(std::wstring& p_rString,
                                    const std::wstring& p_OldValue,
                                    const std::wstring& p_NewValue);

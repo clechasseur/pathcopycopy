@@ -1,5 +1,6 @@
 Version ??.? (202?-??-??)
 -------------------------
+- Paths are now copied in alphabetical order (case-insensitively) [https://github.com/clechasseur/pathcopycopy/issues/129]
 - Fixed data error when associating icons to commands in the Settings application [https://github.com/clechasseur/pathcopycopy/issues/132]
 - Fixed icon scaling when using bigger icons for commands [https://github.com/clechasseur/pathcopycopy/issues/133]
 - Fixed non-working paths copied when following symlink paths [https://github.com/clechasseur/pathcopycopy/issues/127]
