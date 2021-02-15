@@ -232,6 +232,24 @@ namespace PathCopyCopy.Settings.Properties {
                 return ResourceManager.GetString("Language_French_Name", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Chinese.
+        /// </summary>
+        internal static string Language_Chinese_DisplayName {
+            get {
+                return ResourceManager.GetString("Language_Chinese_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to zh-CN.
+        /// </summary>
+        internal static string Language_Chinese_Name {
+            get {
+                return ResourceManager.GetString("Language_Chinese_Name", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to Copy Long Parent Folder Path.

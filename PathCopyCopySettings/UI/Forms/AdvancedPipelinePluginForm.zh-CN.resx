@@ -1,0 +1,673 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="&gt;&gt;NameTxt.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ElementsLbl.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;NameLbl.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="MoveElementUpBtn.ImageIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="OKBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="MinVersionLbl.Text" xml:space="preserve">
+    <value>使用此命令所需的最小 Path Copy Copy 程序版本为：{0}</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="CancelBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="&gt;&gt;UserControlPlacementPanel.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;ElementsImageList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SelectElementLbl.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="PreviewCtrl.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;MoveElementDownBtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="NameTxt.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;MoveElementDownBtn.Name" xml:space="preserve">
+    <value>MoveElementDownBtn</value>
+  </data>
+  <data name="UserControlPlacementPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;ElementsLst.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;PreviewCtrl.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;NewElementBtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PreviewCtrl.Type" xml:space="preserve">
+    <value>PathCopyCopy.Settings.UI.UserControls.PluginPreviewUserControl, PathCopyCopySettings, Version=19.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;AdvancedPipelinePluginToolTip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PreviewCtrl.Name" xml:space="preserve">
+    <value>PreviewCtrl</value>
+  </data>
+  <data name="NameTxt.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="NewElementBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>140, 38</value>
+  </data>
+  <data name="OKBtn.ToolTip" xml:space="preserve">
+    <value>保存自定义命令并关闭窗口</value>
+  </data>
+  <data name="&gt;&gt;ElementsImageList.Name" xml:space="preserve">
+    <value>ElementsImageList</value>
+  </data>
+  <data name="NewElementBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="ElementsLbl.Text" xml:space="preserve">
+    <value>&amp;元素：</value>
+  </data>
+  <data name="DeleteElementBtn.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>自定义命令（专家模式）</value>
+  </data>
+  <data name="NameLbl.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;NewElementContextMenuStrip.Name" xml:space="preserve">
+    <value>NewElementContextMenuStrip</value>
+  </data>
+  <data name="&gt;&gt;MoveElementUpBtn.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="DeleteElementBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;UserControlPlacementPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="MinVersionLbl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>304, 13</value>
+  </data>
+  <data name="ElementsLst.ToolTip" xml:space="preserve">
+    <value>此自定义命令的元素列表</value>
+  </data>
+  <data name="SelectElementLbl.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;NameTxt.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="&gt;&gt;NewElementBtn.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="MinVersionLbl.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="MoveElementUpBtn.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;MinVersionLbl.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;CancelBtn.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="PreviewCtrl.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
+  <data name="DeleteElementBtn.ImageIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="NameLbl.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;DeleteElementBtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ElementsLst.Name" xml:space="preserve">
+    <value>ElementsLst</value>
+  </data>
+  <data name="&gt;&gt;PreviewCtrl.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="MoveElementUpBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;NameLbl.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="NameLbl.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="MinVersionLbl.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="MoveElementDownBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>227, 38</value>
+  </data>
+  <data name="SelectElementLbl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>266, 13</value>
+  </data>
+  <data name="NameTxt.ToolTip" xml:space="preserve">
+    <value>此自定义命令的名称</value>
+  </data>
+  <data name="&gt;&gt;DeleteElementBtn.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="NewElementBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 23</value>
+  </data>
+  <data name="CancelBtn.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>AdvancedPipelinePluginForm</value>
+  </data>
+  <data name="MoveElementDownBtn.ToolTip" xml:space="preserve">
+    <value>下移所选元素</value>
+  </data>
+  <data name="ElementsLst.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="MinVersionLbl.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="MoveElementDownBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 23</value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>654, 469</value>
+  </data>
+  <data name="&gt;&gt;MinVersionLbl.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="DeleteElementBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 23</value>
+  </data>
+  <data name="NewElementContextMenuStrip.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SelectElementLbl.Text" xml:space="preserve">
+    <value>请在列表中选择一个元素以编辑其属性。</value>
+  </data>
+  <data name="&gt;&gt;SelectElementLbl.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="ElementsLbl.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="SelectElementLbl.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;NewElementBtn.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
+  <data name="ElementsLst.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 67</value>
+  </data>
+  <data name="MoveElementDownBtn.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="MoveElementUpBtn.ToolTip" xml:space="preserve">
+    <value>上移所选元素</value>
+  </data>
+  <data name="CancelBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;SwitchBtn.Name" xml:space="preserve">
+    <value>SwitchBtn</value>
+  </data>
+  <data name="NewElementBtn.ToolTip" xml:space="preserve">
+    <value>添加一个新元素到此自定义命令</value>
+  </data>
+  <data name="SelectElementLbl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>256, 67</value>
+  </data>
+  <data name="MinVersionLbl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>256, 43</value>
+  </data>
+  <data name="UserControlPlacementPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>256, 67</value>
+  </data>
+  <data name="&gt;&gt;ElementsLbl.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;SwitchBtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;NewElementContextMenuStrip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="NameLbl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>38, 13</value>
+  </data>
+  <data name="&gt;&gt;NameLbl.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="ElementsLbl.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;UserControlPlacementPanel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;DeleteElementBtn.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;OKBtn.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="MoveElementUpBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>198, 38</value>
+  </data>
+  <data name="PreviewCtrl.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ElementsLst.Size" type="System.Drawing.Size, System.Drawing">
+    <value>238, 316</value>
+  </data>
+  <data name="OKBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="DeleteElementBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>169, 38</value>
+  </data>
+  <data name="&gt;&gt;CancelBtn.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="MoveElementUpBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 23</value>
+  </data>
+  <data name="UserControlPlacementPanel.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="UserControlPlacementPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;OKBtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="NameLbl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 15</value>
+  </data>
+  <data name="NameTxt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>56, 12</value>
+  </data>
+  <data name="&gt;&gt;DeleteElementBtn.Name" xml:space="preserve">
+    <value>DeleteElementBtn</value>
+  </data>
+  <data name="&gt;&gt;CancelBtn.Name" xml:space="preserve">
+    <value>CancelBtn</value>
+  </data>
+  <data name="&gt;&gt;MoveElementDownBtn.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="ElementsLbl.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="OKBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;NameLbl.Name" xml:space="preserve">
+    <value>NameLbl</value>
+  </data>
+  <data name="UserControlPlacementPanel.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SwitchBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 395</value>
+  </data>
+  <data name="ElementsLst.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left</value>
+  </data>
+  <data name="&gt;&gt;OKBtn.Name" xml:space="preserve">
+    <value>OKBtn</value>
+  </data>
+  <data name="OKBtn.Text" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="UserControlPlacementPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>370, 257</value>
+  </data>
+  <data name="&gt;&gt;OKBtn.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;SwitchBtn.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="NewElementContextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 4</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>PathCopyCopy.Settings.UI.Utils.PositionPersistedForm, PathCopyCopySettings, Version=19.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="SwitchBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="&gt;&gt;UserControlPlacementPanel.Name" xml:space="preserve">
+    <value>UserControlPlacementPanel</value>
+  </data>
+  <data name="&gt;&gt;NameTxt.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;MoveElementUpBtn.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="ElementsLbl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 13</value>
+  </data>
+  <data name="MoveElementDownBtn.ImageIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="CancelBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>551, 395</value>
+  </data>
+  <data name="&gt;&gt;ElementsLbl.Name" xml:space="preserve">
+    <value>ElementsLbl</value>
+  </data>
+  <data name="SelectElementLbl.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="SwitchBtn.Text" xml:space="preserve">
+    <value>简单模式</value>
+  </data>
+  <data name="&gt;&gt;MinVersionLbl.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="NameLbl.Text" xml:space="preserve">
+    <value>&amp;名称：</value>
+  </data>
+  <data name="ElementsLbl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 48</value>
+  </data>
+  <data name="&gt;&gt;MoveElementUpBtn.Name" xml:space="preserve">
+    <value>MoveElementUpBtn</value>
+  </data>
+  <data name="ElementsImageList.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABu
+        CgAAAk1TRnQBSQFMAgEBBAEAAVABAAFsAQABEAEAARABAAT/AQkBEAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        AwABQAMAASADAAEBAQABCAYAAQgYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
+        AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
+        AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
+        AWYDAAGZAwABzAIAATMDAAIzAgABMwFmAgABMwGZAgABMwHMAgABMwH/AgABZgMAAWYBMwIAAmYCAAFm
+        AZkCAAFmAcwCAAFmAf8CAAGZAwABmQEzAgABmQFmAgACmQIAAZkBzAIAAZkB/wIAAcwDAAHMATMCAAHM
+        AWYCAAHMAZkCAALMAgABzAH/AgAB/wFmAgAB/wGZAgAB/wHMAQABMwH/AgAB/wEAATMBAAEzAQABZgEA
+        ATMBAAGZAQABMwEAAcwBAAEzAQAB/wEAAf8BMwIAAzMBAAIzAWYBAAIzAZkBAAIzAcwBAAIzAf8BAAEz
+        AWYCAAEzAWYBMwEAATMCZgEAATMBZgGZAQABMwFmAcwBAAEzAWYB/wEAATMBmQIAATMBmQEzAQABMwGZ
+        AWYBAAEzApkBAAEzAZkBzAEAATMBmQH/AQABMwHMAgABMwHMATMBAAEzAcwBZgEAATMBzAGZAQABMwLM
+        AQABMwHMAf8BAAEzAf8BMwEAATMB/wFmAQABMwH/AZkBAAEzAf8BzAEAATMC/wEAAWYDAAFmAQABMwEA
+        AWYBAAFmAQABZgEAAZkBAAFmAQABzAEAAWYBAAH/AQABZgEzAgABZgIzAQABZgEzAWYBAAFmATMBmQEA
+        AWYBMwHMAQABZgEzAf8BAAJmAgACZgEzAQADZgEAAmYBmQEAAmYBzAEAAWYBmQIAAWYBmQEzAQABZgGZ
+        AWYBAAFmApkBAAFmAZkBzAEAAWYBmQH/AQABZgHMAgABZgHMATMBAAFmAcwBmQEAAWYCzAEAAWYBzAH/
+        AQABZgH/AgABZgH/ATMBAAFmAf8BmQEAAWYB/wHMAQABzAEAAf8BAAH/AQABzAEAApkCAAGZATMBmQEA
+        AZkBAAGZAQABmQEAAcwBAAGZAwABmQIzAQABmQEAAWYBAAGZATMBzAEAAZkBAAH/AQABmQFmAgABmQFm
+        ATMBAAGZATMBZgEAAZkBZgGZAQABmQFmAcwBAAGZATMB/wEAApkBMwEAApkBZgEAA5kBAAKZAcwBAAKZ
+        Af8BAAGZAcwCAAGZAcwBMwEAAWYBzAFmAQABmQHMAZkBAAGZAswBAAGZAcwB/wEAAZkB/wIAAZkB/wEz
+        AQABmQHMAWYBAAGZAf8BmQEAAZkB/wHMAQABmQL/AQABzAMAAZkBAAEzAQABzAEAAWYBAAHMAQABmQEA
+        AcwBAAHMAQABmQEzAgABzAIzAQABzAEzAWYBAAHMATMBmQEAAcwBMwHMAQABzAEzAf8BAAHMAWYCAAHM
+        AWYBMwEAAZkCZgEAAcwBZgGZAQABzAFmAcwBAAGZAWYB/wEAAcwBmQIAAcwBmQEzAQABzAGZAWYBAAHM
+        ApkBAAHMAZkBzAEAAcwBmQH/AQACzAIAAswBMwEAAswBZgEAAswBmQEAA8wBAALMAf8BAAHMAf8CAAHM
+        Af8BMwEAAZkB/wFmAQABzAH/AZkBAAHMAf8BzAEAAcwC/wEAAcwBAAEzAQAB/wEAAWYBAAH/AQABmQEA
+        AcwBMwIAAf8CMwEAAf8BMwFmAQAB/wEzAZkBAAH/ATMBzAEAAf8BMwH/AQAB/wFmAgAB/wFmATMBAAHM
+        AmYBAAH/AWYBmQEAAf8BZgHMAQABzAFmAf8BAAH/AZkCAAH/AZkBMwEAAf8BmQFmAQAB/wKZAQAB/wGZ
+        AcwBAAH/AZkB/wEAAf8BzAIAAf8BzAEzAQAB/wHMAWYBAAH/AcwBmQEAAf8CzAEAAf8BzAH/AQAC/wEz
+        AQABzAH/AWYBAAL/AZkBAAL/AcwBAAJmAf8BAAFmAf8BZgEAAWYC/wEAAf8CZgEAAf8BZgH/AQAC/wFm
+        AQABIQEAAaUBAANfAQADdwEAA4YBAAOWAQADywEAA7IBAAPXAQAD3QEAA+MBAAPqAQAD8QEAA/gBAAHw
+        AfsB/wEAAaQCoAEAA4ADAAH/AgAB/wMAAv8BAAH/AwAB/wEAAf8BAAL/AgAD//8A/wD/AP8ADQAE9AwA
+        BPQsAAH0AhQB9AwAAfQCFAH0LAAB9AIUAfQMAAH0AhQB9CwAAfQCFAH0DAAB9AIUAfQIAAH/BgAB/wsA
+        Av8OAAH/AfQCFAH0Af8KAAH/AfMCFAHzAf8GAAH/AvQEAAL0Af8JAAH/AvQB/wwAAf8B9AHsAhQB7AH0
+        Af8IAAH/AfQB7AIUAewB9AH/BAAB/wH0Ae8B8QH0AgAB9AHxAe8B9AH/BwAB/wH0AgcB9AH/CAAE9AHv
+        BBQB9wH0CAAB9AHvBBQB9wH0BAAB9AHyARMBEgHxAvQB8QESARMB8gH0BgAB/wH0AQcCEwEHAfQB/wcA
+        A/QB8AYUAbwB9AIAAv8CAAH0AfAGFAG8AfQDAAH/AfQBBwETARIC8QESARMBBwH0Af8FAAH/AfQBBwET
+        AhIBEwEHAfQB/wQAA/QBTAP0BRQBEwHyAfQB/wLzAf8B9AHzAQcGFAETAfEB9AMAAf8B9AEHARMCEgET
+        AQcB9AH/BQAB/wH0AQcBEwESAvEBEgETAQcB9AH/AwAB9AFMAfQBTAH0AUwB9AYUAW0C8wJGAvMBRgFv
+        Ae8GFAFtAfQEAAH/AfQBBwITAQcB9AH/BgAB9AHyARMBEgHxAvQB8QESARMB8gH0AgAD9ANMCvQB8wFG
+        ASQCRgEkAW8J9AUAAf8B9AIHAfQB/wcAAf8B9AHvAfEB9AIAAfQB8QHvAfQB/wIAAfQDTAH0A0wB9AcA
+        Af8B8wFGAiQBbwH0Af8OAAH/AvQB/wkAAf8C9AQAAvQB/wMAAvQBGgNMARoC9AcAAfQB8wFGAiQBRgHz
+        Af8PAAL/CwAB/wYAAf8FAAH0AUwB9AFMAfQBTAH0CAAB8wFGASQBbwFGASQBRgH0Af8oAAP0AUwD9AgA
+        AfQCbwH0AfMBRgFvAfQB/yoAA/QKAAH/AvQC/wL0Af8oAAFCAU0BPgcAAT4DAAEoAwABQAMAASADAAEB
+        AQABAQYAAQEWAAP/gQAB/wEPAf8BDwX/AQ8B/wEPBf8BDwH/AQ8F/wEPAf8BDwH3Ae8B/gF/Af4BBwH+
+        AQcB4wHHAfwBPwH8AQMB/AEDAcEBgwH4AR8B4AEDAfwBAwHAAQMB8AEPAeABAQGYAQEBwAEDAeABBwGA
+        AwAB4AEHAcABAwGAAwAB8AEPAcABAwQAAfgBHwHBAYMBAAF/AQAB/wH8AT8B4wHHAQABfwEAAf8B/gF/
+        AfcB7wGAAf8BAAF/BP8BgAH/AQABfwT/AeMB/wEABf8WAAs=
+</value>
+  </data>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;ElementsLst.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SelectElementLbl.Name" xml:space="preserve">
+    <value>SelectElementLbl</value>
+  </data>
+  <data name="&gt;&gt;NameTxt.Name" xml:space="preserve">
+    <value>NameTxt</value>
+  </data>
+  <data name="&gt;&gt;SwitchBtn.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="SwitchBtn.ToolTip" xml:space="preserve">
+    <value>切换到更易用的简单模式，少许自定义选项将不可用。</value>
+  </data>
+  <data name="&gt;&gt;NewElementBtn.Name" xml:space="preserve">
+    <value>NewElementBtn</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>638, 430</value>
+  </data>
+  <data name="MoveElementDownBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="DeleteElementBtn.ToolTip" xml:space="preserve">
+    <value>从此自定义命令中移除所选元素</value>
+  </data>
+  <data name="OKBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>470, 395</value>
+  </data>
+  <data name="&gt;&gt;MoveElementDownBtn.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;MinVersionLbl.Name" xml:space="preserve">
+    <value>MinVersionLbl</value>
+  </data>
+  <data name="SwitchBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;ElementsLst.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="CancelBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="PreviewCtrl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>256, 330</value>
+  </data>
+  <data name="&gt;&gt;CancelBtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="NameTxt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>570, 20</value>
+  </data>
+  <data name="&gt;&gt;MoveElementUpBtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="PreviewCtrl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>370, 53</value>
+  </data>
+  <data name="&gt;&gt;ElementsLbl.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="SwitchBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 23</value>
+  </data>
+  <data name="&gt;&gt;AdvancedPipelinePluginToolTip.Name" xml:space="preserve">
+    <value>AdvancedPipelinePluginToolTip</value>
+  </data>
+  <data name="NewElementBtn.ImageIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="CancelBtn.ToolTip" xml:space="preserve">
+    <value>不要保存此自定义命令并关闭窗口</value>
+  </data>
+  <data name="&gt;&gt;SelectElementLbl.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <metadata name="NewElementContextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>393, 17</value>
+  </metadata>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="ElementsImageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>240, 17</value>
+  </metadata>
+  <metadata name="AdvancedPipelinePluginToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+</root>

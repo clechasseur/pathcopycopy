@@ -1,0 +1,175 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "winres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (United States) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+    IDS_PROJNAME            "PathCopyCopy"
+    IDS_PATH_COPY_MENU_ITEM "&路径复制"
+    IDS_PATH_COPY_HINT      "将所选文件的路径以不同格式复制到剪贴板。"
+    IDS_SAMPLE_PLUGIN_DESCRIPTION "Copy Sample Path"
+    IDS_SAMPLE_PLUGIN_HINT  "Copies the path of the given file using the sample plugin."
+    IDS_SHORT_NAME_PLUGIN_DESCRIPTION "复制短&名称"
+    IDS_SHORT_NAME_PLUGIN_HINT 
+                            "复制文件/文件夹的短名称到剪贴板（不含路径）。"
+    IDS_LONG_NAME_PLUGIN_DESCRIPTION "复制长&名称"
+    IDS_LONG_NAME_PLUGIN_HINT 
+                            "复制文件/文件夹的长名称到剪贴板（不含路径）。"
+    IDS_SHORT_PATH_PLUGIN_DESCRIPTION "复制&短路径"
+    IDS_SHORT_PATH_PLUGIN_HINT 
+                            "复制文件/文件夹的短路径到剪切板。"
+    IDS_LONG_PATH_PLUGIN_DESCRIPTION "复制&长路径"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_LONG_PATH_PLUGIN_HINT 
+                            "复制文件/文件夹的长路径到剪切板。"
+    IDS_LONG_UNC_PATH_PLUGIN_DESCRIPTION "复制长 &UNC 路径"
+    IDS_LONG_UNC_PATH_PLUGIN_HINT 
+                            "复制文件/文件夹的长 UNC（网络共享）路径到剪切板。若不存在网络路径，则复制长路径。"
+    IDS_INTERNET_PATH_PLUGIN_DESCRIPTION "复制&互联网路径"
+    IDS_INTERNET_PATH_PLUGIN_HINT 
+                            "复制文件/文件夹的 URI 格式路径到剪切板。"
+    IDS_UNIX_PATH_PLUGIN_DESCRIPTION "复制 Uni&x 路径"
+    IDS_UNIX_PATH_PLUGIN_HINT 
+                            "复制文件/文件夹的路径到剪切板，使用正斜杠代替反斜杠。"
+    IDS_CYGWIN_PATH_PLUGIN_DESCRIPTION "复制 Cy&gwin 路径"
+    IDS_CYGWIN_PATH_PLUGIN_HINT 
+                            "复制文件/文件夹的路径到剪切板，使用 Cygwin 工具可识别的格式。"
+    IDS_DEFAULT_PLUGIN_DESCRIPTION "复制文件/文件夹&路径"
+    IDS_SHORT_UNC_PATH_PLUGIN_DESCRIPTION "复制短 UN&C 路径"
+    IDS_SHORT_UNC_PATH_PLUGIN_HINT 
+                            "复制文件/文件夹的短 UNC（网络共享）路径到剪切板。若不存在网络路径，则复制短路径。"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_LONG_FOLDER_PLUGIN_DESCRIPTION "复制父&目录长路径"
+    IDS_LONG_FOLDER_PLUGIN_HINT 
+                            "复制文件/文件夹的父目录的长路径到剪切板。"
+    IDS_SHORT_FOLDER_PLUGIN_DESCRIPTION "复制父&目录短路径"
+    IDS_SHORT_FOLDER_PLUGIN_HINT 
+                            "复制文件/文件夹的父目录的短路径到剪切板。"
+    IDS_SHORT_UNC_FOLDER_PLUGIN_DESCRIPTION 
+                            "复制 UNC 父&目录短路径"
+    IDS_SHORT_UNC_FOLDER_PLUGIN_HINT 
+                            "复制文件/文件夹的父目录的 UNC（网络共享）短路径到剪切板。若不存在网络路径，则复制父目录短路径。"
+    IDS_LONG_UNC_FOLDER_PLUGIN_DESCRIPTION "复制 UNC 父&目录长路径"
+    IDS_LONG_UNC_FOLDER_PLUGIN_HINT 
+                            "复制文件/文件夹的父目录的 UNC（网络共享）长路径到剪切板。若不存在网络路径，则复制父目录长路径。"
+    IDS_PCC_SETTINGS_DESCRIPTION "设置..."
+    IDS_PCC_SETTINGS_HINT   "打开设置窗口配置此右键菜单。"
+    IDS_SETTINGS_APP_FILE_NAME "PathCopyCopySettings.exe"
+    IDS_REDUNDANT_WORD_COPY "复制"
+    IDS_ANDROGYNOUS_NAME_PLUGIN_DESCRIPTION "复制&名称"
+    IDS_ANDROGYNOUS_PATH_PLUGIN_DESCRIPTION "复制&路径"
+    IDS_ANDROGYNOUS_UNC_PATH_PLUGIN_DESCRIPTION "复制 &UNC 路径"
+    IDS_ANDROGYNOUS_FOLDER_PLUGIN_DESCRIPTION "复制父&目录路径"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_ANDROGYNOUS_UNC_FOLDER_PLUGIN_DESCRIPTION 
+                            "复制 UNC 父&目录路径"
+    IDS_WSL_PATH_PLUGIN_DESCRIPTION "复制 &WSL 路径"
+    IDS_WSL_PATH_PLUGIN_HINT 
+                            "复制文件/文件夹的 WSL (Windows Subsystem for Linux) 格式路径到剪切板。"
+    IDS_SAMBA_PATH_PLUGIN_DESCRIPTION "复制 S&amba 路径"
+    IDS_SAMBA_PATH_PLUGIN_HINT 
+                            "复制文件/文件夹的 Samba 格式路径到剪切板。"
+    IDS_MSYS_PATH_PLUGIN_DESCRIPTION "复制 MS&YS/MSYS2 路径"
+    IDS_MSYS_PATH_PLUGIN_HINT 
+                            "复制文件/文件夹的 MSYS/MSYS2 格式路径到剪切板。"
+    IDS_INVALIDPIPELINE     "<< 无效的自定义命令 >>"
+    IDS_INVALIDPIPELINE_LOOP_DETECTED 
+                            "<< 检测到自定义命令元素存在循环 >>"
+    IDS_INVALIDPIPELINE_POSSIBLE_DOWNGRADE 
+                            "<< 无效的自定义命令元素（可能降级） >>"
+    IDS_INVALIDPIPELINE_BASE_COMMAND_NOT_FOUND "<< 未找到基本命令 >>"
+END
+
+#endif    // English (United States) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// French (Canada) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_FRC)
+LANGUAGE LANG_FRENCH, SUBLANG_FRENCH_CANADIAN
+#pragma code_page(1252)
+
+/////////////////////////////////////////////////////////////////////////////
+// Chinese (Simplified, PRC) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""winres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+#endif    // French (Canada) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+#endif    // Chinese (Simplified, PRC) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

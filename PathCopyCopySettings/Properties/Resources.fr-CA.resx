@@ -147,6 +147,9 @@
   <data name="Language_French_DisplayName" xml:space="preserve">
     <value>Français</value>
   </data>
+  <data name="Language_Chinese_DisplayName" xml:space="preserve">
+    <value>简体中文 (Simplified Chinese)</value>
+  </data>
   <data name="LONG_FOLDER_PLUGIN_DESCRIPTION" xml:space="preserve">
     <value>Copier le chemin long du parent</value>
   </data>
