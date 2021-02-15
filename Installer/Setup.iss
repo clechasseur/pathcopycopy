@@ -81,7 +81,7 @@ SignTool=certum
 [Languages]
 Name: en_CA; MessagesFile: compiler:Default.isl
 Name: fr_CA; MessagesFile: compiler:Languages\French.isl
-Name: zh-CN; MessagesFile: compiler:Languages\Chinese.isl
+Name: zh_CN; MessagesFile: compiler:Languages\Chinese.isl
 
 [CustomMessages]
 CommandsPageCaption=Configuration
