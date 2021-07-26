@@ -1,5 +1,5 @@
 ; Inno Setup script file for PathCopyCopy
-; Copyright (c) 2008-2020 Charles Lechasseur
+; Copyright (c) 2008-2021 Charles Lechasseur
 ;
 ; Permission is hereby granted, free of charge, to any person obtaining a copy
 ; of this software and associated documentation files (the "Software"), to deal
@@ -20,11 +20,11 @@
 ; THE SOFTWARE.
 
 #define MyAppName "Path Copy Copy"
-#define MyAppVersion "19.0"
+#define MyAppVersion "20.0"
 #define MyAppPublisher "Charles Lechasseur"
 #define MyAppURL "https://pathcopycopy.github.io/"
 #define MyAppDescription "Path Copy Copy Shell Contextual Menu Extension"
-#define MyAppCopyright "(c) 2008-2020, Charles Lechasseur. See LICENSE.TXT for details."
+#define MyAppCopyright "(c) 2008-2021, Charles Lechasseur. See LICENSE.TXT for details."
 
 ; Set this to "no" to avoid signing the resulting executable.
 #ifndef SIGNCODE

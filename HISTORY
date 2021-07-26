@@ -1,4 +1,4 @@
-Version ??.? (202?-??-??)
+Version 20.0 (202?-??-??)
 -------------------------
 - Now requires Windows 7 SP1 at a minimum
 - Paths are now copied in alphabetical order (case-insensitively) [https://github.com/clechasseur/pathcopycopy/issues/129]
