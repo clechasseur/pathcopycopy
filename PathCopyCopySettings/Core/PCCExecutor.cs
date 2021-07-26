@@ -35,6 +35,8 @@ namespace PathCopyCopy.Settings.Core
     /// </summary>
     public sealed class PCCExecutor
     {
+#pragma warning disable CA1822 // Member could be static
+
         /// Name of rundll32 executable file.
         private const string RunDll32ExeName = "rundll32.exe";
         
@@ -142,8 +144,12 @@ namespace PathCopyCopy.Settings.Core
             /// Path to registry key containing rundll32 outputs in CURRENT_USER.
             private const string RunDll32OutputKey = @"Software\clechasseur\PathCopyCopy\Rundll32Output";
 
+#pragma warning disable CA2213 // Should dispose of rundll32OutputKey - we do
+
             /// Registry key wrapper to access the rundll32 output.
             private RegistryKey rundll32OutputKey = Registry.CurrentUser.CreateSubKey(RunDll32OutputKey);
+
+#pragma warning restore CA2213
 
             /// <summary>
             /// Name of registry value where to store the rundll32 output. Pass this
@@ -195,6 +201,8 @@ namespace PathCopyCopy.Settings.Core
                 }
             }
         }
+
+#pragma warning restore CA1822 // Member could be static
     }
     
     /// <summary>

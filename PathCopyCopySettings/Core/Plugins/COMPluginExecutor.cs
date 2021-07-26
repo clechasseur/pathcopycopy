@@ -38,6 +38,8 @@ namespace PathCopyCopy.Settings.Core.Plugins
     /// </summary>
     public sealed class COMPluginExecutor
     {
+#pragma warning disable CA1822 // Member could be static
+
         /// Regex used to extract the output of the COM plugin executor program.
         private static readonly Regex OUTPUT_REGEX = new Regex(
             $"^{Resources.COM_PLUGIN_EXECUTOR_OUTPUT_PREFIX}(.*)$", RegexOptions.Compiled);
@@ -209,6 +211,8 @@ namespace PathCopyCopy.Settings.Core.Plugins
             Debug.Assert(output != null);
             return output;
         }
+
+#pragma warning disable CA1822 // Member could be static
     }
     
     /// <summary>
