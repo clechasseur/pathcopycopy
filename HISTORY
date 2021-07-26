@@ -1,5 +1,6 @@
 Version ??.? (202?-??-??)
 -------------------------
+- Now requires Windows 7 SP1 at a minimum
 - Paths are now copied in alphabetical order (case-insensitively) [https://github.com/clechasseur/pathcopycopy/issues/129]
 - Fixed data error when associating icons to commands in the Settings application [https://github.com/clechasseur/pathcopycopy/issues/132]
 - Fixed icon scaling when using bigger icons for commands [https://github.com/clechasseur/pathcopycopy/issues/133]
