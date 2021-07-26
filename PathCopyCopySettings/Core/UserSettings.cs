@@ -289,7 +289,7 @@ namespace PathCopyCopy.Settings.Core
         /// Registry key containing information on forms. They are always user-specific.
         private readonly RegistryKey userFormsKey;
 
-#pragma warning disable CA2227 // Collection properties should be read only
+#pragma warning disable CA2227  // Collection properties should be read only
 
         /// <summary>
         /// Whether the UNC plugins should use hidden shares or not.
@@ -776,7 +776,8 @@ namespace PathCopyCopy.Settings.Core
             }
         }
 
-#pragma warning disable CA1822 // DevBuild could be static in Debug builds
+#pragma warning disable IDE0079 // IDE is confused on the needs for the following pragma
+#pragma warning disable CA1822  // DevBuild could be static in Debug builds
 
         /// <summary>
         /// Whether this is a development build. This will be true of all
@@ -793,8 +794,9 @@ namespace PathCopyCopy.Settings.Core
             }
         }
 
-#pragma warning restore CA1822 // DevBuild could be static in Debug builds
-#pragma warning restore CA2227 // Collection properties should be read only
+#pragma warning restore CA1822  // DevBuild could be static in Debug builds
+#pragma warning restore IDE0079 // IDE is confused on the needs for the following pragma
+#pragma warning restore CA2227  // Collection properties should be read only
 
         /// <summary>
         /// Constructor. Creates the registry key right away to read the settings,

@@ -469,7 +469,7 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::QueryContextMenu(
                         // Submenu was populated. Add it to the contextual menu.
                         std::wstring subMenuCaption = GetMenuCaptionWithShortcut(p_hMenu, (LPCWSTR) ATL::CStringW(MAKEINTRESOURCEW(IDS_PATH_COPY_MENU_ITEM)));
                         PCCDEBUGCODE(subMenuCaption += L" (DEBUG)");
-                        MENUITEMINFOW menuItemInfo;
+                        MENUITEMINFOW menuItemInfo{};
                         menuItemInfo.cbSize = sizeof(MENUITEMINFOW);
                         menuItemInfo.fMask = MIIM_FTYPE | MIIM_ID | MIIM_STRING | MIIM_SUBMENU;
                         menuItemInfo.fType = MFT_STRING;
@@ -832,7 +832,7 @@ HRESULT CPathCopyCopyContextMenuExt::AddPluginToMenu(const PCC::PluginSP& p_spPl
             description = GetMenuCaptionWithShortcut(p_hMenu, description);
         }
     }
-    MENUITEMINFOW menuItemInfo;
+    MENUITEMINFOW menuItemInfo{};
     menuItemInfo.cbSize = sizeof(MENUITEMINFOW);
     menuItemInfo.fMask = MIIM_FTYPE | MIIM_ID | MIIM_STATE | MIIM_STRING;
     menuItemInfo.fType = MFT_STRING;
@@ -892,7 +892,7 @@ std::wstring CPathCopyCopyContextMenuExt::GetMenuCaptionWithShortcut(HMENU const
     const int itemsCount = ::GetMenuItemCount(p_hMenu);
     for (int i = 0; i < itemsCount; ++i) {
         std::wstring buffer(1000, L'\0');
-        MENUITEMINFOW menuItemInfo;
+        MENUITEMINFOW menuItemInfo{};
         menuItemInfo.cbSize = sizeof(MENUITEMINFOW);
         menuItemInfo.fMask = MIIM_STRING | MIIM_STATE;
         menuItemInfo.dwTypeData = buffer.data();
@@ -1157,10 +1157,9 @@ void CPathCopyCopyContextMenuExt::AddQuotes(std::wstring& p_rName,
 //
 PCC::FilesV CPathCopyCopyContextMenuExt::GetFilesToActOn(const bool p_Recursively) const
 {
-    auto vFiles = m_vFiles;
+    auto vFiles(m_vFiles);
 
     if (p_Recursively) {
-
         auto vNewFiles(vFiles);
         while (!vNewFiles.empty()) {
             PCC::FilesV vFilesToScan;
