@@ -172,7 +172,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// <returns>Comparison result.</returns>
         int IComparable.CompareTo(object obj)
         {
-            return obj is Plugin ? CompareTo((Plugin) obj) : 1;
+            return obj is Plugin plugin ? CompareTo(plugin) : 1;
         }
 
         /// <summary>
@@ -183,7 +183,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// as this plugin.</returns>
         public bool Equals(Plugin other)
         {
-            return other is object ? Id.Equals(other.Id) : false;
+            return other is object && Id.Equals(other.Id);
         }
 
         /// <summary>
@@ -196,7 +196,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
         /// <see cref="Plugin"/> and has the same ID as this plugin.</returns>
         public override bool Equals(object obj)
         {
-            return obj is Plugin ? Equals((Plugin) obj) : false;
+            return obj is Plugin plugin && Equals(plugin);
         }
 
         /// <summary>
