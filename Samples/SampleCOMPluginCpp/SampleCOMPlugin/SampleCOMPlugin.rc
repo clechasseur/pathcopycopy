@@ -76,7 +76,7 @@ BEGIN
             VALUE "FileDescription", "Sample Path Copy Copy C++ COM Plugin"
             VALUE "FileVersion", "19.0.0.0"
             VALUE "InternalName", "SampleCOMPlugin.dll"
-            VALUE "LegalCopyright", "(c) 2010-2020, Charles Lechasseur. See LICENSE.TXT for details."
+            VALUE "LegalCopyright", "(c) 2010-2021, Charles Lechasseur. See LICENSE.TXT for details."
             VALUE "OriginalFilename", "SampleCOMPlugin.dll"
             VALUE "ProductName", "Sample Path Copy Copy C++ COM Plugin"
             VALUE "ProductVersion", "19.0.0.0"

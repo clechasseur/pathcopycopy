@@ -1,5 +1,5 @@
 // StGdiplusStartup.h
-// (c) 2014-2020, Charles Lechasseur
+// (c) 2014-2021, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal

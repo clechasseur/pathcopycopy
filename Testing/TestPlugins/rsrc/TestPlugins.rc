@@ -76,7 +76,7 @@ BEGIN
             VALUE "FileDescription", "PathCopyCopy Test Plugins Module"
             VALUE "FileVersion", "19.0.0.0"
             VALUE "InternalName", "TestPlugins.dll"
-            VALUE "LegalCopyright", "(c) 2011-2020, Charles Lechasseur. See LICENSE.TXT for details."
+            VALUE "LegalCopyright", "(c) 2011-2021, Charles Lechasseur. See LICENSE.TXT for details."
             VALUE "OriginalFilename", "TestPlugins.dll"
             VALUE "ProductName", "TestPlugins"
             VALUE "ProductVersion", "19.0.0.0"

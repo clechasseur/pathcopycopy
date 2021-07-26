@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("PathCopyCopySettings")]
-[assembly: AssemblyCopyright("(c) 2008-2020, Charles Lechasseur. See LICENSE.TXT for details.")]
+[assembly: AssemblyCopyright("(c) 2008-2021, Charles Lechasseur. See LICENSE.TXT for details.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

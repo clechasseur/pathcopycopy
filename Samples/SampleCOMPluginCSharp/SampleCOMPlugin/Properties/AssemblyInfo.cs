@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("SampleCOMPluginCSharp")]
-[assembly: AssemblyCopyright("(c) 2015-2020, Charles Lechasseur. See LICENSE.TXT for details.")]
+[assembly: AssemblyCopyright("(c) 2015-2021, Charles Lechasseur. See LICENSE.TXT for details.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
