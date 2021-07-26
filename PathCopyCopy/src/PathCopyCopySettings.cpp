@@ -66,6 +66,7 @@ namespace
     const wchar_t* const    SETTING_USE_PREVIEW_MODE_IN_MAIN_MENU           = L"UsePreviewModeInMainMenu";
     const wchar_t* const    SETTING_DROP_REDUNDANT_WORDS                    = L"DropRedundantWords";
     const wchar_t* const    SETTING_ALWAYS_SHOW_SUBMENU                     = L"AlwaysShowSubmenu";
+    const wchar_t* const    SETTING_ALWAYS_SHOW_SETTINGS_ENTRY              = L"AlwaysShowSettingsEntry";
     const wchar_t* const    SETTING_COPY_PATHS_RECURSIVELY                  = L"CopyPathsRecursively";
     const wchar_t* const    SETTING_PATHS_SEPARATOR                         = L"PathsSeparator";
     const wchar_t* const    SETTING_TRUE_LNK_PATHS                          = L"TrueLnkPaths";
@@ -111,6 +112,7 @@ namespace
     constexpr bool          SETTING_USE_PREVIEW_MODE_IN_MAIN_MENU_DEFAULT   = false;
     constexpr bool          SETTING_DROP_REDUNDANT_WORDS_DEFAULT            = false;
     constexpr bool          SETTING_ALWAYS_SHOW_SUBMENU_DEFAULT             = true;
+    constexpr bool          SETTING_ALWAYS_SHOW_SETTINGS_ENTRY_DEFAULT      = true;
     constexpr bool          SETTING_COPY_PATHS_RECURSIVELY_DEFAULT          = false;
     const wchar_t* const    SETTING_PATHS_SEPARATOR_DEFAULT                 = L"";
     constexpr bool          SETTING_TRUE_LNK_PATHS_DEFAULT                  = false;
@@ -502,6 +504,25 @@ namespace PCC
             alwaysShowSubmenu = regAlwaysShowSubmenu != 0;
         }
         return alwaysShowSubmenu;
+    }
+
+    //
+    // Checks whether we should always show the Settings entry in the submenu.
+    //
+    // @return true to always show the Settings entry.
+    //
+    bool Settings::GetAlwaysShowSettingsEntry() const
+    {
+        // Perform late-revising.
+        Revise();
+
+        // Check if value exists. If so, read it, otherwise use default value.
+        bool alwaysShowEntry = SETTING_ALWAYS_SHOW_SETTINGS_ENTRY_DEFAULT;
+        DWORD regAlwaysShowEntry = 0;
+        if (m_UserKey.QueryDWORDValue(SETTING_ALWAYS_SHOW_SETTINGS_ENTRY, regAlwaysShowEntry) == ERROR_SUCCESS) {
+            alwaysShowEntry = regAlwaysShowEntry != 0;
+        }
+        return alwaysShowEntry;
     }
 
     //

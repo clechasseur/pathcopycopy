@@ -357,6 +357,7 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::QueryContextMenu(
                 const bool usePreviewModeInMainMenu = rSettings.GetUsePreviewModeInMainMenu();
                 const bool dropRedundantWords = rSettings.GetDropRedundantWords();
                 const bool alwaysShowSubmenu = rSettings.GetAlwaysShowSubmenu();
+                const bool alwaysShowSettingsEntry = rSettings.GetAlwaysShowSettingsEntry();
                 PCC::GUIDV vKnownPlugins;
                 const PCC::GUIDV* const pvKnownPlugins = rSettings.GetKnownPlugins(vKnownPlugins) ? &vKnownPlugins : nullptr;
                 GUID ctrlKeyPluginId;
@@ -437,9 +438,10 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::QueryContextMenu(
                             }
                         }
 
-                        // Add item to open the settings app, unless editing
-                        // the settings has been locked out by the administrator.
-                        if (SUCCEEDED(hRes) && cmdId <= p_LastCmdId && !rSettings.GetEditingDisabled()) {
+                        // Add item to open the settings app, unless we're told not
+                        // to display the settings entry or if editing the settings
+                        // has been locked out by the administrator.
+                        if (SUCCEEDED(hRes) && cmdId <= p_LastCmdId && alwaysShowSettingsEntry && !rSettings.GetEditingDisabled()) {
                             if (!prevWasSeparator) {
                                 if (::InsertMenuW(hSubMenu, subPosition, MF_BYPOSITION | MF_SEPARATOR, 0, nullptr)) {
                                     ++subPosition;

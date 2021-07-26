@@ -72,6 +72,7 @@ namespace PCC
         bool            GetUsePreviewModeInMainMenu() const;
         bool            GetDropRedundantWords() const;
         bool            GetAlwaysShowSubmenu() const;
+        bool            GetAlwaysShowSettingsEntry() const;
         bool            GetCopyPathsRecursively() const;
         std::wstring    GetPathsSeparator() const;
         bool            GetTrueLnkPaths() const;
