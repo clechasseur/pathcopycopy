@@ -4,6 +4,8 @@
 // Project-level suppressions either have no target or are given 
 // a specific target and scoped to a namespace, type, member, etc.
 
+using System.Diagnostics.CodeAnalysis;
+
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1714:Flags enums should have plural names", Justification = "<Pending>", Scope = "type", Target = "~T:CommandLine.ArgumentType")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1820:Test for empty strings using string length", Justification = "<Pending>", Scope = "member", Target = "~P:CommandLine.ArgumentAttribute.LongName")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "<Pending>", Scope = "member", Target = "~M:CommandLine.Parser.ParseArgumentsWithUsage(System.String[],System.Object)~System.Boolean")]
@@ -43,3 +45,5 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0044:Add readonly modifier", Justification = "<Pending>", Scope = "member", Target = "~F:CommandLine.Parser.reporter")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0044:Add readonly modifier", Justification = "<Pending>", Scope = "member", Target = "~F:CommandLine.Parser.Argument.flags")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0044:Add readonly modifier", Justification = "<Pending>", Scope = "member", Target = "~F:PathCopyCopy.Settings.UI.UserControls.PluginPreviewUserControl.settings")]
+[assembly: SuppressMessage("CodeQuality", "IDE0079:Remove unnecessary suppression", Justification = "<Pending>", Scope = "type", Target = "~T:PathCopyCopy.Settings.Core.PCCExecutor")]
+[assembly: SuppressMessage("CodeQuality", "IDE0079:Remove unnecessary suppression", Justification = "<Pending>", Scope = "type", Target = "~T:PathCopyCopy.Settings.Core.Plugins.COMPluginExecutor")]
