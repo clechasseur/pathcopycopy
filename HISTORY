@@ -6,6 +6,7 @@ Version 20.0 (202?-??-??)
 - Fixed icon scaling when using bigger icons for commands [https://github.com/clechasseur/pathcopycopy/issues/133]
 - Fixed non-working paths copied when following symlink paths [https://github.com/clechasseur/pathcopycopy/issues/127]
 - Fixed copying of .url paths on recent Windows 10 OSes [https://github.com/clechasseur/pathcopycopy/issues/128]
+- Fixed crash when clicking in Icon column header [https://github.com/clechasseur/pathcopycopy/issues/142]
 
 
 Version 19.0 (2020-08-08)

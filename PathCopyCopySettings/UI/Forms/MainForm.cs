@@ -923,7 +923,7 @@ namespace PathCopyCopy.Settings.UI.Forms
 
             // We're only interested in clicks in icon cells; other cells are
             // data-bound so will take care of themselves.
-            if (e.ColumnIndex == IconCol.Index) {
+            if (e.ColumnIndex == IconCol.Index && e.RowIndex >= 0) {
                 // Get plugin info.
                 DataGridViewRow row = PluginsDataGrid.Rows[e.RowIndex];
                 Plugin rowPlugin = ((PluginDisplayInfo) row.DataBoundItem).Plugin;
