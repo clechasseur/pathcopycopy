@@ -56,6 +56,7 @@ namespace
     constexpr wchar_t   ELEMENT_CODE_EXECUTABLE                 = L'x';
     constexpr wchar_t   ELEMENT_CODE_EXECUTABLE_WITH_FILELIST   = L'f';
     constexpr wchar_t   ELEMENT_CODE_COMMAND_LINE               = L'>';
+    constexpr wchar_t   ELEMENT_CODE_DISPLAY_FOR_SELECTION      = L'!';
 
     // Version numbers used for regex elements.
     constexpr long      REGEX_ELEMENT_INITIAL_VERSION           = 1;
@@ -192,6 +193,10 @@ namespace PCC
             }
             case ELEMENT_CODE_COMMAND_LINE: {
                 spElement = DecodeCommandLinePipelineElement(p_rStream);
+                break;
+            }
+            case ELEMENT_CODE_DISPLAY_FOR_SELECTION: {
+                spElement = DecodeDisplayForSelectionPipelineElement(p_rStream);
                 break;
             }
             default:
@@ -431,6 +436,20 @@ namespace PCC
         const auto arguments = p_rStream.ReadString();
         const auto useFilelist = p_rStream.ReadBool();
         return std::make_shared<CommandLinePipelineElement>(executable, arguments, useFilelist);
+    }
+
+    //
+    // Decodes a DisplayForSelectionPipelineElement found in an encoded stream.
+    //
+    // @param p_rStream Stream containing encoded element.
+    // @return Newly-created element.
+    //
+    auto PipelineDecoder::DecodeDisplayForSelectionPipelineElement(PipelineDecoder::EncodedElementsStream& p_rStream) -> PipelineElementSP
+    {
+        // This type of element contains two flags: one for files and one for folders.
+        const auto showForFiles = p_rStream.ReadBool();
+        const auto showForFolders = p_rStream.ReadBool();
+        return std::make_shared<DisplayForSelectionPipelineElement>(showForFiles, showForFolders);
     }
 
     //

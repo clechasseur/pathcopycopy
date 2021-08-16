@@ -125,7 +125,7 @@ namespace PCC
     {
         std::vector<std::wstring> vParents;
         for (;;) {
-            const auto prevPath = p_Path;
+            const auto prevPath{p_Path};
             const auto hasParent = ExtractFolderFromPath(p_Path);
             if (!hasParent || p_Path == prevPath) {
                 break;

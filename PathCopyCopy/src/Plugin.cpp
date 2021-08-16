@@ -151,6 +151,28 @@ namespace PCC
     }
 
     //
+    // Checks if this plugin should be displayed when files are selected.
+    // The default implementation always returns true.
+    //
+    // @return true to display this plugin when files are selected.
+    //
+    bool Plugin::ShowForFiles() const noexcept(false)
+    {
+        return true;
+    }
+
+    //
+    // Checks if this plugin should be displayed when folders are selected.
+    // The default implementation always returns true.
+    //
+    // @return true to display this plugin when folders are selected.
+    //
+    bool Plugin::ShowForFolders() const noexcept(false)
+    {
+        return true;
+    }
+
+    //
     // Provides a pointer to the object that can be used to access PCC settings.
     // Some plugins depend on this to work.
     //

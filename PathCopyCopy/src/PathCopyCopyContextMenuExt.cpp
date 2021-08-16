@@ -68,6 +68,8 @@ CPathCopyCopyContextMenuExt::CPathCopyCopyContextMenuExt() noexcept(false)
       m_sspAllPlugins(),
       m_spPluginProvider(),
       m_vFiles(),
+      m_FilesSelected(false),
+      m_FoldersSelected(false),
       m_FirstCmdId(),
       m_SubMenuCmdId(),
       m_SettingsCmdId(),
@@ -265,6 +267,14 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::Initialize(
         }
     } catch (...) {
         hRes = E_UNEXPECTED;
+    }
+
+    if (SUCCEEDED(hRes)) {
+        // Check if files and/or folders are selected.
+        m_FilesSelected = std::any_of(m_vFiles.cbegin(), m_vFiles.cend(),
+                                      [](const auto& path) { return !PCC::PluginUtils::IsDirectory(path); });
+        m_FoldersSelected = std::any_of(m_vFiles.cbegin(), m_vFiles.cend(),
+                                        [](const auto& path) { return PCC::PluginUtils::IsDirectory(path); });
     }
 
     return hRes;
@@ -792,86 +802,89 @@ HRESULT CPathCopyCopyContextMenuExt::AddPluginToMenu(const PCC::PluginSP& p_spPl
 {
     HRESULT hRes = S_OK;
 
-    // Check if plugin should be enabled.
-    const bool enabled = p_spPlugin->Enabled(GetParentPath(), m_vFiles.front());
+    // Check if plugin should be displayed according to selection.
+    if ((m_FilesSelected && p_spPlugin->ShowForFiles()) || (m_FoldersSelected && p_spPlugin->ShowForFolders())) {
+        // Check if plugin should be enabled.
+        const bool enabled = p_spPlugin->Enabled(GetParentPath(), m_vFiles.front());
 
-    // Compile info about the menu item using the plugin object.
-    std::wstring description;
-    if (p_UsePreviewMode && enabled) { // Disabled plugins don't work so can't use preview mode.
-        description = p_spPlugin->GetPath(m_vFiles.front());
-        // Let's limit the size of menu items if possible.
-        if (description.size() > MAX_PATH) {
-            description.resize(MAX_PATH);
-        }
-        // If path contains ampersands, they will be treated as shortcuts.
-        // We have to double them.
-        StringUtils::ReplaceAll(description, L"&", L"&&");
-    } else {
-        description = p_spPlugin->Description();
-        if (p_DropRedundantWords && p_spPlugin->CanDropRedundantWords()) {
-            ATL::CStringW redundantCopy(MAKEINTRESOURCEW(IDS_REDUNDANT_WORD_COPY));
-            if (description.size() >= gsl::narrow_cast<std::wstring::size_type>(redundantCopy.GetLength()) &&
-                ::_wcsnicmp(description.c_str(), (LPCWSTR) redundantCopy, redundantCopy.GetLength()) == 0) {
-
-                // The description starts with "Copy ", drop it.
-                description.erase(0, redundantCopy.GetLength());
-
-                // In some language, this will leave the first letter in lowercase.
-                // Convert it to uppercase in that case.
-                if (!description.empty() && ::iswlower(description[0])) {
-                    description[0] = ::towupper(description[0]);
-                }
-
-                // ...or maybe the first letter is the shortcut character...
-                if (description.size() >= 2 && description[0] == L'&' && ::iswlower(description[1])) {
-                    description[1] = ::towupper(description[1]);
-                }
+        // Compile info about the menu item using the plugin object.
+        std::wstring description;
+        if (p_UsePreviewMode && enabled) { // Disabled plugins don't work so can't use preview mode.
+            description = p_spPlugin->GetPath(m_vFiles.front());
+            // Let's limit the size of menu items if possible.
+            if (description.size() > MAX_PATH) {
+                description.resize(MAX_PATH);
             }
-        }
-        if (p_ComputeShortcut) {
-            description = GetMenuCaptionWithShortcut(p_hMenu, description);
-        }
-    }
-    MENUITEMINFOW menuItemInfo{};
-    menuItemInfo.cbSize = sizeof(MENUITEMINFOW);
-    menuItemInfo.fMask = MIIM_FTYPE | MIIM_ID | MIIM_STATE | MIIM_STRING;
-    menuItemInfo.fType = MFT_STRING;
-    menuItemInfo.fState = enabled ? MFS_ENABLED : MFS_DISABLED;
-    menuItemInfo.wID = p_rCmdId;
-    menuItemInfo.dwTypeData = description.data();
-    HBITMAP hIconBitmap = nullptr;
-    if (p_UsePCCIcon || p_spPlugin->UseDefaultIcon()) {
-        hIconBitmap = GetPCCIcon();
-    } else {
-        std::wstring iconFile = p_spPlugin->IconFile();
-        if (!iconFile.empty()) {
-            hIconBitmap = GetIconForIconFile(iconFile);
+            // If path contains ampersands, they will be treated as shortcuts.
+            // We have to double them.
+            StringUtils::ReplaceAll(description, L"&", L"&&");
         } else {
-            auto possibleIconFile = GetSettings().GetIconFileForPlugin(p_spPlugin->IdForIcon());
-            if (possibleIconFile.has_value()) {
-                if (possibleIconFile->empty()) {
-                    hIconBitmap = GetPCCIcon();
-                } else {
-                    hIconBitmap = GetIconForIconFile(*possibleIconFile);
+            description = p_spPlugin->Description();
+            if (p_DropRedundantWords && p_spPlugin->CanDropRedundantWords()) {
+                ATL::CStringW redundantCopy(MAKEINTRESOURCEW(IDS_REDUNDANT_WORD_COPY));
+                if (description.size() >= gsl::narrow_cast<std::wstring::size_type>(redundantCopy.GetLength()) &&
+                    ::_wcsnicmp(description.c_str(), (LPCWSTR) redundantCopy, redundantCopy.GetLength()) == 0) {
+
+                    // The description starts with "Copy ", drop it.
+                    description.erase(0, redundantCopy.GetLength());
+
+                    // In some language, this will leave the first letter in lowercase.
+                    // Convert it to uppercase in that case.
+                    if (!description.empty() && ::iswlower(description[0])) {
+                        description[0] = ::towupper(description[0]);
+                    }
+
+                    // ...or maybe the first letter is the shortcut character...
+                    if (description.size() >= 2 && description[0] == L'&' && ::iswlower(description[1])) {
+                        description[1] = ::towupper(description[1]);
+                    }
+                }
+            }
+            if (p_ComputeShortcut) {
+                description = GetMenuCaptionWithShortcut(p_hMenu, description);
+            }
+        }
+        MENUITEMINFOW menuItemInfo{};
+        menuItemInfo.cbSize = sizeof(MENUITEMINFOW);
+        menuItemInfo.fMask = MIIM_FTYPE | MIIM_ID | MIIM_STATE | MIIM_STRING;
+        menuItemInfo.fType = MFT_STRING;
+        menuItemInfo.fState = enabled ? MFS_ENABLED : MFS_DISABLED;
+        menuItemInfo.wID = p_rCmdId;
+        menuItemInfo.dwTypeData = description.data();
+        HBITMAP hIconBitmap = nullptr;
+        if (p_UsePCCIcon || p_spPlugin->UseDefaultIcon()) {
+            hIconBitmap = GetPCCIcon();
+        } else {
+            std::wstring iconFile = p_spPlugin->IconFile();
+            if (!iconFile.empty()) {
+                hIconBitmap = GetIconForIconFile(iconFile);
+            } else {
+                auto possibleIconFile = GetSettings().GetIconFileForPlugin(p_spPlugin->IdForIcon());
+                if (possibleIconFile.has_value()) {
+                    if (possibleIconFile->empty()) {
+                        hIconBitmap = GetPCCIcon();
+                    } else {
+                        hIconBitmap = GetIconForIconFile(*possibleIconFile);
+                    }
                 }
             }
         }
-    }
-    if (hIconBitmap != nullptr) {
-        menuItemInfo.fMask |= MIIM_BITMAP;
-        menuItemInfo.hbmpItem = hIconBitmap;
-    }
-
-    // Insert the item in the menu.
-    if (::InsertMenuItemW(p_hMenu, p_rPosition, TRUE, &menuItemInfo)) {
-        m_mPluginsByCmdId[p_rCmdId] = p_spPlugin;
-        if (!m_FirstCmdId.has_value()) {
-            m_FirstCmdId = p_rCmdId;
+        if (hIconBitmap != nullptr) {
+            menuItemInfo.fMask |= MIIM_BITMAP;
+            menuItemInfo.hbmpItem = hIconBitmap;
         }
-        ++p_rCmdId;
-        ++p_rPosition;
-    } else {
-        hRes = E_FAIL;
+
+        // Insert the item in the menu.
+        if (::InsertMenuItemW(p_hMenu, p_rPosition, TRUE, &menuItemInfo)) {
+            m_mPluginsByCmdId[p_rCmdId] = p_spPlugin;
+            if (!m_FirstCmdId.has_value()) {
+                m_FirstCmdId = p_rCmdId;
+            }
+            ++p_rCmdId;
+            ++p_rPosition;
+        } else {
+            hRes = E_FAIL;
+        }
     }
 
     return hRes;

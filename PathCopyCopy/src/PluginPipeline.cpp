@@ -137,6 +137,46 @@ namespace PCC
     }
 
     //
+    // Gets whether the plugin should be displayed when files are selected.
+    //
+    // @return true to display plugin when files are selected.
+    //
+    bool PipelineOptions::GetShowForFiles() const noexcept
+    {
+        return m_ShowForFiles;
+    }
+
+    //
+    // Sets whether to display the plugin when files are selected.
+    //
+    // @param p_ShowForFiles true to display the plugin when files are selected.
+    //
+    void PipelineOptions::SetShowForFiles(const bool p_ShowForFiles) noexcept
+    {
+        m_ShowForFiles = p_ShowForFiles;
+    }
+
+    //
+    // Gets whether the plugin should be displayed when folders are selected.
+    //
+    // @return true to display plugin when folders are selected.
+    //
+    bool PipelineOptions::GetShowForFolders() const noexcept
+    {
+        return m_ShowForFolders;
+    }
+
+    //
+    // Sets whether to display the plugin when folders are selected.
+    //
+    // @param p_ShowForFolders true to display the plugin when folders are selected.
+    //
+    void PipelineOptions::SetShowForFolders(const bool p_ShowForFolders) noexcept
+    {
+        m_ShowForFolders = p_ShowForFolders;
+    }
+
+    //
     // Constructor with pre-built elements.
     //
     // @param p_vspElements List of elements in the pipeline.

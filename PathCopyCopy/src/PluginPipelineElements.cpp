@@ -666,7 +666,7 @@ namespace PCC
                                                  const PluginProvider* const /*p_pPluginProvider*/) const
     {
         if (!p_rStack.empty()) {
-            const auto value = p_rStack.top();
+            const auto value{p_rStack.top()};
             p_rStack.pop();
 
             switch (m_Location) {
@@ -738,9 +738,9 @@ namespace PCC
                                                     const PluginProvider* const /*p_pPluginProvider*/) const
     {
         if (p_rStack.size() >= 2) {
-            const auto value1 = p_rStack.top();
+            const auto value1{p_rStack.top()};
             p_rStack.pop();
-            const auto value2 = p_rStack.top();
+            const auto value2{p_rStack.top()};
             p_rStack.pop();
             p_rStack.push(value1);
             p_rStack.push(value2);
@@ -893,6 +893,31 @@ namespace PCC
         ExecutablePipelineElement::ModifyOptions(p_rOptions);
         p_rOptions.SetArguments(m_Arguments);
         p_rOptions.SetUseFilelist(m_UseFilelist);
+    }
+
+    //
+    // Constructor.
+    //
+    // @param p_ShowForFiles Whether to display the plugin when files are selected.
+    // @param p_ShowForFolders Whether to display the plugin when folders are selected.
+    //
+    DisplayForSelectionPipelineElement::DisplayForSelectionPipelineElement(const bool p_ShowForFiles,
+                                                                           const bool p_ShowForFolders)
+        : m_ShowForFiles(p_ShowForFiles),
+          m_ShowForFolders(p_ShowForFolders)
+    {
+    }
+
+    //
+    // Modifies the global pipeline options by specifying whether to display
+    // the plugin when files are/or folders are selected.
+    //
+    // @param p_rOptions Global options to modify.
+    //
+    void DisplayForSelectionPipelineElement::ModifyOptions(PipelineOptions& p_rOptions) const
+    {
+        p_rOptions.SetShowForFiles(m_ShowForFiles);
+        p_rOptions.SetShowForFolders(m_ShowForFolders);
     }
 
 } // namespace PCC

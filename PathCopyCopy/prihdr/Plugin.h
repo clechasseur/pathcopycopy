@@ -90,6 +90,9 @@ namespace PCC
         virtual bool                IsSeparator() const noexcept;
         virtual bool                CanDropRedundantWords() const noexcept(false);
 
+        virtual bool                ShowForFiles() const noexcept(false);
+        virtual bool                ShowForFolders() const noexcept(false);
+
         void                        SetSettings(const Settings* p_pSettings) noexcept;
         void                        SetPluginProvider(const PluginProvider* p_pPluginProvider) noexcept;
 

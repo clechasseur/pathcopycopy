@@ -59,12 +59,20 @@ namespace PCC
         bool            GetUseFilelist() const noexcept;
         void            SetUseFilelist(bool p_UseFilelist) noexcept;
 
+        bool            GetShowForFiles() const noexcept;
+        void            SetShowForFiles(bool p_ShowForFiles) noexcept;
+
+        bool            GetShowForFolders() const noexcept;
+        void            SetShowForFolders(bool p_ShowForFolders) noexcept;
+
     private:
         std::wstring    m_PathsSeparator;           // Separator to use between multiple paths.
         bool            m_Recursively = false;      // Whether to copy paths recursively.
         std::wstring    m_Executable;               // Path to executable to start.
         std::wstring    m_Arguments;                // Arguments to pass to the executable.
         bool            m_UseFilelist = false;      // Whether to launch executable with filelist instead of paths directly.
+        bool            m_ShowForFiles = true;      // Whether to display the plugin when files are selected.
+        bool            m_ShowForFolders = true;    // Whether to display the plugin when folders are selected.
     };
 
     //

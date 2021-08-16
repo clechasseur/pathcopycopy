@@ -604,8 +604,30 @@ namespace PCC
 
     private:
         const std::wstring
-                        m_Arguments;
-        const bool      m_UseFilelist;
+                        m_Arguments;        // Arguments to pass to executable.
+        const bool      m_UseFilelist;      // Whether to pass arguments in a filelist.
+    };
+
+    //
+    // DisplayForSelectionPipelineElement
+    //
+    // Pipeline element that does not modify the path but specifies whether
+    // the plugin should be displayed when files and/or folders are selected.
+    //
+    class DisplayForSelectionPipelineElement : public PipelineElement
+    {
+    public:
+                        DisplayForSelectionPipelineElement(bool p_ShowForFiles,
+                                                           bool p_ShowForFolders);
+                        DisplayForSelectionPipelineElement(const DisplayForSelectionPipelineElement&) = delete;
+        DisplayForSelectionPipelineElement&
+                        operator=(const DisplayForSelectionPipelineElement&) = delete;
+
+        void            ModifyOptions(PipelineOptions& p_rOptions) const override;
+
+    private:
+        bool            m_ShowForFiles;     // Whether the plugin should be displayed when files are selected.
+        bool            m_ShowForFolders;   // Whether the plugin should be displayed when folders are selected.
     };
 
 } // namespace PCC

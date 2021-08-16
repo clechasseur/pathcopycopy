@@ -67,6 +67,9 @@ namespace PCC
 
             bool                        CanDropRedundantWords() const noexcept(false) override;
 
+            bool                        ShowForFiles() const noexcept(false) override;
+            bool                        ShowForFolders() const noexcept(false) override;
+
         private:
             const GUID                  m_Id;               // Plugin ID.
             const std::wstring          m_Description;      // Plugin description.

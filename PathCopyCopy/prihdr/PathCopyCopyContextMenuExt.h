@@ -132,6 +132,8 @@ private:
                         m_spPluginProvider;         // Plugin provider object.
 
     PCC::FilesV         m_vFiles;                   // Files selected in Shell.
+    bool                m_FilesSelected;            // Whether files have been selected.
+    bool                m_FoldersSelected;          // Whether folders have been selected.
 
     std::optional<UINT_PTR>
                         m_FirstCmdId;               // ID of first command menu item.

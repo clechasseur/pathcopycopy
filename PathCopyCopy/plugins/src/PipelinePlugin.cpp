@@ -261,6 +261,42 @@ namespace PCC
             return false;
         }
 
+        //
+        // Checks if this plugin should be displayed when files are selected.
+        //
+        // @return true to display this plugin when files are selected.
+        //
+        bool PipelinePlugin::ShowForFiles() const noexcept(false)
+        {
+            // This is stored in pipeline options.
+            bool showForFiles = Plugin::ShowForFiles();
+            const Pipeline* pPipeline = GetPipeline();
+            if (pPipeline != nullptr) {
+                PipelineOptions options;
+                pPipeline->ModifyOptions(options);
+                showForFiles = options.GetShowForFiles();
+            }
+            return showForFiles;
+        }
+
+        //
+        // Checks if this plugin should be displayed when folders are selected.
+        //
+        // @return true to display this plugin when folders are selected.
+        //
+        bool PipelinePlugin::ShowForFolders() const noexcept(false)
+        {
+            // This is stored in pipeline options.
+            bool showForFolders = Plugin::ShowForFolders();
+            const Pipeline* pPipeline = GetPipeline();
+            if (pPipeline != nullptr) {
+                PipelineOptions options;
+                pPipeline->ModifyOptions(options);
+                showForFolders = options.GetShowForFolders();
+            }
+            return showForFolders;
+        }
+
     } // namespace Plugins
 
 } // namespace PCC
