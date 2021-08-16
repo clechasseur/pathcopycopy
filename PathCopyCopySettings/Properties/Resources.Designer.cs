@@ -587,7 +587,7 @@ namespace PathCopyCopy.Settings.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Options: Launch Command-Line.
+        ///   Looks up a localized string similar to Option: Launch Command-Line.
         /// </summary>
         internal static string PipelineElement_CommandLine {
             get {
@@ -619,6 +619,24 @@ namespace PathCopyCopy.Settings.Properties {
         internal static string PipelineElement_CopyNPathParts_HelpText {
             get {
                 return ResourceManager.GetString("PipelineElement_CopyNPathParts_HelpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Option: Display for Selection.
+        /// </summary>
+        internal static string PipelineElement_DisplayForSelection {
+            get {
+                return ResourceManager.GetString("PipelineElement_DisplayForSelection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Determines if command should be displayed in the menu when files and/or folders are selected.
+        /// </summary>
+        internal static string PipelineElement_DisplayForSelection_HelpText {
+            get {
+                return ResourceManager.GetString("PipelineElement_DisplayForSelection_HelpText", resourceCulture);
             }
         }
         

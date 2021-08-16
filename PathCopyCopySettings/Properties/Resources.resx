@@ -502,7 +502,7 @@ Control-click to avoid displaying an icon for this command.</value>
     <value> (Dev Build)</value>
   </data>
   <data name="PipelineElement_CommandLine" xml:space="preserve">
-    <value>Options: Launch Command-Line</value>
+    <value>Option: Launch Command-Line</value>
   </data>
   <data name="PipelineElement_CommandLine_HelpText" xml:space="preserve">
     <value>Instead of copying the paths to the clipboard, launch a command-line (executable &amp; arguments), including the paths in the arguments either directly or via a filelist</value>
@@ -512,5 +512,11 @@ Control-click to avoid displaying an icon for this command.</value>
   </data>
   <data name="PipelineElement_RecursiveCopy_HelpText" xml:space="preserve">
     <value>Recurse into subdirectories when copying paths</value>
+  </data>
+  <data name="PipelineElement_DisplayForSelection" xml:space="preserve">
+    <value>Option: Display for Selection</value>
+  </data>
+  <data name="PipelineElement_DisplayForSelection_HelpText" xml:space="preserve">
+    <value>Determines if command should be displayed in the menu when files and/or folders are selected</value>
   </data>
 </root>

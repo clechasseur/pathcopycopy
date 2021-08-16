@@ -245,6 +245,12 @@ Ctrl-cliquez pour faire que cette commande n'affiche pas d'icône.</value>
   <data name="PipelineElement_CopyNPathParts_HelpText" xml:space="preserve">
     <value>Ne conserver qu'un certain nombre de morceaux du chemin, à partir du début ou de la fin</value>
   </data>
+  <data name="PipelineElement_DisplayForSelection" xml:space="preserve">
+    <value>Option: Affichage selon la sélection</value>
+  </data>
+  <data name="PipelineElement_DisplayForSelection_HelpText" xml:space="preserve">
+    <value>Détermine si la commande sera affichée dans le menu quand des fichiers et/ou des dossiers sont sélectionnés.</value>
+  </data>
   <data name="PipelineElement_DuplicateStackValue" xml:space="preserve">
     <value>Dupliquer la valeur du dessus de la pile</value>
   </data>

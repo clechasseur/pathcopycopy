@@ -2900,6 +2900,107 @@ namespace PathCopyCopy.Settings.Core.Plugins
     }
 
     /// <summary>
+    /// Pipeline element that determines whether the plugin will be displayed
+    /// when files and/or folders are selected.
+    /// </summary>
+    public class DisplayForSelectionPipelineElement : PipelineElement
+    {
+        /// <summary>
+        /// Code representing this pipeline element type.
+        /// </summary>
+        public const char CODE = '!';
+
+        /// <summary>
+        /// Code representing this pipeline element type.
+        /// </summary>
+        public override char Code
+        {
+            get {
+                return CODE;
+            }
+        }
+
+        /// <summary>
+        /// Pipeline element display value for the UI.
+        /// </summary>
+        public override string DisplayValue
+        {
+            get {
+                return Resources.PipelineElement_DisplayForSelection;
+            }
+        }
+
+        /// <summary>
+        /// Minumum version of Path Copy Copy required to use this pipeline element.
+        /// </summary>
+        public override Version RequiredVersion
+        {
+            get {
+                return new Version(20, 0, 0, 0);
+            }
+        }
+
+        /// <summary>
+        /// Whether to display plugin when files are selected.
+        /// </summary>
+        public bool ShowForFiles
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Whether to display plugin when folders are selected.
+        /// </summary>
+        public bool ShowForFolders
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        public DisplayForSelectionPipelineElement()
+            : base()
+        {
+            ShowForFiles = true;
+            ShowForFolders = true;
+        }
+
+        /// <summary>
+        /// Constructor with arguments.
+        /// </summary>
+        /// <param name="showForFiles">Whether to display plugin when files are selected.</param>
+        /// <param name="showForFolders">Whether to display plugin when folders are selected.</param>
+        public DisplayForSelectionPipelineElement(bool showForFiles, bool showForFolders)
+            : base()
+        {
+            ShowForFiles = showForFiles;
+            ShowForFolders = showForFolders;
+        }
+
+        /// <summary>
+        /// Encodes this pipeline element in a string.
+        /// </summary>
+        /// <returns>Encoded element data.</returns>
+        public override string Encode()
+        {
+            // Encode both flags.
+            return EncodeBool(ShowForFiles) + EncodeBool(ShowForFolders);
+        }
+
+        /// <summary>
+        /// Returns a user control to configure this pipeline element.
+        /// </summary>
+        /// <returns>User control.</returns>
+        public override PipelineElementUserControl GetEditingControl()
+        {
+            return new DisplayForSelectionPipelineElementUserControl(this);
+        }
+    }
+
+    /// <summary>
     /// Static class that can decode a pipeline of multiple elements from an
     /// encoded string. This is the C# equivalent of the C++'s PipelineDecoder.
     /// </summary>
@@ -3053,6 +3154,10 @@ namespace PathCopyCopy.Settings.Core.Plugins
                 }
                 case CommandLinePipelineElement.CODE: {
                     element = DecodeCommandLinePipelineElement(encodedElements, ref curChar);
+                    break;
+                }
+                case DisplayForSelectionPipelineElement.CODE: {
+                    element = DecodeDisplayForSelectionPipelineElement(encodedElements, ref curChar);
                     break;
                 }
                 default:
@@ -3295,6 +3400,23 @@ namespace PathCopyCopy.Settings.Core.Plugins
             string arguments = DecodeString(encodedElements, ref curChar);
             bool useFilelist = DecodeBool(encodedElements, ref curChar);
             return new CommandLinePipelineElement(executable, arguments, useFilelist);
+        }
+
+        /// <summary>
+        /// Decodes a <see cref="DisplayForSelectionPipelineElement"/> from
+        /// an encoded element string.
+        /// </summary>
+        /// <param name="encodedElements">String of encoded elements data.</param>
+        /// <param name="curChar">Position where the element data is to be found
+        /// in the string (not counting the element code). Upon return, this will
+        /// point just after the element data.</param>
+        private static DisplayForSelectionPipelineElement DecodeDisplayForSelectionPipelineElement(
+            string encodedElements, ref int curChar)
+        {
+            // The element data contains two flags.
+            bool showForFiles = DecodeBool(encodedElements, ref curChar);
+            bool showForFolders = DecodeBool(encodedElements, ref curChar);
+            return new DisplayForSelectionPipelineElement(showForFiles, showForFolders);
         }
         
         /// <summary>

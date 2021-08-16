@@ -38,7 +38,6 @@
             // 
             resources.ApplyResources(this.SeparatorLbl, "SeparatorLbl");
             this.SeparatorLbl.Name = "SeparatorLbl";
-            this.SeparatorToolTip.SetToolTip(this.SeparatorLbl, resources.GetString("SeparatorLbl.ToolTip"));
             // 
             // SeparatorTxt
             // 
@@ -54,7 +53,6 @@
             this.Controls.Add(this.SeparatorTxt);
             this.Controls.Add(this.SeparatorLbl);
             this.Name = "PathsSeparatorPipelineElementUserControl";
-            this.SeparatorToolTip.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.ResumeLayout(false);
             this.PerformLayout();
 

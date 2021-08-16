@@ -117,85 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="SeparatorLbl.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="SeparatorLbl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>-3, 3</value>
+  <data name="ShowForFilesCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>372, 17</value>
   </data>
-  <data name="SeparatorLbl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 13</value>
+  <data name="ShowForFilesCheck.Text" xml:space="preserve">
+    <value>Afficher la commande dans le menu lorsque des &amp;fichiers sont sélectionnés</value>
   </data>
-  <data name="SeparatorLbl.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="ShowForFilesCheck.ToolTip" xml:space="preserve">
+    <value>Détermine si la commande sera affichée dans le menu quand des fichiers sont sélectionnés</value>
   </data>
-  <data name="SeparatorLbl.Text" xml:space="preserve">
-    <value>&amp;Separator:</value>
+  <data name="ShowForFoldersCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>377, 17</value>
   </data>
-  <data name="&gt;&gt;SeparatorLbl.Name" xml:space="preserve">
-    <value>SeparatorLbl</value>
+  <data name="ShowForFoldersCheck.Text" xml:space="preserve">
+    <value>Afficher la commande dans le menu lorsque des &amp;dossiers sont sélectionnés</value>
   </data>
-  <data name="&gt;&gt;SeparatorLbl.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SeparatorLbl.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;SeparatorLbl.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="SeparatorTxt.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="SeparatorTxt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>59, 0</value>
-  </data>
-  <data name="SeparatorTxt.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 20</value>
-  </data>
-  <data name="SeparatorTxt.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <metadata name="SeparatorToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <data name="SeparatorTxt.ToolTip" xml:space="preserve">
-    <value>Character string used to separate multiple copied paths; the default value (when this option is not present) is a carriage return</value>
-  </data>
-  <data name="&gt;&gt;SeparatorTxt.Name" xml:space="preserve">
-    <value>SeparatorTxt</value>
-  </data>
-  <data name="&gt;&gt;SeparatorTxt.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SeparatorTxt.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;SeparatorTxt.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+  <data name="ShowForFoldersCheck.ToolTip" xml:space="preserve">
+    <value>Détermine si la commande sera affichée dans le menu quand des dossiers sont sélectionnés</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>231, 20</value>
-  </data>
-  <data name="&gt;&gt;SeparatorToolTip.Name" xml:space="preserve">
-    <value>SeparatorToolTip</value>
-  </data>
-  <data name="&gt;&gt;SeparatorToolTip.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>PathsSeparatorPipelineElementUserControl</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>PathCopyCopy.Settings.UI.UserControls.PipelineElementUserControl, PathCopyCopySettings, Version=20.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>380, 45</value>
   </data>
 </root>

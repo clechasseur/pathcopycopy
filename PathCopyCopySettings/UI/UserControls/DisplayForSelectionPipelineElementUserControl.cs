@@ -1,5 +1,5 @@
-﻿// PathsSeparatorPipelineElementUserControl.cs
-// (c) 2019-2021, Charles Lechasseur
+﻿// DisplayForSelectionPipelineElementUserControl.cs
+// (c) 2021, Charles Lechasseur
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,18 +26,18 @@ using PathCopyCopy.Settings.Core.Plugins;
 namespace PathCopyCopy.Settings.UI.UserControls
 {
     /// <summary>
-    /// UserControl used to configure a paths separator pipeline element.
+    /// UserControl used to configure a display for selection pipeline element.
     /// </summary>
-    public partial class PathsSeparatorPipelineElementUserControl : PipelineElementUserControl
+    public partial class DisplayForSelectionPipelineElementUserControl : PipelineElementUserControl
     {
         /// Element we're configuring.
-        private readonly PathsSeparatorPipelineElement element;
+        private readonly DisplayForSelectionPipelineElement element;
 
         /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="element">Pipeline element to configure.</param>
-        public PathsSeparatorPipelineElementUserControl(PathsSeparatorPipelineElement element)
+        public DisplayForSelectionPipelineElementUserControl(DisplayForSelectionPipelineElement element)
         {
             Debug.Assert(element != null);
 
@@ -53,18 +53,31 @@ namespace PathCopyCopy.Settings.UI.UserControls
         protected override void OnPipelineElementLoad(EventArgs e)
         {
             base.OnPipelineElementLoad(e);
-            SeparatorTxt.Text = element.PathsSeparator;
+            ShowForFilesCheck.Checked = element.ShowForFiles;
+            ShowForFoldersCheck.Checked = element.ShowForFolders;
         }
 
         /// <summary>
-        /// Called when the text of the Separator textbox changes. We update
-        /// our associated pipeline element here.
+        /// Called when the checked state of the "Show for files" checkbox changes.
+        /// We update our associated pipeline element here.
         /// </summary>
         /// <param name="sender">Event sender.</param>
         /// <param name="e">Event arguments.</param>
-        private void SeparatorTxt_TextChanged(object sender, EventArgs e)
+        private void ShowForFilesCheck_CheckedChanged(object sender, EventArgs e)
         {
-            element.PathsSeparator = SeparatorTxt.Text;
+            element.ShowForFiles = ShowForFilesCheck.Checked;
+            OnPipelineElementChanged(EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Called when the checked state of the "Show for folders" checkbox changes.
+        /// We update our associated pipeline element here.
+        /// </summary>
+        /// <param name="sender">Event sender.</param>
+        /// <param name="e">Event arguments.</param>
+        private void ShowForFoldersCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            element.ShowForFolders = ShowForFoldersCheck.Checked;
             OnPipelineElementChanged(EventArgs.Empty);
         }
     }

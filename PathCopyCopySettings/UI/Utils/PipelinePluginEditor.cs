@@ -154,7 +154,8 @@ namespace PathCopyCopy.Settings.UI.Utils
                 element is InjectDriveLabelPipelineElement ||
                 element is CopyNPathPartsPipelineElement ||
                 element is StackPipelineElement ||
-                element is CommandLinePipelineElement);
+                element is CommandLinePipelineElement ||
+                element is DisplayForSelectionPipelineElement);
         }
 
         /// <summary>
