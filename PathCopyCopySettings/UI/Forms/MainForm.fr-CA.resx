@@ -428,6 +428,9 @@
   <data name="AddQuotesChk.ToolTip" xml:space="preserve">
     <value>Entourer tous les chemins copiés de guillemets ( " )</value>
   </data>
+  <data name="MiscOptionsPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>465, 522</value>
+  </data>
   <data name="MiscOptionsPage.Text" xml:space="preserve">
     <value>Paramètres</value>
   </data>
@@ -470,8 +473,14 @@ Les dons aident à financer le développement et à fournir du support.</value>
   <data name="DonationLinkLbl.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="AboutTableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>459, 516</value>
+  </data>
   <data name="AboutTableLayoutPanel.ToolTip" xml:space="preserve">
     <value />
+  </data>
+  <data name="AboutPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>465, 522</value>
   </data>
   <data name="AboutPage.Text" xml:space="preserve">
     <value>À propos</value>
