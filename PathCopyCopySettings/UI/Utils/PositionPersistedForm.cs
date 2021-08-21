@@ -80,6 +80,11 @@ namespace PathCopyCopy.Settings.UI.Utils
                 }
                 if (size.HasValue) {
                     Size = size.Value;
+                    Point bottomRight = Location + Size;
+                    Point visibleBottomRight = GetVisiblePoint(bottomRight, false);
+                    if (visibleBottomRight != bottomRight) {
+                        Left += visibleBottomRight.X - bottomRight.X;
+                    }
                 }
 
                 // Set flag telling listeners that from now on, any change is size/position
