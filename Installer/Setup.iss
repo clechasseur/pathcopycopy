@@ -83,18 +83,30 @@ Name: en_CA; MessagesFile: compiler:Default.isl
 Name: fr_CA; MessagesFile: compiler:Languages\French.isl
 
 [CustomMessages]
+NetFrameworkPageCaption=Prerequisites
+NetFrameworkPageDescription=Installing .NET Framework 4.8
+NetFrameworkPageSubCaption=Path Copy Copy requires .NET Framework 4.8, which is not installed on your system. Do you wish Setup to download and install it now?
+NetFrameworkPageInstallChoice=Install .NET Framework 4.8
+NetFrameworkPageDoNotInstallChoice=Do not install .NET Framework 4.8; I will install it later
 CommandsPageCaption=Configuration
 CommandsPageDescription=Pre-configure commands
 CommandsPageSubCaption=Path Copy Copy ships with multiple commands used to copy paths (long path, network path, etc.) Please choose which ones to include by default. This can be changed later via Settings.
 CommandsPageCommonCommandsChoice=Commonly-used commands only
 CommandsPageNetworkCommandsChoice=Common commands and commands for network environments
 CommandsPageAllCommandsChoice=All commands, including power-user commands
+InstallNetFramework48=Installing .NET Framework 4.8...
+fr_CA.NetFrameworkPageCaption=Prérequis
+fr_CA.NetFrameworkPageDescription=Installation du .NET Framework 4.8
+fr_CA.NetFrameworkPageSubCaption=Path Copy Copy a besoin du .NET Framework 4.8, qui n'est pas présent sur ce système. Voulez-vous que Setup le télécharge et l'installe maintenant?
+fr_CA.NetFrameworkPageInstallChoice=Installer .NET Framework 4.8
+fr_CA.NetFrameworkPageDoNotInstallChoice=Ne pas installer .NET Framework 4.8; Je l'installerai plus tard
 fr_CA.CommandsPageCaption=Configuration
 fr_CA.CommandsPageDescription=Configuration initiale des commandes
 fr_CA.CommandsPageSubCaption=Path Copy Copy vient avec plusieurs commandes permettant de copier des chemins (chemin long, chemin réseau, etc.) Veuillez choisir quelles commandes afficher par défaut. Ceci peut être changé plus tard via Paramètres.
 fr_CA.CommandsPageCommonCommandsChoice=Seules les commandes les plus utilisées
 fr_CA.CommandsPageNetworkCommandsChoice=Les commandes de base et celles utilisées dans les environnements réseaux
 fr_CA.CommandsPageAllCommandsChoice=Toutes les commandes, incluant celles plus avancées
+fr_CA.InstallNetFramework48=Installation du .NET Framework 4.8...
 
 [Files]
 Source: ..\bin\Win32\Release\PathCopyCopy.dll; DestDir: {app}; Flags: ignoreversion restartreplace overwritereadonly uninsrestartdelete uninsremovereadonly; DestName: PCC32.dll; Check: (not Is64BitInstallMode) or IsAdminInstallMode
@@ -157,6 +169,7 @@ Type: files; Name: {app}\Path Copy Copy on CodePlex.url
 [Run]
 Filename: {sys}\regsvr32.exe; Parameters: "{code:Regsvr32InstallParameters} ""{app}\PCC32.dll"""; WorkingDir: {app}; StatusMsg: {code:GetStatusRegisterFiles}; Flags: runhidden 32bit; Check: FileExists(ExpandConstant('{app}\PCC32.dll'))
 Filename: {sys}\regsvr32.exe; Parameters: "{code:Regsvr32InstallParameters} ""{app}\PCC64.dll"""; WorkingDir: {app}; StatusMsg: {code:GetStatusRegisterFiles}; Flags: runhidden 64bit; Check: Is64BitInstallMode and FileExists(ExpandConstant('{app}\PCC64.dll'))
+Filename: {tmp}\NETFramework48.exe; StatusMsg: {cm:InstallNetFramework48}; Flags: skipifsilent; Check: ShouldInstallNetFramework
 
 [UninstallRun]
 Filename: {sys}\regsvr32.exe; Parameters: "{code:Regsvr32InstallParameters|/u} ""{app}\PCC32.dll"""; WorkingDir: {app}; RunOnceId: UnregisterPCC32; Flags: runhidden 32bit; Check: FileExists(ExpandConstant('{app}\PCC32.dll'))
@@ -164,13 +177,21 @@ Filename: {sys}\regsvr32.exe; Parameters: "{code:Regsvr32InstallParameters|/u} "
 
 [Code]
 const
+  CNetFrameworkUrl = 'https://go.microsoft.com/fwlink/?LinkId=2085155';
+
   CDwordSwitch = '/PCCREGVALUEDWORD=';
   CStringSwitch = '/PCCREGVALUESZ=';
   CPipelinePluginSwitch = '/PCCREGPIPELINEPLUGIN=';
   CLegacyPipelinePluginsDisplayOrderSwitch = '/PCCREGPIPELINEPLUGINSDISPLAYORDER=';
+  CNetFrameworkUrlSwitch = '/NETFRAMEWORKURL=';
+  CForceOfferNetFrameworkSwitch = '/FORCEOFFERNETFRAMEWORK';
+  CDontOfferNetFrameworkSwitch = '/DONOTOFFERNETFRAMEWORK';
   CInitialCommandsChoiceSwitch = '/INITIALCOMMANDSCHOICE=';
   CStringSeparator = ',';
-    
+  
+  CInstallChoice = 0;
+  CDoNotInstallChoice = 1;
+  
   CCommonCommandsChoice = 0;
   CNetworkCommandsChoice = 1;
   CAllCommandsChoice = 2;
@@ -187,7 +208,10 @@ const
     '{7da6a4a2-ae54-40e0-9910-ebd9ef3f017e},{31022a3d-6fee-4b36-843e-bbb4556ab35b}';
   
 var
+  GOfferToInstallNetFramework: Boolean;
+  GInstallNetFrameworkPage: TInputOptionWizardPage;
   GCommandsPage: TInputOptionWizardPage;
+  GDownloadPage: TDownloadWizardPage;
   GIsUpgrade: Boolean;
   GSkipCommandsPage: Boolean;
   GLastUserPageID: Integer;
@@ -200,7 +224,7 @@ begin
   else
     Result := AString;
 end;
-  
+
 // This function will check if a specific switch is present on the command-line.
 // Make sure switch is uppercase.
 function SwitchPresent(const ASwitch: string): Boolean;
@@ -216,6 +240,31 @@ begin
       Break;
     end;
   end;
+end;
+
+// This function will return the URL to use to download the installer
+// for the .NET Framework.
+function NetFrameworkUrl: string;
+var
+  I: Integer;
+  S: string;
+begin
+  // Check if user overrode the URL through a command-line argument.
+  Result := '';
+  for I := 1 to ParamCount do
+  begin
+    S := ParamStr(I);
+    if Pos(CNetFrameworkUrlSwitch, Uppercase(S)) = 1 then
+    begin
+      // This is the argument we're looking for; URL follows.
+      Result := MyRemoveQuotes(Copy(S, Length(CNetFrameworkUrlSwitch) + 1, MaxInt));
+      Break;
+    end;
+  end;
+  
+  // If user did not specify an URL, use the default.
+  if Result = '' then
+    Result := CNetFrameworkUrl;
 end;
 
 // This function will return the initial choice to select in the
@@ -273,6 +322,13 @@ end;
 function GetStatusRegisterFiles(Params: string): string;
 begin
   Result := SetupMessage(msgStatusRegisterFiles);
+end;
+
+// Called to know if we should install .NET Framework.
+function ShouldInstallNetFramework: Boolean;
+begin
+  Result := GOfferToInstallNetFramework and
+    (GInstallNetFrameworkPage.SelectedValueIndex = CInstallChoice);
 end;
 
 // This procedure scans the command-line for values to write
@@ -391,7 +447,33 @@ end;
 // Called when setup first initializes. Note that the
 // wizard form does not exist at that point.
 function InitializeSetup: Boolean;
+var
+  NetFramework4Release: Cardinal;
 begin
+  // Check for debug switch that forces us to offer .NET Framework page
+  // and for switch that tells us not to offer it. If not present,
+  // don't try to install .NET Framework in a non-administrative installation
+  // since user might not have the privileges; dependencies will need to
+  // be present on the system or installed separately.
+  if SwitchPresent(CForceOfferNetFrameworkSwitch) then
+  begin
+    GOfferToInstallNetFramework := True;
+  end
+  else if SwitchPresent(CDontOfferNetFrameworkSwitch) or (not IsAdminInstallMode) then
+  begin
+    GOfferToInstallNetFramework := False;
+  end
+  else
+  begin
+    // Check if .NET Framework 4.8 isn't there.
+    // If so, we'll offer to install it.
+    NetFramework4Release := 0;
+    RegQueryDWordValue(HKEY_LOCAL_MACHINE,
+      'Software\Microsoft\NET Framework Setup\NDP\v4\Full',
+      'Release', NetFramework4Release);
+    GOfferToInstallNetFramework := (NetFramework4Release < 528040);
+  end;
+
   // Check if this is an upgrade by checking the main DLL's AppID registry
   // entry. (We could also check the installer's AppID in the Uninstall key.)
   GIsUpgrade := RegKeyExists(HKEY_AUTO, 'Software\Classes\AppID\{44F7E5A2-1286-45F5-9A7A-A95A41B72918}');
@@ -409,9 +491,17 @@ end;
 // We can use this opportunity to add pages to it.
 procedure InitializeWizard;
 begin
+  // Create a page to allow user to install .NET Framework.
+  GInstallNetFrameworkPage := CreateInputOptionPage(wpSelectTasks,
+    CustomMessage('NetFrameworkPageCaption'), CustomMessage('NetFrameworkPageDescription'),
+    CustomMessage('NetFrameworkPageSubCaption'), True, False);
+  GInstallNetFrameworkPage.Add(CustomMessage('NetFrameworkPageInstallChoice'));
+  GInstallNetFrameworkPage.Add(CustomMessage('NetFrameworkPageDoNotInstallChoice'));
+  GInstallNetFrameworkPage.SelectedValueIndex := CInstallChoice;
+  
   // Create a page to allow the user to select which commands
   // to include in the submenu by default.
-  GCommandsPage := CreateInputOptionPage(wpSelectTasks,
+  GCommandsPage := CreateInputOptionPage(GInstallNetFrameworkPage.ID,
     CustomMessage('CommandsPageCaption'), CustomMessage('CommandsPageDescription'),
     CustomMessage('CommandsPageSubCaption'), True, False);
   GCommandsPage.Add(CustomMessage('CommandsPageCommonCommandsChoice'));
@@ -419,10 +509,15 @@ begin
   GCommandsPage.Add(CustomMessage('CommandsPageAllCommandsChoice'));
   GCommandsPage.SelectedValueIndex := InitialCommandsChoice;
   
+  // Create a page to download installation files if required.
+  GDownloadPage := CreateDownloadPage(SetupMessage(msgWizardPreparing), SetupMessage(msgPreparingDesc), nil);
+  
   // Compute the ID of the last page the user is going to see before installation.
   // Since Ready page is disabled, it depends on what pages will be visible.
   if not GSkipCommandsPage then
     GLastUserPageID := GCommandsPage.ID
+  else if GOfferToInstallNetFramework then
+    GLastUserPageID := GInstallNetFrameworkPage.ID
   else if not GIsUpgrade then
     GLastUserPageID := wpSelectDir
   else
@@ -442,10 +537,48 @@ begin
   // We do this to avoid overwriting existing settings and since it's
   // difficult to parse the "SubmenuDisplayOrder" registry value, which
   // can be modified by other means.
+  // Also skip the .NET Framework page unless we need it.
   if PageID = GCommandsPage.ID then
     Result := GSkipCommandsPage
+  else if PageID = GInstallNetFrameworkPage.ID then
+    Result := not GOfferToInstallNetFramework
   else
     Result := False;
+end;
+
+// Called for each wizard page when the Next button is clicked. Returning True
+// will continue to the next page, False will stay on the page.
+function NextButtonClick(CurPageID: Integer): Boolean;
+begin
+  if CurPageID = GLastUserPageID then
+  begin
+    // We're moving past the last user page, which means that if we must
+    // download the .NET Framework installer, we must do so now.
+    // Don't do it if we're in a silent installation though since it's interactive.
+    if ShouldInstallNetFramework and not WizardSilent then
+    begin
+      GDownloadPage.Clear;
+      GDownloadPage.Add(NetFrameworkUrl, 'NETFramework48.exe',
+        '0bba3094588c4bfec301939985222a20b340bf03431563dec8b2b4478b06fffa');
+      GDownloadPage.Show;
+      try
+        try
+          GDownloadPage.Download;
+          Result := True;
+        except
+          if not GDownloadPage.AbortedByUser then
+            SuppressibleMsgBox(AddPeriod(GetExceptionMessage), mbCriticalError, MB_OK, IDOK);
+          Result := False;
+        end;
+      finally
+        GDownloadPage.Hide;
+      end;
+    end
+    else
+      Result := True;
+  end
+  else
+    Result := True;
 end;
 
 // Called for each wizard page when the page is shown. We use this opportunity
