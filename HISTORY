@@ -9,6 +9,7 @@ Version 20.0 (202?-??-??)
 - Fixed copying of .url paths on recent Windows 10 OSes [https://github.com/clechasseur/pathcopycopy/issues/128]
 - Fixed crash when clicking in Icon column header [https://github.com/clechasseur/pathcopycopy/issues/142]
 - New custom command element to display command when files and/or folders are selected [https://github.com/clechasseur/pathcopycopy/issues/125]
+- Better support for high DPI monitors [https://github.com/clechasseur/pathcopycopy/issues/131]
 
 
 Version 19.0 (2020-08-08)
