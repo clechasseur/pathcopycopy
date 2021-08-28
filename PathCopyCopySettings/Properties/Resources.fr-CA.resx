@@ -186,6 +186,9 @@
   <data name="MainForm_Error_InvalidPipelinePluginEncodedElements" xml:space="preserve">
     <value>Une erreur est survenue en tentant d'interpréter les données de cette commande personnalisée. Peut-être a-t-elle été créée par une version ultérieure de Path Copy Copy? Il sera impossible de l'éditer.</value>
   </data>
+  <data name="MainForm_Msg_DataErrorMsgTitle" xml:space="preserve">
+    <value>Erreur</value>
+  </data>
   <data name="MainForm_Msg_LanguageSwitched" xml:space="preserve">
     <value>Changer la langue de l'application demande de fermer sa session et de se réauthentifier pour être appliquée.</value>
   </data>

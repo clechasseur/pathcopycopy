@@ -77,7 +77,7 @@ namespace PathCopyCopy.Settings.UI.Forms
                     StringBuilder htmlBuilder = new StringBuilder();
                     htmlBuilder.Append("<ul>");
                     foreach (string note in updateInfo.ReleaseNotes) {
-                        htmlBuilder.AppendFormat("<li>{0}</li>", note);
+                        htmlBuilder.Append($"<li>{note}</li>");
                     }
                     htmlBuilder.Append("</ul>");
                     innerHtml = htmlBuilder.ToString();

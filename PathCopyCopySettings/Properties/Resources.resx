@@ -519,4 +519,7 @@ Control-click to avoid displaying an icon for this command.</value>
   <data name="PipelineElement_DisplayForSelection_HelpText" xml:space="preserve">
     <value>Determines if command should be displayed in the menu when files and/or folders are selected</value>
   </data>
+  <data name="MainForm_Msg_DataErrorMsgTitle" xml:space="preserve">
+    <value>Error</value>
+  </data>
 </root>

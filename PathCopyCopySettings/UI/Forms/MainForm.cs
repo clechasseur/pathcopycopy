@@ -1010,6 +1010,26 @@ namespace PathCopyCopy.Settings.UI.Forms
         }
 
         /// <summary>
+        /// Called when a data error occurs in the plugins data grid.
+        /// </summary>
+        /// <param name="sender">Event sender.</param>
+        /// <param name="e">Event arguments.</param>
+        private void PluginsDataGrid_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            // When we run in non-standard DPI, a data error is raised for the Icon column values
+            // when determining the formatting. I have not been able to pinpoint the cause, but
+            // simply silencing the error fixes the issue...
+            if (e.ColumnIndex == IconCol.Index && e.Context ==
+                (DataGridViewDataErrorContexts.Formatting | DataGridViewDataErrorContexts.PreferredSize)) {
+
+                e.Cancel = true;
+            } else {
+                MessageBox.Show(this, e.Exception.Message, Resources.MainForm_Msg_DataErrorMsgTitle,
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
         /// Called when the Up button is pressed. We need to move the
         /// selected plugin up one position in the grid.
         /// </summary>

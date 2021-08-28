@@ -414,6 +414,15 @@ namespace PathCopyCopy.Settings.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        internal static string MainForm_Msg_DataErrorMsgTitle {
+            get {
+                return ResourceManager.GetString("MainForm_Msg_DataErrorMsgTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Changing the application&apos;s language requires a logoff/logon in order to be applied..
         /// </summary>
         internal static string MainForm_Msg_LanguageSwitched {

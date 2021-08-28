@@ -1,6 +1,7 @@
 Version 20.0 (202?-??-??)
 -------------------------
 - Now requires Windows 7 SP1 at a minimum
+- Now requires .NET Framework 4.8 at a minimum; installer will offer to download and install it
 - Paths are now copied in alphabetical order (case-insensitively) [https://github.com/clechasseur/pathcopycopy/issues/129]
 - Fixed data error when associating icons to commands in the Settings application [https://github.com/clechasseur/pathcopycopy/issues/132]
 - Fixed icon scaling when using bigger icons for commands [https://github.com/clechasseur/pathcopycopy/issues/133]
@@ -8,6 +9,7 @@ Version 20.0 (202?-??-??)
 - Fixed copying of .url paths on recent Windows 10 OSes [https://github.com/clechasseur/pathcopycopy/issues/128]
 - Fixed crash when clicking in Icon column header [https://github.com/clechasseur/pathcopycopy/issues/142]
 - New custom command element to display command when files and/or folders are selected [https://github.com/clechasseur/pathcopycopy/issues/125]
+- Better support for high DPI monitors [https://github.com/clechasseur/pathcopycopy/issues/131]
 
 
 Version 19.0 (2020-08-08)

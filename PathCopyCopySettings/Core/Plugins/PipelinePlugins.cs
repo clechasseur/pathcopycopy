@@ -628,7 +628,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
                         };
                         overrides.Add(typeof(PipelinePluginInfo), "EditModeAsString", attributes);
                         xmlSerializer = new XmlSerializer(typeof(PipelinePluginCollection),
-                            overrides, new Type[0], null, PipelinePluginsXmlNamespace);
+                            overrides, Array.Empty<Type>(), null, PipelinePluginsXmlNamespace);
                     } else if (serializerVersion == PipelinePluginXmlSerializerVersion.V1) {
                         // First version: do not serializer RequiredVersion or EditMode.
                         XmlAttributeOverrides overrides = new XmlAttributeOverrides();
@@ -638,7 +638,7 @@ namespace PathCopyCopy.Settings.Core.Plugins
                         overrides.Add(typeof(PipelinePluginInfo), "RequiredVersionAsString", attributes);
                         overrides.Add(typeof(PipelinePluginInfo), "EditModeAsString", attributes);
                         xmlSerializer = new XmlSerializer(typeof(PipelinePluginCollection),
-                            overrides, new Type[0], null, PipelinePluginsXmlNamespace);
+                            overrides, Array.Empty<Type>(), null, PipelinePluginsXmlNamespace);
                     }
                     xmlSerializers.Add(serializerVersion, xmlSerializer);
                 }
