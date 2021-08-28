@@ -169,18 +169,21 @@ namespace PCC
                                            flagsAndAttributes,
                                            nullptr);
             if (hFile != nullptr) {
-                std::wstring finalPath(MAX_PATH + 1, L'\0');
-                const auto finalPathRes = ::GetFinalPathNameByHandleW(hFile,
-                                                                      &*finalPath.begin(),
-                                                                      MAX_PATH,
-                                                                      FILE_NAME_NORMALIZED | VOLUME_NAME_DOS);
-                if (finalPathRes != 0) {
-                    p_rPath = finalPath.c_str();
+                const auto bufferSize = ::GetFinalPathNameByHandleW(hFile, nullptr, 0, FILE_NAME_NORMALIZED | VOLUME_NAME_DOS);
+                if (bufferSize != 0) {
+                    std::wstring finalPath(bufferSize + 1, L'\0');
+                    const auto finalPathRes = ::GetFinalPathNameByHandleW(hFile,
+                                                                          &*finalPath.begin(),
+                                                                          bufferSize + 1,
+                                                                          FILE_NAME_NORMALIZED | VOLUME_NAME_DOS);
+                    if (finalPathRes != 0) {
+                        p_rPath = finalPath.c_str();
 
-                    // Fetching symlink target probably left us with a weird path, fix it
-                    // because Explorer can't handle paths with \\?\ in them.
-                    StringUtils::ReplaceAll(p_rPath, UNC_DRIVE_SYMLINK_PREFIX, L"");
-                    StringUtils::ReplaceAll(p_rPath, LOCAL_DRIVE_SYMLINK_PREFIX, L"");
+                        // Fetching symlink target probably left us with a weird path, fix it
+                        // because Explorer can't handle paths with \\?\ in them.
+                        StringUtils::ReplaceAll(p_rPath, UNC_DRIVE_SYMLINK_PREFIX, L"");
+                        StringUtils::ReplaceAll(p_rPath, LOCAL_DRIVE_SYMLINK_PREFIX, L"");
+                    }
                 }
             }
         }

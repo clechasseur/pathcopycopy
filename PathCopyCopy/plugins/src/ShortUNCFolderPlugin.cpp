@@ -64,9 +64,12 @@ namespace PCC
 
             // Now ask for a short version and return it.
             if (!path.empty()) {
-                std::wstring shortPath(MAX_PATH + 1, L'\0');
-                if (::GetShortPathNameW(path.c_str(), &*shortPath.begin(), gsl::narrow<DWORD>(shortPath.size())) != 0) {
-                    path = shortPath.c_str();
+                const auto bufferSize = ::GetShortPathNameW(path.c_str(), nullptr, 0);
+                if (bufferSize != 0) {
+                    std::wstring shortPath(bufferSize, L'\0');
+                    if (::GetShortPathNameW(path.c_str(), &*shortPath.begin(), gsl::narrow<DWORD>(shortPath.size())) != 0) {
+                        path = shortPath.c_str();
+                    }
                 }
             }
             return path;

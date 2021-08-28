@@ -65,9 +65,12 @@ namespace PCC
 
             std::wstring path(p_File);
             if (!path.empty()) {
-                std::wstring shortPath(MAX_PATH + 1, L'\0');
-                if (::GetShortPathNameW(p_File.c_str(), &*shortPath.begin(), gsl::narrow<DWORD>(shortPath.size())) != 0) {
-                    path = shortPath.c_str();
+                const auto bufferSize = ::GetShortPathNameW(p_File.c_str(), nullptr, 0);
+                if (bufferSize != 0) {
+                    std::wstring shortPath(bufferSize, L'\0');
+                    if (::GetShortPathNameW(p_File.c_str(), &*shortPath.begin(), gsl::narrow<DWORD>(shortPath.size())) != 0) {
+                        path = shortPath.c_str();
+                    }
                 }
 
                 // Append separator if needed.

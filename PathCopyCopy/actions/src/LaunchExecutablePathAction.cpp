@@ -64,7 +64,7 @@ namespace PCC
         void LaunchExecutablePathAction::Act(const std::wstring& p_Paths,
                                              HWND const p_hWnd) const
         {
-            auto files = p_Paths;
+            auto files{p_Paths};
             if (m_UseFilelist) {
                 // Get path to temp directory
                 std::wstring tempDirPath(MAX_PATH + 1, L'\0');
@@ -96,7 +96,7 @@ namespace PCC
             }
 
             // Look for files placeholder in arguments. If it's not there, append the files.
-            auto arguments = m_Arguments;
+            auto arguments{m_Arguments};
             std::wregex placeholderRegex(FILES_ARGUMENT_PLACEHOLDER,
                                          std::regex_constants::ECMAScript | std::regex_constants::icase);
             std::wsmatch match;

@@ -241,10 +241,10 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::Initialize(
                     m_vFiles.reserve(fileCount);
 
                     // Get each file in turn.
-                    std::wstring buffer(MAX_PATH + 1, L'\0');
-                    for(UINT i = 0; i < fileCount; ++i) {
-                        const UINT copiedCount = ::DragQueryFileW(static_cast<HDROP>(stgMedium.Get().hGlobal),
-                            i, &*buffer.begin(), gsl::narrow<UINT>(buffer.size()));
+                    for (UINT i = 0; i < fileCount; ++i) {
+                        const auto bufferSize = ::DragQueryFileW(static_cast<HDROP>(stgMedium.Get().hGlobal), i, nullptr, 0);
+                        std::wstring buffer(bufferSize + 1, L'\0');
+                        ::DragQueryFileW(static_cast<HDROP>(stgMedium.Get().hGlobal), i, &*buffer.begin(), gsl::narrow<UINT>(buffer.size()));
                         m_vFiles.emplace_back(buffer.c_str());
                     }
                 } else {
