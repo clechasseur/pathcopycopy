@@ -1,4 +1,4 @@
-Version 20.0 (202?-??-??)
+Version 20.0 (2021-08-28)
 -------------------------
 - Now requires Windows 7 SP1 at a minimum
 - Now requires .NET Framework 4.8 at a minimum; installer will offer to download and install it
