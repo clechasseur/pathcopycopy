@@ -8,6 +8,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: microsoft/setup-msbuild@v1
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v1
+      with:
+        languages: [ cpp, csharp ]
     - name: Cache NuGet packages
       uses: actions/cache@v2
       with:
@@ -26,6 +30,8 @@ jobs:
       run: msbuild /p:Platform=Win32 /p:Configuration=Release PathCopyCopy.sln
     - name: Build Release x64
       run: msbuild /p:Platform=x64 /p:Configuration=Release PathCopyCopy.sln
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v1
     - name: Build installer
       run: iscc /O+ /DSIGNCODE="no" /DDEVBUILD="yes" "Installer\Setup.iss"
     - name: Upload installer artifact
