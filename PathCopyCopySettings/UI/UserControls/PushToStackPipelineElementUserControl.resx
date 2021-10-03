@@ -117,434 +117,197 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="PushToStackLbl.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="PushToStackLbl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>-3, 0</value>
-  </data>
-  <data name="PushToStackLbl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 13</value>
-  </data>
-  <data name="PushToStackLbl.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="PushToStackLbl.Text" xml:space="preserve">
-    <value>Push the following to the stack:</value>
-  </data>
-  <data name="&gt;&gt;PushToStackLbl.Name" xml:space="preserve">
-    <value>PushToStackLbl</value>
-  </data>
-  <data name="&gt;&gt;PushToStackLbl.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PushToStackLbl.Parent" xml:space="preserve">
+  <data name="&gt;&gt;RegexGroupTxt.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;PushToStackLbl.ZOrder" xml:space="preserve">
-    <value>14</value>
+  <data name="UseGroupLbl2.Text" xml:space="preserve">
+    <value>)</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="EntirePathRadio.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="EntirePathRadio.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 16</value>
-  </data>
-  <data name="EntirePathRadio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>97, 17</value>
-  </data>
-  <data name="EntirePathRadio.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="EntirePathRadio.Text" xml:space="preserve">
-    <value>The &amp;entire path</value>
-  </data>
-  <metadata name="PushToStackToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <data name="EntirePathRadio.ToolTip" xml:space="preserve">
-    <value>Push the entire path to  the stack</value>
-  </data>
-  <data name="&gt;&gt;EntirePathRadio.Name" xml:space="preserve">
-    <value>EntirePathRadio</value>
-  </data>
-  <data name="&gt;&gt;EntirePathRadio.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;EntirePathRadio.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;EntirePathRadio.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="RangeRadio.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="RangeRadio.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 39</value>
-  </data>
-  <data name="RangeRadio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 17</value>
-  </data>
-  <data name="RangeRadio.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="RangeRadio.Text" xml:space="preserve">
-    <value>Everything in the path between &amp;positions</value>
-  </data>
-  <data name="RangeRadio.ToolTip" xml:space="preserve">
-    <value>Push part of the path to the stack, as defined by a range of characters</value>
-  </data>
-  <data name="&gt;&gt;RangeRadio.Name" xml:space="preserve">
-    <value>RangeRadio</value>
-  </data>
-  <data name="&gt;&gt;RangeRadio.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;RangeRadio.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;RangeRadio.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="RangeBeginTxt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>222, 38</value>
-  </data>
-  <data name="RangeBeginTxt.MaxLength" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="RangeBeginTxt.Size" type="System.Drawing.Size, System.Drawing">
-    <value>27, 20</value>
-  </data>
-  <data name="RangeBeginTxt.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="RangeBeginTxt.Text" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="RangeBeginTxt.ToolTip" xml:space="preserve">
-    <value>Beginning of range to push to the stack</value>
-  </data>
-  <data name="&gt;&gt;RangeBeginTxt.Name" xml:space="preserve">
-    <value>RangeBeginTxt</value>
-  </data>
-  <data name="&gt;&gt;RangeBeginTxt.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;RangeBeginTxt.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;RangeBeginTxt.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="BeginAndEndLbl.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="BeginAndEndLbl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>255, 41</value>
-  </data>
-  <data name="BeginAndEndLbl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 13</value>
-  </data>
-  <data name="BeginAndEndLbl.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="BeginAndEndLbl.Text" xml:space="preserve">
-    <value>and</value>
-  </data>
-  <data name="&gt;&gt;BeginAndEndLbl.Name" xml:space="preserve">
-    <value>BeginAndEndLbl</value>
-  </data>
-  <data name="&gt;&gt;BeginAndEndLbl.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;BeginAndEndLbl.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;BeginAndEndLbl.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="RangeEndTxt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>286, 38</value>
-  </data>
-  <data name="RangeEndTxt.MaxLength" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="RangeEndTxt.Size" type="System.Drawing.Size, System.Drawing">
-    <value>27, 20</value>
-  </data>
-  <data name="RangeEndTxt.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="RangeEndTxt.Text" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="RangeEndTxt.ToolTip" xml:space="preserve">
-    <value>End of range to push to the stack</value>
-  </data>
-  <data name="&gt;&gt;RangeEndTxt.Name" xml:space="preserve">
-    <value>RangeEndTxt</value>
-  </data>
-  <data name="&gt;&gt;RangeEndTxt.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;RangeEndTxt.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;RangeEndTxt.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="RegexRadio.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="RegexRadio.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 62</value>
-  </data>
-  <data name="RegexRadio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 17</value>
-  </data>
-  <data name="RegexRadio.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="RegexRadio.Text" xml:space="preserve">
-    <value>The first match of &amp;regular expression</value>
-  </data>
-  <data name="RegexRadio.ToolTip" xml:space="preserve">
-    <value>Push the first match of a regular expression to the stack</value>
-  </data>
-  <data name="&gt;&gt;RegexRadio.Name" xml:space="preserve">
-    <value>RegexRadio</value>
-  </data>
-  <data name="&gt;&gt;RegexRadio.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;RegexRadio.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;RegexRadio.ZOrder" xml:space="preserve">
-    <value>8</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="UseGroupLbl1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 92</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="RegexTxt.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="RegexTxt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>201, 61</value>
-  </data>
-  <data name="RegexTxt.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 20</value>
-  </data>
-  <data name="RegexTxt.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="RegexTxt.ToolTip" xml:space="preserve">
-    <value>Regular expression to use to locate the part of the path to push to the stack</value>
-  </data>
-  <data name="&gt;&gt;RegexTxt.Name" xml:space="preserve">
-    <value>RegexTxt</value>
-  </data>
-  <data name="&gt;&gt;RegexTxt.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;RegexTxt.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;RegexTxt.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="IgnoreCaseChk.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="IgnoreCaseChk.Location" type="System.Drawing.Point, System.Drawing">
-    <value>201, 91</value>
-  </data>
-  <data name="IgnoreCaseChk.Size" type="System.Drawing.Size, System.Drawing">
-    <value>82, 17</value>
-  </data>
-  <data name="IgnoreCaseChk.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="IgnoreCaseChk.Text" xml:space="preserve">
-    <value>&amp;Ignore case</value>
-  </data>
-  <data name="IgnoreCaseChk.ToolTip" xml:space="preserve">
-    <value>Whether to ignore case when using the regular expression to locate the part of the path to push to the stack</value>
-  </data>
-  <data name="&gt;&gt;IgnoreCaseChk.Name" xml:space="preserve">
-    <value>IgnoreCaseChk</value>
-  </data>
-  <data name="&gt;&gt;IgnoreCaseChk.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;IgnoreCaseChk.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;IgnoreCaseChk.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="TestRegexBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="TestRegexBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>295, 87</value>
-  </data>
-  <data name="TestRegexBtn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="TestRegexBtn.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="TestRegexBtn.Text" xml:space="preserve">
-    <value>&amp;Test...</value>
-  </data>
-  <data name="TestRegexBtn.ToolTip" xml:space="preserve">
-    <value>Open a dialog and test the regular expression</value>
-  </data>
-  <data name="&gt;&gt;TestRegexBtn.Name" xml:space="preserve">
-    <value>TestRegexBtn</value>
-  </data>
-  <data name="&gt;&gt;TestRegexBtn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TestRegexBtn.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;TestRegexBtn.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="UseGroupLbl1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="UseGroupLbl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 92</value>
-  </data>
-  <data name="UseGroupLbl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 13</value>
-  </data>
-  <data name="UseGroupLbl1.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="UseGroupLbl1.Text" xml:space="preserve">
-    <value>(Use &amp;group</value>
-  </data>
-  <data name="&gt;&gt;UseGroupLbl1.Name" xml:space="preserve">
-    <value>UseGroupLbl1</value>
+  <data name="RangeBeginTxt.MaxLength" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
   <data name="&gt;&gt;UseGroupLbl1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;UseGroupLbl1.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="RegexGroupTxt.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
   </data>
-  <data name="&gt;&gt;UseGroupLbl1.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="RegexTxt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>201, 61</value>
   </data>
-  <data name="RegexGroupTxt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>84, 89</value>
+  <data name="&gt;&gt;RegexRadio.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="RegexGroupTxt.MaxLength" type="System.Int32, mscorlib">
+  <data name="FixedStringRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 17</value>
+  </data>
+  <data name="&gt;&gt;RegexRadio.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="BeginAndEndLbl.Text" xml:space="preserve">
+    <value>and</value>
+  </data>
+  <data name="RangeRadio.ToolTip" xml:space="preserve">
+    <value>Push part of the path to the stack, as defined by a range of characters</value>
+  </data>
+  <data name="IgnoreCaseChk.Text" xml:space="preserve">
+    <value>&amp;Ignore case</value>
+  </data>
+  <data name="PushToStackLbl.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;RegexGroupTxt.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="RegexGroupTxt.Size" type="System.Drawing.Size, System.Drawing">
     <value>27, 20</value>
   </data>
-  <data name="RegexGroupTxt.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="RegexGroupTxt.Text" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="RegexGroupTxt.ToolTip" xml:space="preserve">
-    <value>Which matching group of the regular expression to push to the stack</value>
-  </data>
-  <data name="&gt;&gt;RegexGroupTxt.Name" xml:space="preserve">
-    <value>RegexGroupTxt</value>
-  </data>
-  <data name="&gt;&gt;RegexGroupTxt.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;RegexGroupTxt.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;RegexGroupTxt.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="UseGroupLbl2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="UseGroupLbl2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>117, 92</value>
-  </data>
-  <data name="UseGroupLbl2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>10, 13</value>
-  </data>
-  <data name="UseGroupLbl2.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="UseGroupLbl2.Text" xml:space="preserve">
-    <value>)</value>
-  </data>
-  <data name="&gt;&gt;UseGroupLbl2.Name" xml:space="preserve">
-    <value>UseGroupLbl2</value>
-  </data>
-  <data name="&gt;&gt;UseGroupLbl2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;UseGroupLbl2.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;UseGroupLbl2.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="RangeRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 17</value>
   </data>
-  <data name="FixedStringRadio.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="RegexRadio.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
-  <data name="FixedStringRadio.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 115</value>
+  <data name="IgnoreCaseChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>82, 17</value>
   </data>
-  <data name="FixedStringRadio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 17</value>
+  <data name="UseGroupLbl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 13</value>
   </data>
-  <data name="FixedStringRadio.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="FixedStringRadio.Text" xml:space="preserve">
-    <value>The &amp;value</value>
-  </data>
-  <data name="FixedStringRadio.ToolTip" xml:space="preserve">
-    <value>Push a fixed value to the stack</value>
-  </data>
-  <data name="&gt;&gt;FixedStringRadio.Name" xml:space="preserve">
-    <value>FixedStringRadio</value>
-  </data>
-  <data name="&gt;&gt;FixedStringRadio.Type" xml:space="preserve">
+  <data name="&gt;&gt;EntirePathRadio.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;FixedStringRadio.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;TestRegexBtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="RegexRadio.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="BeginAndEndLbl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>25, 13</value>
+  </data>
+  <data name="&gt;&gt;RegexRadio.Name" xml:space="preserve">
+    <value>RegexRadio</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
   </data>
   <data name="&gt;&gt;FixedStringRadio.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="FixedStringTxt.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="RegexGroupTxt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>84, 89</value>
+  </data>
+  <data name="&gt;&gt;RangeBeginTxt.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="FixedStringTxt.Location" type="System.Drawing.Point, System.Drawing">
     <value>79, 114</value>
   </data>
-  <data name="FixedStringTxt.Size" type="System.Drawing.Size, System.Drawing">
-    <value>291, 20</value>
+  <data name="FixedStringRadio.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 115</value>
   </data>
-  <data name="FixedStringTxt.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+  <data name="&gt;&gt;IgnoreCaseChk.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;UseGroupLbl1.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;UseGroupLbl2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="RangeRadio.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;RangeRadio.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="EntirePathRadio.ToolTip" xml:space="preserve">
+    <value>Push the entire path to  the stack</value>
+  </data>
+  <data name="&gt;&gt;RegexGroupTxt.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;RegexTxt.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="PushToStackLbl.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;EntirePathRadio.Name" xml:space="preserve">
+    <value>EntirePathRadio</value>
+  </data>
+  <data name="EntirePathRadio.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 16</value>
+  </data>
+  <data name="IgnoreCaseChk.ToolTip" xml:space="preserve">
+    <value>Whether to ignore case when using the regular expression to locate the part of the path to push to the stack</value>
+  </data>
+  <data name="TestRegexBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="PushToStackLbl.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="BeginAndEndLbl.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="RegexRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>195, 17</value>
+  </data>
+  <data name="RangeEndTxt.Text" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;RangeEndTxt.Name" xml:space="preserve">
+    <value>RangeEndTxt</value>
   </data>
   <data name="FixedStringTxt.ToolTip" xml:space="preserve">
     <value>Value to push to the stack</value>
   </data>
-  <data name="&gt;&gt;FixedStringTxt.Name" xml:space="preserve">
-    <value>FixedStringTxt</value>
+  <data name="IgnoreCaseChk.Location" type="System.Drawing.Point, System.Drawing">
+    <value>201, 91</value>
+  </data>
+  <data name="TestRegexBtn.ToolTip" xml:space="preserve">
+    <value>Open a dialog and test the regular expression</value>
+  </data>
+  <data name="PushToStackLbl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>155, 13</value>
+  </data>
+  <data name="&gt;&gt;FixedStringRadio.Name" xml:space="preserve">
+    <value>FixedStringRadio</value>
+  </data>
+  <data name="FixedStringTxt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>291, 20</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>PushToStackPipelineElementUserControl</value>
+  </data>
+  <data name="TestRegexBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>295, 87</value>
+  </data>
+  <data name="PushToStackLbl.Text" xml:space="preserve">
+    <value>Push the following to the stack:</value>
+  </data>
+  <data name="&gt;&gt;FixedStringTxt.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;TestRegexBtn.Name" xml:space="preserve">
+    <value>TestRegexBtn</value>
   </data>
   <data name="&gt;&gt;FixedStringTxt.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -552,28 +315,283 @@
   <data name="&gt;&gt;FixedStringTxt.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;FixedStringTxt.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;TestRegexBtn.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="&gt;&gt;RegexRadio.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="RangeEndTxt.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;RegexGroupTxt.Name" xml:space="preserve">
+    <value>RegexGroupTxt</value>
+  </data>
+  <data name="&gt;&gt;RangeBeginTxt.Name" xml:space="preserve">
+    <value>RangeBeginTxt</value>
+  </data>
+  <data name="&gt;&gt;RegexTxt.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="RangeBeginTxt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>222, 38</value>
+  </data>
+  <data name="EntirePathRadio.Text" xml:space="preserve">
+    <value>The &amp;entire path</value>
+  </data>
+  <data name="&gt;&gt;RangeEndTxt.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;BeginAndEndLbl.Name" xml:space="preserve">
+    <value>BeginAndEndLbl</value>
+  </data>
+  <data name="UseGroupLbl2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>117, 92</value>
+  </data>
+  <data name="RangeRadio.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;RangeRadio.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IgnoreCaseChk.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;RangeRadio.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="RangeRadio.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 39</value>
+  </data>
+  <data name="RegexRadio.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 62</value>
+  </data>
+  <data name="&gt;&gt;RangeBeginTxt.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="RangeEndTxt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>27, 20</value>
+  </data>
+  <data name="&gt;&gt;BeginAndEndLbl.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="IgnoreCaseChk.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="RangeBeginTxt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>27, 20</value>
+  </data>
+  <data name="UseGroupLbl2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>10, 13</value>
+  </data>
+  <data name="RangeBeginTxt.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="UseGroupLbl1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
   </data>
-  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>370, 138</value>
+  <data name="&gt;&gt;PushToStackLbl.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;PushToStackToolTip.Name" xml:space="preserve">
-    <value>PushToStackToolTip</value>
+  <data name="&gt;&gt;UseGroupLbl1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="FixedStringRadio.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;PushToStackToolTip.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>PushToStackPipelineElementUserControl</value>
+  <data name="BeginAndEndLbl.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="EntirePathRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 17</value>
+  </data>
+  <data name="RegexTxt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>169, 20</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>370, 138</value>
+  </data>
+  <data name="&gt;&gt;FixedStringRadio.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="UseGroupLbl2.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="TestRegexBtn.Text" xml:space="preserve">
+    <value>&amp;Test...</value>
+  </data>
+  <data name="&gt;&gt;BeginAndEndLbl.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="RangeBeginTxt.ToolTip" xml:space="preserve">
+    <value>Beginning of range to push to the stack</value>
+  </data>
+  <data name="BeginAndEndLbl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>255, 41</value>
+  </data>
+  <data name="IgnoreCaseChk.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="RangeBeginTxt.Text" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="RangeEndTxt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>286, 38</value>
+  </data>
+  <data name="&gt;&gt;RangeEndTxt.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="TestRegexBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="RegexRadio.ToolTip" xml:space="preserve">
+    <value>Push the first match of a regular expression to the stack</value>
+  </data>
+  <data name="&gt;&gt;EntirePathRadio.ZOrder" xml:space="preserve">
+    <value>13</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>PathCopyCopy.Settings.UI.UserControls.PipelineElementUserControl, PathCopyCopySettings, Version=19.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>PathCopyCopy.Settings.UI.UserControls.PipelineElementUserControl, PathCopyCopySettings, Version=20.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
+  <data name="RegexGroupTxt.Text" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;FixedStringRadio.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="IgnoreCaseChk.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="RegexRadio.Text" xml:space="preserve">
+    <value>The first match of &amp;regular expression</value>
+  </data>
+  <data name="RangeEndTxt.ToolTip" xml:space="preserve">
+    <value>End of range to push to the stack</value>
+  </data>
+  <data name="FixedStringRadio.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="FixedStringTxt.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;PushToStackToolTip.Name" xml:space="preserve">
+    <value>PushToStackToolTip</value>
+  </data>
+  <data name="&gt;&gt;UseGroupLbl1.Name" xml:space="preserve">
+    <value>UseGroupLbl1</value>
+  </data>
+  <data name="EntirePathRadio.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;PushToStackLbl.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;UseGroupLbl2.Name" xml:space="preserve">
+    <value>UseGroupLbl2</value>
+  </data>
+  <data name="&gt;&gt;IgnoreCaseChk.Name" xml:space="preserve">
+    <value>IgnoreCaseChk</value>
+  </data>
+  <data name="TestRegexBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="RegexGroupTxt.MaxLength" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="FixedStringTxt.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="UseGroupLbl1.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="RangeEndTxt.MaxLength" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;RegexTxt.Name" xml:space="preserve">
+    <value>RegexTxt</value>
+  </data>
+  <data name="&gt;&gt;RangeBeginTxt.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="FixedStringRadio.ToolTip" xml:space="preserve">
+    <value>Push a fixed value to the stack</value>
+  </data>
+  <data name="&gt;&gt;PushToStackLbl.Name" xml:space="preserve">
+    <value>PushToStackLbl</value>
+  </data>
+  <data name="&gt;&gt;UseGroupLbl2.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;FixedStringTxt.Name" xml:space="preserve">
+    <value>FixedStringTxt</value>
+  </data>
+  <data name="UseGroupLbl1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;TestRegexBtn.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="UseGroupLbl2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="RegexGroupTxt.ToolTip" xml:space="preserve">
+    <value>Which matching group of the regular expression to push to the stack</value>
+  </data>
+  <data name="BeginAndEndLbl.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;IgnoreCaseChk.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;BeginAndEndLbl.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;EntirePathRadio.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="FixedStringRadio.Text" xml:space="preserve">
+    <value>The &amp;value</value>
+  </data>
+  <data name="UseGroupLbl2.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="RegexTxt.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;RangeEndTxt.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;RangeRadio.Name" xml:space="preserve">
+    <value>RangeRadio</value>
+  </data>
+  <data name="RegexTxt.ToolTip" xml:space="preserve">
+    <value>Regular expression to use to locate the part of the path to push to the stack</value>
+  </data>
+  <data name="PushToStackLbl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>-3, 0</value>
+  </data>
+  <data name="&gt;&gt;PushToStackLbl.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;RegexTxt.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="RangeRadio.Text" xml:space="preserve">
+    <value>Everything in the path between &amp;positions</value>
+  </data>
+  <data name="UseGroupLbl1.Text" xml:space="preserve">
+    <value>(Use &amp;group</value>
+  </data>
+  <metadata name="PushToStackToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>

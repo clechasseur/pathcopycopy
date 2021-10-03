@@ -353,6 +353,10 @@
   <data name="RangeEndTxt.ToolTip" xml:space="preserve">
     <value>End of range to replace with the popped value</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="IgnoreCaseChk.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="&gt;&gt;TestRegexBtn.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
@@ -389,7 +393,6 @@
   <data name="&gt;&gt;RangeEndTxt.Name" xml:space="preserve">
     <value>RangeEndTxt</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="RegexTxt.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
@@ -409,7 +412,7 @@
     <value>Insert the popped value at the end of the path</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>PathCopyCopy.Settings.UI.UserControls.PipelineElementUserControl, PathCopyCopySettings, Version=19.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>PathCopyCopy.Settings.UI.UserControls.PipelineElementUserControl, PathCopyCopySettings, Version=20.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="StartRadio.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>

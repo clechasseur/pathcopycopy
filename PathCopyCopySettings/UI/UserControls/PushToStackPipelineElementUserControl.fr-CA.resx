@@ -181,8 +181,20 @@
   <data name="RegexTxt.ToolTip" xml:space="preserve">
     <value>Expression régulière utilisée pour trouver la partie du chemin à empiler</value>
   </data>
+  <data name="IgnoreCaseChk.Location" type="System.Drawing.Point, System.Drawing">
+    <value>182, 91</value>
+  </data>
+  <data name="IgnoreCaseChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 17</value>
+  </data>
+  <data name="IgnoreCaseChk.Text" xml:space="preserve">
+    <value>&amp;Ignorer la casse</value>
+  </data>
   <data name="IgnoreCaseChk.ToolTip" xml:space="preserve">
     <value>Détermine si la casse est importante lors de l'utilisation de l'expression régulière pour trouver la partie du chemin à empiler</value>
+  </data>
+  <data name="TestRegexBtn.Text" xml:space="preserve">
+    <value>&amp;Tester...</value>
   </data>
   <data name="TestRegexBtn.ToolTip" xml:space="preserve">
     <value>Ouvre un dialogue permettant de tester l'expression régulière</value>

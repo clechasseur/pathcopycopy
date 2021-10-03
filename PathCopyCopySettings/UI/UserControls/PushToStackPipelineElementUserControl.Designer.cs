@@ -51,6 +51,7 @@
             // 
             resources.ApplyResources(this.PushToStackLbl, "PushToStackLbl");
             this.PushToStackLbl.Name = "PushToStackLbl";
+            this.PushToStackToolTip.SetToolTip(this.PushToStackLbl, resources.GetString("PushToStackLbl.ToolTip"));
             // 
             // EntirePathRadio
             // 
@@ -84,6 +85,7 @@
             // 
             resources.ApplyResources(this.BeginAndEndLbl, "BeginAndEndLbl");
             this.BeginAndEndLbl.Name = "BeginAndEndLbl";
+            this.PushToStackToolTip.SetToolTip(this.BeginAndEndLbl, resources.GetString("BeginAndEndLbl.ToolTip"));
             // 
             // RangeEndTxt
             // 
@@ -130,6 +132,7 @@
             // 
             resources.ApplyResources(this.UseGroupLbl1, "UseGroupLbl1");
             this.UseGroupLbl1.Name = "UseGroupLbl1";
+            this.PushToStackToolTip.SetToolTip(this.UseGroupLbl1, resources.GetString("UseGroupLbl1.ToolTip"));
             // 
             // RegexGroupTxt
             // 
@@ -143,6 +146,7 @@
             // 
             resources.ApplyResources(this.UseGroupLbl2, "UseGroupLbl2");
             this.UseGroupLbl2.Name = "UseGroupLbl2";
+            this.PushToStackToolTip.SetToolTip(this.UseGroupLbl2, resources.GetString("UseGroupLbl2.ToolTip"));
             // 
             // FixedStringRadio
             // 
@@ -180,6 +184,7 @@
             this.Controls.Add(this.EntirePathRadio);
             this.Controls.Add(this.PushToStackLbl);
             this.Name = "PushToStackPipelineElementUserControl";
+            this.PushToStackToolTip.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.ResumeLayout(false);
             this.PerformLayout();
 
