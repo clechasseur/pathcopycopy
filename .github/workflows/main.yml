@@ -11,7 +11,7 @@ jobs:
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v1
       with:
-        languages: [ cpp, csharp ]
+        languages: cpp
     - name: Cache NuGet packages
       uses: actions/cache@v2
       with:
