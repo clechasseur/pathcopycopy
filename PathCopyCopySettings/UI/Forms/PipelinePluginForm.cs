@@ -309,7 +309,7 @@ namespace PathCopyCopy.Settings.UI.Forms
             if (RemoveExtChk.Checked) {
                 pipeline.Elements.Add(new RemoveExtPipelineElement());
             }
-            if (OptionalQuotesChk.Checked) {
+            if (OptionalQuotesChk.Checked && QuotesChk.Checked) {
                 pipeline.Elements.Add(new OptionalQuotesPipelineElement());
             } else if (QuotesChk.Checked) {
                 pipeline.Elements.Add(new QuotesPipelineElement());

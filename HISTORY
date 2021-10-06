@@ -1,3 +1,8 @@
+Version ??.? (20??-??-??)
+-------------------------
+- Selecting optional quotes without selecting quotes itself will no longer incorrectly add optional quotes
+
+
 Version 20.0 (2021-08-28)
 -------------------------
 - Now requires Windows 7 SP1 at a minimum
