@@ -174,6 +174,8 @@ Type: files; Name: {app}\Path Copy Copy on CodePlex.url
 Filename: {sys}\regsvr32.exe; Parameters: "{code:Regsvr32InstallParameters} ""{app}\PCC32.dll"""; WorkingDir: {app}; StatusMsg: {code:GetStatusRegisterFiles}; Flags: runhidden 32bit; Check: FileExists(ExpandConstant('{app}\PCC32.dll'))
 Filename: {sys}\regsvr32.exe; Parameters: "{code:Regsvr32InstallParameters} ""{app}\PCC64.dll"""; WorkingDir: {app}; StatusMsg: {code:GetStatusRegisterFiles}; Flags: runhidden 64bit; Check: Is64BitInstallMode and FileExists(ExpandConstant('{app}\PCC64.dll'))
 Filename: {tmp}\NETFramework48.exe; StatusMsg: {cm:InstallNetFramework48}; Flags: skipifsilent; Check: ShouldInstallNetFramework
+Filename: {app}\PathCopyCopyHotkeyHandler32.exe; Flags: uninsdeletevalue; Check: (not Is64BitInstallMode) and IsAdminInstallMode
+Filename: {app}\PathCopyCopyHotkeyHandler64.exe; Flags: uninsdeletevalue; Check: Is64BitInstallMode
 
 [UninstallRun]
 Filename: {sys}\regsvr32.exe; Parameters: "{code:Regsvr32InstallParameters|/u} ""{app}\PCC32.dll"""; WorkingDir: {app}; RunOnceId: UnregisterPCC32; Flags: runhidden 32bit; Check: FileExists(ExpandConstant('{app}\PCC32.dll'))

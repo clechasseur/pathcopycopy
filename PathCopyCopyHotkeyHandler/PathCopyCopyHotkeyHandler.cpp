@@ -116,7 +116,6 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
         return FALSE;
     }
 
-    ShowWindow(hWnd, nCmdShow);
     UpdateWindow(hWnd);
 
     return TRUE;
@@ -134,8 +133,10 @@ void SelectedPathToClipboard(HWND hWnd) {
     g_szPath[0] = TEXT('\0');
     g_szItem[0] = TEXT('\0');
     IShellWindows* psw;
-    if (SUCCEEDED(CoCreateInstance(CLSID_ShellWindows, NULL, CLSCTX_ALL,
-        IID_IShellWindows, (void**)&psw))) {
+    CoInitialize(NULL);
+    HRESULT result = CoCreateInstance(CLSID_ShellWindows, NULL, CLSCTX_ALL,
+        IID_IShellWindows, (void**)&psw);
+    if (SUCCEEDED(result)) {
         VARIANT v;
         V_VT(&v) = VT_I4;
         IDispatch* pdisp;
@@ -175,7 +176,7 @@ void SelectedPathToClipboard(HWND hWnd) {
                                                         (void**)&psf))) {
                                                         STRRET str;
                                                         if (SUCCEEDED(psf->GetDisplayNameOf(pidlItem,
-                                                            SHGDN_INFOLDER,
+                                                            SHGDN_INFOLDER | SHGDN_FORPARSING,
                                                             &str))) {
                                                             StrRetToBuf(&str, pidlItem, g_szItem, MAX_PATH);
                                                             StringCchPrintf(g_combined, sizeof(g_combined), g_formatString, g_szPath, g_szItem);
