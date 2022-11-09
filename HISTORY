@@ -1,6 +1,7 @@
 Version ??.? (20??-??-??)
 -------------------------
 - Selecting optional quotes without selecting quotes itself will no longer incorrectly add optional quotes
+- Selecting a separator in the Expert Mode Custom Command dialog's drop-down menu will no longer cause an exception
 
 
 Version 20.0 (2021-08-28)

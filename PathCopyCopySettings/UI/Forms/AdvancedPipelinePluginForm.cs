@@ -399,7 +399,7 @@ namespace PathCopyCopy.Settings.UI.Forms
         private void NewElementMenuItem_Click(object sender, EventArgs e)
         {
             // A function to create the new element is stored in the item's Tag.
-            if (((ToolStripMenuItem) sender).Tag is Func<PipelineElement> creator) {
+            if (((ToolStripItem) sender).Tag is Func<PipelineElement> creator) {
                 // Instanciate element and add it to the end of the pipeline.
                 elements.Add(creator());
 
