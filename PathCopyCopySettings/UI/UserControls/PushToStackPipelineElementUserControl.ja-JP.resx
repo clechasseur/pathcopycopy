@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="PushToStackLbl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 13</value>
+  </data>
+  <data name="PushToStackLbl.Text" xml:space="preserve">
+    <value>プッシュ:</value>
+  </data>
+  <data name="EntirePathRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>118, 17</value>
+  </data>
+  <data name="EntirePathRadio.Text" xml:space="preserve">
+    <value>パス全体(&E)</value>
+  </data>
+  <data name="EntirePathRadio.ToolTip" xml:space="preserve">
+    <value>完全なパスをプッシュします</value>
+  </data>
+  <data name="RangeRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>218, 17</value>
+  </data>
+  <data name="RangeRadio.Text" xml:space="preserve">
+    <value>位置の範囲でパスの内容(&P)</value>
+  </data>
+  <data name="RangeRadio.ToolTip" xml:space="preserve">
+    <value>範囲で定義されたパスの一部をプッシュします</value>
+  </data>
+  <data name="RangeBeginTxt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>224, 38</value>
+  </data>
+  <data name="RangeBeginTxt.ToolTip" xml:space="preserve">
+    <value>プッシュする範囲の開始位置</value>
+  </data>
+  <data name="BeginAndEndLbl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>257, 41</value>
+  </data>
+  <data name="BeginAndEndLbl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 13</value>
+  </data>
+  <data name="BeginAndEndLbl.Text" xml:space="preserve">
+    <value>～</value>
+  </data>
+  <data name="RangeEndTxt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>279, 38</value>
+  </data>
+  <data name="RangeEndTxt.ToolTip" xml:space="preserve">
+    <value>プッシュする範囲の終了位置</value>
+  </data>
+  <data name="RegexRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>192, 17</value>
+  </data>
+  <data name="RegexRadio.Text" xml:space="preserve">
+    <value>正規表現が見つけたもの(&R)</value>
+  </data>
+  <data name="RegexRadio.ToolTip" xml:space="preserve">
+    <value>正規表現で見つかったものをプッシュします</value>
+  </data>
+  <data name="RegexTxt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>198, 61</value>
+  </data>
+  <data name="RegexTxt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>172, 20</value>
+  </data>
+  <data name="RegexTxt.ToolTip" xml:space="preserve">
+    <value>プッシュするパスの部分を見つけるために使用する正規表現</value>
+  </data>
+  <data name="IgnoreCaseChk.ToolTip" xml:space="preserve">
+    <value>正規表現を使用してプッシュするパスの部分を見つける際に、大文字小文字を区別するかを指定します</value>
+  </data>
+  <data name="TestRegexBtn.ToolTip" xml:space="preserve">
+    <value>正規表現をテストするダイアログを開きます</value>
+  </data>
+  <data name="UseGroupLbl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 13</value>
+  </data>
+  <data name="UseGroupLbl1.Text" xml:space="preserve">
+    <value>(グループを使用(&G)</value>
+  </data>
+  <data name="RegexGroupTxt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>113, 89</value>
+  </data>
+  <data name="RegexGroupTxt.ToolTip" xml:space="preserve">
+    <value>プッシュする正規表現で見つかったグループ</value>
+  </data>
+  <data name="UseGroupLbl2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>146, 92</value>
+  </data>
+  <data name="FixedStringRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>69, 17</value>
+  </data>
+  <data name="FixedStringRadio.Text" xml:space="preserve">
+    <value>値(&V)</value>
+  </data>
+  <data name="FixedStringRadio.ToolTip" xml:space="preserve">
+    <value>固定値をプッシュします</value>
+  </data>
+  <data name="FixedStringTxt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>75, 114</value>
+  </data>
+  <data name="FixedStringTxt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>295, 20</value>
+  </data>
+  <data name="FixedStringTxt.ToolTip" xml:space="preserve">
+    <value>プッシュする値</value>
+  </data>
+</root>
