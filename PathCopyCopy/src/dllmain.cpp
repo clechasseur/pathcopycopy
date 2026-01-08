@@ -44,6 +44,7 @@ EXTERN_C IMAGE_DOS_HEADER __ImageBase;
 //
 // Constructor.
 //
+[[gsl::suppress(f.6)]]
 CPathCopyCopyModule::CPathCopyCopyModule()
     : ATL::CAtlDllModuleT<CPathCopyCopyModule>()
 {

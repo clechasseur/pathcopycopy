@@ -177,6 +177,7 @@ namespace PCC
             }
             case ELEMENT_CODE_DUPLICATE_STACK_VALUE: {
                 spElement = std::make_shared<DuplicateStackValuePipelineElement>();
+                // FIXME: there should be a `break` here!
             }
             case ELEMENT_CODE_PATHS_SEPARATOR: {
                 spElement = DecodePathsSeparatorElement(p_rStream);
@@ -319,8 +320,8 @@ namespace PCC
             }
             case PushToStackMethod::Range: {
                 // Encoded stream contains begin and end of range.
-                const auto begin = static_cast<size_t>(p_rStream.ReadLong());
-                const auto end = static_cast<size_t>(p_rStream.ReadLong());
+                const auto begin = gsl::narrow_cast<size_t>(p_rStream.ReadLong());
+                const auto end = gsl::narrow_cast<size_t>(p_rStream.ReadLong());
                 spElement = std::make_shared<PushToStackPipelineElement>(begin, end);
                 break;
             }
@@ -328,7 +329,7 @@ namespace PCC
                 // Encoded stream contains the regex, ignore case flag and group number.
                 const auto regex = p_rStream.ReadString();
                 const auto ignoreCase = p_rStream.ReadBool();
-                const auto group = static_cast<size_t>(p_rStream.ReadLong());
+                const auto group = gsl::narrow_cast<size_t>(p_rStream.ReadLong());
                 spElement = std::make_shared<PushToStackPipelineElement>(regex, ignoreCase, group);
                 break;
             }

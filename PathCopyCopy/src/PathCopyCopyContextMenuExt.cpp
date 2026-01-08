@@ -47,9 +47,9 @@
 
 namespace {
 
-const wchar_t* const DEFAULT_PATHS_SEPARATOR = L"\r\n"; // Default separator used between paths when copying multiple file names.
+const wchar_t* const    DEFAULT_PATHS_SEPARATOR = L"\r\n";  // Default separator used between paths when copying multiple file names.
 
-const int32_t DEFAULT_ICON_SIZE = 16;                   // Default width & height for loaded icons.
+constexpr int32_t       DEFAULT_ICON_SIZE = 16;             // Default width & height for loaded icons.
 
 }
 
@@ -243,7 +243,7 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::Initialize(
                     // Get each file in turn.
                     for (UINT i = 0; i < fileCount; ++i) {
                         const auto bufferSize = ::DragQueryFileW(static_cast<HDROP>(stgMedium.Get().hGlobal), i, nullptr, 0);
-                        std::wstring buffer(bufferSize + 1, L'\0');
+                        std::wstring buffer(static_cast<std::wstring::size_type>(bufferSize) + 1, L'\0');
                         ::DragQueryFileW(static_cast<HDROP>(stgMedium.Get().hGlobal), i, &*buffer.begin(), gsl::narrow<UINT>(buffer.size()));
                         m_vFiles.emplace_back(buffer.c_str());
                     }
@@ -411,7 +411,7 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::QueryContextMenu(
                     try {
                         // Fetch list of plugins to display in the submenu.
                         PCC::PluginSPV vspPlugins;
-                        const PCC::PluginSPV* pvspPlugins = nullptr;
+                        gsl::not_null<const PCC::PluginSPV*> pvspPlugins{&m_vspPluginsInDefaultOrder};
                         vPluginIds.clear();
                         rSettings.GetSubmenuPluginDisplayOrder(vPluginIds);
                         if (!vPluginIds.empty()) {
@@ -420,7 +420,6 @@ STDMETHODIMP CPathCopyCopyContextMenuExt::QueryContextMenu(
                             pvspPlugins = &vspPlugins;
                         } else {
                             // No plugin specified, use all plugins in default order.
-                            pvspPlugins = &m_vspPluginsInDefaultOrder;
                         }
 
                         // Iterate plugins and try to add them to the submenu.
@@ -830,13 +829,13 @@ HRESULT CPathCopyCopyContextMenuExt::AddPluginToMenu(const PCC::PluginSP& p_spPl
 
                     // In some language, this will leave the first letter in lowercase.
                     // Convert it to uppercase in that case.
-                    if (!description.empty() && ::iswlower(description[0])) {
-                        description[0] = ::towupper(description[0]);
+                    if (!description.empty() && ::iswlower(description.front())) {
+                        description.front() = ::towupper(description.front());
                     }
 
                     // ...or maybe the first letter is the shortcut character...
-                    if (description.size() >= 2 && description[0] == L'&' && ::iswlower(description[1])) {
-                        description[1] = ::towupper(description[1]);
+                    if (description.size() >= 2 && description.at(0) == L'&' && ::iswlower(description.at(1))) {
+                        description.at(1) = ::towupper(description.at(1));
                     }
                 }
             }
@@ -1030,24 +1029,23 @@ HBITMAP CPathCopyCopyContextMenuExt::GetIconForIconFile(const std::wstring& p_Ic
                 StGdiplusStartup gdiPlusStartup;
                 if (gdiPlusStartup.Started()) {
                     // Load original bitmap using GDI+.
-                    std::shared_ptr<Gdiplus::Bitmap> spFileBitmap(Gdiplus::Bitmap::FromStream(cpIconFileStream, FALSE));
+                    std::unique_ptr<Gdiplus::Bitmap> upFileBitmap{Gdiplus::Bitmap::FromStream(cpIconFileStream, FALSE)};
 
                     // If necessary, rescale bitmap to fit.
-                    auto spTempBitmap = std::make_shared<Gdiplus::Bitmap>(DEFAULT_ICON_SIZE, DEFAULT_ICON_SIZE);
+                    Gdiplus::Bitmap bitmap{DEFAULT_ICON_SIZE, DEFAULT_ICON_SIZE};
                     {
-                        Gdiplus::Graphics graphics(spTempBitmap.get());
-                        graphics.ScaleTransform(static_cast<Gdiplus::REAL>(DEFAULT_ICON_SIZE) / static_cast<Gdiplus::REAL>(spFileBitmap->GetWidth()),
-                                                static_cast<Gdiplus::REAL>(DEFAULT_ICON_SIZE) / static_cast<Gdiplus::REAL>(spFileBitmap->GetHeight()));
-                        graphics.DrawImage(spFileBitmap.get(), 0, 0);
+                        Gdiplus::Graphics graphics{&bitmap};
+                        graphics.ScaleTransform(static_cast<Gdiplus::REAL>(DEFAULT_ICON_SIZE) / static_cast<Gdiplus::REAL>(upFileBitmap->GetWidth()),
+                                                static_cast<Gdiplus::REAL>(DEFAULT_ICON_SIZE) / static_cast<Gdiplus::REAL>(upFileBitmap->GetHeight()));
+                        graphics.DrawImage(upFileBitmap.get(), 0, 0);
                     }
-                    spFileBitmap = spTempBitmap;
 
                     // Extract HBITMAP using GDI+.
-                    HBITMAP hFileBitmap = nullptr;
-                    if (spFileBitmap->GetHBITMAP(Gdiplus::Color(), &hFileBitmap) == Gdiplus::Ok) {
+                    HBITMAP hBitmap = nullptr;
+                    if (bitmap.GetHBITMAP(Gdiplus::Color(), &hBitmap) == Gdiplus::Ok) {
                         // We have HBITMAP, save it in the map.
 #pragma warning(suppress: 26414) // spImage IS copied in emplace, but the compiler can't see it
-                        const auto spImage = std::make_shared<StImage>(hFileBitmap, IMAGE_BITMAP, false);
+                        const auto spImage = std::make_shared<StImage>(hBitmap, IMAGE_BITMAP, false);
                         m_mspIcons.emplace(lowerIconFile, spImage);
                         if (spImage->GetLoadResult() == ERROR_SUCCESS) {
                             hIconBitmap = spImage->GetBitmap();
@@ -1178,7 +1176,7 @@ PCC::FilesV CPathCopyCopyContextMenuExt::GetFilesToActOn(const bool p_Recursivel
             PCC::FilesV vFilesToScan;
             vFilesToScan.swap(vNewFiles);
             for (const auto& fileToScan : vFilesToScan) {
-                auto attributes = ::GetFileAttributesW(fileToScan.c_str());
+                const auto attributes = ::GetFileAttributesW(fileToScan.c_str());
                 if (attributes != INVALID_FILE_ATTRIBUTES && (attributes & FILE_ATTRIBUTE_DIRECTORY) != 0) {
                     WIN32_FIND_DATAW findData;
                     HANDLE hFind = ::FindFirstFileW((fileToScan + L"\\*").c_str(), &findData);

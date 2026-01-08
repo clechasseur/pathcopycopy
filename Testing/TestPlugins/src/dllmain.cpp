@@ -42,104 +42,112 @@ CTestPluginsModule _AtlModule;
 [[gsl::suppress(c.128)]]
 HRESULT CTestPluginsModule::DllRegisterServer(BOOL bRegTypeLib /*= TRUE*/) throw()
 {
-    // Create PathCopyCopy registration object and check if it supports per-user install.
-    ATL::CComPtr<IPathCopyCopyContextMenuExt> cpPccExt;
-    HRESULT hRes = cpPccExt.CoCreateInstance(__uuidof(PathCopyCopyContextMenuExt));
-    if (SUCCEEDED(hRes)) {
-        ATL::CComQIPtr<IPathCopyCopyContextMenuExt2> cpPccExt2(cpPccExt);
-
-        // Setup per-user registration. If user asked for a per-user install
-        // but the registration object does not support it, fail.
-        StAtlPerUserOverride perUserOverride;
-        hRes = perUserOverride.Succeeded() ? S_OK : E_FAIL;
-        if (SUCCEEDED(hRes) && perUserOverride.Overridden() && cpPccExt2.p == nullptr) {
-            hRes = E_NOTIMPL;
-        }
+    try {
+        // Create PathCopyCopy registration object and check if it supports per-user install.
+        ATL::CComPtr<IPathCopyCopyContextMenuExt> cpPccExt;
+        HRESULT hRes = cpPccExt.CoCreateInstance(__uuidof(PathCopyCopyContextMenuExt));
         if (SUCCEEDED(hRes)) {
-            // First perform DLL registration.
-            hRes = ATL::CAtlDllModuleT<CTestPluginsModule>::DllRegisterServer(bRegTypeLib);
+            ATL::CComQIPtr<IPathCopyCopyContextMenuExt2> cpPccExt2(cpPccExt);
+
+            // Check for per-user registration. If user asked for a per-user install
+            // but the registration object does not support it, fail.
+            bool perUserRegistration = false;
+            hRes = ATL::AtlGetPerUserRegistration(&perUserRegistration);
+            if (SUCCEEDED(hRes) && perUserRegistration && cpPccExt2.p == nullptr) {
+                hRes = E_NOTIMPL;
+            }
             if (SUCCEEDED(hRes)) {
-                // Perform per-user registration if available, otherwise fall back to
-                // the default interface. We'll have verified that this is OK before.
-                if (cpPccExt2.p != nullptr) {
-                    const VARIANT_BOOL varPerUser = perUserOverride.Overridden() ? VARIANT_TRUE : VARIANT_FALSE;
-                    const auto registerPlugin = [&](REFCLSID p_CLSID) {
-                        if (SUCCEEDED(hRes)) {
-                            hRes = cpPccExt2->RegisterPlugin2(p_CLSID, varPerUser);
-                        }
-                    };
-                    registerPlugin(__uuidof(PathCopyCopyPlugin1a));
-                    registerPlugin(__uuidof(PathCopyCopyPlugin1b));
-                    registerPlugin(__uuidof(PathCopyCopyPlugin2a));
-                    registerPlugin(__uuidof(PathCopyCopyPlugin2b));
-                } else {
-                    const auto registerPlugin = [&](REFCLSID p_CLSID) {
-                        if (SUCCEEDED(hRes)) {
-                            hRes = cpPccExt->RegisterPlugin(p_CLSID);
-                        }
-                    };
-                    registerPlugin(__uuidof(PathCopyCopyPlugin1a));
-                    registerPlugin(__uuidof(PathCopyCopyPlugin1b));
-                    registerPlugin(__uuidof(PathCopyCopyPlugin2a));
-                    registerPlugin(__uuidof(PathCopyCopyPlugin2b));
+                // First perform DLL registration.
+                hRes = ATL::CAtlDllModuleT<CTestPluginsModule>::DllRegisterServer(bRegTypeLib);
+                if (SUCCEEDED(hRes)) {
+                    // Perform per-user registration if available, otherwise fall back to
+                    // the default interface. We'll have verified that this is OK before.
+                    if (cpPccExt2.p != nullptr) {
+                        const VARIANT_BOOL varPerUser = perUserRegistration ? VARIANT_TRUE : VARIANT_FALSE;
+                        const auto registerPlugin = [&](REFCLSID p_CLSID) {
+                            if (SUCCEEDED(hRes)) {
+                                hRes = cpPccExt2->RegisterPlugin2(p_CLSID, varPerUser);
+                            }
+                        };
+                        registerPlugin(__uuidof(PathCopyCopyPlugin1a));
+                        registerPlugin(__uuidof(PathCopyCopyPlugin1b));
+                        registerPlugin(__uuidof(PathCopyCopyPlugin2a));
+                        registerPlugin(__uuidof(PathCopyCopyPlugin2b));
+                    } else {
+                        const auto registerPlugin = [&](REFCLSID p_CLSID) {
+                            if (SUCCEEDED(hRes)) {
+                                hRes = cpPccExt->RegisterPlugin(p_CLSID);
+                            }
+                        };
+                        registerPlugin(__uuidof(PathCopyCopyPlugin1a));
+                        registerPlugin(__uuidof(PathCopyCopyPlugin1b));
+                        registerPlugin(__uuidof(PathCopyCopyPlugin2a));
+                        registerPlugin(__uuidof(PathCopyCopyPlugin2b));
+                    }
                 }
             }
         }
+        return hRes;
+    } catch (...) {
+        return E_UNEXPECTED;
     }
-    return hRes;
 }
 
 // Unregisters our COM object. We will also remove our plugins from Path Copy Copy.
 [[gsl::suppress(c.128)]]
 HRESULT CTestPluginsModule::DllUnregisterServer(BOOL bUnRegTypeLib /*= TRUE*/) throw()
 {
-    // Setup per-user unregistration.
-    StAtlPerUserOverride perUserOverride;
-    HRESULT hRes = perUserOverride.Succeeded() ? S_OK : E_FAIL;
-    if (SUCCEEDED(hRes)) {
-        // First perform DLL unregistration.
-        hRes = ATL::CAtlDllModuleT<CTestPluginsModule>::DllUnregisterServer(bUnRegTypeLib);
+    try {
+        // Setup per-user unregistration.
+        bool perUserRegistration = false;
+        HRESULT hRes = ATL::AtlGetPerUserRegistration(&perUserRegistration);
         if (SUCCEEDED(hRes)) {
-            // Create PathCopyCopy registration object and check if it supports per-user uninstall.
-            ATL::CComPtr<IPathCopyCopyContextMenuExt> cpPccExt;
-            hRes = cpPccExt.CoCreateInstance(__uuidof(PathCopyCopyContextMenuExt));
+            // First perform DLL unregistration.
+            hRes = ATL::CAtlDllModuleT<CTestPluginsModule>::DllUnregisterServer(bUnRegTypeLib);
             if (SUCCEEDED(hRes)) {
-                ATL::CComQIPtr<IPathCopyCopyContextMenuExt2> cpPccExt2(cpPccExt);
+                // Create PathCopyCopy registration object and check if it supports per-user uninstall.
+                ATL::CComPtr<IPathCopyCopyContextMenuExt> cpPccExt;
+                hRes = cpPccExt.CoCreateInstance(__uuidof(PathCopyCopyContextMenuExt));
+                if (SUCCEEDED(hRes)) {
+                    ATL::CComQIPtr<IPathCopyCopyContextMenuExt2> cpPccExt2(cpPccExt);
 
-                // If user asked for a per-user uninstall but the registration
-                // object does not support it, fail.
-                if (SUCCEEDED(hRes) && perUserOverride.Overridden() && cpPccExt2.p == nullptr) {
-                    hRes = E_NOTIMPL;
-                } else {
-                    // Perform per-user unregistration if available, otherwise fall back to
-                    // the default interface. We'll have verified that this is OK before.
-                    if (cpPccExt2.p != nullptr) {
-                        const VARIANT_BOOL varPerUser = perUserOverride.Overridden() ? VARIANT_TRUE : VARIANT_FALSE;
-                        const auto unregisterPlugin = [&](REFCLSID p_CLSID) {
-                            if (SUCCEEDED(hRes)) {
-                                hRes = cpPccExt2->UnregisterPlugin2(p_CLSID, varPerUser);
-                            }
-                        };
-                        unregisterPlugin(__uuidof(PathCopyCopyPlugin1a));
-                        unregisterPlugin(__uuidof(PathCopyCopyPlugin1b));
-                        unregisterPlugin(__uuidof(PathCopyCopyPlugin2a));
-                        unregisterPlugin(__uuidof(PathCopyCopyPlugin2b));
+                    // If user asked for a per-user uninstall but the registration
+                    // object does not support it, fail.
+                    if (SUCCEEDED(hRes) && perUserRegistration && cpPccExt2.p == nullptr) {
+                        hRes = E_NOTIMPL;
                     } else {
-                        const auto unregisterPlugin = [&](REFCLSID p_CLSID) {
-                            if (SUCCEEDED(hRes)) {
-                                hRes = cpPccExt->UnregisterPlugin(p_CLSID);
-                            }
-                        };
-                        unregisterPlugin(__uuidof(PathCopyCopyPlugin1a));
-                        unregisterPlugin(__uuidof(PathCopyCopyPlugin1b));
-                        unregisterPlugin(__uuidof(PathCopyCopyPlugin2a));
-                        unregisterPlugin(__uuidof(PathCopyCopyPlugin2b));
+                        // Perform per-user unregistration if available, otherwise fall back to
+                        // the default interface. We'll have verified that this is OK before.
+                        if (cpPccExt2.p != nullptr) {
+                            const VARIANT_BOOL varPerUser = perUserRegistration ? VARIANT_TRUE : VARIANT_FALSE;
+                            const auto unregisterPlugin = [&](REFCLSID p_CLSID) {
+                                if (SUCCEEDED(hRes)) {
+                                    hRes = cpPccExt2->UnregisterPlugin2(p_CLSID, varPerUser);
+                                }
+                            };
+                            unregisterPlugin(__uuidof(PathCopyCopyPlugin1a));
+                            unregisterPlugin(__uuidof(PathCopyCopyPlugin1b));
+                            unregisterPlugin(__uuidof(PathCopyCopyPlugin2a));
+                            unregisterPlugin(__uuidof(PathCopyCopyPlugin2b));
+                        } else {
+                            const auto unregisterPlugin = [&](REFCLSID p_CLSID) {
+                                if (SUCCEEDED(hRes)) {
+                                    hRes = cpPccExt->UnregisterPlugin(p_CLSID);
+                                }
+                            };
+                            unregisterPlugin(__uuidof(PathCopyCopyPlugin1a));
+                            unregisterPlugin(__uuidof(PathCopyCopyPlugin1b));
+                            unregisterPlugin(__uuidof(PathCopyCopyPlugin2a));
+                            unregisterPlugin(__uuidof(PathCopyCopyPlugin2b));
+                        }
                     }
                 }
             }
         }
+        return hRes;
+    } catch (...) {
+        return E_UNEXPECTED;
     }
-    return hRes;
 }
 
 // Returns the instance handle passed to our module's DllMain.

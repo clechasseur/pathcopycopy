@@ -37,6 +37,10 @@ public :
     DECLARE_REGISTRY_APPID_RESOURCEID(IDR_PATHCOPYCOPY, "{44F7E5A2-1286-45F5-9A7A-A95A41B72918}")
 
                         CPathCopyCopyModule();
+                        CPathCopyCopyModule(const CPathCopyCopyModule&) = delete;
+                        CPathCopyCopyModule(CPathCopyCopyModule&&) = delete;
+    CPathCopyCopyModule& operator=(const CPathCopyCopyModule&) = delete;
+    CPathCopyCopyModule& operator=(CPathCopyCopyModule&&) = delete;
                         ~CPathCopyCopyModule();
 
     HRESULT             DllRegisterServer(BOOL p_RegisterTypeLib = TRUE) throw();

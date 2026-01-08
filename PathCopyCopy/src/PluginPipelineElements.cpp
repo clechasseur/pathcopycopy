@@ -336,7 +336,7 @@ namespace PCC
     // @param p_First Whether to copy the first (true) or last (false) path parts.
     //
     CopyNPathPartsPipelineElement::CopyNPathPartsPipelineElement(const size_t p_NumParts,
-                                                                 const bool p_First)
+                                                                 const bool p_First) noexcept
         : m_NumParts(p_NumParts),
           m_First(p_First)
     {
@@ -358,7 +358,7 @@ namespace PCC
         if (m_NumParts < vPathParts.size()) {
             // Try auto-detecting the separator type used in this path.
             const auto separatorPos = p_rPath.find_first_of(L"\\/");
-            const auto separator = separatorPos != std::wstring::npos ? p_rPath[separatorPos] : L'\\';
+            const auto separator = separatorPos != std::wstring::npos ? p_rPath.at(separatorPos) : L'\\';
 
             // Keep only the required number of path parts and join them using separator.
             if (m_First) {
@@ -493,7 +493,7 @@ namespace PCC
     // Default constructor. The element will push the entire path
     // to the stack.
     //
-    PushToStackPipelineElement::PushToStackPipelineElement()
+    PushToStackPipelineElement::PushToStackPipelineElement() noexcept
         : m_Method(PushToStackMethod::Entire)
     {
     }
@@ -506,7 +506,7 @@ namespace PCC
     // @param p_End Index of end of range to push to the stack (exclusive).
     //
     PushToStackPipelineElement::PushToStackPipelineElement(const size_t p_Begin,
-                                                           const size_t p_End)
+                                                           const size_t p_End) noexcept
         : m_Method(PushToStackMethod::Range),
           m_Begin(p_Begin),
           m_End(p_End)
@@ -594,7 +594,11 @@ namespace PCC
 
                         std::wsmatch match;
                         if (std::regex_search(p_Path, match, regex)) {
-                            part = match[m_Group];
+                            // Note: here, gsl::at() should not be necessary because
+                            // std::match_results::operator[] is actually safe (it returns
+                            // a reference to an empty sub-match if the index is out of range).
+                            // However, C++ Code Analysis doesn't seem to know this.
+                            part = gsl::at(match, m_Group);
                         }
                     }
                 } catch (const std::regex_error&) {
@@ -617,7 +621,7 @@ namespace PCC
     //
     // @param p_Location Location where to store popped value.
     //
-    PopFromStackPipelineElement::PopFromStackPipelineElement(const PopFromStackLocation p_Location)
+    PopFromStackPipelineElement::PopFromStackPipelineElement(const PopFromStackLocation p_Location) noexcept
         : m_Location(p_Location)
     {
     }
@@ -630,7 +634,7 @@ namespace PCC
     // @param p_End End of range to replace with the popped value.
     //
     PopFromStackPipelineElement::PopFromStackPipelineElement(const size_t p_Begin,
-                                                             const size_t p_End)
+                                                             const size_t p_End) noexcept
         : m_Location(PopFromStackLocation::Range),
           m_Begin(p_Begin),
           m_End(p_End)
@@ -803,7 +807,7 @@ namespace PCC
     //
     // @param p_rOptions Global options to modify (in-place).
     //
-    void RecursiveCopyPipelineElement::ModifyOptions(PipelineOptions& p_rOptions) const
+    void RecursiveCopyPipelineElement::ModifyOptions(PipelineOptions& p_rOptions) const noexcept
     {
         p_rOptions.SetCopyPathsRecursively(true);
     }
@@ -902,7 +906,7 @@ namespace PCC
     // @param p_ShowForFolders Whether to display the plugin when folders are selected.
     //
     DisplayForSelectionPipelineElement::DisplayForSelectionPipelineElement(const bool p_ShowForFiles,
-                                                                           const bool p_ShowForFolders)
+                                                                           const bool p_ShowForFolders) noexcept
         : m_ShowForFiles(p_ShowForFiles),
           m_ShowForFolders(p_ShowForFolders)
     {
@@ -914,7 +918,7 @@ namespace PCC
     //
     // @param p_rOptions Global options to modify.
     //
-    void DisplayForSelectionPipelineElement::ModifyOptions(PipelineOptions& p_rOptions) const
+    void DisplayForSelectionPipelineElement::ModifyOptions(PipelineOptions& p_rOptions) const noexcept
     {
         p_rOptions.SetShowForFiles(m_ShowForFiles);
         p_rOptions.SetShowForFolders(m_ShowForFolders);

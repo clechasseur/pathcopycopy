@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28803.202
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PathCopyCopy", "PathCopyCopy\PathCopyCopy.vcxproj", "{AA106D7B-966E-4A98-8EAD-0AE2AE0038D2}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -31,6 +31,13 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PathCopyCopyLocalization_en", "PathCopyCopy\localization\PathCopyCopyLocalization_en\PathCopyCopyLocalization_en.vcxproj", "{04469FC1-4E3F-43CC-B245-1487AB1369CB}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PathCopyCopyLocalization_fr", "PathCopyCopy\localization\PathCopyCopyLocalization_fr\PathCopyCopyLocalization_fr.vcxproj", "{69A53834-5AF9-4B92-B78B-15567FE6DE30}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{B42127A5-4EEF-4EFD-93EB-F3387D71C17F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{FCDBD36A-5A37-41BC-982C-67E8DE995A26}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\main.yml = .github\workflows\main.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -99,6 +106,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B42127A5-4EEF-4EFD-93EB-F3387D71C17F} = {0B4523A6-521E-43F6-BC87-44919C8CA492}
+		{FCDBD36A-5A37-41BC-982C-67E8DE995A26} = {B42127A5-4EEF-4EFD-93EB-F3387D71C17F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {95CB2D2A-C347-4A94-9C44-BDC4A9A76CB1}

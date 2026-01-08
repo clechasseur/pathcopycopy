@@ -24,6 +24,7 @@
 #include "TestPlugins_i.h"
 #include "dllmain.h"
 #include "dlldatax.h"
+#include "StAtlPerUserOverride.h"
 
 // Used to determine whether the DLL can be unloaded by OLE
 STDAPI DllCanUnloadNow(void)
@@ -51,6 +52,12 @@ STDAPI DllGetClassObject(REFCLSID rclsid, REFIID riid, LPVOID* ppv)
 // DllRegisterServer - Adds entries to the system registry
 STDAPI DllRegisterServer(void)
 {
+    // Setup per-user registration if needed.
+    StAtlPerUserOverride perUserOverride;
+    if (!perUserOverride.Succeeded()) {
+        return E_FAIL;
+    }
+
     // registers object, typelib and all interfaces in typelib
     HRESULT hr = _AtlModule.DllRegisterServer();
 #ifdef _MERGE_PROXYSTUB
@@ -65,6 +72,12 @@ STDAPI DllRegisterServer(void)
 // DllUnregisterServer - Removes entries from the system registry
 STDAPI DllUnregisterServer(void)
 {
+    // Setup per-user unregistration if needed.
+    StAtlPerUserOverride perUserOverride;
+    if (!perUserOverride.Succeeded()) {
+        return E_FAIL;
+    }
+
 	HRESULT hr = _AtlModule.DllUnregisterServer();
 #ifdef _MERGE_PROXYSTUB
     if (FAILED(hr))

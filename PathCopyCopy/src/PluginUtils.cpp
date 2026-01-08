@@ -171,7 +171,7 @@ namespace PCC
             if (hFile != nullptr) {
                 const auto bufferSize = ::GetFinalPathNameByHandleW(hFile, nullptr, 0, FILE_NAME_NORMALIZED | VOLUME_NAME_DOS);
                 if (bufferSize != 0) {
-                    std::wstring finalPath(bufferSize + 1, L'\0');
+                    std::wstring finalPath(static_cast<std::wstring::size_type>(bufferSize) + 1, L'\0');
                     const auto finalPathRes = ::GetFinalPathNameByHandleW(hFile,
                                                                           &*finalPath.begin(),
                                                                           bufferSize + 1,

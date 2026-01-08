@@ -119,8 +119,8 @@ namespace PathCopyCopy.Settings.UI.Forms
             // Connect all checkboxes in the Options page to the CheckChanged event handler that
             // will enable the Apply button.
             foreach (Control control in MiscOptionsPage.Controls) {
-                if (control is CheckBox) {
-                    (control as CheckBox).CheckedChanged += Chk_CheckedChanged;
+                if (control is CheckBox checkBox) {
+                    checkBox.CheckedChanged += Chk_CheckedChanged;
                 }
             }
 

@@ -327,7 +327,7 @@ namespace PCC
     {
     public:
                         CopyNPathPartsPipelineElement(size_t p_NumParts,
-                                                      bool p_First);
+                                                      bool p_First) noexcept;
                         CopyNPathPartsPipelineElement(const CopyNPathPartsPipelineElement&) = delete;
         CopyNPathPartsPipelineElement&
                         operator=(const CopyNPathPartsPipelineElement&) = delete;
@@ -395,9 +395,9 @@ namespace PCC
     class PushToStackPipelineElement : public PipelineElement
     {
     public:
-                        PushToStackPipelineElement();
+                        PushToStackPipelineElement() noexcept;
                         PushToStackPipelineElement(size_t p_Begin,
-                                                   size_t p_End);
+                                                   size_t p_End) noexcept;
                         PushToStackPipelineElement(const std::wstring& p_Regex,
                                                    bool p_IgnoreCase,
                                                    size_t p_Group);
@@ -437,9 +437,9 @@ namespace PCC
     class PopFromStackPipelineElement : public PipelineElement
     {
     public:
-        explicit        PopFromStackPipelineElement(PopFromStackLocation p_Location);
+        explicit        PopFromStackPipelineElement(PopFromStackLocation p_Location) noexcept;
                         PopFromStackPipelineElement(size_t m_Begin,
-                                                    size_t m_End);
+                                                    size_t m_End) noexcept;
                         PopFromStackPipelineElement(const std::wstring& p_Regex,
                                                     bool p_IgnoreCase);
                         PopFromStackPipelineElement(const PopFromStackPipelineElement&) = delete;
@@ -537,7 +537,7 @@ namespace PCC
         RecursiveCopyPipelineElement&
                         operator=(const RecursiveCopyPipelineElement&) = delete;
 
-        void            ModifyOptions(PipelineOptions& p_rOptions) const override;
+        void            ModifyOptions(PipelineOptions& p_rOptions) const noexcept override;
     };
 
     //
@@ -618,12 +618,12 @@ namespace PCC
     {
     public:
                         DisplayForSelectionPipelineElement(bool p_ShowForFiles,
-                                                           bool p_ShowForFolders);
+                                                           bool p_ShowForFolders) noexcept;
                         DisplayForSelectionPipelineElement(const DisplayForSelectionPipelineElement&) = delete;
         DisplayForSelectionPipelineElement&
                         operator=(const DisplayForSelectionPipelineElement&) = delete;
 
-        void            ModifyOptions(PipelineOptions& p_rOptions) const override;
+        void            ModifyOptions(PipelineOptions& p_rOptions) const noexcept override;
 
     private:
         bool            m_ShowForFiles;     // Whether the plugin should be displayed when files are selected.
