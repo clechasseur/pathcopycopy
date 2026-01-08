@@ -1,0 +1,434 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="NameLbl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>32, 13</value>
+  </data>
+  <data name="NameLbl.Text" xml:space="preserve">
+    <value>名前(&N):</value>
+  </data>
+  <data name="NameLbl.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="NameTxt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>50, 12</value>
+  </data>
+  <data name="NameTxt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>712, 20</value>
+  </data>
+  <data name="NameTxt.ToolTip" xml:space="preserve">
+    <value>このカスタムコマンドの名前</value>
+  </data>
+  <data name="BasePluginLst.ToolTip" xml:space="preserve">
+    <value>パスをコピーするために使用するベースコマンド。追加オプションは後で適用されます</value>
+  </data>
+  <data name="BaseCommandLbl2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>449, 13</value>
+  </data>
+  <data name="BaseCommandLbl2.Text" xml:space="preserve">
+    <value>これは、追加オプションを適用する前にコピーするパスのタイプを決定します。</value>
+  </data>
+  <data name="BaseCommandLbl2.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="BaseCommandLbl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>370, 13</value>
+  </data>
+  <data name="BaseCommandLbl.Text" xml:space="preserve">
+    <value>カスタムコマンドのベースコマンドを選択してください。</value>
+  </data>
+  <data name="BaseCommandLbl.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="BasePluginPage.Text" xml:space="preserve">
+    <value>ベースコマンド</value>
+  </data>
+  <data name="BasePluginPage.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="RecursiveCopyChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>183, 17</value>
+  </data>
+  <data name="RecursiveCopyChk.Text" xml:space="preserve">
+    <value>パスを再帰的にコピー(&N)</value>
+  </data>
+  <data name="RecursiveCopyChk.ToolTip" xml:space="preserve">
+    <value>パスをコピーする際に、サブフォルダを再帰的に探索します</value>
+  </data>
+  <data name="WithFilelistChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>336, 17</value>
+  </data>
+  <data name="WithFilelistChk.Text" xml:space="preserve">
+    <value>...パスを直接渡す代わりにファイルを使用(&D)</value>
+  </data>
+  <data name="WithFilelistChk.ToolTip" xml:space="preserve">
+    <value>パスを実行ファイルに引数として直接渡す代わりに、ディスク上のファイルに保存して、そのファイルのパスを実行ファイルに渡します</value>
+  </data>
+  <data name="BrowserForExecutableBtn.Text" xml:space="preserve">
+    <value>参照...</value>
+  </data>
+  <data name="BrowserForExecutableBtn.ToolTip" xml:space="preserve">
+    <value>起動する実行ファイルを選択するダイアログを開きます</value>
+  </data>
+  <data name="ExecutableTxt.ToolTip" xml:space="preserve">
+    <value>起動する実行ファイル</value>
+  </data>
+  <data name="ExecutableLbl.Text" xml:space="preserve">
+    <value>実行ファイル(&X):</value>
+  </data>
+  <data name="ExecutableLbl.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LaunchExecutableChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>313, 17</value>
+  </data>
+  <data name="LaunchExecutableChk.Text" xml:space="preserve">
+    <value>クリップボードにコピーする代わりに実行ファイルを起動(&C)
+</value>
+  </data>
+  <data name="LaunchExecutableChk.ToolTip" xml:space="preserve">
+    <value>パスをクリップボードにコピーする代わりに、ディスク上の実行ファイルを起動してパスを引数として渡します</value>
+  </data>
+  <data name="CopyOnSameLineChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>255, 17</value>
+  </data>
+  <data name="CopyOnSameLineChk.Text" xml:space="preserve">
+    <value>複数のパスを同じ行にコピー(&L)</value>
+  </data>
+  <data name="CopyOnSameLineChk.ToolTip" xml:space="preserve">
+    <value>複数のファイル/フォルダが選択されている場合、パスを別々の行(改行で区切る)ではなく、同じ行(スペースで区切る)にコピーします</value>
+  </data>
+  <data name="OptionsGroupBox.Text" xml:space="preserve">
+    <value>その他</value>
+  </data>
+  <data name="OptionsGroupBox.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="UnexpandEnvStringsChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>328, 17</value>
+  </data>
+  <data name="UnexpandEnvStringsChk.Text" xml:space="preserve">
+    <value>可能な場合はパスに環境変数を使用(&M)</value>
+  </data>
+  <data name="UnexpandEnvStringsChk.ToolTip" xml:space="preserve">
+    <value>%USERPROFILE%などの環境変数の値に対応するパスの部分を、これらの変数への参照に置き換えるかを指定します</value>
+  </data>
+  <data name="TestRegexBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>301, 71</value>
+  </data>
+  <data name="TestRegexBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 23</value>
+  </data>
+  <data name="TestRegexBtn.Text" xml:space="preserve">
+    <value>テスト(&T)...</value>
+  </data>
+  <data name="TestRegexBtn.ToolTip" xml:space="preserve">
+    <value>現在使用されている正規表現と置換式をテストするウィンドウを開きます</value>
+  </data>
+  <data name="IgnoreCaseChk.Location" type="System.Drawing.Point, System.Drawing">
+    <value>194, 75</value>
+  </data>
+  <data name="IgnoreCaseChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 17</value>
+  </data>
+  <data name="IgnoreCaseChk.Text" xml:space="preserve">
+    <value>大文字小文字を区別しない(&A)</value>
+  </data>
+  <data name="IgnoreCaseChk.ToolTip" xml:space="preserve">
+    <value>正規表現を使用して検索/置換を行う際に、大文字小文字を区別するかを指定します</value>
+  </data>
+  <data name="UseRegexChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>179, 17</value>
+  </data>
+  <data name="UseRegexChk.Text" xml:space="preserve">
+    <value>正規表現を使用(&U)</value>
+  </data>
+  <data name="UseRegexChk.ToolTip" xml:space="preserve">
+    <value>検索/置換操作に正規表現を使用するかを指定します</value>
+  </data>
+  <data name="ReplaceTxt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>91, 45</value>
+  </data>
+  <data name="ReplaceTxt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>265, 20</value>
+  </data>
+  <data name="ReplaceTxt.ToolTip" xml:space="preserve">
+    <value>パス内で見つかった要素を置き換えるために使用する文字列。正規表現を使用する場合は、これは置換式です</value>
+  </data>
+  <data name="ReplaceLbl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>79, 13</value>
+  </data>
+  <data name="ReplaceLbl.Text" xml:space="preserve">
+    <value>置換(&R):</value>
+  </data>
+  <data name="ReplaceLbl.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FindTxt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>65, 19</value>
+  </data>
+  <data name="FindTxt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>291, 20</value>
+  </data>
+  <data name="FindTxt.ToolTip" xml:space="preserve">
+    <value>パス内で検索する文字列。正規表現を使用する場合は、これは正規表現です</value>
+  </data>
+  <data name="FindLbl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 13</value>
+  </data>
+  <data name="FindLbl.Text" xml:space="preserve">
+    <value>検索(&H):</value>
+  </data>
+  <data name="FindLbl.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FindReplaceGroupBox.Text" xml:space="preserve">
+    <value>検索 / 置換</value>
+  </data>
+  <data name="FindReplaceGroupBox.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="NoSlashesChangeRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>192, 17</value>
+  </data>
+  <data name="NoSlashesChangeRadio.Text" xml:space="preserve">
+    <value>スラッシュを変更しない(&B)</value>
+  </data>
+  <data name="NoSlashesChangeRadio.ToolTip" xml:space="preserve">
+    <value>パス内のスラッシュを変更しません</value>
+  </data>
+  <data name="BackToForwardSlashesRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>318, 17</value>
+  </data>
+  <data name="BackToForwardSlashesRadio.Text" xml:space="preserve">
+    <value>すべてのバックスラッシュをスラッシュに変更(&O)</value>
+  </data>
+  <data name="BackToForwardSlashesRadio.ToolTip" xml:space="preserve">
+    <value>パス内のすべてのバックスラッシュ( \ )をスラッシュ( / )に置き換えます</value>
+  </data>
+  <data name="ForwardToBackslashesRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>358, 17</value>
+  </data>
+  <data name="ForwardToBackslashesRadio.Text" xml:space="preserve">
+    <value>すべてのスラッシュ( / )をバックスラッシュ( \ )に変更(&I)</value>
+  </data>
+  <data name="ForwardToBackslashesRadio.ToolTip" xml:space="preserve">
+    <value>パス内のすべてのスラッシュ( / )をバックスラッシュ( \ )に置き換えます</value>
+  </data>
+  <data name="SlashesGroupBox.Text" xml:space="preserve">
+    <value>スラッシュ</value>
+  </data>
+  <data name="SlashesGroupBox.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="RemoveExtChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 17</value>
+  </data>
+  <data name="RemoveExtChk.Text" xml:space="preserve">
+    <value>ファイル拡張子を削除(&F)</value>
+  </data>
+  <data name="RemoveExtChk.ToolTip" xml:space="preserve">
+    <value>パスの末尾にあるファイル拡張子を削除します</value>
+  </data>
+  <data name="OptionalQuotesChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>201, 17</value>
+  </data>
+  <data name="OptionalQuotesChk.Text" xml:space="preserve">
+    <value>...スペースが含まれている場合のみ(&S)</value>
+  </data>
+  <data name="OptionalQuotesChk.ToolTip" xml:space="preserve">
+    <value>パスにスペースが含まれている場合にのみ引用符で囲むかを指定します</value>
+  </data>
+  <data name="EncodeURICharsChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>320, 17</value>
+  </data>
+  <data name="EncodeURICharsChk.Text" xml:space="preserve">
+    <value>...およびURI内の無効な文字をすべてエンコード(例: %xx)(&V)</value>
+  </data>
+  <data name="EncodeURICharsChk.ToolTip" xml:space="preserve">
+    <value>パス内のURI内で無効なすべての文字をパーセントエンコーディング( %xx )に置き換えます</value>
+  </data>
+  <data name="EncodeURIWhitespaceChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>344, 17</value>
+  </data>
+  <data name="EncodeURIWhitespaceChk.Text" xml:space="preserve">
+    <value>スペースをパーセントエンコーディングでエンコード(例: %20)(&P)</value>
+  </data>
+  <data name="EncodeURIWhitespaceChk.ToolTip" xml:space="preserve">
+    <value>パス内のすべてのスペースを%20に置き換えます</value>
+  </data>
+  <data name="EmailLinksChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>287, 17</value>
+  </data>
+  <data name="EmailLinksChk.Text" xml:space="preserve">
+    <value>パスを&lt;と&gt;で囲む(メールリンクを作成)(&E)</value>
+  </data>
+  <data name="EmailLinksChk.ToolTip" xml:space="preserve">
+    <value>パスを&lt;と&gt;で囲みます(これによりメールリンクが作成されます)</value>
+  </data>
+  <data name="QuotesChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>178, 17</value>
+  </data>
+  <data name="QuotesChk.Text" xml:space="preserve">
+    <value>パスを引用符で囲む(&G)</value>
+  </data>
+  <data name="QuotesChk.ToolTip" xml:space="preserve">
+    <value>パスを引用符( " )で囲みます</value>
+  </data>
+  <data name="DecorationsGroupBox.Text" xml:space="preserve">
+    <value>装飾</value>
+  </data>
+  <data name="DecorationsGroupBox.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="OptionsPage.Text" xml:space="preserve">
+    <value>追加オプション</value>
+  </data>
+  <data name="OptionsPage.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="MainTabControl.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="OKBtn.ToolTip" xml:space="preserve">
+    <value>このカスタムコマンドを保存してウィンドウを閉じます</value>
+  </data>
+  <data name="CancelBtn.ToolTip" xml:space="preserve">
+    <value>このカスタムコマンドを保存せずにウィンドウを閉じます</value>
+  </data>
+  <data name="ChooseExecutableOpenDlg.Filter" xml:space="preserve">
+    <value>実行ファイル (*.exe;*.com;*.bat;*.cmd)|*.exe;*.com;*.bat;*.cmd|すべてのファイル (*.*)|*.*</value>
+  </data>
+  <data name="SwitchBtn.Text" xml:space="preserve">
+    <value>エキスパートモード</value>
+  </data>
+  <data name="SwitchBtn.ToolTip" xml:space="preserve">
+    <value>エキスパートモードに切り替えます。より複雑になりますが、設定の柔軟性が向上します</value>
+  </data>
+  <data name="PreviewCtrl.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>カスタムコマンド</value>
+  </data>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+</root>
