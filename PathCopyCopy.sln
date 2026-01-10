@@ -32,6 +32,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PathCopyCopyLocalization_en
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PathCopyCopyLocalization_fr", "PathCopyCopy\localization\PathCopyCopyLocalization_fr\PathCopyCopyLocalization_fr.vcxproj", "{69A53834-5AF9-4B92-B78B-15567FE6DE30}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PathCopyCopyHotkeyHandler", "PathCopyCopyHotkeyHandler\PathCopyCopyHotkeyHandler.vcxproj", "{E62C1A19-8104-4C29-B7B1-155C6D31FEA9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -96,6 +98,14 @@ Global
 		{69A53834-5AF9-4B92-B78B-15567FE6DE30}.Release|Win32.Build.0 = Release|Win32
 		{69A53834-5AF9-4B92-B78B-15567FE6DE30}.Release|x64.ActiveCfg = Release|Win32
 		{69A53834-5AF9-4B92-B78B-15567FE6DE30}.Release|x64.Build.0 = Release|Win32
+		{E62C1A19-8104-4C29-B7B1-155C6D31FEA9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E62C1A19-8104-4C29-B7B1-155C6D31FEA9}.Debug|Win32.Build.0 = Debug|Win32
+		{E62C1A19-8104-4C29-B7B1-155C6D31FEA9}.Debug|x64.ActiveCfg = Debug|x64
+		{E62C1A19-8104-4C29-B7B1-155C6D31FEA9}.Debug|x64.Build.0 = Debug|x64
+		{E62C1A19-8104-4C29-B7B1-155C6D31FEA9}.Release|Win32.ActiveCfg = Release|Win32
+		{E62C1A19-8104-4C29-B7B1-155C6D31FEA9}.Release|Win32.Build.0 = Release|Win32
+		{E62C1A19-8104-4C29-B7B1-155C6D31FEA9}.Release|x64.ActiveCfg = Release|x64
+		{E62C1A19-8104-4C29-B7B1-155C6D31FEA9}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -118,6 +118,8 @@ Source: ..\bin\Win32\Release\fr-CA\*; DestDir: {app}\fr-CA; Flags: ignoreversion
 Source: ..\bin\Win32\Release\PathCopyCopyRegexTester.exe; DestDir: {app}; Flags: ignoreversion restartreplace overwritereadonly uninsrestartdelete uninsremovereadonly
 Source: ..\bin\Win32\Release\PathCopyCopyCOMPluginExecutor32.exe; DestDir: {app}; Flags: ignoreversion restartreplace overwritereadonly uninsrestartdelete uninsremovereadonly
 Source: ..\bin\x64\Release\PathCopyCopyCOMPluginExecutor64.exe; DestDir: {app}; Flags: ignoreversion restartreplace overwritereadonly uninsrestartdelete uninsremovereadonly; Check: Is64BitInstallMode
+Source: ..\bin\Win32\Release\PathCopyCopyHotkeyHandler32.exe; DestDir: {app}; Flags: ignoreversion restartreplace overwritereadonly uninsrestartdelete uninsremovereadonly
+Source: ..\bin\x64\Release\PathCopyCopyHotkeyHandler64.exe; DestDir: {app}; Flags: ignoreversion restartreplace overwritereadonly uninsrestartdelete uninsremovereadonly; Check: Is64BitInstallMode
 Source: ..\LICENSE; DestDir: {app}; Flags: overwritereadonly uninsremovereadonly; DestName: LICENSE.TXT
 Source: ..\LICENSE.CommandLineArguments; DestDir: {app}; Flags: overwritereadonly uninsremovereadonly; DestName: LICENSE.CommandLineArguments.TXT
 Source: ..\LICENSE.coveo_linq; DestDir: {app}; Flags: overwritereadonly uninsremovereadonly; DestName: LICENSE.coveo_linq.TXT
@@ -149,6 +151,8 @@ Root: HKLM32; Subkey: Software\clechasseur\PathCopyCopy; Flags: uninsdeletekeyif
 Root: HKLM64; Subkey: Software\clechasseur\PathCopyCopy\PipelinePlugins; Flags: uninsdeletekeyifempty; Check: Is64BitInstallMode and IsAdminInstallMode
 Root: HKLM64; Subkey: Software\clechasseur\PathCopyCopy\Plugins; Flags: uninsdeletekeyifempty; Check: Is64BitInstallMode and IsAdminInstallMode
 Root: HKLM64; Subkey: Software\clechasseur\PathCopyCopy; Flags: uninsdeletekeyifempty; Check: Is64BitInstallMode and IsAdminInstallMode
+Root: HKLM32; Subkey: Software\Microsoft\Windows\CurrentVersion\Run; ValueType: string; ValueName: PathCopyCopyHotkeyHandler; ValueData: {app}\PathCopyCopyHotkeyHandler32.exe; Flags: uninsdeletevalue; Check: (not Is64BitInstallMode) and IsAdminInstallMode
+Root: HKLM64; Subkey: Software\Microsoft\Windows\CurrentVersion\Run; ValueType: string; ValueName: PathCopyCopyHotkeyHandler; ValueData: {app}\PathCopyCopyHotkeyHandler64.exe; Flags: uninsdeletevalue; Check: Is64BitInstallMode and IsAdminInstallMode
 
 ; A typo made previous versions of the DLL register approved extensions in the wrong key.
 Root: HKCR; Subkey: Software\Microsoft\Windows\CurrentVersion\Extensions\Approved; ValueName: {{82CB99A2-2F18-4D5D-9476-54347E3B6720}; Flags: deletevalue; Check: IsAdminInstallMode
@@ -170,6 +174,8 @@ Type: files; Name: {app}\Path Copy Copy on CodePlex.url
 Filename: {sys}\regsvr32.exe; Parameters: "{code:Regsvr32InstallParameters} ""{app}\PCC32.dll"""; WorkingDir: {app}; StatusMsg: {code:GetStatusRegisterFiles}; Flags: runhidden 32bit; Check: FileExists(ExpandConstant('{app}\PCC32.dll'))
 Filename: {sys}\regsvr32.exe; Parameters: "{code:Regsvr32InstallParameters} ""{app}\PCC64.dll"""; WorkingDir: {app}; StatusMsg: {code:GetStatusRegisterFiles}; Flags: runhidden 64bit; Check: Is64BitInstallMode and FileExists(ExpandConstant('{app}\PCC64.dll'))
 Filename: {tmp}\NETFramework48.exe; StatusMsg: {cm:InstallNetFramework48}; Flags: skipifsilent; Check: ShouldInstallNetFramework
+Filename: {app}\PathCopyCopyHotkeyHandler32.exe; Check: (not Is64BitInstallMode) and IsAdminInstallMode
+Filename: {app}\PathCopyCopyHotkeyHandler64.exe; Check: Is64BitInstallMode
 
 [UninstallRun]
 Filename: {sys}\regsvr32.exe; Parameters: "{code:Regsvr32InstallParameters|/u} ""{app}\PCC32.dll"""; WorkingDir: {app}; RunOnceId: UnregisterPCC32; Flags: runhidden 32bit; Check: FileExists(ExpandConstant('{app}\PCC32.dll'))
